@@ -9,7 +9,8 @@ blogdown::stop_server()
 
 blogdown::build_site()
 unlink("docs", recursive = TRUE, force = TRUE)
-dir.create('docs')
+R.utils::copyDirectory("public", "docs")
 file.copy("public", "docs", recursive=TRUE)
 blogdown::serve_site()
+
 

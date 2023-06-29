@@ -47,11 +47,14 @@ superuser: true
 title: Jonathan Mellon
 ---
 
-Dr. Jonathan Mellon is an Assistant Professor at West Point’s Department of Systems Engineering. He serves as co-director of the British Election Study and advisor to the Systems and Decision Sciences Program. 
+I am an Assistant Professor at West Point’s Department of Systems Engineering and co-director of the British Election Study.
 
-Dr. Mellon has published 26 articles in peer reviewed journals including the American Political Science Review, Journal of Politics, Public Administration Review, British Journal of Political Science, and Public Opinion Quarterly as well as numerous book chapters and white papers. He also co-authored Electoral Shocks: The Volatile Voter in a Turbulent World with Oxford University Press (available [open access](https://library.oapen.org/bitstream/handle/20.500.12657/47106/9780198800583.pdf?sequence=1)). As part of his research, he has designed and fielded more than 40 surveys around the world. He has helped to win grants worth a total of $5.7 million across 13 awards. 
+My research focuses on improving measurement and causal inference in social science. Substantively I study electoral behavior, online citizen engagement, and measuring public opinion. 
 
-Dr. Mellon's research focuses on improving measurement and causal inference in social science. Substantively his research has focused on electoral behavior, online citizen engagement, and measuring public opinion. 
+I have published 26 articles in peer reviewed journals including the *American Political Science Review*, *American Journal of Political Science*, and the *Journal of Politics*. I also co-authored *Electoral Shocks: The Volatile Voter in a Turbulent World* with Oxford University Press (available [open access](https://library.oapen.org/bitstream/handle/20.500.12657/47106/9780198800583.pdf?sequence=1)). 
+
+My full list of publications are available on [Google Scholar](https://scholar.google.com/citations?user=EekbrtcAAAAJ&hl=en) or my [CV](uploads/resume.pdf). 
+
 
 
 {style="text-align: justify;"}
