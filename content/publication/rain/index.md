@@ -20,7 +20,7 @@ tags:
 - causal inference
 - political science
 - metascience
-title: "Rain, Rain, Go away: 192 potential exclusion-restriction violations for studies using weather as an instrumental variable"
+title: "Rain, Rain, Go away: 192 potential exclusion-restriction violations for studies using weather as an instrumental variable (accepted at AJPS)"
 # url_code: https://github.com/wowchemy/wowchemy-hugo-themes
 # url_dataset: ""
 url_pdf: https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3715610

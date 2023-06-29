@@ -2,14 +2,14 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Jonathan Mellon</title>
-    <link>jonathanmellon.com/</link>
-      <atom:link href="jonathanmellon.com/index.xml" rel="self" type="application/rss+xml" />
+    <link>/</link>
+      <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <description>Jonathan Mellon</description>
     <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Mon, 24 Oct 2022 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>/jonathanmellon.com/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_3.png</url>
+      <url>/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_3.png</url>
       <title>Jonathan Mellon</title>
-      <link>jonathanmellon.com/</link>
+      <link>/</link>
     </image>
     
     <item>
@@ -34,25 +34,25 @@
     
     <item>
       <title>Rain, Rain, Go away: 192 potential exclusion-restriction violations for studies using weather as an instrumental variable</title>
-      <link>jonathanmellon.com/publication/rain/</link>
+      <link>/publication/rain/</link>
       <pubDate>Wed, 28 Jun 2023 00:00:00 +0000</pubDate>
-      <guid>jonathanmellon.com/publication/rain/</guid>
+      <guid>/publication/rain/</guid>
       <description></description>
     </item>
     
     <item>
       <title>What Drives Electoral Change? Evidence From 104 Inter-Election Panel Surveys in 18 Countries</title>
-      <link>jonathanmellon.com/publication/comparativeswitching/</link>
+      <link>/publication/comparativeswitching/</link>
       <pubDate>Wed, 28 Jun 2023 00:00:00 +0000</pubDate>
-      <guid>jonathanmellon.com/publication/comparativeswitching/</guid>
+      <guid>/publication/comparativeswitching/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Members of Parliament are Minimally Accountable for Their Issue Stances (and They Know It)</title>
-      <link>jonathanmellon.com/publication/brexitmatters/</link>
+      <link>/publication/brexitmatters/</link>
       <pubDate>Thu, 08 Jul 2021 00:00:00 +0000</pubDate>
-      <guid>jonathanmellon.com/publication/brexitmatters/</guid>
+      <guid>/publication/brexitmatters/</guid>
       <description></description>
     </item>
     
@@ -99,17 +99,17 @@
     
     <item>
       <title>What Drives Electoral Change? Evidence From 104 Inter-Election Panel Surveys in 18 Countries</title>
-      <link>jonathanmellon.com/publication/electoralshocks/</link>
+      <link>/publication/electoralshocks/</link>
       <pubDate>Fri, 01 May 2020 00:00:00 +0000</pubDate>
-      <guid>jonathanmellon.com/publication/electoralshocks/</guid>
+      <guid>/publication/electoralshocks/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Example Project</title>
-      <link>jonathanmellon.com/project/example/</link>
+      <link>/project/example/</link>
       <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
-      <guid>jonathanmellon.com/project/example/</guid>
+      <guid>/project/example/</guid>
       <description>&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis sapien eu, pulvinar tempor diam. Quisque risus orci, mollis id ante sit amet, gravida egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus. Vestibulum sit amet erat at nulla eleifend gravida.&lt;/p&gt;
 &lt;p&gt;Nullam vel molestie justo. Curabitur vitae efficitur leo. In hac habitasse platea dictumst. Sed pulvinar mauris dui, eget varius purus congue ac. Nulla euismod, lorem vel elementum dapibus, nunc justo porta mi, sed tempus est est vel tellus. Nam et enim eleifend, laoreet sem sit amet, elementum sem. Morbi ut leo congue, maximus velit ut, finibus arcu. In et libero cursus, rutrum risus non, molestie leo. Nullam congue quam et volutpat malesuada. Sed risus tortor, pulvinar et dictum nec, sodales non mi. Phasellus lacinia commodo laoreet. Nam mollis, erat in feugiat consectetur, purus eros egestas tellus, in auctor urna odio at nibh. Mauris imperdiet nisi ac magna convallis, at rhoncus ligula cursus.&lt;/p&gt;
 &lt;p&gt;Cras aliquam rhoncus ipsum, in hendrerit nunc mattis vitae. Duis vitae efficitur metus, ac tempus leo. Cras nec fringilla lacus. Quisque sit amet risus at ipsum pharetra commodo. Sed aliquam mauris at consequat eleifend. Praesent porta, augue sed viverra bibendum, neque ante euismod ante, in vehicula justo lorem ac eros. Suspendisse augue libero, venenatis eget tincidunt ut, malesuada at lorem. Donec vitae bibendum arcu. Aenean maximus nulla non pretium iaculis. Quisque imperdiet, nulla in pulvinar aliquet, velit quam ultrices quam, sit amet fringilla leo sem vel nunc. Mauris in lacinia lacus.&lt;/p&gt;
@@ -120,17 +120,17 @@
     
     <item>
       <title>External Project</title>
-      <link>jonathanmellon.com/project/external-project/</link>
+      <link>/project/external-project/</link>
       <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
-      <guid>jonathanmellon.com/project/external-project/</guid>
+      <guid>/project/external-project/</guid>
       <description></description>
     </item>
     
     <item>
       <title></title>
-      <link>jonathanmellon.com/admin/config.yml</link>
+      <link>/admin/config.yml</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>jonathanmellon.com/admin/config.yml</guid>
+      <guid>/admin/config.yml</guid>
       <description></description>
     </item>
     
