@@ -8,4 +8,8 @@ file.copy(from = "C:/Users/jonathan.mellon/Dropbox/paperwork/achievements/cv_upd
 blogdown::stop_server()
 
 blogdown::build_site()
+unlink("docs", recursive = TRUE, force = TRUE)
+dir.create('docs')
+file.copy("public", "docs", recursive=TRUE)
 blogdown::serve_site()
+
