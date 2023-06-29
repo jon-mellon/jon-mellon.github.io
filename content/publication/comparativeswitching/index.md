@@ -15,11 +15,14 @@ publication_types:
 - "1"
 publishDate: "2022-01-25T00:00:00Z"
 # slides: example
-summary: "Lots of studies use weather as an instrumental variable, but the core assumption of IV implies that an instrument should only affect one variable. I develop a full methodology for how to find and review possible exclusion restriction violations."
+summary: "Do election results change because people switch parties or because different people show up to the polls? Across 104 election pairs, this papers shows that vote switching is the overwhelming driver of electoral change."
 tags:
-- causal inference
+- electoral behavior
 - political science
-- metascience
+- measurement
+- descriptive
+- survey methodology
+- statistics
 title: "What Drives Electoral Change? Evidence From 104 Inter-Election Panel Surveys in 18 Countries"
 # url_code: "https://github.com/wowchemy/wowchemy-hugo-themes"
 # url_dataset: ""

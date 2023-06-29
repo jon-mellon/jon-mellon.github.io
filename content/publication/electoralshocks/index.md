@@ -21,14 +21,14 @@ publication_types:
 - "5"
 publishDate: "2020-05-01T00:00:00Z"
 # slides: example
-summary: "Lots of studies use weather as an instrumental variable, but the core assumption of IV implies that an instrument should only affect one variable. I develop a full methodology for how to find and review possible exclusion restriction violations."
+summary: "The British Election Study team explain the origins of the dramatic events of the 2015 and 2017 UK General Elections and show that they were unprecedentedly volatile compared to all elections since 1964."
 tags:
-- causal inference
 - political science
-- metascience
-title: "What Drives Electoral Change? Evidence From 104 Inter-Election Panel Surveys in 18 Countries"
-# url_code: "https://github.com/wowchemy/wowchemy-hugo-themes"
-# url_dataset: ""
+- public opinion
+- electoral behavior
+- british politics
+title: "Electoral Shocks: the Volatile Voter in a Turbulent World"
+url_dataset: "britishelectionstudy.com"
 url_pdf: "https://library.oapen.org/bitstream/handle/20.500.12657/47106/9780198800583.pdf?sequence=1"
 # url_poster: ""
 # url_project: ""
