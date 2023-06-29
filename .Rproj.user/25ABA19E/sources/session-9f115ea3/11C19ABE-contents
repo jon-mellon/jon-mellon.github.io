@@ -5,7 +5,7 @@ theme: "starter-hugo-academic"
 # This file is formatted using YAML syntax - learn more at https://learnxinyminutes.com/docs/yaml/
 
 title: Jonathan Mellon # Website name
-baseURL: 'jonathanmellon.com/' # Website URL
+baseURL: '/' # Website URL
 
 ############################
 ## LANGUAGE
