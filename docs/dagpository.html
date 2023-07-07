@@ -173,6 +173,16 @@
           for (var i = 0; i < currentitems.length; i++) { 
             allnodes.push(currentitems[i].x);
             allnodes.push(currentitems[i].y);
+            if(currentitems[i].finding=="positive") {
+              currentitems[i].color = "green";
+            }
+            if(currentitems[i].finding=="negative") {
+              currentitems[i].color = "red";
+            }
+            if(currentitems[i].finding=="zero") {
+              currentitems[i].color = "gray";
+            }
+            
           }
           uniquenodes = allnodes.filter(onlyUnique);
            //var nodeset = [];
@@ -184,8 +194,8 @@
               from: uniquenodes.indexOf(currentitems[i].x), 
               to: uniquenodes.indexOf(currentitems[i].y),
               relation: currentitems[i].finding,
-              arrows: "to, from",
-              color: { color: "red" },
+              arrows: "to",
+              color: { color: currentitems[i].color },
             };
           }
         })
