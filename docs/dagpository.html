@@ -111,36 +111,49 @@
       const showResult = (string) => {
         resultElement.innerHTML = JSON.stringify(string, null, 2)
       }
+      /*
       const setLoading = () => {
         resultElement.innerHTML = 'Loading...'
       }
+      
       const isEnter = ({ key, code, keyCode, which } = {}) => {
         return key === 'Enter' || code === 'Enter' || keyCode === 13 || which === 13
       }
+      */
 
       const getItems = () => {
-        const spreadsheetIdElement = document.querySelector('#sheet-id')
+        /* const spreadsheetIdElement = document.querySelector('#sheet-id')
         if (!spreadsheetIdElement.value) {
           window.alert('Please insert your public spreadsheet ID')
           return spreadsheetIdElement.focus()
         }
-        const spreadsheetId = spreadsheetIdElement.value.trim()
+        */
+        const spreadsheetId = "1N66GqAVQGcmV4PMQk6B2zDwvSZ3Oa6aF6FXwfKoVUU8"
         const sheetId = document.querySelector('#gid').value.trim()
         const sheetName = document.querySelector('#sheet-name').value.trim()
         const sheetInfo = { sheetId, sheetName }
         const parser = new PublicGoogleSheetsParser(spreadsheetId, sheetInfo)
-        setLoading()
+        //setLoading()
         parser.parse().then((items) => {
           // items should be [{ a :1, b :2, c :3 },{ a :4, b :5, c :6 },{ a :7, b :8, c :9 }]
           showResult(items)
           console.table(items)
+          currentitems = items;
+          console.log("using this version");
         })
       }
-
+      
+      var currentitems;
+      getItems();
+      /*
       [...document.querySelectorAll('input')].forEach((el) => {
         el.onkeydown = (e) => isEnter(e) ? getItems() : null
       })
       document.querySelector('.get-results').onclick = getItems
+      */
     })()
+    
+    
+    
   </script>
 </body>
