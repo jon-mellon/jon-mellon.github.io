@@ -162,8 +162,11 @@
     <div id="mynetwork"></div>
   <script>
   
+    
     dvSelected = function() {
-       var dvselect = document.querySelector('selectDV');
+      // create a reachability diagram in 
+    }
+    ivSelected = function() {
       // create a reachability diagram in 
     }
     
@@ -224,11 +227,11 @@
             }
           }
 
-          
+                    
           
           uniquenodes = allnodes.filter(onlyUnique);
           var itemout;
-          var select = document.getElementById("selectDV");
+          var dvselect = document.getElementById("selectDV");
           var ivselect = document.getElementById("selectIV");
           
           for(var i = 0; i < uniquenodes.length; i++) {
@@ -236,7 +239,7 @@
               var el = document.createElement("option");
               el.textContent = opt;
               el.value = opt;
-              select.appendChild(el);
+              dvselect.appendChild(el);
               ivselect.appendChild(el);
           }
           
