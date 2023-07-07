@@ -86,32 +86,22 @@
 </head>
 <body>
   <div class="title">
-    <span>Dagpository Preliminary version</span>
+    <span>Dagpository: pre-Alpha</span>
     <div class="row badges">
-      <a class="badge" href="https://github.com/fureweb-com/public-google-sheets-parser">
-        <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="Github Repository">
-      </a>
+     
     </div>
   </div>
 
   <body>
-    <h1>Dynamic filtering</h1>
+    <h1>Custom DAGs</h1>
     <p>
-      With
-      <a
-        href="https://visjs.github.io/vis-data/data/dataview.html"
-        target="_blank"
-      >
-        <code>vis.DataView</code></a
-      >
-      on top of vis.DataSet you can filter displayed data without modifying the
-      data source.
+      Here are all the relevant causal claims listed in our dataset. 
     </p>
     <label>
       Filter nodes
       <select id="nodeFilterSelect">
         <option value="">All</option>
-        <option value="test">kids</option>
+        <option value="test">test</option>
       </select>
     </label>
     <br />
@@ -120,30 +110,26 @@
       Filter edges
       <div>
         <label>
-          <input type="checkbox" name="edgesFilter" value="parent" checked />
-          Is <span style="color: green">parent</span> of
+          <input type="checkbox" name="edgesFilter" value="positive" checked />
+          <span style="color: green">Positive</span>
         </label>
       </div>
       <div>
         <label>
-          <input type="checkbox" name="edgesFilter" value="teacher" checked />
-          Is <span style="color: blue">teacher</span> of
+          <input type="checkbox" name="edgesFilter" value="zero" unchecked />
+          <span style="color: gray">Null</span>
         </label>
       </div>
       <div>
         <label>
-          <input type="checkbox" name="edgesFilter" value="friend" checked />
-          Is <span style="color: red">friend</span> of
+          <input type="checkbox" name="edgesFilter" value="negative" checked />
+          <span style="color: red">Negative</span>
         </label>
       </div>
+      <button onclick="createNetwork()">Create DAG</button>
     </label>
     <br />
     <div id="mynetwork"></div>
-    <button onclick="createNetwork()">Create DAG</button>
-
-  <pre class="result" style="padding: 16px; border: 1px solid #dedede; background-color: #eee"></pre>
-  
-  
   <script>
     
       const resultElement = document.querySelector('.result')
@@ -173,7 +159,7 @@
             allnodes.push(currentitems[i].y);
           }
           uniquenodes = allnodes.filter(onlyUnique);
-           var nodeset = [];
+           //var nodeset = [];
           for (var i = 0; i < uniquenodes.length; i++) { 
               nodeset[i] = {id: (i+1), label: uniquenodes[i], attribute: "test"};
           }
@@ -194,12 +180,6 @@
       var edgeset = [];
       getEdges();
       
-      
-      
-    
-    
-    
-    
   </script>
   
   
@@ -221,67 +201,7 @@
        * In this example we do not mutate nodes or edges source data.
        */
        
-      /*
-      const nodes = new vis.DataSet([
-        { id: 1, label: "Eric Cartman", age: "kid", gender: "male" },
-        { id: 2, label: "Stan Marsh", age: "kid", gender: "male" },
-        { id: 3, label: "Wendy Testaburger", age: "kid", gender: "female" },
-        { id: 4, label: "Mr Mackey", age: "adult", gender: "male" },
-        { id: 5, label: "Sharon Marsh", age: "adult", gender: "female" },
-      ]);
-
-      const edges = new vis.DataSet([
-        {
-          from: 1,
-          to: 2,
-          relation: "friend",
-          arrows: "to, from",
-          color: { color: "red" },
-        },
-        {
-          from: 1,
-          to: 3,
-          relation: "friend",
-          arrows: "to, from",
-          color: { color: "red" },
-        },
-        {
-          from: 2,
-          to: 3,
-          relation: "friend",
-          arrows: "to, from",
-          color: { color: "red" },
-        },
-        {
-          from: 5,
-          to: 2,
-          relation: "parent",
-          arrows: "to",
-          color: { color: "green" },
-        },
-        {
-          from: 4,
-          to: 1,
-          relation: "teacher",
-          arrows: "to",
-          color: { color: "blue" },
-        },
-        {
-          from: 4,
-          to: 2,
-          relation: "teacher",
-          arrows: "to",
-          color: { color: "blue" },
-        },
-        {
-          from: 4,
-          to: 3,
-          relation: "teacher",
-          arrows: "to",
-          color: { color: "blue" },
-        },
-      ]);
-      */
+     
       /**
        * filter values are updated in the outer scope.
        * in order to apply filters to new values, DataView.refresh() should be called
