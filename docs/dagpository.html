@@ -173,38 +173,28 @@
             allnodes.push(currentitems[i].y);
           }
           uniquenodes = allnodes.filter(onlyUnique);
+           var nodeset = [];
+          for (var i = 0; i < uniquenodes.length; i++) { 
+              nodeset[i] = {id: (i+1), label: uniquenodes[i], attribute: "test"};
+          }
+          for (var i = 0; i < currentitems.length; i++) { 
+            edgeset[i] = {
+              from: uniquenodes.indexOf(currentitems[i].x), 
+              to: uniquenodes.indexOf(currentitems[i].y),
+              relation: currentitems[i].finding,
+              arrows: "to, from",
+              color: { color: "red" },
+            };
+          }
         })
       }
       var allnodes = [];
       var uniquenodes = [];
-      
+      var nodeset = [];
+      var edgeset = [];
       getEdges();
       
-      var allnodes
       
-      
-      createNode = function(id, label, attribute) {
-        return({ id: id, label: label, attribute: attribute })
-      }
-      var nodeset = [];
-      for (var i = 0; i < uniquenodes.length; i++) { 
-        nodeset[i] = {id: (i+1), label: uniquenodes[i], attribute: "test"};
-      }
-      const nodes = new vis.DataSet(nodeset);
-      
-      
-      var edgeset = [];
-      for (var i = 0; i < currentitems.length; i++) { 
-        edgeset[i] = {
-          from: uniquenodes.indexOf(currentitems[i].x), 
-          to: uniquenodes.indexOf(currentitems[i].y),
-          relation: currentitems[i].finding,
-          arrows: "to, from",
-          color: { color: "red" },
-        };
-      }
-      const edges = new vis.DataSet(edgeset);
-     
       
     
     
@@ -217,8 +207,10 @@
       
       createNetwork = function() {
         const nodeFilterSelector = document.getElementById("nodeFilterSelect");
-      const edgeFilters = document.getElementsByName("edgesFilter");
-
+        const edgeFilters = document.getElementsByName("edgesFilter");
+        const nodes = new vis.DataSet(nodeset);
+        const edges = new vis.DataSet(edgeset);
+     
       function startNetwork(data) {
         const container = document.getElementById("mynetwork");
         const options = {};
