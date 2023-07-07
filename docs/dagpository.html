@@ -72,6 +72,11 @@
       white-space: break-spaces;
     }
   </style>
+   <script
+      type="text/javascript"
+      src="visjs-min.js"
+    ></script>
+
 </head>
 <body>
   <div class="title">
@@ -103,6 +108,56 @@
     <p><a target="_blank" href="https://docs.google.com/spreadsheets/d/10WDbAPAY7Xl5DT36VuMheTPTTpqx9x0C5sDCnh4BGps/edit#gid=1839148703">SpreadSheet URL</a></p>
   </div>
 
+
+  <body>
+    <h1>Dynamic filtering</h1>
+    <p>
+      With
+      <a
+        href="https://visjs.github.io/vis-data/data/dataview.html"
+        target="_blank"
+      >
+        <code>vis.DataView</code></a
+      >
+      on top of vis.DataSet you can filter displayed data without modifying the
+      data source.
+    </p>
+    <label>
+      Filter nodes
+      <select id="nodeFilterSelect">
+        <option value="">All characters</option>
+        <option value="kid">kids</option>
+        <option value="adult">adults</option>
+        <option value="male">male</option>
+        <option value="female">female</option>
+      </select>
+    </label>
+    <br />
+    <br />
+    <label>
+      Filter edges
+      <div>
+        <label>
+          <input type="checkbox" name="edgesFilter" value="parent" checked />
+          Is <span style="color: green">parent</span> of
+        </label>
+      </div>
+      <div>
+        <label>
+          <input type="checkbox" name="edgesFilter" value="teacher" checked />
+          Is <span style="color: blue">teacher</span> of
+        </label>
+      </div>
+      <div>
+        <label>
+          <input type="checkbox" name="edgesFilter" value="friend" checked />
+          Is <span style="color: red">friend</span> of
+        </label>
+      </div>
+    </label>
+    <br />
+    <div id="mynetwork"></div>
+
   <pre class="result" style="padding: 16px; border: 1px solid #dedede; background-color: #eee"></pre>
   <script src="https://cdn.jsdelivr.net/npm/public-google-sheets-parser?v=20230209"></script>
   <script>
@@ -111,23 +166,8 @@
       const showResult = (string) => {
         resultElement.innerHTML = JSON.stringify(string, null, 2)
       }
-      /*
-      const setLoading = () => {
-        resultElement.innerHTML = 'Loading...'
-      }
-      
-      const isEnter = ({ key, code, keyCode, which } = {}) => {
-        return key === 'Enter' || code === 'Enter' || keyCode === 13 || which === 13
-      }
-      */
-
+     
       const getItems = () => {
-        /* const spreadsheetIdElement = document.querySelector('#sheet-id')
-        if (!spreadsheetIdElement.value) {
-          window.alert('Please insert your public spreadsheet ID')
-          return spreadsheetIdElement.focus()
-        }
-        */
         const spreadsheetId = "1N66GqAVQGcmV4PMQk6B2zDwvSZ3Oa6aF6FXwfKoVUU8"
         const sheetId = document.querySelector('#gid').value.trim()
         const sheetName = document.querySelector('#sheet-name').value.trim()
@@ -145,15 +185,144 @@
       
       var currentitems;
       getItems();
-      /*
-      [...document.querySelectorAll('input')].forEach((el) => {
-        el.onkeydown = (e) => isEnter(e) ? getItems() : null
-      })
-      document.querySelector('.get-results').onclick = getItems
-      */
     })()
     
     
     
   </script>
+  
+  
+      <script type="text/javascript">
+      const nodeFilterSelector = document.getElementById("nodeFilterSelect");
+      const edgeFilters = document.getElementsByName("edgesFilter");
+
+      function startNetwork(data) {
+        const container = document.getElementById("mynetwork");
+        const options = {};
+        new vis.Network(container, data, options);
+      }
+
+      /**
+       * In this example we do not mutate nodes or edges source data.
+       */
+      const nodes = new vis.DataSet([
+        { id: 1, label: "Eric Cartman", age: "kid", gender: "male" },
+        { id: 2, label: "Stan Marsh", age: "kid", gender: "male" },
+        { id: 3, label: "Wendy Testaburger", age: "kid", gender: "female" },
+        { id: 4, label: "Mr Mackey", age: "adult", gender: "male" },
+        { id: 5, label: "Sharon Marsh", age: "adult", gender: "female" },
+      ]);
+
+      const edges = new vis.DataSet([
+        {
+          from: 1,
+          to: 2,
+          relation: "friend",
+          arrows: "to, from",
+          color: { color: "red" },
+        },
+        {
+          from: 1,
+          to: 3,
+          relation: "friend",
+          arrows: "to, from",
+          color: { color: "red" },
+        },
+        {
+          from: 2,
+          to: 3,
+          relation: "friend",
+          arrows: "to, from",
+          color: { color: "red" },
+        },
+        {
+          from: 5,
+          to: 2,
+          relation: "parent",
+          arrows: "to",
+          color: { color: "green" },
+        },
+        {
+          from: 4,
+          to: 1,
+          relation: "teacher",
+          arrows: "to",
+          color: { color: "blue" },
+        },
+        {
+          from: 4,
+          to: 2,
+          relation: "teacher",
+          arrows: "to",
+          color: { color: "blue" },
+        },
+        {
+          from: 4,
+          to: 3,
+          relation: "teacher",
+          arrows: "to",
+          color: { color: "blue" },
+        },
+      ]);
+
+      /**
+       * filter values are updated in the outer scope.
+       * in order to apply filters to new values, DataView.refresh() should be called
+       */
+      let nodeFilterValue = "";
+      const edgesFilterValues = {
+        friend: true,
+        teacher: true,
+        parent: true,
+      };
+
+      /*
+      filter function should return true or false
+      based on whether item in DataView satisfies a given condition.
+    */
+      const nodesFilter = (node) => {
+        if (nodeFilterValue === "") {
+          return true;
+        }
+        switch (nodeFilterValue) {
+          case "kid":
+            return node.age === "kid";
+          case "adult":
+            return node.age === "adult";
+          case "male":
+            return node.gender === "male";
+          case "female":
+            return node.gender === "female";
+          default:
+            return true;
+        }
+      };
+
+      const edgesFilter = (edge) => {
+        return edgesFilterValues[edge.relation];
+      };
+
+      const nodesView = new vis.DataView(nodes, { filter: nodesFilter });
+      const edgesView = new vis.DataView(edges, { filter: edgesFilter });
+
+      nodeFilterSelector.addEventListener("change", (e) => {
+        // set new value to filter variable
+        nodeFilterValue = e.target.value;
+        /*
+        refresh DataView,
+        so that its filter function is re-calculated with the new variable
+      */
+        nodesView.refresh();
+      });
+
+      edgeFilters.forEach((filter) =>
+        filter.addEventListener("change", (e) => {
+          const { value, checked } = e.target;
+          edgesFilterValues[value] = checked;
+          edgesView.refresh();
+        })
+      );
+
+      startNetwork({ nodes: nodesView, edges: edgesView });
+    </script>
 </body>
