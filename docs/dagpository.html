@@ -82,7 +82,6 @@
       src="https://cdn.jsdelivr.net/npm/public-google-sheets-parser?v=20230209"
     ></script>
     <script>
-      var currentitems;
     </script>
 </head>
 <body>
@@ -148,7 +147,7 @@
   
   
   <script>
-    (() => {
+    
       const resultElement = document.querySelector('.result')
       const showResult = (string) => {
         resultElement.innerHTML = JSON.stringify(string, null, 2)
@@ -165,12 +164,13 @@
           // items should be [{ a :1, b :2, c :3 },{ a :4, b :5, c :6 },{ a :7, b :8, c :9 }]
           showResult(items)
           console.table(items)
-          currentitems = items;
           console.log("using this version");
+          return(items);
         })
       }
+      var currentitems = getEdges();
       
-      getEdges();
+      
       var allnodes = [];
       
       for (var i = 0; i < currentitems.length; i++) { 
@@ -204,7 +204,7 @@
       const edges = new vis.DataSet(edgeset);
      
       
-    })()
+    
     
     
     
@@ -306,14 +306,8 @@
           return true;
         }
         switch (nodeFilterValue) {
-          case "kid":
-            return node.age === "kid";
-          case "adult":
-            return node.age === "adult";
-          case "male":
-            return node.gender === "male";
-          case "female":
-            return node.gender === "female";
+          case "test":
+            return node.attribute === "test";
           default:
             return true;
         }
