@@ -172,12 +172,11 @@
       }
       getEdges();
       
-      
       var allnodes = [];
       
       for (var i = 0; i < currentitems.length; i++) { 
-        allnodes[allnodes.length] = currentitems[i].x;
-        allnodes[allnodes.length] = currentitems[i].y;
+        allnodes.push(currentitems[i].x);
+        allnodes.push(currentitems[i].y);
       }
       function onlyUnique(value, index, array) {
         return array.indexOf(value) === index;
