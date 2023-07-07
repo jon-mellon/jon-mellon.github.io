@@ -152,7 +152,8 @@
       const showResult = (string) => {
         resultElement.innerHTML = JSON.stringify(string, null, 2)
       }
-     
+      var currentitems ;
+      
       const getEdges = () => {
         const spreadsheetId = "1N66GqAVQGcmV4PMQk6B2zDwvSZ3Oa6aF6FXwfKoVUU8"
         const sheetId = 0;
@@ -160,15 +161,16 @@
         const sheetInfo = { sheetId, sheetName }
         const parser = new PublicGoogleSheetsParser(spreadsheetId, sheetInfo)
         //setLoading()
+        var itemout;
         parser.parse().then((items) => {
           // items should be [{ a :1, b :2, c :3 },{ a :4, b :5, c :6 },{ a :7, b :8, c :9 }]
-          showResult(items)
+          //showResult(items)
           console.table(items)
           console.log("using this version");
-          return(items);
+          currentitems = items;
         })
       }
-      var currentitems = getEdges();
+      getEdges();
       
       
       var allnodes = [];
