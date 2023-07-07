@@ -191,8 +191,8 @@
           }
           for (var i = 0; i < currentitems.length; i++) { 
             edgeset[i] = {
-              from: uniquenodes.indexOf(currentitems[i].x), 
-              to: uniquenodes.indexOf(currentitems[i].y),
+              from: uniquenodes.indexOf(currentitems[i].x)+1, 
+              to: uniquenodes.indexOf(currentitems[i].y)+1,
               relation: currentitems[i].finding,
               arrows: "to",
               color: { color: currentitems[i].color },
