@@ -110,11 +110,8 @@
     <label>
       Filter nodes
       <select id="nodeFilterSelect">
-        <option value="">All characters</option>
-        <option value="kid">kids</option>
-        <option value="adult">adults</option>
-        <option value="male">male</option>
-        <option value="female">female</option>
+        <option value="">All</option>
+        <option value="test">kids</option>
       </select>
     </label>
     <br />
@@ -142,6 +139,7 @@
     </label>
     <br />
     <div id="mynetwork"></div>
+    <button onclick="createNetwork()">Create DAG</button>
 
   <pre class="result" style="padding: 16px; border: 1px solid #dedede; background-color: #eee"></pre>
   
@@ -152,9 +150,10 @@
       const showResult = (string) => {
         resultElement.innerHTML = JSON.stringify(string, null, 2)
       }
-      var currentitems ;
-      
-      const getEdges = () => {
+      function onlyUnique(value, index, array) {
+        return array.indexOf(value) === index;
+      }
+      getEdges = function() {
         const spreadsheetId = "1N66GqAVQGcmV4PMQk6B2zDwvSZ3Oa6aF6FXwfKoVUU8"
         const sheetId = 0;
         const sheetName = "causalclaims";
@@ -168,20 +167,22 @@
           console.table(items)
           console.log("using this version");
           currentitems = items;
+          
+          for (var i = 0; i < currentitems.length; i++) { 
+            allnodes.push(currentitems[i].x);
+            allnodes.push(currentitems[i].y);
+          }
+          uniquenodes = allnodes.filter(onlyUnique);
         })
       }
+      var allnodes = [];
+      var uniquenodes = [];
+      
       getEdges();
       
-      var allnodes = [];
+      var allnodes
       
-      for (var i = 0; i < currentitems.length; i++) { 
-        allnodes.push(currentitems[i].x);
-        allnodes.push(currentitems[i].y);
-      }
-      function onlyUnique(value, index, array) {
-        return array.indexOf(value) === index;
-      }
-      var uniquenodes = allnodes.filter(onlyUnique);
+      
       createNode = function(id, label, attribute) {
         return({ id: id, label: label, attribute: attribute })
       }
@@ -213,7 +214,9 @@
   
   
       <script type="text/javascript">
-      const nodeFilterSelector = document.getElementById("nodeFilterSelect");
+      
+      createNetwork = function() {
+        const nodeFilterSelector = document.getElementById("nodeFilterSelect");
       const edgeFilters = document.getElementsByName("edgesFilter");
 
       function startNetwork(data) {
@@ -340,5 +343,7 @@
       );
 
       startNetwork({ nodes: nodesView, edges: edgesView });
+      }
+      
     </script>
 </body>
