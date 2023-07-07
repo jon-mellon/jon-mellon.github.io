@@ -154,10 +154,10 @@
         resultElement.innerHTML = JSON.stringify(string, null, 2)
       }
      
-      const getItems = () => {
+      const getEdges = () => {
         const spreadsheetId = "1N66GqAVQGcmV4PMQk6B2zDwvSZ3Oa6aF6FXwfKoVUU8"
         const sheetId = 0;
-        const sheetName = "";
+        const sheetName = "causalclaims";
         const sheetInfo = { sheetId, sheetName }
         const parser = new PublicGoogleSheetsParser(spreadsheetId, sheetInfo)
         //setLoading()
@@ -170,7 +170,40 @@
         })
       }
       
-      getItems();
+      getEdges();
+      var allnodes = [];
+      
+      for (var i = 0; i < currentitems.length; i++) { 
+        allnodes[allnodes.length] = currentitems[i].x;
+        allnodes[allnodes.length] = currentitems[i].y;
+      }
+      function onlyUnique(value, index, array) {
+        return array.indexOf(value) === index;
+      }
+      var uniquenodes = allnodes.filter(onlyUnique);
+      createNode = function(id, label, attribute) {
+        return({ id: id, label: label, attribute: attribute })
+      }
+      var nodeset = [];
+      for (var i = 0; i < uniquenodes.length; i++) { 
+        nodeset[i] = {id: (i+1), label: uniquenodes[i], attribute: "test"};
+      }
+      const nodes = new vis.DataSet(nodeset);
+      
+      
+      var edgeset = [];
+      for (var i = 0; i < currentitems.length; i++) { 
+        edgeset[i] = {
+          from: uniquenodes.indexOf(currentitems[i].x), 
+          to: uniquenodes.indexOf(currentitems[i].y),
+          relation: currentitems[i].finding,
+          arrows: "to, from",
+          color: { color: "red" },
+        };
+      }
+      const edges = new vis.DataSet(edgeset);
+     
+      
     })()
     
     
@@ -191,6 +224,8 @@
       /**
        * In this example we do not mutate nodes or edges source data.
        */
+       
+      /*
       const nodes = new vis.DataSet([
         { id: 1, label: "Eric Cartman", age: "kid", gender: "male" },
         { id: 2, label: "Stan Marsh", age: "kid", gender: "male" },
@@ -250,16 +285,16 @@
           color: { color: "blue" },
         },
       ]);
-
+      */
       /**
        * filter values are updated in the outer scope.
        * in order to apply filters to new values, DataView.refresh() should be called
        */
       let nodeFilterValue = "";
       const edgesFilterValues = {
-        friend: true,
-        teacher: true,
-        parent: true,
+        positive: true,
+        negative: true,
+        zero: false,
       };
 
       /*
