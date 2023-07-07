@@ -122,6 +122,11 @@
     </label>
     <br />
     <br />
+    <form id="dvselector">
+      <select id="selectDV">
+        <option>Choose a dependent variable</option>
+    </select>
+</form>
     <label>
       Filter edges
       <div>
@@ -162,7 +167,7 @@
         const sheetInfo = { sheetId, sheetName }
         const parser = new PublicGoogleSheetsParser(spreadsheetId, sheetInfo)
         //setLoading()
-        var itemout;
+       
         parser.parse().then((items) => {
           // items should be [{ a :1, b :2, c :3 },{ a :4, b :5, c :6 },{ a :7, b :8, c :9 }]
           //showResult(items)
@@ -185,6 +190,16 @@
             
           }
           uniquenodes = allnodes.filter(onlyUnique);
+          var itemout;
+          var select = document.getElementById("selectDV");
+          
+          for(var i = 0; i < uniquenodes.length; i++) {
+              var opt = uniquenodes[i];
+              var el = document.createElement("option");
+              el.textContent = opt;
+              el.value = opt;
+              select.appendChild(el);
+          }
            //var nodeset = [];
           for (var i = 0; i < uniquenodes.length; i++) { 
               nodeset[i] = {id: (i+1), label: uniquenodes[i], attribute: "test"};
@@ -198,6 +213,7 @@
               color: { color: currentitems[i].color },
             };
           }
+         
         })
       }
       var allnodes = [];
