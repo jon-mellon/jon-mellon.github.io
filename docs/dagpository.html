@@ -146,7 +146,7 @@
       </div>
       <div>
         <label>
-          <input type="checkbox" name="edgesFilter" value="mixed" unchecked />
+          <input type="checkbox" name="edgesFilter" value="mixed" checked />
           <span style="color: purple">Mixed</span>
         </label>
       </div>
@@ -237,10 +237,13 @@
           for(var i = 0; i < uniquenodes.length; i++) {
               var opt = uniquenodes[i];
               var el = document.createElement("option");
+              var el2 = document.createElement("option");
               el.textContent = opt;
               el.value = opt;
+              el2.textContent = opt;
+              el2.value = opt;
               dvselect.appendChild(el);
-              ivselect.appendChild(el);
+              ivselect.appendChild(el2);
           }
           
           
@@ -332,7 +335,7 @@
         /*
         refresh DataView,
         so that its filter function is re-calculated with the new variable
-      */
+        */
         nodesView.refresh();
       });
 
