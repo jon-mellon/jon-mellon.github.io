@@ -259,6 +259,14 @@
             hovering) {
               if(selected){
                 console.log("edge activated:" + id + selected);
+                var edgedata = edges.get();
+                var dois;
+                for (var i = 0; i < edgedata.length; i++) { 
+                  if(edgedata[i].id==id) {
+                    dois = edgedata[i].DOIs;
+                    console.log(dois);
+                  }
+                }
               }
             
             // find the DOIs that went into this edge
@@ -276,6 +284,7 @@
               relation: uniqueitems[i].finding,
               arrows: "to",
               color: { color: uniqueitems[i].color },
+              dois: "test",
               chosen: { label: false, edge: testEdgeChoice },
             };
           }
