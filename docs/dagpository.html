@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dagpository Preliminary version</title>
+  <title>DAGpository</title>
   <link data-n-head="1" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=block">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
   <style>
@@ -257,7 +257,10 @@
             id,
             selected,
             hovering) {
-            console.log("edge activated:" + values);
+              if(selected){
+                console.log("edge activated:" + id);
+              }
+            
             // find the DOIs that went into this edge
             // query crossref for the DOIs on this edge
             // paste together key info from cross ref
