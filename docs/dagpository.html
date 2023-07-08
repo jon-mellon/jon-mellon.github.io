@@ -258,7 +258,7 @@
             selected,
             hovering) {
               if(selected){
-                console.log("edge activated:" + id);
+                //console.log("edge activated:" + id);
               }
             
             // find the DOIs that went into this edge
@@ -292,12 +292,13 @@
   
   
       <script type="text/javascript">
-      
+      const nodes;
+      const edges;
       createNetwork = function() {
         const nodeFilterSelector = document.getElementById("nodeFilterSelect");
         const edgeFilters = document.getElementsByName("edgesFilter");
-        const nodes = new vis.DataSet(nodeset);
-        const edges = new vis.DataSet(edgeset);
+        nodes = new vis.DataSet(nodeset);
+        edges = new vis.DataSet(edgeset);
      
       function startNetwork(data) {
         const container = document.getElementById("mynetwork");
