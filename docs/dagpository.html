@@ -291,11 +291,13 @@
           for (var i = 0; i < uniqueedgecombs.length; i++) {
             let firstmatch = edgecombs.indexOf(uniqueedgecombs[i]);
             uniqueitems[i] = currentitems[firstmatch];
+            
             for (var j = firstmatch; j <edgecombs.length; j++) { 
               if(uniqueedgecombs[i]==edgecombs[j]) {
                 if(uniqueitems[i].finding!= currentitems[j].finding) {
                   uniqueitems[i].finding= "mixed";
                 }
+                uniqueitems[i].doi = uniqueitems[i].doi + ";" + currentitems[j].doi;
               }
             }
             if(uniqueitems[i].finding=="positive") {
