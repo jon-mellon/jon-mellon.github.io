@@ -102,7 +102,7 @@
 </head>
 <body>
   <div class="title">
-    <span>DAGpository</span>
+    <span>Big DAG</span>
     <div class="row badges">
      
     </div>
@@ -164,6 +164,11 @@
     <button id = "resetbutton"  onclick="location.reload()" disabled>New variable pair</button>
     <br />
     <div id="mynetwork"></div>
+    <div>
+      Studies:
+      <br>
+      <textarea id="pubdetails"></textarea>
+    </div>
   <script>
   
     var canreachdv = [];
@@ -172,8 +177,26 @@
     var ivcanreach = [];
     var nodestatus = [];
     
+    const pubtext = document.getElementById('pubdetails');
+    //pubtext.value
     
+    //doi = "10.1111/0022-3816.00035";
+    async function crossRefCall(doi) {
+      const response = await fetch("https://api.crossref.org/works/" + doi);
+      const pubdetails = await response.json();
+      return(pubdetails)
+    }
     
+    async function populateCitations(dois) {
+      pubtext.value = "";
+      for (var i = 0; i < dois.length; i++) {
+        try {
+          let crtemp =  crossRefCall(dois[i]);
+          pubtext.value= pubtext.value+ "\n" + crtemp;
+        }  
+      }
+    }
+          
     attemptDAGButton = function() {
       const dvselector = document.getElementById('selectDV');
       const ivselector = document.getElementById('selectIV');
@@ -335,10 +358,11 @@
           
           
           
-           //var nodeset = [];
+          //var nodeset = [];
           for (var i = 0; i < uniquenodes.length; i++) { 
               nodeset[i] = {id: (i), label: uniquenodes[i], attribute: "test"};
           }
+          
           
           testEdgeChoice = function( values,
             id,
