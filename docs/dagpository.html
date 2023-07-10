@@ -123,11 +123,14 @@
     <br />
     <br />
     <form id="dvselector">
-      <select id="selectDV" onChange = "dvSelected();">
-        <option>Choose a dependent variable</option>
-    </select>
+      Independent variable: 
      <select id="selectIV" onChange = "ivSelected();">
         <option>Choose an independent variable</option>
+    </select>
+    <br>
+      Depdendent variable: 
+      <select id="selectDV" onChange = "dvSelected();">
+        <option>Choose a dependent variable</option>
     </select>
 </form>
     <label>
@@ -171,7 +174,14 @@
       const dvselector = document.getElementById('selectDV');
       
       canreachdv = reachableByNodes(uniquenodes.indexOf(dvselector.value))
-      dvcanreach = reachableByNodes(uniquenodes.indexOf(dvselector.value))
+      dvcanreach = reachableNodes(uniquenodes.indexOf(dvselector.value))
+    }
+        
+    ivSelected = function() {
+      const ivselector = document.getElementById('selectIV');
+      
+      canreachiv = reachableByNodes(uniquenodes.indexOf(ivselector.value))
+      ivcanreach = reachableNodes(uniquenodes.indexOf(ivselector.value))
     }
     
     updateNodeStatus = function() {
@@ -197,14 +207,7 @@
       }
     }
     
-    
-    ivSelected = function() {
-      const ivselector = document.getElementById('selectIV');
-      
-      canreachiv = reachableByNodes(uniquenodes.indexOf(ivselector.value))
-      ivcanreach = reachableByNodes(uniquenodes.indexOf(ivselector.value))
-    }
-    
+
       const resultElement = document.querySelector('.result')
       const showResult = (string) => {
         resultElement.innerHTML = JSON.stringify(string, null, 2)
