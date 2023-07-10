@@ -166,18 +166,43 @@
     var dvcanreach = [];
     var canreachiv = [];
     var ivcanreach = [];
-    
+    var nodestatus = [];
     dvSelected = function() {
       const dvselector = document.getElementById('selectDV');
       
-      canreachdv = reachableByNodes(uniquenodes.indexOf(dvselector.value)+1)
-      dvcanreach = reachableByNodes(uniquenodes.indexOf(dvselector.value)+1)
+      canreachdv = reachableByNodes(uniquenodes.indexOf(dvselector.value))
+      dvcanreach = reachableByNodes(uniquenodes.indexOf(dvselector.value))
     }
+    
+    updateNodeStatus = function() {
+      for (var i = 0; i < uniquenodes.length; i++) {
+        nodestatus[i] = "irrelevant";
+        let riv =  canreachiv.includes(i);
+        let rdv =  canreachdv.includes(i);
+        let ivr =  ivcanreach.includes(i);
+        let dvr =  dvcanreach.includes(i);
+        if( (riv & ivr) | (rdv & dvr) | (dvr & riv) ) {
+          nodestatus[i] = "loop";  
+        } else {
+          if((riv & rdv)) {
+            nodestatus[i] = "confounder";    
+          }
+          if((ivr & rdv)) {
+            nodestatus[i] = "mediator";    
+          }
+          if((dvr)) {
+            nodestatus[i] = "do not adjust";    
+          }
+        }
+      }
+    }
+    
+    
     ivSelected = function() {
       const ivselector = document.getElementById('selectIV');
       
-      canreachiv = reachableByNodes(uniquenodes.indexOf(ivselector.value)+1)
-      ivcanreach = reachableByNodes(uniquenodes.indexOf(ivselector.value)+1)
+      canreachiv = reachableByNodes(uniquenodes.indexOf(ivselector.value))
+      ivcanreach = reachableByNodes(uniquenodes.indexOf(ivselector.value))
     }
     
       const resultElement = document.querySelector('.result')
@@ -199,7 +224,7 @@
           // items should be [{ a :1, b :2, c :3 },{ a :4, b :5, c :6 },{ a :7, b :8, c :9 }]
           //showResult(items)
           console.table(items)
-          console.log("using this version");
+          // console.log("using this version");
           currentitems = items;
           var edgecombs = [];
           for (var i = 0; i < currentitems.length; i++) { 
@@ -258,7 +283,7 @@
           
            //var nodeset = [];
           for (var i = 0; i < uniquenodes.length; i++) { 
-              nodeset[i] = {id: (i+1), label: uniquenodes[i], attribute: "test"};
+              nodeset[i] = {id: (i), label: uniquenodes[i], attribute: "test"};
           }
           
           testEdgeChoice = function( values,
@@ -266,7 +291,7 @@
             selected,
             hovering) {
               if(selected){
-                console.log("edge activated:" + id + selected);
+                //console.log("edge activated:" + id + selected);
                 var edgedata = edges.get();
                 var dois;
                 for (var i = 0; i < edgedata.length; i++) { 
@@ -287,8 +312,8 @@
           // creating edges
           for (var i = 0; i < uniqueitems.length; i++) { 
             edgeset[i] = {
-              from: uniquenodes.indexOf(uniqueitems[i].x)+1, 
-              to: uniquenodes.indexOf(uniqueitems[i].y)+1,
+              from: uniquenodes.indexOf(uniqueitems[i].x), 
+              to: uniquenodes.indexOf(uniqueitems[i].y),
               relation: uniqueitems[i].finding,
               arrows: "to",
               color: { color: uniqueitems[i].color },
