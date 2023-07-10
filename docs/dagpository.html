@@ -161,6 +161,7 @@
       </div>
       <button id = "createdagbutton" onclick="createNetwork()" disabled>Create DAG</button>
     </label>
+    <button id = "resetbutton"  onclick="location.reload()" disabled>New variable pair</button>
     <br />
     <div id="mynetwork"></div>
   <script>
@@ -440,7 +441,13 @@
         const edgeFilters = document.getElementsByName("edgesFilter");
         nodes = new vis.DataSet(nodeset);
         edges = new vis.DataSet(edgeset);
-     
+        const dvselector = document.getElementById('selectDV');
+        const ivselector = document.getElementById('selectIV');     
+        const resetit = document.getElementById('resetbutton');     
+        
+        dvselector.disabled = true;
+        ivselector.disabled = true;
+        resetit.disabled = false;
       function startNetwork(data) {
         const container = document.getElementById("mynetwork");
         const options = {};
