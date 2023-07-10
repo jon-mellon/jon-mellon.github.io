@@ -173,6 +173,7 @@
     var nodestatus = [];
     
     
+    
     attemptDAGButton = function() {
       const dvselector = document.getElementById('selectDV');
       const ivselector = document.getElementById('selectIV');
@@ -238,6 +239,20 @@
       let iv = uniquenodes.indexOf(ivselector.value);
       for (var i = 0; i < uniquenodes.length; i++) {
         nodestatus[i] = getNodesStatus(i, iv = iv, dv = dv);
+      }
+      var confounders = [];
+      for (var i = 0; i < uniquenodes.length; i++) {
+        if(nodestatus[i]=="confounder") {
+          confounders.push(i);
+        }
+      }
+      for (var i = 0; i < confounders.length; i++) {
+        let cfreach = reachableNodes(confounders[i]);
+        for (var j = 0; j < cfreach.length; j++) {
+          if(canreachdv.includes(cfreach[j]) | canreachiv.includes(cfreach[j])) {
+            nodestatus[cfreach[j]] = "confounder pathway";
+          }
+        }
       }
     }
     
