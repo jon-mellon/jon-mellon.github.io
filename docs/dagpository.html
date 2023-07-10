@@ -159,7 +159,7 @@
           <span style="color: red">Negative</span>
         </label>
       </div>
-      <button onclick="createNetwork()">Create DAG</button>
+      <button id = "createdagbutton" onclick="createNetwork()" disabled>Create DAG</button>
     </label>
     <br />
     <div id="mynetwork"></div>
@@ -170,11 +170,24 @@
     var canreachiv = [];
     var ivcanreach = [];
     var nodestatus = [];
+    
+    
+    attemptDAGButton = function() {
+      const dvselector = document.getElementById('selectDV');
+      const ivselector = document.getElementById('selectIV');
+      if(dvselector.value!="Choose a dependent variable" & 
+      ivselector.value!="Choose an independent variable") {
+        const dagbutton = document.getElementById('createdagbutton');
+        dagbutton.disabled = false;
+      }
+    }
+    
     dvSelected = function() {
       const dvselector = document.getElementById('selectDV');
       
       canreachdv = reachableByNodes(uniquenodes.indexOf(dvselector.value))
       dvcanreach = reachableNodes(uniquenodes.indexOf(dvselector.value))
+      updateNodeStatus();
     }
         
     ivSelected = function() {
@@ -182,6 +195,7 @@
       
       canreachiv = reachableByNodes(uniquenodes.indexOf(ivselector.value))
       ivcanreach = reachableNodes(uniquenodes.indexOf(ivselector.value))
+      updateNodeStatus();
     }
     
     updateNodeStatus = function() {
@@ -436,6 +450,7 @@
       based on whether item in DataView satisfies a given condition.
       */
       const nodesFilter = (node) => {
+        console.log("filter gets called");
         if(nodestatus[node.id]!="irrelevant") {
           return true;
         } else {
