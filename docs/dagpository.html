@@ -165,6 +165,9 @@
     
     dvSelected = function() {
       // create a reachability diagram in 
+      const dvselector = document.getElementById('selectDV');
+      dvselector.value
+      
     }
     ivSelected = function() {
       // create a reachability diagram in 
@@ -229,7 +232,7 @@
 
                     
           
-          var uniquenodes = allnodes.filter(onlyUnique);
+          uniquenodes = allnodes.filter(onlyUnique);
           
           var dvselect = document.getElementById("selectDV");
           var ivselect = document.getElementById("selectIV");
@@ -291,6 +294,69 @@
          
         })
       }
+      
+      reachableNodes = function(startnode) {
+        var nodesreached = [];
+        var nodestocheck = [startnode];
+        var nodeschecked = [];
+        var dist = 0;
+        while(nodestocheck.length>0) {
+          dist = dist+1;
+          for (var i = 0; i < nodestocheck.length; i++) {
+            var currentnode   = nodestocheck[i];
+            for (var j = 0; j < edgeset.length; j++) {
+              if(edgeset[j].from==currentnode) {
+                if(!nodesreached.includes(edgeset[j].to)) {
+                // adding new node to reached list
+                nodesreached.push(edgeset[j].to);
+                  if(!nodeschecked.includes(edgeset[j].to) & 
+                    !nodestocheck.includes(edgeset[j].to)) {
+                    // adding new node to need to check list
+                    nodestocheck.push(edgeset[j].to);
+                  }
+                }
+              }
+            }
+            // removing currentnode from the nodestocheck list
+            nodestocheck.splice(nodestocheck.indexOf(currentnode), 1);
+            nodeschecked.push(currentnode);
+          }
+        }
+        return nodesreached;
+      }
+      
+      
+      reachableByNodes = function(startnode) {
+        var nodesreached = [];
+        var nodestocheck = [startnode];
+        var nodeschecked = [];
+        var dist = 0;
+        while(nodestocheck.length>0) {
+          dist = dist+1;
+          for (var i = 0; i < nodestocheck.length; i++) {
+            var currentnode   = nodestocheck[i];
+            for (var j = 0; j < edgeset.length; j++) {
+              if(edgeset[j].to==currentnode) {
+                if(!nodesreached.includes(edgeset[j].from)) {
+                // adding new node to reached list
+                nodesreached.push(edgeset[j].from);
+                  if(!nodeschecked.includes(edgeset[j].from) & 
+                    !nodestocheck.includes(edgeset[j].from)) {
+                    // adding new node to need to check list
+                    nodestocheck.push(edgeset[j].from);
+                  }
+                }
+              }
+            }
+            // removing currentnode from the nodestocheck list
+            nodestocheck.splice(nodestocheck.indexOf(currentnode), 1);
+            nodeschecked.push(currentnode);
+          }
+        }
+        return nodesreached;
+      }
+
+      
       var allnodes = [];
       var uniquenodes = [];
       var nodeset = [];
