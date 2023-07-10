@@ -459,10 +459,13 @@
         const dvselector = document.getElementById('selectDV');
         const ivselector = document.getElementById('selectIV');     
         const resetit = document.getElementById('resetbutton');     
+        const dagbutton = document.getElementById('createdagbutton');
         
+        dagbutton.disabled = true;
         dvselector.disabled = true;
         ivselector.disabled = true;
         resetit.disabled = false;
+        
       function startNetwork(data) {
         const container = document.getElementById("mynetwork");
         const options = {};
@@ -491,7 +494,6 @@
       based on whether item in DataView satisfies a given condition.
       */
       const nodesFilter = (node) => {
-        console.log("filter gets called");
         if(nodestatus[node.id]!="irrelevant") {
           return true;
         } else {
