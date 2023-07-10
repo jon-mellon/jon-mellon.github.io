@@ -436,6 +436,11 @@
       based on whether item in DataView satisfies a given condition.
       */
       const nodesFilter = (node) => {
+        if(nodestatus[node.id]!="irrelevant") {
+          return true;
+        } else {
+          return false;
+        }
         
         if (nodeFilterValue === "") {
           return true;
