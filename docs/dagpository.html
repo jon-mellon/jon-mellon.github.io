@@ -167,7 +167,9 @@
     <div>
       Studies:
       <br>
-      <div id="pubdetails"></div>
+      <div>
+        <p id="pubdetails"></p>
+      </div>
     </div>
   <script>
   
@@ -179,8 +181,9 @@
     
     const pubtext = document.getElementById('pubdetails');
     //pubtext.value
-    
-  fetch("https://api.crossref.org/works/" + doi)
+  
+  populateCiteFromDOI = function(doi) {
+    fetch("https://api.crossref.org/works/" + doi)
   .then((response) => {
     if (response.ok) {
       return response.json();
@@ -190,9 +193,11 @@
   })
   .then(data => {
     console.log(data.message.author);
-    pubtext.value = formatArticle(data.message);
+    pubtext.value = pubtext.value +"\n" + formatArticle(data.message);
   })
   .catch((error) => console.error("FETCH ERROR:", error));
+  }
+  
     
   formatArticle = function(dat) {
     
