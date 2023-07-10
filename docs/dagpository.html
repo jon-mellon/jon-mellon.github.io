@@ -167,7 +167,7 @@
     <div>
       Studies:
       <br>
-      <textarea id="pubdetails"></textarea>
+      <div id="pubdetails"></div>
     </div>
   <script>
   
@@ -180,11 +180,46 @@
     const pubtext = document.getElementById('pubdetails');
     //pubtext.value
     
+  fetch("https://api.crossref.org/works/" + doi)
+  .then((response) => {
+    if (response.ok) {
+      return response.json();
+    } else {
+      throw new Error("NETWORK RESPONSE ERROR");
+    }
+  })
+  .then(data => {
+    console.log(data.message.author);
+    pubtext.value = formatArticle(data.message);
+  })
+  .catch((error) => console.error("FETCH ERROR:", error));
+    
+  formatArticle = function(dat) {
+    
+    var authors = [];
+    for (var i = 0; i < dat.author.length; i++) {
+      authors[i] = dat.author[i].given + " " + dat.author[i].family;
+    }
+    var authorlist = authors.join(", ");
+    var title = dat.title[0];
+    var journal = dat["container-title"][0];
+    var year= dat.published["date-parts"][0];
+    
+    var combtitle = authorlist  +" (" + year+ ") \"" + title + "\"" +"*" + journal + "*" ;
+    
+    
+    return combtitle
+  }
+    
     //doi = "10.1111/0022-3816.00035";
     async function crossRefCall(doi) {
-      const response = await fetch("https://api.crossref.org/works/" + doi);
-      const pubdetails = await response.json();
-      return(pubdetails)
+      const response = await fetch("https://api.crossref.org/works/" + doi)
+      var pubdetails = await response.json();
+      
+      // await pubdetails.message.then((out) =>
+      // pubtext.value= out.message);
+      //pubtext.value= await pubtext.value+ "\n" + pubdetails;
+      // return(pubdetails.message)
     }
     
     async function populateCitations(dois) {
