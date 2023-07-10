@@ -188,6 +188,7 @@
       canreachdv = reachableByNodes(uniquenodes.indexOf(dvselector.value))
       dvcanreach = reachableNodes(uniquenodes.indexOf(dvselector.value))
       updateNodeStatus();
+      attemptDAGButton();
     }
         
     ivSelected = function() {
@@ -196,28 +197,46 @@
       canreachiv = reachableByNodes(uniquenodes.indexOf(ivselector.value))
       ivcanreach = reachableNodes(uniquenodes.indexOf(ivselector.value))
       updateNodeStatus();
+      attemptDAGButton();
     }
-    
-    updateNodeStatus = function() {
-      for (var i = 0; i < uniquenodes.length; i++) {
-        nodestatus[i] = "irrelevant";
-        let riv =  canreachiv.includes(i);
-        let rdv =  canreachdv.includes(i);
-        let ivr =  ivcanreach.includes(i);
-        let dvr =  dvcanreach.includes(i);
-        if( (riv & ivr) | (rdv & dvr) | (dvr & riv) ) {
-          nodestatus[i] = "loop";  
-        } else {
-          if((riv & rdv)) {
-            nodestatus[i] = "confounder";    
+        
+        
+        getNodesStatus = function(cnode, iv, dv) {
+          if(iv==cnode) {
+            return ("dependent variable");
           }
-          if((ivr & rdv)) {
-            nodestatus[i] = "mediator";    
+          if(dv==cnode) {
+            return("independent variable");
           }
-          if((dvr)) {
-            nodestatus[i] = "do not adjust";    
+          let riv =  canreachiv.includes(cnode);
+          let rdv =  canreachdv.includes(cnode);
+          let ivr =  ivcanreach.includes(cnode);
+          let dvr =  dvcanreach.includes(cnode);
+          if( (riv & ivr) | (rdv & dvr) | (dvr & riv) ) {
+            return("loop");  
+          } else {
+            if(riv & rdv) {
+              return("confounder");    
+            }
+            if(ivr & rdv) {
+              return("mediator");    
+            }
+            if(dvr) {
+              return("do not adjust");    
+            }
+            return("irrelevant");
           }
         }
+        
+        
+    updateNodeStatus = function() {
+      const dvselector = document.getElementById('selectDV');
+      const ivselector = document.getElementById('selectIV');
+
+      let dv = uniquenodes.indexOf(dvselector.value);
+      let iv = uniquenodes.indexOf(ivselector.value);
+      for (var i = 0; i < uniquenodes.length; i++) {
+        nodestatus[i] = getNodesStatus(i, iv = iv, dv = dv);
       }
     }
     
@@ -314,7 +333,7 @@
                 for (var i = 0; i < edgedata.length; i++) { 
                   if(edgedata[i].id==id) {
                     dois = edgedata[i].dois;
-                    console.log(dois);
+                    // console.log(dois);
                   }
                 }
               }
