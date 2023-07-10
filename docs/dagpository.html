@@ -162,18 +162,23 @@
     <div id="mynetwork"></div>
   <script>
   
+    var canreachdv = [];
+    var dvcanreach = [];
+    var canreachiv = [];
+    var ivcanreach = [];
     
     dvSelected = function() {
-      // create a reachability diagram in 
       const dvselector = document.getElementById('selectDV');
-      dvselector.value
       
+      canreachdv = reachableByNodes(uniquenodes.indexOf(dvselector.value)+1)
+      dvcanreach = reachableByNodes(uniquenodes.indexOf(dvselector.value)+1)
     }
     ivSelected = function() {
-      // create a reachability diagram in 
+      const ivselector = document.getElementById('selectIV');
+      
+      canreachiv = reachableByNodes(uniquenodes.indexOf(ivselector.value)+1)
+      ivcanreach = reachableByNodes(uniquenodes.indexOf(ivselector.value)+1)
     }
-    
-    
     
       const resultElement = document.querySelector('.result')
       const showResult = (string) => {
@@ -397,12 +402,13 @@
         zero: false,
         mixed: true,
       };
-
+      
       /*
       filter function should return true or false
       based on whether item in DataView satisfies a given condition.
-    */
+      */
       const nodesFilter = (node) => {
+        
         if (nodeFilterValue === "") {
           return true;
         }
