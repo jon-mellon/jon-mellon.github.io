@@ -433,13 +433,15 @@
           }
           
           
-          testEdgeChoice = function( values,
+          testEdgeChoice = function(values,
             id,
             selected,
             hovering) {
               if(selected) {
+                values.strokeWidth = 3;
+                values.width = 3;
                 if(pubtext.edgeid != id) {
-                  console.log("here");
+                  console.log("here2");
                   pubtext.edgeid = id;
                   var edgedata = edges.get();
                   for (var i = 0; i < edgedata.length; i++) { 
