@@ -21,24 +21,24 @@
       min-width: 300px;
       max-width: 2000px;
       min-height: 300px;
-      max-height: 800px;
+      max-height: 600px;
+      bottom: 20%;
     }
      #mynetworkh {
         position: absolute;
-        left: 0px;
-        top: 0px;
-        bottom: 0px;
+        left: 0%;
+        top: 0%;
+        bottom: 0%;
         right: 50%;
-        min-height: 100vh;
         border-right: 1px solid lightgray;
         background: white;
      }
      #mynetwork {
         position: absolute;
-        left: 0px;
-        top: 0px;
-        bottom: 0px;
-        right: 0%;
+        left: 50%;
+        top: 0%;
+        bottom: 0%;
+        right: 100%;
         min-height: 100vh;
         border-right: 1px solid lightgray;
         background: white;
@@ -190,11 +190,11 @@
     </label>
     <button id = "resetbutton"  onclick="location.reload()" disabled>New variable pair</button>
     <br />
+   
     <div id = "networkcontainer" >
       <div id="mynetwork"></div>
       <div id="mynetworkh"></div>  
     </div>
-    
     <div>
       Studies:
       <br>
@@ -202,8 +202,6 @@
         <p id="pubdetails"></p>
       </div>
     </div>
-  
-  
     
   <script>
     // main DAG variables
