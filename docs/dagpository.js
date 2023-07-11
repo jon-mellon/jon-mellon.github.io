@@ -592,7 +592,7 @@ draw = function () {
     nodesh2 = new vis.DataSet(nodesshown);
     edgesh2 = new vis.DataSet(edgesh);
 
-    const nodesViewh = new vis.DataView(nodesh2, {
+    nodesViewh = new vis.DataView(nodesh2, {
         filter: nodesFilter
     });
     const edgesViewh = new vis.DataView(edgesh2, {
