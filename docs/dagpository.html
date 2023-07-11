@@ -363,9 +363,9 @@
           // console.log("using this version");
           currentitems = items;
           var edgecombs = [];
-          for (var i = 0; i < currentitems.length; i++) { 
+          for (var i = 0; i < currentitems.length; i++) {
             try {
-              currentitems.doi[i] = cleanDOI(currentitems.doi[i]);  
+              currentitems[i].doi = cleanDOI(currentitems[i].doi);  
             } catch(error) {
               
             }
