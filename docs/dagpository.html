@@ -182,6 +182,9 @@
     const pubtext = document.getElementById('pubdetails');
     //pubtext.value
   
+  clearStudyText = function() {
+    pubtext.innerHTML = ""
+  }
   populateCiteFromDOI = function(doi) {
     fetch("https://api.crossref.org/works/" + doi)
   .then((response) => {
@@ -192,12 +195,27 @@
     }
   })
   .then(data => {
-    console.log(data.message.author);
-    pubtext.value = pubtext.value +"\n" + formatArticle(data.message);
+    console.log(data.message);
+    pubtext.innerHTML = pubtext.innerHTML + "<br>" + formatArticle(data.message);
   })
-  .catch((error) => console.error("FETCH ERROR:", error));
+    .catch((error) => console.error("FETCH ERROR:", error));
+  }
+  populateDOIList= function(dois) {
+    clearStudyText();
+    for (var i = 0; i < dois.length; i++) {
+      populateCiteFromDOI(dois[i]);
+    }
+    
   }
   
+  
+  cleanDOI = function(doi) {
+    doi = doi.replace("https://doi.org/", "");
+    doi = doi.replace("http://doi.org/", "");
+    doi = doi.replace("doi.org/", "");
+    doi = doi.replace("www.doi.org/", "");
+    return(doi)
+  }
     
   formatArticle = function(dat) {
     
@@ -208,11 +226,12 @@
     var authorlist = authors.join(", ");
     var title = dat.title[0];
     var journal = dat["container-title"][0];
-    var year= dat.published["date-parts"][0];
-    
-    var combtitle = authorlist  +" (" + year+ ") \"" + title + "\"" +"*" + journal + "*" ;
-    
-    
+    var year= dat.published["date-parts"][0][0];
+    let doiurl = dat.URL;
+    var combtitle = "• " + authorlist  +" (" + year+ ") \"" +
+    title + "\"" + " " + journal + ": " + "<a href=\"" + doiurl +
+    "\" target=\"_blank\">" + doiurl + "</a>\n";
+    console.log(combtitle);
     return combtitle
   }
     
@@ -345,6 +364,12 @@
           currentitems = items;
           var edgecombs = [];
           for (var i = 0; i < currentitems.length; i++) { 
+            try {
+              currentitems.doi[i] = cleanDOI(currentitems.doi[i]);  
+            } catch(error) {
+              
+            }
+            
             allnodes.push(currentitems[i].x);
             allnodes.push(currentitems[i].y);
             currentitems[i].edgecomb = currentitems[i].x + "|" + currentitems[i].y;
