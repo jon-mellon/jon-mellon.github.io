@@ -210,13 +210,18 @@
     var ivcanreach = [];
     var nodestatus = [];
     var allnodes = [];
+    
     var uniquenodes = [];
     var nodeset = [];
     var edgeset = [];
+    
+    // shared network variables
+    var allvars = [];
       
     // hierarchy variables
     var networkh = null;
     var nodesViewh;
+    var hedges;
     var edgesh;
     var nodesh;
     var hidden = [];
@@ -226,7 +231,10 @@
     const pubtext = document.getElementById('pubdetails');
     const resultElement = document.querySelector('.result')
     
+    getVariableHierarchy();
+    
     getEdges();
+    
     var nodes;
     var edges;  
     
