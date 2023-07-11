@@ -208,7 +208,7 @@
     
   }
   
-  
+  populateDOIList(edgeset[4].doi)
   cleanDOI = function(doi) {
     doi = doi.replace("https://doi.org/", "");
     doi = doi.replace("http://doi.org/", "");
@@ -382,12 +382,14 @@
             let firstmatch = edgecombs.indexOf(uniqueedgecombs[i]);
             uniqueitems[i] = currentitems[firstmatch];
             
-            for (var j = firstmatch; j <edgecombs.length; j++) { 
+            for (var j = (firstmatch+1); j <edgecombs.length; j++) { 
               if(uniqueedgecombs[i]==edgecombs[j]) {
                 if(uniqueitems[i].finding!= currentitems[j].finding) {
                   uniqueitems[i].finding= "mixed";
                 }
                 uniqueitems[i].doi = uniqueitems[i].doi + ";" + currentitems[j].doi;
+                uniqueitems[i].resultdocposition = uniqueitems[i].resultdocposition + ";" + currentitems[j].resultdocposition;
+                
               }
             }
             if(uniqueitems[i].finding=="positive") {
@@ -435,23 +437,18 @@
             id,
             selected,
             hovering) {
-              if(selected){
-                //console.log("edge activated:" + id + selected);
-                var edgedata = edges.get();
-                var dois;
-                for (var i = 0; i < edgedata.length; i++) { 
-                  if(edgedata[i].id==id) {
-                    dois = edgedata[i].dois;
-                    // console.log(dois);
-                  }
-                }
+              if(selected) {
+                if(pubtext.edgeid != id) {
+                  console.log("here");
+                  pubtext.edgeid = id;
+                  var edgedata = edges.get();
+                  for (var i = 0; i < edgedata.length; i++) { 
+                    if(edgedata[i].id==id) {
+                      populateDOIList(edgedata[i].dois.split(";"));
+                    }
+                  }  
               }
-            
-            // find the DOIs that went into this edge
-            // query crossref for the DOIs on this edge
-            // paste together key info from cross ref
-            // update text box to show key details
-            
+              }
             }
           
           // creating edges
@@ -463,6 +460,7 @@
               arrows: "to",
               color: { color: uniqueitems[i].color },
               dois: uniqueitems[i].doi,
+              resultdocposition: uniqueitems[i].resultdocposition,
               chosen: { label: false, edge: testEdgeChoice },
             };
           }
