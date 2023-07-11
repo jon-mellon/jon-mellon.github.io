@@ -489,14 +489,14 @@ getVariableHierarchy = function() {
 
     parser.parse().then((items) => {
         var keep = [];
-        var nodesh = [];
+        nodesh = [];
         
         for (var i = 0; i < items.length; i++) {
             if (!allvars.includes(items[i].variable)) {
               allvars.push(items[i].variable);
             }
             
-            nodesh[i] = items[i].variable;
+            //nodesh[i] = items[i].variable;
             if (typeof items[i].parent === "undefined") {
 
             } else {
@@ -508,16 +508,19 @@ getVariableHierarchy = function() {
         }
         
         for (var i = 0; i < allvars.length; i++) {
-          nodesh[i] = {id: (i), label: allvars[i], attribute: "test"};
+          nodesh[i] = {id: (i), label: allvars[i]};
         }
         items = keep.map(i => items[i]);
         
         for (var i = 0; i < items.length; i++) {
-          edgesh[i]=  {from: items[i].parent, to: items[i].variable, arrows: 'to'};
+          edgesh[i]=  {from: allvars.indexOf(items[i].parent), to: allvars.indexOf(items[i].variable)};
         }
+        
+      
         console.table(edgesh);
         console.log(allvars);
-        allvars = hedges;
+        console.log(nodesh);
+        
     });
 }
 
@@ -526,158 +529,7 @@ draw = function () {
         networkh.destroy();
         networkh = null;
     }
-
-    nodesh = [{
-            id: 0,
-            label: "education"
-        },
-        {
-            id: 1,
-            label: "test scores"
-        },
-        {
-            id: 2,
-            label: "SAT"
-        },
-        {
-            id: 3,
-            label: "English SAT"
-        },
-        {
-            id: 4,
-            label: "Math SAT"
-        },
-        {
-            id: 5,
-            label: "5"
-        },
-        {
-            id: 6,
-            label: "graduated university"
-        },
-        {
-            id: 7,
-            label: "GRE"
-        },
-        {
-            id: 8,
-            label: "8"
-        },
-        {
-            id: 9,
-            label: "9"
-        },
-        {
-            id: 10,
-            label: "NAEP Scores"
-        },
-        {
-            id: 11,
-            label: "graduated high school"
-        },
-        {
-            id: 12,
-            label: "LSAT"
-        },
-        {
-            id: 13,
-            label: "years of education"
-        },
-        {
-            id: 14,
-            label: "14"
-        },
-        {
-            id: 15,
-            label: "15"
-        },
-        {
-            id: 16,
-            label: "16"
-        },
-        {
-            id: 17,
-            label: "17"
-        },
-        {
-            id: 18,
-            label: "18"
-        },
-    ];
-
-
-    /*
-    edgesh = [{
-            from: 0,
-            to: 1
-        },
-        {
-            from: 0,
-            to: 6
-        },
-        {
-            from: 0,
-            to: 13
-        },
-        {
-            from: 0,
-            to: 11
-        },
-        {
-            from: 1,
-            to: 2
-        },
-        {
-            from: 2,
-            to: 3
-        },
-        {
-            from: 2,
-            to: 4
-        },
-        {
-            from: 3,
-            to: 5
-        },
-        {
-            from: 1,
-            to: 10
-        },
-        {
-            from: 1,
-            to: 7
-        },
-        {
-            from: 2,
-            to: 8
-        },
-        {
-            from: 2,
-            to: 9
-        },
-        {
-            from: 3,
-            to: 14
-        },
-        {
-            from: 1,
-            to: 12
-        },
-        {
-            from: 16,
-            to: 15
-        },
-        {
-            from: 15,
-            to: 17
-        },
-        {
-            from: 18,
-            to: 17
-        },
-    ];
-    */
-
+  
     // create the network
     var container = document.getElementById("mynetworkh");
 
@@ -714,8 +566,6 @@ draw = function () {
     };
 
 
-
-
     nodesshown = [];
     for (var i = 0; i < nodesh.length; i++) {
         if (!hidden.includes(nodesh[i].id)) {
@@ -725,17 +575,19 @@ draw = function () {
     nodesh2 = new vis.DataSet(nodesshown);
     edgesh2 = new vis.DataSet(edgesh);
 
-    nodesViewh = new vis.DataView(nodesh2, {
+    const nodesViewh = new vis.DataView(nodesh2, {
         filter: nodesFilter
     });
     const edgesViewh = new vis.DataView(edgesh2, {
         filter: edgesFilter
     });
+    
     var data = {
         nodes: nodesViewh,
         edges: edgesViewh,
     };
-
+   
+    
     networkh = new vis.Network(container, data, options);
 
     /*
