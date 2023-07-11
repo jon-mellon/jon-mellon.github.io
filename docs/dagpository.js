@@ -516,6 +516,23 @@ getVariableHierarchy = function() {
           edgesh[i]=  {from: allvars.indexOf(items[i].parent), to: allvars.indexOf(items[i].variable)};
         }
         
+        inanyedge = function(nodeid) {
+          for (var j = 0; j < edgesh.length; j++) {
+            if(edgesh[j].from==i | edgesh[j].to==i) {
+              return true;
+            }
+          }
+          return false;
+        }
+        
+        
+        for (var i = 0; i < nodesh.length; i++) {
+          if(inanyedge(i)) {
+            hidden[i] = false;
+          } else {
+            hidden[i] = true;
+          }
+        }
       
         console.table(edgesh);
         console.log(allvars);
