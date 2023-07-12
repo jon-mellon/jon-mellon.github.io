@@ -538,7 +538,7 @@ getVariableHierarchy = function() {
         console.table(edgesh);
         console.log(allvars);
         console.log(nodesh);
-        
+        draw();
     });
 }
 
