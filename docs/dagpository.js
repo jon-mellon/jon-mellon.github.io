@@ -527,11 +527,9 @@ getVariableHierarchy = function() {
         
         
         for (var i = 0; i < nodesh.length; i++) {
-          if(inanyedge(i)) {
-            hidden[i] = false;
-          } else {
-            hidden[i] = true;
-          }
+          if(!inanyedge(i)) {
+            hidden.push(i)
+            } 
         }
       
         console.table(edgesh);
