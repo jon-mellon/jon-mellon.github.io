@@ -603,8 +603,8 @@ getVariableHierarchy = function() {
         console.log(nodesh);
         draw();
         getEdges();
-        nodesView.refresh();
         createListHierarchy();
+        nodesView.refresh();
       });
 }
 
