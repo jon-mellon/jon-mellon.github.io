@@ -28,16 +28,37 @@ reachableNodesGeneral = function(startnode, edgesetall) {
     }
     return nodesreached;
 }
-
+citationPresent = function(doi) {
+  for (var i = 0; i < citations.length; i++) {
+    if(citations[i].DOI==doi) {
+      return true;
+    } else {
+      return false;
+    }
+  }  
+}
 //// reference management ////
 clearStudyText = function() {
     pubtext.innerHTML = ""
 }
 populateCiteFromDOI = function(doi) {
+    if(citationPresent(doi)) {
+      for (var i = 0; i < citations.length; i++) {
+        if(citations[i].DOI==doi) {
+          return citations[i];
+        } else {
+          return "";
+        }
+    }
+    }
     fetch("https://api.crossref.org/works/" + doi)
         .then((response) => {
             if (response.ok) {
-                return response.json();
+                let jsonout = response.json();
+                if(!citationPresent(doi)) {
+                  citations.push(jsonout);
+                }
+                return jsonout;
             } else {
                 throw new Error("NETWORK RESPONSE ERROR");
             }
