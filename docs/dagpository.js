@@ -32,10 +32,9 @@ citationPresent = function(doi) {
   for (var i = 0; i < citations.length; i++) {
     if(citations[i].DOI==doi) {
       return true;
-    } else {
-      return false;
-    }
+    } 
   }  
+  return false;
 }
 //// reference management ////
 clearStudyText = function() {
@@ -575,8 +574,8 @@ getVariableHierarchy = function() {
         console.table(edgesh);
         console.log(allvars);
         console.log(nodesh);
-        getEdges();
         draw();
+        getEdges();
     });
 }
 
