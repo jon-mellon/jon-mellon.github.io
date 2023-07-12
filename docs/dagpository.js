@@ -485,6 +485,7 @@ createNetwork = function() {
         nodes: nodesView,
         edges: edgesView
     });
+    nodesView.refresh();
 }
 
 
