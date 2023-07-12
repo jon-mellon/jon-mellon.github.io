@@ -410,6 +410,7 @@ createNetwork = function() {
     */
     const nodesFilter = (node) => {
         // temporary while testing:
+        if(network!=null) {
         var nodecount = (network.getConnectedNodes(node.id, "from").length + 
               network.getConnectedNodes(node.id, "to").length);
         console.log("node filtered: " + node.id);
@@ -417,7 +418,12 @@ createNetwork = function() {
               return false;
             } else {
               return true;
-            }
+            }  
+        } else {
+          return true;
+        }
+        
+        
         //return true;
         
         if (nodestatus[node.id] != "irrelevant") {
