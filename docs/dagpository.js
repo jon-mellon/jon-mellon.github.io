@@ -664,7 +664,7 @@ draw = function () {
     unclusterNodes = function(nodeid) {
       network.openCluster(nodeid);
       for (var i = 0; i < clusterednodes.length; i++) {
-        if(clusterednodes[i]==nodeid) {
+        if(clusterednodes[i].id==nodeid) {
           clusterednodes.slice(i, 1);
         }
       }
