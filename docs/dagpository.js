@@ -598,7 +598,8 @@ getVariableHierarchy = function() {
         console.log(nodesh);
         draw();
         getEdges();
-    });
+        nodesView.refresh()
+      });
 }
 
 draw = function () {
@@ -687,6 +688,7 @@ draw = function () {
           clusterednodes.slice(i, 1);
         }
       }
+      nodesView.refresh();
     }
     
     clusterNodes = function(nodeids, label, origid) {
@@ -709,5 +711,6 @@ draw = function () {
       clusterednodes.push({id: clusterid,
       origid: origid,
       label: label});
+      nodesView.refresh();
     }
     
