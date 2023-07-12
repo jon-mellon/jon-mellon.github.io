@@ -358,7 +358,7 @@ createNetwork = function() {
     function startNetwork(data) {
         const container = document.getElementById("mynetwork");
         const options = {};
-        new vis.Network(container, data, options);
+        network = new vis.Network(container, data, options);
     }
 
     let nodeFilterValue = "";
