@@ -419,7 +419,6 @@ createNetwork = function() {
         if(network!=null) {
         var nodecount = (network.getConnectedNodes(node.id, "from").length + 
               network.getConnectedNodes(node.id, "to").length);
-        console.log("node filtered: " + node.id);
         if(nodecount==0) {
               return false;
             } else {
