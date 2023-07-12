@@ -55,7 +55,6 @@ populateCiteFromDOI = function(doi) {
             console.log("crossref API Call");
             if (response.ok) {
                 let jsonout = response.json();
-                
                 return jsonout;
             } else {
                 throw new Error("NETWORK RESPONSE ERROR");
@@ -65,7 +64,7 @@ populateCiteFromDOI = function(doi) {
             console.log(data.message);
             pubtext.innerHTML = pubtext.innerHTML + "<br>" + formatArticle(data.message);
             if(!citationPresent(doi)) {
-               citations.push(jsonout);
+               citations.push(data.message);
             }
         })
         .catch((error) => console.error("FETCH ERROR:", error));
