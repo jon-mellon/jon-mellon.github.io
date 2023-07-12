@@ -532,7 +532,6 @@ getVariableHierarchy = function() {
 
     parser.parse().then((items) => {
         var keep = [];
-        nodesh = [];
         
         for (var i = 0; i < items.length; i++) {
             if (!allvars.includes(items[i].variable)) {
