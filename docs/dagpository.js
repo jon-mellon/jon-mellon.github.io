@@ -721,3 +721,32 @@ draw = function () {
       nodesView.refresh();
     }
     
+getNextLevel = function(currentorig) {
+  let nextlevel = [];
+  for (var i = 0; i < edgesh.length; i++) {
+    if(edgesh[i].from==currentorig) {
+      nextlevel.push(edgesh[i].to);
+    }
+  }
+  return nextlevel;
+}
+createNextLevel = function(currentorig) {
+  let toplevel = document.createElement("li");
+  let nextlev = getNextLevel(currentorig);
+  if(nextlev.length>0) {
+    toplevel.innerHTML = "<span class='caret' id=" + "node" + currentorig + ">" + nodesh[currentorig].label +"</span>"
+    toplevellist = document.createElement("ul");
+    toplevellist.className = "nested";
+    toplevellist.id = "nodelist" + currentorig;
+    toplevel.appendChild(toplevellist);
+    for (var i = 0; i < nextlev.length; i++) {
+      toplevellist.appendChild(createNextLevel(nextlev[i]));
+    }
+  } else {
+    toplevel.innerText = nodesh[currentorig].label;
+  }
+  return(toplevel);
+}
+
+
+    
