@@ -374,6 +374,9 @@ createNetwork = function() {
     based on whether item in DataView satisfies a given condition.
     */
     const nodesFilter = (node) => {
+        // temporary while testing:
+        return true;
+        
         if (nodestatus[node.id] != "irrelevant") {
             return true;
         } else {
