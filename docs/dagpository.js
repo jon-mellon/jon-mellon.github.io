@@ -478,7 +478,7 @@ hideChildren = function(nodeid) {
     }
     hidethese.push(nodeid);
     clusterNodes(nodeids = hidethese, 
-      origid = nodeid, label = parentlabel);
+      label = parentlabel, origid = nodeid);
     nodesViewh.refresh();
 }
 
