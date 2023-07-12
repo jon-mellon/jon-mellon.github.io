@@ -129,8 +129,8 @@ attemptDAGButton = function() {
 dvSelected = function() {
     const dvselector = document.getElementById('selectDV');
 
-    canreachdv = reachableByNodes(uniquenodes.indexOf(dvselector.value), edgeset)
-    dvcanreach = reachableNodesGeneral(uniquenodes.indexOf(dvselector.value), edgeset)
+    canreachdv = reachableByNodes(allvars.indexOf(dvselector.value), edgeset)
+    dvcanreach = reachableNodesGeneral(allvars.indexOf(dvselector.value), edgeset)
     updateNodeStatus();
     attemptDAGButton();
 }
@@ -138,8 +138,8 @@ dvSelected = function() {
 ivSelected = function() {
     const ivselector = document.getElementById('selectIV');
 
-    canreachiv = reachableByNodes(uniquenodes.indexOf(ivselector.value), edgeset)
-    ivcanreach = reachableNodesGeneral(uniquenodes.indexOf(ivselector.value), edgeset)
+    canreachiv = reachableByNodes(allvars.indexOf(ivselector.value), edgeset)
+    ivcanreach = reachableNodesGeneral(allvars.indexOf(ivselector.value), edgeset)
     updateNodeStatus();
     attemptDAGButton();
 }
@@ -175,13 +175,13 @@ updateNodeStatus = function() {
     const dvselector = document.getElementById('selectDV');
     const ivselector = document.getElementById('selectIV');
 
-    let dv = uniquenodes.indexOf(dvselector.value);
-    let iv = uniquenodes.indexOf(ivselector.value);
-    for (var i = 0; i < uniquenodes.length; i++) {
+    let dv = allvars.indexOf(dvselector.value);
+    let iv = allvars.indexOf(ivselector.value);
+    for (var i = 0; i < allvars.length; i++) {
         nodestatus[i] = getNodesStatus(i, iv = iv, dv = dv);
     }
     var confounders = [];
-    for (var i = 0; i < uniquenodes.length; i++) {
+    for (var i = 0; i < allvars.length; i++) {
         if (nodestatus[i] == "confounder") {
             confounders.push(i);
         }
@@ -289,15 +289,13 @@ getEdges = function() {
             }
         }
 
-
-
         uniquenodes = allnodes.filter(onlyUnique);
 
         var dvselect = document.getElementById("selectDV");
         var ivselect = document.getElementById("selectIV");
 
-        for (var i = 0; i < uniquenodes.length; i++) {
-            var opt = uniquenodes[i];
+        for (var i = 0; i < allvars.length; i++) {
+            var opt = allvars[i];
             var el = document.createElement("option");
             var el2 = document.createElement("option");
             el.textContent = opt;
@@ -349,8 +347,8 @@ getEdges = function() {
         // creating edges
         for (var i = 0; i < uniqueitems.length; i++) {
             edgeset[i] = {
-                from: uniquenodes.indexOf(uniqueitems[i].x),
-                to: uniquenodes.indexOf(uniqueitems[i].y),
+                from: allvars.indexOf(uniqueitems[i].x),
+                to: allvars.indexOf(uniqueitems[i].y),
                 relation: uniqueitems[i].finding,
                 arrows: "to",
                 color: {
@@ -577,6 +575,7 @@ getVariableHierarchy = function() {
         console.table(edgesh);
         console.log(allvars);
         console.log(nodesh);
+        getEdges();
         draw();
     });
 }
