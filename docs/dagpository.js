@@ -336,7 +336,6 @@ getEdges = function() {
                 values.strokeWidth = 3;
                 values.width = 3;
                 if (pubtext.edgeid != id) {
-                    console.log("here2");
                     pubtext.edgeid = id;
                     var edgedata = edges.get();
                     for (var i = 0; i < edgedata.length; i++) {
