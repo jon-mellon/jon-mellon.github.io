@@ -51,6 +51,7 @@ populateCiteFromDOI = function(doi) {
         }
       }
     }
+    if(!citationPresent(doi)) {
     fetch("https://api.crossref.org/works/" + doi)
         .then((response) => {
             console.log("crossref API Call");
@@ -76,7 +77,8 @@ populateCiteFromDOI = function(doi) {
                });
             }
         })
-        .catch((error) => console.error("FETCH ERROR:", error));
+        .catch((error) => console.error("FETCH ERROR:", error));  
+    }
 }
 populateDOIList = function(dois) {
     clearStudyText();
