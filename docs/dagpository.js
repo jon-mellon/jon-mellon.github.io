@@ -654,7 +654,11 @@ draw = function () {
 
     unclusterNodes = function(nodeid) {
       network.openCluster(nodeid);
-      clusterednodes.slice(clusterednodes.indexOf(nodeid), 1);
+      for (var i = 0; i < clusterednodes.length; i++) {
+        if(clusterednodes[i]==nodeid) {
+          clusterednodes.slice(i, 1);
+        }
+      }
     }
     
     clusterNodes = function(nodeids, label, origid) {
