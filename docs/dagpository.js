@@ -44,11 +44,12 @@ populateCiteFromDOI = function(doi) {
     if(citationPresent(doi)) {
       for (var i = 0; i < citations.length; i++) {
         if(citations[i].DOI==doi) {
-          return citations[i];
+          pubtext.innerHTML = pubtext.innerHTML + "<br>" + formatArticle(citations[i]);
+          return "";
         } else {
           return "";
         }
-    }
+      }
     }
     fetch("https://api.crossref.org/works/" + doi)
         .then((response) => {
@@ -70,7 +71,6 @@ populateCiteFromDOI = function(doi) {
                for (var i = 0; i < citations.length; i++) {
                  doiall[i] = citations[i].DOI;
                }
-               
                citations = citations.filter(function(item, pos) {
                 return doiall.indexOf(item.DOI) == pos;
                });
@@ -81,7 +81,7 @@ populateCiteFromDOI = function(doi) {
 populateDOIList = function(dois) {
     clearStudyText();
     for (var i = 0; i < dois.length; i++) {
-        populateCiteFromDOI(dois[i]);
+      populateCiteFromDOI(dois[i]);
     }
 }
 cleanDOI = function(doi) {
@@ -111,6 +111,7 @@ formatArticle = function(dat) {
     console.log(combtitle);
     return combtitle
 }
+/*
 async function populateCitations(dois) {
     pubtext.value = "";
     for (var i = 0; i < dois.length; i++) {
@@ -122,6 +123,7 @@ async function populateCitations(dois) {
         }
     }
 }
+*/
 
 //// main DAG ////
 attemptDAGButton = function() {
@@ -341,7 +343,9 @@ getEdges = function() {
                     for (var i = 0; i < edgedata.length; i++) {
                         if (edgedata[i].id == id) {
                           try{
-                            populateDOIList(edgedata[i].dois.split(";"));
+                            let doistemp = edgedata[i].dois.split(";");
+                            doistemp = doistemp.filter(onlyUnique);
+                            populateDOIList(doistemp);
                           } catch(error) {
                             
                           }
