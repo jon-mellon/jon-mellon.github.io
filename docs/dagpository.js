@@ -311,6 +311,7 @@ getEdges = function() {
 
 
         //var nodeset = [];
+        /*
         for (var i = 0; i < uniquenodes.length; i++) {
             nodeset[i] = {
                 id: (i),
@@ -318,6 +319,7 @@ getEdges = function() {
                 attribute: "test"
             };
         }
+        */
 
 
         testEdgeChoice = function(values,
@@ -365,6 +367,8 @@ getEdges = function() {
 createNetwork = function() {
     const nodeFilterSelector = document.getElementById("nodeFilterSelect");
     const edgeFilters = document.getElementsByName("edgesFilter");
+    // setting nodes to be the ones from the hierarchy
+    nodeset = nodesh;
     nodes = new vis.DataSet(nodeset);
     edges = new vis.DataSet(edgeset);
     const dvselector = document.getElementById('selectDV');
