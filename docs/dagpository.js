@@ -460,7 +460,7 @@ hideChildren = function(nodeid) {
     if (!foldednodes.includes(nodeid)) {
         foldednodes.push(nodeid);
     }
-
+    var parentlabel;
     let hidethese = reachableNodesGeneral(nodeid, edgesh);
     if (hidethese.length > 0) {
         var clickednode = nodesViewh.get(nodeid);
@@ -470,11 +470,15 @@ hideChildren = function(nodeid) {
     for (var i = 0; i < nodesh.length; i++) {
         if (nodesh[i].id == nodeid) {
             nodesh[i].color = "#09e472";
+            parentlabel = nodesh[i].label
         }
         if (hidethese.includes(i)) {
             hidden.push(i);
         }
     }
+    hidethese.push(nodeid);
+    clusterNodes(nodeids = hidethese, 
+      origid = nodeid, label = parentlabel);
     nodesViewh.refresh();
 }
 
@@ -497,6 +501,12 @@ showChildren = function(nodeid) {
     for (var i = 0; i < foldednodes.length; i++) {
         hideChildren(foldednodes[i]);
     }
+    for (var i = 0; i < clusterednodes.length; i++) {
+      if(clusterednodes[i].origid==nodeid) {
+        unclusterNodes(clusterednodes[i].id)
+      }
+    }
+    
     nodesViewh.refresh();
 }
 
@@ -629,25 +639,6 @@ draw = function () {
     
     networkh = new vis.Network(container, data, options);
 
-    /*
-    networkh.cluster({
-      joinCondition(nodeOptions) {
-        if(nodeOptions.id==1 | nodeOptions.id==2) {
-          return true;
-        } else {
-          return false;
-        }
-      },
-    });
-    */
-    /*
-    networkh.cluster({
-      joinCondition(nodeOptions) {
-        console.log(nodeOptions);
-        return !!formData.get(`cluster-node-${nodeOptions.id}`);
-      },
-    });
-    */
 
     networkh.on('click', function(properties) {
         var ids = properties.nodes;
@@ -659,3 +650,32 @@ draw = function () {
         console.log(ids);
     });
 }
+
+
+    unclusterNodes = function(nodeid) {
+      network.openCluster(nodeid);
+      clusterednodes.slice(clusterednodes.indexOf(nodeid), 1);
+    }
+    
+    clusterNodes = function(nodeids, label, origid) {
+      let clusterid = "cluster"+(clusterednodes.length+1); 
+      network.cluster({
+      joinCondition(nodeOptions) {
+        if(nodeids.includes(nodeOptions.id)) {
+          return true;
+        } else {
+          return false;
+        }
+      },
+      clusterNodeProperties: {
+        id: clusterid,
+        borderWidth: 3,
+        color: "#09e472",
+        label: label,
+      }});
+      
+      clusterednodes.push({id: clusterid,
+      origid: origid,
+      label: label});
+    }
+    
