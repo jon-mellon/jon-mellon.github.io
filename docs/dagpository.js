@@ -53,6 +53,7 @@ populateCiteFromDOI = function(doi) {
     }
     fetch("https://api.crossref.org/works/" + doi)
         .then((response) => {
+            console.log("crossref API Call");
             if (response.ok) {
                 let jsonout = response.json();
                 if(!citationPresent(doi)) {
