@@ -335,7 +335,11 @@ getEdges = function() {
                     var edgedata = edges.get();
                     for (var i = 0; i < edgedata.length; i++) {
                         if (edgedata[i].id == id) {
+                          try{
                             populateDOIList(edgedata[i].dois.split(";"));
+                          } catch(error) {
+                            
+                          }
                         }
                     }
                 }
