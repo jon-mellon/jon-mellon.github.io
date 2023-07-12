@@ -247,31 +247,5 @@
    
     */
     </script>
-     
-    
-<script>
-
-const nestedvars = document.getElementById('ultest');
-var originnodes = [];
-        
-for (var i = 0; i < nodesh.length; i++) {
-  if(reachableByNodes(i, edgesh).length==0) {
-    if(reachableNodesGeneral(i, edgesh).length>0) {
-      originnodes.push(i);  
-    }
-  }
-}
-
-for (var i = 0; i < originnodes.length; i++) {
-  nestedvars.appendChild(createNextLevel(originnodes[i]));
-}
-var toggler = document.getElementsByClassName("caret");
-var i;
-for (i = 0; i < toggler.length; i++) {
-  toggler[i].addEventListener("click", function() {
-    this.parentElement.querySelector(".nested").classList.toggle("active");
-    this.classList.toggle("caret-down");
-  });
-}
-</script> 
+   
 </body>

@@ -558,7 +558,6 @@ getVariableHierarchy = function() {
 
     parser.parse().then((items) => {
         var keep = [];
-        
         for (var i = 0; i < items.length; i++) {
             if (!allvars.includes(items[i].variable)) {
               allvars.push(items[i].variable);
@@ -605,7 +604,8 @@ getVariableHierarchy = function() {
         console.log(nodesh);
         draw();
         getEdges();
-        nodesView.refresh()
+        nodesView.refresh();
+        createListHierarchy();
       });
 }
 
@@ -749,4 +749,28 @@ createNextLevel = function(currentorig) {
 }
 
 
-    
+
+createListHierarchy = function() {
+  var nestedvars = document.getElementById('ultest');
+var originnodes = [];
+        
+for (var i = 0; i < nodesh.length; i++) {
+  if(reachableByNodes(i, edgesh).length==0) {
+    if(reachableNodesGeneral(i, edgesh).length>0) {
+      originnodes.push(i);  
+    }
+  }
+}
+
+for (var i = 0; i < originnodes.length; i++) {
+  nestedvars.appendChild(createNextLevel(originnodes[i]));
+}
+var toggler = document.getElementsByClassName("caret");
+var i;
+for (i = 0; i < toggler.length; i++) {
+  toggler[i].addEventListener("click", function() {
+    this.parentElement.querySelector(".nested").classList.toggle("active");
+    this.classList.toggle("caret-down");
+  });
+}
+}    
