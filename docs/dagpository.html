@@ -139,11 +139,11 @@
 }
 
 .nested {
-  display: active;
+  display: block;
 }
 
 .active {
-  display: block;
+  display: none;
 }
   </style>
   
@@ -184,7 +184,7 @@
     </label>
     <br />
     <br />
-    <form id="dvselector">
+    <form id="dvselector" hidden>
       Independent variable: 
      <select id="selectIV" onChange = "ivSelected();">
         <option>Choose an independent variable</option>
@@ -194,7 +194,7 @@
       <select id="selectDV" onChange = "dvSelected();">
         <option>Choose a dependent variable</option>
     </select>
-</form>
+    </form>
     <label hidden>
       Filter edges
       <div>
