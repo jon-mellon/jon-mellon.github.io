@@ -498,9 +498,9 @@ hideChildren = function(nodeid) {
     var parentlabel;
     let hidethese = reachableNodesGeneral(nodeid, edgesh);
     if (hidethese.length > 0) {
-        var clickednode = nodesViewh.get(nodeid);
-        clickednode.color = "#09e472";
-        nodesh2.update(clickednode);
+        //var clickednode = nodesViewh.get(nodeid);
+        //clickednode.color = "#09e472";
+        //nodesh2.update(clickednode);
     }
     for (var i = 0; i < nodesh.length; i++) {
         if (nodesh[i].id == nodeid) {
@@ -514,13 +514,13 @@ hideChildren = function(nodeid) {
     hidethese.push(nodeid);
     clusterNodes(nodeids = hidethese, 
       label = parentlabel, origid = nodeid);
-    nodesViewh.refresh();
+    //nodesViewh.refresh();
 }
 
 showChildren = function(nodeid) {
-    var clickednode = nodesViewh.get(nodeid);
-    clickednode.color = null;
-    nodesh2.update(clickednode);
+    //var clickednode = nodesViewh.get(nodeid);
+    //clickednode.color = null;
+    //nodesh2.update(clickednode);
     
     let showthese = reachableNodesGeneral(nodeid, edgesh);
     if (foldednodes.indexOf(nodeid) != -1) {
@@ -542,7 +542,7 @@ showChildren = function(nodeid) {
       }
     }
     
-    nodesViewh.refresh();
+    //nodesViewh.refresh();
 }
 
 getVariableHierarchy = function() {
