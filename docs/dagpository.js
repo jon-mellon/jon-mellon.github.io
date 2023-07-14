@@ -136,6 +136,7 @@ fetchAllCrossRef = function() {
   }
 }
 
+/*
 populateCitationFromDOI = function(doi) {
     if(citationPresent(doi)) {
       for (var i = 0; i < citations.length; i++) {
@@ -176,7 +177,7 @@ populateCitationFromDOI = function(doi) {
         .catch((error) => console.error("FETCH ERROR:", error));  
     }
 }
-
+*/
 
 populateDOIList = function(dois) {
     clearStudyText();
@@ -187,6 +188,7 @@ populateDOIList = function(dois) {
       pubtext.innerHTML= "No reference listed";
     }
 }
+
 cleanDOI = function(doi) {
     doi = doi.replace("https://doi.org/", "");
     doi = doi.replace("http://doi.org/", "");
@@ -481,7 +483,7 @@ getEdges = function() {
         }
         
         createNetwork();
-        getAllDOIS();
+        fetchAllCrossRef();
     })
 }
 
