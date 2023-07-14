@@ -594,7 +594,7 @@ getVariableHierarchy = function() {
         
         for (var i = 0; i < nodesh.length; i++) {
           if(!inanyedge(i)) {
-            hidden.push(i)
+              hidden.push(i)
             } 
         }
       
@@ -720,10 +720,10 @@ draw = function () {
       nodesView.refresh();
     }
     
-getNextLevel = function(currentorig) {
+getNextLevel = function(orid) {
   let nextlevel = [];
   for (var i = 0; i < edgesh.length; i++) {
-    if(edgesh[i].from==currentorig) {
+    if(edgesh[i].from==orid) {
       nextlevel.push(edgesh[i].to);
     }
   }
@@ -733,16 +733,27 @@ createNextLevel = function(currentorig) {
   let toplevel = document.createElement("li");
   let nextlev = getNextLevel(currentorig);
   if(nextlev.length>0) {
-    toplevel.innerHTML = "<span class='caret' id=" + "node" + currentorig + ">" + nodesh[currentorig].label +"</span>"
-    toplevellist = document.createElement("ul");
+    let topspan = document.createElement("span");
+    topspan.className = "caret";
+    topspan.id = "node" + currentorig;
+    topspan.innerText = nodesh[currentorig].label ;
+    toplevel.appendChild(topspan);
+    let  toplevellist = document.createElement("ul");
     toplevellist.className = "nested";
     toplevellist.id = "nodelist" + currentorig;
-    toplevel.appendChild(toplevellist);
+    
     for (var i = 0; i < nextlev.length; i++) {
-      toplevellist.appendChild(createNextLevel(nextlev[i]));
+      if(toplevellist.nextSibling) {
+        toplevellist.ParentNode.insertBefore(createNextLevel(nextlev[i]), 
+          toplevellist.nextSibling);  
+      } else {
+        toplevellist.appendChild(createNextLevel(nextlev[i]));  
+      }
+      
     }
+    toplevel.appendChild(toplevellist);
   } else {
-    toplevel.innerText = nodesh[currentorig].label;
+    toplevel.innerText =  nodesh[currentorig].label ;
   }
   return(toplevel);
 }
@@ -751,25 +762,25 @@ createNextLevel = function(currentorig) {
 
 createListHierarchy = function() {
   var nestedvars = document.getElementById('ultest');
-var originnodes = [];
+  var originnodes = [];
         
-for (var i = 0; i < nodesh.length; i++) {
-  if(reachableByNodes(i, edgesh).length==0) {
-    if(reachableNodesGeneral(i, edgesh).length>0) {
-      originnodes.push(i);  
+  for (var i = 0; i < nodesh.length; i++) {
+    if(reachableByNodes(i, edgesh).length==0) {
+      if(reachableNodesGeneral(i, edgesh).length>0) {
+        originnodes.push(i);  
+      }
     }
   }
-}
 
-for (var i = 0; i < originnodes.length; i++) {
-  nestedvars.appendChild(createNextLevel(originnodes[i]));
+  for (var i = 0; i < originnodes.length; i++) {
+    nestedvars.appendChild(createNextLevel(originnodes[i]));
+  }
+  var toggler = document.getElementsByClassName("caret");
+  var i;
+  for (i = 0; i < toggler.length; i++) {
+    toggler[i].addEventListener("click", function() {
+      this.parentElement.querySelector(".nested").classList.toggle("active");
+      this.classList.toggle("caret-down");
+    });
+  }
 }
-var toggler = document.getElementsByClassName("caret");
-var i;
-for (i = 0; i < toggler.length; i++) {
-  toggler[i].addEventListener("click", function() {
-    this.parentElement.querySelector(".nested").classList.toggle("active");
-    this.classList.toggle("caret-down");
-  });
-}
-}    
