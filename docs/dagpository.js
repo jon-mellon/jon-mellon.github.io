@@ -480,6 +480,7 @@ getEdges = function() {
         }
         
         createNetwork();
+        getAllDOIS();
     })
 }
 
