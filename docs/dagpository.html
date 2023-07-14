@@ -37,7 +37,7 @@
         position: absolute;
         bottom: 0%;
         top: 0%;
-        left: 50%;
+        left: 0%;
         right: 0%;
         border-right: 1px solid lightgray;
         background: white;
@@ -175,7 +175,7 @@
     <p>
       Here are all the relevant causal claims listed in our dataset. 
     </p>
-    <label>
+    <label hidden>
       Filter nodes
       <select id="nodeFilterSelect">
         <option value="">All</option>
@@ -221,14 +221,13 @@
           <span style="color: red">Negative</span>
         </label>
       </div>
-      <button id = "createdagbutton" onclick="createNetwork()" disabled>Create DAG</button>
+      <button id = "createdagbutton" onclick="createNetwork()" disabled hidden>Create DAG</button>
     </label>
-    <button id = "resetbutton"  onclick="location.reload()" disabled>New variable pair</button>
+    <button id = "resetbutton"  onclick="location.reload()" disabled>Reset</button>
     <br />
    
     <div id = "networkcontainer" >
       <div id="mynetwork"></div>
-      <div id="mynetworkh"></div>  
     </div>
     <div>
       Studies:
