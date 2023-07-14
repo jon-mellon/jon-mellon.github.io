@@ -791,7 +791,7 @@ createListHierarchy = function() {
       this.classList.toggle("caret-down");
       
       
-      let tempid = this.id.replace("node", "");
+      let tempid = Number(this.id.replace("node", ""));
       console.log(tempid);
       if (foldednodes.includes(tempid)) {
         showChildren(tempid);
