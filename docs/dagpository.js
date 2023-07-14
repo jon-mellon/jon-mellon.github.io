@@ -536,12 +536,20 @@ showChildren = function(nodeid) {
     for (var i = 0; i < foldednodes.length; i++) {
         hideChildren(foldednodes[i]);
     }
+    cdeletes = [];  
     for (var i = 0; i < clusterednodes.length; i++) {
       if(clusterednodes[i].origid==nodeid) {
-        unclusterNodes(clusterednodes[i].id)
+        cdeletes.push(i);
+        try{
+          unclusterNodes(clusterednodes[i].id)  
+        } catch(error) {
+          
+        }
       }
     }
-    
+    for(var i = cdeletes.length-1; i >= 0; i--){
+      clusterednodes.splice(cdeletes[i], 1);
+    }
     //nodesViewh.refresh();
 }
 
@@ -691,9 +699,11 @@ draw = function () {
     unclusterNodes = function(nodeid) {
       network.openCluster(nodeid);
       for (var i = 0; i < clusterednodes.length; i++) {
+        /*
         if(clusterednodes[i].id==nodeid) {
           clusterednodes.splice(i, 1);
         }
+        */
       }
       nodesView.refresh();
     }
