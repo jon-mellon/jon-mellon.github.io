@@ -114,6 +114,7 @@ getDOIFromCrossRef = function(doi) {
 }
 
 getAllDOIS = function() {
+  console.log("getAllDOIS called");
   var alldois = [];
   for (var i = 0; i < edgeset.length; i++) {
     console.log(i);
