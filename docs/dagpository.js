@@ -732,20 +732,13 @@ getNextLevel = function(orid) {
 
 createNextLevel = function(currentorig) {
   let toplevel = document.createElement("li");
+  toplevel.id = "node" + currentorig;
   let nextlev = getNextLevel(currentorig);
   if(nextlev.length>0) {
     let topspan = document.createElement("span");
     topspan.className = "caret";
-    topspan.id = "node" + currentorig;
     topspan.innerText = nodesh[currentorig].label ;
-    topspan.addEventListener("click", function() {
-      console.log(this.id);
-       if (foldednodes.includes(this.id)) {
-        showChildren(this.id);
-       } else {
-        hideChildren(this.id);
-       }
-    });
+    
     toplevel.appendChild(topspan);
     let  toplevellist = document.createElement("ul");
     toplevellist.className = "nested";
@@ -761,6 +754,12 @@ createNextLevel = function(currentorig) {
       
     }
     toplevel.appendChild(toplevellist);
+    /*
+    toplevel.addEventListener("click", function() {
+      console.log(this.id);
+      
+    });
+    */
   } else {
     toplevel.innerText =  nodesh[currentorig].label ;
   }
@@ -784,10 +783,16 @@ createListHierarchy = function() {
   for (var i = 0; i < originnodes.length; i++) {
     nestedvars.appendChild(createNextLevel(originnodes[i]));
   }
-  var toggler = document.getElementsByClassName("caret");
+  toggler = document.getElementsByClassName("caret");
   var i;
   for (i = 0; i < toggler.length; i++) {
-    toggler[i].addEventListener("click", function() {
+    toggler[i].addEventListener("click", e => {
+      console.log(this.parentElement.id);
+       if (foldednodes.includes(this.parentElement.id)) {
+        showChildren(this.parentElement.id);
+       } else {
+        hideChildren(this.parentElement.id);
+       }
       this.parentElement.querySelector(".nested").classList.toggle("active");
       this.classList.toggle("caret-down");
     });
