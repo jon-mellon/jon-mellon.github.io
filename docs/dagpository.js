@@ -789,15 +789,16 @@ createListHierarchy = function() {
     toggler[i].addEventListener("click", function() {
       this.parentElement.querySelector(".nested").classList.toggle("active");
       this.classList.toggle("caret-down");
-      console.log(this.id);
-       /*
-      console.log(this.parentElement.id);
-      if (foldednodes.includes(this.parentElement.id)) {
-        showChildren(this.parentElement.id);
+      
+      
+      let tempid = this.id.replace("node", "");
+      console.log(tempid);
+      if (foldednodes.includes(tempid)) {
+        showChildren(tempid);
       } else {
-        hideChildren(this.parentElement.id);
+        hideChildren(tempid);
       }
-      */
+      
     });
   }
   
