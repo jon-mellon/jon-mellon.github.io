@@ -729,6 +729,7 @@ getNextLevel = function(orid) {
   }
   return nextlevel;
 }
+
 createNextLevel = function(currentorig) {
   let toplevel = document.createElement("li");
   let nextlev = getNextLevel(currentorig);
@@ -737,6 +738,9 @@ createNextLevel = function(currentorig) {
     topspan.className = "caret";
     topspan.id = "node" + currentorig;
     topspan.innerText = nodesh[currentorig].label ;
+    topspan.addEventListener("click", function() {
+      console.log(this.id);
+    });
     toplevel.appendChild(topspan);
     let  toplevellist = document.createElement("ul");
     toplevellist.className = "nested";
