@@ -375,7 +375,8 @@ getEdges = function() {
                 },
             };
         }
-
+        
+        createNetwork();
     })
 }
 
@@ -604,7 +605,7 @@ getVariableHierarchy = function() {
         draw();
         getEdges();
         createListHierarchy();
-        nodesView.refresh();
+        //nodesView.refresh();
       });
 }
 
@@ -691,7 +692,7 @@ draw = function () {
       network.openCluster(nodeid);
       for (var i = 0; i < clusterednodes.length; i++) {
         if(clusterednodes[i].id==nodeid) {
-          clusterednodes.slice(i, 1);
+          clusterednodes.splice(i, 1);
         }
       }
       nodesView.refresh();
@@ -789,7 +790,6 @@ createListHierarchy = function() {
     toggler[i].addEventListener("click", function() {
       this.parentElement.querySelector(".nested").classList.toggle("active");
       this.classList.toggle("caret-down");
-      
       
       let tempid = Number(this.id.replace("node", ""));
       console.log(tempid);
