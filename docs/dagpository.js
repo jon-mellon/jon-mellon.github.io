@@ -41,6 +41,101 @@ clearStudyText = function() {
     pubtext.innerHTML = ""
 }
 populateCiteFromDOI = function(doi) {
+    
+    if(citationPresent(doi)) {
+      for (var i = 0; i < citations.length; i++) {
+        if(citations[i].DOI==doi) {
+          pubtext.innerHTML = pubtext.innerHTML + "<br>" + formatArticle(citations[i]);
+        } else {
+          
+        }
+      }
+    }
+    
+    /*
+    if(!citationPresent(doi)) {
+    fetch("https://api.crossref.org/works/" + doi)
+        .then((response) => {
+            console.log("crossref API Call");
+            if (response.ok) {
+                let jsonout = response.json();
+                return jsonout;
+            } else {
+                throw new Error("NETWORK RESPONSE ERROR");
+            }
+        })
+        .then(data => {
+            console.log(data.message);
+            pubtext.innerHTML = pubtext.innerHTML + "<br>" + formatArticle(data.message);
+            if(!citationPresent(doi)) {
+               citations.push(data.message);
+               // remove duplicates
+               var doiall = [];
+               for (var i = 0; i < citations.length; i++) {
+                 doiall[i] = citations[i].DOI;
+               }
+               citations = citations.filter(function(item, pos) {
+                return doiall.indexOf(item.DOI) == pos;
+               });
+            }
+        })
+        .catch((error) => console.error("FETCH ERROR:", error));  
+    }
+    */
+}
+
+getDOIFromCrossRef = function(doi) {
+   fetch("https://api.crossref.org/works/" + doi)
+        .then((response) => {
+            console.log("crossref API Call");
+            if (response.ok) {
+                let jsonout = response.json();
+                return jsonout;
+            } else {
+                throw new Error("NETWORK RESPONSE ERROR");
+            }
+        })
+        .then(data => {
+            console.log(data.message);
+            //pubtext.innerHTML = pubtext.innerHTML + "<br>" + formatArticle(data.message);
+            if(!citationPresent(doi)) {
+               citations.push(data.message);
+               // remove duplicates
+               var doiall = [];
+               for (var i = 0; i < citations.length; i++) {
+                 doiall[i] = citations[i].DOI;
+               }
+               citations = citations.filter(function(item, pos) {
+                return doiall.indexOf(item.DOI) == pos;
+               });
+            }
+        })
+        .catch((error) => console.error("FETCH ERROR:", error));  
+}
+
+getAllDOIS = function() {
+  var alldois = [];
+  for (var i = 0; i < edgeset.length; i++) {
+    console.log(i);
+    if(typeof edgeset[i].dois !=="undefined") {
+      let tempdois = edgeset[i].dois.split(";");
+      for (var j = 0; j < tempdois.length; j++) {
+       alldois.push(tempdois[j]);
+      }
+    }
+  }
+  alldois  = alldois.filter(onlyUnique);
+  return(alldois)  
+}
+
+fetchAllCrossRef = function() {
+  var alldois = getAllDOIS();
+  for (var i = 0; i < alldois.length; i++) {
+    setTimeout(getDOIFromCrossRef, 50, alldois[i])
+  }
+}
+
+populateCitationFromDOI = function(doi) {
     if(citationPresent(doi)) {
       for (var i = 0; i < citations.length; i++) {
         if(citations[i].DOI==doi) {
@@ -80,10 +175,15 @@ populateCiteFromDOI = function(doi) {
         .catch((error) => console.error("FETCH ERROR:", error));  
     }
 }
+
+
 populateDOIList = function(dois) {
     clearStudyText();
     for (var i = 0; i < dois.length; i++) {
       populateCiteFromDOI(dois[i]);
+    }
+    if(pubtext.innerHTML=="") {
+      pubtext.innerHTML= "No reference listed";
     }
 }
 cleanDOI = function(doi) {
@@ -354,6 +454,9 @@ getEdges = function() {
                         }
                     }
                 }
+            }
+            if(pubtext.innerHTML=="") {
+              pubtext.innerHTML = "No citations listed";
             }
         }
 
