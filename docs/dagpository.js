@@ -602,7 +602,7 @@ getVariableHierarchy = function() {
         console.table(edgesh);
         console.log(allvars);
         console.log(nodesh);
-        draw();
+        //draw();
         getEdges();
         createListHierarchy();
         //nodesView.refresh();
@@ -716,8 +716,8 @@ draw = function () {
       }});
       
       clusterednodes.push({id: clusterid,
-      origid: origid,
-      label: label});
+        origid: origid,
+        label: label});
       nodesView.refresh();
     }
     
