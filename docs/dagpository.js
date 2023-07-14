@@ -738,7 +738,7 @@ createNextLevel = function(currentorig) {
     let topspan = document.createElement("span");
     topspan.className = "caret";
     topspan.innerText = nodesh[currentorig].label ;
-    
+    topspan.id = "node" + currentorig;
     toplevel.appendChild(topspan);
     let  toplevellist = document.createElement("ul");
     toplevellist.className = "nested";
@@ -786,15 +786,17 @@ createListHierarchy = function() {
   toggler = document.getElementsByClassName("caret");
   var i;
   for (i = 0; i < toggler.length; i++) {
-    toggler[i].addEventListener("click", e => {
-      console.log(this.parentElement.id);
-       if (foldednodes.includes(this.parentElement.id)) {
-        showChildren(this.parentElement.id);
-       } else {
-        hideChildren(this.parentElement.id);
-       }
+    toggler[i].addEventListener("click", () => {
       this.parentElement.querySelector(".nested").classList.toggle("active");
       this.classList.toggle("caret-down");
+      /*
+      console.log(this.parentElement.id);
+      if (foldednodes.includes(this.parentElement.id)) {
+        showChildren(this.parentElement.id);
+      } else {
+        hideChildren(this.parentElement.id);
+      }
+      */
     });
   }
 }
