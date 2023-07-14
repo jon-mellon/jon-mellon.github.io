@@ -783,13 +783,13 @@ createListHierarchy = function() {
   for (var i = 0; i < originnodes.length; i++) {
     nestedvars.appendChild(createNextLevel(originnodes[i]));
   }
-  toggler = document.getElementsByClassName("caret");
+  var toggler = document.getElementsByClassName("caret");
   var i;
-  for (i = 0; i < toggler.length; i++) {
-    toggler[i].addEventListener("click", () => {
+   for (i = 0; i < toggler.length; i++) {
+    toggler[i].addEventListener("click", function() {
       this.parentElement.querySelector(".nested").classList.toggle("active");
       this.classList.toggle("caret-down");
-      /*
+       /*
       console.log(this.parentElement.id);
       if (foldednodes.includes(this.parentElement.id)) {
         showChildren(this.parentElement.id);
@@ -799,4 +799,6 @@ createListHierarchy = function() {
       */
     });
   }
+  
+  
 }
