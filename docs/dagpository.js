@@ -520,7 +520,7 @@ showChildren = function(nodeid) {
     var clickednode = nodesViewh.get(nodeid);
     clickednode.color = null;
     nodesh2.update(clickednode);
-
+    
     let showthese = reachableNodesGeneral(nodeid, edgesh);
     if (foldednodes.indexOf(nodeid) != -1) {
         foldednodes.splice(foldednodes.indexOf(nodeid));
@@ -740,6 +740,11 @@ createNextLevel = function(currentorig) {
     topspan.innerText = nodesh[currentorig].label ;
     topspan.addEventListener("click", function() {
       console.log(this.id);
+       if (foldednodes.includes(this.id)) {
+        showChildren(this.id);
+       } else {
+        hideChildren(this.id);
+       }
     });
     toplevel.appendChild(topspan);
     let  toplevellist = document.createElement("ul");
@@ -765,7 +770,7 @@ createNextLevel = function(currentorig) {
 
 
 createListHierarchy = function() {
-  var nestedvars = document.getElementById('ultest');
+  nestedvars = document.getElementById('ultest');
   var originnodes = [];
         
   for (var i = 0; i < nodesh.length; i++) {
