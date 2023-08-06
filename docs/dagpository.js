@@ -30,7 +30,7 @@ reachableNodesGeneral = function(startnode, edgesetall) {
 }
 citationPresent = function(doi) {
   for (var i = 0; i < citations.length; i++) {
-    if(citations[i].DOI==doi) {
+    if(citations[i].DOI==doi.toLowerCase()) {
       return true;
     } 
   }  
@@ -44,7 +44,7 @@ populateCiteFromDOI = function(doi) {
     
     if(citationPresent(doi)) {
       for (var i = 0; i < citations.length; i++) {
-        if(citations[i].DOI==doi) {
+        if(citations[i].DOI==doi.toLowerCase()) {
           pubtext.innerHTML = pubtext.innerHTML + "<br>" + formatArticle(citations[i]);
         } else {
           
@@ -87,7 +87,7 @@ populateCiteFromDOI = function(doi) {
 getDOIFromCrossRef = function(doi) {
    fetch("https://api.crossref.org/works/" + doi)
         .then((response) => {
-            console.log("crossref API Call");
+            //console.log("crossref API Call");
             if (response.ok) {
                 let jsonout = response.json();
                 return jsonout;
@@ -96,14 +96,15 @@ getDOIFromCrossRef = function(doi) {
             }
         })
         .then(data => {
-            console.log(data.message);
+            //console.log(data.message);
             //pubtext.innerHTML = pubtext.innerHTML + "<br>" + formatArticle(data.message);
             if(!citationPresent(doi)) {
-               citations.push(data.message);
+              data.message.doi = data.message.doi.toLowerCase();
+              citations.push(data.message);
                // remove duplicates
                var doiall = [];
                for (var i = 0; i < citations.length; i++) {
-                 doiall[i] = citations[i].DOI;
+                 doiall[i] = citations[i].DOI.toLowerCase();
                }
                citations = citations.filter(function(item, pos) {
                 return doiall.indexOf(item.DOI) == pos;
@@ -121,7 +122,7 @@ getAllDOIS = function() {
     if(typeof edgeset[i].dois !=="undefined") {
       let tempdois = edgeset[i].dois.split(";");
       for (var j = 0; j < tempdois.length; j++) {
-       alldois.push(tempdois[j]);
+       alldois.push(tempdois[j].toLowerCase());
       }
     }
   }
@@ -440,7 +441,6 @@ getEdges = function() {
             selected,
             hovering) {
             if (selected) {
-                console.log(id);
                 values.strokeWidth = 3;
                 values.width = 3;
                 
@@ -751,9 +751,6 @@ getVariableHierarchy = function() {
             } 
         }
       
-        console.table(edgesh);
-        console.log(allvars);
-        console.log(nodesh);
         //draw();
         getEdges();
         createListHierarchy();
@@ -835,7 +832,7 @@ draw = function () {
         } else {
             hideChildren(ids[0]);
         }
-        console.log(ids);
+        
     });
 }
 
