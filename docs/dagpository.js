@@ -893,15 +893,27 @@ createListHierarchy = function() {
   var i;
    for (i = 0; i < toggler.length; i++) {
     toggler[i].addEventListener("click", function() {
-      this.parentElement.querySelector(".nested").classList.toggle("active");
-      this.classList.toggle("caret-down");
-      
       let tempid = Number(this.id.replace("node", ""));
       console.log(tempid);
+      var flipswitch = true;
+
       if (foldednodes.includes(tempid)) {
-        showChildren(tempid);
+        try{
+          showChildren(tempid);  
+        } catch(error) {
+          flipswitch = false;
+        }
+        
       } else {
-        hideChildren(tempid);
+        try{
+          hideChildren(tempid);  
+        } catch(error) {
+          flipswitch = false;
+        }
+        if(flipswitch) {
+          this.parentElement.querySelector(".nested").classList.toggle("active");
+          this.classList.toggle("caret-down");
+        }
       }
       
     });
