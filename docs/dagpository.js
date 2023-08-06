@@ -99,7 +99,7 @@ getDOIFromCrossRef = function(doi) {
             //console.log(data.message);
             //pubtext.innerHTML = pubtext.innerHTML + "<br>" + formatArticle(data.message);
             if(!citationPresent(doi)) {
-              data.message.doi = data.message.doi.toLowerCase();
+              data.message.DOI = data.message.DOI.toLowerCase();
               citations.push(data.message);
                // remove duplicates
                var doiall = [];
