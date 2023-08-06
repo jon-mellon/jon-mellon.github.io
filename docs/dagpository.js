@@ -153,7 +153,6 @@ cleanDOI = function(doi) {
     return (doi)
 }
 formatArticle = function(dat) {
-
     var authors = [];
     for (var i = 0; i < dat.author.length; i++) {
         authors[i] = dat.author[i].given + " " + dat.author[i].family;
@@ -421,7 +420,7 @@ getEdges = function() {
                       doistemp = doistemp.filter(onlyUnique);
                       populateDOIList(doistemp);
                     } catch(error) {
-                      
+                      clearStudyText();
                     }
                     }
                     
@@ -431,7 +430,7 @@ getEdges = function() {
                       doistemp = doistemp.filter(onlyUnique);
                       populateDOIList(doistemp);
                     } catch(error) {
-                      
+                      clearStudyText();
                     }
                     /*
                     var edgedata = edges.get();
