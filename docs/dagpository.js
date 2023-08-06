@@ -120,7 +120,7 @@ getAllDOIS = function() {
     if(typeof edgeset[i].dois !=="undefined") {
       let tempdois = edgeset[i].dois.split(";");
       for (var j = 0; j < tempdois.length; j++) {
-       alldois.push(tempdois[j]());
+       alldois.push(tempdois[j]);
       }
     }
   }
