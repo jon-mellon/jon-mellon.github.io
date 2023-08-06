@@ -96,15 +96,13 @@ getDOIFromCrossRef = function(doi) {
             }
         })
         .then(data => {
-            //console.log(data.message);
-            //pubtext.innerHTML = pubtext.innerHTML + "<br>" + formatArticle(data.message);
             if(!citationPresent(doi)) {
-              data.message.DOI = data.message.DOI.toLowerCase();
+              //data.message.DOI = data.message.DOI.toLowerCase();
               citations.push(data.message);
                // remove duplicates
                var doiall = [];
                for (var i = 0; i < citations.length; i++) {
-                 doiall[i] = citations[i].DOI.toLowerCase();
+                 doiall[i] = citations[i].DOI();
                }
                citations = citations.filter(function(item, pos) {
                 return doiall.indexOf(item.DOI) == pos;
@@ -122,7 +120,7 @@ getAllDOIS = function() {
     if(typeof edgeset[i].dois !=="undefined") {
       let tempdois = edgeset[i].dois.split(";");
       for (var j = 0; j < tempdois.length; j++) {
-       alldois.push(tempdois[j].toLowerCase());
+       alldois.push(tempdois[j]());
       }
     }
   }
