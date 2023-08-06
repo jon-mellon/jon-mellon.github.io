@@ -440,22 +440,59 @@ getEdges = function() {
             selected,
             hovering) {
             if (selected) {
+                console.log(id);
                 values.strokeWidth = 3;
                 values.width = 3;
+                
+                
                 if (pubtext.edgeid != id) {
-                    pubtext.edgeid = id;
+                  pubtext.edgeid = id;
+                  if(id.includes("cluster")) {
+                    var doismulti = "";
+                    var baseedgeids = network.clustering.getBaseEdges(id);
+                    var baseedges = edges.get(baseedgeids);
+                    for (var i = 0; i < baseedges.length; i++) {
+                      if(baseedges[i].dois!=null) {
+                        if(doismulti=="") {
+                          doismulti = baseedges[i].dois;
+                        } else {
+                          doismulti = doismulti + ";" + baseedges[i].dois;
+                        }
+                      } 
+                    }
+                    if(doismulti != "") {
+                      try{
+                      let doistemp = doismulti.split(";");
+                      doistemp = doistemp.filter(onlyUnique);
+                      populateDOIList(doistemp);
+                    } catch(error) {
+                      
+                    }
+                    }
+                    
+                  } else {
+                    try{
+                      let doistemp = edges.get(id).dois.split(";");
+                      doistemp = doistemp.filter(onlyUnique);
+                      populateDOIList(doistemp);
+                    } catch(error) {
+                      
+                    }
+                    /*
                     var edgedata = edges.get();
                     for (var i = 0; i < edgedata.length; i++) {
-                        if (edgedata[i].id == id) {
-                          try{
-                            let doistemp = edgedata[i].dois.split(";");
-                            doistemp = doistemp.filter(onlyUnique);
-                            populateDOIList(doistemp);
-                          } catch(error) {
-                            
-                          }
+                      if (edgedata[i].id == id) {
+                        try{
+                          let doistemp = edgedata[i].dois.split(";");
+                          doistemp = doistemp.filter(onlyUnique);
+                          populateDOIList(doistemp);
+                        } catch(error) {
+                          
                         }
+                      }
                     }
+                    */
+                  }
                 }
             }
             if(pubtext.innerHTML=="") {
@@ -921,3 +958,16 @@ createListHierarchy = function() {
   
   
 }
+
+
+// figuring out how to make clustered edges work consistently:
+// this 
+
+// this code successfully updates the color but the DOI doesn't seem to get recorded
+//network.clustering.updateEdge(clusterexample, {dois: "10.1111/0022-3816.00035", color : "pink"})
+
+/*
+for (var i = 0; i < network.clustering.body.edgeIndices.length; i++) {
+ 
+}
+*/
