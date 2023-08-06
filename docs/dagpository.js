@@ -135,49 +135,6 @@ fetchAllCrossRef = function() {
   }
 }
 
-/*
-populateCitationFromDOI = function(doi) {
-    if(citationPresent(doi)) {
-      for (var i = 0; i < citations.length; i++) {
-        if(citations[i].DOI==doi) {
-          pubtext.innerHTML = pubtext.innerHTML + "<br>" + formatArticle(citations[i]);
-          return "";
-        } else {
-          return "";
-        }
-      }
-    }
-    if(!citationPresent(doi)) {
-    fetch("https://api.crossref.org/works/" + doi)
-        .then((response) => {
-            console.log("crossref API Call");
-            if (response.ok) {
-                let jsonout = response.json();
-                return jsonout;
-            } else {
-                throw new Error("NETWORK RESPONSE ERROR");
-            }
-        })
-        .then(data => {
-            console.log(data.message);
-            pubtext.innerHTML = pubtext.innerHTML + "<br>" + formatArticle(data.message);
-            if(!citationPresent(doi)) {
-               citations.push(data.message);
-               // remove duplicates
-               var doiall = [];
-               for (var i = 0; i < citations.length; i++) {
-                 doiall[i] = citations[i].DOI;
-               }
-               citations = citations.filter(function(item, pos) {
-                return doiall.indexOf(item.DOI) == pos;
-               });
-            }
-        })
-        .catch((error) => console.error("FETCH ERROR:", error));  
-    }
-}
-*/
-
 populateDOIList = function(dois) {
     clearStudyText();
     for (var i = 0; i < dois.length; i++) {
@@ -204,7 +161,7 @@ formatArticle = function(dat) {
     var authorlist = authors.join(", ");
     var title = dat.title[0];
     var journal = dat["container-title"][0];
-    if (journal.length == 0) {
+    if (journal==null) {
         journal = "";
     }
     var year = dat.published["date-parts"][0][0];
