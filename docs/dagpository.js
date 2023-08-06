@@ -102,7 +102,7 @@ getDOIFromCrossRef = function(doi) {
                // remove duplicates
                var doiall = [];
                for (var i = 0; i < citations.length; i++) {
-                 doiall[i] = citations[i].DOI();
+                 doiall[i] = citations[i].DOI;
                }
                citations = citations.filter(function(item, pos) {
                 return doiall.indexOf(item.DOI) == pos;
