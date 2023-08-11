@@ -26,7 +26,7 @@ sections:
       company_logo: westpoint-logo
       company_url: ""
       date_end: ""
-      date_start: "2023-09-01"
+      date_start: "2023-08-10"
       location: NY
       title: Associate Professor
     - company: British Election Study
@@ -39,7 +39,7 @@ sections:
     - company: West Point
       company_logo: westpoint-logo
       company_url: ""
-      date_end: "2023-09-01"
+      date_end: "2023-08-09"
       date_start: "2022-06-01"
       location: NY
       title: Assistant Professor

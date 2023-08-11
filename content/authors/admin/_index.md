@@ -23,7 +23,7 @@ last_name: Mellon
 organizations:
 - name: West Point Department of Systems Engineering
   url: https://www.westpoint.edu/academics/academic-departments/systems-engineering
-role: Assistant Professor
+role: Associate Professor
 social:
 - icon: envelope
   icon_pack: fas
@@ -47,7 +47,7 @@ superuser: true
 title: Jonathan Mellon
 ---
 
-I am an Assistant Professor at West Point’s Department of Systems Engineering and co-director of the British Election Study.
+I am an Associate Professor at West Point’s Department of Systems Engineering and co-director of the British Election Study.
 
 My research focuses on improving measurement and causal inference in social science. Substantively I study electoral behavior, online citizen engagement, and measuring public opinion. 
 

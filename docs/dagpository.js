@@ -30,7 +30,7 @@ reachableNodesGeneral = function(startnode, edgesetall) {
 }
 citationPresent = function(doi) {
   for (var i = 0; i < citations.length; i++) {
-    if(citations[i].DOI==doi.toLowerCase()) {
+    if(citations[i].DOI==doi) {
       return true;
     } 
   }  
@@ -41,19 +41,15 @@ clearStudyText = function() {
     pubtext.innerHTML = ""
 }
 populateCiteFromDOI = function(doi) {
-    
     if(citationPresent(doi)) {
       for (var i = 0; i < citations.length; i++) {
-        if(citations[i].DOI==doi.toLowerCase()) {
-          pubtext.innerHTML = pubtext.innerHTML + "<br>" + formatArticle(citations[i]);
+        if(citations[i].DOI==doi) {
+          return citations[i];
         } else {
-          
+          return "";
         }
-      }
     }
-    
-    /*
-    if(!citationPresent(doi)) {
+    }
     fetch("https://api.crossref.org/works/" + doi)
         .then((response) => {
             console.log("crossref API Call");
@@ -74,77 +70,20 @@ populateCiteFromDOI = function(doi) {
                for (var i = 0; i < citations.length; i++) {
                  doiall[i] = citations[i].DOI;
                }
+               
                citations = citations.filter(function(item, pos) {
                 return doiall.indexOf(item.DOI) == pos;
                });
             }
         })
-        .catch((error) => console.error("FETCH ERROR:", error));  
-    }
-    */
+        .catch((error) => console.error("FETCH ERROR:", error));
 }
-
-getDOIFromCrossRef = function(doi) {
-   fetch("https://api.crossref.org/works/" + doi)
-        .then((response) => {
-            //console.log("crossref API Call");
-            if (response.ok) {
-                let jsonout = response.json();
-                return jsonout;
-            } else {
-                throw new Error("NETWORK RESPONSE ERROR");
-            }
-        })
-        .then(data => {
-            if(!citationPresent(doi)) {
-              //data.message.DOI = data.message.DOI.toLowerCase();
-              citations.push(data.message);
-               // remove duplicates
-               var doiall = [];
-               for (var i = 0; i < citations.length; i++) {
-                 doiall[i] = citations[i].DOI;
-               }
-               citations = citations.filter(function(item, pos) {
-                return doiall.indexOf(item.DOI) == pos;
-               });
-            }
-        })
-        .catch((error) => console.error("FETCH ERROR:", error));  
-}
-
-getAllDOIS = function() {
-  console.log("getAllDOIS called");
-  var alldois = [];
-  for (var i = 0; i < edgeset.length; i++) {
-    
-    if(typeof edgeset[i].dois !=="undefined") {
-      let tempdois = edgeset[i].dois.split(";");
-      for (var j = 0; j < tempdois.length; j++) {
-       alldois.push(tempdois[j]);
-      }
-    }
-  }
-  alldois  = alldois.filter(onlyUnique);
-  return(alldois)  
-}
-
-fetchAllCrossRef = function() {
-  var alldois = getAllDOIS();
-  for (var i = 0; i < alldois.length; i++) {
-    setTimeout(getDOIFromCrossRef, 50, alldois[i])
-  }
-}
-
 populateDOIList = function(dois) {
     clearStudyText();
     for (var i = 0; i < dois.length; i++) {
-      populateCiteFromDOI(dois[i]);
-    }
-    if(pubtext.innerHTML=="") {
-      pubtext.innerHTML= "No reference listed";
+        populateCiteFromDOI(dois[i]);
     }
 }
-
 cleanDOI = function(doi) {
     doi = doi.replace("https://doi.org/", "");
     doi = doi.replace("http://doi.org/", "");
@@ -153,6 +92,7 @@ cleanDOI = function(doi) {
     return (doi)
 }
 formatArticle = function(dat) {
+
     var authors = [];
     for (var i = 0; i < dat.author.length; i++) {
         authors[i] = dat.author[i].given + " " + dat.author[i].family;
@@ -160,7 +100,7 @@ formatArticle = function(dat) {
     var authorlist = authors.join(", ");
     var title = dat.title[0];
     var journal = dat["container-title"][0];
-    if (journal==null) {
+    if (journal.length == 0) {
         journal = "";
     }
     var year = dat.published["date-parts"][0][0];
@@ -171,7 +111,6 @@ formatArticle = function(dat) {
     console.log(combtitle);
     return combtitle
 }
-/*
 async function populateCitations(dois) {
     pubtext.value = "";
     for (var i = 0; i < dois.length; i++) {
@@ -183,7 +122,6 @@ async function populateCitations(dois) {
         }
     }
 }
-*/
 
 //// main DAG ////
 attemptDAGButton = function() {
@@ -397,60 +335,20 @@ getEdges = function() {
             if (selected) {
                 values.strokeWidth = 3;
                 values.width = 3;
-                
-                
                 if (pubtext.edgeid != id) {
-                  pubtext.edgeid = id;
-                  if(id.includes("cluster")) {
-                    var doismulti = "";
-                    var baseedgeids = network.clustering.getBaseEdges(id);
-                    var baseedges = edges.get(baseedgeids);
-                    for (var i = 0; i < baseedges.length; i++) {
-                      if(baseedges[i].dois!=null) {
-                        if(doismulti=="") {
-                          doismulti = baseedges[i].dois;
-                        } else {
-                          doismulti = doismulti + ";" + baseedges[i].dois;
-                        }
-                      } 
-                    }
-                    if(doismulti != "") {
-                      try{
-                      let doistemp = doismulti.split(";");
-                      doistemp = doistemp.filter(onlyUnique);
-                      populateDOIList(doistemp);
-                    } catch(error) {
-                      clearStudyText();
-                    }
-                    }
-                    
-                  } else {
-                    try{
-                      let doistemp = edges.get(id).dois.split(";");
-                      doistemp = doistemp.filter(onlyUnique);
-                      populateDOIList(doistemp);
-                    } catch(error) {
-                      clearStudyText();
-                    }
-                    /*
+                    console.log("here2");
+                    pubtext.edgeid = id;
                     var edgedata = edges.get();
                     for (var i = 0; i < edgedata.length; i++) {
-                      if (edgedata[i].id == id) {
-                        try{
-                          let doistemp = edgedata[i].dois.split(";");
-                          doistemp = doistemp.filter(onlyUnique);
-                          populateDOIList(doistemp);
-                        } catch(error) {
-                          
+                        if (edgedata[i].id == id) {
+                          try{
+                            populateDOIList(edgedata[i].dois.split(";"));
+                          } catch(error) {
+                            
+                          }
                         }
-                      }
                     }
-                    */
-                  }
                 }
-            }
-            if(pubtext.innerHTML=="") {
-              pubtext.innerHTML = "No citations listed";
             }
         }
 
@@ -472,9 +370,7 @@ getEdges = function() {
                 },
             };
         }
-        
-        createNetwork();
-        fetchAllCrossRef();
+
     })
 }
 
@@ -515,19 +411,14 @@ createNetwork = function() {
     */
     const nodesFilter = (node) => {
         // temporary while testing:
-        if(network!=null) {
         var nodecount = (network.getConnectedNodes(node.id, "from").length + 
               network.getConnectedNodes(node.id, "to").length);
+        console.log("node filtered: " + node.id);
         if(nodecount==0) {
               return false;
             } else {
               return true;
-            }  
-        } else {
-          return true;
-        }
-        
-        
+            }
         //return true;
         
         if (nodestatus[node.id] != "irrelevant") {
@@ -551,7 +442,7 @@ createNetwork = function() {
         return edgesFilterValues[edge.relation];
     };
 
-    nodesView = new vis.DataView(nodes, {
+    const nodesView = new vis.DataView(nodes, {
         filter: nodesFilter
     });
     const edgesView = new vis.DataView(edges, {
@@ -583,7 +474,6 @@ createNetwork = function() {
         nodes: nodesView,
         edges: edgesView
     });
-    nodesView.refresh();
 }
 
 
@@ -596,9 +486,9 @@ hideChildren = function(nodeid) {
     var parentlabel;
     let hidethese = reachableNodesGeneral(nodeid, edgesh);
     if (hidethese.length > 0) {
-        //var clickednode = nodesViewh.get(nodeid);
-        //clickednode.color = "#09e472";
-        //nodesh2.update(clickednode);
+        var clickednode = nodesViewh.get(nodeid);
+        clickednode.color = "#09e472";
+        nodesh2.update(clickednode);
     }
     for (var i = 0; i < nodesh.length; i++) {
         if (nodesh[i].id == nodeid) {
@@ -612,14 +502,14 @@ hideChildren = function(nodeid) {
     hidethese.push(nodeid);
     clusterNodes(nodeids = hidethese, 
       label = parentlabel, origid = nodeid);
-    //nodesViewh.refresh();
+    nodesViewh.refresh();
 }
 
 showChildren = function(nodeid) {
-    //var clickednode = nodesViewh.get(nodeid);
-    //clickednode.color = null;
-    //nodesh2.update(clickednode);
-    
+    var clickednode = nodesViewh.get(nodeid);
+    clickednode.color = null;
+    nodesh2.update(clickednode);
+
     let showthese = reachableNodesGeneral(nodeid, edgesh);
     if (foldednodes.indexOf(nodeid) != -1) {
         foldednodes.splice(foldednodes.indexOf(nodeid));
@@ -634,21 +524,13 @@ showChildren = function(nodeid) {
     for (var i = 0; i < foldednodes.length; i++) {
         hideChildren(foldednodes[i]);
     }
-    cdeletes = [];  
     for (var i = 0; i < clusterednodes.length; i++) {
       if(clusterednodes[i].origid==nodeid) {
-        cdeletes.push(i);
-        try{
-          unclusterNodes(clusterednodes[i].id)  
-        } catch(error) {
-          
-        }
+        unclusterNodes(clusterednodes[i].id)
       }
     }
-    for(var i = cdeletes.length-1; i >= 0; i--){
-      clusterednodes.splice(cdeletes[i], 1);
-    }
-    //nodesViewh.refresh();
+    
+    nodesViewh.refresh();
 }
 
 getVariableHierarchy = function() {
@@ -664,6 +546,7 @@ getVariableHierarchy = function() {
 
     parser.parse().then((items) => {
         var keep = [];
+        
         for (var i = 0; i < items.length; i++) {
             if (!allvars.includes(items[i].variable)) {
               allvars.push(items[i].variable);
@@ -701,15 +584,16 @@ getVariableHierarchy = function() {
         
         for (var i = 0; i < nodesh.length; i++) {
           if(!inanyedge(i)) {
-              hidden.push(i)
+            hidden.push(i)
             } 
         }
       
-        //draw();
+        console.table(edgesh);
+        console.log(allvars);
+        console.log(nodesh);
+        draw();
         getEdges();
-        createListHierarchy();
-        //nodesView.refresh();
-      });
+    });
 }
 
 draw = function () {
@@ -786,7 +670,7 @@ draw = function () {
         } else {
             hideChildren(ids[0]);
         }
-        
+        console.log(ids);
     });
 }
 
@@ -794,13 +678,10 @@ draw = function () {
     unclusterNodes = function(nodeid) {
       network.openCluster(nodeid);
       for (var i = 0; i < clusterednodes.length; i++) {
-        /*
         if(clusterednodes[i].id==nodeid) {
-          clusterednodes.splice(i, 1);
+          clusterednodes.slice(i, 1);
         }
-        */
       }
-      nodesView.refresh();
     }
     
     clusterNodes = function(nodeids, label, origid) {
@@ -821,116 +702,7 @@ draw = function () {
       }});
       
       clusterednodes.push({id: clusterid,
-        origid: origid,
-        label: label});
-      nodesView.refresh();
+      origid: origid,
+      label: label});
     }
     
-getNextLevel = function(orid) {
-  let nextlevel = [];
-  for (var i = 0; i < edgesh.length; i++) {
-    if(edgesh[i].from==orid) {
-      nextlevel.push(edgesh[i].to);
-    }
-  }
-  return nextlevel;
-}
-
-createNextLevel = function(currentorig) {
-  let toplevel = document.createElement("li");
-  toplevel.id = "node" + currentorig;
-  let nextlev = getNextLevel(currentorig);
-  if(nextlev.length>0) {
-    let topspan = document.createElement("span");
-    topspan.className = "caret";
-    topspan.innerText = nodesh[currentorig].label ;
-    topspan.id = "node" + currentorig;
-    toplevel.appendChild(topspan);
-    let  toplevellist = document.createElement("ul");
-    toplevellist.className = "nested";
-    toplevellist.id = "nodelist" + currentorig;
-    
-    for (var i = 0; i < nextlev.length; i++) {
-      if(toplevellist.nextSibling) {
-        toplevellist.ParentNode.insertBefore(createNextLevel(nextlev[i]), 
-          toplevellist.nextSibling);  
-      } else {
-        toplevellist.appendChild(createNextLevel(nextlev[i]));  
-      }
-      
-    }
-    toplevel.appendChild(toplevellist);
-    /*
-    toplevel.addEventListener("click", function() {
-      console.log(this.id);
-      
-    });
-    */
-  } else {
-    toplevel.innerText =  nodesh[currentorig].label ;
-  }
-  return(toplevel);
-}
-
-
-
-createListHierarchy = function() {
-  nestedvars = document.getElementById('ultest');
-  var originnodes = [];
-        
-  for (var i = 0; i < nodesh.length; i++) {
-    if(reachableByNodes(i, edgesh).length==0) {
-      if(reachableNodesGeneral(i, edgesh).length>0) {
-        originnodes.push(i);  
-      }
-    }
-  }
-
-  for (var i = 0; i < originnodes.length; i++) {
-    nestedvars.appendChild(createNextLevel(originnodes[i]));
-  }
-  var toggler = document.getElementsByClassName("caret");
-  var i;
-   for (i = 0; i < toggler.length; i++) {
-    toggler[i].addEventListener("click", function() {
-      let tempid = Number(this.id.replace("node", ""));
-      console.log(tempid);
-      var flipswitch = true;
-
-      if (foldednodes.includes(tempid)) {
-        try{
-          showChildren(tempid);  
-        } catch(error) {
-          flipswitch = false;
-        }
-        
-      } else {
-        try{
-          hideChildren(tempid);  
-        } catch(error) {
-          flipswitch = false;
-        }
-        if(flipswitch) {
-          this.parentElement.querySelector(".nested").classList.toggle("active");
-          this.classList.toggle("caret-down");
-        }
-      }
-      
-    });
-  }
-  
-  
-}
-
-
-// figuring out how to make clustered edges work consistently:
-// this 
-
-// this code successfully updates the color but the DOI doesn't seem to get recorded
-//network.clustering.updateEdge(clusterexample, {dois: "10.1111/0022-3816.00035", color : "pink"})
-
-/*
-for (var i = 0; i < network.clustering.body.edgeIndices.length; i++) {
- 
-}
-*/
