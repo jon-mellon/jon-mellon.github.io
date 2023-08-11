@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DAGpository</title>
+  <title>Big DAG</title>
   <link data-n-head="1" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=block">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+
   <style>
     body {
       min-width: 300px;
@@ -20,9 +20,10 @@
       position: relative;
       min-width: 300px;
       max-width: 2000px;
-      min-height: 500px;
-      max-height: 900px;
+      min-height: 700px;
+      max-height: 1200px;
       bottom: 20%;
+      border: 1px solid lightgray;
     }
      #mynetworkh {
         position: absolute;
@@ -37,7 +38,7 @@
         position: absolute;
         bottom: 0%;
         top: 0%;
-        left: 50%;
+        left: 0%;
         right: 0%;
         border-right: 1px solid lightgray;
         background: white;
@@ -108,7 +109,43 @@
       margin-top: 20px;
       white-space: break-spaces;
     }
-    
+    ul, #myUL {
+      list-style-type: none;
+}
+
+#myUL {
+  margin: 0;
+  padding: 0;
+}
+
+.caret {
+  cursor: pointer;
+  -webkit-user-select: none; /* Safari 3.1+ */
+  -moz-user-select: none; /* Firefox 2+ */
+  -ms-user-select: none; /* IE 10+ */
+  user-select: none;
+}
+
+.caret::before {
+  content: "\25B6";
+  color: black;
+  display: inline-block;
+  margin-right: 6px;
+}
+
+.caret-down::before {
+  -ms-transform: rotate(90deg); /* IE 9 */
+  -webkit-transform: rotate(90deg); /* Safari */'
+  transform: rotate(90deg);  
+}
+
+.nested {
+  display: block;
+}
+
+.active {
+  display: none;
+}
   </style>
   
    <script
@@ -128,7 +165,7 @@
 </head>
 <body>
   <div class="title">
-    <span>Big DAG</span>
+    <span>Big DAG: Beta Version</span>
     <div class="row badges">
      
     </div>
@@ -139,7 +176,7 @@
     <p>
       Here are all the relevant causal claims listed in our dataset. 
     </p>
-    <label>
+    <label hidden>
       Filter nodes
       <select id="nodeFilterSelect">
         <option value="">All</option>
@@ -148,7 +185,7 @@
     </label>
     <br />
     <br />
-    <form id="dvselector">
+    <form id="dvselector" hidden>
       Independent variable: 
      <select id="selectIV" onChange = "ivSelected();">
         <option>Choose an independent variable</option>
@@ -158,8 +195,8 @@
       <select id="selectDV" onChange = "dvSelected();">
         <option>Choose a dependent variable</option>
     </select>
-</form>
-    <label>
+    </form>
+    <label hidden>
       Filter edges
       <div>
         <label>
@@ -185,14 +222,13 @@
           <span style="color: red">Negative</span>
         </label>
       </div>
-      <button id = "createdagbutton" onclick="createNetwork()" disabled>Create DAG</button>
+      <button id = "createdagbutton" onclick="createNetwork()" disabled hidden>Create DAG</button>
     </label>
-    <button id = "resetbutton"  onclick="location.reload()" disabled>New variable pair</button>
+    <button id = "resetbutton"  onclick="location.reload()" disabled>Reset</button>
     <br />
    
     <div id = "networkcontainer" >
       <div id="mynetwork"></div>
-      <div id="mynetworkh"></div>  
     </div>
     <div>
       Studies:
@@ -201,7 +237,9 @@
         <p id="pubdetails"></p>
       </div>
     </div>
-    
+    <ul id="ultest">
+  
+    </ul>
   <script>
     // main DAG variables
     var canreachdv = [];
@@ -210,6 +248,7 @@
     var ivcanreach = [];
     var nodestatus = [];
     var allnodes = [];
+    var nodesView;
     
     var uniquenodes = [];
     var nodeset = [];
@@ -232,7 +271,7 @@
     // html elements:
     const pubtext = document.getElementById('pubdetails');
     const resultElement = document.querySelector('.result')
-    
+    var nestedvars;
     getVariableHierarchy();
     
     
@@ -244,5 +283,5 @@
    
     */
     </script>
-     
+   
 </body>
