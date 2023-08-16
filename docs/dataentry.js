@@ -197,6 +197,7 @@ function revealColumns() {
       for (var i = 0; i < value.length; i++) {
         allvars[i] = value[i].Variablename;
       }
+      allvars = allvars.sort();
       const varselects = ["dependent-variable", "independent-variable",            "instrumental-variable", "parent-variable"];
     for (var i = 0; i < varselects.length; i++) {
       
