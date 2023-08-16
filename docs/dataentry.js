@@ -116,7 +116,7 @@ DOIInfoCall = function(doi) {
         }  
       }
       
-      var paperstring = authorstr + " (" + value.message.published["date-parts"][0] + ") " +  value.message.title + ", " + 
+      var paperstring = authorstr + " (" + value.message.published["date-parts"][0][0] + ") " +  value.message.title + ", " + 
       value.message["container-title"][0];
       pubtext.innerHTML = paperstring;
     });
