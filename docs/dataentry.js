@@ -77,7 +77,7 @@ getDOIFromCrossRef = function(doi) {
 DOIInfoCall = function(doi) {
     if(currentenv=="offline") {
       var varpromise = new Promise((resolve, reject) => {
-      studyinfo = {
+      var studytemp = {message: {
         author: [{family : "Smith", 
                    given : "Bob"},
                    {family : "Bloggs", 
@@ -89,8 +89,8 @@ DOIInfoCall = function(doi) {
         title: ["The Causal Effect of Lorem Ipsum on tktk"],
         "container-title": ["Journal of Placeholder Studies"], 
         published: {"date-parts": [2023, 7]}
-      }
-      resolve(studyinfo);
+      }};
+      resolve(studytemp);
     });
   } else {
       var varpromise = fetch("https://api.crossref.org/works/" + doi)
@@ -107,16 +107,17 @@ DOIInfoCall = function(doi) {
       // getDOIFromCrossRef(doi);
     }
     varpromise.then((value) => {
+      studyinfo = value.message;
       // put the citation in here
-      var authorstr = value.author[0].family;
-      if(value.author.length>1) {
-        for (var i = 1; i < value.authors.length; i++) {
-          authorstr = authorstr + ", " + value.author[i].family;
+      var authorstr = value.message.author[0].family;
+      if(value.message.author.length>1) {
+        for (var i = 1; i < value.message.author.length; i++) {
+          authorstr = authorstr + ", " + value.message.author[i].family;
         }  
       }
       
-      var paperstring = authorstr + " (" + value.published["date-parts"][0] + ") " +  value.title + ", " + 
-      value["container-title"][0];
+      var paperstring = authorstr + " (" + value.message.published["date-parts"][0] + ") " +  value.message.title + ", " + 
+      value.message["container-title"][0];
       pubtext.innerHTML = paperstring;
     });
   }
