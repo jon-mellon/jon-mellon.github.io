@@ -14,11 +14,17 @@
       type="text/javascript"
       src="dataentry.js"
     ></script>
+  <script 
+      src="https://cdn.jsdelivr.net/npm/public-google-sheets-parser?v=20230209"
+    ></script>
   <script>
     
     
     // instantiating all global variables needed
     var allstudies = [];
+    var allfindings = [];
+    var allidentifications = [];
+    var uoas = [];
     var alldois = [];
     var allvars = ["none"];
     var claim = {doi: "blank", 
@@ -32,7 +38,7 @@
                 finding: "blank",
                 identification: "blank",
                 uoa: "blank",
-                countries: "US;CA",
+                countries: "blank",
                 subpop: "blank",
                 n: "blank",
                 resultdoc: "blank",
@@ -44,14 +50,6 @@
                   parentvar: "",
                   vardescription: ""
     }
-    
-    
-    if(currentenv=="offline") {
-      
-    } else {
-      // real data grabbing happens here
-    }
-   
     
     
   </script>

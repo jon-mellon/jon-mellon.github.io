@@ -85,7 +85,6 @@ function revealColumns() {
   document.getElementById('columnentry').classList.remove('invisiblecolumns');
   document.getElementById('columnentry').classList.add('columns');
   document.getElementById("DOI").disabled = true;
-  
 }
 
 
@@ -145,7 +144,8 @@ function revealColumns() {
           sheetId,
           sheetName
       }
-      var varpromise = new PublicGoogleSheetsParser(spreadsheetId, sheetInfo)      }
+      var varpromise = new PublicGoogleSheetsParser(spreadsheetId, sheetInfo);
+    }
       varpromise.then((value) => {
       for (var i = 0; i < value.length; i++) {
         allvars[i] = value[i].Variablename;
@@ -158,15 +158,29 @@ function revealColumns() {
    fetchIdentStrats = function() {
     if(currentenv=="offline") {
       var varpromise = new Promise((resolve, reject) => {
-        var dummyvars = ["Selection on observables", "Diff-in-diff", "Regression discontinuity design", "Randomized experiment", "not real data"];
-        resolve(dummyvars);
+        var dummstrats = [{strategy: "Selection on observables"}, 
+                          {strategy: "Diff-in-diff"}, 
+                          {strategy: "Regression discontinuity design"},
+                          {strategy: "Randomized experiment"},
+                          {strategy: "not real data"}];
+        
+        resolve(dummstrats);
       })
       
     } else {
-      //create varpromise here using google API call
+      const spreadsheetId = "1N66GqAVQGcmV4PMQk6B2zDwvSZ3Oa6aF6FXwfKoVUU8"
+      const sheetId = 0;
+      const sheetName = "identification";
+      const sheetInfo = {
+          sheetId,
+          sheetName
+      }
+      var varpromise = new PublicGoogleSheetsParser(spreadsheetId, sheetInfo);
     }
     varpromise.then((value) => {
-      allidentifications = value;
+    for (var i = 0; i < value.length; i++) {
+      allidentifications[i] = value[i].strategy;
+    }
       updateSelector("identification", allidentifications);
     });
   }
@@ -176,32 +190,54 @@ function revealColumns() {
   fetchFindingOpts = function() {
     if(currentenv=="offline") {
       var varpromise = new Promise((resolve, reject) => {
-        var dummyvars = ["Positive", "Negative", "Zero", "Mixed", "Non-monotonic", "Heterogeneous", "Not real data"];
-        resolve(dummyvars);
+        var dummfinds = [{finding: "Positive"},
+                        {finding: "Negative"},
+                        {finding: "Zero"}, 
+                        {finding: "Not real data"}];
+        resolve(dummfinds);
       })
       
     } else {
-      //create varpromise here using google API call
+      const spreadsheetId = "1N66GqAVQGcmV4PMQk6B2zDwvSZ3Oa6aF6FXwfKoVUU8"
+      const sheetId = 0;
+      const sheetName = "finding";
+      const sheetInfo = {
+          sheetId,
+          sheetName
+      }
+      var varpromise = new PublicGoogleSheetsParser(spreadsheetId, sheetInfo);
     }
     varpromise.then((value) => {
-      allfindings = value;
-      updateSelector("finding", allfindings);
+    for (var i = 0; i < value.length; i++) {
+      allfindings[i] = value[i].finding;
+    }
+    updateSelector("finding", allfindings);
     });
   }
   
   fetchUOA = function() {
     if(currentenv=="offline") {
       var varpromise = new Promise((resolve, reject) => {
-        var dummyvars = ["Individual", "Household", "Subnational unit", "Country", "Electoral District", "Party", "Not real data"];
+        var dummyvars = [{uoa: "Individual"}, {uoa:"Household"}, {uoa: "Not real data"}];
         resolve(dummyvars);
       })
       
     } else {
-      //create varpromise here using google API call
-    }
+      const spreadsheetId = "1N66GqAVQGcmV4PMQk6B2zDwvSZ3Oa6aF6FXwfKoVUU8"
+      const sheetId = 0;
+      const sheetName = "unitofanalysis";
+      const sheetInfo = {
+          sheetId,
+          sheetName
+      }
+      var varpromise = new PublicGoogleSheetsParser(spreadsheetId, sheetInfo);    }
+   
+    
     varpromise.then((value) => {
-      uoas = value;
-      updateSelector("uoa", uoas);
+    for (var i = 0; i < value.length; i++) {
+      uoas[i] = value[i].uoa;
+    }
+    updateSelector("uoa", uoas);
     });
   }
   
