@@ -53,25 +53,69 @@ function DOIchecker() {
 
 // https://docs.google.com/forms/d/e/1FAIpQLSdXgItq-zrA7Do6vOAuJmtd_nDqYFoZ3l8ypO4EQ0fUoLWA_w/viewform?usp=pp_url&entry.1535032722=test&entry.1128171251=xvar1&entry.860119781=yvar1&entry.1916574635=none&entry.1950636191=1999&entry.1246413525=2001&entry.883997836=positive&entry.756521078=QCA&entry.2108748939=person&entry.163883274=CA;GB&entry.583739099=children&entry.1778787331=120&entry.308413737=table+1(col+a)
 
+
+getDOIFromCrossRef = function(doi) {
+   fetch("https://api.crossref.org/works/" + doi)
+        .then((response) => {
+            //console.log("crossref API Call");
+            if (response.ok) {
+                let jsonout = response.json();
+                return jsonout;
+            } else {
+                throw new Error("NETWORK RESPONSE ERROR");
+                // error handling here
+            }
+        })
+        .then(data => {
+          console.log(data.message);
+          studyinfo = data.message;
+        })
+        .catch((error) => console.error("FETCH ERROR:", error));  
+}
+
 DOIInfoCall = function(doi) {
     if(currentenv=="offline") {
       var varpromise = new Promise((resolve, reject) => {
-      var studyinfo = {
-        authors: "Smith, Bloggs, Jones, and Doe", 
-        title: "The Causal Effect of Lorem Ipsum on tktk",
-        journal: "Journal of Placeholder Studies", 
-        year: "2023",
-      };
-        resolve(studyinfo);
-      })
-      
-    } else {
-      //create varpromise here using crossref call
+      studyinfo = {
+        authors: [{family : "Smith", 
+                   given : "Bob"},
+                   {family : "Bloggs", 
+                   given : "Joe"},
+                   {family : "Jones", 
+                   given : "Davey"},
+                   {family : "Doe", 
+                   given : "Jane"}], 
+        title: ["The Causal Effect of Lorem Ipsum on tktk"],
+        "container-title": ["Journal of Placeholder Studies"], 
+        published: {"date-parts": [2023, 7]}
+      }
+      resolve(studyinfo);
+    });
+  } else {
+      var varpromise = fetch("https://api.crossref.org/works/" + doi)
+        .then((response) => {
+            //console.log("crossref API Call");
+            if (response.ok) {
+                let jsonout = response.json();
+                return jsonout;
+            } else {
+                throw new Error("NETWORK RESPONSE ERROR");
+                // error handling here
+            }
+        });
+      // getDOIFromCrossRef(doi);
     }
     varpromise.then((value) => {
       // put the citation in here
-      var paperstring = value.authors + " (" + value.year + ") " +  value.title + ", " + 
-      value.journal
+      var authorstr = value.authors[0].family;
+      if(value.authors.length>1) {
+        for (var i = 1; i < value.authors.length; i++) {
+          authorstr = authorstr + ", " + value.authors[i].family;
+        }  
+      }
+      
+      var paperstring = authorstr + " (" + value.published["date-parts"][0] + ") " +  value.title + ", " + 
+      value["container-title"][0];
       pubtext.innerHTML = paperstring;
       //pubtext2.innerHTML = paperstring;
     });
