@@ -7,6 +7,7 @@ function resetPage() {
 function revealStudyCheck() {
   document.getElementById("pubdetails").style.display = "block";
   document.getElementById("pubcheck").style.display = "block";
+  document.getElementById("doicheckbutton").disabled = true;
   document.getElementById("DOI").disabled = true;
 }
 
@@ -128,6 +129,8 @@ function revealColumns() {
   document.getElementById('columnentry').classList.remove('invisiblecolumns');
   document.getElementById('columnentry').classList.add('columns');
   document.getElementById("DOI").disabled = true;
+  document.getElementById("doicheckbutton").disabled = true;
+  
 }
 
 
