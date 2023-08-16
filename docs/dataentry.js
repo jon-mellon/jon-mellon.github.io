@@ -117,7 +117,6 @@ DOIInfoCall = function(doi) {
       var paperstring = authorstr + " (" + value.published["date-parts"][0] + ") " +  value.title + ", " + 
       value["container-title"][0];
       pubtext.innerHTML = paperstring;
-      //pubtext2.innerHTML = paperstring;
     });
   }
   
@@ -158,7 +157,7 @@ function revealColumns() {
           sheetId,
           sheetName
       }
-      var studypromise = new PublicGoogleSheetsParser(spreadsheetId, sheetInfo)  
+      var studypromise = new PublicGoogleSheetsParser(spreadsheetId, sheetInfo).parse();
     }
      studypromise.then((value) => {
       for (var i = 0; i < value.length; i++) {
@@ -188,7 +187,7 @@ function revealColumns() {
           sheetId,
           sheetName
       }
-      var varpromise = new PublicGoogleSheetsParser(spreadsheetId, sheetInfo);
+      var varpromise = new PublicGoogleSheetsParser(spreadsheetId, sheetInfo).parse();
     }
       varpromise.then((value) => {
       for (var i = 0; i < value.length; i++) {
@@ -219,7 +218,7 @@ function revealColumns() {
           sheetId,
           sheetName
       }
-      var varpromise = new PublicGoogleSheetsParser(spreadsheetId, sheetInfo);
+      var varpromise = new PublicGoogleSheetsParser(spreadsheetId, sheetInfo).parse();
     }
     varpromise.then((value) => {
     for (var i = 0; i < value.length; i++) {
@@ -249,7 +248,7 @@ function revealColumns() {
           sheetId,
           sheetName
       }
-      var varpromise = new PublicGoogleSheetsParser(spreadsheetId, sheetInfo);
+      var varpromise = new PublicGoogleSheetsParser(spreadsheetId, sheetInfo).parse();
     }
     varpromise.then((value) => {
     for (var i = 0; i < value.length; i++) {
@@ -274,7 +273,8 @@ function revealColumns() {
           sheetId,
           sheetName
       }
-      var varpromise = new PublicGoogleSheetsParser(spreadsheetId, sheetInfo);    }
+        var varpromise = new PublicGoogleSheetsParser(spreadsheetId, sheetInfo).parse();
+      }
    
     
     varpromise.then((value) => {
