@@ -88,7 +88,7 @@ DOIInfoCall = function(doi) {
                    given : "Jane"}], 
         title: ["The Causal Effect of Lorem Ipsum on tktk"],
         "container-title": ["Journal of Placeholder Studies"], 
-        published: {"date-parts": [2023, 7]}
+        published: {"date-parts": [[2023, 7]]}
       }};
       resolve(studytemp);
     });
@@ -197,6 +197,11 @@ function revealColumns() {
       for (var i = 0; i < value.length; i++) {
         allvars[i] = value[i].Variablename;
       }
+      const varselects = ["dependent-variable", "independent-variable",            "instrumental-variable", "parent-variable"];
+    for (var i = 0; i < varselects.length; i++) {
+      
+      updateSelector(varselects[i], allvars)
+    }
     });
   }
      
@@ -311,11 +316,7 @@ function revealColumns() {
   
   function updateAllVars() {
     fetchAllVars();
-    const varselects = ["dependent-variable", "independent-variable",            "instrumental-variable", "parent-variable"];
-    for (var i = 0; i < varselects.length; i++) {
-      
-      updateSelector(varselects[i], allvars)
-    }
+  
   }
         
         
