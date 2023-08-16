@@ -77,7 +77,7 @@ DOIInfoCall = function(doi) {
     if(currentenv=="offline") {
       var varpromise = new Promise((resolve, reject) => {
       studyinfo = {
-        authors: [{family : "Smith", 
+        author: [{family : "Smith", 
                    given : "Bob"},
                    {family : "Bloggs", 
                    given : "Joe"},
@@ -107,10 +107,10 @@ DOIInfoCall = function(doi) {
     }
     varpromise.then((value) => {
       // put the citation in here
-      var authorstr = value.authors[0].family;
-      if(value.authors.length>1) {
+      var authorstr = value.author[0].family;
+      if(value.author.length>1) {
         for (var i = 1; i < value.authors.length; i++) {
-          authorstr = authorstr + ", " + value.authors[i].family;
+          authorstr = authorstr + ", " + value.author[i].family;
         }  
       }
       
