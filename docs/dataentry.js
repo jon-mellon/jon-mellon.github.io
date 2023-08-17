@@ -470,7 +470,6 @@ function updateSelector(id, varset) {
 
 function updateAllVars() {
    fetchAllVars();
-
 }
 
 submitClaim = function () {

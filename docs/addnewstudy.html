@@ -219,7 +219,7 @@
                 <label for="instrumental-variable">Instrumental Variable (Optional)</label>
                 <input id="instrumental-variable" type="text" name="q" placeholder="Search for instrumental variable..." style="width:100%;max-width:1200px;outline:0" onfocusout = "wipeInvalidAnswer('instrumental-variable');">
 
-                <button type="button" onclick="updateAllVars()">Update variable list</button>
+                <button type="button" onclick="fetchAllVars()">Update variable list</button>
   <label for="finding">Finding</label>
   <select id="finding" name="finding" onchange = "updateClaimSubmission();"></select>                
   
@@ -515,7 +515,7 @@
 
     <script>
         // Initial update on page load
-    window.onload = updateAllVars;
+    window.onload = fetchAllVars;
     </script>
     
     <div id="overlay" class="overlay">
@@ -585,7 +585,7 @@
         });
         const pubtext = document.getElementById('pubdetails');
         
-    updateAllVars();
+    fetchAllVars();
     fetchAllStudies();
     fetchFindingOpts();
     fetchIdentStrats();
