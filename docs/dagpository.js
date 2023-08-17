@@ -1,17 +1,13 @@
 
 DOIChecker = function(doi) {
   for (var i = 0; i < currentitems.length; i++) {
-    if(currentitems[i].doi!=null) {
-      if(currentitems[i].doi.toLowerCase()==doi.toLowerCase()) {
+    if(currentitems[i].DOI!=null) {
+      if(currentitems[i].DOI.toLowerCase()==doi.toLowerCase()) {
         return true;
       }
     }
   } 
   return false;
-}
-
-constructFormsSubmission = function() {
-  
 }
 
 
@@ -320,7 +316,7 @@ reachableByNodes = function(startnode, edgesetall) {
 }
 
 getEdges = function() {
-    const spreadsheetId = "1N66GqAVQGcmV4PMQk6B2zDwvSZ3Oa6aF6FXwfKoVUU8"
+    const spreadsheetId = "11hfXFfdpMyDEeMSy3xeO3rsbI7a6UdcaJfJpZZlBJ34"
     const sheetId = 0;
     const sheetName = "causalclaims";
     const sheetInfo = {
@@ -336,14 +332,14 @@ getEdges = function() {
         var edgecombs = [];
         for (var i = 0; i < currentitems.length; i++) {
             try {
-                currentitems[i].doi = cleanDOI(currentitems[i].doi);
+                currentitems[i].DOI = cleanDOI(currentitems[i].DOI);
             } catch (error) {
 
             }
 
-            allnodes.push(currentitems[i].x);
-            allnodes.push(currentitems[i].y);
-            currentitems[i].edgecomb = currentitems[i].x + "|" + currentitems[i].y;
+            allnodes.push(currentitems[i]["x variable"]);
+            allnodes.push(currentitems[i]["y variable"]);
+            currentitems[i].edgecomb = currentitems[i]["x variable"] + "|" + currentitems[i]["y variable"];
             edgecombs[i] = currentitems[i].edgecomb;
         }
 
@@ -358,7 +354,7 @@ getEdges = function() {
                     if (uniqueitems[i].finding != currentitems[j].finding) {
                         uniqueitems[i].finding = "mixed";
                     }
-                    uniqueitems[i].doi = uniqueitems[i].doi + ";" + currentitems[j].doi;
+                    uniqueitems[i].DOI = uniqueitems[i].DOI + ";" + currentitems[j].DOI;
                     uniqueitems[i].resultdocposition = uniqueitems[i].resultdocposition + ";" + currentitems[j].resultdocposition;
 
                 }
@@ -475,14 +471,14 @@ getEdges = function() {
         // creating edges
         for (var i = 0; i < uniqueitems.length; i++) {
             edgeset[i] = {
-                from: allvars.indexOf(uniqueitems[i].x),
-                to: allvars.indexOf(uniqueitems[i].y),
+                from: allvars.indexOf(uniqueitems[i]["x variable"]),
+                to: allvars.indexOf(uniqueitems[i]["y variable"]),
                 relation: uniqueitems[i].finding,
                 arrows: "to",
                 color: {
                     color: uniqueitems[i].color
                 },
-                dois: uniqueitems[i].doi,
+                dois: uniqueitems[i].DOI,
                 resultdocposition: uniqueitems[i].resultdocposition,
                 chosen: {
                     label: false,
@@ -683,16 +679,14 @@ getVariableHierarchy = function() {
     parser.parse().then((items) => {
         var keep = [];
         for (var i = 0; i < items.length; i++) {
-            if (!allvars.includes(items[i].variable)) {
-              allvars.push(items[i].variable);
+            if (!allvars.includes(items[i].Variablename)) {
+              allvars.push(items[i].Variablename);
             }
-            
-            //nodesh[i] = items[i].variable;
-            if (typeof items[i].parent === "undefined") {
+            if (typeof items[i].Parent === "undefined") {
 
             } else {
-              if (!allvars.includes(items[i].parent)) {
-                allvars.push(items[i].parent);
+              if (!allvars.includes(items[i].Parent)) {
+                allvars.push(items[i].Parent);
               }
               keep.push(i);
             }
@@ -704,7 +698,7 @@ getVariableHierarchy = function() {
         items = keep.map(i => items[i]);
         
         for (var i = 0; i < items.length; i++) {
-          edgesh[i]=  {from: allvars.indexOf(items[i].parent), to: allvars.indexOf(items[i].variable)};
+          edgesh[i]=  {from: allvars.indexOf(items[i].Parent), to: allvars.indexOf(items[i].Variablename)};
         }
         
         inanyedge = function(nodeid) {
