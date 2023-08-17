@@ -935,15 +935,3 @@ createListHierarchy = function() {
   
 }
 
-
-// figuring out how to make clustered edges work consistently:
-// this 
-
-// this code successfully updates the color but the DOI doesn't seem to get recorded
-//network.clustering.updateEdge(clusterexample, {dois: "10.1111/0022-3816.00035", color : "pink"})
-
-/*
-for (var i = 0; i < network.clustering.body.edgeIndices.length; i++) {
- 
-}
-*/

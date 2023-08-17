@@ -43,7 +43,7 @@ function revealPrevClaimCheck() {
    var claimset = [];
    for (var i = 0; i < alldois.length; i++) {
       if (alldois[i] == tempdoi) {
-         claimset.push(allstudies[i].xvariable + " 🡒 " + allstudies[i].yvariable)
+         claimset.push(allstudies[i]["x variable"] + " 🡒 " + allstudies[i]["y variable"])
       }
    }
    var claimtext = claimset[0];
@@ -181,18 +181,18 @@ fetchAllStudies = function () {
 
          var studies = [{
                DOI: "12345",
-               "xvariable": "education",
-               "yvariable": "income"
+               "x variable": "education",
+               "y variable": "income"
             },
             {
                DOI: "12345",
-               "xvariable": "education",
-               "yvariable": "voting for economic right wing party"
+               "x variable": "education",
+               "y variable": "voting for economic right wing party"
             },
             {
                DOI: "54321",
-               "xvariable": "education",
-               "yvariable": "voting for economic right wing party"
+               "x variable": "education",
+               "y variable": "voting for economic right wing party"
             }
          ];
          resolve(studies);
@@ -515,6 +515,9 @@ updateVarSubmission = function () {
 
 
 submitVarClaim = function () {
+  if(allvars.includes(newvar.name)) {
+    // variable already exists
+  } else {
    var submissionurl = "https://docs.google.com/forms/d/e/1FAIpQLScWFrxRU7VDtPnKe857jBIPCYFRBNftoICGAUT5xPMuwIJFVA/viewform?usp=pp_url&entry.775303211=" +
       newvar.name +
       "&entry.1554052921=" + newvar.parentvar +
@@ -522,7 +525,9 @@ submitVarClaim = function () {
 
    document.getElementById("varoverlay").style.display = "block";
 
-   window.open(submissionurl, '_blank');
+   window.open(submissionurl, '_blank'); 
+  }
+   
 }
 
 updateClaimSubmission = function () {
