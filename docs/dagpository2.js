@@ -679,16 +679,14 @@ getVariableHierarchy = function() {
     parser.parse().then((items) => {
         var keep = [];
         for (var i = 0; i < items.length; i++) {
-            if (!allvars.includes(items[i].variable)) {
-              allvars.push(items[i].variable);
+            if (!allvars.includes(items[i].Variablename)) {
+              allvars.push(items[i].Variablename);
             }
-            
-            //nodesh[i] = items[i].variable;
-            if (typeof items[i].parent === "undefined") {
+            if (typeof items[i].Parent === "undefined") {
 
             } else {
-              if (!allvars.includes(items[i].parent)) {
-                allvars.push(items[i].parent);
+              if (!allvars.includes(items[i].Parent)) {
+                allvars.push(items[i].Parent);
               }
               keep.push(i);
             }
@@ -700,7 +698,7 @@ getVariableHierarchy = function() {
         items = keep.map(i => items[i]);
         
         for (var i = 0; i < items.length; i++) {
-          edgesh[i]=  {from: allvars.indexOf(items[i].parent), to: allvars.indexOf(items[i].variable)};
+          edgesh[i]=  {from: allvars.indexOf(items[i].Parent), to: allvars.indexOf(items[i].Variablename)};
         }
         
         inanyedge = function(nodeid) {
