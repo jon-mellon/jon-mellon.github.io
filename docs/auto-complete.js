@@ -38,7 +38,6 @@ var autoComplete = (function(){
             cache: 1,
             menuClass: '',
             renderItem: function (item, search){
-              console.log("item")
               try {
                 // escape special characters
                 search = search.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');

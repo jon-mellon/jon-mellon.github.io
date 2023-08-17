@@ -473,18 +473,13 @@ function updateAllVars() {
 
 }
 
-
 submitClaim = function () {
    var submissionurl = "https://docs.google.com/forms/d/e/1FAIpQLSdXgItq-zrA7Do6vOAuJmtd_nDqYFoZ3l8ypO4EQ0fUoLWA_w/viewform?usp=pp_url&entry.1535032722=" + claim.doi +
       "&entry.1128171251=" + claim.xvar +
       "&entry.860119781=" + claim.yvar +
       "&entry.1916574635=" + claim.instrument +
-      /*
-      "&entry.1950636191=" + claim.xvarstart + 
-      "&entry.1246413525=" + claim.xvarend + 
-      "&entry.1218728387=" + claim.yvarstart + 
-      "&entry.78933920=" + claim.yvarend + 
-      */
+      "&entry.1972506017=" + claim.startyear + 
+      "&entry.470269037=" + claim.endyear + 
       "&entry.883997836=" + claim.finding +
       "&entry.756521078=" + claim.identification +
       "&entry.2108748939=" + claim.uoa +
@@ -518,6 +513,7 @@ updateVarSubmission = function () {
    newvar.parentvar = parentvar.value
    newvar.vardescription = vardescription.value;
 }
+
 
 submitVarClaim = function () {
    var submissionurl = "https://docs.google.com/forms/d/e/1FAIpQLScWFrxRU7VDtPnKe857jBIPCYFRBNftoICGAUT5xPMuwIJFVA/viewform?usp=pp_url&entry.775303211=" +
