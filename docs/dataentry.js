@@ -311,10 +311,19 @@ fetchAllVars = function () {
          allchildren[i] = [];
          for (var j = 0; j < value.length; j++) {
             if (value[j].Variablename == allvars[i]) {
-               allparents[i] = value[j].Parent;
+               if(value[j].Parent==null) {
+                 allparents[i]= "";
+               } else {
+                 allparents[i] = value[j].Parent;
+               }
+               
             }
             if (value[j].Parent == allvars[i]) {
-               allchildren[i].push(value[j].Variablename);
+              if(value[j].Variablename==null) {
+                
+              } else {
+               allchildren[i].push(value[j].Variablename); 
+              }
             }
          }
       }
