@@ -1,4 +1,30 @@
+matcher = function(term, suggest){
+                term = term.toLowerCase();
+                var suggestions = [];
+                for (i=0;i<allvars.length;i++)
+                    if (~allvars[i].toLowerCase().indexOf(term)) {
+                      suggestions.push(allvars[i]);
+                      if(allchildren[i].length>0) {
+                        for (var j = 0; j < allchildren[i].length; j++) {
+                          if(allchildren[i][j]!="") {
+                            suggestions.push(allchildren[i][j]);  
+                          }
+                        }
+                      }
+                      if(allparents[i]!="") {
+                        suggestions.push(allparents[i]);  
+                      }
+                    }
+                suggestions = suggestions.filter(onlyUnique);
+
+                suggest(suggestions);
+            }
+
 // 
+onlyUnique = function (value, index, array) {
+    return array.indexOf(value) === index;
+}
+
 
 function resetPage() {
   location.reload();
@@ -170,16 +196,65 @@ function revealColumns() {
       } 
     });
   }
+  
+  wipeInvalidAnswer = function(selector) {
+    if(!allvars.includes(document.getElementById(selector).value)) {
+      document.getElementById(selector).value = ""  
+    } else {
+      updateClaimSubmission();
+    }
+  }
+  
+  validateYear = function(selector) {
+    var year = document.getElementById(selector).value;
+    year = year.replace(" ", "");
+    year = year.replace(",", "");
+    document.getElementById(selector).value = year;
+    var yr = Number(year);
+    
+    if(!(yr<3000)) {
+      document.getElementById(selector).value = ""  
+    } else {
+      updateClaimSubmission();
+    }
+  }
+  
+  validatePosInteger= function(selector) {
+    var numint = document.getElementById(selector).value;
+    numint = numint.replace(" ", "");
+    numint = numint.replace(",", "");
+    document.getElementById(selector).value = numint;
+    var numnum = Number(numint);
+    
+    if(!(numnum>0)) {
+      document.getElementById(selector).value = ""  
+    } else {
+      updateClaimSubmission();
+    }
+  }
+  
 
   
   fetchAllVars = function() {
     if(currentenv=="offline") {
       var varpromise = new Promise((resolve, reject) => {
-        var dummyvars = [{"Variablename": "none"},
-        {"Variablename": "education"},
-        {"Variablename": "income"},
-        {"Variablename": "voting for economic right wing party"},
-        {"Variablename": "not real data"}]
+        var dummyvars = [{"Variablename": "none",
+          Parent: ""
+        },
+        {"Variablename": "education",
+          Parent: ""},
+        {"Variablename": "years of schooling",
+          Parent: "education"},
+        {"Variablename": "income",
+          Parent: ""},
+        {"Variablename": "individual income",
+          Parent: "income"},
+        {"Variablename": "voting for economic right wing party",
+          Parent: "voting for party"},
+        {"Variablename": "voting for party",
+          Parent: ""},
+        {"Variablename": "not real data",
+          Parent: ""}]
         
         resolve(dummyvars);
       })
@@ -196,13 +271,27 @@ function revealColumns() {
       varpromise.then((value) => {
       for (var i = 0; i < value.length; i++) {
         allvars[i] = value[i].Variablename;
+      
       }
       allvars = allvars.sort();
-      const varselects = ["dependent-variable", "independent-variable",            "instrumental-variable", "parent-variable"];
-    for (var i = 0; i < varselects.length; i++) {
+      for (var i = 0; i < allvars.length; i++) {
+        allchildren[i] = [];
+        for (var j = 0; j < value.length; j++) {
+          if(value[j].Variablename==allvars[i]) {
+            allparents[i] = value[j].Parent;
+          }
+          if(value[j].Parent==allvars[i]) {
+            allchildren[i].push(value[j].Variablename);
+          }
+        }
+      }
       
+      /*
+      const varselects = ["dependent-variable", "independent-variable", "instrumental-variable", "parent-variable"];
+    for (var i = 0; i < varselects.length; i++) {
       updateSelector(varselects[i], allvars)
     }
+    */
     });
   }
      
@@ -384,6 +473,8 @@ submitClaim = function() {
       claim.finding = finding.value;
       claim.identification = identification.value;
       claim.uoa = uoa.value;
+      claim.startyear = startyr.value;
+      claim.endyear = startyr.value;
       let countrystring = "";
       for (var i = 0; i < countries.selectedOptions.length; i++) {
         if(countrystring=="") {
@@ -411,7 +502,164 @@ submitClaim = function() {
       })
     }
     
+    unselectAllCountries = function() {
+      for (var i = 0; i < countries.options.length; i++) {
+        countries.options[i].selected = false;
+      }
+    }
     
-    
-    
+    selectCountry = function(set) {
+      var countryset = [];
+      if(set=="NATO") {
+        countryset = [
+  "BE", // Belgium
+  "BG", // Bulgaria
+  "CA", // Canada
+  "HR", // Croatia
+  "CZ", // Czech Republic
+  "DK", // Denmark
+  "EE", // Estonia
+  "FR", // France
+  "DE", // Germany
+  "GR", // Greece
+  "HU", // Hungary
+  "IS", // Iceland
+  "IT", // Italy
+  "LV", // Latvia
+  "LT", // Lithuania
+  "LU", // Luxembourg
+  "NL", // Netherlands
+  "NO", // Norway
+  "PL", // Poland
+  "PT", // Portugal
+  "RO", // Romania
+  "SK", // Slovakia
+  "SI", // Slovenia
+  "ES", // Spain
+  "TR", // Turkey
+  "GB", // United Kingdom
+  "US", // United States
+];
+      }
+      if(set=="EU") {
+        countryset= [
+  "AT", // Austria
+  "BE", // Belgium
+  "BG", // Bulgaria
+  "HR", // Croatia
+  "CY", // Cyprus
+  "CZ", // Czech Republic
+  "DK", // Denmark
+  "EE", // Estonia
+  "FI", // Finland
+  "FR", // France
+  "DE", // Germany
+  "GR", // Greece
+  "HU", // Hungary
+  "IE", // Ireland
+  "IT", // Italy
+  "LV", // Latvia
+  "LT", // Lithuania
+  "LU", // Luxembourg
+  "MT", // Malta
+  "NL", // Netherlands
+  "PL", // Poland
+  "PT", // Portugal
+  "RO", // Romania
+  "SK", // Slovakia
+  "SI", // Slovenia
+  "ES", // Spain
+  "SE", // Sweden
+];
+      }
+      if(set=="OECD") {
+        countryset= [
+  "AU", // Australia
+  "AT", // Austria
+  "BE", // Belgium
+  "CA", // Canada
+  "CL", // Chile
+  "CZ", // Czech Republic
+  "DK", // Denmark
+  "EE", // Estonia
+  "FI", // Finland
+  "FR", // France
+  "DE", // Germany
+  "GR", // Greece
+  "HU", // Hungary
+  "IS", // Iceland
+  "IE", // Ireland
+  "IL", // Israel
+  "IT", // Italy
+  "JP", // Japan
+  "KR", // South Korea
+  "LV", // Latvia
+  "LT", // Lithuania
+  "LU", // Luxembourg
+  "MX", // Mexico
+  "NL", // Netherlands
+  "NZ", // New Zealand
+  "NO", // Norway
+  "PL", // Poland
+  "PT", // Portugal
+  "SK", // Slovakia
+  "SI", // Slovenia
+  "ES", // Spain
+  "SE", // Sweden
+  "CH", // Switzerland
+  "TR", // Turkey
+  "GB", // United Kingdom
+  "US", // United States
+];
+      }
+      
+    if(set=="lowinc") {
+        countryset=  [
+  "AF", "BI", "BF", "CF", "CD", "ER", "ET", "GM", "GW", "LR",
+  "MG", "ML", "MZ", "MW", "NE", "KP", "RW", "SD", "SL", "SO",
+  "SS", "SY", "TD", "TG", "UG", "YE"
+];
+}
+if(set=="lowmidinc") {
+        countryset=  [
+  "AO", "BJ", "BD", "BO", "BT", "CI", "CM", "CG", "KM", "CV",
+  "DJ", "DZ", "EG", "FM", "GH", "GN", "HN", "HT", "IN", "IR",
+  "JO", "KE", "KG", "KH", "KI", "LA", "LB", "LK", "LS", "MA",
+  "MM", "MN", "MR", "NG", "NI", "NP", "PK", "PH", "PG", "SN",
+  "SB", "ST", "SZ", "TJ", "TL", "TN", "TZ", "UA", "UZ", "VN",
+  "VU", "WS", "ZM", "ZW"
+];
+}
+if(set=="highmidinc") {
+        countryset=[
+  "AL", "AR", "AM", "AZ", "BG", "BA", "BY", "BZ", "BR", "BW",
+  "CN", "CO", "CR", "CU", "DM", "DO", "EC", "FJ", "GA", "GE",
+  "GQ", "GD", "GT", "ID", "IQ", "JM", "KZ", "LY", "LC", "MD",
+  "MV", "MX", "MH", "MK", "ME", "MU", "MY", "NA", "PE", "PW",
+  "PY", "PS", "RU", "SV", "RS", "SR", "TH", "TM", "TO", "TR",
+  "TV", "VC", "XK", "ZA"
+];
+}
+
+if(set=="highinc") {
+        countryset=[
+  "AW", "AD", "AE", "AS", "AG", "AU", "AT", "BE", "BH", "BS",
+  "BM", "BB", "BN", "CA", "CH", "JE", "CL", "CW", "KY", "CY",
+  "CZ", "DE", "DK", "ES", "EE", "FI", "FR", "FO", "GB", "GI",
+  "GR", "GL", "GU", "GY", "HK", "HR", "HU", "IM", "IE", "IS",
+  "IL", "IT", "JP", "KN", "KR", "KW", "LI", "LT", "LU", "LV",
+  "MO", "MF", "MC", "MT", "MP", "NC", "NL", "NO", "NR", "NZ",
+  "OM", "PA", "PL", "PR", "PT", "PF", "QA", "RO", "SA", "SG",
+  "SM", "SK", "SI", "SE", "SX", "SC", "TC", "TT", "TW", "UY",
+  "US", "VG", "VI"
+];
+
+}
+      for (var i = 0; i < countries.options.length; i++) {
+        if(countryset.includes(countries.options[i].value)) {
+          countries.options[i].selected = true;
+        } 
+      }
+      
+    }
     
