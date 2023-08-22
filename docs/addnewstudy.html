@@ -208,7 +208,7 @@
         <div class="column2" id="causal-claim">
             <h2>Causal claim</h2>
             
-            <p>Please add the variables for this study. If a variable is not present please add the variable using the add variable form on the right side and hit update variable list.</p>
+            <p>Please add the variables for this study. If a variable is not present please add the variable using the add variable form on the right side.</p>
        <form id="claim-form">
                 <label for="independent-variable">Independent Variable</label>
                 <input id="independent-variable" type="text" name="q" placeholder="Search for independent variable..." style="width:100%;max-width:1200px;outline:0" onfocusout = "wipeInvalidAnswer('independent-variable');">
@@ -219,7 +219,6 @@
                 <label for="instrumental-variable">Instrumental Variable (Optional)</label>
                 <input id="instrumental-variable" type="text" name="q" placeholder="Search for instrumental variable..." style="width:100%;max-width:1200px;outline:0" onfocusout = "wipeInvalidAnswer('instrumental-variable');">
 
-                <button type="button" onclick="fetchAllVars()">Update variable list</button>
   <label for="finding">Finding</label>
   <select id="finding" name="finding" onchange = "updateClaimSubmission();"></select>                
   
@@ -577,6 +576,7 @@
         
         document.getElementById("confirmvar").addEventListener("click", function() {
             document.getElementById("varoverlay").style.display = "none";
+            fetchAllVars();
             resetVarSubmission();
         });
         

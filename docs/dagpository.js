@@ -1052,7 +1052,8 @@ createListHierarchy = function() {
 }
 
 makeEdgeTwoway = function(edge) {
-    network.updateEdge(edge, {arrows: {from: {enabled: true}}} )
+    network.updateEdge(edge, {arrows: {from: {enabled: true}},
+    color : "purple"} )
 }
 
 updateAllClusterEdges = function() {
