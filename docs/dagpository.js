@@ -1076,9 +1076,7 @@ for (var i = 0; i < clusternodestemp.length; i++) {
         } catch (e) {
           console.log(e);
         }
-        
     }
-    
     } catch(e2) {
       console.log(e2);
     }
