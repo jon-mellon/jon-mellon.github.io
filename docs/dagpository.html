@@ -147,7 +147,13 @@
   display: none;
 }
   </style>
-  
+  <script>
+     if(window.location.hostname=="") {
+      var currentenv = "offline";  
+    } else {
+      var currentenv = "live";  
+    }
+  </script>
    <script
       type="text/javascript"
       src="visjs-min.js"

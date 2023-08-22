@@ -99,7 +99,8 @@ populateCiteFromDOI = function(doi) {
 }
 
 getDOIFromCrossRef = function(doi) {
-   fetch("https://api.crossref.org/works/" + doi)
+   if(currentenv!="offline") {
+   var doipromise = fetch("https://api.crossref.org/works/" + doi)
         .then((response) => {
             //console.log("crossref API Call");
             if (response.ok) {
@@ -108,8 +109,42 @@ getDOIFromCrossRef = function(doi) {
             } else {
                 throw new Error("NETWORK RESPONSE ERROR");
             }
-        })
-        .then(data => {
+        })  
+   } else {
+      var doipromise = new Promise((resolve, reject) => {
+         var studytemp = {
+            message: {
+               author: [{
+                     family: "Smith",
+                     given: "Bob"
+                  },
+                  {
+                     family: "Bloggs",
+                     given: "Joe"
+                  },
+                  {
+                     family: "Jones",
+                     given: "Davey"
+                  },
+                  {
+                     family: "Doe",
+                     given: "Jane"
+                  }
+               ],
+               title: ["The Causal Effect of Lorem Ipsum on tktk"],
+               "container-title": ["Journal of Placeholder Studies"],
+               published: {
+                  "date-parts": [
+                     [2023, 7]
+                  ]
+               },
+               URL: "www.example.com",
+            }
+         };
+         resolve(studytemp);
+      });
+   }
+        doipromise.then(data => {
             if(!citationPresent(doi)) {
               //data.message.DOI = data.message.DOI.toLowerCase();
               citations.push(data.message);
@@ -316,17 +351,57 @@ reachableByNodes = function(startnode, edgesetall) {
 }
 
 getEdges = function() {
-    const spreadsheetId = "11hfXFfdpMyDEeMSy3xeO3rsbI7a6UdcaJfJpZZlBJ34"
+    
+    if(currentenv=="offline") {
+      var studypromise = new Promise((resolve, reject) => {
+
+         var studies = [{
+               DOI: "12345",
+               "x variable": "education",
+               "y variable": "income",
+               finding: "positive"
+            },
+            {
+               DOI: "12345",
+               "x variable": "education",
+               "y variable": "voting for economic right wing party",
+               finding: "positive"
+            },
+            {
+               DOI: "54321",
+               "x variable": "years of schooling",
+               "y variable": "voting for economic right wing party",
+               finding: "positive"
+            },
+            {
+               DOI: "54321",
+               "y variable": "education",
+               "x variable": "voting for economic right wing party",
+               finding: "positive"
+            },
+            {
+               DOI: "54321",
+               "x variable": "education",
+               "y variable": "voting for party",
+               finding: "positive"
+            }
+         ];
+         resolve(studies);
+      });
+    }  else {
+      const spreadsheetId = "11hfXFfdpMyDEeMSy3xeO3rsbI7a6UdcaJfJpZZlBJ34"
     const sheetId = 0;
     const sheetName = "causalclaims";
     const sheetInfo = {
         sheetId,
         sheetName
     }
-    const parser = new PublicGoogleSheetsParser(spreadsheetId, sheetInfo)
+    var studypromise  = new PublicGoogleSheetsParser(spreadsheetId, sheetInfo).parse()
+    } 
+    
     //setLoading()
     
-    parser.parse().then((items) => {
+    studypromise.then((items) => {
         console.table(items)
         currentitems = items;
         var edgecombs = [];
@@ -527,6 +602,7 @@ createNetwork = function() {
     filter function should return true or false
     based on whether item in DataView satisfies a given condition.
     */
+    
     const nodesFilter = (node) => {
         // temporary while testing:
         if(network!=null) {
@@ -666,6 +742,45 @@ showChildren = function(nodeid) {
 }
 
 getVariableHierarchy = function() {
+    if(currentenv=="offline") {
+      var varpromise = new Promise((resolve, reject) => {
+         var dummyvars = [{
+               "Variablename": "none",
+               Parent: ""
+            },
+            {
+               "Variablename": "education",
+               Parent: ""
+            },
+            {
+               "Variablename": "years of schooling",
+               Parent: "education"
+            },
+            {
+               "Variablename": "income",
+               Parent: ""
+            },
+            {
+               "Variablename": "individual income",
+               Parent: "income"
+            },
+            {
+               "Variablename": "voting for economic right wing party",
+               Parent: "voting for party"
+            },
+            {
+               "Variablename": "voting for party",
+               Parent: ""
+            },
+            {
+               "Variablename": "not real data",
+               Parent: ""
+            }
+         ]
+
+         resolve(dummyvars);
+      })
+    } else {
     const spreadsheetId = "1JdIwj_x64L6rpEK48acjnctYfrzFIS5HBkb4s27S7L8";
     const sheetId = 0;
     const sheetName = "variables";
@@ -673,10 +788,10 @@ getVariableHierarchy = function() {
         sheetId,
         sheetName
     }
-    const parser = new PublicGoogleSheetsParser(spreadsheetId, sheetInfo)
-    //setLoading()
-
-    parser.parse().then((items) => {
+    var varpromise = new PublicGoogleSheetsParser(spreadsheetId, sheetInfo).parse();
+    }
+    
+    varpromise.then((items) => {
         var keep = [];
         for (var i = 0; i < items.length; i++) {
             if (!allvars.includes(items[i].Variablename)) {
@@ -836,6 +951,7 @@ draw = function () {
         origid: origid,
         label: label});
       nodesView.refresh();
+      updateAllClusterEdges();
     }
     
 getNextLevel = function(orid) {
@@ -934,4 +1050,37 @@ createListHierarchy = function() {
   
   
 }
+
+makeEdgeTwoway = function(edge) {
+    network.updateEdge(edge, {arrows: {from: {enabled: true}}} )
+}
+
+updateAllClusterEdges = function() {
+  
+for (var i = 0; i < clusterednodes.length; i++) {
+  var basenodes = network.getNodesInCluster(clusterednodes[i].id);
+
+var clusteredges = network.getConnectedEdges(clusterednodes[i].id);
+for (var j = 0; j < clusteredges.length; j++) {
+  var baseedgeids = network.getBaseEdges(clusteredges[j]);
+  var baseedges = edges.get(baseedgeids);
+  var anyto = false;
+  var anyfrom = false;
+  for (var i = 0; i < baseedges.length; i++) {
+    if(basenodes.includes(baseedges[i].from)) {
+      anyfrom = true;
+    }
+    if(basenodes.includes(baseedges[i].to)) {
+      anyto = true;
+    }
+  }
+  if(anyfrom & anyto) {
+    makeEdgeTwoway(clusteredges[j])
+  }
+}
+}
+}
+
+
+
 
