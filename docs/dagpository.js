@@ -467,19 +467,7 @@ getEdges = function() {
 
 
 
-        //var nodeset = [];
-        /*
-        for (var i = 0; i < uniquenodes.length; i++) {
-            nodeset[i] = {
-                id: (i),
-                label: uniquenodes[i],
-                attribute: "test"
-            };
-        }
-        */
-
-
-        testEdgeChoice = function(values,
+       testEdgeChoice = function(values,
             id,
             selected,
             hovering) {
@@ -702,7 +690,8 @@ hideChildren = function(nodeid) {
     hidethese.push(nodeid);
     clusterNodes(nodeids = hidethese, 
       label = parentlabel, origid = nodeid);
-    //nodesViewh.refresh();
+    updateAllClusterEdges();
+
 }
 
 showChildren = function(nodeid) {
@@ -738,7 +727,6 @@ showChildren = function(nodeid) {
     for(var i = cdeletes.length-1; i >= 0; i--){
       clusterednodes.splice(cdeletes[i], 1);
     }
-    //nodesViewh.refresh();
 }
 
 getVariableHierarchy = function() {
@@ -838,7 +826,7 @@ getVariableHierarchy = function() {
         //nodesView.refresh();
       });
 }
-
+/*
 draw = function () {
     if (networkh !== null) {
         networkh.destroy();
@@ -916,7 +904,7 @@ draw = function () {
         
     });
 }
-
+*/
 
     unclusterNodes = function(nodeid) {
       network.openCluster(nodeid);
@@ -951,7 +939,6 @@ draw = function () {
         origid: origid,
         label: label});
       nodesView.refresh();
-      updateAllClusterEdges();
     }
     
 getNextLevel = function(orid) {
@@ -1057,29 +1044,45 @@ makeEdgeTwoway = function(edge) {
 }
 
 updateAllClusterEdges = function() {
-  
-for (var i = 0; i < clusterednodes.length; i++) {
-  var basenodes = network.getNodesInCluster(clusterednodes[i].id);
+  var clusternodestemp = [];
+  for (var i = 0; i < clusterednodes.length; i++) {
+    clusternodestemp[i] = clusterednodes[i].id;
+  }
 
-var clusteredges = network.getConnectedEdges(clusterednodes[i].id);
-for (var j = 0; j < clusteredges.length; j++) {
-  var baseedgeids = network.getBaseEdges(clusteredges[j]);
-  var baseedges = edges.get(baseedgeids);
-  var anyto = false;
-  var anyfrom = false;
-  for (var i = 0; i < baseedges.length; i++) {
-    if(basenodes.includes(baseedges[i].from)) {
-      anyfrom = true;
+for (var i = 0; i < clusternodestemp.length; i++) {
+  try {
+    var basenodes = network.getNodesInCluster(clusternodestemp[i]);
+    var clusteredges = network.getConnectedEdges(clusternodestemp[i]);
+    
+    for (var j = 0; j < clusteredges.length; j++) {
+      try {
+        var baseedgeids = network.getBaseEdges(clusteredges[j]);
+        var baseedges = edges.get(baseedgeids);
+        var anyto = false;
+        var anyfrom = false;
+        for (var k = 0; k < baseedges.length; k++) {
+          if(basenodes.includes(baseedges[k].from)) {
+            anyfrom = true;
+          }
+          if(basenodes.includes(baseedges[k].to)) {
+            anyto = true;
+          }
+        }
+        
+        if(anyfrom & anyto) {
+          makeEdgeTwoway(clusteredges[j]);
+        }
+        
+        } catch (e) {
+          console.log(e);
+        }
+        
     }
-    if(basenodes.includes(baseedges[i].to)) {
-      anyto = true;
+    
+    } catch(e2) {
+      console.log(e2);
     }
   }
-  if(anyfrom & anyto) {
-    makeEdgeTwoway(clusteredges[j])
-  }
-}
-}
 }
 
 
