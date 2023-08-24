@@ -939,6 +939,7 @@ draw = function () {
         origid: origid,
         label: label});
       nodesView.refresh();
+      updateAllClusterEdges();
     }
     
 getNextLevel = function(orid) {
@@ -1039,6 +1040,7 @@ createListHierarchy = function() {
 }
 
 makeEdgeTwoway = function(edge) {
+<<<<<<< Updated upstream
     network.updateEdge(edge, {arrows: {from: {enabled: true}},
     color : "purple"} )
 }
@@ -1081,6 +1083,35 @@ for (var i = 0; i < clusternodestemp.length; i++) {
       console.log(e2);
     }
   }
+=======
+    network.updateEdge(edge, {arrows: {from: {enabled: true}}} )
+}
+
+updateAllClusterEdges = function() {
+  
+for (var i = 0; i < clusterednodes.length; i++) {
+  var basenodes = network.getNodesInCluster(clusterednodes[i].id);
+
+var clusteredges = network.getConnectedEdges(clusterednodes[i].id);
+for (var j = 0; j < clusteredges.length; j++) {
+  var baseedgeids = network.getBaseEdges(clusteredges[j]);
+  var baseedges = edges.get(baseedgeids);
+  var anyto = false;
+  var anyfrom = false;
+  for (var i = 0; i < baseedges.length; i++) {
+    if(basenodes.includes(baseedges[i].from)) {
+      anyfrom = true;
+    }
+    if(basenodes.includes(baseedges[i].to)) {
+      anyto = true;
+    }
+  }
+  if(anyfrom & anyto) {
+    makeEdgeTwoway(clusteredges[j])
+  }
+}
+}
+>>>>>>> Stashed changes
 }
 
 
