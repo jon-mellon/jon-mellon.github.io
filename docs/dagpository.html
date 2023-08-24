@@ -195,17 +195,17 @@
     </label>
     <br />
     <br />
-    <form id="varselector">
+    <form id="varselector" hidden>
       <label for="selectIV">Independent Variable</label>
-      <input id="selectIV" type="text" name="q" placeholder="Search for independent variable..." style="width:100%;max-width:1200px;outline:0" onfocusout = "showCurrentNetworkState();">
+      <input id="selectIV" type="text" name="q" placeholder="Search for independent variable..." style="width:100%;max-width:1200px;outline:0" onfocusout = "showCurrentNetworkState();" >
     </select>
     <br>
     <label for="selectDV">Dependent Variable</label>
-    <input id="selectDV" type="text" name="q" placeholder="Search for dependent variable..." style="width:100%;max-width:1200px;outline:0" onfocusout = "showCurrentNetworkState();">
+    <input id="selectDV" type="text" name="q" placeholder="Search for dependent variable..." style="width:100%;max-width:1200px;outline:0" onfocusout = "showCurrentNetworkState();" hidden>
     
     </form>
-    <button id = "filterbutton"  onclick="nodesView.refresh();">Filter network</button>
-    <button id = "resetbutton"  onclick="resetDVIVFilter();">Reset</button>
+    <button hidden id = "filterbutton"  onclick="nodesView.refresh();">Filter network</button>
+    <button hidden id = "resetbutton"  onclick="resetDVIVFilter();">Reset</button>
     <p>
       Here are all the relevant causal claims listed in our dataset. 
     </p>
