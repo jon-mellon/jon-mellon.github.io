@@ -54,11 +54,7 @@ unclusterAllNodes = function() {
 
 
 hideChildren = function(nodeid) {
-    /*
-    if (!foldednodes.includes(nodeid)) {
-        foldednodes.push(nodeid);
-    }
-    */
+   
     var parentlabel;
     let hidethese = reachableNodesGeneral(nodeid, edgesh);
     if (hidethese.length > 0) {
@@ -69,11 +65,7 @@ hideChildren = function(nodeid) {
             nodesh[i].color = "#09e472";
             parentlabel = nodesh[i].label
         }
-        /*
-        if (hidethese.includes(i)) {
-            hidden.push(i);
-        }
-        */
+     
         }
     hidethese.push(nodeid);
     clusterNodes(nodeidstocluster = hidethese, 
@@ -90,11 +82,7 @@ hideChildren2 = function(nodeid) {
             nodesh[i].color = "#09e472";
             parentlabel = nodesh[i].label
         }
-        /*
-        if (hidethese.includes(i)) {
-            hidden.push(i);
-        }
-        */
+      
     }
     hidethese.push(nodeid);
     clusterNodes2(nodeidstocluster = hidethese, 
@@ -210,17 +198,28 @@ showCurrentNetworkState = function() {
   let dvselectorindex = combids[combvars.indexOf(dvselector.value)];
   
   if(dvselectorindex!=null) {
-    canreachdv = reachableByNodes(dvselectorindex, currentedgeset);
-    dvcanreach = reachableNodesGeneral(dvselectorindex, currentedgeset);
+    //canreachdv = reachableByNodes(dvselectorindex, currentedgeset);
+    canreachdv = reachableByNodeOrParent(dvselectorindex, currentedgeset);
+    
+    //dvcanreach = reachableNodesGeneral(dvselectorindex, currentedgeset);
+    dvcanreach = reachableNodeOrParent(dvselectorindex, currentedgeset);
+  } else {
+    dvcanreach = [];
+    canreachdv = [];
   }
   if(ivselectorindex!=null) {
-    canreachiv = reachableByNodes(ivselectorindex, currentedgeset);
-    ivcanreach = reachableNodesGeneral(ivselectorindex, currentedgeset);  
+    //canreachiv = reachableByNodes(ivselectorindex, currentedgeset);
+    canreachiv = reachableByNodeOrParent(ivselectorindex, currentedgeset);
+    //ivcanreach = reachableNodesGeneral(ivselectorindex, currentedgeset);  
+    ivcanreach = reachableNodeOrParent(ivselectorindex, currentedgeset);  
+  } else {
+    canreachiv = [];
+    ivcanreach = [];
   }
   
   
   updateNodeStatus();
-    nodesView.refresh();
+  nodesView.refresh();
 
   nodeids = nodesView.getIds();
     
@@ -241,7 +240,37 @@ showCurrentNetworkState = function() {
   nodesView.refresh();
 }
 
+reachableNodeOrParent = function(startnode, edgesetall) {
+  
+  var allreachable = reachableNodesGeneral(startnode, edgesetall);
+  var allclusters = getAllClusters();
+  for (var i = 0; i < allclusters.length; i++) {
+    if(allclusters[i].includes(startnode)) {
+      for (var j = 0; j < allclusters[i].length; j++) {
+        allreachable = allreachable.concat(reachableNodesGeneral(allclusters[i][j], edgesetall));
+      }
+    }
+  }
+  return(allreachable)
+}
 
+reachableByNodeOrParent = function(startnode, edgesetall) {
+  
+  var allreachable = reachableByNodes(startnode, edgesetall);
+  var allclusters = getAllClusters();
+  
+  for (var i = 0; i < allclusters.length; i++) {
+    
+    if(network.getNodesInCluster(allclusters[i]).includes(startnode)) {
+       console.log("looking in cluster: " + allclusters[i]);
+      for (var j = 0; j < network.getNodesInCluster(allclusters[i]).length; j++) {
+       
+        allreachable = allreachable.concat(reachableByNodes(allclusters[i][j], edgesetall));
+      }
+    }
+  }
+  return(allreachable)
+}
 
 //// general network ////
 reachableNodesGeneral = function(startnode, edgesetall) {
@@ -499,12 +528,10 @@ resetDVIVFilter = function() {
   
   dvselector.value = "";
   ivselector.value = "";
-  updateNodeStatus();
-  nodesView.refresh();
+  showCurrentNetworkState();
 }
 
 updateNodeStatus = function() {
-    
     if (dvselector.value == "" &
         ivselector.value == "") {
           blankNodeStatus();
@@ -541,13 +568,27 @@ updateNodeStatus = function() {
    
    
     }
-    /*
     var allclusters = getAllClusters();
-    
     var clusterednodestemp = [];
     for (var i = 0; i < allclusters.length; i++) {
       clusterednodestemp = clusterednodestemp.concat(network.getNodesInCluster(allclusters[i]));
+      
+      for (var j = 0; j < combids.length; j++) {
+        if(combids[j]==allclusters[i]) {
+          for (var k = 0; k < nodestatus.length; k++) {
+            if(clusterednodestemp.includes(combids[k])) {
+              nodestatus[k] = nodestatus[j];
+            }
+          }
+        }
+      }
     }
+    
+    /*
+    
+    
+    
+    
     
     for (var i = 0; i < nodestatus.length; i++) {
       if(clusterednodestemp.includes(combids[i])) {
