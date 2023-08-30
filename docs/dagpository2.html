@@ -146,6 +146,33 @@
 .active {
   display: none;
 }
+.invisiblecolumns {
+            display: flex;
+            justify-content: space-between;
+            height: 500px;
+            display: none;
+        }
+        .columns {
+            display: flex;
+            justify-content: space-between;
+            height: 500px;
+        }
+        .column {
+            flex: 25%;
+            overflow: auto;
+            padding: 1em;
+            border: 1px solid #000;
+            margin: 1em;
+            box-sizing: border-box;
+        }
+        .column2 {
+            flex: 75%;
+            overflow: auto;
+            padding: 1em;
+            border: 1px solid #000;
+            margin: 1em;
+            box-sizing: border-box;
+        }
   </style>
   <script>
      if(window.location.hostname=="") {
@@ -164,7 +191,7 @@
     ></script>
     <script
       type="text/javascript"
-      src="dagpository2.js"
+      src="dagpository.js"
     ></script>
     <script src="auto-complete.js"></script>
     <link rel="stylesheet" href="auto-complete.css">
@@ -177,14 +204,13 @@
 </head>
 <body>
   <div class="title">
-    <span>Big DAG: Beta Version</span>
+    <span>DAGpository: Beta Version</span>
     <div class="row badges">
-     
     </div>
   </div>
 
   <body>
-    <h1>Custom DAGs</h1>
+
     
     <label hidden>
       Filter nodes
@@ -193,19 +219,18 @@
         <option value="test">test</option>
       </select>
     </label>
-    <br />
-    <br />
-    <form id="varselector">
+    
+    <form id="varselector" hidden>
       <label for="selectIV">Independent Variable</label>
-      <input id="selectIV" type="text" name="q" placeholder="Search for independent variable..." style="width:100%;max-width:1200px;outline:0" onfocusout = "showCurrentNetworkState();">
+      <input id="selectIV" type="text" name="q" placeholder="Search for independent variable..." style="width:100%;max-width:1200px;outline:0" onfocusout = "showCurrentNetworkState();" >
     </select>
     <br>
     <label for="selectDV">Dependent Variable</label>
-    <input id="selectDV" type="text" name="q" placeholder="Search for dependent variable..." style="width:100%;max-width:1200px;outline:0" onfocusout = "showCurrentNetworkState();">
+    <input id="selectDV" type="text" name="q" placeholder="Search for dependent variable..." style="width:100%;max-width:1200px;outline:0" onfocusout = "showCurrentNetworkState();" hidden>
     
     </form>
-    <button id = "filterbutton"  onclick="nodesView.refresh();">Filter network</button>
-    <button id = "resetbutton"  onclick="resetDVIVFilter();">Reset</button>
+    <button hidden id = "filterbutton"  onclick="nodesView.refresh();">Filter network</button>
+    <button hidden id = "resetbutton"  onclick="resetDVIVFilter();">Reset</button>
     <p>
       Here are all the relevant causal claims listed in our dataset. 
     </p>
@@ -239,17 +264,28 @@
     </label>
     
     <br/>
-   
-    <div id = "networkcontainer" >
-      <div id="mynetwork"></div>
+    <div class="columns" id = "columnentry" >
+    <div class="column2" id="causal-network">
+      <div id = "networkcontainer" >
+        <div id="mynetwork"></div>
+      </div>
     </div>
-    <div>
+    
+    <div class="column" id="add-variable">
+      <div>
       Studies:
       <br>
       <div>
         <p id="pubdetails"></p>
       </div>
     </div>
+      
+    </div>
+    
+    </div>
+
+    
+    
     <ul id="ultest">
   
     </ul>
