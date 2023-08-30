@@ -91,7 +91,15 @@ getDOIFromCrossRef = function (doi) {
       .catch((error) => console.error("FETCH ERROR:", error));
 }
 
+showDOINotFound = function() {
+  document.getElementById("notfound").hidden = false;
+}
+hideDOINotFound = function() {
+  document.getElementById("notfound").hidden = true;
+}
+
 DOIInfoCall = function (doi) {
+    hideDOINotFound();
    if (currentenv == "offline") {
       var varpromise = new Promise((resolve, reject) => {
         if(doi==98765)  {
@@ -136,11 +144,15 @@ DOIInfoCall = function (doi) {
                let jsonout = response.json();
                return jsonout;
             } else {
+               console.log(response);
+               if(response.status==404) {
+                console.log("DOI not found");
+                showDOINotFound();
+               }
                throw new Error("NETWORK RESPONSE ERROR");
                // error handling here
             }
          });
-      // getDOIFromCrossRef(doi);
    }
    varpromise.then((value) => {
       studyinfo = value.message;
