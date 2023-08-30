@@ -784,6 +784,16 @@ getEdges = function() {
                 
                 if (pubtext.edgeid != id) {
                   pubtext.edgeid = id;
+                  
+                  var edgenodes = network.getConnectedNodes(pubtext.edgeid)
+                  
+                  var xvar = nodeLabelFromId(edgenodes[0]);
+                  var yvar = nodeLabelFromId(edgenodes[1]);
+                  let studytitle = xvar + " 🡒 " + yvar
+                  
+                  document.getElementById("claimstudy").innerText = studytitle;
+                  
+                  
                   if(id.includes("cluster")) {
                     var doismulti = "";
                     var baseedgeids = network.clustering.getBaseEdges(id);
@@ -1013,11 +1023,7 @@ hideChildren = function(nodeid) {
 showChildren = function(nodeid) {
     
     let showthese = reachableNodesGeneral(nodeid, edgesh);
-    /*
-    if (foldednodes.indexOf(nodeid) != -1) {
-        foldednodes.splice(foldednodes.indexOf(nodeid));
-    }
-    */
+  
 
     for (var i = 0; i < nodesh.length; i++) {
         if (showthese.includes(i)) {
@@ -1286,6 +1292,14 @@ createListHierarchy = function() {
   foldTopLevels();
   
   
+}
+
+nodeLabelFromId = function(id) {
+for (var i = 0; i < combids.length; i++) {
+  if(combids[i]==id) {
+    return(combvars[i]);
+  }
+}  
 }
 
 makeEdgeTwoway = function(edge) {

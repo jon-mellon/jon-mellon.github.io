@@ -206,7 +206,12 @@
   border-style: solid;
   border-color: #555 transparent transparent transparent;
 }
-
+.title {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+    }
 /* Toggle this class when clicking on the popup container (hide and show the popup) */
 .popup .show {
   visibility: visible;
@@ -240,8 +245,12 @@ function showPopup(id) {
   popup.classList.toggle("show");
 }
 </script>
-
-   <div style="max-width:2200px;padding:0 10px;margin:40px auto;text-align:center">
+    <div class="title">
+    <span>Causal claim entry form: Beta Version</span>
+    <div class="row badges">
+    </div>
+  </div>
+  <div style="max-width:2200px;padding:0 10px;margin:40px auto;text-align:center">
     </div>
   <div id="message"></div>
     <input type="text" id="DOI" placeholder="Enter DOI here">

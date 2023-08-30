@@ -20,9 +20,9 @@
       position: relative;
       min-width: 300px;
       max-width: 2000px;
-      min-height: 700px;
+      min-height: 900px;
       max-height: 1200px;
-      bottom: 20%;
+      bottom: 0%;
       border: 1px solid lightgray;
     }
      #mynetworkh {
@@ -146,6 +146,33 @@
 .active {
   display: none;
 }
+.invisiblecolumns {
+            display: flex;
+            justify-content: space-between;
+            height: 700px;
+            display: none;
+        }
+        .columns {
+            display: flex;
+            justify-content: space-between;
+            height: 700px;
+        }
+        .column {
+            flex: 25%;
+            overflow: auto;
+            padding: 1em;
+            border: 1px solid #000;
+            margin: 1em;
+            box-sizing: border-box;
+        }
+        .column2 {
+            flex: 75%;
+            overflow: auto;
+            padding: 1em;
+            border: 1px solid #000;
+            margin: 1em;
+            box-sizing: border-box;
+        }
   </style>
   <script>
      if(window.location.hostname=="") {
@@ -177,14 +204,13 @@
 </head>
 <body>
   <div class="title">
-    <span>Big DAG: Beta Version</span>
+    <span>DAGpository: Beta Version</span>
     <div class="row badges">
-     
     </div>
   </div>
 
   <body>
-    <h1>Custom DAGs</h1>
+
     
     <label hidden>
       Filter nodes
@@ -193,8 +219,7 @@
         <option value="test">test</option>
       </select>
     </label>
-    <br />
-    <br />
+    
     <form id="varselector" hidden>
       <label for="selectIV">Independent Variable</label>
       <input id="selectIV" type="text" name="q" placeholder="Search for independent variable..." style="width:100%;max-width:1200px;outline:0" onfocusout = "showCurrentNetworkState();" >
@@ -239,17 +264,32 @@
     </label>
     
     <br/>
-   
-    <div id = "networkcontainer" >
-      <div id="mynetwork"></div>
+    <div class="columns" id = "columnentry" >
+    <div class="column2" id="causal-network">
+      <div id = "networkcontainer" >
+        <div id="mynetwork"></div>
+      </div>
     </div>
-    <div>
-      Studies:
+    
+    <div class="column" id="add-variable">
+      <div>
+        <h2 id ="studytitle">
+          Studies
+        </h2>
+        <h3 id ="claimstudy">
+          
+        </h3>
       <br>
       <div>
         <p id="pubdetails"></p>
       </div>
     </div>
+      
+    </div>
+    
+    </div>
+
+    <h2>Variables hierarchy</h2>
     <ul id="ultest">
   
     </ul>
