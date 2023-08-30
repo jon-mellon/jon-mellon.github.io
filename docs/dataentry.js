@@ -158,9 +158,11 @@ DOIInfoCall = function (doi) {
       
       
       if (alldois.includes(doi)) {
+        hideDOIImage();
         revealPrevClaimCheck();
       } else {
         revealStudyCheck();
+        hideDOIImage();
       }
    })
    .catch((reason) => {
@@ -178,6 +180,10 @@ function revealColumns() {
    document.getElementById("DOI").disabled = true;
    document.getElementById("doicheckbutton").disabled = true;
 
+}
+
+hideDOIImage = function() {
+  document.getElementById("exampledoi").classList.add('hidden');
 }
 
 
