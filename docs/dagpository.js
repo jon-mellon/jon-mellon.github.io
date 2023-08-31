@@ -165,22 +165,27 @@ currentNetworkEdgeSet = function() {
     }
     currentids = network.body.nodeIndices;
     currentvars = [];
+    currentparents = [];
     for (var i = 0; i < currentids.length; i++) {
         currentvars[i] = network.body.nodes[currentids[i]].options.label;
     }
 
     let origids = nodesView.getIds();
-
+    let origparents=  [];
     let origvars = [];
     for (var i = 0; i < origids.length; i++) {
         origvars[i] = allvars[origids[i]];
+        origparents[i] = allparents[origids[i]];
     }
+    
     combids = currentids;
     combvars = currentvars;
+    combparents = [];
     for (var i = 0; i < origids.length; i++) {
         if (!currentids.includes(origids[i])) {
             combids.push(origids[i]);
             combvars.push(origvars[i]);
+            combparents.push(origparents[i]);
         }
     }
 }
@@ -212,20 +217,32 @@ showCurrentNetworkState = function() {
     let dvselectorindex = combids[combvars.indexOf(dvselector.value)];
 
     if (dvselectorindex != null) {
-        //canreachdv = reachableByNodes(dvselectorindex, currentedgeset);
         canreachdv = reachableByNodeOrParent(dvselectorindex, currentedgeset);
-
-        //dvcanreach = reachableNodesGeneral(dvselectorindex, currentedgeset);
+        canreachdv2 = reachableByNodeOrParent(dvselectorindex, edgeset);
+        canreachdv = canreachdv.concat(canreachdv2);
+        canreachdv = canreachdv.filter(onlyUnique);
+        
         dvcanreach = reachableNodeOrParent(dvselectorindex, currentedgeset);
+        dvcanreach2 = reachableNodeOrParent(dvselectorindex, edgeset);
+        dvcanreach = dvcanreach.concat(dvcanreach2);
+        dvcanreach = dvcanreach.filter(onlyUnique);
+        
     } else {
         dvcanreach = [];
         canreachdv = [];
     }
     if (ivselectorindex != null) {
-        //canreachiv = reachableByNodes(ivselectorindex, currentedgeset);
         canreachiv = reachableByNodeOrParent(ivselectorindex, currentedgeset);
-        //ivcanreach = reachableNodesGeneral(ivselectorindex, currentedgeset);  
+        canreachiv2 = reachableByNodeOrParent(ivselectorindex, edgeset);
+        canreachiv = canreachiv.concat(canreachiv2);
+        canreachiv = canreachiv.filter(onlyUnique);
+        
+        
         ivcanreach = reachableNodeOrParent(ivselectorindex, currentedgeset);
+        ivcanreach2 = reachableNodeOrParent(ivselectorindex, edgeset);
+        ivcanreach = ivcanreach.concat(ivcanreach2);
+        ivcanreach = ivcanreach.filter(onlyUnique);
+        
     } else {
         canreachiv = [];
         ivcanreach = [];
@@ -495,10 +512,28 @@ ivSelected = function() {
     attemptDAGButton();
 }
 
+
+getParent = function(nodeid) {
+  for (var i = 0; i < combids.length; i++) {
+    if(combids[i]==nodeid) {
+      return(combvars[i]);
+    }
+  }
+  return(-1);
+}
 getNodesStatus = function(cnode, iv, dv) {
     if (iv == cnode) {
         return ("independent variable");
     }
+    
+    if(typeof(cnode)!="string") {
+      if (nodes.get(cnode).parent == ivselector.value) {
+          console.log("labeled ");
+          return ("independent variable");
+      }  
+    }
+    
+    
     if (dv == cnode) {
         return ("dependent variable");
     }
@@ -567,7 +602,8 @@ updateNodeStatus = function() {
         let iv = combids[combvars.indexOf(ivselector.value)];
 
         for (var i = 0; i < combids.length; i++) {
-            nodestatus[i] = getNodesStatus(combids[i], iv = iv, dv = dv);
+            nodestatus[i] = getNodesStatus(combids[i],
+            iv = iv, dv = dv);
         }
         var confounders = [];
         for (var i = 0; i < combids.length; i++) {
@@ -602,21 +638,7 @@ updateNodeStatus = function() {
         }
     }
 
-    /*
-    
-    
-    
-    
-    
-    for (var i = 0; i < nodestatus.length; i++) {
-      if(clusterednodestemp.includes(combids[i])) {
-         
-      //!(combids[i].toString().search("cluster")==-1)
-        console.log("Marking " + combids[i] + " as irrelevant")
-        nodestatus[i] = "irrelevant";
-      }
-    }
-    */
+   
 }
 
 getAllClusters = function() {
@@ -947,10 +969,6 @@ createNetwork = function() {
         mixed: true,
     };
 
-    /*
-    filter function should return true or false
-    based on whether item in DataView satisfies a given condition.
-    */
 
     const nodesFilter = (node) => {
         if (nofilter) {
@@ -959,6 +977,23 @@ createNetwork = function() {
         if (notstarted) {
             return true;
         }
+        if(ivselector.value==node.label) {
+          return true;
+        }
+        if(dvselector.value==node.label) {
+          return true;
+        }
+        if(node.parent!=null & node.parent!="") {
+        if(ivselector.value==node.parent) {
+          return true;
+        }
+        
+        if(dvselector.value==node.parent) {
+          return true;
+        }  
+        }
+        
+        
         // temporary while testing:
         for (var i = 0; i < nodecount.length; i++) {
             var currentnodecount;
@@ -974,7 +1009,7 @@ createNetwork = function() {
                 if (nodestatus[combids.indexOf(node.id)] != "irrelevant") {
                     return true;
                 } else {
-                    //console.log("rejected for nodestatus of irrelevant: " + node.label);
+                  //  console.log("rejected for nodestatus of irrelevant: " + node.label);
                     return false;
                 }
             }
@@ -1047,27 +1082,6 @@ makeNodeCounts = function() {
 
 //// hierarchy ////
 
-/*
-hideChildren = function(nodeid) {
-
-    var parentlabel;
-    let hidethese = reachableNodesGeneral(nodeid, edgesh);
-    if (hidethese.length > 0) {
-        
-    }
-    for (var i = 0; i < nodesh.length; i++) {
-        if (nodesh[i].id == nodeid) {
-            nodesh[i].color = "#09e472";
-            parentlabel = nodesh[i].label
-        }
-        
-    }
-    hidethese.push(nodeid);
-    clusterNodes2(nodeidstocluster = hidethese, 
-      label = parentlabel, origid = nodeid);
-    updateAllClusterEdges();
-}
-*/
 
 showChildren = function(nodeid) {
 
@@ -1279,7 +1293,8 @@ getVariableHierarchy = function() {
         for (var i = 0; i < allvars.length; i++) {
             nodesh[i] = {
                 id: (i),
-                label: allvars[i]
+                label: allvars[i],
+                parent: allparents[i],
             };
         }
         items = keep.map(i => items[i]);
@@ -1291,28 +1306,9 @@ getVariableHierarchy = function() {
             };
         }
 
-        /*
-        inanyedge = function(nodeid) {
-            for (var j = 0; j < edgesh.length; j++) {
-                if (edgesh[j].from == i | edgesh[j].to == i) {
-                    return true;
-                }
-            }
-            return false;
-        }
-        */
-        
-        /*
-        for (var i = 0; i < nodesh.length; i++) {
-            if (!inanyedge(i)) {
-                hidden.push(i)
-            }
-        }
-        */
-        //draw();
+       
         getEdges();
-        // should probably get called inside getEdges
-        //createListHierarchy();
+  
 
     });
 }
@@ -1408,8 +1404,6 @@ createListHierarchy = function() {
         });
     }
     foldTopLevels();
-
-
 }
 
 nodeLabelFromId = function(id) {
@@ -1498,7 +1492,7 @@ updateFoldedList = function(component) {
     }
     if (foldeddown) {
         var run = true;
-        console.log("folded: " + component.children[0].innerText);
+        //console.log("folded: " + component.children[0].innerText);
         for (var j = 0; j < nodesh.length & run; j++) {
             if (nodesh[j].label == component.children[0].innerText) {
                 foldednodes.push(nodesh[j].id);
@@ -1509,8 +1503,8 @@ updateFoldedList = function(component) {
         if (component.children.length == 0) {
             return null;
         }
-        console.log("unfolded: ");
-        console.log(component);
+        //console.log("unfolded: ");
+        //console.log(component);
 
         if (component.children[1].children.length > 0) {
             for (var i = 0; i < component.children[1].children.length; i++) {
@@ -1535,6 +1529,14 @@ findVariableIdFromLabel = function(label) {
     for (var i = 0; i < combvars.length; i++) {
         if (combvars[i] == label) {
             return (combids[i]);
+        }
+    }
+    return (-1)
+}
+findVariableLabelFromId = function(id) {
+    for (var i = 0; i < combids.length; i++) {
+        if (combids[i] == id) {
+            return (combvars[i]);
         }
     }
     return (-1)
