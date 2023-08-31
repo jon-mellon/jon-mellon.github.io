@@ -52,7 +52,7 @@ unclusterAllNodes = function() {
   }
 }
 
-
+/*
 hideChildren = function(nodeid) {
    
     var parentlabel;
@@ -72,6 +72,7 @@ hideChildren = function(nodeid) {
       label = parentlabel, origid = nodeid);
     updateAllClusterEdges();
 }
+*/
 
 hideChildren2 = function(nodeid) {
     var parentlabel;
@@ -89,6 +90,8 @@ hideChildren2 = function(nodeid) {
       label = parentlabel, origid = nodeid);
 }
 
+
+/*
 clusterNodes = function(nodeidstocluster, label, origid) {
       let clusterid = "cluster"+(clusterednodes.length+1); 
       network.cluster({
@@ -112,6 +115,7 @@ clusterNodes = function(nodeidstocluster, label, origid) {
         label: label});
       nodesView.refresh();
 }
+*/
 
 clusterNodes2 = function(nodeidstocluster, label, origid) {
       let clusterid = "cluster"+(clusterednodes.length+1); 
@@ -669,6 +673,18 @@ getEdges = function() {
             },
             {
                DOI: "12345",
+               "x variable": "performance anxiety",
+               "y variable": "performance",
+               finding: "positive"
+            },
+            {
+               DOI: "12345",
+               "x variable": "performance",
+               "y variable": "social anxiety",
+               finding: "positive"
+            },
+            {
+               DOI: "12345",
                "x variable": "individual income tax",
                "y variable": "aggregate income tax",
                finding: "positive"
@@ -934,6 +950,9 @@ createNetwork = function() {
     */
     
     const nodesFilter = (node) => {
+      if(nofilter) {
+        return true;
+      }
       if(notstarted) {
         return true;
       }
@@ -1025,12 +1044,9 @@ makeNodeCounts = function() {
 
 //// hierarchy ////
 
+/*
 hideChildren = function(nodeid) {
-    /*
-    if (!foldednodes.includes(nodeid)) {
-        foldednodes.push(nodeid);
-    }
-    */
+
     var parentlabel;
     let hidethese = reachableNodesGeneral(nodeid, edgesh);
     if (hidethese.length > 0) {
@@ -1041,17 +1057,14 @@ hideChildren = function(nodeid) {
             nodesh[i].color = "#09e472";
             parentlabel = nodesh[i].label
         }
-        /*
-        if (hidethese.includes(i)) {
-            hidden.push(i);
-        }
-        */
+        
     }
     hidethese.push(nodeid);
-    clusterNodes(nodeidstocluster = hidethese, 
+    clusterNodes2(nodeidstocluster = hidethese, 
       label = parentlabel, origid = nodeid);
     updateAllClusterEdges();
 }
+*/
 
 showChildren = function(nodeid) {
     
@@ -1065,7 +1078,8 @@ showChildren = function(nodeid) {
         }
     }
     for (var i = 0; i < foldednodes.length; i++) {
-        hideChildren(foldednodes[i]);
+      // changed to v2 here
+        hideChildren2(foldednodes[i]);
     }
     cdeletes = [];  
     for (var i = 0; i < clusterednodes.length; i++) {
@@ -1133,6 +1147,22 @@ getVariableHierarchy = function() {
             },
            {
                "Variablename": "none",
+               Parent: ""
+            },
+            {
+               "Variablename": "anxiety",
+               Parent: ""
+            },
+            {
+               "Variablename": "performance anxiety",
+               Parent: "anxiety"
+            },
+            {
+               "Variablename": "social anxiety",
+               Parent: "anxiety"
+            },
+            {
+               "Variablename": "performance",
                Parent: ""
             },
             {
@@ -1380,6 +1410,7 @@ for (var i = 0; i < combids.length; i++) {
 }
 
 makeEdgeTwoway = function(edge) {
+    console.log("make edge twoway activated");
     network.updateEdge(edge, {arrows: {from: {enabled: true}},
     color : "purple"} )
 }
@@ -1489,4 +1520,11 @@ findVariableInOriginalNodes = function(label) {
     }
   }
   return(-1)
+}
+var nofilter = false;
+
+toggleNoFilterMode = function() {
+  nofilter = !nofilter;
+  nodesView.refresh();
+  edgesView.refresh();
 }
