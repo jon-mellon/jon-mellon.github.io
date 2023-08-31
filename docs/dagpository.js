@@ -667,6 +667,12 @@ getEdges = function() {
             },
             {
                DOI: "12345",
+               "x variable": "individual income tax",
+               "y variable": "aggregate income tax",
+               finding: "positive"
+            },
+            {
+               DOI: "12345",
                "x variable": "music",
                "y variable": "dancing",
                finding: "positive"
@@ -889,7 +895,7 @@ getEdges = function() {
         showCurrentNetworkState();
     })
 }
-
+var notstarted = true;
 createNetwork = function() {
     const nodeFilterSelector = document.getElementById("nodeFilterSelect");
     const edgeFilters = document.getElementsByName("edgesFilter");
@@ -926,6 +932,9 @@ createNetwork = function() {
     */
     
     const nodesFilter = (node) => {
+      if(notstarted) {
+        return true;
+      }
         console.log("testing filter on " + node.label     );
         // temporary while testing:
         for (var i = 0; i < nodecount.length; i++) {
@@ -997,17 +1006,21 @@ createNetwork = function() {
         nodes: nodesView,
         edges: edgesView
     });
+    console.log("network started");
     
-    
-    nodeids = nodes.getIds();
+    makeNodeCounts();
+    notstarted = false;
+    nodesView.refresh();
+}
+
+makeNodeCounts = function() {
+   nodeids = nodes.getIds();
     
     for (var i = 0; i < nodeids.length; i++) {
       nodecount[i] = (network.getConnectedNodes(nodeids[i], "from").length + 
               network.getConnectedNodes(nodeids[i], "to").length);
     }
-    nodesView.refresh();
 }
-
 
 //// hierarchy ////
 
@@ -1132,6 +1145,18 @@ getVariableHierarchy = function() {
            
             {
                "Variablename": "income",
+               Parent: ""
+            },
+            {
+               "Variablename": "individual income tax",
+               Parent: "income tax"
+            },
+            {
+               "Variablename": "aggregate income tax",
+               Parent: "income tax"
+            },
+            {
+               "Variablename": "income tax",
                Parent: ""
             },
             {
@@ -1395,6 +1420,8 @@ for (var i = 0; i < clusternodestemp.length; i++) {
 }
 
 updateFoldedList= function(component) {
+  notstarted= true;
+  nodesView.refresh();
   var foldeddown = false;
   if(component.children!=null) {
     if(component.children[0]!=null) {
@@ -1427,6 +1454,7 @@ updateFoldedList= function(component) {
       }
     }
   }
+  notstarted = false;
 }
 
 findFoldedNodes = function() {
