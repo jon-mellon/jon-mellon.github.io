@@ -1423,14 +1423,27 @@ makeEdgeTwoway = function(edge) {
 updateAllClusterEdges = function() {
   //console.log("updateAllClusterEdges called");
   var clusternodestemp = [];
+  /*
   for (var i = 0; i < clusterednodes.length; i++) {
     clusternodestemp[i] = clusterednodes[i].id;
   }
+  */
+  var clusternodestemp = getAllClusters();
+  
+
 
 for (var i = 0; i < clusternodestemp.length; i++) {
   try {
     var basenodes = network.getNodesInCluster(clusternodestemp[i]);
+  } catch(e) {
+    let sink = e;
+  }
+  try{
     var clusteredges = network.getConnectedEdges(clusternodestemp[i]);
+  } catch(e) {
+    let sink = e;
+  }
+    
     
     for (var j = 0; j < clusteredges.length; j++) {
       try {
@@ -1452,11 +1465,8 @@ for (var i = 0; i < clusternodestemp.length; i++) {
         }
         
         } catch (e) {
-          console.log(e);
+          //console.log(e);
         }
-    }
-    } catch(e2) {
-      console.log(e2);
     }
   }
 }
