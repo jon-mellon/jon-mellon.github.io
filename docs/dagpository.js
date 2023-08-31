@@ -978,7 +978,7 @@ createNetwork = function() {
     nodesView = new vis.DataView(nodes, {
         filter: nodesFilter
     });
-    const edgesView = new vis.DataView(edges, {
+    edgesView = new vis.DataView(edges, {
         filter: edgesFilter
     });
 
