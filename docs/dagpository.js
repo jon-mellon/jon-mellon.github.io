@@ -104,6 +104,7 @@ clusterNodes = function(nodeidstocluster, label, origid) {
         borderWidth: 3,
         color: "#09e472",
         label: label,
+        allowSingleNodeCluster: true,
       }});
       
       clusterednodes.push({id: clusterid,
@@ -127,6 +128,7 @@ clusterNodes2 = function(nodeidstocluster, label, origid) {
         borderWidth: 3,
         color: "#09e472",
         label: label,
+        allowSingleNodeCluster: true,
       }});
       
       clusterednodes.push({id: clusterid,
@@ -1112,6 +1114,10 @@ getVariableHierarchy = function() {
             },
             {
                "Variablename": "living in bolivia",
+               Parent: "association with bolivia"
+            },
+            {
+               "Variablename": "association with bolivia",
                Parent: ""
             },
             {
