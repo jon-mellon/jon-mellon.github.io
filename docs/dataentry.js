@@ -66,15 +66,7 @@ function DOIchecker() {
    if (doibox.value == "") {
       return null;
    }
-   if (alldois.includes(doibox.value)) {
-      // reveal retry sequence
-      DOIInfoCall(doibox.value);
-      revealPrevClaimCheck();
-
-   } else {
-      DOIInfoCall(doibox.value);
-      revealStudyCheck();
-   }
+   DOIInfoCall(doibox.value);
 }
 
 // https://docs.google.com/forms/d/e/1FAIpQLSdXgItq-zrA7Do6vOAuJmtd_nDqYFoZ3l8ypO4EQ0fUoLWA_w/viewform?usp=pp_url&entry.1535032722=test&entry.1128171251=xvar1&entry.860119781=yvar1&entry.1916574635=none&entry.1950636191=1999&entry.1246413525=2001&entry.883997836=positive&entry.756521078=QCA&entry.2108748939=person&entry.163883274=CA;GB&entry.583739099=children&entry.1778787331=120&entry.308413737=table+1(col+a)
@@ -99,10 +91,21 @@ getDOIFromCrossRef = function (doi) {
       .catch((error) => console.error("FETCH ERROR:", error));
 }
 
+showDOINotFound = function() {
+  document.getElementById("notfound").hidden = false;
+}
+hideDOINotFound = function() {
+  document.getElementById("notfound").hidden = true;
+}
+
 DOIInfoCall = function (doi) {
+    hideDOINotFound();
    if (currentenv == "offline") {
       var varpromise = new Promise((resolve, reject) => {
-         var studytemp = {
+        if(doi==98765)  {
+          reject("this DOI is not recognized");
+        } else {
+           var studytemp = {
             message: {
                author: [{
                      family: "Smith",
@@ -131,6 +134,7 @@ DOIInfoCall = function (doi) {
             }
          };
          resolve(studytemp);
+        }
       });
    } else {
       var varpromise = fetch("https://api.crossref.org/works/" + doi)
@@ -140,11 +144,15 @@ DOIInfoCall = function (doi) {
                let jsonout = response.json();
                return jsonout;
             } else {
+               console.log(response);
+               if(response.status==404) {
+                console.log("DOI not found");
+                showDOINotFound();
+               }
                throw new Error("NETWORK RESPONSE ERROR");
                // error handling here
             }
          });
-      // getDOIFromCrossRef(doi);
    }
    varpromise.then((value) => {
       studyinfo = value.message;
@@ -159,7 +167,19 @@ DOIInfoCall = function (doi) {
       var paperstring = authorstr + " (" + value.message.published["date-parts"][0][0] + ") " + value.message.title + ", " +
          value.message["container-title"][0];
       pubtext.innerHTML = paperstring;
-   });
+      
+      
+      if (alldois.includes(doi)) {
+        hideDOIImage();
+        revealPrevClaimCheck();
+      } else {
+        revealStudyCheck();
+        hideDOIImage();
+      }
+   })
+   .catch((reason) => {
+     console.error(reason);
+   })
 }
 
 
@@ -172,6 +192,10 @@ function revealColumns() {
    document.getElementById("DOI").disabled = true;
    document.getElementById("doicheckbutton").disabled = true;
 
+}
+
+hideDOIImage = function() {
+  document.getElementById("exampledoi").classList.add('hidden');
 }
 
 

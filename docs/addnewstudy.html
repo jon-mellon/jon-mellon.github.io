@@ -172,18 +172,98 @@
         .pure-button { margin: 5px 0; text-decoration: none !important; }
         .button-lg { margin: 5px 0; padding: .65em 1.6em; font-size: 105%; }
         input[type="text"] { border-radius: 0 !important; }
+        /* Popup container */
+.popup {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+/* The actual popup (appears on top) */
+.popup .popuptext {
+  visibility: hidden;
+  width: 300px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -80px;
+}
+
+/* Popup arrow */
+.popup .popuptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+.title {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+    }
+/* Toggle this class when clicking on the popup container (hide and show the popup) */
+.popup .show {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity:1 ;}
+}
     </style>
+    
     <link rel="stylesheet" href="auto-complete.css">
 
   
   </head>
 <body>
-     
-   <div style="max-width:2200px;padding:0 10px;margin:40px auto;text-align:center">
+
+
+<script>
+// When the user clicks on <div>, open the popup
+function showPopup(id) {
+  var popup = document.getElementById(id);
+  popup.classList.toggle("show");
+}
+</script>
+    <div class="title">
+    <span>Causal claim entry form: Beta Version</span>
+    <div class="row badges">
+    </div>
+  </div>
+  <div style="max-width:2200px;padding:0 10px;margin:40px auto;text-align:center">
     </div>
   <div id="message"></div>
     <input type="text" id="DOI" placeholder="Enter DOI here">
     <button onclick="DOIchecker()" id = "doicheckbutton">Check DOI</button>
+    <br>
+    <br>
+    <div id = "exampledoi">
+    <p id= "notfound" style="color:red" hidden>DOI not found.</p>
+    <p>Example of a DOI:</p>
+    <img  src="doiexample.png" alt="example of a DOI" style="width:40%; border: 2px solid">  
+    </div>
+    
+
     <p id="pubdetails" class="hidden"></p>
     <div id = "pubcheck" class="hidden">
       </br>
@@ -219,14 +299,23 @@
                 <label for="instrumental-variable">Instrumental Variable (Optional)</label>
                 <input id="instrumental-variable" type="text" name="q" placeholder="Search for instrumental variable..." style="width:100%;max-width:1200px;outline:0" onfocusout = "wipeInvalidAnswer('instrumental-variable');">
 
-  <label for="finding">Finding</label>
-  <select id="finding" name="finding" onchange = "updateClaimSubmission();"></select>                
-  
-  <label for="identification">Identification strategy</label>
+  Finding
+  <div class="popup" onclick="showPopup('findpopup')">ⓘ
+  <span class="popuptext" id="findpopup"> Can be zero (the authors claim a null finding), positive (the x variable increases the y variable) or negative the x variable decreases the y variable. Non-monotonic is when the authors claim the relationship varies in direction over the range of the x variable (e.g. u-shaped). Heterogeneous is when the relationship is positive for some subgroups and negative for others. 
+  </span>
+  </div> 
+  <select id="finding" name="finding" onchange = "updateClaimSubmission();"></select>       
+  Identification Strategy
+  <div class="popup" onclick="showPopup('identpopup')">ⓘ
+  <span class="popuptext" id="identpopup">The casual strategy used by the study. Standard regression analysis usually falls under selection–on-observables. Quasi-random assignment is for cases where there wasn't true randomization but the authors claim a variable was assigned as if it were random.
+</span>
+  </div> 
   <select id="identification" name="identification" onchange = "updateClaimSubmission();"></select>                
-  
-  
-  <label for="uoa">Primary unit of analysis (e.g. person, state, country, household etc)</label>
+  Primary unit of analysis (e.g. person, state, country, household etc)
+  <div class="popup" onclick="showPopup('uoapopup')">ⓘ
+  <span class="popuptext" id="uoapopup"> Primary unit is the main unit that the study looks at whether that is countries, state, individuals, or households.
+  </span>
+  </div> 
   <select id="uoa" name="uoa" onchange = "updateClaimSubmission();"></select>
   
     <label for="countries">Countries covered (use ctrl to select multiple)</label>

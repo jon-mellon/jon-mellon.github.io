@@ -20,9 +20,9 @@
       position: relative;
       min-width: 300px;
       max-width: 2000px;
-      min-height: 700px;
+      min-height: 900px;
       max-height: 1200px;
-      bottom: 20%;
+      bottom: 0%;
       border: 1px solid lightgray;
     }
      #mynetworkh {
@@ -146,6 +146,33 @@
 .active {
   display: none;
 }
+.invisiblecolumns {
+            display: flex;
+            justify-content: space-between;
+            height: 700px;
+            display: none;
+        }
+        .columns {
+            display: flex;
+            justify-content: space-between;
+            height: 700px;
+        }
+        .column {
+            flex: 25%;
+            overflow: auto;
+            padding: 1em;
+            border: 1px solid #000;
+            margin: 1em;
+            box-sizing: border-box;
+        }
+        .column2 {
+            flex: 75%;
+            overflow: auto;
+            padding: 1em;
+            border: 1px solid #000;
+            margin: 1em;
+            box-sizing: border-box;
+        }
   </style>
   <script>
      if(window.location.hostname=="") {
@@ -154,6 +181,10 @@
       var currentenv = "live";  
     }
   </script>
+    <script
+      type="text/javascript"
+      src="dataentry.js"
+    ></script>
    <script
       type="text/javascript"
       src="visjs-min.js"
@@ -162,7 +193,9 @@
       type="text/javascript"
       src="dagpository.js"
     ></script>
-    
+    <script src="auto-complete.js"></script>
+    <link rel="stylesheet" href="auto-complete.css">
+
     <script 
       src="https://cdn.jsdelivr.net/npm/public-google-sheets-parser?v=20230209"
     ></script>
@@ -171,17 +204,14 @@
 </head>
 <body>
   <div class="title">
-    <span>Big DAG: Beta Version</span>
+    <span>DAGpository: Beta Version</span>
     <div class="row badges">
-     
     </div>
   </div>
 
   <body>
-    <h1>Custom DAGs</h1>
-    <p>
-      Here are all the relevant causal claims listed in our dataset. 
-    </p>
+
+    
     <label hidden>
       Filter nodes
       <select id="nodeFilterSelect">
@@ -189,19 +219,21 @@
         <option value="test">test</option>
       </select>
     </label>
-    <br />
-    <br />
-    <form id="dvselector" hidden>
-      Independent variable: 
-     <select id="selectIV" onChange = "ivSelected();">
-        <option>Choose an independent variable</option>
+    
+    <form id="varselector" hidden>
+      <label for="selectIV">Independent Variable</label>
+      <input id="selectIV" type="text" name="q" placeholder="Search for independent variable..." style="width:100%;max-width:1200px;outline:0" onfocusout = "showCurrentNetworkState();" >
     </select>
     <br>
-      Depdendent variable: 
-      <select id="selectDV" onChange = "dvSelected();">
-        <option>Choose a dependent variable</option>
-    </select>
+    <label for="selectDV">Dependent Variable</label>
+    <input id="selectDV" type="text" name="q" placeholder="Search for dependent variable..." style="width:100%;max-width:1200px;outline:0" onfocusout = "showCurrentNetworkState();" hidden>
+    
     </form>
+    <button hidden id = "filterbutton"  onclick="nodesView.refresh();">Filter network</button>
+    <button hidden id = "resetbutton"  onclick="resetDVIVFilter();">Reset</button>
+    <p>
+      Here are all the relevant causal claims listed in our dataset. 
+    </p>
     <label hidden>
       Filter edges
       <div>
@@ -230,19 +262,34 @@
       </div>
       <button id = "createdagbutton" onclick="createNetwork()" disabled hidden>Create DAG</button>
     </label>
-    <button id = "resetbutton"  onclick="location.reload()" disabled>Reset</button>
-    <br />
-   
-    <div id = "networkcontainer" >
-      <div id="mynetwork"></div>
+    
+    <br/>
+    <div class="columns" id = "columnentry" >
+    <div class="column2" id="causal-network">
+      <div id = "networkcontainer" >
+        <div id="mynetwork"></div>
+      </div>
     </div>
-    <div>
-      Studies:
+    
+    <div class="column" id="add-variable">
+      <div>
+        <h2 id ="studytitle">
+          Studies
+        </h2>
+        <h3 id ="claimstudy">
+          
+        </h3>
       <br>
       <div>
         <p id="pubdetails"></p>
       </div>
     </div>
+      
+    </div>
+    
+    </div>
+
+    <h2>Variables hierarchy</h2>
     <ul id="ultest">
   
     </ul>
@@ -255,16 +302,23 @@
     var nodestatus = [];
     var allnodes = [];
     var nodesView;
-    
+    var edgesView;
+
+    var nodecount = [];
+    var nodeids = [];
     var uniquenodes = [];
     var nodeset = [];
     var edgeset = [];
+    var currentedgeset = [];
+    var currentvars = [];
     var network = null;
     var citations = [];
     
     // shared network variables
     var allvars = [];
-      
+    var allparents = ["none"];
+    var allchildren = [];
+    
     // hierarchy variables
     var networkh = null;
     var nodesViewh;
@@ -274,20 +328,35 @@
     var hidden = [];
     var foldednodes = [];
     var clusterednodes = [];
+    var currentids = [];
+    var combids = [];
+    var combvars = [];
     // html elements:
     const pubtext = document.getElementById('pubdetails');
     const resultElement = document.querySelector('.result')
     var nestedvars;
-    getVariableHierarchy();
+    
+    //var depvar = document.getElementById("selectDV");
+    var depvarautomatch = new autoComplete({
+            selector: '#selectDV',
+            minChars: 1,
+            source: matcher
+        });  
+    
+    var indvarautomatch = new autoComplete({
+            selector: '#selectIV',
+            minChars: 1,
+            source: matcher
+        });  
     
     
     var nodes;
     var edges;  
-    // CREATE VARIABLE HIERARCHY
-    
-    /*
-   
-    */
+    var dvselector = document.getElementById('selectDV');
+    var ivselector = document.getElementById('selectIV');
+    var nestedvars = document.getElementById('ultest');
+    getVariableHierarchy();
+
     </script>
    
 </body>

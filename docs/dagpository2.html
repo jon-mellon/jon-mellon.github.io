@@ -146,6 +146,33 @@
 .active {
   display: none;
 }
+.invisiblecolumns {
+            display: flex;
+            justify-content: space-between;
+            height: 500px;
+            display: none;
+        }
+        .columns {
+            display: flex;
+            justify-content: space-between;
+            height: 500px;
+        }
+        .column {
+            flex: 25%;
+            overflow: auto;
+            padding: 1em;
+            border: 1px solid #000;
+            margin: 1em;
+            box-sizing: border-box;
+        }
+        .column2 {
+            flex: 75%;
+            overflow: auto;
+            padding: 1em;
+            border: 1px solid #000;
+            margin: 1em;
+            box-sizing: border-box;
+        }
   </style>
   <script>
      if(window.location.hostname=="") {
@@ -164,7 +191,7 @@
     ></script>
     <script
       type="text/javascript"
-      src="dagpository2.js"
+      src="dagpository.js"
     ></script>
     <script src="auto-complete.js"></script>
     <link rel="stylesheet" href="auto-complete.css">
@@ -177,14 +204,17 @@
 </head>
 <body>
   <div class="title">
-    <span>Big DAG: Beta Version</span>
+    <span>DAGpository: Beta Version</span>
     <div class="row badges">
-     
     </div>
   </div>
 
   <body>
+<<<<<<< HEAD
     <h1>Custom DAGs</h1>
+=======
+
+>>>>>>> master
     
     <label hidden>
       Filter nodes
@@ -193,6 +223,7 @@
         <option value="test">test</option>
       </select>
     </label>
+<<<<<<< HEAD
     <br />
     <br />
     <form id="varselector">
@@ -206,6 +237,20 @@
     </form>
     <button id = "filterbutton"  onclick="nodesView.refresh();">Filter network</button>
     <button id = "resetbutton"  onclick="resetDVIVFilter();">Reset</button>
+=======
+    
+    <form id="varselector" hidden>
+      <label for="selectIV">Independent Variable</label>
+      <input id="selectIV" type="text" name="q" placeholder="Search for independent variable..." style="width:100%;max-width:1200px;outline:0" onfocusout = "showCurrentNetworkState();" >
+    </select>
+    <br>
+    <label for="selectDV">Dependent Variable</label>
+    <input id="selectDV" type="text" name="q" placeholder="Search for dependent variable..." style="width:100%;max-width:1200px;outline:0" onfocusout = "showCurrentNetworkState();" hidden>
+    
+    </form>
+    <button hidden id = "filterbutton"  onclick="nodesView.refresh();">Filter network</button>
+    <button hidden id = "resetbutton"  onclick="resetDVIVFilter();">Reset</button>
+>>>>>>> master
     <p>
       Here are all the relevant causal claims listed in our dataset. 
     </p>
@@ -239,17 +284,34 @@
     </label>
     
     <br/>
+<<<<<<< HEAD
    
     <div id = "networkcontainer" >
       <div id="mynetwork"></div>
+=======
+    <div class="columns" id = "columnentry" >
+    <div class="column2" id="causal-network">
+      <div id = "networkcontainer" >
+        <div id="mynetwork"></div>
+      </div>
+>>>>>>> master
     </div>
-    <div>
+    
+    <div class="column" id="add-variable">
+      <div>
       Studies:
       <br>
       <div>
         <p id="pubdetails"></p>
       </div>
     </div>
+      
+    </div>
+    
+    </div>
+
+    
+    
     <ul id="ultest">
   
     </ul>
@@ -293,7 +355,11 @@
     const pubtext = document.getElementById('pubdetails');
     const resultElement = document.querySelector('.result')
     var nestedvars;
+<<<<<<< HEAD
     getVariableHierarchy();
+=======
+    
+>>>>>>> master
     //var depvar = document.getElementById("selectDV");
     var depvarautomatch = new autoComplete({
             selector: '#selectDV',
@@ -313,6 +379,10 @@
     var dvselector = document.getElementById('selectDV');
     var ivselector = document.getElementById('selectIV');
     var nestedvars = document.getElementById('ultest');
+<<<<<<< HEAD
+=======
+    getVariableHierarchy();
+>>>>>>> master
 
     </script>
    
