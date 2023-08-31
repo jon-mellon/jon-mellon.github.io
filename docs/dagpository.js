@@ -1558,3 +1558,7 @@ toggleNoFilterMode = function() {
     nodesView.refresh();
     edgesView.refresh();
 }
+
+showFilterBoxes= function() {
+ document.getElementById("varselector").hidden = false; 
+}
