@@ -20,9 +20,9 @@
       position: relative;
       min-width: 300px;
       max-width: 2000px;
-      min-height: 700px;
+      min-height: 900px;
       max-height: 1200px;
-      bottom: 20%;
+      bottom: 0%;
       border: 1px solid lightgray;
     }
      #mynetworkh {
@@ -149,13 +149,13 @@
 .invisiblecolumns {
             display: flex;
             justify-content: space-between;
-            height: 500px;
+            height: 700px;
             display: none;
         }
         .columns {
             display: flex;
             justify-content: space-between;
-            height: 500px;
+            height: 700px;
         }
         .column {
             flex: 25%;
@@ -191,7 +191,7 @@
     ></script>
     <script
       type="text/javascript"
-      src="dagpository.js"
+      src="dagpository2.js"
     ></script>
     <script src="auto-complete.js"></script>
     <link rel="stylesheet" href="auto-complete.css">
@@ -210,11 +210,7 @@
   </div>
 
   <body>
-<<<<<<< HEAD
-    <h1>Custom DAGs</h1>
-=======
 
->>>>>>> master
     
     <label hidden>
       Filter nodes
@@ -223,23 +219,8 @@
         <option value="test">test</option>
       </select>
     </label>
-<<<<<<< HEAD
-    <br />
-    <br />
-    <form id="varselector">
-      <label for="selectIV">Independent Variable</label>
-      <input id="selectIV" type="text" name="q" placeholder="Search for independent variable..." style="width:100%;max-width:1200px;outline:0" onfocusout = "showCurrentNetworkState();">
-    </select>
-    <br>
-    <label for="selectDV">Dependent Variable</label>
-    <input id="selectDV" type="text" name="q" placeholder="Search for dependent variable..." style="width:100%;max-width:1200px;outline:0" onfocusout = "showCurrentNetworkState();">
     
-    </form>
-    <button id = "filterbutton"  onclick="nodesView.refresh();">Filter network</button>
-    <button id = "resetbutton"  onclick="resetDVIVFilter();">Reset</button>
-=======
-    
-    <form id="varselector" hidden>
+    <form id="varselector" >
       <label for="selectIV">Independent Variable</label>
       <input id="selectIV" type="text" name="q" placeholder="Search for independent variable..." style="width:100%;max-width:1200px;outline:0" onfocusout = "showCurrentNetworkState();" >
     </select>
@@ -250,7 +231,6 @@
     </form>
     <button hidden id = "filterbutton"  onclick="nodesView.refresh();">Filter network</button>
     <button hidden id = "resetbutton"  onclick="resetDVIVFilter();">Reset</button>
->>>>>>> master
     <p>
       Here are all the relevant causal claims listed in our dataset. 
     </p>
@@ -284,22 +264,21 @@
     </label>
     
     <br/>
-<<<<<<< HEAD
-   
-    <div id = "networkcontainer" >
-      <div id="mynetwork"></div>
-=======
     <div class="columns" id = "columnentry" >
     <div class="column2" id="causal-network">
       <div id = "networkcontainer" >
         <div id="mynetwork"></div>
       </div>
->>>>>>> master
     </div>
     
     <div class="column" id="add-variable">
       <div>
-      Studies:
+        <h2 id ="studytitle">
+          Studies
+        </h2>
+        <h3 id ="claimstudy">
+          
+        </h3>
       <br>
       <div>
         <p id="pubdetails"></p>
@@ -310,8 +289,7 @@
     
     </div>
 
-    
-    
+    <h2>Variables hierarchy</h2>
     <ul id="ultest">
   
     </ul>
@@ -324,6 +302,8 @@
     var nodestatus = [];
     var allnodes = [];
     var nodesView;
+    var edgesView;
+
     var nodecount = [];
     var nodeids = [];
     var uniquenodes = [];
@@ -355,11 +335,7 @@
     const pubtext = document.getElementById('pubdetails');
     const resultElement = document.querySelector('.result')
     var nestedvars;
-<<<<<<< HEAD
-    getVariableHierarchy();
-=======
     
->>>>>>> master
     //var depvar = document.getElementById("selectDV");
     var depvarautomatch = new autoComplete({
             selector: '#selectDV',
@@ -379,10 +355,7 @@
     var dvselector = document.getElementById('selectDV');
     var ivselector = document.getElementById('selectIV');
     var nestedvars = document.getElementById('ultest');
-<<<<<<< HEAD
-=======
     getVariableHierarchy();
->>>>>>> master
 
     </script>
    
