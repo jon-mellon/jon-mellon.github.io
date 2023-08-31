@@ -14,6 +14,7 @@ foldTopLevels = function() {
 
 
 
+
 DOIChecker = function(doi) {
   for (var i = 0; i < currentitems.length; i++) {
     if(currentitems[i].DOI!=null) {
@@ -88,6 +89,8 @@ hideChildren2 = function(nodeid) {
     hidethese.push(nodeid);
     clusterNodes2(nodeidstocluster = hidethese, 
       label = parentlabel, origid = nodeid);
+    updateAllClusterEdges();
+
 }
 
 
@@ -965,13 +968,13 @@ createNetwork = function() {
         }
         if(network!=null) {
           if(currentnodecount==0) {
-            console.log(node.label + " rejected for node count of 0");
+            //console.log(node.label + " rejected for node count of 0");
             return false;
           } else {
           if (nodestatus[combids.indexOf(node.id)] != "irrelevant") {
             return true;
         } else {
-            console.log("rejected for nodestatus of irrelevant: " + node.label);
+            //console.log("rejected for nodestatus of irrelevant: " + node.label);
             return false;
         }  
       }  
@@ -1095,6 +1098,8 @@ showChildren = function(nodeid) {
     for(var i = cdeletes.length-1; i >= 0; i--){
       clusterednodes.splice(cdeletes[i], 1);
     }
+    updateAllClusterEdges();
+
 }
 
 getVariableHierarchy = function() {
@@ -1410,12 +1415,13 @@ for (var i = 0; i < combids.length; i++) {
 }
 
 makeEdgeTwoway = function(edge) {
-    console.log("make edge twoway activated");
+    //console.log("make edge twoway activated");
     network.updateEdge(edge, {arrows: {from: {enabled: true}},
     color : "purple"} )
 }
 
 updateAllClusterEdges = function() {
+  //console.log("updateAllClusterEdges called");
   var clusternodestemp = [];
   for (var i = 0; i < clusterednodes.length; i++) {
     clusternodestemp[i] = clusterednodes[i].id;
