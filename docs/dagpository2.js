@@ -217,20 +217,37 @@ showCurrentNetworkState = function() {
     let dvselectorindex = combids[combvars.indexOf(dvselector.value)];
 
     if (dvselectorindex != null) {
-        //canreachdv = reachableByNodes(dvselectorindex, currentedgeset);
         canreachdv = reachableByNodeOrParent(dvselectorindex, currentedgeset);
-
-        //dvcanreach = reachableNodesGeneral(dvselectorindex, currentedgeset);
+        
+        canreachdv2 = reachableByNodeOrParent(dvselectorindex, edgeset);
+        canreachdv = canreachdv.concat(canreachdv2);
+        canreachdv = canreachdv.filter(onlyUnique);
+        
+        
         dvcanreach = reachableNodeOrParent(dvselectorindex, currentedgeset);
+        
+        dvcanreach2 = reachableNodeOrParent(dvselectorindex, edgeset);
+        dvcanreach = dvcanreach.concat(dvcanreach2);
+        dvcanreach = dvcanreach.filter(onlyUnique);
+        
     } else {
         dvcanreach = [];
         canreachdv = [];
     }
     if (ivselectorindex != null) {
-        //canreachiv = reachableByNodes(ivselectorindex, currentedgeset);
         canreachiv = reachableByNodeOrParent(ivselectorindex, currentedgeset);
-        //ivcanreach = reachableNodesGeneral(ivselectorindex, currentedgeset);  
+        
+        canreachiv2 = reachableByNodeOrParent(ivselectorindex, edgeset);
+        canreachiv = canreachiv.concat(canreachiv2);
+        canreachiv = canreachiv.filter(onlyUnique);
+        
+        
         ivcanreach = reachableNodeOrParent(ivselectorindex, currentedgeset);
+        
+        ivcanreach2 = reachableNodeOrParent(ivselectorindex, edgeset);
+        ivcanreach = ivcanreach.concat(ivcanreach2);
+        ivcanreach = ivcanreach.filter(onlyUnique);
+        
     } else {
         canreachiv = [];
         ivcanreach = [];
@@ -971,7 +988,7 @@ createNetwork = function() {
         if(dvselector.value==node.label) {
           return true;
         }
-        if(node.parent!=null) {
+        if(node.parent!=null & node.parent!="") {
         if(ivselector.value==node.parent) {
           return true;
         }
