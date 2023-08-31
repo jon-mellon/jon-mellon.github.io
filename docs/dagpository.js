@@ -464,7 +464,7 @@ formatArticle = function(dat) {
     var combtitle = "• " + authorlist + " (" + year + ") \"" +
         title + "\"" + " " + journal + ": " + "<a href=\"" + doiurl +
         "\" target=\"_blank\">" + doiurl + "</a>\n";
-    console.log(combtitle);
+    //console.log(combtitle);
     return combtitle
 }
 
@@ -707,7 +707,7 @@ getEdges = function() {
                     DOI: "12345",
                     "x variable": "living in argentina",
                     "y variable": "tango dancing",
-                    finding: "positive"
+                    finding: "non-monotonic"
                 },
                 {
                     DOI: "12345",
@@ -814,6 +814,12 @@ getEdges = function() {
                 uniqueitems[i].color = "gray";
             }
             if (uniqueitems[i].finding == "mixed") {
+                uniqueitems[i].color = "purple";
+            }
+            if (uniqueitems[i].finding == "non-monotonic") {
+                uniqueitems[i].color = "purple";
+            }
+            if (uniqueitems[i].finding == "heterogeneous") {
                 uniqueitems[i].color = "purple";
             }
         }
@@ -935,6 +941,8 @@ createNetwork = function() {
     const edgesFilterValues = {
         positive: true,
         negative: true,
+        heterogeneous: true,
+        "non-monotonic": true,
         zero: false,
         mixed: true,
     };
