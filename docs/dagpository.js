@@ -667,6 +667,24 @@ getEdges = function() {
             },
             {
                DOI: "12345",
+               "x variable": "music",
+               "y variable": "dancing",
+               finding: "positive"
+            },
+            {
+               DOI: "12345",
+               "x variable": "living in argentina",
+               "y variable": "tango dancing",
+               finding: "positive"
+            },
+            {
+               DOI: "12345",
+               "x variable": "living in bolivia",
+               "y variable": "bolivian tango dancing",
+               finding: "positive"
+            },
+            {
+               DOI: "12345",
                "x variable": "revenue",
                "y variable": "smoking",
                finding: "positive"
@@ -980,7 +998,8 @@ createNetwork = function() {
         edges: edgesView
     });
     
-    nodeids = nodesView.getIds();
+    
+    nodeids = nodes.getIds();
     
     for (var i = 0; i < nodeids.length; i++) {
       nodecount[i] = (network.getConnectedNodes(nodeids[i], "from").length + 
@@ -1057,6 +1076,34 @@ getVariableHierarchy = function() {
             {
                "Variablename": "years of schooling",
                Parent: "education"
+            },
+             {
+               "Variablename": "music",
+               Parent: ""
+            },
+            {
+               "Variablename": "dancing",
+               Parent: ""
+            },
+              {
+               "Variablename": "tango dancing",
+               Parent: "dancing"
+            },
+            {
+               "Variablename": "bolivian tango dancing",
+               Parent: "tango dancing"
+            },
+            {
+               "Variablename": "living in argentina",
+               Parent: ""
+            },
+            {
+               "Variablename": "living in bolivia",
+               Parent: ""
+            },
+            {
+               "Variablename": "living in hawaii",
+               Parent: ""
             },
             {
                "Variablename": "snacks eaten per minute",
@@ -1392,4 +1439,21 @@ findFoldedNodes = function() {
 
 
 
-  
+findVariableIdFromLabel = function(label) {
+  for (var i = 0; i < combvars.length; i++) {
+    if(combvars[i]==label) {
+      return(combids[i]);
+    }
+  }
+  return(-1)
+}
+
+findVariableInOriginalNodes = function(label) {
+  var allnodestemp = nodes.get();
+  for (var i = 0; i < allnodestemp.length; i++) {
+    if(allnodestemp[i].label==label) {
+      return(allnodestemp[i])
+    }
+  }
+  return(-1)
+}
