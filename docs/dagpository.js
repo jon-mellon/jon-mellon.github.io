@@ -937,7 +937,6 @@ createNetwork = function() {
       if(notstarted) {
         return true;
       }
-        console.log("testing filter on " + node.label     );
         // temporary while testing:
         for (var i = 0; i < nodecount.length; i++) {
           var currentnodecount;
@@ -947,13 +946,13 @@ createNetwork = function() {
         }
         if(network!=null) {
           if(currentnodecount==0) {
-            // note the issue
+            console.log(node.label + " rejected for node count of 0");
             return false;
           } else {
           if (nodestatus[combids.indexOf(node.id)] != "irrelevant") {
             return true;
         } else {
-            console.log("Filtering out " + node.label);
+            console.log("rejected for nodestatus of irrelevant: " + node.label);
             return false;
         }  
       }  
