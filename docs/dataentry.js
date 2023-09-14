@@ -244,6 +244,7 @@ wipeInvalidAnswer = function (selector) {
       document.getElementById(selector).value = ""
    } else {
       updateClaimSubmission();
+      updateVarSubmission();
    }
 }
 
