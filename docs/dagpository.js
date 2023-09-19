@@ -366,7 +366,6 @@ getDOIFromCrossRef = function(doi) {
     if (currentenv != "offline") {
         var doipromise = fetch("https://api.crossref.org/works/" + doi)
             .then((response) => {
-                //console.log("crossref API Call");
                 if (response.ok) {
                     let jsonout = response.json();
                     return jsonout;
@@ -444,7 +443,7 @@ getAllDOIS = function() {
 fetchAllCrossRef = function() {
     var alldois = getAllDOIS();
     for (var i = 0; i < alldois.length; i++) {
-        setTimeout(getDOIFromCrossRef, 50, alldois[i])
+        setTimeout(getDOIFromCrossRef, 100, alldois[i])
     }
 }
 
