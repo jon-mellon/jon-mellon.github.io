@@ -5,10 +5,10 @@ foldTopLevels = function() {
     }
     var toggler = document.getElementsByClassName("caret");
     for (var i = 0; i < toggler.length; i++) {
-        if (toplevids.includes(toggler[i].id)) {
+        //if (toplevids.includes(toggler[i].id)) {
             toggler[i].parentElement.querySelector(".nested").classList.toggle("active");
             toggler[i].classList.toggle("caret-down");
-        }
+      //  }
     }
 }
 
@@ -218,14 +218,11 @@ showCurrentNetworkState = function() {
 
     if (dvselectorindex != null) {
         canreachdv = reachableByNodeOrParent(dvselectorindex, currentedgeset);
-        
         canreachdv2 = reachableByNodeOrParent(dvselectorindex, edgeset);
         canreachdv = canreachdv.concat(canreachdv2);
         canreachdv = canreachdv.filter(onlyUnique);
         
-        
         dvcanreach = reachableNodeOrParent(dvselectorindex, currentedgeset);
-        
         dvcanreach2 = reachableNodeOrParent(dvselectorindex, edgeset);
         dvcanreach = dvcanreach.concat(dvcanreach2);
         dvcanreach = dvcanreach.filter(onlyUnique);
@@ -236,14 +233,12 @@ showCurrentNetworkState = function() {
     }
     if (ivselectorindex != null) {
         canreachiv = reachableByNodeOrParent(ivselectorindex, currentedgeset);
-        
         canreachiv2 = reachableByNodeOrParent(ivselectorindex, edgeset);
         canreachiv = canreachiv.concat(canreachiv2);
         canreachiv = canreachiv.filter(onlyUnique);
         
         
         ivcanreach = reachableNodeOrParent(ivselectorindex, currentedgeset);
-        
         ivcanreach2 = reachableNodeOrParent(ivselectorindex, edgeset);
         ivcanreach = ivcanreach.concat(ivcanreach2);
         ivcanreach = ivcanreach.filter(onlyUnique);
@@ -371,7 +366,6 @@ getDOIFromCrossRef = function(doi) {
     if (currentenv != "offline") {
         var doipromise = fetch("https://api.crossref.org/works/" + doi)
             .then((response) => {
-                //console.log("crossref API Call");
                 if (response.ok) {
                     let jsonout = response.json();
                     return jsonout;
@@ -449,7 +443,7 @@ getAllDOIS = function() {
 fetchAllCrossRef = function() {
     var alldois = getAllDOIS();
     for (var i = 0; i < alldois.length; i++) {
-        setTimeout(getDOIFromCrossRef, 50, alldois[i])
+        setTimeout(getDOIFromCrossRef, 100, alldois[i])
     }
 }
 
@@ -1392,7 +1386,11 @@ createListHierarchy = function() {
             }
         }
     }
-
+    originnodes.sort(function(a,b) {
+      let alabel = nodeLabelFromIdh(a);
+      let blabel = nodeLabelFromIdh(b);
+      return alabel.localeCompare(blabel);
+    });
     for (var i = 0; i < originnodes.length; i++) {
         nestedvars.appendChild(createNextLevel(originnodes[i]));
     }
@@ -1410,7 +1408,13 @@ createListHierarchy = function() {
     }
     foldTopLevels();
 }
-
+nodeLabelFromIdh= function(id) {
+    for (var i = 0; i < nodesh.length; i++) {
+        if (nodesh[i].id == id) {
+            return (nodesh[i].label);
+        }
+    }
+} 
 nodeLabelFromId = function(id) {
     for (var i = 0; i < combids.length; i++) {
         if (combids[i] == id) {
@@ -1562,4 +1566,8 @@ toggleNoFilterMode = function() {
     nofilter = !nofilter;
     nodesView.refresh();
     edgesView.refresh();
+}
+
+showFilterBoxes= function() {
+ document.getElementById("varselector").hidden = false; 
 }

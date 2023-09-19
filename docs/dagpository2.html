@@ -220,9 +220,9 @@
       </select>
     </label>
     
-    <form id="varselector" >
+    <form id="varselector" hidden>
       <label for="selectIV">Independent Variable</label>
-      <input id="selectIV" type="text" name="q" placeholder="Search for independent variable..." style="width:100%;max-width:1200px;outline:0" onfocusout = "showCurrentNetworkState();" >
+      <input id="selectIV"  type="text" name="q" placeholder="Search for independent variable..." style="width:100%;max-width:1200px;outline:0" onfocusout = "showCurrentNetworkState();" >
     </select>
     <br>
     <label for="selectDV">Dependent Variable</label>
@@ -356,7 +356,8 @@
     var ivselector = document.getElementById('selectIV');
     var nestedvars = document.getElementById('ultest');
     getVariableHierarchy();
-
+    
     </script>
    
 </body>
+
