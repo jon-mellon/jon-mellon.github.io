@@ -5,10 +5,10 @@ foldTopLevels = function() {
     }
     var toggler = document.getElementsByClassName("caret");
     for (var i = 0; i < toggler.length; i++) {
-        if (toplevids.includes(toggler[i].id)) {
+        //if (toplevids.includes(toggler[i].id)) {
             toggler[i].parentElement.querySelector(".nested").classList.toggle("active");
             toggler[i].classList.toggle("caret-down");
-        }
+      //  }
     }
 }
 
