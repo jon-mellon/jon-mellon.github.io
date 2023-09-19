@@ -1386,7 +1386,11 @@ createListHierarchy = function() {
             }
         }
     }
-
+    originnodes.sort(function(a,b) {
+      let alabel = nodeLabelFromIdh(a);
+      let blabel = nodeLabelFromIdh(b);
+      return alabel.localeCompare(blabel);
+    });
     for (var i = 0; i < originnodes.length; i++) {
         nestedvars.appendChild(createNextLevel(originnodes[i]));
     }
@@ -1404,7 +1408,13 @@ createListHierarchy = function() {
     }
     foldTopLevels();
 }
-
+nodeLabelFromIdh= function(id) {
+    for (var i = 0; i < nodesh.length; i++) {
+        if (nodesh[i].id == id) {
+            return (nodesh[i].label);
+        }
+    }
+} 
 nodeLabelFromId = function(id) {
     for (var i = 0; i < combids.length; i++) {
         if (combids[i] == id) {
