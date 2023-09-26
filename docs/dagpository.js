@@ -381,12 +381,16 @@ getDOIFromCrossRef = function(doi) {
                         ]
                     },
                     URL: "www.example.com",
+                    DOI: doi,
                 }
             };
             resolve(studytemp);
+        }).then((response) =>{
+          return response;
         });
     }
     doipromise.then(data => {
+          console.log(data);
             if (!citationPresent(doi)) {
                 //data.message.DOI = data.message.DOI.toLowerCase();
                 citations.push(data.message);
@@ -779,7 +783,7 @@ getEdges = function() {
             try {
                 currentitems[i].DOI = cleanDOI(currentitems[i].DOI);
             } catch (error) {
-
+              console.log(error);
             }
 
             allnodes.push(currentitems[i]["x variable"]);
@@ -843,6 +847,7 @@ getEdges = function() {
 
                     var xvar = nodeLabelFromId(edgenodes[0]);
                     var yvar = nodeLabelFromId(edgenodes[1]);
+                    openTab("buttonviewertab", 'viewertab');
                     hideVariableHeaders();
                     document.getElementById("studytitle").innerText = "Studies";
                     document.getElementById("claimstudy").innerText = "";
@@ -942,6 +947,7 @@ createNetwork = function() {
         network = new vis.Network(container, data, options);
         
         network.on( 'selectNode', function(properties) {
+          openTab("buttonviewertab", 'viewertab');
           clearStudyText();
           showVariableHeaders();
           document.getElementById("studytitle").innerText = "Variable";
@@ -1627,4 +1633,28 @@ toggleNoFilterMode = function() {
 
 showFilterBoxes= function() {
  document.getElementById("varselector").hidden = false; 
+}
+
+
+function openTab(tabbutton, tabName) {
+  // Declare all variables
+  var i, tabcontent, tablinks;
+
+  // Get all elements with class="tabcontent" and hide them
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+
+  // Get all elements with class="tablinks" and remove the class "active"
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+
+  // Show the current tab, and add an "active" class to the button that opened the tab
+  document.getElementById(tabName).style.display = "block";
+  //evt.currentTarget.className += " active";
+  document.getElementById(tabbutton).className += " active";
+  
 }
