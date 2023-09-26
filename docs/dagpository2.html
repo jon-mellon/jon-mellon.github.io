@@ -230,6 +230,7 @@
          <div class="row badges">
          </div>
       </div>
+<<<<<<< HEAD
       <body>
          <label hidden>
             Filter nodes
@@ -316,6 +317,132 @@
                   </div>
                </div>
               </div>
+=======
+      <div>
+        <label>
+          <input type="checkbox" name="edgesFilter" value="mixed" checked />
+          <span style="color: purple">Mixed</span>
+        </label>
+      </div>
+      <div>
+        <label>
+          <input type="checkbox" name="edgesFilter" value="negative" checked />
+          <span style="color: red">Negative</span>
+        </label>
+      </div>
+      <button id = "createdagbutton" onclick="createNetwork()" disabled hidden>Create DAG</button>
+    </label>
+    
+    <br/>
+    <div class="columns" id = "columnentry" >
+    <div class="column2" id="causal-network">
+      <div id = "networkcontainer" >
+        <div id="mynetwork"></div>
+      </div>
+    </div>
+    
+    <div class="column" id="add-variable">
+      <div>
+        <h2 id ="studytitle">
+          Studies
+        </h2>
+        <h3 id ="claimstudy">
+        </h3>
+        <p id = "varname" hidden></p>
+        
+        <h4 id ="parenttitle" hidden>
+          Parent
+        </h4>
+        <p id="parentlist" hidden></p>
+        <button hidden id = "parentbutton"  onclick="foldNode()">Aggregate</button>
+
+        <h4 id ="childtitle" hidden>
+          Children
+        </h4>
+        <p id="childlist" hidden></p>
+        <button hidden id = "childbutton"  onclick="unfoldNode()">Disaggregate</button>
+      <br>
+      <div>
+        <p id="pubdetails"></p>
+      </div>
+    </div>
+      
+    </div>
+    
+    </div>
+
+    <h2>Variables hierarchy</h2>
+    <ul id="ultest">
+  
+    </ul>
+  <script>
+    // main DAG variables
+    var canreachdv = [];
+    var dvcanreach = [];
+    var canreachiv = [];
+    var ivcanreach = [];
+    var nodestatus = [];
+    var allnodes = [];
+    var nodesView;
+    var edgesView;
+
+    var nodecount = [];
+    var nodeids = [];
+    var uniquenodes = [];
+    var nodeset = [];
+    var edgeset = [];
+    var currentedgeset = [];
+    var currentvars = [];
+    var network = null;
+    var citations = [];
+    
+    // shared network variables
+    var allvars = [];
+    var allparents = ["none"];
+    var allchildren = [];
+    
+    // hierarchy variables
+    var networkh = null;
+    var nodesViewh;
+    var hedges;
+    var edgesh = [];
+    var nodesh = [];
+    var hidden = [];
+    var foldednodes = [];
+    var clusterednodes = [];
+    var currentids = [];
+    var combids = [];
+    var combvars = [];
+    // html elements:
+    const pubtext = document.getElementById('pubdetails');
+    const resultElement = document.querySelector('.result')
+    var nestedvars;
+    
+    //var depvar = document.getElementById("selectDV");
+    var depvarautomatch = new autoComplete({
+            selector: '#selectDV',
+            minChars: 1,
+            source: matcher
+        });  
+    
+    var indvarautomatch = new autoComplete({
+            selector: '#selectIV',
+            minChars: 1,
+            source: matcher
+        });  
+    
+    
+    var nodes;
+    var edges;  
+    var dvselector = document.getElementById('selectDV');
+    var ivselector = document.getElementById('selectIV');
+    var nestedvars = document.getElementById('ultest');
+    getVariableHierarchy();
+    
+    </script>
+   
+</body>
+>>>>>>> master
 
                <div id="vartab" class="tabcontent">
                   <ul id="ultest">

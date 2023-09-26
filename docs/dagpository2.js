@@ -847,7 +847,10 @@ getEdges = function() {
 
                     var xvar = nodeLabelFromId(edgenodes[0]);
                     var yvar = nodeLabelFromId(edgenodes[1]);
+<<<<<<< HEAD
                     openTab("buttonviewertab", 'viewertab');
+=======
+>>>>>>> master
                     hideVariableHeaders();
                     document.getElementById("studytitle").innerText = "Studies";
                     document.getElementById("claimstudy").innerText = "";
@@ -947,7 +950,10 @@ createNetwork = function() {
         network = new vis.Network(container, data, options);
         
         network.on( 'selectNode', function(properties) {
+<<<<<<< HEAD
           openTab("buttonviewertab", 'viewertab');
+=======
+>>>>>>> master
           clearStudyText();
           showVariableHeaders();
           document.getElementById("studytitle").innerText = "Variable";
