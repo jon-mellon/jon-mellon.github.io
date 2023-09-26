@@ -1,3 +1,28 @@
+
+showVariableHeaders = function() {
+  document.getElementById("parentlist").innerHTML = "";
+  document.getElementById("childlist").innerHTML = "";
+  document.getElementById("parenttitle").hidden = false;
+  document.getElementById("childtitle").hidden = false;
+  document.getElementById("parentlist").hidden = false;
+  document.getElementById("childlist").hidden = false;
+  document.getElementById("varname").hidden = false;
+  document.getElementById("parentbutton").hidden = true;
+  document.getElementById("childbutton").hidden = true;
+}
+
+hideVariableHeaders = function() {
+  document.getElementById("parentlist").innerHTML = "";
+  document.getElementById("childlist").innerHTML = "";
+  document.getElementById("parenttitle").hidden = true;
+  document.getElementById("childtitle").hidden = true;
+  document.getElementById("parentlist").hidden = true;
+  document.getElementById("childlist").hidden = true;
+  document.getElementById("varname").hidden = true;
+  document.getElementById("parentbutton").hidden = true;
+  document.getElementById("childbutton").hidden = true;
+}
+
 foldTopLevels = function() {
     var toplevids = [];
     for (var i = 0; i < nestedvars.children.length; i++) {
@@ -5,10 +30,10 @@ foldTopLevels = function() {
     }
     var toggler = document.getElementsByClassName("caret");
     for (var i = 0; i < toggler.length; i++) {
-        if (toplevids.includes(toggler[i].id)) {
+        //if (toplevids.includes(toggler[i].id)) {
             toggler[i].parentElement.querySelector(".nested").classList.toggle("active");
             toggler[i].classList.toggle("caret-down");
-        }
+      //  }
     }
 }
 
@@ -53,27 +78,6 @@ unclusterAllNodes = function() {
     }
 }
 
-/*
-hideChildren = function(nodeid) {
-   
-    var parentlabel;
-    let hidethese = reachableNodesGeneral(nodeid, edgesh);
-    if (hidethese.length > 0) {
-        
-    }
-    for (var i = 0; i < nodesh.length; i++) {
-        if (nodesh[i].id == nodeid) {
-            nodesh[i].color = "#09e472";
-            parentlabel = nodesh[i].label
-        }
-     
-        }
-    hidethese.push(nodeid);
-    clusterNodes(nodeidstocluster = hidethese, 
-      label = parentlabel, origid = nodeid);
-    updateAllClusterEdges();
-}
-*/
 
 hideChildren2 = function(nodeid) {
     var parentlabel;
@@ -94,31 +98,6 @@ hideChildren2 = function(nodeid) {
 }
 
 
-/*
-clusterNodes = function(nodeidstocluster, label, origid) {
-      let clusterid = "cluster"+(clusterednodes.length+1); 
-      network.cluster({
-      joinCondition(nodeOptions) {
-        if(nodeidstocluster.includes(nodeOptions.id)) {
-          return true;
-        } else {
-          return false;
-        }
-      },
-      clusterNodeProperties: {
-        id: clusterid,
-        borderWidth: 3,
-        color: "#09e472",
-        label: label,
-        allowSingleNodeCluster: true,
-      }});
-      
-      clusterednodes.push({id: clusterid,
-        origid: origid,
-        label: label});
-      nodesView.refresh();
-}
-*/
 
 clusterNodes2 = function(nodeidstocluster, label, origid) {
     let clusterid = "cluster" + (clusterednodes.length + 1);
@@ -218,14 +197,11 @@ showCurrentNetworkState = function() {
 
     if (dvselectorindex != null) {
         canreachdv = reachableByNodeOrParent(dvselectorindex, currentedgeset);
-        
         canreachdv2 = reachableByNodeOrParent(dvselectorindex, edgeset);
         canreachdv = canreachdv.concat(canreachdv2);
         canreachdv = canreachdv.filter(onlyUnique);
         
-        
         dvcanreach = reachableNodeOrParent(dvselectorindex, currentedgeset);
-        
         dvcanreach2 = reachableNodeOrParent(dvselectorindex, edgeset);
         dvcanreach = dvcanreach.concat(dvcanreach2);
         dvcanreach = dvcanreach.filter(onlyUnique);
@@ -236,14 +212,12 @@ showCurrentNetworkState = function() {
     }
     if (ivselectorindex != null) {
         canreachiv = reachableByNodeOrParent(ivselectorindex, currentedgeset);
-        
         canreachiv2 = reachableByNodeOrParent(ivselectorindex, edgeset);
         canreachiv = canreachiv.concat(canreachiv2);
         canreachiv = canreachiv.filter(onlyUnique);
         
         
         ivcanreach = reachableNodeOrParent(ivselectorindex, currentedgeset);
-        
         ivcanreach2 = reachableNodeOrParent(ivselectorindex, edgeset);
         ivcanreach = ivcanreach.concat(ivcanreach2);
         ivcanreach = ivcanreach.filter(onlyUnique);
@@ -371,7 +345,6 @@ getDOIFromCrossRef = function(doi) {
     if (currentenv != "offline") {
         var doipromise = fetch("https://api.crossref.org/works/" + doi)
             .then((response) => {
-                //console.log("crossref API Call");
                 if (response.ok) {
                     let jsonout = response.json();
                     return jsonout;
@@ -449,7 +422,7 @@ getAllDOIS = function() {
 fetchAllCrossRef = function() {
     var alldois = getAllDOIS();
     for (var i = 0; i < alldois.length; i++) {
-        setTimeout(getDOIFromCrossRef, 50, alldois[i])
+        setTimeout(getDOIFromCrossRef, 100, alldois[i])
     }
 }
 
@@ -533,7 +506,6 @@ getNodesStatus = function(cnode, iv, dv) {
     
     if(typeof(cnode)!="string") {
       if (nodes.get(cnode).parent == ivselector.value) {
-          console.log("labeled ");
           return ("independent variable");
       }  
     }
@@ -870,7 +842,12 @@ getEdges = function() {
 
                     var xvar = nodeLabelFromId(edgenodes[0]);
                     var yvar = nodeLabelFromId(edgenodes[1]);
-                    let studytitle = xvar + " 🡒 " + yvar
+                    hideVariableHeaders();
+                    document.getElementById("studytitle").innerText = "Studies";
+                    document.getElementById("claimstudy").innerText = "";
+                    clearStudyText();
+
+                    let studytitle = xvar + " 🡒 " + yvar;
 
                     document.getElementById("claimstudy").innerText = studytitle;
 
@@ -960,8 +937,49 @@ createNetwork = function() {
 
     function startNetwork(data) {
         const container = document.getElementById("mynetwork");
-        const options = {};
+        const options = {interaction:{ selectConnectedEdges: false}};
         network = new vis.Network(container, data, options);
+        
+        network.on( 'selectNode', function(properties) {
+          clearStudyText();
+          showVariableHeaders();
+          document.getElementById("studytitle").innerText = "Variable";
+          document.getElementById("claimstudy").innerText = "";
+          
+          
+          document.getElementById("varname").innerText = nodeLabelFromId(properties.nodes);
+
+           for (var i = 0; i < allvars.length; i++) {
+             if(allvars[i]==nodeLabelFromId(properties.nodes) ) {
+               console.log(allvars[i]);
+               console.log(allparents[i]);
+               //console.log(allchildren[i]);
+               var childtext = "";
+               console.log(properties);
+               if(properties.nodes[0].toString().includes("cluster")) {
+                for (var j = 0; j < allchildren[i].length; j++) {
+                   childtext = childtext + "• " + allchildren[i][j] + "\n";
+                }  
+                document.getElementById("childlist").innerText = childtext;
+                if(allchildren[i].length>0) {
+                 document.getElementById("childbutton").hidden = false;
+               }
+               }
+               
+               
+               
+                
+               
+               if(allparents[i]!="") {
+                document.getElementById("parentlist").innerText = "• " + allparents[i]; 
+                document.getElementById("parentlist").currentparent = allparents[i]; 
+                document.getElementById("parentbutton").hidden = false;
+               }
+               
+               
+             }
+           }
+});
     }
 
     let nodeFilterValue = "";
@@ -1087,7 +1105,7 @@ makeNodeCounts = function() {
 
 //// hierarchy ////
 
-
+/*
 showChildren = function(nodeid) {
 
     let showthese = reachableNodesGeneral(nodeid, edgesh);
@@ -1118,8 +1136,9 @@ showChildren = function(nodeid) {
         clusterednodes.splice(cdeletes[i], 1);
     }
     updateAllClusterEdges();
-
 }
+*/
+
 
 getVariableHierarchy = function() {
     if (currentenv == "offline") {
@@ -1319,20 +1338,19 @@ getVariableHierarchy = function() {
 }
 
 
-
+/*
 unclusterNodes = function(nodeid) {
     network.openCluster(nodeid);
     for (var i = 0; i < clusterednodes.length; i++) {
-        /*
+
         if(clusterednodes[i].id==nodeid) {
           clusterednodes.splice(i, 1);
         }
-        */
+        
     }
     nodesView.refresh();
 }
-
-
+*/
 
 getNextLevel = function(orid) {
     let nextlevel = [];
@@ -1380,7 +1398,46 @@ createNextLevel = function(currentorig) {
     return (toplevel);
 }
 
+foldNode = function() {
+  // find parent of current node
+  
+  // 
+  var toggler = document.getElementsByClassName("caret");
+  for (i = 0; i < toggler.length; i++) {
+    //let tempid = Number(toggler[i].id.replace("node", ""));
+    //let tempid = toggler[i].id;
+    if(toggler[i].innerHTML==document.getElementById("parentlist").currentparent) {
+      if(toggler[i].className!="caret caret-down") {
+        toggler[i].classList.toggle("caret-down");
+      }
+      if(toggler[i].parentElement.querySelector(".nested").classList[1]!='active') {
+        toggler[i].parentElement.querySelector(".nested").classList.toggle("active");  
+      }
+    }
+  }
+  showCurrentNetworkState();
+  hideVariableHeaders();
+}
 
+
+unfoldNode = function() {
+  var toggler = document.getElementsByClassName("caret");
+
+  for (i = 0; i < toggler.length; i++) {
+    //let tempid = Number(toggler[i].id.replace("node", ""));
+    //let tempid = toggler[i].id;
+    if(toggler[i].innerHTML==document.getElementById("varname").innerHTML) {
+      if(toggler[i].className=="caret caret-down") {
+        toggler[i].classList.toggle("caret-down");
+      }
+      if(toggler[i].parentElement.querySelector(".nested").classList[1]=='active') {
+        toggler[i].parentElement.querySelector(".nested").classList.toggle("active");  
+      }
+    }
+  }
+  showCurrentNetworkState();
+  hideVariableHeaders();
+}
 
 createListHierarchy = function() {
     var originnodes = [];
@@ -1392,7 +1449,11 @@ createListHierarchy = function() {
             }
         }
     }
-
+    originnodes.sort(function(a,b) {
+      let alabel = nodeLabelFromIdh(a);
+      let blabel = nodeLabelFromIdh(b);
+      return alabel.localeCompare(blabel);
+    });
     for (var i = 0; i < originnodes.length; i++) {
         nestedvars.appendChild(createNextLevel(originnodes[i]));
     }
@@ -1410,7 +1471,13 @@ createListHierarchy = function() {
     }
     foldTopLevels();
 }
-
+nodeLabelFromIdh= function(id) {
+    for (var i = 0; i < nodesh.length; i++) {
+        if (nodesh[i].id == id) {
+            return (nodesh[i].label);
+        }
+    }
+} 
 nodeLabelFromId = function(id) {
     for (var i = 0; i < combids.length; i++) {
         if (combids[i] == id) {
@@ -1432,13 +1499,8 @@ makeEdgeTwoway = function(edge) {
 }
 
 updateAllClusterEdges = function() {
-    //console.log("updateAllClusterEdges called");
     var clusternodestemp = [];
-    /*
-    for (var i = 0; i < clusterednodes.length; i++) {
-      clusternodestemp[i] = clusterednodes[i].id;
-    }
-    */
+  
     var clusternodestemp = getAllClusters();
 
 
@@ -1476,7 +1538,7 @@ updateAllClusterEdges = function() {
                 }
 
             } catch (e) {
-                //console.log(e);
+              
             }
         }
     }
@@ -1508,9 +1570,7 @@ updateFoldedList = function(component) {
         if (component.children.length == 0) {
             return null;
         }
-        //console.log("unfolded: ");
-        //console.log(component);
-
+        
         if (component.children[1].children.length > 0) {
             for (var i = 0; i < component.children[1].children.length; i++) {
                 updateFoldedList(component.children[1].children[i]);
@@ -1562,4 +1622,8 @@ toggleNoFilterMode = function() {
     nofilter = !nofilter;
     nodesView.refresh();
     edgesView.refresh();
+}
+
+showFilterBoxes= function() {
+ document.getElementById("varselector").hidden = false; 
 }

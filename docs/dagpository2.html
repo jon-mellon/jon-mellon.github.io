@@ -220,9 +220,9 @@
       </select>
     </label>
     
-    <form id="varselector" >
+    <form id="varselector" hidden>
       <label for="selectIV">Independent Variable</label>
-      <input id="selectIV" type="text" name="q" placeholder="Search for independent variable..." style="width:100%;max-width:1200px;outline:0" onfocusout = "showCurrentNetworkState();" >
+      <input id="selectIV"  type="text" name="q" placeholder="Search for independent variable..." style="width:100%;max-width:1200px;outline:0" onfocusout = "showCurrentNetworkState();" >
     </select>
     <br>
     <label for="selectDV">Dependent Variable</label>
@@ -277,8 +277,20 @@
           Studies
         </h2>
         <h3 id ="claimstudy">
-          
         </h3>
+        <p id = "varname" hidden></p>
+        
+        <h4 id ="parenttitle" hidden>
+          Parent
+        </h4>
+        <p id="parentlist" hidden></p>
+        <button hidden id = "parentbutton"  onclick="foldNode()">Aggregate</button>
+
+        <h4 id ="childtitle" hidden>
+          Children
+        </h4>
+        <p id="childlist" hidden></p>
+        <button hidden id = "childbutton"  onclick="unfoldNode()">Disaggregate</button>
       <br>
       <div>
         <p id="pubdetails"></p>
@@ -356,7 +368,8 @@
     var ivselector = document.getElementById('selectIV');
     var nestedvars = document.getElementById('ultest');
     getVariableHierarchy();
-
+    
     </script>
    
 </body>
+
