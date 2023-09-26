@@ -5,10 +5,10 @@ foldTopLevels = function() {
     }
     var toggler = document.getElementsByClassName("caret");
     for (var i = 0; i < toggler.length; i++) {
-        if (toplevids.includes(toggler[i].id)) {
+        //if (toplevids.includes(toggler[i].id)) {
             toggler[i].parentElement.querySelector(".nested").classList.toggle("active");
             toggler[i].classList.toggle("caret-down");
-        }
+      //  }
     }
 }
 
@@ -1386,7 +1386,11 @@ createListHierarchy = function() {
             }
         }
     }
-
+    originnodes.sort(function(a,b) {
+      let alabel = nodeLabelFromIdh(a);
+      let blabel = nodeLabelFromIdh(b);
+      return alabel.localeCompare(blabel);
+    });
     for (var i = 0; i < originnodes.length; i++) {
         nestedvars.appendChild(createNextLevel(originnodes[i]));
     }
@@ -1404,7 +1408,13 @@ createListHierarchy = function() {
     }
     foldTopLevels();
 }
-
+nodeLabelFromIdh= function(id) {
+    for (var i = 0; i < nodesh.length; i++) {
+        if (nodesh[i].id == id) {
+            return (nodesh[i].label);
+        }
+    }
+} 
 nodeLabelFromId = function(id) {
     for (var i = 0; i < combids.length; i++) {
         if (combids[i] == id) {
