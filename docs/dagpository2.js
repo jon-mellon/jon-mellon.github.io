@@ -422,7 +422,7 @@ getAllDOIS = function() {
 fetchAllCrossRef = function() {
     var alldois = getAllDOIS();
     for (var i = 0; i < alldois.length; i++) {
-        setTimeout(getDOIFromCrossRef, 100, alldois[i])
+        setTimeout(getDOIFromCrossRef, i * 100, alldois[i]);
     }
 }
 
