@@ -1,363 +1,392 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Big DAG</title>
-  <link data-n-head="1" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=block">
-
-  <style>
-    body {
-      min-width: 300px;
-      max-width: 2000px;
-      font-family: 'Noto Sans', Arial, sans-serif;
-      font-size: 14px;
-      padding: 0 1rem;
-      margin: 0 auto;
-      word-break: break-all;
-    }
-    #networkcontainer {
-      position: relative;
-      min-width: 300px;
-      max-width: 2000px;
-      min-height: 900px;
-      max-height: 1200px;
-      bottom: 0%;
-      border: 1px solid lightgray;
-    }
-     #mynetworkh {
-        position: absolute;
-        left: 0%;
-        top: 0%;
-        bottom: 0%;
-        right: 50%;
-        border-right: 1px solid lightgray;
-        background: white;
-     }
-     #mynetwork {
-        position: absolute;
-        bottom: 0%;
-        top: 0%;
-        left: 0%;
-        right: 0%;
-        border-right: 1px solid lightgray;
-        background: white;
-      }
-      body {
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
-          "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
-          "Helvetica Neue", sans-serif;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-      }
-      code {
-        font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-          monospace;
-      }
-
-    .row {
-      display: flex;
-    }
-
-    .title {
-      font-size: 2rem;
-      font-weight: 800;
-      margin-top: 2rem;
-      margin-bottom: 2rem;
-    }
-
-    .badges .badge {
-      display: block;
-      width: 30px;
-      height: 30px;
-    }
-
-    .badges .badge img {
-      width: 100%;
-      height: 100%;
-    }
-
-    .for-input {
-      margin-bottom: 20px;
-      text-align: left;
-    }
-
-    input[type="text"] {
-      display: flex;
-      width: 100%;
-      padding: 8px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      margin-bottom: 4px;
-    }
-
-    button.get-results {
-      padding: 8px 16px;
-      background-color: #333;
-      color: #fff;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      width: 100%;
-    }
-
-    button.get-results:hover {
-      background-color: #444;
-    }
-
-    .result {
-      margin-top: 20px;
-      white-space: break-spaces;
-    }
-    ul, #myUL {
-      list-style-type: none;
-}
-
-#myUL {
-  margin: 0;
-  padding: 0;
-}
-
-.caret {
-  cursor: pointer;
-  -webkit-user-select: none; /* Safari 3.1+ */
-  -moz-user-select: none; /* Firefox 2+ */
-  -ms-user-select: none; /* IE 10+ */
-  user-select: none;
-}
-
-.caret::before {
-  content: "\25B6";
-  color: black;
-  display: inline-block;
-  margin-right: 6px;
-}
-
-.caret-down::before {
-  -ms-transform: rotate(90deg); /* IE 9 */
-  -webkit-transform: rotate(90deg); /* Safari */'
-  transform: rotate(90deg);  
-}
-
-.nested {
-  display: block;
-}
-
-.active {
-  display: none;
-}
-.invisiblecolumns {
-            display: flex;
-            justify-content: space-between;
-            height: 700px;
-            display: none;
-        }
-        .columns {
-            display: flex;
-            justify-content: space-between;
-            height: 700px;
-        }
-        .column {
-            flex: 25%;
-            overflow: auto;
-            padding: 1em;
-            border: 1px solid #000;
-            margin: 1em;
-            box-sizing: border-box;
-        }
-        .column2 {
-            flex: 75%;
-            overflow: auto;
-            padding: 1em;
-            border: 1px solid #000;
-            margin: 1em;
-            box-sizing: border-box;
-        }
-  </style>
-  <script>
-     if(window.location.hostname=="") {
-      var currentenv = "offline";  
-    } else {
-      var currentenv = "live";  
-    }
-  </script>
-    <script
-      type="text/javascript"
-      src="dataentry.js"
-    ></script>
-   <script
-      type="text/javascript"
-      src="visjs-min.js"
-    ></script>
-    <script
-      type="text/javascript"
-      src="dagpository2.js"
-    ></script>
-    <script src="auto-complete.js"></script>
-    <link rel="stylesheet" href="auto-complete.css">
-
-    <script 
-      src="https://cdn.jsdelivr.net/npm/public-google-sheets-parser?v=20230209"
-    ></script>
-    <script>
-    </script>
-</head>
-<body>
-  <div class="title">
-    <span>DAGpository: Beta Version</span>
-    <div class="row badges">
-    </div>
-  </div>
-
-  <body>
-
-    
-    <label hidden>
-      Filter nodes
-      <select id="nodeFilterSelect">
-        <option value="">All</option>
-        <option value="test">test</option>
-      </select>
-    </label>
-    
-    <form id="varselector" hidden>
-      <label for="selectIV">Independent Variable</label>
-      <input id="selectIV"  type="text" name="q" placeholder="Search for independent variable..." style="width:100%;max-width:1200px;outline:0" onfocusout = "showCurrentNetworkState();" >
-    </select>
-    <br>
-    <label for="selectDV">Dependent Variable</label>
-    <input id="selectDV" type="text" name="q" placeholder="Search for dependent variable..." style="width:100%;max-width:1200px;outline:0" onfocusout = "showCurrentNetworkState();" hidden>
-    
-    </form>
-    <button hidden id = "filterbutton"  onclick="nodesView.refresh();">Filter network</button>
-    <button hidden id = "resetbutton"  onclick="resetDVIVFilter();">Reset</button>
-    <p>
-      Here are all the relevant causal claims listed in our dataset. 
-    </p>
-    <label hidden>
-      Filter edges
-      <div>
-        <label>
-          <input type="checkbox" name="edgesFilter" value="positive" checked />
-          <span style="color: green">Positive</span>
-        </label>
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Big DAG</title>
+      <link data-n-head="1" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=block">
+      <style>
+         body {
+         min-width: 300px;
+         max-width: 2000px;
+         font-family: 'Noto Sans', Arial, sans-serif;
+         font-size: 14px;
+         padding: 0 1rem;
+         margin: 0 auto;
+         word-break: break-all;
+         }
+         #networkcontainer {
+         position: relative;
+         min-width: 300px;
+         max-width: 2000px;
+         min-height: 900px;
+         max-height: 1200px;
+         bottom: 0%;
+         border: 1px solid lightgray;
+         }
+         #mynetworkh {
+         position: absolute;
+         left: 0%;
+         top: 0%;
+         bottom: 0%;
+         right: 50%;
+         border-right: 1px solid lightgray;
+         background: white;
+         }
+         #mynetwork {
+         position: absolute;
+         bottom: 0%;
+         top: 0%;
+         left: 0%;
+         right: 0%;
+         border-right: 1px solid lightgray;
+         background: white;
+         }
+         body {
+         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+         "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+         "Helvetica Neue", sans-serif;
+         -webkit-font-smoothing: antialiased;
+         -moz-osx-font-smoothing: grayscale;
+         }
+         code {
+         font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+         monospace;
+         }
+         .row {
+         display: flex;
+         }
+         .title {
+         font-size: 2rem;
+         font-weight: 800;
+         margin-top: 2rem;
+         margin-bottom: 2rem;
+         }
+         .badges .badge {
+         display: block;
+         width: 30px;
+         height: 30px;
+         }
+         .badges .badge img {
+         width: 100%;
+         height: 100%;
+         }
+         .for-input {
+         margin-bottom: 20px;
+         text-align: left;
+         }
+         input[type="text"] {
+         display: flex;
+         width: 100%;
+         padding: 8px;
+         border: 1px solid #ccc;
+         border-radius: 4px;
+         margin-bottom: 4px;
+         }
+         button.get-results {
+         padding: 8px 16px;
+         background-color: #333;
+         color: #fff;
+         border: none;
+         border-radius: 4px;
+         cursor: pointer;
+         width: 100%;
+         }
+         button.get-results:hover {
+         background-color: #444;
+         }
+         .result {
+         margin-top: 20px;
+         white-space: break-spaces;
+         }
+         ul, #myUL {
+         list-style-type: none;
+         }
+         #myUL {
+         margin: 0;
+         padding: 0;
+         }
+         .caret {
+         cursor: pointer;
+         -webkit-user-select: none; /* Safari 3.1+ */
+         -moz-user-select: none; /* Firefox 2+ */
+         -ms-user-select: none; /* IE 10+ */
+         user-select: none;
+         }
+         .caret::before {
+         content: "\25B6";
+         color: black;
+         display: inline-block;
+         margin-right: 6px;
+         }
+         .caret-down::before {
+         -ms-transform: rotate(90deg); /* IE 9 */
+         -webkit-transform: rotate(90deg); /* Safari */'
+         transform: rotate(90deg);  
+         }
+         .nested {
+         display: block;
+         }
+         .active {
+         display: none;
+         }
+         .invisiblecolumns {
+         display: flex;
+         justify-content: space-between;
+         height: 700px;
+         display: none;
+         }
+         .columns {
+         display: flex;
+         justify-content: space-between;
+         height: 700px;
+         }
+         .column {
+         flex: 25%;
+         overflow: auto;
+         padding: 1em;
+         border: 1px solid #000;
+         margin: 1em;
+         box-sizing: border-box;
+         }
+         .column2 {
+         flex: 75%;
+         overflow: auto;
+         padding: 1em;
+         border: 1px solid #000;
+         margin: 1em;
+         box-sizing: border-box;
+         }
+         /* Style the tab */
+         .tab {
+         overflow: hidden;
+         border: 1px solid #ccc;
+         background-color: #f1f1f1;
+         }
+         /* Style the buttons that are used to open the tab content */
+         .tab button {
+         background-color: inherit;
+         float: left;
+         border: none;
+         outline: none;
+         cursor: pointer;
+         padding: 10px 10px;
+         transition: 0.3s;
+         }
+         /* Change background color of buttons on hover */
+         .tab button:hover {
+         background-color: #ddd;
+         }
+         /* Create an active/current tablink class */
+         .tab button.active {
+         background-color: #ccc;
+         display: block
+         }
+         /* Style the tab content */
+         .tabcontent {
+         display: none;
+         padding: 6px 12px;
+         border: 1px solid #ccc;
+         border-top: none;
+         }
+         .tabcontent {
+         animation: fadeEffect 1s; /* Fading effect takes 1 second */
+         }
+         /* Go from zero to full opacity */
+         @keyframes fadeEffect {
+         from {opacity: 0;}
+         to {opacity: 1;}
+         }
+      </style>
+      <script>
+         if(window.location.hostname=="") {
+          var currentenv = "offline";  
+         } else {
+          var currentenv = "live";  
+         }
+      </script>
+      <script
+         type="text/javascript"
+         src="dataentry.js"
+         ></script>
+      <script
+         type="text/javascript"
+         src="visjs-min.js"
+         ></script>
+      <script
+         type="text/javascript"
+         src="dagpository2.js"
+         ></script>
+      <script src="auto-complete.js"></script>
+      <link rel="stylesheet" href="auto-complete.css">
+      <script 
+         src="https://cdn.jsdelivr.net/npm/public-google-sheets-parser?v=20230209"
+         ></script>
+      <script></script>
+   </head>
+   <body>
+      <div class="title">
+         <span>DAGpository: Beta Version</span>
+         <div class="row badges">
+         </div>
       </div>
-      <div>
-        <label>
-          <input type="checkbox" name="edgesFilter" value="zero" unchecked />
-          <span style="color: gray">Null</span>
-        </label>
-      </div>
-      <div>
-        <label>
-          <input type="checkbox" name="edgesFilter" value="mixed" checked />
-          <span style="color: purple">Mixed</span>
-        </label>
-      </div>
-      <div>
-        <label>
-          <input type="checkbox" name="edgesFilter" value="negative" checked />
-          <span style="color: red">Negative</span>
-        </label>
-      </div>
-      <button id = "createdagbutton" onclick="createNetwork()" disabled hidden>Create DAG</button>
-    </label>
-    
-    <br/>
-    <div class="columns" id = "columnentry" >
-    <div class="column2" id="causal-network">
-      <div id = "networkcontainer" >
-        <div id="mynetwork"></div>
-      </div>
-    </div>
-    
-    <div class="column" id="add-variable">
-      <div>
-        <h2 id ="studytitle">
-          Studies
-        </h2>
-        <h3 id ="claimstudy">
-          
-        </h3>
-      <br>
-      <div>
-        <p id="pubdetails"></p>
-      </div>
-    </div>
-      
-    </div>
-    
-    </div>
+      <body>
+         <label hidden>
+            Filter nodes
+            <select id="nodeFilterSelect">
+               <option value="">All</option>
+               <option value="test">test</option>
+            </select>
+         </label>
+         <form id="varselector" hidden>
+            <label for="selectIV">Independent Variable</label>
+            <input id="selectIV"  type="text" name="q" placeholder="Search for independent variable..." style="width:100%;max-width:1200px;outline:0" onfocusout = "showCurrentNetworkState();" >
+            </select>
+            <br>
+            <label for="selectDV">Dependent Variable</label>
+            <input id="selectDV" type="text" name="q" placeholder="Search for dependent variable..." style="width:100%;max-width:1200px;outline:0" onfocusout = "showCurrentNetworkState();" hidden>
+         </form>
+         <button hidden id = "filterbutton"  onclick="nodesView.refresh();">Filter network</button>
+         <button hidden id = "resetbutton"  onclick="resetDVIVFilter();">Reset</button>
+         <p>
+            Here are all the relevant causal claims listed in our dataset. 
+         </p>
+         <label hidden>
+            Filter edges
+            <div>
+         <label>
+         <input type="checkbox" name="edgesFilter" value="positive" checked />
+         <span style="color: green">Positive</span>
+         </label>
+         </div>
+         <div>
+            <label>
+            <input type="checkbox" name="edgesFilter" value="zero" unchecked />
+            <span style="color: gray">Null</span>
+            </label>
+         </div>
+         <div>
+            <label>
+            <input type="checkbox" name="edgesFilter" value="mixed" checked />
+            <span style="color: purple">Mixed</span>
+            </label>
+         </div>
+         <div>
+            <label>
+            <input type="checkbox" name="edgesFilter" value="negative" checked />
+            <span style="color: red">Negative</span>
+            </label>
+         </div>
+         <button id = "createdagbutton" onclick="createNetwork()" disabled hidden>Create DAG</button>
+         </label>
+         <br/>
+         <div class="columns" id = "columnentry" >
+         <div class="column2" id="causal-network">
+            <div id = "networkcontainer" >
+               <div id="mynetwork"></div>
+            </div>
+         </div>
+         <div class="column" id="add-variable">
+            <div class="tab">
+               <button id  = "buttonviewertab" class="tablinks" onclick="openTab('buttonviewertab', 'viewertab')">Viewer</button>
+               <button id  = "buttonvarhiertab" class="tablinks" onclick="openTab('buttonvarhiertab', 'vartab')">Variable hierarchy</button>
+            </div>
+            <!-- Tab content -->
+            <div id="viewertab" class="tabcontent">
+               <div>
+                  <h2 id ="studytitle">
+                     Studies
+                  </h2>
+                  <h3 id ="claimstudy">
+                  </h3>
+                  <p id = "varname" hidden></p>
+                  <h4 id ="parenttitle" hidden>
+                     Parent
+                  </h4>
+                  <p id="parentlist" hidden></p>
+                  <button hidden id = "parentbutton"  onclick="foldNode()">Aggregate</button>
+                  <h4 id ="childtitle" hidden>
+                     Children
+                  </h4>
+                  <p id="childlist" hidden></p>
+                  <button hidden id = "childbutton"  onclick="unfoldNode()">Disaggregate</button>
+                  <br>
+                  <div>
+                     <p id="pubdetails"></p>
+                  </div>
+               </div>
+              </div>
 
-    <h2>Variables hierarchy</h2>
-    <ul id="ultest">
-  
-    </ul>
-  <script>
-    // main DAG variables
-    var canreachdv = [];
-    var dvcanreach = [];
-    var canreachiv = [];
-    var ivcanreach = [];
-    var nodestatus = [];
-    var allnodes = [];
-    var nodesView;
-    var edgesView;
-
-    var nodecount = [];
-    var nodeids = [];
-    var uniquenodes = [];
-    var nodeset = [];
-    var edgeset = [];
-    var currentedgeset = [];
-    var currentvars = [];
-    var network = null;
-    var citations = [];
-    
-    // shared network variables
-    var allvars = [];
-    var allparents = ["none"];
-    var allchildren = [];
-    
-    // hierarchy variables
-    var networkh = null;
-    var nodesViewh;
-    var hedges;
-    var edgesh = [];
-    var nodesh = [];
-    var hidden = [];
-    var foldednodes = [];
-    var clusterednodes = [];
-    var currentids = [];
-    var combids = [];
-    var combvars = [];
-    // html elements:
-    const pubtext = document.getElementById('pubdetails');
-    const resultElement = document.querySelector('.result')
-    var nestedvars;
-    
-    //var depvar = document.getElementById("selectDV");
-    var depvarautomatch = new autoComplete({
-            selector: '#selectDV',
-            minChars: 1,
-            source: matcher
-        });  
-    
-    var indvarautomatch = new autoComplete({
-            selector: '#selectIV',
-            minChars: 1,
-            source: matcher
-        });  
-    
-    
-    var nodes;
-    var edges;  
-    var dvselector = document.getElementById('selectDV');
-    var ivselector = document.getElementById('selectIV');
-    var nestedvars = document.getElementById('ultest');
-    getVariableHierarchy();
-    
-    </script>
-   
-</body>
-
+               <div id="vartab" class="tabcontent">
+                  <ul id="ultest">
+                  </ul>
+               </div>
+            </div>
+         </div>
+         </div>
+         <script>
+            // main DAG variables
+            var canreachdv = [];
+            var dvcanreach = [];
+            var canreachiv = [];
+            var ivcanreach = [];
+            var nodestatus = [];
+            var allnodes = [];
+            var nodesView;
+            var edgesView;
+            
+            var nodecount = [];
+            var nodeids = [];
+            var uniquenodes = [];
+            var nodeset = [];
+            var edgeset = [];
+            var currentedgeset = [];
+            var currentvars = [];
+            var network = null;
+            var citations = [];
+            
+            // shared network variables
+            var allvars = [];
+            var allparents = ["none"];
+            var allchildren = [];
+            
+            // hierarchy variables
+            var networkh = null;
+            var nodesViewh;
+            var hedges;
+            var edgesh = [];
+            var nodesh = [];
+            var hidden = [];
+            var foldednodes = [];
+            var clusterednodes = [];
+            var currentids = [];
+            var combids = [];
+            var combvars = [];
+            // html elements:
+            const pubtext = document.getElementById('pubdetails');
+            const resultElement = document.querySelector('.result')
+            var nestedvars;
+            
+            //var depvar = document.getElementById("selectDV");
+            var depvarautomatch = new autoComplete({
+                    selector: '#selectDV',
+                    minChars: 1,
+                    source: matcher
+                });  
+            
+            var indvarautomatch = new autoComplete({
+                    selector: '#selectIV',
+                    minChars: 1,
+                    source: matcher
+                });  
+            
+            
+            var nodes;
+            var edges;  
+            var dvselector = document.getElementById('selectDV');
+            var ivselector = document.getElementById('selectIV');
+            var nestedvars = document.getElementById('ultest');
+            getVariableHierarchy();
+            
+         </script>
+   </body>
