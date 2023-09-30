@@ -83,7 +83,7 @@ unclusterAllNodes = function() {
 
     for (var i = 0; i < allclusters.length; i++) {
         try {
-            console.log("Unclustering:" + allclusters[i]);
+            //console.log("Unclustering:" + allclusters[i]);
             network.openCluster(allclusters[i]);
         } catch (e) {
 
@@ -353,7 +353,7 @@ reachableNodesGeneral = function(startnode, edgesetall) {
         for (var i = 0; i < nodestocheck.length; i++) {
             var currentnode = nodestocheck[i];
             if (!currentnode.search == null) {
-                console.log("reachablebynodes: " + currentnode);
+                //console.log("reachablebynodes: " + currentnode);
             }
             for (var j = 0; j < edgesetall.length; j++) {
                 if (edgesetall[j].from == currentnode) {
@@ -450,7 +450,7 @@ getDOIFromCrossRef = function(doi) {
         });
     }
     doipromise.then(data => {
-            console.log(data);
+            //console.log(data);
             if (!citationPresent(doi)) {
                 //data.message.DOI = data.message.DOI.toLowerCase();
                 citations.push(data.message);
@@ -468,7 +468,7 @@ getDOIFromCrossRef = function(doi) {
 }
 
 getAllDOIS = function() {
-    console.log("getAllDOIS called");
+    //console.log("getAllDOIS called");
     var alldois = [];
     for (var i = 0; i < edgeset.length; i++) {
 
@@ -711,7 +711,7 @@ updateNodeStatus = function() {
                 confounders.push(vardettemp.id);
             }
         }
-        console.log(confounders);
+        //console.log(confounders);
         if(confounders.length>0) {
         for (var i = 0; i < confounders.length; i++) {
             let cfreach = reachableNodesGeneral(confounders[i], currentedgeset);
@@ -776,7 +776,7 @@ reachableByNodes = function(startnode, edgesetall) {
         for (var i = 0; i < nodestocheck.length; i++) {
             var currentnode = nodestocheck[i];
             if (!currentnode.search == null) {
-                console.log("reachablebynodes: " + currentnode);
+                //console.log("reachablebynodes: " + currentnode);
             }
 
             for (var j = 0; j < edgesetall.length; j++) {
@@ -1135,7 +1135,7 @@ createNetwork = function() {
                 for (var i = 0; i < allvars.length; i++) {
                     if (allvars[i] == findVariableLabelFromId(properties.nodes)) {
                         var childtext = "";
-                        console.log(properties);
+                        //console.log(properties);
 
                         if (allchildren[i].length > 0) {
                             for (var j = 0; j < allchildren[i].length; j++) {
@@ -1149,7 +1149,6 @@ createNetwork = function() {
                             }
                         }
                       if (allparents[i] != "") {
-                        console.log("here");
                         document.getElementById("parentlist").innerText = "• " + allparents[i];
                         document.getElementById("parentlist").currentparent = allparents[i];
                         document.getElementById("parentbutton").hidden = false;
@@ -1621,7 +1620,7 @@ createListHierarchy = function() {
     for (i = 0; i < toggler.length; i++) {
         toggler[i].addEventListener("click", function() {
             let tempid = Number(this.id.replace("node", ""));
-            console.log(tempid);
+            //console.log(tempid);
             this.parentElement.querySelector(".nested").classList.toggle("active");
             this.classList.toggle("caret-down");
 
