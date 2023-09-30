@@ -205,23 +205,6 @@ sfb = function() {
     showFilterBoxes();
 }
 
-clusterCorrection = function() {
-
-    // ERROR: something in here breaks the variable viewer
-
-    // uncluster all nodes
-    unclusterAllNodes();
-    // read variable clustering from list
-    findFoldedNodes();
-
-    // foldednodes now contains the current state of the list
-
-    // apply variable clustering
-    clusterFoldedNodes();
-    createCurrentvardet();
-    update();
-    nodesView.refresh();
-}
 
 calculateReachabilities = function() {
       // calculate reachabilities from currentedgeset
@@ -263,11 +246,11 @@ calculateReachabilities = function() {
 showCurrentNetworkState = function() {
     // show all nodes
     blankNodeStatus();
-    nodesView.refresh();
+    //nodesView.refresh();
 
     // uncluster all nodes
     unclusterAllNodes();
-    nodesView.refresh();
+    //nodesView.refresh();
 
     // read variable clustering from list
     findFoldedNodes();
@@ -277,24 +260,21 @@ showCurrentNetworkState = function() {
     // apply variable clustering
     clusterFoldedNodes();
 
-    nodesView.refresh();
+    //nodesView.refresh();
 
     // create currentedgeset from current network
     currentNetworkEdgeSet(network);
     
-    
     calculateReachabilities();
-    
-
 
     updateNodeStatus();
-    nodesView.refresh();
+    //nodesView.refresh();
 
     makeNodeCounts();
-    nodesView.refresh();
+    //nodesView.refresh();
 
     makeNodeCounts();
-    nodesView.refresh();
+    //nodesView.refresh();
 
     updateNodeStatus();
     nodesView.refresh();
@@ -1257,7 +1237,7 @@ nodeFilterSelector.addEventListener("change", (e) => {
     refresh DataView,
     so that its filter function is re-calculated with the new variable
     */
-    nodesView.refresh();
+    //nodesView.refresh();
 });
 
 edgeFilters.forEach((filter) =>
@@ -1267,7 +1247,7 @@ edgeFilters.forEach((filter) =>
             checked
         } = e.target;
         edgesFilterValues[value] = checked;
-        edgesView.refresh();
+        //edgesView.refresh();
     })
 );
 
