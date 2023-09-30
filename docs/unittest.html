@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+   </head>
+    <script
+         type="text/javascript"
+         src="dataentry.js"
+         ></script>
+      <script
+         type="text/javascript"
+         src="visjs-min.js"
+         ></script>
+      <script
+         type="text/javascript"
+         src="dagpository.js"
+         ></script>
+         <script>
+           sameset = function(a,b) {
+       return (ycontainsx(a,b) && ycontainsx(b,a));
+     }
+      ycontainsx= function(x,y) {
+        anymatch = [];
+        for (var i = 0; i < x.length; i++) {
+          var xmatch = false;
+          for (var j = 0; j < y.length; j++) {
+            if(!xmatch) {
+              if(x[i]==y[j]) {
+                xmatch= true;
+              }
+            }
+          }
+          if(!xmatch) {
+              return(false)
+            }
+          }
+          return true;
+      }
+      
+      
+      testHarness = function(htmlelem, answer, test) {
+        var answertext ="nodes: " +  answer;  
+        var tempcol = '';
+       if(sameset(answer, test)) {
+          tempcol="green"
+        } else {
+          tempcol = 'red'
+        }
+        document.getElementById(htmlelem).innerHTML =answertext.fontcolor(tempcol);
+      }
+         </script>
+   <body>
+     
+     <h1> test edge sets</h1>
+     <h2>network 1</h2>
+      <div id= "net1"></div>
+
+     <script>
+      var nodes1 = [
+                {id:"A", label:"A"}, {id:"B", label:"B"}, {id:"C", label:"C"}
+                ];
+      var edgeset1 = [
+                    {from: "A", to:"B",arrows: "to"},
+                    {from: "B", to:"C",arrows: "to"},
+                  ];
+                  
+      var edges1 = new vis.DataSet(edgeset1);
+      var data1 = {
+        nodes: nodes1,
+        edges: edges1
+      };
+      network1 = new vis.Network(document.getElementById("net1"), data1, {});
+
+      </script>
+      
+      <h2>network 2</h2>
+      <div id= "net2"></div>
+
+     <script>
+      var nodes2 = [
+                {id:"A", label:"A"}, {id:"B", label:"B"}, {id:"C", label:"C"}
+                ];
+      var edgeset2 = [
+                    {from: "A", to:"B",arrows: "to"},
+                    {from: "B", to:"C",arrows: "to"},
+                    {from: "C", to:"A",arrows: "to"},
+                  ];
+                  
+      var edges2 = new vis.DataSet(edgeset2);
+      var data2 = {
+        nodes: nodes2,
+        edges: edges2
+      };
+      network2 = new vis.Network(document.getElementById("net2"), data2, {});
+
+      </script>
+      
+      
+     <h1>reachableByNodes</h1>
+     
+     
+     <h2>network 1</h2>
+     
+     Which nodes can reach A? Correct answer: blank
+     <br>
+     <p id = "ES1AReachoutcome"></p>
+     <script>
+     testHarness("ES1AReachoutcome", [], reachableByNodes("A", edgeset1))
+     </script>
+     
+     
+     Which nodes can reach B? Correct answer: A
+     <br>
+     <p id = "ES1BReachoutcome"></p>
+     <script>
+     testHarness("ES1BReachoutcome", ['A'], reachableByNodes("B", edgeset1))
+     </script>
+     
+     Which nodes can reach C? Correct answer: A,B
+     <br>
+     <p id = "ES1CReachoutcome"></p>
+     <script>
+     testHarness("ES1CReachoutcome", ['A', 'B'], reachableByNodes("C", edgeset1))
+     </script>
+     
+     Which nodes can reach D? Correct answer: 
+     <br>
+     <p id = "ES1DReachoutcome"></p>
+     <script>
+     testHarness("ES1DReachoutcome", [], reachableByNodes("D", edgeset1))
+     </script>
+     
+      
+     <h2>network 2</h2>
+     
+     Which nodes can reach A? Correct answer: A,B,C
+     <br>
+     <p id = "ES2AReachoutcome"></p>
+     <script>
+     testHarness("ES2AReachoutcome", ["A", "B", "C"], reachableByNodes("A", edgeset2))
+     </script>
+     
+     
+     Which nodes can reach B? Correct answer: A,B,C
+     <br>
+     <p id = "ES2BReachoutcome"></p>
+     <script>
+     testHarness("ES2BReachoutcome", ["A", "B", "C"], reachableByNodes("B", edgeset2))
+     </script>
+     
+     Which nodes can reach C? Correct answer: A,B,C
+     <br>
+     <p id = "ES2CReachoutcome"></p>
+     <script>
+     testHarness("ES2CReachoutcome", ['A', 'B', 'C'], reachableByNodes("C", edgeset2))
+     </script>
+     
+     Which nodes can reach D? Correct answer: 
+     <br>
+     <p id = "ES2DReachoutcome"></p>
+     <script>
+     testHarness("ES2DReachoutcome", [], reachableByNodes("D", edgeset2))
+     </script>
+     
+     
+     <H1>reachableByNodeOrParent</H1>
+     
+     reachableByNodeOrParent(dvselectorindex, currentedgeset, currentnetwork)
+     
+     <script>
+       
+     </script>
+     
+     
+     
+   </body>
+</html>
+     

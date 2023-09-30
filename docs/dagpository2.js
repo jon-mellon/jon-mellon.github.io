@@ -1,26 +1,41 @@
+/*
+// testing code for getNodeStatus:
+
+var dv = findVariableIdFromLabel(dvselector.value);
+var iv = findVariableIdFromLabel(ivselector.value);
+var cnode = findVariableIdFromLabel("voting for party");
+getNodeStatus(cnode, iv, dv)
+dvcanreach = reachableNodeOrParent(dv, currentedgeset);
+dvcanreach2 = reachableNodeOrParent(dv, edgeset);
+*/
+
+
 
 showVariableHeaders = function() {
-  document.getElementById("parentlist").innerHTML = "";
-  document.getElementById("childlist").innerHTML = "";
-  document.getElementById("parenttitle").hidden = false;
-  document.getElementById("childtitle").hidden = false;
-  document.getElementById("parentlist").hidden = false;
-  document.getElementById("childlist").hidden = false;
-  document.getElementById("varname").hidden = false;
-  document.getElementById("parentbutton").hidden = true;
-  document.getElementById("childbutton").hidden = true;
+    document.getElementById("parentlist").innerHTML = "";
+    document.getElementById("childlist").innerHTML = "";
+    document.getElementById("parenttitle").hidden = false;
+    document.getElementById("childtitle").hidden = false;
+    document.getElementById("parentlist").hidden = false;
+    document.getElementById("childlist").hidden = false;
+    document.getElementById("varname").hidden = false;
+    document.getElementById("parentbutton").hidden = true;
+    document.getElementById("childbutton").hidden = true;
+    document.getElementById("childrecallbutton").hidden = true;
 }
 
 hideVariableHeaders = function() {
-  document.getElementById("parentlist").innerHTML = "";
-  document.getElementById("childlist").innerHTML = "";
-  document.getElementById("parenttitle").hidden = true;
-  document.getElementById("childtitle").hidden = true;
-  document.getElementById("parentlist").hidden = true;
-  document.getElementById("childlist").hidden = true;
-  document.getElementById("varname").hidden = true;
-  document.getElementById("parentbutton").hidden = true;
-  document.getElementById("childbutton").hidden = true;
+    document.getElementById("parentlist").innerHTML = "";
+    document.getElementById("childlist").innerHTML = "";
+    document.getElementById("parenttitle").hidden = true;
+    document.getElementById("childtitle").hidden = true;
+    document.getElementById("parentlist").hidden = true;
+    document.getElementById("childlist").hidden = true;
+    document.getElementById("varname").hidden = true;
+    document.getElementById("parentbutton").hidden = true;
+    document.getElementById("childbutton").hidden = true;
+    document.getElementById("childrecallbutton").hidden = true;
+
 }
 
 foldTopLevels = function() {
@@ -30,10 +45,9 @@ foldTopLevels = function() {
     }
     var toggler = document.getElementsByClassName("caret");
     for (var i = 0; i < toggler.length; i++) {
-        //if (toplevids.includes(toggler[i].id)) {
-            toggler[i].parentElement.querySelector(".nested").classList.toggle("active");
-            toggler[i].classList.toggle("caret-down");
-      //  }
+        toggler[i].parentElement.querySelector(".nested").classList.toggle("active");
+        toggler[i].classList.toggle("caret-down");
+
     }
 }
 
@@ -65,7 +79,7 @@ setSize = function(x) {
 }
 
 unclusterAllNodes = function() {
-    let allclusters = getAllClusters();
+    let allclusters = getAllClusters(network);
 
     for (var i = 0; i < allclusters.length; i++) {
         try {
@@ -111,8 +125,8 @@ clusterNodes2 = function(nodeidstocluster, label, origid) {
         },
         clusterNodeProperties: {
             id: clusterid,
-            borderWidth: 3,
-            color: "#09e472",
+            borderWidth: 4,
+            //color: "#09e472",
             label: label,
             allowSingleNodeCluster: true,
         }
@@ -133,40 +147,78 @@ clusterFoldedNodes = function() {
     }
 }
 
-currentNetworkEdgeSet = function() {
+currentNetworkEdgeSet = function(currentnetwork) {
     // create currentedgeset from the visible network
     currentedgeset = [];
-    for (var i = 0; i < network.body.edgeIndices.length; i++) {
+    for (var i = 0; i < currentnetwork.body.edgeIndices.length; i++) {
         currentedgeset[i] = {
-            from: network.body.edges[network.body.edgeIndices[i]].fromId,
-            to: network.body.edges[network.body.edgeIndices[i]].toId
+            from: currentnetwork.body.edges[currentnetwork.body.edgeIndices[i]].fromId,
+            to: currentnetwork.body.edges[currentnetwork.body.edgeIndices[i]].toId
         };
     }
-    currentids = network.body.nodeIndices;
-    currentvars = [];
-    currentparents = [];
+    createCurrentvardet();
+}
+
+createCurrentvardet = function() {
+    currentvardet = [];
+    var currentids = network.body.nodeIndices;
     for (var i = 0; i < currentids.length; i++) {
-        currentvars[i] = network.body.nodes[currentids[i]].options.label;
+        let currentvar = network.body.nodes[currentids[i]].options.label;
+        currentvardet[i] = {
+            id: currentids[i],
+            label: currentvar,
+            status: "blank",
+            count: 1,
+            parent: getParentFromLabel(currentvar),
+        };
     }
 
     let origids = nodesView.getIds();
-    let origparents=  [];
-    let origvars = [];
+    let origvardet = [];
     for (var i = 0; i < origids.length; i++) {
-        origvars[i] = allvars[origids[i]];
-        origparents[i] = allparents[origids[i]];
+        origvardet[i] = {
+            id: origids[i],
+            label: allvars[origids[i]],
+            status: "blank",
+            count: 1,
+            parent: allparents[origids[i]],
+        };
     }
-    
+
     combids = currentids;
-    combvars = currentvars;
-    combparents = [];
+    combvardet = currentvardet;
+    //combparents = [];
     for (var i = 0; i < origids.length; i++) {
         if (!currentids.includes(origids[i])) {
             combids.push(origids[i]);
-            combvars.push(origvars[i]);
-            combparents.push(origparents[i]);
+
+            combvardet.push(origvardet[i]);
+            //combparents.push(origparents[i]);
         }
     }
+}
+
+
+sfb = function() {
+    showFilterBoxes();
+}
+
+clusterCorrection = function() {
+
+    // ERROR: something in here breaks the variable viewer
+
+    // uncluster all nodes
+    unclusterAllNodes();
+    // read variable clustering from list
+    findFoldedNodes();
+
+    // foldednodes now contains the current state of the list
+
+    // apply variable clustering
+    clusterFoldedNodes();
+    createCurrentvardet();
+    update();
+    nodesView.refresh();
 }
 
 showCurrentNetworkState = function() {
@@ -189,39 +241,38 @@ showCurrentNetworkState = function() {
     nodesView.refresh();
 
     // create currentedgeset from current network
-    currentNetworkEdgeSet();
+    currentNetworkEdgeSet(network);
 
     // calculate reachabilities from currentedgeset
-    let ivselectorindex = combids[combvars.indexOf(ivselector.value)];
-    let dvselectorindex = combids[combvars.indexOf(dvselector.value)];
+    let ivselectorindex = findVariableIdFromLabel(ivselector.value);
+    let dvselectorindex = findVariableIdFromLabel(dvselector.value);
 
     if (dvselectorindex != null) {
-        canreachdv = reachableByNodeOrParent(dvselectorindex, currentedgeset);
-        canreachdv2 = reachableByNodeOrParent(dvselectorindex, edgeset);
+        canreachdv = reachableByNodeOrParent(dvselectorindex, currentedgeset, network);
+        canreachdv2 = reachableByNodeOrParent(dvselectorindex, edgeset, network);
         canreachdv = canreachdv.concat(canreachdv2);
         canreachdv = canreachdv.filter(onlyUnique);
-        
+
         dvcanreach = reachableNodeOrParent(dvselectorindex, currentedgeset);
         dvcanreach2 = reachableNodeOrParent(dvselectorindex, edgeset);
         dvcanreach = dvcanreach.concat(dvcanreach2);
         dvcanreach = dvcanreach.filter(onlyUnique);
-        
+
     } else {
         dvcanreach = [];
         canreachdv = [];
     }
     if (ivselectorindex != null) {
-        canreachiv = reachableByNodeOrParent(ivselectorindex, currentedgeset);
-        canreachiv2 = reachableByNodeOrParent(ivselectorindex, edgeset);
+        canreachiv = reachableByNodeOrParent(ivselectorindex, currentedgeset, network);
+        canreachiv2 = reachableByNodeOrParent(ivselectorindex, edgeset, network);
         canreachiv = canreachiv.concat(canreachiv2);
         canreachiv = canreachiv.filter(onlyUnique);
-        
-        
+
         ivcanreach = reachableNodeOrParent(ivselectorindex, currentedgeset);
         ivcanreach2 = reachableNodeOrParent(ivselectorindex, edgeset);
         ivcanreach = ivcanreach.concat(ivcanreach2);
         ivcanreach = ivcanreach.filter(onlyUnique);
-        
+
     } else {
         canreachiv = [];
         ivcanreach = [];
@@ -231,54 +282,63 @@ showCurrentNetworkState = function() {
     updateNodeStatus();
     nodesView.refresh();
 
-    nodeids = nodesView.getIds();
-
-    for (var i = 0; i < nodeids.length; i++) {
-        nodecount[i] = (network.getConnectedNodes(nodeids[i], "from").length +
-            network.getConnectedNodes(nodeids[i], "to").length);
-    }
-    // apply variable filtering based on reachabilities
+    makeNodeCounts();
     nodesView.refresh();
 
-    nodeids = nodesView.getIds();
-
-    for (var i = 0; i < nodeids.length; i++) {
-        nodecount[i] = (network.getConnectedNodes(nodeids[i], "from").length +
-            network.getConnectedNodes(nodeids[i], "to").length);
-    }
-    // apply variable filtering based on reachabilities
+    makeNodeCounts();
     nodesView.refresh();
+
+    updateNodeStatus();
+    nodesView.refresh();
+    clusterFoldedNodes();
+
 }
 
 reachableNodeOrParent = function(startnode, edgesetall) {
-
+    // reachable self
     var allreachable = reachableNodesGeneral(startnode, edgesetall);
-    var allclusters = getAllClusters();
+
+
+    var allclusters = getAllClusters(network);
     for (var i = 0; i < allclusters.length; i++) {
-        if (allclusters[i].includes(startnode)) {
-            for (var j = 0; j < allclusters[i].length; j++) {
-                allreachable = allreachable.concat(reachableNodesGeneral(allclusters[i][j], edgesetall));
+        var tempclusternodes = network.getNodesInCluster(allclusters[i]);
+        if (tempclusternodes.includes(startnode)) {
+            // reachable parent
+            for (var j = 0; j < tempclusternodes.length; j++) {
+                allreachable = allreachable.concat(reachableNodesGeneral(tempclusternodes[j], edgesetall));
             }
+            allreachable = allreachable.concat(reachableNodesGeneral(allclusters[i], edgesetall));
+            
         }
     }
+    if(getParent(startnode)!="") {
+      allreachable = allreachable.concat(reachableNodesGeneral(getParent(startnode), edgesetall));  
+    }
+    
+
+    // reachable child?
+
     return (allreachable)
 }
 
-reachableByNodeOrParent = function(startnode, edgesetall) {
-
+reachableByNodeOrParent = function(startnode, edgesetall, currentnetwork) {
     var allreachable = reachableByNodes(startnode, edgesetall);
-    var allclusters = getAllClusters();
-
+    var allclusters = getAllClusters(currentnetwork);
+    
+    // if startnode is in a cluster, add any variables that nodes within that 
+    // cluster can reach to the reachable array. 
+    // Also add in any variables that the cluster itself can reach
     for (var i = 0; i < allclusters.length; i++) {
-
-        if (network.getNodesInCluster(allclusters[i]).includes(startnode)) {
-            console.log("looking in cluster: " + allclusters[i]);
-            for (var j = 0; j < network.getNodesInCluster(allclusters[i]).length; j++) {
-
-                allreachable = allreachable.concat(reachableByNodes(allclusters[i][j], edgesetall));
+        var tempnodesincluster = currentnetwork.getNodesInCluster(allclusters[i]);
+        if (tempnodesincluster.includes(startnode)) {
+            for (var j = 0; j < tempnodesincluster.length; j++) {
+                allreachable = allreachable.concat(reachableByNodes(tempnodesincluster[j], edgesetall));
             }
+            allreachable = allreachable.concat(reachableByNodes(allclusters[i], edgesetall));
         }
     }
+    allreachable = allreachable.concat(reachableByNodes(startnode, edgesetall));
+
     return (allreachable)
 }
 
@@ -385,12 +445,12 @@ getDOIFromCrossRef = function(doi) {
                 }
             };
             resolve(studytemp);
-        }).then((response) =>{
-          return response;
+        }).then((response) => {
+            return response;
         });
     }
     doipromise.then(data => {
-          console.log(data);
+            console.log(data);
             if (!citationPresent(doi)) {
                 //data.message.DOI = data.message.DOI.toLowerCase();
                 citations.push(data.message);
@@ -478,8 +538,8 @@ attemptDAGButton = function() {
     }
 }
 
+/*
 dvSelected = function() {
-
     canreachdv = reachableByNodes(allvars.indexOf(dvselector.value), edgeset)
     dvcanreach = reachableNodesGeneral(allvars.indexOf(dvselector.value), edgeset)
     updateNodeStatus();
@@ -494,68 +554,121 @@ ivSelected = function() {
     updateNodeStatus();
     attemptDAGButton();
 }
+*/
 
+getParentFromLabel = function(nodelabel) {
+    for (var i = 0; i < nodesh.length; i++) {
+        if (nodesh[i].label == nodelabel) {
+            return (nodesh[i].parent);
+        }
+    }
+    return ("");
+}
 
 getParent = function(nodeid) {
-  for (var i = 0; i < combids.length; i++) {
-    if(combids[i]==nodeid) {
-      return(combvars[i]);
+    for (var i = 0; i < combvardet.length; i++) {
+        if (combvardet[i].id == nodeid) {
+            return (combvardet[i].parent);
+        }
     }
-  }
-  return(-1);
+    return ("");
 }
-getNodesStatus = function(cnode, iv, dv) {
-    if (iv == cnode) {
-        return ("independent variable");
-    }
+
+
+ts = function(scenario = 1) {
+  if(scenario ==1 ) {
+    sfb();
+    ivselector.value = "income";
+    dvselector.value = "years of schooling";
+    showCurrentNetworkState();    
+  }
+}
+
+getNodeStatus = function(cnode, iv, dv) {
+    // cnode, iv and dv are all ids variables
     
-    if(typeof(cnode)!="string") {
-      if (nodes.get(cnode).parent == ivselector.value) {
-          return ("independent variable");
-      }  
-    }
-    
-    
-    if (dv == cnode) {
-        return ("dependent variable");
-    }
+    var ivlabel = findVariableLabelFromId(iv);
+    var dvlabel = findVariableLabelFromId(dv);
+    var clabel = findVariableLabelFromId(cnode);
+    var ivparent = getParent(iv);
+    var dvparent = getParent(dv);
+    var cparent = getParent(cnode);
     let riv = canreachiv.includes(cnode);
     let rdv = canreachdv.includes(cnode);
     let ivr = ivcanreach.includes(cnode);
     let dvr = dvcanreach.includes(cnode);
-    if ((riv & ivr) | (rdv & dvr) | (dvr & riv)) {
-        return ("loop");
-    } else {
-        if (riv & rdv) {
-            return ("confounder");
-        }
-        if (ivr & rdv) {
-            return ("mediator");
-        }
-        if (ivr & dvr) {
-            return ("collider");
-        }
-        if (ivr) {
-            return ("predicted by IV");
-        }
-        if (dvr) {
-            return ("do not adjust");
-        }
-        if (rdv) {
-            return ("DV predictor");
-        }
-        if (riv) {
-            return ("IV predictor");
-        }
-
-        return ("irrelevant");
+    
+    if (iv == cnode) {
+        makeNodeOrange(cnode);
+        return ("independent variable");
     }
+    if (cparent == ivlabel & ivlabel != "") {
+        makeNodeOrange(cnode);
+        return ("independent variable");
+    }
+    if (cparent == dvlabel & dvlabel != "") {
+        makeNodeOrange(cnode);
+        return ("dependent variable");
+    }
+    if (clabel == dvparent & clabel != "") {
+        makeNodeOrange(cnode);
+        return ("dependent variable");
+    }
+    if (typeof(cnode) != "string") {
+        
+        
+        /*
+        if(orignodes.get(dv).parent==findVariableLabelFromId(cnode)) {
+          makeNodeOrange(cnode);
+          return ("dependent variable");
+        }
+        */
+        
+    }
+
+    if (dv == cnode) {
+        makeNodeOrange(cnode);
+        return ("dependent variable");
+    }
+    if ((riv && ivr) || (rdv && dvr) || (dvr && riv)) {
+        makeNodeBoring(cnode);
+        return ("loop");
+    }
+    if (riv && rdv) {
+        makeNodeRed(cnode);
+        return ("confounder");
+    }
+    if (ivr && rdv) {
+        makeNodeBoring(cnode);
+        return ("mediator");
+    }
+    if (ivr && dvr) {
+        makeNodeBoring(cnode);
+        return ("collider");
+    }
+    if (ivr) {
+        makeNodeBoring(cnode);
+        return ("predicted by IV");
+    }
+    if (dvr) {
+        makeNodeBoring(cnode);
+        return ("do not adjust");
+    }
+    if (rdv) {
+        makeNodeBoring(cnode);
+        return ("DV predictor");
+    }
+    if (riv) {
+        makeNodeBoring(cnode);
+        return ("IV predictor");
+    }
+    makeNodeBoring(cnode);
+    return ("irrelevant");
 }
 
 blankNodeStatus = function() {
-
-    for (var i = 0; i < nodestatus.length; i++) {
-        nodestatus[i] = "blank";
+    for (var i = 0; i < combvardet.length; i++) {
+        combvardet[i].status = "blank";
     }
 }
 
@@ -570,61 +683,76 @@ updateNodeStatus = function() {
     if (dvselector.value == "" &
         ivselector.value == "") {
         blankNodeStatus();
-        if (nodestatus.length == 0) {
-            for (var i = 0; i < combids.length; i++) {
-                nodestatus[i] = "blank";
+        if (combvardet.length == 0) {
+            for (var i = 0; i < combvardet.length; i++) {
+                combvardet[i].status = "blank";
             }
         }
 
     } else {
-        nodestatus = [];
+        var dv
+        var iv;
+        if (dvselector.value != "") {
+            dv = findVariableIdFromLabel(dvselector.value);
+        }
+        if (ivselector.value != "") {
+            iv = findVariableIdFromLabel(ivselector.value);
+        }
 
 
-        let dv = combids[combvars.indexOf(dvselector.value)];
-        let iv = combids[combvars.indexOf(ivselector.value)];
-
-        for (var i = 0; i < combids.length; i++) {
-            nodestatus[i] = getNodesStatus(combids[i],
-            iv = iv, dv = dv);
+        for (var i = 0; i < combvardet.length; i++) {
+            combvardet[i].status = getNodeStatus(combvardet[i].id,
+                iv = iv, dv = dv);
         }
         var confounders = [];
-        for (var i = 0; i < combids.length; i++) {
-            if (nodestatus[i] == "confounder") {
-                confounders.push(combids[i]);
+        for (var i = 0; i < combvardet.length; i++) {
+            var vardettemp = combvardet[i];
+            if (vardettemp.status == "confounder") {
+                confounders.push(vardettemp.id);
             }
         }
+        console.log(confounders);
+        if(confounders.length>0) {
         for (var i = 0; i < confounders.length; i++) {
             let cfreach = reachableNodesGeneral(confounders[i], currentedgeset);
             for (var j = 0; j < cfreach.length; j++) {
                 if (canreachdv.includes(cfreach[j]) | canreachiv.includes(cfreach[j])) {
-                    nodestatus[cfreach[j]] = "confounder pathway";
-                }
-            }
-        }
-
-
-    }
-    var allclusters = getAllClusters();
-    var clusterednodestemp = [];
-    for (var i = 0; i < allclusters.length; i++) {
-        clusterednodestemp = clusterednodestemp.concat(network.getNodesInCluster(allclusters[i]));
-
-        for (var j = 0; j < combids.length; j++) {
-            if (combids[j] == allclusters[i]) {
-                for (var k = 0; k < nodestatus.length; k++) {
-                    if (clusterednodestemp.includes(combids[k])) {
-                        nodestatus[k] = nodestatus[j];
+                    for (var k = 0; k < combvardet.length; k++) {
+                      if(combvardet[k].id==cfreach[j]) {
+                        combvardet[k].status = "confounder pathway";
+                      }
                     }
                 }
             }
+        }  
         }
+        
+
+
     }
 
-   
+
+    var allclusters = getAllClusters(network);
+    var clusterstatus = [];
+    for (var i = 0; i < allclusters.length; i++) {
+        for (var j = 0; j < combvardet.length; j++) {
+            if (allclusters[i] == combvardet[j].id) {
+                clusterstatus[i] = combvardet[j].status;
+            }
+        }
+    }
+    for (var i = 0; i < allclusters.length; i++) {
+        var clusternodestemp = network.getNodesInCluster(allclusters[i]);
+        for (var j = 0; j < combvardet.length; j++) {
+            if (clusternodestemp.includes(combvardet[j].id)) {
+                combvardet[j].status = clusterstatus[i];
+            }
+        }
+    }
 }
 
-getAllClusters = function() {
-    let allcnodes = Object.entries(network.clustering.clusteredNodes);
+getAllClusters = function(currentnetwork) {
+    let allcnodes = Object.entries(currentnetwork.clustering.clusteredNodes);
     let allclusters = [];
     for (var i = 0; i < allcnodes.length; i++) {
         allclusters.push(allcnodes[i][1].clusterId);
@@ -681,84 +809,112 @@ getEdges = function() {
                     DOI: "12345",
                     "x variable": "education",
                     "y variable": "income",
+                    "instrument": "",
                     finding: "positive"
                 },
                 {
                     DOI: "12345",
                     "x variable": "performance anxiety",
                     "y variable": "performance",
+                    "instrument": "",
                     finding: "positive"
                 },
                 {
                     DOI: "12345",
                     "x variable": "performance",
                     "y variable": "social anxiety",
+                    "instrument": "",
                     finding: "positive"
                 },
                 {
                     DOI: "12345",
                     "x variable": "individual income tax",
                     "y variable": "aggregate income tax",
+                    "instrument": "",
                     finding: "positive"
                 },
                 {
                     DOI: "12345",
                     "x variable": "music",
                     "y variable": "dancing",
+                    "instrument": "rainfall",
                     finding: "positive"
                 },
                 {
                     DOI: "12345",
                     "x variable": "living in argentina",
                     "y variable": "tango dancing",
+                    "instrument": "",
                     finding: "non-monotonic"
                 },
                 {
                     DOI: "12345",
                     "x variable": "living in bolivia",
                     "y variable": "bolivian tango dancing",
+                    "instrument": "",
                     finding: "positive"
                 },
                 {
                     DOI: "12345",
                     "x variable": "revenue",
                     "y variable": "smoking",
+                    "instrument": "",
                     finding: "positive"
                 },
                 {
                     DOI: "12345",
                     "x variable": "education",
                     "y variable": "voting for economic right wing party",
+                    "instrument": "",
                     finding: "positive"
                 },
                 {
                     DOI: "54321",
                     "x variable": "years of schooling",
                     "y variable": "voting for economic right wing party",
+                    "instrument": "",
                     finding: "positive"
                 },
                 {
                     DOI: "243",
-                    "x variable": "years of schooling",
-                    "y variable": "snacks eaten per minute",
+                    "x variable": "snacks eaten per minute",
+                    "y variable": "years of schooling",
+                    "instrument": "",
+                    finding: "positive"
+                },
+                {
+                    DOI: "243",
+                    "x variable": "snacks eaten per minute",
+                    "y variable": "income",
+                    "instrument": "",
+                    finding: "positive"
+                },
+                {
+                    DOI: "244",
+                    "x variable": "snacks eaten per minute",
+                    "y variable": "voting for economic right wing party",
+                    "instrument": "",
                     finding: "positive"
                 },
                 {
                     DOI: "54321",
                     "y variable": "education",
                     "x variable": "voting for economic right wing party",
+                    "instrument": "",
                     finding: "positive"
                 },
                 {
                     DOI: "54321",
                     "x variable": "education",
                     "y variable": "voting for party",
+                    "instrument": "",
                     finding: "positive"
                 },
                 {
                     DOI: "6789",
                     "x variable": "smoking",
                     "y variable": "cancer",
+                    "instrument": "",
                     finding: "positive"
                 }
             ];
@@ -783,11 +939,9 @@ getEdges = function() {
             try {
                 currentitems[i].DOI = cleanDOI(currentitems[i].DOI);
             } catch (error) {
-              console.log(error);
+                console.log(error);
             }
 
-            allnodes.push(currentitems[i]["x variable"]);
-            allnodes.push(currentitems[i]["y variable"]);
             currentitems[i].edgecomb = currentitems[i]["x variable"] + "|" + currentitems[i]["y variable"];
             edgecombs[i] = currentitems[i].edgecomb;
         }
@@ -828,7 +982,7 @@ getEdges = function() {
             }
         }
 
-        uniquenodes = allnodes.filter(onlyUnique);
+
 
 
         testEdgeChoice = function(values,
@@ -845,8 +999,8 @@ getEdges = function() {
 
                     var edgenodes = network.getConnectedNodes(pubtext.edgeid)
 
-                    var xvar = nodeLabelFromId(edgenodes[0]);
-                    var yvar = nodeLabelFromId(edgenodes[1]);
+                    var xvar = findVariableLabelFromId(edgenodes[0]);
+                    var yvar = findVariableLabelFromId(edgenodes[1]);
                     openTab("buttonviewertab", 'viewertab');
                     hideVariableHeaders();
                     document.getElementById("studytitle").innerText = "Studies";
@@ -861,7 +1015,7 @@ getEdges = function() {
                     if (id.includes("cluster")) {
                         var doismulti = "";
                         var baseedgeids = network.clustering.getBaseEdges(id);
-                        var baseedges = edges.get(baseedgeids);
+                        var baseedges = origedges.get(baseedgeids);
                         for (var i = 0; i < baseedges.length; i++) {
                             if (baseedges[i].dois != null) {
                                 if (doismulti == "") {
@@ -883,13 +1037,13 @@ getEdges = function() {
 
                     } else {
                         try {
-                            let doistemp = edges.get(id).dois.split(";");
+                            let doistemp = origedges.get(id).dois.split(";");
                             doistemp = doistemp.filter(onlyUnique);
                             populateDOIList(doistemp);
                         } catch (error) {
                             clearStudyText();
                         }
-                     
+
                     }
                 }
             }
@@ -916,7 +1070,29 @@ getEdges = function() {
                 },
             };
         }
-        
+
+        for (var i = 0; i < uniqueitems.length; i++) {
+            if (uniqueitems[i]["instrument"] != "") {
+                let ivedge = {
+                    from: allvars.indexOf(uniqueitems[i]["instrument"]),
+                    to: allvars.indexOf(uniqueitems[i]["x variable"]),
+                    relation: "first-stage",
+                    arrows: "to",
+                    color: {
+                        color: "purple"
+                    },
+                    dois: uniqueitems[i].DOI,
+                    resultdocposition: uniqueitems[i].resultdocposition,
+                    chosen: {
+                        label: false,
+                        edge: testEdgeChoice
+                    },
+                };
+                edgeset.push(ivedge);
+            }
+
+        }
+
 
         createNetwork();
         fetchAllCrossRef();
@@ -929,222 +1105,193 @@ createNetwork = function() {
     const nodeFilterSelector = document.getElementById("nodeFilterSelect");
     const edgeFilters = document.getElementsByName("edgesFilter");
     // setting nodes to be the ones from the hierarchy
-    nodeset = nodesh;
-    nodes = new vis.DataSet(nodeset);
-    edges = new vis.DataSet(edgeset);
+
+    orignodes = new vis.DataSet(nodesh);
+    origedges = new vis.DataSet(edgeset);
 
     const resetit = document.getElementById('resetbutton');
-    //const filterit = document.getElementById('filterbutton');
     const dagbutton = document.getElementById('createdagbutton');
     dagbutton.disabled = true;
-    //dvselector.disabled = true;
-    //ivselector.disabled = true;
-    //resetit.disabled = false;
 
     function startNetwork(data) {
         const container = document.getElementById("mynetwork");
-        const options = {interaction:{ selectConnectedEdges: false}};
+        const options = {
+            interaction: {
+                selectConnectedEdges: false
+            }
+        };
         network = new vis.Network(container, data, options);
-        
-        network.on( 'selectNode', function(properties) {
-          openTab("buttonviewertab", 'viewertab');
-          clearStudyText();
-          showVariableHeaders();
-          document.getElementById("studytitle").innerText = "Variable";
-          document.getElementById("claimstudy").innerText = "";
-          
-          
-          document.getElementById("varname").innerText = nodeLabelFromId(properties.nodes);
 
-           for (var i = 0; i < allvars.length; i++) {
-             if(allvars[i]==nodeLabelFromId(properties.nodes) ) {
-               console.log(allvars[i]);
-               console.log(allparents[i]);
-               //console.log(allchildren[i]);
-               var childtext = "";
-               console.log(properties);
-               if(properties.nodes[0].toString().includes("cluster")) {
-                for (var j = 0; j < allchildren[i].length; j++) {
-                   childtext = childtext + "• " + allchildren[i][j] + "\n";
-                }  
-                document.getElementById("childlist").innerText = childtext;
-                if(allchildren[i].length>0) {
-                 document.getElementById("childbutton").hidden = false;
-               }
-               }
-               
-               
-               
-                
-               
-               if(allparents[i]!="") {
-                document.getElementById("parentlist").innerText = "• " + allparents[i]; 
-                document.getElementById("parentlist").currentparent = allparents[i]; 
-                document.getElementById("parentbutton").hidden = false;
-               }
-               
-               
-             }
-           }
-});
+        network.on('selectNode', function(properties) {
+                openTab("buttonviewertab", 'viewertab');
+                clearStudyText();
+                showVariableHeaders();
+                document.getElementById("studytitle").innerText = "Variable";
+                document.getElementById("claimstudy").innerText = "";
+
+
+                document.getElementById("varname").innerText = findVariableLabelFromId(properties.nodes);
+
+                for (var i = 0; i < allvars.length; i++) {
+                    if (allvars[i] == findVariableLabelFromId(properties.nodes)) {
+                        var childtext = "";
+                        console.log(properties);
+
+                        if (allchildren[i].length > 0) {
+                            for (var j = 0; j < allchildren[i].length; j++) {
+                                childtext = childtext + "• " + allchildren[i][j] + "\n";
+                            }
+                            document.getElementById("childlist").innerText = childtext;
+                            if (properties.nodes[0].toString().includes("cluster")) {
+                                document.getElementById("childbutton").hidden = false;
+                            } else {
+                                document.getElementById("childrecallbutton").hidden = false;
+                            }
+                        }
+                      if (allparents[i] != "") {
+                        console.log("here");
+                        document.getElementById("parentlist").innerText = "• " + allparents[i];
+                        document.getElementById("parentlist").currentparent = allparents[i];
+                        document.getElementById("parentbutton").hidden = false;
+                      }
+                    }
+                }
+          });
+}
+
+let nodeFilterValue = "";
+const edgesFilterValues = {
+    positive: true,
+    negative: true,
+    "first-stage": true,
+    heterogeneous: true,
+    "non-monotonic": true,
+    zero: false,
+    mixed: true,
+};
+
+
+const nodesFilter = (node) => {
+    if (nofilter) {
+        return true;
+    }
+    if (notstarted) {
+        return true;
+    }
+    if (ivselector.value == node.label) {
+        return true;
+    }
+    if (dvselector.value == node.label) {
+        return true;
+    }
+    if (node.parent != null & node.parent != "") {
+        if (ivselector.value == node.parent) {
+            return true;
+        }
+
+        if (dvselector.value == node.parent) {
+            return true;
+        }
     }
 
-    let nodeFilterValue = "";
-    const edgesFilterValues = {
-        positive: true,
-        negative: true,
-        heterogeneous: true,
-        "non-monotonic": true,
-        zero: false,
-        mixed: true,
-    };
 
-
-    const nodesFilter = (node) => {
-        if (nofilter) {
-            return true;
+    // temporary while testing:
+    for (var i = 0; i < nodecount.length; i++) {
+        var currentnodecount;
+        if (nodecount[i].id == node.id) {
+            currentnodecount = nodecount[i].count;
         }
-        if (notstarted) {
-            return true;
-        }
-        if(ivselector.value==node.label) {
-          return true;
-        }
-        if(dvselector.value==node.label) {
-          return true;
-        }
-        if(node.parent!=null & node.parent!="") {
-        if(ivselector.value==node.parent) {
-          return true;
-        }
-        
-        if(dvselector.value==node.parent) {
-          return true;
-        }  
-        }
-        
-        
-        // temporary while testing:
-        for (var i = 0; i < nodecount.length; i++) {
-            var currentnodecount;
-            if (nodeids[i] == node.id) {
-                currentnodecount = nodecount[i];
-            }
-        }
-        if (network != null) {
-            if (currentnodecount == 0) {
-                //console.log(node.label + " rejected for node count of 0");
-                return false;
-            } else {
-                if (nodestatus[combids.indexOf(node.id)] != "irrelevant") {
-                    return true;
-                } else {
-                  //  console.log("rejected for nodestatus of irrelevant: " + node.label);
-                    return false;
-                }
-            }
+    }
+    if (network != null) {
+        if (currentnodecount == 0) {
+            return false;
         } else {
-            return true;
-        }
-
-        if (nodeFilterValue === "") {
-
-        }
-        switch (nodeFilterValue) {
-            case "test":
-                return node.attribute === "test";
-            default:
+            if (typeof combvardet[combids.indexOf(node.id)] == "undefined") {
                 return true;
+            }
+            if (combvardet[combids.indexOf(node.id)].status != "irrelevant") {
+                return true;
+            } else {
+                //  console.log("rejected for nodestatus of irrelevant: " + node.label);
+                return false;
+            }
         }
-    };
+    } else {
+        return true;
+    }
 
-    const edgesFilter = (edge) => {
-        return edgesFilterValues[edge.relation];
-    };
+    if (nodeFilterValue === "") {
 
-    nodesView = new vis.DataView(nodes, {
-        filter: nodesFilter
-    });
-    edgesView = new vis.DataView(edges, {
-        filter: edgesFilter
-    });
+    }
+    switch (nodeFilterValue) {
+        case "test":
+            return node.attribute === "test";
+        default:
+            return true;
+    }
+};
 
-    nodeFilterSelector.addEventListener("change", (e) => {
-        // set new value to filter variable
-        nodeFilterValue = e.target.value;
-        /*
-        refresh DataView,
-        so that its filter function is re-calculated with the new variable
-        */
-        nodesView.refresh();
-    });
+const edgesFilter = (edge) => {
+    return edgesFilterValues[edge.relation];
+};
 
-    edgeFilters.forEach((filter) =>
-        filter.addEventListener("change", (e) => {
-            const {
-                value,
-                checked
-            } = e.target;
-            edgesFilterValues[value] = checked;
-            edgesView.refresh();
-        })
-    );
+nodesView = new vis.DataView(orignodes, {
+    filter: nodesFilter
+});
+edgesView = new vis.DataView(origedges, {
+    filter: edgesFilter
+});
 
-    startNetwork({
-        nodes: nodesView,
-        edges: edgesView
-    });
-    console.log("network started");
-
-    makeNodeCounts();
-    notstarted = false;
+nodeFilterSelector.addEventListener("change", (e) => {
+    // set new value to filter variable
+    nodeFilterValue = e.target.value;
+    /*
+    refresh DataView,
+    so that its filter function is re-calculated with the new variable
+    */
     nodesView.refresh();
+});
+
+edgeFilters.forEach((filter) =>
+    filter.addEventListener("change", (e) => {
+        const {
+            value,
+            checked
+        } = e.target;
+        edgesFilterValues[value] = checked;
+        edgesView.refresh();
+    })
+);
+
+startNetwork({
+    nodes: nodesView,
+    edges: edgesView
+});
+console.log("network started");
+
+makeNodeCounts();
+notstarted = false;
+nodesView.refresh();
 }
 
 makeNodeCounts = function() {
-    nodeids = nodes.getIds();
-
+    var nodeids = nodesView.getIds();
+    nodecount = [];
     for (var i = 0; i < nodeids.length; i++) {
-        nodecount[i] = (network.getConnectedNodes(nodeids[i], "from").length +
-            network.getConnectedNodes(nodeids[i], "to").length);
+        nodecount[i] = {
+            id: nodeids[i],
+            count: (network.getConnectedNodes(nodeids[i], "from").length +
+                network.getConnectedNodes(nodeids[i], "to").length),
+            label: findVariableLabelFromId(nodeids[i]),
+        };
     }
+
+    for (var i = 0; i < combvardet.length; i++) {
+        combvardet[i].count = (network.getConnectedNodes(combvardet[i].id, "from").length +
+            network.getConnectedNodes(combvardet[i].id, "to").length);
+    }
+
 }
-
-//// hierarchy ////
-
-/*
-showChildren = function(nodeid) {
-
-    let showthese = reachableNodesGeneral(nodeid, edgesh);
-
-
-    for (var i = 0; i < nodesh.length; i++) {
-        if (showthese.includes(i)) {
-            //hidden.push(i);
-            //hidden.splice(hidden.indexOf(i));
-        }
-    }
-    for (var i = 0; i < foldednodes.length; i++) {
-        // changed to v2 here
-        hideChildren2(foldednodes[i]);
-    }
-    cdeletes = [];
-    for (var i = 0; i < clusterednodes.length; i++) {
-        if (clusterednodes[i].origid == nodeid) {
-            cdeletes.push(i);
-            try {
-                unclusterNodes(clusterednodes[i].id)
-            } catch (error) {
-
-            }
-        }
-    }
-    for (var i = cdeletes.length - 1; i >= 0; i--) {
-        clusterednodes.splice(cdeletes[i], 1);
-    }
-    updateAllClusterEdges();
-}
-*/
 
 
 getVariableHierarchy = function() {
@@ -1160,6 +1307,14 @@ getVariableHierarchy = function() {
                 },
                 {
                     "Variablename": "dancing",
+                    Parent: ""
+                },
+                {
+                    "Variablename": "rainfall",
+                    Parent: "weather"
+                },
+                {
+                    "Variablename": "weather",
                     Parent: ""
                 },
                 {
@@ -1337,27 +1492,14 @@ getVariableHierarchy = function() {
             };
         }
 
-       
+
         getEdges();
-  
+
 
     });
 }
 
 
-/*
-unclusterNodes = function(nodeid) {
-    network.openCluster(nodeid);
-    for (var i = 0; i < clusterednodes.length; i++) {
-
-        if(clusterednodes[i].id==nodeid) {
-          clusterednodes.splice(i, 1);
-        }
-        
-    }
-    nodesView.refresh();
-}
-*/
 
 getNextLevel = function(orid) {
     let nextlevel = [];
@@ -1406,44 +1548,54 @@ createNextLevel = function(currentorig) {
 }
 
 foldNode = function() {
-  // find parent of current node
-  
-  // 
-  var toggler = document.getElementsByClassName("caret");
-  for (i = 0; i < toggler.length; i++) {
-    //let tempid = Number(toggler[i].id.replace("node", ""));
-    //let tempid = toggler[i].id;
-    if(toggler[i].innerHTML==document.getElementById("parentlist").currentparent) {
-      if(toggler[i].className!="caret caret-down") {
-        toggler[i].classList.toggle("caret-down");
-      }
-      if(toggler[i].parentElement.querySelector(".nested").classList[1]!='active') {
-        toggler[i].parentElement.querySelector(".nested").classList.toggle("active");  
-      }
+    var toggler = document.getElementsByClassName("caret");
+    for (i = 0; i < toggler.length; i++) {
+        if (toggler[i].innerHTML == document.getElementById("parentlist").currentparent) {
+            if (toggler[i].className != "caret caret-down") {
+                toggler[i].classList.toggle("caret-down");
+            }
+            if (toggler[i].parentElement.querySelector(".nested").classList[1] != 'active') {
+                toggler[i].parentElement.querySelector(".nested").classList.toggle("active");
+            }
+        }
     }
-  }
-  showCurrentNetworkState();
-  hideVariableHeaders();
+    showCurrentNetworkState();
+    hideVariableHeaders();
 }
 
 
 unfoldNode = function() {
-  var toggler = document.getElementsByClassName("caret");
+    var toggler = document.getElementsByClassName("caret");
 
-  for (i = 0; i < toggler.length; i++) {
-    //let tempid = Number(toggler[i].id.replace("node", ""));
-    //let tempid = toggler[i].id;
-    if(toggler[i].innerHTML==document.getElementById("varname").innerHTML) {
-      if(toggler[i].className=="caret caret-down") {
-        toggler[i].classList.toggle("caret-down");
-      }
-      if(toggler[i].parentElement.querySelector(".nested").classList[1]=='active') {
-        toggler[i].parentElement.querySelector(".nested").classList.toggle("active");  
-      }
+    for (i = 0; i < toggler.length; i++) {
+        if (toggler[i].innerHTML == document.getElementById("varname").innerHTML) {
+            if (toggler[i].className == "caret caret-down") {
+                toggler[i].classList.toggle("caret-down");
+            }
+            if (toggler[i].parentElement.querySelector(".nested").classList[1] == 'active') {
+                toggler[i].parentElement.querySelector(".nested").classList.toggle("active");
+            }
+        }
     }
-  }
-  showCurrentNetworkState();
-  hideVariableHeaders();
+    showCurrentNetworkState();
+    hideVariableHeaders();
+}
+
+refoldNode = function() {
+    var toggler = document.getElementsByClassName("caret");
+
+    for (i = 0; i < toggler.length; i++) {
+        if (toggler[i].innerHTML == document.getElementById("varname").innerHTML) {
+            if (toggler[i].className != "caret caret-down") {
+                toggler[i].classList.toggle("caret-down");
+            }
+            if (toggler[i].parentElement.querySelector(".nested").classList[1] != 'active') {
+                toggler[i].parentElement.querySelector(".nested").classList.toggle("active");
+            }
+        }
+    }
+    showCurrentNetworkState();
+    hideVariableHeaders();
 }
 
 createListHierarchy = function() {
@@ -1456,10 +1608,10 @@ createListHierarchy = function() {
             }
         }
     }
-    originnodes.sort(function(a,b) {
-      let alabel = nodeLabelFromIdh(a);
-      let blabel = nodeLabelFromIdh(b);
-      return alabel.localeCompare(blabel);
+    originnodes.sort(function(a, b) {
+        let alabel = nodeLabelFromIdh(a);
+        let blabel = nodeLabelFromIdh(b);
+        return alabel.localeCompare(blabel);
     });
     for (var i = 0; i < originnodes.length; i++) {
         nestedvars.appendChild(createNextLevel(originnodes[i]));
@@ -1478,20 +1630,57 @@ createListHierarchy = function() {
     }
     foldTopLevels();
 }
-nodeLabelFromIdh= function(id) {
+nodeLabelFromIdh = function(id) {
     for (var i = 0; i < nodesh.length; i++) {
         if (nodesh[i].id == id) {
             return (nodesh[i].label);
         }
     }
-} 
-nodeLabelFromId = function(id) {
-    for (var i = 0; i < combids.length; i++) {
-        if (combids[i] == id) {
-            return (combvars[i]);
-        }
-    }
 }
+
+makeNodeOrange = function(id) {
+  network.body.nodes[id].options.color.background = "#fcb103";
+  network.body.nodes[id].options.color.highlight.background = "#ffe224";
+  network.body.nodes[id].options.color.border = "#a17902";
+  network.body.nodes[id].options.color.highlight.border = "#a17902";
+  network.redraw();
+}
+
+makeNodeRed = function(id) {
+  network.body.nodes[id].options.color.background = "#e75a2b";
+  network.body.nodes[id].options.color.highlight.background = "#fa6464";
+  network.body.nodes[id].options.color.border = "#a42a02";
+  network.body.nodes[id].options.color.highlight.border = "#a42a02";
+  //network.body.nodes[id].options.font.color = "#ffffff";
+  //network.body.nodes[id].options.font.bold.color = "#ffffff";
+  //network.body.emitter.emit('_dataChanged');
+  network.redraw();
+}
+
+makeNodeBoring = function(id) {
+  try{
+    delete(network.body.nodes[id].options.color.background);  
+  } catch(e) {
+    
+  }
+  try{
+    delete(network.body.nodes[id].options.color.border);  
+  } catch(e) {
+    
+  }
+  try{
+    delete(network.body.nodes[id].options.color.highlight.background);  
+  } catch(e) {
+    
+  }
+  try{
+    delete(network.body.nodes[id].options.color.highlight.border);  
+  } catch(e) {
+    
+  }
+  network.redraw();
+}
+
 
 makeEdgeTwoway = function(edge) {
     //console.log("make edge twoway activated");
@@ -1507,10 +1696,8 @@ makeEdgeTwoway = function(edge) {
 
 updateAllClusterEdges = function() {
     var clusternodestemp = [];
-  
-    var clusternodestemp = getAllClusters();
 
-
+    var clusternodestemp = getAllClusters(network);
 
     for (var i = 0; i < clusternodestemp.length; i++) {
         try {
@@ -1528,7 +1715,7 @@ updateAllClusterEdges = function() {
         for (var j = 0; j < clusteredges.length; j++) {
             try {
                 var baseedgeids = network.getBaseEdges(clusteredges[j]);
-                var baseedges = edges.get(baseedgeids);
+                var baseedges = origedges.get(baseedgeids);
                 var anyto = false;
                 var anyfrom = false;
                 for (var k = 0; k < baseedges.length; k++) {
@@ -1545,7 +1732,7 @@ updateAllClusterEdges = function() {
                 }
 
             } catch (e) {
-              
+
             }
         }
     }
@@ -1566,7 +1753,6 @@ updateFoldedList = function(component) {
     }
     if (foldeddown) {
         var run = true;
-        //console.log("folded: " + component.children[0].innerText);
         for (var j = 0; j < nodesh.length & run; j++) {
             if (nodesh[j].label == component.children[0].innerText) {
                 foldednodes.push(nodesh[j].id);
@@ -1577,7 +1763,7 @@ updateFoldedList = function(component) {
         if (component.children.length == 0) {
             return null;
         }
-        
+
         if (component.children[1].children.length > 0) {
             for (var i = 0; i < component.children[1].children.length; i++) {
                 updateFoldedList(component.children[1].children[i]);
@@ -1597,25 +1783,9 @@ findFoldedNodes = function() {
 
 
 
-findVariableIdFromLabel = function(label) {
-    for (var i = 0; i < combvars.length; i++) {
-        if (combvars[i] == label) {
-            return (combids[i]);
-        }
-    }
-    return (-1)
-}
-findVariableLabelFromId = function(id) {
-    for (var i = 0; i < combids.length; i++) {
-        if (combids[i] == id) {
-            return (combvars[i]);
-        }
-    }
-    return (-1)
-}
 
 findVariableInOriginalNodes = function(label) {
-    var allnodestemp = nodes.get();
+    var allnodestemp = orignodes.get();
     for (var i = 0; i < allnodestemp.length; i++) {
         if (allnodestemp[i].label == label) {
             return (allnodestemp[i])
@@ -1631,30 +1801,59 @@ toggleNoFilterMode = function() {
     edgesView.refresh();
 }
 
-showFilterBoxes= function() {
- document.getElementById("varselector").hidden = false; 
+showFilterBoxes = function() {
+    document.getElementById("varselector").hidden = false;
 }
 
 
 function openTab(tabbutton, tabName) {
-  // Declare all variables
-  var i, tabcontent, tablinks;
+    // Declare all variables
+    var i, tabcontent, tablinks;
 
-  // Get all elements with class="tabcontent" and hide them
-  tabcontent = document.getElementsByClassName("tabcontent");
-  for (i = 0; i < tabcontent.length; i++) {
-    tabcontent[i].style.display = "none";
-  }
+    // Get all elements with class="tabcontent" and hide them
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
 
-  // Get all elements with class="tablinks" and remove the class "active"
-  tablinks = document.getElementsByClassName("tablinks");
-  for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" active", "");
-  }
+    // Get all elements with class="tablinks" and remove the class "active"
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
 
-  // Show the current tab, and add an "active" class to the button that opened the tab
-  document.getElementById(tabName).style.display = "block";
-  //evt.currentTarget.className += " active";
-  document.getElementById(tabbutton).className += " active";
-  
+    // Show the current tab, and add an "active" class to the button that opened the tab
+    document.getElementById(tabName).style.display = "block";
+    //evt.currentTarget.className += " active";
+    document.getElementById(tabbutton).className += " active";
+
+}
+
+
+findVariableIdFromLabel = function(label) {
+    for (var i = 0; i < combvardet.length; i++) {
+        if (combvardet[i].label == label) {
+            return (combvardet[i].id);
+        }
+    }
+    return (-1)
+}
+findVariableLabelFromId = function(id) {
+    for (var i = 0; i < combvardet.length; i++) {
+        if (combvardet[i].id == id) {
+            return (combvardet[i].label);
+        }
+    }
+    return ("")
+}
+
+
+isVariableClustered = function(id) {
+    var allclusters = getAllClusters(network);
+    for (var i = 0; i < allclusters.length; i++) {
+        if (network.getNodesInCluster(allclusters[i]).includes(id)) {
+            return true;
+        }
+    }
+    return false;
 }
