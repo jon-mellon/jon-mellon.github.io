@@ -1118,6 +1118,10 @@ createNetwork = function() {
         const options = {
             interaction: {
                 selectConnectedEdges: false
+            },
+            layout: {
+              randomSeed: 191006,
+              improvedLayout: true
             }
         };
         network = new vis.Network(container, data, options);
