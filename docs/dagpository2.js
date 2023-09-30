@@ -107,7 +107,7 @@ hideChildren2 = function(nodeid) {
     hidethese.push(nodeid);
     clusterNodes2(nodeidstocluster = hidethese,
         label = parentlabel, origid = nodeid);
-    updateAllClusterEdges();
+    //updateAllClusterEdges();
 
 }
 
@@ -145,6 +145,7 @@ clusterFoldedNodes = function() {
     for (var i = 0; i < foldednodes.length; i++) {
         hideChildren2(foldednodes[i]);
     }
+    updateAllClusterEdges();
 }
 
 currentNetworkEdgeSet = function(currentnetwork) {
@@ -221,7 +222,7 @@ clusterCorrection = function() {
     nodesView.refresh();
 }
 
- calculateReachabilities = function() {
+calculateReachabilities = function() {
       // calculate reachabilities from currentedgeset
     let ivselectorindex = findVariableIdFromLabel(ivselector.value);
     let dvselectorindex = findVariableIdFromLabel(dvselector.value);
@@ -279,8 +280,11 @@ showCurrentNetworkState = function() {
 
     // create currentedgeset from current network
     currentNetworkEdgeSet(network);
-   
+    
+    
     calculateReachabilities();
+    
+
 
     updateNodeStatus();
     nodesView.refresh();
@@ -288,12 +292,13 @@ showCurrentNetworkState = function() {
     makeNodeCounts();
     nodesView.refresh();
 
-    //makeNodeCounts();
-    //nodesView.refresh();
+    makeNodeCounts();
+    nodesView.refresh();
 
     updateNodeStatus();
     nodesView.refresh();
     clusterFoldedNodes();
+
 }
 
 reachableNodeOrParent = function(startnode, edgesetall) {
