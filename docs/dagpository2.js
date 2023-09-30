@@ -221,29 +221,8 @@ clusterCorrection = function() {
     nodesView.refresh();
 }
 
-showCurrentNetworkState = function() {
-    // show all nodes
-    blankNodeStatus();
-    nodesView.refresh();
-
-    // uncluster all nodes
-    unclusterAllNodes();
-    nodesView.refresh();
-
-    // read variable clustering from list
-    findFoldedNodes();
-
-    // foldednodes now contains the current state of the list
-
-    // apply variable clustering
-    clusterFoldedNodes();
-
-    nodesView.refresh();
-
-    // create currentedgeset from current network
-    currentNetworkEdgeSet(network);
-
-    // calculate reachabilities from currentedgeset
+ calculateReachabilities = function() {
+      // calculate reachabilities from currentedgeset
     let ivselectorindex = findVariableIdFromLabel(ivselector.value);
     let dvselectorindex = findVariableIdFromLabel(dvselector.value);
 
@@ -277,7 +256,31 @@ showCurrentNetworkState = function() {
         canreachiv = [];
         ivcanreach = [];
     }
+    }
 
+showCurrentNetworkState = function() {
+    // show all nodes
+    blankNodeStatus();
+    nodesView.refresh();
+
+    // uncluster all nodes
+    unclusterAllNodes();
+    nodesView.refresh();
+
+    // read variable clustering from list
+    findFoldedNodes();
+
+    // foldednodes now contains the current state of the list
+
+    // apply variable clustering
+    clusterFoldedNodes();
+
+    nodesView.refresh();
+
+    // create currentedgeset from current network
+    currentNetworkEdgeSet(network);
+   
+    calculateReachabilities();
 
     updateNodeStatus();
     nodesView.refresh();
@@ -285,13 +288,12 @@ showCurrentNetworkState = function() {
     makeNodeCounts();
     nodesView.refresh();
 
-    makeNodeCounts();
-    nodesView.refresh();
+    //makeNodeCounts();
+    //nodesView.refresh();
 
     updateNodeStatus();
     nodesView.refresh();
     clusterFoldedNodes();
-
 }
 
 reachableNodeOrParent = function(startnode, edgesetall) {
@@ -1121,7 +1123,7 @@ createNetwork = function() {
             },
             layout: {
               randomSeed: 191006,
-              improvedLayout: true
+              improvedLayout: false
             }
         };
         network = new vis.Network(container, data, options);
