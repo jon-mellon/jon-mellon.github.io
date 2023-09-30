@@ -1107,6 +1107,12 @@ createNetwork = function() {
             layout: {
               randomSeed: 191006,
               improvedLayout: false
+            },
+            nodes: {
+              borderWidth:0
+            },
+            physics:{
+              stabilization: false
             }
         };
         network = new vis.Network(container, data, options);
@@ -1646,6 +1652,11 @@ makeNodeRed = function(id) {
 }
 
 makeNodeBoring = function(id) {
+  try{
+    //delete(network.body.nodes[id].options.borderWidth);  
+  } catch(e) {
+    
+  }
   try{
     delete(network.body.nodes[id].options.color.background);  
   } catch(e) {
