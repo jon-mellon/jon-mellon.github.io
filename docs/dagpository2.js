@@ -1111,10 +1111,14 @@ createNetwork = function() {
             nodes: {
               borderWidth:0
             },
-            physics:{
-              stabilization: false
-            }
+            physics:false
         };
+        
+        /*
+        {
+              stabilization: false
+        }
+        */
         network = new vis.Network(container, data, options);
 
         network.on('selectNode', function(properties) {
