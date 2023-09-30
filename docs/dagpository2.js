@@ -114,6 +114,7 @@ hideChildren2 = function(nodeid) {
 
 
 clusterNodes2 = function(nodeidstocluster, label, origid) {
+    // performance: this function is a major bottleneck
     let clusterid = "cluster" + (clusterednodes.length + 1);
     network.cluster({
         joinCondition(nodeOptions) {
@@ -593,50 +594,46 @@ ts = function(scenario = 1) {
 
 getNodeStatus = function(cnode, iv, dv) {
     // cnode, iv and dv are all ids variables
+    if (iv == cnode) {
+        makeNodeOrange(cnode);
+        return ("independent variable");
+    }
+    if (dv == cnode) {
+        makeNodeOrange(cnode);
+        return ("dependent variable");
+    }
     
     var ivlabel = findVariableLabelFromId(iv);
-    var dvlabel = findVariableLabelFromId(dv);
-    var clabel = findVariableLabelFromId(cnode);
-    var ivparent = getParent(iv);
-    var dvparent = getParent(dv);
     var cparent = getParent(cnode);
+
+    if (cparent == ivlabel & ivlabel != "") {
+        makeNodeOrange(cnode);
+        return ("independent variable");
+    }
+    var dvlabel = findVariableLabelFromId(dv);
+    if (cparent == dvlabel & dvlabel != "") {
+        makeNodeOrange(cnode);
+        return ("dependent variable");
+    }
+    
+    
+    var clabel = findVariableLabelFromId(cnode);
+    var dvparent = getParent(dv);
+    if (clabel == dvparent & clabel != "") {
+        makeNodeOrange(cnode);
+        return ("dependent variable");
+    }
+    var ivparent = getParent(iv);
+    if (clabel == ivparent & clabel != "") {
+        makeNodeOrange(cnode);
+        return ("independent variable");
+    }
+
     let riv = canreachiv.includes(cnode);
     let rdv = canreachdv.includes(cnode);
     let ivr = ivcanreach.includes(cnode);
     let dvr = dvcanreach.includes(cnode);
     
-    if (iv == cnode) {
-        makeNodeOrange(cnode);
-        return ("independent variable");
-    }
-    if (cparent == ivlabel & ivlabel != "") {
-        makeNodeOrange(cnode);
-        return ("independent variable");
-    }
-    if (cparent == dvlabel & dvlabel != "") {
-        makeNodeOrange(cnode);
-        return ("dependent variable");
-    }
-    if (clabel == dvparent & clabel != "") {
-        makeNodeOrange(cnode);
-        return ("dependent variable");
-    }
-    if (typeof(cnode) != "string") {
-        
-        
-        /*
-        if(orignodes.get(dv).parent==findVariableLabelFromId(cnode)) {
-          makeNodeOrange(cnode);
-          return ("dependent variable");
-        }
-        */
-        
-    }
-
-    if (dv == cnode) {
-        makeNodeOrange(cnode);
-        return ("dependent variable");
-    }
     if ((riv && ivr) || (rdv && dvr) || (dvr && riv)) {
         makeNodeBoring(cnode);
         return ("loop");
@@ -711,6 +708,7 @@ updateNodeStatus = function() {
             combvardet[i].status = getNodeStatus(combvardet[i].id,
                 iv = iv, dv = dv);
         }
+        network.redraw();
         var confounders = [];
         for (var i = 0; i < combvardet.length; i++) {
             var vardettemp = combvardet[i];
@@ -1653,7 +1651,7 @@ makeNodeOrange = function(id) {
   network.body.nodes[id].options.color.highlight.background = "#ffe224";
   network.body.nodes[id].options.color.border = "#a17902";
   network.body.nodes[id].options.color.highlight.border = "#a17902";
-  network.redraw();
+  //network.redraw();
 }
 
 makeNodeRed = function(id) {
@@ -1664,7 +1662,7 @@ makeNodeRed = function(id) {
   //network.body.nodes[id].options.font.color = "#ffffff";
   //network.body.nodes[id].options.font.bold.color = "#ffffff";
   //network.body.emitter.emit('_dataChanged');
-  network.redraw();
+  //network.redraw();
 }
 
 makeNodeBoring = function(id) {
@@ -1688,7 +1686,7 @@ makeNodeBoring = function(id) {
   } catch(e) {
     
   }
-  network.redraw();
+  //network.redraw();
 }
 
 
