@@ -375,7 +375,7 @@ reachableByNodeOrParent = function(startnode, edgesetall, currentnetwork) {
         }
     }
     allreachable = allreachable.concat(reachableByNodes(startnode, edgesetall));
-
+    allreachable = allreachable.filter(onlyUnique);
     return (allreachable)
 }
 
@@ -835,6 +835,7 @@ reachableByNodes = function(startnode, edgesetall) {
             nodeschecked.push(currentnode);
         }
     }
+    nodesreached = nodesreached.filter(onlyUnique);
     return nodesreached;
 }
 
