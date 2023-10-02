@@ -823,12 +823,16 @@ updateNodeStatus = function() {
 getAllClusters = function(currentnetwork) {
     let allcnodes = Object.entries(currentnetwork.clustering.clusteredNodes);
 
-    let allclusters = [];
+    var allclusters = [];
+    var allclids = [];
     for (var i = 0; i < allcnodes.length; i++) {
+      if(!allclids.includes(allcnodes[i][1].clusterId)) {
         allclusters.push({id: allcnodes[i][1].clusterId, 
           label: allcnodes[i][1].node.options.label
         });
-    }
+        allclids.push(allcnodes[i][1].clusterId);
+        }
+      }
     allclusters = allclusters.filter(onlyUnique);
     return (allclusters);
 }
@@ -1797,7 +1801,6 @@ makeEdgeTwoway = function(edge) {
     } else {
       //console.log("avoided")
     }
-    
 }
 
 updateAllClusterEdges = function() {
@@ -1869,7 +1872,7 @@ updateFoldedList = function(component) {
         if (component.children.length == 0) {
             return null;
         }
-
+        
         if (component.children[1].children.length > 0) {
             for (var i = 0; i < component.children[1].children.length; i++) {
                 updateFoldedList(component.children[1].children[i]);
