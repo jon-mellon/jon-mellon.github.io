@@ -120,14 +120,14 @@ hideChildren2 = function(nodeid) {
     for (var i = 0; i < hidethese.length; i++) {
       var hidelabel = nodeLabelFromIdh(hidethese[i]);
       for (var j = 0; j < allclusters.length; j++) {
-        if(allclusters[j].label==hidelabel & 
+        if((allclusters[j].label==hidelabel) & 
           hidelabel!="") {
           try{
             //console.log("Success: " + allclusters[j].id + " " + allclusters[j].label);
             network.openCluster(allclusters[j].id);
           } catch(e) {
             //console.log(allclusters[j].id + allclusters[j].label) ;
-            console.log(e);
+            //console.log(e);
           }
         }
       }
@@ -194,8 +194,7 @@ clusterFoldedNodes = function() {
     for (var i = 0; i < foldednodes.length; i++) {
       var cluster = true;
       for (var j = 0; j < allclusters.length; j++) {
-        var clusterlabel = allclusters[j].label;
-        if(clusterlabel==foldednodes[i].label) {
+        if(allclusters[j].label==foldednodes[i].label) {
           cluster = false;
         }
       }
@@ -328,7 +327,7 @@ showCurrentNetworkState = function() {
 
     updateNodeStatus();
     nodesView.refresh();
-    clusterFoldedNodes();
+    //clusterFoldedNodes();
 
 }
 
@@ -411,6 +410,7 @@ reachableNodesGeneral = function(startnode, edgesetall) {
             nodeschecked.push(currentnode);
         }
     }
+    nodesreached = nodesreached.filter(onlyUnique);
     return nodesreached;
 }
 citationPresent = function(doi) {
