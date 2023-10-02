@@ -78,17 +78,30 @@ setSize = function(x) {
     return (size);
 }
 
+
+
+
 unclusterAllNodes = function() {
     let allclusters = getAllClusters(network);
 
     for (var i = 0; i < allclusters.length; i++) {
         try {
             //console.log("Unclustering:" + allclusters[i]);
-            network.openCluster(allclusters[i]);
+            network.openCluster(allclusters[i].id);
         } catch (e) {
 
         }
+    }
+}
 
+unclusterSpecificNodes = function(touncluster) {
+    for (var i = 0; i < touncluster.length; i++) {
+        try {
+            //console.log("Unclustering:" + allclusters[i]);
+            network.openCluster(touncluster[i]);
+        } catch (e) {
+
+        }
     }
 }
 
@@ -96,19 +109,32 @@ unclusterAllNodes = function() {
 hideChildren2 = function(nodeid) {
     var parentlabel;
     let hidethese = reachableNodesGeneral(nodeid, edgesh);
-
     for (var i = 0; i < nodesh.length; i++) {
         if (nodesh[i].id == nodeid) {
             nodesh[i].color = "#09e472";
             parentlabel = nodesh[i].label
         }
-
     }
     hidethese.push(nodeid);
+    var allclusters = getAllClusters(network);
+    for (var i = 0; i < hidethese.length; i++) {
+      var hidelabel = nodeLabelFromIdh(hidethese[i]);
+      for (var j = 0; j < allclusters.length; j++) {
+        if(allclusters[j].label==hidelabel & 
+          hidelabel!="") {
+          try{
+            //console.log("Success: " + allclusters[j].id + " " + allclusters[j].label);
+            network.openCluster(allclusters[j].id);
+          } catch(e) {
+            //console.log(allclusters[j].id + allclusters[j].label) ;
+            console.log(e);
+          }
+        }
+      }
+    }
     clusterNodes2(nodeidstocluster = hidethese,
         label = parentlabel, origid = nodeid);
     //updateAllClusterEdges();
-
 }
 
 
@@ -141,10 +167,41 @@ clusterNodes2 = function(nodeidstocluster, label, origid) {
 }
 
 
+unclusterUnfoldedNodes = function() {
+  let allclusters = getAllClusters(network);
+  for (var i = 0; i < allclusters.length; i++) {
+      var clusterlabel = allclusters[i].label;
+      var uncluster = true;
+      for (var j = 0; j < foldednodes.length; j++) {
+        if(foldednodes[j].label==clusterlabel) {
+          uncluster = false;
+        }
+      }
+      if(uncluster) {
+        try {
+          //console.log("Unclustering:" + allclusters[i]);
+          network.openCluster(allclusters[i].id);
+        } catch (e) {
+
+        }  
+      }
+  }
+}
+
 clusterFoldedNodes = function() {
     // this function clusters everything in the foldednodes array
+    var allclusters = getAllClusters(network);
     for (var i = 0; i < foldednodes.length; i++) {
-        hideChildren2(foldednodes[i]);
+      var cluster = true;
+      for (var j = 0; j < allclusters.length; j++) {
+        var clusterlabel = allclusters[j].label;
+        if(clusterlabel==foldednodes[i].label) {
+          cluster = false;
+        }
+      }
+      if(cluster) {
+        hideChildren2(foldednodes[i].id);
+      }
     }
     updateAllClusterEdges();
 }
@@ -175,7 +232,7 @@ createCurrentvardet = function() {
         };
     }
 
-    let origids = nodesView.getIds();
+    let origids = orignodes.getIds();
     let origvardet = [];
     for (var i = 0; i < origids.length; i++) {
         origvardet[i] = {
@@ -211,7 +268,7 @@ calculateReachabilities = function() {
     let ivselectorindex = findVariableIdFromLabel(ivselector.value);
     let dvselectorindex = findVariableIdFromLabel(dvselector.value);
 
-    if (dvselectorindex != null) {
+    if (dvselectorindex != null && dvselectorindex!="") {
         canreachdv = reachableByNodeOrParent(dvselectorindex, currentedgeset, network);
         canreachdv2 = reachableByNodeOrParent(dvselectorindex, edgeset, network);
         canreachdv = canreachdv.concat(canreachdv2);
@@ -221,12 +278,11 @@ calculateReachabilities = function() {
         dvcanreach2 = reachableNodeOrParent(dvselectorindex, edgeset);
         dvcanreach = dvcanreach.concat(dvcanreach2);
         dvcanreach = dvcanreach.filter(onlyUnique);
-
     } else {
         dvcanreach = [];
         canreachdv = [];
     }
-    if (ivselectorindex != null) {
+    if (ivselectorindex != null && ivselectorindex!="") {
         canreachiv = reachableByNodeOrParent(ivselectorindex, currentedgeset, network);
         canreachiv2 = reachableByNodeOrParent(ivselectorindex, edgeset, network);
         canreachiv = canreachiv.concat(canreachiv2);
@@ -241,27 +297,21 @@ calculateReachabilities = function() {
         canreachiv = [];
         ivcanreach = [];
     }
-    }
+  }
 
 showCurrentNetworkState = function() {
     // show all nodes
     blankNodeStatus();
-    //nodesView.refresh();
-
-    // uncluster all nodes
-    unclusterAllNodes();
-    //nodesView.refresh();
-
     // read variable clustering from list
     findFoldedNodes();
 
-    // foldednodes now contains the current state of the list
+    // uncluster all nodes
+    //unclusterAllNodes();
+    unclusterUnfoldedNodes();
 
+    // foldednodes now contains the current state of the list
     // apply variable clustering
     clusterFoldedNodes();
-
-    //nodesView.refresh();
-
     // create currentedgeset from current network
     currentNetworkEdgeSet(network);
     
@@ -289,13 +339,13 @@ reachableNodeOrParent = function(startnode, edgesetall) {
 
     var allclusters = getAllClusters(network);
     for (var i = 0; i < allclusters.length; i++) {
-        var tempclusternodes = network.getNodesInCluster(allclusters[i]);
+        var tempclusternodes = network.getNodesInCluster(allclusters[i].id);
         if (tempclusternodes.includes(startnode)) {
             // reachable parent
             for (var j = 0; j < tempclusternodes.length; j++) {
                 allreachable = allreachable.concat(reachableNodesGeneral(tempclusternodes[j], edgesetall));
             }
-            allreachable = allreachable.concat(reachableNodesGeneral(allclusters[i], edgesetall));
+            allreachable = allreachable.concat(reachableNodesGeneral(allclusters[i].id, edgesetall));
             
         }
     }
@@ -317,12 +367,12 @@ reachableByNodeOrParent = function(startnode, edgesetall, currentnetwork) {
     // cluster can reach to the reachable array. 
     // Also add in any variables that the cluster itself can reach
     for (var i = 0; i < allclusters.length; i++) {
-        var tempnodesincluster = currentnetwork.getNodesInCluster(allclusters[i]);
+        var tempnodesincluster = currentnetwork.getNodesInCluster(allclusters[i].id);
         if (tempnodesincluster.includes(startnode)) {
             for (var j = 0; j < tempnodesincluster.length; j++) {
                 allreachable = allreachable.concat(reachableByNodes(tempnodesincluster[j], edgesetall));
             }
-            allreachable = allreachable.concat(reachableByNodes(allclusters[i], edgesetall));
+            allreachable = allreachable.concat(reachableByNodes(allclusters[i].id, edgesetall));
         }
     }
     allreachable = allreachable.concat(reachableByNodes(startnode, edgesetall));
@@ -674,8 +724,8 @@ updateNodeStatus = function() {
         }
 
     } else {
-        var dv
-        var iv;
+        var dv = -1;
+        var iv = -1;
         if (dvselector.value != "") {
             dv = findVariableIdFromLabel(dvselector.value);
         }
@@ -683,7 +733,7 @@ updateNodeStatus = function() {
             iv = findVariableIdFromLabel(ivselector.value);
         }
 
-
+        
         for (var i = 0; i < combvardet.length; i++) {
             combvardet[i].status = getNodeStatus(combvardet[i].id,
                 iv = iv, dv = dv);
@@ -721,13 +771,13 @@ updateNodeStatus = function() {
     var clusterstatus = [];
     for (var i = 0; i < allclusters.length; i++) {
         for (var j = 0; j < combvardet.length; j++) {
-            if (allclusters[i] == combvardet[j].id) {
+            if (allclusters[i].id == combvardet[j].id) {
                 clusterstatus[i] = combvardet[j].status;
             }
         }
     }
     for (var i = 0; i < allclusters.length; i++) {
-        var clusternodestemp = network.getNodesInCluster(allclusters[i]);
+        var clusternodestemp = network.getNodesInCluster(allclusters[i].id);
         for (var j = 0; j < combvardet.length; j++) {
             if (clusternodestemp.includes(combvardet[j].id)) {
                 combvardet[j].status = clusterstatus[i];
@@ -738,9 +788,12 @@ updateNodeStatus = function() {
 
 getAllClusters = function(currentnetwork) {
     let allcnodes = Object.entries(currentnetwork.clustering.clusteredNodes);
+
     let allclusters = [];
     for (var i = 0; i < allcnodes.length; i++) {
-        allclusters.push(allcnodes[i][1].clusterId);
+        allclusters.push({id: allcnodes[i][1].clusterId, 
+          label: allcnodes[i][1].node.options.label
+        });
     }
     allclusters = allclusters.filter(onlyUnique);
     return (allclusters);
@@ -1113,10 +1166,8 @@ createNetwork = function() {
             },
             physics:{
               stabilization: false
-        }
+            }
         };
-        
-        
         
         
         network = new vis.Network(container, data, options);
@@ -1127,7 +1178,6 @@ createNetwork = function() {
                 showVariableHeaders();
                 document.getElementById("studytitle").innerText = "Variable";
                 document.getElementById("claimstudy").innerText = "";
-
 
                 document.getElementById("varname").innerText = findVariableLabelFromId(properties.nodes);
 
@@ -1186,19 +1236,24 @@ const nodesFilter = (node) => {
         if (ivselector.value == node.parent) {
             return true;
         }
-
         if (dvselector.value == node.parent) {
             return true;
         }
     }
 
-
+    var currentnodecount;
     // temporary while testing:
     for (var i = 0; i < nodecount.length; i++) {
-        var currentnodecount;
         if (nodecount[i].id == node.id) {
             currentnodecount = nodecount[i].count;
         }
+    }
+    if (currentnodecount==null) {
+      for (var i = 0; i < combvardet.length; i++) {
+        if(combvardet[i].id==node.id) {
+          currentnodecount = combvardet[i].count;
+        }
+      }
     }
     if (network != null) {
         if (currentnodecount == 0) {
@@ -1276,11 +1331,15 @@ makeNodeCounts = function() {
     var nodeids = nodesView.getIds();
     nodecount = [];
     for (var i = 0; i < nodeids.length; i++) {
+        var templabel = findVariableLabelFromId(nodeids[i]);
+        if(templabel=="") {
+          templabel = nodeLabelFromIdh(nodeids[i]);
+        }
         nodecount[i] = {
             id: nodeids[i],
             count: (network.getConnectedNodes(nodeids[i], "from").length +
                 network.getConnectedNodes(nodeids[i], "to").length),
-            label: findVariableLabelFromId(nodeids[i]),
+            label: templabel,
         };
     }
 
@@ -1704,12 +1763,12 @@ updateAllClusterEdges = function() {
 
     for (var i = 0; i < clusternodestemp.length; i++) {
         try {
-            var basenodes = network.getNodesInCluster(clusternodestemp[i]);
+            var basenodes = network.getNodesInCluster(clusternodestemp[i].id);
         } catch (e) {
             let sink = e;
         }
         try {
-            var clusteredges = network.getConnectedEdges(clusternodestemp[i]);
+            var clusteredges = network.getConnectedEdges(clusternodestemp[i].id);
         } catch (e) {
             let sink = e;
         }
@@ -1758,7 +1817,7 @@ updateFoldedList = function(component) {
         var run = true;
         for (var j = 0; j < nodesh.length & run; j++) {
             if (nodesh[j].label == component.children[0].innerText) {
-                foldednodes.push(nodesh[j].id);
+                foldednodes.push(nodesh[j]);
                 run = false;
             }
         }
@@ -1786,7 +1845,6 @@ findFoldedNodes = function() {
 
 
 
-
 findVariableInOriginalNodes = function(label) {
     var allnodestemp = orignodes.get();
     for (var i = 0; i < allnodestemp.length; i++) {
@@ -1798,11 +1856,13 @@ findVariableInOriginalNodes = function(label) {
 }
 var nofilter = false;
 
+
 toggleNoFilterMode = function() {
     nofilter = !nofilter;
     nodesView.refresh();
     edgesView.refresh();
 }
+
 
 showFilterBoxes = function() {
     document.getElementById("varselector").hidden = false;
@@ -1854,7 +1914,7 @@ findVariableLabelFromId = function(id) {
 isVariableClustered = function(id) {
     var allclusters = getAllClusters(network);
     for (var i = 0; i < allclusters.length; i++) {
-        if (network.getNodesInCluster(allclusters[i]).includes(id)) {
+        if (network.getNodesInCluster(allclusters[i].id).includes(id)) {
             return true;
         }
     }
