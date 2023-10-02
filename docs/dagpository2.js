@@ -277,9 +277,13 @@ calculateReachabilities = function() {
         dvcanreach2 = reachableNodeOrParent(dvselectorindex, edgeset);
         dvcanreach = dvcanreach.concat(dvcanreach2);
         dvcanreach = dvcanreach.filter(onlyUnique);
+        dvchildren = reachableNodesGeneral(dvselectorindex, edgesh);
+        dvparents = reachableByNodes(dvselectorindex, edgesh);
     } else {
         dvcanreach = [];
         canreachdv = [];
+        dvchildren = [];
+        dvparents = [];
     }
     if (ivselectorindex != null && ivselectorindex!="") {
         canreachiv = reachableByNodeOrParent(ivselectorindex, currentedgeset, network);
@@ -291,10 +295,15 @@ calculateReachabilities = function() {
         ivcanreach2 = reachableNodeOrParent(ivselectorindex, edgeset);
         ivcanreach = ivcanreach.concat(ivcanreach2);
         ivcanreach = ivcanreach.filter(onlyUnique);
+        
+        ivchildren = reachableNodesGeneral(ivselectorindex, edgesh);
+        ivparents = reachableByNodes(ivselectorindex, edgesh);
 
     } else {
         canreachiv = [];
         ivcanreach = [];
+        ivchildren = [];
+        ivparents = [];
     }
   }
 
@@ -358,6 +367,10 @@ reachableNodeOrParent = function(startnode, edgesetall) {
     return (allreachable)
 }
 
+openListToLevel = function(cnode) {
+  
+}
+
 reachableByNodeOrParent = function(startnode, edgesetall, currentnetwork) {
     var allreachable = reachableByNodes(startnode, edgesetall);
     var allclusters = getAllClusters(currentnetwork);
@@ -381,6 +394,7 @@ reachableByNodeOrParent = function(startnode, edgesetall, currentnetwork) {
 
 //// general network ////
 reachableNodesGeneral = function(startnode, edgesetall) {
+    // which nodes can this node reach
     var nodesreached = [];
     var nodestocheck = [startnode];
     var nodeschecked = [];
@@ -648,16 +662,36 @@ getNodeStatus = function(cnode, iv, dv) {
     
     
     var clabel = findVariableLabelFromId(cnode);
-    var dvparent = getParent(dv);
-    if (clabel == dvparent & clabel != "") {
+    
+    //var dvparent = getParent(dv);
+    
+    if(clabel!=""){
+    for (var i = 0; i < dvparents.length; i++) {
+      if(clabel==findVariableLabelFromId(dvparents[i])) {
         makeNodeOrange(cnode);
         return ("dependent variable");
+      }
     }
-    var ivparent = getParent(iv);
-    if (clabel == ivparent & clabel != "") {
+    for (var i = 0; i < dvchildren.length; i++) {
+      if(clabel==findVariableLabelFromId(dvchildren[i])) {
         makeNodeOrange(cnode);
-        return ("independent variable");
+        return ("dependent variable");
+      }
     }
+    for (var i = 0; i < ivparents.length; i++) {
+      if(clabel==findVariableLabelFromId(ivparents[i])) {
+        makeNodeOrange(cnode);
+        return ("dependent variable");
+      }
+    }
+    for (var i = 0; i < ivchildren.length; i++) {
+      if(clabel==findVariableLabelFromId(ivchildren[i])) {
+        makeNodeOrange(cnode);
+        return ("dependent variable");
+      }
+    }
+    }
+    
 
     let riv = canreachiv.includes(cnode);
     let rdv = canreachdv.includes(cnode);
