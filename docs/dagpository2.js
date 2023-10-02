@@ -1781,14 +1781,17 @@ makeNodeBoring = function(id) {
 
 makeEdgeTwoway = function(edge) {
     //console.log("make edge twoway activated");
-    network.updateEdge(edge, {
-        arrows: {
-            from: {
-                enabled: true
-            }
-        },
-        color: "purple"
-    })
+    if(network.body.edges[edge].options.arrows.to.enabled!=null) {
+      network.updateEdge(edge, {
+          arrows: {
+              from: {
+                  enabled: true
+              }
+          },
+          color: "purple"
+      })  
+    }
+    
 }
 
 updateAllClusterEdges = function() {
