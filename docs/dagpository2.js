@@ -1781,15 +1781,21 @@ makeNodeBoring = function(id) {
 
 makeEdgeTwoway = function(edge) {
     //console.log("make edge twoway activated");
-    if(network.body.edges[edge].options.arrows.to.enabled!=null) {
-      network.updateEdge(edge, {
+    if(network.body.edges[edge].options.arrows.from.enabled!=null) {
+      if(!network.body.edges[edge].options.arrows.from.enabled) {
+        network.updateEdge(edge, {
           arrows: {
               from: {
                   enabled: true
               }
           },
           color: "purple"
-      })  
+      })
+      } else {
+        //console.log("avoided");
+      }        
+    } else {
+      //console.log("avoided")
     }
     
 }
