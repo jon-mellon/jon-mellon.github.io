@@ -272,17 +272,27 @@ calculateReachabilities = function() {
     var dvselectorindex = findVariableIdFromLabel(dvselector.value);
 
     if (dvselectorindex != null && dvselectorindex!=-1) {
+        dvchildren = reachableNodesGeneral(dvselectorindex, edgesh);
+        dvparents = reachableByNodes(dvselectorindex, edgesh);
+        var dvcomb = dvchildren.concat(dvparents);
+        
         canreachdv = reachableByNodeOrParent(dvselectorindex, currentedgeset, network);
         canreachdv2 = reachableByNodeOrParent(dvselectorindex, edgeset, network);
         canreachdv = canreachdv.concat(canreachdv2);
-        canreachdv = canreachdv.filter(onlyUnique);
-
         dvcanreach = reachableNodeOrParent(dvselectorindex, currentedgeset);
         dvcanreach2 = reachableNodeOrParent(dvselectorindex, edgeset);
         dvcanreach = dvcanreach.concat(dvcanreach2);
+        
+        for (var i = 0; i < dvcomb.length; i++) {
+          canreachdv = canreachdv.concat(reachableByNodeOrParent(dvcomb[i], currentedgeset, network));
+          canreachdv = canreachdv.concat(reachableByNodeOrParent(dvcomb[i], edgeset, network));
+          dvcanreach = dvcanreach.concat(reachableNodeOrParent(dvcomb[i], currentedgeset));
+          dvcanreach = dvcanreach.concat(reachableNodeOrParent(dvcomb[i], edgeset));
+        }
+        
+        canreachdv = canreachdv.filter(onlyUnique);
         dvcanreach = dvcanreach.filter(onlyUnique);
-        dvchildren = reachableNodesGeneral(dvselectorindex, edgesh);
-        dvparents = reachableByNodes(dvselectorindex, edgesh);
+        
     } else {
         dvcanreach = [];
         canreachdv = [];
@@ -290,19 +300,30 @@ calculateReachabilities = function() {
         dvparents = [];
     }
     if (ivselectorindex != null && ivselectorindex!=-1) {
+        ivchildren = reachableNodesGeneral(ivselectorindex, edgesh);
+        ivparents = reachableByNodes(ivselectorindex, edgesh);
+        var ivcomb = ivchildren.concat(ivparents);
+
+        
         canreachiv = reachableByNodeOrParent(ivselectorindex, currentedgeset, network);
         canreachiv2 = reachableByNodeOrParent(ivselectorindex, edgeset, network);
         canreachiv = canreachiv.concat(canreachiv2);
-        canreachiv = canreachiv.filter(onlyUnique);
-
+        
         ivcanreach = reachableNodeOrParent(ivselectorindex, currentedgeset);
         ivcanreach2 = reachableNodeOrParent(ivselectorindex, edgeset);
         ivcanreach = ivcanreach.concat(ivcanreach2);
+        
+         
+        for (var i = 0; i < ivcomb.length; i++) {
+          canreachiv = canreachiv.concat(reachableByNodeOrParent(ivcomb[i], currentedgeset, network));
+          canreachiv = canreachiv.concat(reachableByNodeOrParent(ivcomb[i], edgeset, network));
+          ivcanreach = ivcanreach.concat(reachableNodeOrParent(ivcomb[i], currentedgeset));
+          ivcanreach = ivcanreach.concat(reachableNodeOrParent(ivcomb[i], edgeset));
+        }
+        
+        canreachiv = canreachiv.filter(onlyUnique);
         ivcanreach = ivcanreach.filter(onlyUnique);
         
-        ivchildren = reachableNodesGeneral(ivselectorindex, edgesh);
-        ivparents = reachableByNodes(ivselectorindex, edgesh);
-
     } else {
         canreachiv = [];
         ivcanreach = [];
@@ -337,7 +358,6 @@ showCurrentNetworkState = function() {
 
     updateNodeStatus();
     nodesView.refresh();
-
 }
 
 reachableNodeOrParent = function(startnode, edgesetall) {
@@ -361,7 +381,7 @@ reachableNodeOrParent = function(startnode, edgesetall) {
       allreachable = allreachable.concat(reachableNodesGeneral(getParent(startnode), edgesetall));  
     }
     
-
+    
     // reachable child?
 
     return (allreachable)
@@ -632,6 +652,12 @@ ts = function(scenario = 1) {
     sfb();
     ivselector.value = "income";
     dvselector.value = "years of schooling";
+    showCurrentNetworkState();    
+  }
+  if(scenario ==2 ) {
+    sfb();
+    ivselector.value = "income";
+    dvselector.value = "minutes of schooling";
     showCurrentNetworkState();    
   }
 }
@@ -1258,7 +1284,23 @@ const edgesFilterValues = {
     mixed: true,
 };
 
-
+isNodeClustered = function(node) {
+      var nodereach = reachableByNodes(node.id, edgesh);
+      var allclusters = getAllClusters(network);
+        for (var i = 0; i < nodereach.length; i++) {
+          for (var j = 0; j < allclusters.length; j++) {
+            if(allclusters[j].label==nodeLabelFromIdh(nodereach[i])) {
+              for (var k = 0; k < combvardet.length; k++) {
+                if(combvardet[k].id==node.id && combvardet[k].count==0) {
+                  return false;
+                }
+              }
+              return true;
+            }
+          }
+        }
+        return true;
+    }
 const nodesFilter = (node) => {
     if (nofilter) {
         return true;
@@ -1267,47 +1309,26 @@ const nodesFilter = (node) => {
         return true;
     }
     if (ivselector.value == node.label) {
-        return true;
+          return isNodeClustered(node);
     }
     if (dvselector.value == node.label) {
-        return true;
+          return isNodeClustered(node);
     }
+    if(ivparents.includes(node.id) || 
+        dvparents.includes(node.id) || 
+        ivchildren.includes(node.id) || 
+        dvchildren.includes(node.id) ) {
+      return isNodeClustered(node);
+    }
+    
     if (node.parent != null & node.parent != "") {
         if (ivselector.value == node.parent) {
-          var nodereach = reachableByNodes(node.id, edgesh);
-          var allclusters = getAllClusters(network);
-          for (var i = 0; i < nodereach.length; i++) {
-            for (var j = 0; j < allclusters.length; j++) {
-              if(allclusters[j].label==nodeLabelFromIdh(nodereach[i])) {
-                for (var k = 0; k < combvardet.length; k++) {
-                  if(combvardet[k].id==node.id && combvardet[k].count==0) {
-                      return false;
-                  }
-                }
-                return true;
-              }
-            }
-          }
-          return true;
+          return isNodeClustered(node);
         }
         if (dvselector.value == node.parent) {
-          var nodereach = reachableByNodes(node.id, edgesh);
-          var allclusters = getAllClusters(network);
-          for (var i = 0; i < nodereach.length; i++) {
-            for (var j = 0; j < allclusters.length; j++) {
-              if(allclusters[j].label==nodeLabelFromIdh(nodereach[i])) {
-                for (var k = 0; k < combvardet.length; k++) {
-                  if(combvardet[k].id==node.id && combvardet[k].count==0) {
-                      return false;
-                  }
-                }
-                return true;
-              }
-            }
-          }
-          return true;
+          return isNodeClustered(node);
         }
-    }
+      }
     var currentnodecount;
     // temporary while testing:
     for (var i = 0; i < nodecount.length; i++) {
