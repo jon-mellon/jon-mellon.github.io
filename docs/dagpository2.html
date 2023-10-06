@@ -39,11 +39,11 @@
    
    <body>
       <div class="title">
-         <span>DAGpository: Beta Version</span>
+         <span>Causes of Human Outcomes: Early Access</span>
          <div class="row badges">
          </div>
       </div>
-      <body>
+      
          <label hidden>
             Filter nodes
             <select id="nodeFilterSelect">
@@ -64,6 +64,8 @@
          <p>
             Here are all the relevant causal claims listed in our dataset. 
          </p>
+         <a href="addnewstudy.html" target="_blank">Add a new study here.</a>
+
          <label hidden>
             Filter edges
             <div>
@@ -138,6 +140,15 @@
             </div>
          </div>
          </div>
+        
+        <h1>Data</h1>
+        
+        <table id = "edgetable" style="border: 1px solid black;">
+          <!-- here goes our data! -->
+        </table>
+ 
+        
+        
          <script>
             
             // main DAG variables

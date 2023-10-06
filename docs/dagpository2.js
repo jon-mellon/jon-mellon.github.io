@@ -1,3 +1,4 @@
+
 /*
 // testing code for getNodeStatus:
 
@@ -10,7 +11,21 @@ dvcanreach = reachableNodeOrParent(dv, currentedgeset);
 dvcanreach2 = reachableNodeOrParent(dv, edgeset);
 */
 
-
+getDOIMulti = function(id) {
+  var doismulti = "";
+  var baseedgeids = network.clustering.getBaseEdges(id);
+  var baseedges = origedges.get(baseedgeids);
+  for (var i = 0; i < baseedges.length; i++) {
+    if (baseedges[i].dois != null) {
+      if (doismulti == "") {
+        doismulti = baseedges[i].dois;
+      } else {
+        doismulti = doismulti + ";" + baseedges[i].dois;
+      }
+    }
+  }
+  return(doismulti);
+}
 
 showVariableHeaders = function() {
     document.getElementById("parentlist").innerHTML = "";
@@ -358,7 +373,12 @@ showCurrentNetworkState = function() {
 
     updateNodeStatus();
     nodesView.refresh();
+    //createEdgeTable();
+    
+    setTimeout(createEdgeTable, 1000);
+
 }
+var firstedgetable = true;
 
 reachableNodeOrParent = function(startnode, edgesetall) {
     // reachable self
@@ -580,25 +600,7 @@ cleanDOI = function(doi) {
     doi = doi.replace("www.doi.org/", "");
     return (doi)
 }
-formatArticle = function(dat) {
-    var authors = [];
-    for (var i = 0; i < dat.author.length; i++) {
-        authors[i] = dat.author[i].given + " " + dat.author[i].family;
-    }
-    var authorlist = authors.join(", ");
-    var title = dat.title[0];
-    var journal = dat["container-title"][0];
-    if (journal == null) {
-        journal = "";
-    }
-    var year = dat.published["date-parts"][0][0];
-    let doiurl = dat.URL;
-    var combtitle = "• " + authorlist + " (" + year + ") \"" +
-        title + "\"" + " " + journal + ": " + "<a href=\"" + doiurl +
-        "\" target=\"_blank\">" + doiurl + "</a>\n";
-    //console.log(combtitle);
-    return combtitle
-}
+
 
 //// main DAG ////
 attemptDAGButton = function() {
@@ -610,23 +612,6 @@ attemptDAGButton = function() {
     }
 }
 
-/*
-dvSelected = function() {
-    canreachdv = reachableByNodes(allvars.indexOf(dvselector.value), edgeset)
-    dvcanreach = reachableNodesGeneral(allvars.indexOf(dvselector.value), edgeset)
-    updateNodeStatus();
-    attemptDAGButton();
-}
-
-
-ivSelected = function() {
-
-    canreachiv = reachableByNodes(allvars.indexOf(ivselector.value), edgeset)
-    ivcanreach = reachableNodesGeneral(allvars.indexOf(ivselector.value), edgeset)
-    updateNodeStatus();
-    attemptDAGButton();
-}
-*/
 
 getParentFromLabel = function(nodelabel) {
     for (var i = 0; i < nodesh.length; i++) {
@@ -1101,7 +1086,7 @@ getEdges = function() {
                 if (pubtext.edgeid != id) {
                     pubtext.edgeid = id;
 
-                    var edgenodes = network.getConnectedNodes(pubtext.edgeid)
+                    var edgenodes = network.getConnectedNodes(pubtext.edgeid);
 
                     var xvar = findVariableLabelFromId(edgenodes[0]);
                     var yvar = findVariableLabelFromId(edgenodes[1]);
@@ -1117,18 +1102,7 @@ getEdges = function() {
 
 
                     if (id.includes("cluster")) {
-                        var doismulti = "";
-                        var baseedgeids = network.clustering.getBaseEdges(id);
-                        var baseedges = origedges.get(baseedgeids);
-                        for (var i = 0; i < baseedges.length; i++) {
-                            if (baseedges[i].dois != null) {
-                                if (doismulti == "") {
-                                    doismulti = baseedges[i].dois;
-                                } else {
-                                    doismulti = doismulti + ";" + baseedges[i].dois;
-                                }
-                            }
-                        }
+                        var doismulti = getDOIMulti(id);
                         if (doismulti != "") {
                             try {
                                 let doistemp = doismulti.split(";");
@@ -1855,7 +1829,8 @@ makeEdgeTwoway = function(edge) {
                   enabled: true
               }
           },
-          color: "purple"
+          color: "purple",
+          relation: "twoway"
       })
       } else {
         //console.log("avoided");
@@ -2029,3 +2004,145 @@ isVariableClustered = function(id) {
     }
     return false;
 }
+formatArticle = function(dat, showurl = true) {
+    var authors = [];
+    for (var i = 0; i < dat.author.length; i++) {
+        authors[i] = dat.author[i].given + " " + dat.author[i].family;
+    }
+    var authorlist = authors.join(", ");
+    var title = dat.title[0];
+    var journal = dat["container-title"][0];
+    if (journal == null) {
+        journal = "";
+    }
+    var year = dat.published["date-parts"][0][0];
+    if(showurl) {
+      let doiurl = dat.URL;
+      var combtitle = "• " + authorlist + " (" + year + ") \"" +
+        title + "\"" + " " + journal + ": " + "<a href=\"" + doiurl +
+        "\" target=\"_blank\">" + doiurl + "</a>\n";  
+    } else {
+      var combtitle = "• " + authorlist + " (" + year + ") \"" +
+        title + "\"" + " " + journal + ": ";  
+    }
+    
+    //console.log(combtitle);
+    return combtitle
+}
+
+
+/*
+var citetable = [];
+pubtext.edgeid = id;
+var edgenodes = network.getConnectedNodes(pubtext.edgeid);
+var xvar = findVariableLabelFromId(edgenodes[0]);
+var yvar = findVariableLabelFromId(edgenodes[1]);
+openTab("buttonviewertab", 'viewertab');
+hideVariableHeaders();
+document.getElementById("studytitle").innerText = "Studies";
+document.getElementById("claimstudy").innerText = "";
+clearStudyText();
+let studytitle = xvar + " 🡒 " + yvar;
+*/
+
+
+createEdgeTable = function() {
+  let edgetable = document.getElementById("edgetable");
+  try{
+  edgetable.deleteTHead();
+  while(edgetable.rows.length>0) {
+    edgetable.deleteRow(0)
+  }
+  } catch(e) {
+    
+  }
+  
+  var citetable = [];  
+  var visibleedges = network.body.edgeIndices;
+  var edgesall = Object.entries(network.body.edges);
+
+  for (var i = 0; i < visibleedges.length; i++) {
+    if(visibleedges[i].includes("cluster")) {
+     var betemp = network.getBaseEdges(visibleedges[i]);
+     for (var j = 0; j < betemp.length; j++) {
+       var doiset = getDOIMulti(betemp[j]).split(";");
+       var relationship = network.body.edges[visibleedges[i]].from.options.label + " 🡒 " + network.body.edges[visibleedges[i]].to.options.label;
+       var col = network.body.edges[betemp[j]].options.color.color;
+       var finding;
+            if(col == "green") {
+              finding= "positive"
+            }
+            if(col == "red") {
+              finding= "negative"
+            }
+            if(col == "gray") {
+              finding= "zero"
+            }
+            if(col == "purple") {
+              finding= "mixed"
+            }
+       citetable.push({relationship: relationship, 
+                    x: network.body.edges[betemp[j]].from.options.label, 
+                    y: network.body.edges[betemp[j]].to.options.label,
+                    finding: finding,
+                    citation: doiset
+       });
+     }
+    }
+  }
+  let edgetabledata = Object.keys(citetable[0]);
+  console.log(citetable)
+  generateTable(edgetable, citetable);
+  generateTableHead(edgetable, edgetabledata);
+  firstedgetable = false;
+}
+
+
+function generateTableHead(table, data) {
+  let thead = table.createTHead();
+  let row = thead.insertRow();
+  for (let key of data) {
+    let th = document.createElement("th");
+    
+    let text = document.createTextNode(key);
+    th.appendChild(text);
+    row.appendChild(th);
+  }
+}
+
+function generateTable(table, data) {
+  for (let element of data) {
+    let row = table.insertRow();
+    for (key in element) {
+      let cell = row.insertCell();
+      if(key=="citation") {
+        var celldiv = document.createElement('div');
+        var count = 0;
+        for (var j = 0; j < citations.length; j++) {
+            if(element[key].includes(citations[j].DOI)) {
+              if(count>0) {
+                let lbreak = document.createElement('br');
+                celldiv.appendChild(lbreak);
+              }
+              var citetext = document.createTextNode(formatArticle(citations[j], false));
+              celldiv.appendChild(citetext);
+              var a = document.createElement('a');
+              var linktext = document.createTextNode(citations[j].URL);
+
+              a.appendChild(linktext);
+              a.href = citations[j].URL;      
+              celldiv.appendChild(a);
+              count = count + 1;
+              
+          }
+        }
+        cell.appendChild(celldiv);
+      } else {
+        
+        let text = document.createTextNode(element[key]);
+        cell.appendChild(text); 
+      }
+    }
+  }
+}
+
