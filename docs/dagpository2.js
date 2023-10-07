@@ -895,21 +895,21 @@ getEdges = function() {
         var studypromise = new Promise((resolve, reject) => {
 
             var studies = [{
-                    DOI: "12345",
+                    DOI: "12345A",
                     "x variable": "education",
                     "y variable": "income",
                     "instrument": "",
                     finding: "positive"
                 },
                 {
-                    DOI: "12345",
+                    DOI: "12345a",
                     "x variable": "performance anxiety",
                     "y variable": "performance",
                     "instrument": "",
                     finding: "positive"
                 },
                 {
-                    DOI: "12345",
+                    DOI: "12345c",
                     "x variable": "performance",
                     "y variable": "social anxiety",
                     "instrument": "",
@@ -2066,6 +2066,9 @@ createEdgeTable = function() {
      var betemp = network.getBaseEdges(visibleedges[i]);
      for (var j = 0; j < betemp.length; j++) {
        var doiset = getDOIMulti(betemp[j]).split(";");
+       for (var k = 0; k < doiset.length; k++) {
+         doiset[k] = doiset[k].toLowerCase();
+       }
        var relationship = network.body.edges[visibleedges[i]].from.options.label + " 🡒 " + network.body.edges[visibleedges[i]].to.options.label;
        var col = network.body.edges[betemp[j]].options.color.color;
        var finding;
@@ -2119,7 +2122,7 @@ function generateTable(table, data) {
         var celldiv = document.createElement('div');
         var count = 0;
         for (var j = 0; j < citations.length; j++) {
-            if(element[key].includes(citations[j].DOI)) {
+            if(element[key].includes(citations[j].DOI.toLowerCase())) {
               if(count>0) {
                 let lbreak = document.createElement('br');
                 celldiv.appendChild(lbreak);
