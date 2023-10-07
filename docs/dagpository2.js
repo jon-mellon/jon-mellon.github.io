@@ -374,8 +374,8 @@ showCurrentNetworkState = function() {
     updateNodeStatus();
     nodesView.refresh();
     //createEdgeTable();
-    
-    setTimeout(createEdgeTable, 1000);
+    createEdgeTable();
+    //setTimeout(createEdgeTable, 1000);
 
 }
 var firstedgetable = true;
@@ -554,6 +554,11 @@ getDOIFromCrossRef = function(doi) {
                 citations = citations.filter(function(item, pos) {
                     return doiall.indexOf(item.DOI) == pos;
                 });
+                try{
+                  createEdgeTable();
+                } catch(e) {
+                  
+                }
             }
         })
         .catch((error) => console.error("FETCH ERROR:", error));
