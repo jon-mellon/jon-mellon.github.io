@@ -32,20 +32,86 @@ dvcanreach2 = reachableNodeOrParent(dv, edgeset);
 getDoltStudies = function() {
   var doireadallquery = "SELECT s.*, REPLACE(CONCAT(GROUP_CONCAT(CONCAT(a.given, ' ', a.family) ORDER BY a.id ASC)), ',', ', ') AS authors FROM studies AS s JOIN doiauthors AS a ON s.doi = a.doi GROUP BY s.doi;";
     url = "https://www.dolthub.com/api/v1alpha1/jon-mellon/causes-of-human-outcomes/main?q=" + doireadallquery;
-  var doipromise = fetch(url)
-            .then((response) => {
+  if(currentenv != "offline") {
+    var doipromise = fetch(url).then((response) => {
                 if (response.ok) {
                     let jsonout = response.json();
-                    console.log(jsonout);
-                    for (var i = 0; i < jsonout.length; i++) {
-                      citations2.push(jsonout[i]);
-                    }
                     return jsonout;
                 } else {
                     throw new Error("NETWORK RESPONSE ERROR FROM DOLTHUB DOI CALL");
                 }
-            })  
+            });  
+  } else {
+              
+var doipromise = new Promise((resolve, reject) => {
+            var studytemp = [
+{
+  authors: "Bob Smith, Joe Bloggs, Davey Jones, Jane Doe",
+  title: "The Causal Effect of Lorem Ipsum on tktk",
+  containertitle: "Journal of Placeholder Studies",
+  published: "2023-07-01",
+  URL: "www.example.com",
+  DOI: "12345a"
+},
+{
+  authors: "Bob Smith, Joe Bloggs, Davey Jones, Jane Doe",
+  title: "The Causal Effect of Lorem Ipsum on tktk",
+  containertitle: "Placeholder",
+  published: "2023-07-01",
+  URL: "www.example.com",
+  DOI: "12345c"
+},
+{
+  authors: "Joe Bloggs, Bob Smith, Davey Jones, Jane Doe",
+  title: "The Causal Effect of Lorem Ipsum on tktk",
+  containertitle: "Journal of Experimental Placeholder Studies",
+  published: "2019-02-01",
+  URL: "www.example.com",
+  DOI: "54321"
+},
+{
+  authors: "Joe Bloggs, Bob Smith, Davey Jones, Jane Doe",
+  title: "The Causal Effect of Lorem Ipsum on tktk",
+  containertitle: "Placeholder Studies Quarterly",
+  published: "2023-07-01",
+  URL: "www.example.com",
+  DOI: "243"
+},
+{
+  authors: "Bob Smith, Davey Jones, Jane Doe",
+  title: "The Causal Effect of Lorem Ipsum on tktk",
+  containertitle: "American Placeholder Studies Review",
+  published: "2003-07-21",
+  URL: "www.example.com",
+  DOI: "244"
+},
+{
+  authors: "Joe Bloggs",
+  title: "The Causal Effect of Lorem Ipsum on tktk",
+  containertitle: "Annual Review of Placeholder Studies",
+  published: "1922-01-01",
+  URL: "www.example.com",
+  DOI: "6789"
+},
+];
+  resolve(studytemp);
+  })
+  }
+  
+doipromise.then((response) => {
+  for (var i = 0; i < response.length; i++) {
+                      citations2.push(response[i]);
+                    }
+});
+                    
 }
+
+
+
+        
+        
+
+
 
 getDOIMulti = function(id) {
   var doismulti = "";
@@ -982,6 +1048,7 @@ getEdges = function() {
                     "instrument": "",
                     finding: "positive"
                 },
+                
                 {
                     DOI: "12345a",
                     "x variable": "performance anxiety",
@@ -996,6 +1063,7 @@ getEdges = function() {
                     "instrument": "",
                     finding: "positive"
                 },
+                
                 {
                     DOI: "12345",
                     "x variable": "individual income tax",
@@ -1059,6 +1127,7 @@ getEdges = function() {
                     "instrument": "",
                     finding: "positive"
                 },
+                
                 {
                     DOI: "244",
                     "x variable": "snacks eaten per minute",
@@ -1080,6 +1149,7 @@ getEdges = function() {
                     "instrument": "",
                     finding: "positive"
                 },
+                
                 {
                     DOI: "6789",
                     "x variable": "smoking",
