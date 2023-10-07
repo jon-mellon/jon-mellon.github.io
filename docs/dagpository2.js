@@ -1,4 +1,22 @@
-
+makeDate = function(x) {
+  if(x==null) {
+    return null;
+  } else {
+    let puby = x['date-parts'][0][0];
+    let pubm = x['date-parts'][0][1];
+    let pubd = x['date-parts'][0][2];     if(pubm==null) {
+       pubm = "01";
+    }
+    pubm = String(pubm).padStart(2,'0');
+    if(pubd==null) {
+      pubd = "01";
+    }
+    pubd = String(pubd).padStart(2,'0');
+    let pubdate = puby + "-" + pubm + "-" + pubd;
+    return(pubdate)
+    
+  }
+  }
 /*
 // testing code for getNodeStatus:
 
@@ -10,6 +28,24 @@ getNodeStatus(cnode, iv, dv)
 dvcanreach = reachableNodeOrParent(dv, currentedgeset);
 dvcanreach2 = reachableNodeOrParent(dv, edgeset);
 */
+// create offline version of getDoltStudies
+getDoltStudies = function() {
+  var doireadallquery = "SELECT s.*, REPLACE(CONCAT(GROUP_CONCAT(CONCAT(a.given, ' ', a.family) ORDER BY a.id ASC)), ',', ', ') AS authors FROM studies AS s JOIN doiauthors AS a ON s.doi = a.doi GROUP BY s.doi;";
+    url = "https://www.dolthub.com/api/v1alpha1/jon-mellon/causes-of-human-outcomes/main?q=" + doireadallquery;
+  var doipromise = fetch(url)
+            .then((response) => {
+                if (response.ok) {
+                    let jsonout = response.json();
+                    console.log(jsonout);
+                    for (var i = 0; i < jsonout.length; i++) {
+                      citations2.push(jsonout[i]);
+                    }
+                    return jsonout;
+                } else {
+                    throw new Error("NETWORK RESPONSE ERROR FROM DOLTHUB DOI CALL");
+                }
+            })  
+}
 
 getDOIMulti = function(id) {
   var doismulti = "";
@@ -113,7 +149,6 @@ unclusterAllNodes = function() {
 unclusterSpecificNodes = function(touncluster) {
     for (var i = 0; i < touncluster.length; i++) {
         try {
-            //console.log("Unclustering:" + allclusters[i]);
             network.openCluster(touncluster[i]);
         } catch (e) {
 
@@ -139,17 +174,12 @@ hideChildren2 = function(nodeid) {
         if((allclusters[j].label==hidelabel) & 
           hidelabel!="") {
           try{
-            //console.log("Success: " + allclusters[j].id + " " + allclusters[j].label);
             network.openCluster(allclusters[j].id);
           } catch(e) {
-            //console.log(allclusters[j].id + allclusters[j].label) ;
-            //console.log(e);
           }
         }
       }
     }
-    
-    console.log("cluster: " + parentlabel+ " nodes:" + hidethese);
     clusterNodes2(nodeidstocluster = hidethese,
         label = parentlabel, origid = nodeid);
     //updateAllClusterEdges();
@@ -475,12 +505,21 @@ citationPresent = function(doi) {
     }
     return false;
 }
+citationPresent2 = function(doi) {
+    for (var i = 0; i < citations2.length; i++) {
+        if (citations2[i].doi == doi.toLowerCase()) {
+            return true;
+        }
+    }
+    return false;
+}
+
 //// reference management ////
 clearStudyText = function() {
     pubtext.innerHTML = ""
 }
 populateCiteFromDOI = function(doi) {
-
+    /*
     if (citationPresent(doi)) {
         for (var i = 0; i < citations.length; i++) {
             if (citations[i].DOI == doi.toLowerCase()) {
@@ -490,10 +529,23 @@ populateCiteFromDOI = function(doi) {
             }
         }
     }
+    */
+    if (citationPresent2(doi)) {
+        for (var i = 0; i < citations2.length; i++) {
+            if (citations2[i].doi == doi.toLowerCase()) {
+                pubtext.innerHTML = pubtext.innerHTML + "<br>" + formatArticle2(citations2[i]);
+            } else {
+
+            }
+        }
+    }
 
 }
 
 getDOIFromCrossRef = function(doi) {
+    if(citationPresent2(doi)) {
+      return null;
+    }
     if (currentenv != "offline") {
         var doipromise = fetch("https://api.crossref.org/works/" + doi)
             .then((response) => {
@@ -542,10 +594,35 @@ getDOIFromCrossRef = function(doi) {
         });
     }
     doipromise.then(data => {
-            //console.log(data);
             if (!citationPresent(doi)) {
                 //data.message.DOI = data.message.DOI.toLowerCase();
                 citations.push(data.message);
+                
+                var authorlist = data.message.author[0].given + " " + data.message.author[0].family;
+                for (var i = 1; i < data.message.author.length; i++) {
+                  authorlist = authorlist + ", " + data.message.author[i].given + " " + data.message.author[i].family;
+                }
+
+                
+                citations2.push({
+      URL:data.message.URL,
+      alternativeid: data.message["alternative-id"],
+      authors: authorlist,
+      containertitle: data.message["container-title"],
+      doi: data.message.DOI,
+      issue: data.message.issue,
+      language:data.message.language,
+      page: data.message.page,
+      published:makeDate(data.message.published),
+      publishedonline:makeDate(data.message["published-online"]),
+      publishedprint:makeDate(data.message["published-print"]),
+      publisher: data.message.publisher,
+      referencecount: data.message["is-referenced-by-count"],
+      shortcontainertitle: data.message["short-container-title"],
+      timestamp: null,
+      title: data.message.title[0],
+      type: data.message.type,
+    });                 
                 // remove duplicates
                 var doiall = [];
                 for (var i = 0; i < citations.length; i++) {
@@ -796,7 +873,6 @@ updateNodeStatus = function() {
                 confounders.push(vardettemp.id);
             }
         }
-        //console.log(confounders);
         if(confounders.length>0) {
         for (var i = 0; i < confounders.length; i++) {
             let cfreach = reachableNodesGeneral(confounders[i], currentedgeset);
@@ -869,7 +945,7 @@ reachableByNodes = function(startnode, edgesetall) {
         for (var i = 0; i < nodestocheck.length; i++) {
             var currentnode = nodestocheck[i];
             if (!currentnode.search == null) {
-                //console.log("reachablebynodes: " + currentnode);
+                
             }
 
             for (var j = 0; j < edgesetall.length; j++) {
@@ -1229,7 +1305,6 @@ createNetwork = function() {
                 for (var i = 0; i < allvars.length; i++) {
                     if (allvars[i] == findVariableLabelFromId(properties.nodes)) {
                         var childtext = "";
-                        //console.log(properties);
 
                         if (allchildren[i].length > 0) {
                             for (var j = 0; j < allchildren[i].length; j++) {
@@ -1332,7 +1407,6 @@ const nodesFilter = (node) => {
             if (combvardet[combids.indexOf(node.id)].status != "irrelevant") {
                 return true;
             } else {
-                //  console.log("rejected for nodestatus of irrelevant: " + node.label);
                 return false;
             }
         }
@@ -1755,7 +1829,6 @@ createListHierarchy = function() {
     for (i = 0; i < toggler.length; i++) {
         toggler[i].addEventListener("click", function() {
             let tempid = Number(this.id.replace("node", ""));
-            //console.log(tempid);
             this.parentElement.querySelector(".nested").classList.toggle("active");
             this.classList.toggle("caret-down");
 
@@ -1825,7 +1898,6 @@ makeNodeBoring = function(id) {
 
 
 makeEdgeTwoway = function(edge) {
-    //console.log("make edge twoway activated");
     if(network.body.edges[edge].options.arrows.from.enabled!=null) {
       if(!network.body.edges[edge].options.arrows.from.enabled) {
         network.updateEdge(edge, {
@@ -2035,6 +2107,28 @@ formatArticle = function(dat, showurl = true) {
     return combtitle
 }
 
+formatArticle2 = function(dat, showurl = true) {
+    var authorlist = dat.authors;
+    var title = dat.title;
+    var journal = dat["containertitle"];
+    if (journal == null) {
+        journal = "";
+    }
+    var year = dat.published.split("-")[0];
+    if(showurl) {
+      let doiurl = dat.URL;
+      var combtitle = "• " + authorlist + " (" + year + ") \"" +
+        title + "\"" + " " + journal + ": " + "<a href=\"" + doiurl +
+        "\" target=\"_blank\">" + doiurl + "</a>\n";  
+    } else {
+      var combtitle = "• " + authorlist + " (" + year + ") \"" +
+        title + "\"" + " " + journal + ": ";  
+    }
+    
+    //console.log(combtitle);
+    return combtitle
+}
+
 
 /*
 var citetable = [];
@@ -2099,7 +2193,6 @@ createEdgeTable = function() {
     }
   }
   let edgetabledata = Object.keys(citetable[0]);
-  console.log(citetable)
   generateTable(edgetable, citetable);
   generateTableHead(edgetable, edgetabledata);
   firstedgetable = false;
@@ -2126,19 +2219,19 @@ function generateTable(table, data) {
       if(key=="citation") {
         var celldiv = document.createElement('div');
         var count = 0;
-        for (var j = 0; j < citations.length; j++) {
-            if(element[key].includes(citations[j].DOI.toLowerCase())) {
+        for (var j = 0; j < citations2.length; j++) {
+            if(element[key].includes(citations2[j].doi.toLowerCase())) {
               if(count>0) {
                 let lbreak = document.createElement('br');
                 celldiv.appendChild(lbreak);
               }
-              var citetext = document.createTextNode(formatArticle(citations[j], false));
+              var citetext = document.createTextNode(formatArticle2(citations2[j], false));
               celldiv.appendChild(citetext);
               var a = document.createElement('a');
-              var linktext = document.createTextNode(citations[j].URL);
+              var linktext = document.createTextNode(citations2[j].URL);
 
               a.appendChild(linktext);
-              a.href = citations[j].URL;      
+              a.href = citations2[j].URL;      
               celldiv.appendChild(a);
               count = count + 1;
               
