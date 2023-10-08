@@ -1,22 +1,23 @@
 makeDate = function(x) {
-  if(x==null) {
-    return null;
-  } else {
-    let puby = x['date-parts'][0][0];
-    let pubm = x['date-parts'][0][1];
-    let pubd = x['date-parts'][0][2];     if(pubm==null) {
-       pubm = "01";
+    if (x == null) {
+        return null;
+    } else {
+        let puby = x['date-parts'][0][0];
+        let pubm = x['date-parts'][0][1];
+        let pubd = x['date-parts'][0][2];
+        if (pubm == null) {
+            pubm = "01";
+        }
+        pubm = String(pubm).padStart(2, '0');
+        if (pubd == null) {
+            pubd = "01";
+        }
+        pubd = String(pubd).padStart(2, '0');
+        let pubdate = puby + "-" + pubm + "-" + pubd;
+        return (pubdate)
+
     }
-    pubm = String(pubm).padStart(2,'0');
-    if(pubd==null) {
-      pubd = "01";
-    }
-    pubd = String(pubd).padStart(2,'0');
-    let pubdate = puby + "-" + pubm + "-" + pubd;
-    return(pubdate)
-    
-  }
-  }
+}
 /*
 // testing code for getNodeStatus:
 
@@ -30,103 +31,105 @@ dvcanreach2 = reachableNodeOrParent(dv, edgeset);
 */
 // create offline version of getDoltStudies
 getDoltStudies = function() {
-  var doireadallquery = "SELECT s.*, REPLACE(CONCAT(GROUP_CONCAT(CONCAT(a.given, ' ', a.family) ORDER BY a.id ASC)), ',', ', ') AS authors FROM studies AS s JOIN doiauthors AS a ON s.doi = a.doi GROUP BY s.doi;";
-    url = "https://www.dolthub.com/api/v1alpha1/jon-mellon/causes-of-human-outcomes/main?q=" + doireadallquery;
-  if(currentenv != "offline") {
-    var doipromise = fetch(url).then((response) => {
-                if (response.ok) {
-                    let jsonout = response.json();
-                    return jsonout;
-                } else {
-                    throw new Error("NETWORK RESPONSE ERROR FROM DOLTHUB DOI CALL");
-                }
-            });  
-  } else {
-              
-var doipromise = new Promise((resolve, reject) => {
-            var studytemp = [
-{
-  authors: "Bob Smith, Joe Bloggs, Davey Jones, Jane Doe",
-  title: "The Causal Effect of Lorem Ipsum on tktk",
-  containertitle: "Journal of Placeholder Studies",
-  published: "2023-07-01",
-  URL: "www.example.com",
-  DOI: "12345a"
-},
-{
-  authors: "Bob Smith, Joe Bloggs, Davey Jones, Jane Doe",
-  title: "The Causal Effect of Lorem Ipsum on tktk",
-  containertitle: "Placeholder",
-  published: "2023-07-01",
-  URL: "www.example.com",
-  DOI: "12345c"
-},
-{
-  authors: "Joe Bloggs, Bob Smith, Davey Jones, Jane Doe",
-  title: "The Causal Effect of Lorem Ipsum on tktk",
-  containertitle: "Journal of Experimental Placeholder Studies",
-  published: "2019-02-01",
-  URL: "www.example.com",
-  DOI: "54321"
-},
-{
-  authors: "Joe Bloggs, Bob Smith, Davey Jones, Jane Doe",
-  title: "The Causal Effect of Lorem Ipsum on tktk",
-  containertitle: "Placeholder Studies Quarterly",
-  published: "2023-07-01",
-  URL: "www.example.com",
-  DOI: "243"
-},
-{
-  authors: "Bob Smith, Davey Jones, Jane Doe",
-  title: "The Causal Effect of Lorem Ipsum on tktk",
-  containertitle: "American Placeholder Studies Review",
-  published: "2003-07-21",
-  URL: "www.example.com",
-  DOI: "244"
-},
-{
-  authors: "Joe Bloggs",
-  title: "The Causal Effect of Lorem Ipsum on tktk",
-  containertitle: "Annual Review of Placeholder Studies",
-  published: "1922-01-01",
-  URL: "www.example.com",
-  DOI: "6789"
-},
-];
-  resolve(studytemp);
-  })
-  }
-  
-doipromise.then((response) => {
-  for (var i = 0; i < response.length; i++) {
-                      citations2.push(response[i]);
-                    }
-});
-                    
+    var doireadallquery = "SELECT s.*, REPLACE(CONCAT(GROUP_CONCAT(CONCAT(a.given, ' ', a.family) ORDER BY a.id ASC)), ',', ', ') AS authors FROM studies AS s JOIN doiauthors AS a ON s.doi = a.doi GROUP BY s.doi;";
+    var url = "https://www.dolthub.com/api/v1alpha1/jon-mellon/causes-of-human-outcomes/main?q=" + doireadallquery;
+    if (currentenv != "offline") {
+        var doipromise = fetch(url).then((response) => {
+            if (response.ok) {
+                let jsonout = response.json();
+                return jsonout;
+            } else {
+                throw new Error("NETWORK RESPONSE ERROR FROM DOLTHUB DOI CALL");
+            }
+        });
+    } else {
+
+        var doipromise = new Promise((resolve, reject) => {
+            var studytemp = {
+                rows: [{
+                        authors: "Bob Smith, Joe Bloggs, Davey Jones, Jane Doe",
+                        title: "The Causal Effect of Lorem Ipsum on tktk",
+                        containertitle: "Journal of Placeholder Studies",
+                        published: "2023-07-01",
+                        URL: "www.example.com",
+                        doi: "12345a"
+                    },
+                    {
+                        authors: "Bob Smith, Joe Bloggs, Davey Jones, Jane Doe",
+                        title: "The Causal Effect of tktk on tbc",
+                        containertitle: "Placeholder",
+                        published: "2023-07-01",
+                        URL: "www.example.com",
+                        doi: "12345c"
+                    },
+                    {
+                        authors: "Joe Bloggs, Bob Smith, Davey Jones, Jane Doe",
+                        title: "On Lorem Ipsum",
+                        containertitle: "Journal of Experimental Placeholder Studies",
+                        published: "2019-02-01",
+                        URL: "www.example.com",
+                        doi: "54321"
+                    },
+                    {
+                        authors: "Joe Bloggs, Bob Smith, Davey Jones, Jane Doe",
+                        title: "The Causal Effect of Lorem Ipsum on tktk",
+                        containertitle: "Placeholder Studies Quarterly",
+                        published: "2023-07-01",
+                        URL: "www.example.com",
+                        doi: "243"
+                    },
+                    {
+                        authors: "Bob Smith, Davey Jones, Jane Doe",
+                        title: "The Causal Effect of Lorem Ipsum on tktk",
+                        containertitle: "American Placeholder Studies Review",
+                        published: "2003-07-21",
+                        URL: "www.example.com",
+                        doi: "244"
+                    },
+                    {
+                        authors: "Joe Bloggs",
+                        title: "The Causal Effect of Lorem Ipsum on tktk",
+                        containertitle: "Annual Review of Placeholder Studies",
+                        published: "1922-01-01",
+                        URL: "www.example.com",
+                        doi: "6789"
+                    },
+                ]
+            };
+            resolve(studytemp);
+        })
+    }
+
+    doipromise.then((response) => {
+        for (var i = 0; i < response.rows.length; i++) {
+            citations2.push(response.rows[i]);
+        }
+    });
+    fetchAllCrossRef();
+    try {
+        createEdgeTable();
+    } catch (e) {
+
+    }
 }
 
 
 
-        
-        
-
-
 
 getDOIMulti = function(id) {
-  var doismulti = "";
-  var baseedgeids = network.clustering.getBaseEdges(id);
-  var baseedges = origedges.get(baseedgeids);
-  for (var i = 0; i < baseedges.length; i++) {
-    if (baseedges[i].dois != null) {
-      if (doismulti == "") {
-        doismulti = baseedges[i].dois;
-      } else {
-        doismulti = doismulti + ";" + baseedges[i].dois;
-      }
+    var doismulti = "";
+    var baseedgeids = network.clustering.getBaseEdges(id);
+    var baseedges = origedges.get(baseedgeids);
+    for (var i = 0; i < baseedges.length; i++) {
+        if (baseedges[i].dois != null) {
+            if (doismulti == "") {
+                doismulti = baseedges[i].dois;
+            } else {
+                doismulti = doismulti + ";" + baseedges[i].dois;
+            }
+        }
     }
-  }
-  return(doismulti);
+    return (doismulti);
 }
 
 showVariableHeaders = function() {
@@ -235,16 +238,15 @@ hideChildren2 = function(nodeid) {
     hidethese.push(nodeid);
     var allclusters = getAllClusters(network);
     for (var i = 0; i < hidethese.length; i++) {
-      var hidelabel = nodeLabelFromIdh(hidethese[i]);
-      for (var j = 0; j < allclusters.length; j++) {
-        if((allclusters[j].label==hidelabel) & 
-          hidelabel!="") {
-          try{
-            network.openCluster(allclusters[j].id);
-          } catch(e) {
-          }
+        var hidelabel = nodeLabelFromIdh(hidethese[i]);
+        for (var j = 0; j < allclusters.length; j++) {
+            if ((allclusters[j].label == hidelabel) &
+                hidelabel != "") {
+                try {
+                    network.openCluster(allclusters[j].id);
+                } catch (e) {}
+            }
         }
-      }
     }
     clusterNodes2(nodeidstocluster = hidethese,
         label = parentlabel, origid = nodeid);
@@ -282,40 +284,40 @@ clusterNodes2 = function(nodeidstocluster, label, origid) {
 
 
 unclusterUnfoldedNodes = function() {
-  let allclusters = getAllClusters(network);
-  for (var i = 0; i < allclusters.length; i++) {
-      var clusterlabel = allclusters[i].label;
-      var uncluster = true;
-      for (var j = 0; j < foldednodes.length; j++) {
-        if(foldednodes[j].label==clusterlabel) {
-          uncluster = false;
+    let allclusters = getAllClusters(network);
+    for (var i = 0; i < allclusters.length; i++) {
+        var clusterlabel = allclusters[i].label;
+        var uncluster = true;
+        for (var j = 0; j < foldednodes.length; j++) {
+            if (foldednodes[j].label == clusterlabel) {
+                uncluster = false;
+            }
         }
-      }
-      if(uncluster) {
-        try {
-          //console.log("Unclustering:" + allclusters[i]);
-          network.openCluster(allclusters[i].id);
-        } catch (e) {
+        if (uncluster) {
+            try {
+                //console.log("Unclustering:" + allclusters[i]);
+                network.openCluster(allclusters[i].id);
+            } catch (e) {
 
-        }  
-      }
-  }
+            }
+        }
+    }
 }
 
 clusterFoldedNodes = function() {
-    
+
     // this function clusters everything in the foldednodes array
     var allclusters = getAllClusters(network);
     for (var i = 0; i < foldednodes.length; i++) {
-      var cluster = true;
-      for (var j = 0; j < allclusters.length; j++) {
-        if(allclusters[j].label==foldednodes[i].label) {
-          cluster = false;
+        var cluster = true;
+        for (var j = 0; j < allclusters.length; j++) {
+            if (allclusters[j].label == foldednodes[i].label) {
+                cluster = false;
+            }
         }
-      }
-      if(cluster) {
-        hideChildren2(foldednodes[i].id);
-      }
+        if (cluster) {
+            hideChildren2(foldednodes[i].id);
+        }
     }
     updateAllClusterEdges();
 }
@@ -378,70 +380,70 @@ sfb = function() {
 
 
 calculateReachabilities = function() {
-      // calculate reachabilities from currentedgeset
+    // calculate reachabilities from currentedgeset
     var ivselectorindex = findVariableIdFromLabel(ivselector.value);
     var dvselectorindex = findVariableIdFromLabel(dvselector.value);
 
-    if (dvselectorindex != null && dvselectorindex!=-1) {
+    if (dvselectorindex != null && dvselectorindex != -1) {
         dvchildren = reachableNodesGeneral(dvselectorindex, edgesh);
         dvparents = reachableByNodes(dvselectorindex, edgesh);
         var dvcomb = dvchildren.concat(dvparents);
-        
+
         canreachdv = reachableByNodeOrParent(dvselectorindex, currentedgeset, network);
         canreachdv2 = reachableByNodeOrParent(dvselectorindex, edgeset, network);
         canreachdv = canreachdv.concat(canreachdv2);
         dvcanreach = reachableNodeOrParent(dvselectorindex, currentedgeset);
         dvcanreach2 = reachableNodeOrParent(dvselectorindex, edgeset);
         dvcanreach = dvcanreach.concat(dvcanreach2);
-        
+
         for (var i = 0; i < dvcomb.length; i++) {
-          canreachdv = canreachdv.concat(reachableByNodeOrParent(dvcomb[i], currentedgeset, network));
-          canreachdv = canreachdv.concat(reachableByNodeOrParent(dvcomb[i], edgeset, network));
-          dvcanreach = dvcanreach.concat(reachableNodeOrParent(dvcomb[i], currentedgeset));
-          dvcanreach = dvcanreach.concat(reachableNodeOrParent(dvcomb[i], edgeset));
+            canreachdv = canreachdv.concat(reachableByNodeOrParent(dvcomb[i], currentedgeset, network));
+            canreachdv = canreachdv.concat(reachableByNodeOrParent(dvcomb[i], edgeset, network));
+            dvcanreach = dvcanreach.concat(reachableNodeOrParent(dvcomb[i], currentedgeset));
+            dvcanreach = dvcanreach.concat(reachableNodeOrParent(dvcomb[i], edgeset));
         }
-        
+
         canreachdv = canreachdv.filter(onlyUnique);
         dvcanreach = dvcanreach.filter(onlyUnique);
-        
+
     } else {
         dvcanreach = [];
         canreachdv = [];
         dvchildren = [];
         dvparents = [];
     }
-    if (ivselectorindex != null && ivselectorindex!=-1) {
+    if (ivselectorindex != null && ivselectorindex != -1) {
         ivchildren = reachableNodesGeneral(ivselectorindex, edgesh);
         ivparents = reachableByNodes(ivselectorindex, edgesh);
         var ivcomb = ivchildren.concat(ivparents);
 
-        
+
         canreachiv = reachableByNodeOrParent(ivselectorindex, currentedgeset, network);
         canreachiv2 = reachableByNodeOrParent(ivselectorindex, edgeset, network);
         canreachiv = canreachiv.concat(canreachiv2);
-        
+
         ivcanreach = reachableNodeOrParent(ivselectorindex, currentedgeset);
         ivcanreach2 = reachableNodeOrParent(ivselectorindex, edgeset);
         ivcanreach = ivcanreach.concat(ivcanreach2);
-        
-         
+
+
         for (var i = 0; i < ivcomb.length; i++) {
-          canreachiv = canreachiv.concat(reachableByNodeOrParent(ivcomb[i], currentedgeset, network));
-          canreachiv = canreachiv.concat(reachableByNodeOrParent(ivcomb[i], edgeset, network));
-          ivcanreach = ivcanreach.concat(reachableNodeOrParent(ivcomb[i], currentedgeset));
-          ivcanreach = ivcanreach.concat(reachableNodeOrParent(ivcomb[i], edgeset));
+            canreachiv = canreachiv.concat(reachableByNodeOrParent(ivcomb[i], currentedgeset, network));
+            canreachiv = canreachiv.concat(reachableByNodeOrParent(ivcomb[i], edgeset, network));
+            ivcanreach = ivcanreach.concat(reachableNodeOrParent(ivcomb[i], currentedgeset));
+            ivcanreach = ivcanreach.concat(reachableNodeOrParent(ivcomb[i], edgeset));
         }
-        
+
         canreachiv = canreachiv.filter(onlyUnique);
         ivcanreach = ivcanreach.filter(onlyUnique);
-        
+
     } else {
         canreachiv = [];
         ivcanreach = [];
         ivchildren = [];
         ivparents = [];
     }
-  }
+}
 
 showCurrentNetworkState = function() {
     // show all nodes
@@ -458,7 +460,7 @@ showCurrentNetworkState = function() {
     clusterFoldedNodes();
     // create currentedgeset from current network
     currentNetworkEdgeSet(network);
-    
+
     calculateReachabilities();
 
     updateNodeStatus();
@@ -470,7 +472,12 @@ showCurrentNetworkState = function() {
     updateNodeStatus();
     nodesView.refresh();
     //createEdgeTable();
-    createEdgeTable();
+    try {
+        createEdgeTable();
+    } catch (e) {
+
+    }
+
     //setTimeout(createEdgeTable, 1000);
 
 }
@@ -490,27 +497,27 @@ reachableNodeOrParent = function(startnode, edgesetall) {
                 allreachable = allreachable.concat(reachableNodesGeneral(tempclusternodes[j], edgesetall));
             }
             allreachable = allreachable.concat(reachableNodesGeneral(allclusters[i].id, edgesetall));
-            
+
         }
     }
-    if(getParent(startnode)!="") {
-      allreachable = allreachable.concat(reachableNodesGeneral(getParent(startnode), edgesetall));  
+    if (getParent(startnode) != "") {
+        allreachable = allreachable.concat(reachableNodesGeneral(getParent(startnode), edgesetall));
     }
-    
-    
+
+
     // reachable child?
 
     return (allreachable)
 }
 
 openListToLevel = function(cnode) {
-  
+
 }
 
 reachableByNodeOrParent = function(startnode, edgesetall, currentnetwork) {
     var allreachable = reachableByNodes(startnode, edgesetall);
     var allclusters = getAllClusters(currentnetwork);
-    
+
     // if startnode is in a cluster, add any variables that nodes within that 
     // cluster can reach to the reachable array. 
     // Also add in any variables that the cluster itself can reach
@@ -563,6 +570,7 @@ reachableNodesGeneral = function(startnode, edgesetall) {
     nodesreached = nodesreached.filter(onlyUnique);
     return nodesreached;
 }
+/*
 citationPresent = function(doi) {
     for (var i = 0; i < citations.length; i++) {
         if (citations[i].DOI == doi.toLowerCase()) {
@@ -571,6 +579,7 @@ citationPresent = function(doi) {
     }
     return false;
 }
+*/
 citationPresent2 = function(doi) {
     for (var i = 0; i < citations2.length; i++) {
         if (citations2[i].doi == doi.toLowerCase()) {
@@ -609,9 +618,10 @@ populateCiteFromDOI = function(doi) {
 }
 
 getDOIFromCrossRef = function(doi) {
-    if(citationPresent2(doi)) {
-      return null;
+    if (citationPresent2(doi)) {
+        return null;
     }
+    console.log("got past cp2 check" + doi);
     if (currentenv != "offline") {
         var doipromise = fetch("https://api.crossref.org/works/" + doi)
             .then((response) => {
@@ -660,35 +670,36 @@ getDOIFromCrossRef = function(doi) {
         });
     }
     doipromise.then(data => {
-            if (!citationPresent(doi)) {
+            if (!citationPresent2(doi)) {
                 //data.message.DOI = data.message.DOI.toLowerCase();
-                citations.push(data.message);
-                
+                //citations.push(data.message);
+
                 var authorlist = data.message.author[0].given + " " + data.message.author[0].family;
                 for (var i = 1; i < data.message.author.length; i++) {
-                  authorlist = authorlist + ", " + data.message.author[i].given + " " + data.message.author[i].family;
+                    authorlist = authorlist + ", " + data.message.author[i].given + " " + data.message.author[i].family;
                 }
 
-                
+
                 citations2.push({
-      URL:data.message.URL,
-      alternativeid: data.message["alternative-id"],
-      authors: authorlist,
-      containertitle: data.message["container-title"],
-      doi: data.message.DOI,
-      issue: data.message.issue,
-      language:data.message.language,
-      page: data.message.page,
-      published:makeDate(data.message.published),
-      publishedonline:makeDate(data.message["published-online"]),
-      publishedprint:makeDate(data.message["published-print"]),
-      publisher: data.message.publisher,
-      referencecount: data.message["is-referenced-by-count"],
-      shortcontainertitle: data.message["short-container-title"],
-      timestamp: null,
-      title: data.message.title[0],
-      type: data.message.type,
-    });                 
+                    URL: data.message.URL,
+                    alternativeid: data.message["alternative-id"],
+                    authors: authorlist,
+                    containertitle: data.message["container-title"],
+                    doi: data.message.DOI,
+                    issue: data.message.issue,
+                    language: data.message.language,
+                    page: data.message.page,
+                    published: makeDate(data.message.published),
+                    publishedonline: makeDate(data.message["published-online"]),
+                    publishedprint: makeDate(data.message["published-print"]),
+                    publisher: data.message.publisher,
+                    referencecount: data.message["is-referenced-by-count"],
+                    shortcontainertitle: data.message["short-container-title"],
+                    timestamp: null,
+                    title: data.message.title[0],
+                    type: data.message.type,
+                });
+                /*
                 // remove duplicates
                 var doiall = [];
                 for (var i = 0; i < citations.length; i++) {
@@ -697,10 +708,11 @@ getDOIFromCrossRef = function(doi) {
                 citations = citations.filter(function(item, pos) {
                     return doiall.indexOf(item.DOI) == pos;
                 });
-                try{
-                  createEdgeTable();
-                } catch(e) {
-                  
+                */
+                try {
+                    createEdgeTable();
+                } catch (e) {
+
                 }
             }
         })
@@ -711,7 +723,6 @@ getAllDOIS = function() {
     //console.log("getAllDOIS called");
     var alldois = [];
     for (var i = 0; i < edgeset.length; i++) {
-
         if (typeof edgeset[i].dois !== "undefined") {
             let tempdois = edgeset[i].dois.split(";");
             for (var j = 0; j < tempdois.length; j++) {
@@ -781,18 +792,18 @@ getParent = function(nodeid) {
 
 
 ts = function(scenario = 1) {
-  if(scenario ==1 ) {
-    sfb();
-    ivselector.value = "income";
-    dvselector.value = "years of schooling";
-    showCurrentNetworkState();    
-  }
-  if(scenario ==2 ) {
-    sfb();
-    ivselector.value = "income";
-    dvselector.value = "minutes of schooling";
-    showCurrentNetworkState();    
-  }
+    if (scenario == 1) {
+        sfb();
+        ivselector.value = "income";
+        dvselector.value = "years of schooling";
+        showCurrentNetworkState();
+    }
+    if (scenario == 2) {
+        sfb();
+        ivselector.value = "income";
+        dvselector.value = "minutes of schooling";
+        showCurrentNetworkState();
+    }
 }
 
 getNodeStatus = function(cnode, iv, dv) {
@@ -805,7 +816,7 @@ getNodeStatus = function(cnode, iv, dv) {
         makeNodeOrange(cnode);
         return ("dependent variable");
     }
-    
+
     var ivlabel = findVariableLabelFromId(iv);
     var cparent = getParent(cnode);
 
@@ -818,45 +829,45 @@ getNodeStatus = function(cnode, iv, dv) {
         makeNodeOrange(cnode);
         return ("dependent variable");
     }
-    
-    
+
+
     var clabel = findVariableLabelFromId(cnode);
-    
+
     //var dvparent = getParent(dv);
-    
-    if(clabel!=""){
-    for (var i = 0; i < dvparents.length; i++) {
-      if(clabel==findVariableLabelFromId(dvparents[i])) {
-        makeNodeOrange(cnode);
-        return ("dependent variable");
-      }
+
+    if (clabel != "") {
+        for (var i = 0; i < dvparents.length; i++) {
+            if (clabel == findVariableLabelFromId(dvparents[i])) {
+                makeNodeOrange(cnode);
+                return ("dependent variable");
+            }
+        }
+        for (var i = 0; i < dvchildren.length; i++) {
+            if (clabel == findVariableLabelFromId(dvchildren[i])) {
+                makeNodeOrange(cnode);
+                return ("dependent variable");
+            }
+        }
+        for (var i = 0; i < ivparents.length; i++) {
+            if (clabel == findVariableLabelFromId(ivparents[i])) {
+                makeNodeOrange(cnode);
+                return ("dependent variable");
+            }
+        }
+        for (var i = 0; i < ivchildren.length; i++) {
+            if (clabel == findVariableLabelFromId(ivchildren[i])) {
+                makeNodeOrange(cnode);
+                return ("dependent variable");
+            }
+        }
     }
-    for (var i = 0; i < dvchildren.length; i++) {
-      if(clabel==findVariableLabelFromId(dvchildren[i])) {
-        makeNodeOrange(cnode);
-        return ("dependent variable");
-      }
-    }
-    for (var i = 0; i < ivparents.length; i++) {
-      if(clabel==findVariableLabelFromId(ivparents[i])) {
-        makeNodeOrange(cnode);
-        return ("dependent variable");
-      }
-    }
-    for (var i = 0; i < ivchildren.length; i++) {
-      if(clabel==findVariableLabelFromId(ivchildren[i])) {
-        makeNodeOrange(cnode);
-        return ("dependent variable");
-      }
-    }
-    }
-    
+
 
     let riv = canreachiv.includes(cnode);
     let rdv = canreachdv.includes(cnode);
     let ivr = ivcanreach.includes(cnode);
     let dvr = dvcanreach.includes(cnode);
-    
+
     if ((riv && ivr) || (rdv && dvr) || (dvr && riv)) {
         makeNodeBoring(cnode);
         return ("loop");
@@ -926,7 +937,7 @@ updateNodeStatus = function() {
             iv = findVariableIdFromLabel(ivselector.value);
         }
 
-        
+
         for (var i = 0; i < combvardet.length; i++) {
             combvardet[i].status = getNodeStatus(combvardet[i].id,
                 iv = iv, dv = dv);
@@ -939,21 +950,21 @@ updateNodeStatus = function() {
                 confounders.push(vardettemp.id);
             }
         }
-        if(confounders.length>0) {
-        for (var i = 0; i < confounders.length; i++) {
-            let cfreach = reachableNodesGeneral(confounders[i], currentedgeset);
-            for (var j = 0; j < cfreach.length; j++) {
-                if (canreachdv.includes(cfreach[j]) | canreachiv.includes(cfreach[j])) {
-                    for (var k = 0; k < combvardet.length; k++) {
-                      if(combvardet[k].id==cfreach[j]) {
-                        combvardet[k].status = "confounder pathway";
-                      }
+        if (confounders.length > 0) {
+            for (var i = 0; i < confounders.length; i++) {
+                let cfreach = reachableNodesGeneral(confounders[i], currentedgeset);
+                for (var j = 0; j < cfreach.length; j++) {
+                    if (canreachdv.includes(cfreach[j]) | canreachiv.includes(cfreach[j])) {
+                        for (var k = 0; k < combvardet.length; k++) {
+                            if (combvardet[k].id == cfreach[j]) {
+                                combvardet[k].status = "confounder pathway";
+                            }
+                        }
                     }
                 }
             }
-        }  
         }
-        
+
 
 
     }
@@ -984,13 +995,14 @@ getAllClusters = function(currentnetwork) {
     var allclusters = [];
     var allclids = [];
     for (var i = 0; i < allcnodes.length; i++) {
-      if(!allclids.includes(allcnodes[i][1].clusterId)) {
-        allclusters.push({id: allcnodes[i][1].clusterId, 
-          label: network.body.nodes[allcnodes[i][1].clusterId].options.label
-        });
-        allclids.push(allcnodes[i][1].clusterId);
+        if (!allclids.includes(allcnodes[i][1].clusterId)) {
+            allclusters.push({
+                id: allcnodes[i][1].clusterId,
+                label: network.body.nodes[allcnodes[i][1].clusterId].options.label
+            });
+            allclids.push(allcnodes[i][1].clusterId);
         }
-      }
+    }
     allclusters = allclusters.filter(onlyUnique);
     return (allclusters);
 }
@@ -1011,7 +1023,7 @@ reachableByNodes = function(startnode, edgesetall) {
         for (var i = 0; i < nodestocheck.length; i++) {
             var currentnode = nodestocheck[i];
             if (!currentnode.search == null) {
-                
+
             }
 
             for (var j = 0; j < edgesetall.length; j++) {
@@ -1048,7 +1060,7 @@ getEdges = function() {
                     "instrument": "",
                     finding: "positive"
                 },
-                
+
                 {
                     DOI: "12345a",
                     "x variable": "performance anxiety",
@@ -1063,7 +1075,7 @@ getEdges = function() {
                     "instrument": "",
                     finding: "positive"
                 },
-                
+
                 {
                     DOI: "12345",
                     "x variable": "individual income tax",
@@ -1127,7 +1139,7 @@ getEdges = function() {
                     "instrument": "",
                     finding: "positive"
                 },
-                
+
                 {
                     DOI: "244",
                     "x variable": "snacks eaten per minute",
@@ -1149,7 +1161,7 @@ getEdges = function() {
                     "instrument": "",
                     finding: "positive"
                 },
-                
+
                 {
                     DOI: "6789",
                     "x variable": "smoking",
@@ -1324,9 +1336,10 @@ getEdges = function() {
 
 
         createNetwork();
-        fetchAllCrossRef();
+        getDoltStudies();
         createListHierarchy();
         showCurrentNetworkState();
+        createEdgeTable();
     })
 }
 var notstarted = true;
@@ -1349,203 +1362,203 @@ createNetwork = function() {
                 selectConnectedEdges: false
             },
             layout: {
-              randomSeed: 191006,
-              improvedLayout: false
+                randomSeed: 191006,
+                improvedLayout: false
             },
             nodes: {
-              borderWidth:0
+                borderWidth: 0
             },
-            physics:{
-              stabilization: false
+            physics: {
+                stabilization: false
             }
         };
-        
-        
+
+
         network = new vis.Network(container, data, options);
 
         network.on('selectNode', function(properties) {
-                openTab("buttonviewertab", 'viewertab');
-                clearStudyText();
-                showVariableHeaders();
-                document.getElementById("studytitle").innerText = "Variable";
-                document.getElementById("claimstudy").innerText = "";
+            openTab("buttonviewertab", 'viewertab');
+            clearStudyText();
+            showVariableHeaders();
+            document.getElementById("studytitle").innerText = "Variable";
+            document.getElementById("claimstudy").innerText = "";
 
-                document.getElementById("varname").innerText = findVariableLabelFromId(properties.nodes);
+            document.getElementById("varname").innerText = findVariableLabelFromId(properties.nodes);
 
-                for (var i = 0; i < allvars.length; i++) {
-                    if (allvars[i] == findVariableLabelFromId(properties.nodes)) {
-                        var childtext = "";
+            for (var i = 0; i < allvars.length; i++) {
+                if (allvars[i] == findVariableLabelFromId(properties.nodes)) {
+                    var childtext = "";
 
-                        if (allchildren[i].length > 0) {
-                            for (var j = 0; j < allchildren[i].length; j++) {
-                                childtext = childtext + "• " + allchildren[i][j] + "\n";
-                            }
-                            document.getElementById("childlist").innerText = childtext;
-                            if (properties.nodes[0].toString().includes("cluster")) {
-                                document.getElementById("childbutton").hidden = false;
-                            } else {
-                                document.getElementById("childrecallbutton").hidden = false;
-                            }
+                    if (allchildren[i].length > 0) {
+                        for (var j = 0; j < allchildren[i].length; j++) {
+                            childtext = childtext + "• " + allchildren[i][j] + "\n";
                         }
-                      if (allparents[i] != "") {
+                        document.getElementById("childlist").innerText = childtext;
+                        if (properties.nodes[0].toString().includes("cluster")) {
+                            document.getElementById("childbutton").hidden = false;
+                        } else {
+                            document.getElementById("childrecallbutton").hidden = false;
+                        }
+                    }
+                    if (allparents[i] != "") {
                         document.getElementById("parentlist").innerText = "• " + allparents[i];
                         document.getElementById("parentlist").currentparent = allparents[i];
                         document.getElementById("parentbutton").hidden = false;
-                      }
                     }
                 }
-          });
-}
+            }
+        });
+    }
 
-let nodeFilterValue = "";
-const edgesFilterValues = {
-    positive: true,
-    negative: true,
-    "first-stage": true,
-    heterogeneous: true,
-    "non-monotonic": true,
-    zero: false,
-    mixed: true,
-};
+    let nodeFilterValue = "";
+    const edgesFilterValues = {
+        positive: true,
+        negative: true,
+        "first-stage": true,
+        heterogeneous: true,
+        "non-monotonic": true,
+        zero: false,
+        mixed: true,
+    };
 
-isNodeClustered = function(node) {
-      var nodereach = reachableByNodes(node.id, edgesh);
-      var allclusters = getAllClusters(network);
+    isNodeClustered = function(node) {
+        var nodereach = reachableByNodes(node.id, edgesh);
+        var allclusters = getAllClusters(network);
         for (var i = 0; i < nodereach.length; i++) {
-          for (var j = 0; j < allclusters.length; j++) {
-            if(allclusters[j].label==nodeLabelFromIdh(nodereach[i])) {
-              for (var k = 0; k < combvardet.length; k++) {
-                if(combvardet[k].id==node.id && combvardet[k].count==0) {
-                  return false;
+            for (var j = 0; j < allclusters.length; j++) {
+                if (allclusters[j].label == nodeLabelFromIdh(nodereach[i])) {
+                    for (var k = 0; k < combvardet.length; k++) {
+                        if (combvardet[k].id == node.id && combvardet[k].count == 0) {
+                            return false;
+                        }
+                    }
+                    return true;
                 }
-              }
-              return true;
-            }
-          }
-        }
-        return true;
-    }
-const nodesFilter = (node) => {
-    if (nofilter) {
-        return true;
-    }
-    if (notstarted) {
-        return true;
-    }
-    if (ivselector.value == node.label) {
-          return isNodeClustered(node);
-    }
-    if (dvselector.value == node.label) {
-          return isNodeClustered(node);
-    }
-    if(ivparents.includes(node.id) || 
-        dvparents.includes(node.id) || 
-        ivchildren.includes(node.id) || 
-        dvchildren.includes(node.id) ) {
-      return isNodeClustered(node);
-    }
-    
-    if (node.parent != null & node.parent != "") {
-        if (ivselector.value == node.parent) {
-          return isNodeClustered(node);
-        }
-        if (dvselector.value == node.parent) {
-          return isNodeClustered(node);
-        }
-      }
-    var currentnodecount;
-    // temporary while testing:
-    for (var i = 0; i < nodecount.length; i++) {
-        if (nodecount[i].id == node.id) {
-            currentnodecount = nodecount[i].count;
-        }
-    }
-    if (currentnodecount==null) {
-      for (var i = 0; i < combvardet.length; i++) {
-        if(combvardet[i].id==node.id) {
-          currentnodecount = combvardet[i].count;
-        }
-      }
-    }
-    if (network != null) {
-        if (currentnodecount == 0) {
-            return false;
-        } else {
-            if (typeof combvardet[combids.indexOf(node.id)] == "undefined") {
-                return true;
-            }
-            if (combvardet[combids.indexOf(node.id)].status != "irrelevant") {
-                return true;
-            } else {
-                return false;
             }
         }
-    } else {
         return true;
     }
-
-    if (nodeFilterValue === "") {
-
-    }
-    switch (nodeFilterValue) {
-        case "test":
-            return node.attribute === "test";
-        default:
+    const nodesFilter = (node) => {
+        if (nofilter) {
             return true;
-    }
-};
-const nodesFilter2 = (node) => {
-  return true;
-};
+        }
+        if (notstarted) {
+            return true;
+        }
+        if (ivselector.value == node.label) {
+            return isNodeClustered(node);
+        }
+        if (dvselector.value == node.label) {
+            return isNodeClustered(node);
+        }
+        if (ivparents.includes(node.id) ||
+            dvparents.includes(node.id) ||
+            ivchildren.includes(node.id) ||
+            dvchildren.includes(node.id)) {
+            return isNodeClustered(node);
+        }
 
-const edgesFilter = (edge) => {
-    return edgesFilterValues[edge.relation];
-};
+        if (node.parent != null & node.parent != "") {
+            if (ivselector.value == node.parent) {
+                return isNodeClustered(node);
+            }
+            if (dvselector.value == node.parent) {
+                return isNodeClustered(node);
+            }
+        }
+        var currentnodecount;
+        // temporary while testing:
+        for (var i = 0; i < nodecount.length; i++) {
+            if (nodecount[i].id == node.id) {
+                currentnodecount = nodecount[i].count;
+            }
+        }
+        if (currentnodecount == null) {
+            for (var i = 0; i < combvardet.length; i++) {
+                if (combvardet[i].id == node.id) {
+                    currentnodecount = combvardet[i].count;
+                }
+            }
+        }
+        if (network != null) {
+            if (currentnodecount == 0) {
+                return false;
+            } else {
+                if (typeof combvardet[combids.indexOf(node.id)] == "undefined") {
+                    return true;
+                }
+                if (combvardet[combids.indexOf(node.id)].status != "irrelevant") {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        } else {
+            return true;
+        }
 
-nodesView = new vis.DataView(orignodes, {
-    filter: nodesFilter
-});
+        if (nodeFilterValue === "") {
 
-/*
-nodesView2 = new vis.DataView(nodesView, {
-    filter: nodesFilter2
-});
-*/
+        }
+        switch (nodeFilterValue) {
+            case "test":
+                return node.attribute === "test";
+            default:
+                return true;
+        }
+    };
+    const nodesFilter2 = (node) => {
+        return true;
+    };
 
-edgesView = new vis.DataView(origedges, {
-    filter: edgesFilter
-});
+    const edgesFilter = (edge) => {
+        return edgesFilterValues[edge.relation];
+    };
 
-nodeFilterSelector.addEventListener("change", (e) => {
-    // set new value to filter variable
-    nodeFilterValue = e.target.value;
+    nodesView = new vis.DataView(orignodes, {
+        filter: nodesFilter
+    });
+
     /*
-    refresh DataView,
-    so that its filter function is re-calculated with the new variable
+    nodesView2 = new vis.DataView(nodesView, {
+        filter: nodesFilter2
+    });
     */
-    //nodesView.refresh();
-});
 
-edgeFilters.forEach((filter) =>
-    filter.addEventListener("change", (e) => {
-        const {
-            value,
-            checked
-        } = e.target;
-        edgesFilterValues[value] = checked;
-        //edgesView.refresh();
-    })
-);
+    edgesView = new vis.DataView(origedges, {
+        filter: edgesFilter
+    });
 
-startNetwork({
-    nodes: nodesView,
-    edges: edgesView
-});
-console.log("network started");
+    nodeFilterSelector.addEventListener("change", (e) => {
+        // set new value to filter variable
+        nodeFilterValue = e.target.value;
+        /*
+        refresh DataView,
+        so that its filter function is re-calculated with the new variable
+        */
+        //nodesView.refresh();
+    });
 
-makeNodeCounts();
-notstarted = false;
-nodesView.refresh();
+    edgeFilters.forEach((filter) =>
+        filter.addEventListener("change", (e) => {
+            const {
+                value,
+                checked
+            } = e.target;
+            edgesFilterValues[value] = checked;
+            //edgesView.refresh();
+        })
+    );
+
+    startNetwork({
+        nodes: nodesView,
+        edges: edgesView
+    });
+    console.log("network started");
+
+    makeNodeCounts();
+    notstarted = false;
+    nodesView.refresh();
 }
 
 makeNodeCounts = function() {
@@ -1553,8 +1566,8 @@ makeNodeCounts = function() {
     nodecount = [];
     for (var i = 0; i < nodeids.length; i++) {
         var templabel = findVariableLabelFromId(nodeids[i]);
-        if(templabel=="") {
-          templabel = nodeLabelFromIdh(nodeids[i]);
+        if (templabel == "") {
+            templabel = nodeLabelFromIdh(nodeids[i]);
         }
         nodecount[i] = {
             id: nodeids[i],
@@ -1916,74 +1929,74 @@ nodeLabelFromIdh = function(id) {
 }
 
 makeNodeOrange = function(id) {
-  if(network.body.nodes[id]!=null) {
-  network.body.nodes[id].options.color.background = "#fcb103";
-  network.body.nodes[id].options.color.highlight.background = "#ffe224";
-  network.body.nodes[id].options.color.border = "#a17902";
-  network.body.nodes[id].options.color.highlight.border = "#a17902";
-  //network.redraw();  
-  }
-  
+    if (network.body.nodes[id] != null) {
+        network.body.nodes[id].options.color.background = "#fcb103";
+        network.body.nodes[id].options.color.highlight.background = "#ffe224";
+        network.body.nodes[id].options.color.border = "#a17902";
+        network.body.nodes[id].options.color.highlight.border = "#a17902";
+        //network.redraw();  
+    }
+
 }
 
 makeNodeRed = function(id) {
-  network.body.nodes[id].options.color.background = "#e75a2b";
-  network.body.nodes[id].options.color.highlight.background = "#fa6464";
-  network.body.nodes[id].options.color.border = "#a42a02";
-  network.body.nodes[id].options.color.highlight.border = "#a42a02";
-  //network.body.nodes[id].options.font.color = "#ffffff";
-  //network.body.nodes[id].options.font.bold.color = "#ffffff";
-  //network.body.emitter.emit('_dataChanged');
-  //network.redraw();
+    network.body.nodes[id].options.color.background = "#e75a2b";
+    network.body.nodes[id].options.color.highlight.background = "#fa6464";
+    network.body.nodes[id].options.color.border = "#a42a02";
+    network.body.nodes[id].options.color.highlight.border = "#a42a02";
+    //network.body.nodes[id].options.font.color = "#ffffff";
+    //network.body.nodes[id].options.font.bold.color = "#ffffff";
+    //network.body.emitter.emit('_dataChanged');
+    //network.redraw();
 }
 
 makeNodeBoring = function(id) {
-  try{
-    //delete(network.body.nodes[id].options.borderWidth);  
-  } catch(e) {
-    
-  }
-  try{
-    delete(network.body.nodes[id].options.color.background);  
-  } catch(e) {
-    
-  }
-  try{
-    delete(network.body.nodes[id].options.color.border);  
-  } catch(e) {
-    
-  }
-  try{
-    delete(network.body.nodes[id].options.color.highlight.background);  
-  } catch(e) {
-    
-  }
-  try{
-    delete(network.body.nodes[id].options.color.highlight.border);  
-  } catch(e) {
-    
-  }
-  //network.redraw();
+    try {
+        //delete(network.body.nodes[id].options.borderWidth);  
+    } catch (e) {
+
+    }
+    try {
+        delete(network.body.nodes[id].options.color.background);
+    } catch (e) {
+
+    }
+    try {
+        delete(network.body.nodes[id].options.color.border);
+    } catch (e) {
+
+    }
+    try {
+        delete(network.body.nodes[id].options.color.highlight.background);
+    } catch (e) {
+
+    }
+    try {
+        delete(network.body.nodes[id].options.color.highlight.border);
+    } catch (e) {
+
+    }
+    //network.redraw();
 }
 
 
 makeEdgeTwoway = function(edge) {
-    if(network.body.edges[edge].options.arrows.from.enabled!=null) {
-      if(!network.body.edges[edge].options.arrows.from.enabled) {
-        network.updateEdge(edge, {
-          arrows: {
-              from: {
-                  enabled: true
-              }
-          },
-          color: "purple",
-          relation: "twoway"
-      })
-      } else {
-        //console.log("avoided");
-      }        
+    if (network.body.edges[edge].options.arrows.from.enabled != null) {
+        if (!network.body.edges[edge].options.arrows.from.enabled) {
+            network.updateEdge(edge, {
+                arrows: {
+                    from: {
+                        enabled: true
+                    }
+                },
+                color: "purple",
+                relation: "twoway"
+            })
+        } else {
+            //console.log("avoided");
+        }
     } else {
-      //console.log("avoided")
+        //console.log("avoided")
     }
 }
 
@@ -2056,7 +2069,7 @@ updateFoldedList = function(component) {
         if (component.children.length == 0) {
             return null;
         }
-        
+
         if (component.children[1].children.length > 0) {
             for (var i = 0; i < component.children[1].children.length; i++) {
                 updateFoldedList(component.children[1].children[i]);
@@ -2163,16 +2176,16 @@ formatArticle = function(dat, showurl = true) {
         journal = "";
     }
     var year = dat.published["date-parts"][0][0];
-    if(showurl) {
-      let doiurl = dat.URL;
-      var combtitle = "• " + authorlist + " (" + year + ") \"" +
-        title + "\"" + " " + journal + ": " + "<a href=\"" + doiurl +
-        "\" target=\"_blank\">" + doiurl + "</a>\n";  
+    if (showurl) {
+        let doiurl = dat.URL;
+        var combtitle = "• " + authorlist + " (" + year + ") \"" +
+            title + "\"" + " " + journal + ": " + "<a href=\"" + doiurl +
+            "\" target=\"_blank\">" + doiurl + "</a>\n";
     } else {
-      var combtitle = "• " + authorlist + " (" + year + ") \"" +
-        title + "\"" + " " + journal + ": ";  
+        var combtitle = "• " + authorlist + " (" + year + ") \"" +
+            title + "\"" + " " + journal + ": ";
     }
-    
+
     //console.log(combtitle);
     return combtitle
 }
@@ -2185,16 +2198,16 @@ formatArticle2 = function(dat, showurl = true) {
         journal = "";
     }
     var year = dat.published.split("-")[0];
-    if(showurl) {
-      let doiurl = dat.URL;
-      var combtitle = "• " + authorlist + " (" + year + ") \"" +
-        title + "\"" + " " + journal + ": " + "<a href=\"" + doiurl +
-        "\" target=\"_blank\">" + doiurl + "</a>\n";  
+    if (showurl) {
+        let doiurl = dat.URL;
+        var combtitle = "• " + authorlist + " (" + year + ") \"" +
+            title + "\"" + " " + journal + ": " + "<a href=\"" + doiurl +
+            "\" target=\"_blank\">" + doiurl + "</a>\n";
     } else {
-      var combtitle = "• " + authorlist + " (" + year + ") \"" +
-        title + "\"" + " " + journal + ": ";  
+        var combtitle = "• " + authorlist + " (" + year + ") \"" +
+            title + "\"" + " " + journal + ": ";
     }
-    
+
     //console.log(combtitle);
     return combtitle
 }
@@ -2216,104 +2229,104 @@ let studytitle = xvar + " 🡒 " + yvar;
 
 
 createEdgeTable = function() {
-  let edgetable = document.getElementById("edgetable");
-  try{
-  edgetable.deleteTHead();
-  while(edgetable.rows.length>0) {
-    edgetable.deleteRow(0)
-  }
-  } catch(e) {
-    
-  }
-  
-  var citetable = [];  
-  var visibleedges = network.body.edgeIndices;
-  var edgesall = Object.entries(network.body.edges);
+    let edgetable = document.getElementById("edgetable");
+    try {
+        edgetable.deleteTHead();
+        while (edgetable.rows.length > 0) {
+            edgetable.deleteRow(0)
+        }
+    } catch (e) {
 
-  for (var i = 0; i < visibleedges.length; i++) {
-    if(visibleedges[i].includes("cluster")) {
-     var betemp = network.getBaseEdges(visibleedges[i]);
-     for (var j = 0; j < betemp.length; j++) {
-       var doiset = getDOIMulti(betemp[j]).split(";");
-       for (var k = 0; k < doiset.length; k++) {
-         doiset[k] = doiset[k].toLowerCase();
-       }
-       var relationship = network.body.edges[visibleedges[i]].from.options.label + " 🡒 " + network.body.edges[visibleedges[i]].to.options.label;
-       var col = network.body.edges[betemp[j]].options.color.color;
-       var finding;
-            if(col == "green") {
-              finding= "positive"
-            }
-            if(col == "red") {
-              finding= "negative"
-            }
-            if(col == "gray") {
-              finding= "zero"
-            }
-            if(col == "purple") {
-              finding= "mixed"
-            }
-       citetable.push({relationship: relationship, 
-                    x: network.body.edges[betemp[j]].from.options.label, 
+    }
+
+    var citetable = [];
+    var visibleedges = network.body.edgeIndices;
+    var edgesall = Object.entries(network.body.edges);
+
+    for (var i = 0; i < visibleedges.length; i++) {
+        if (visibleedges[i].includes("cluster")) {
+            var betemp = network.getBaseEdges(visibleedges[i]);
+            for (var j = 0; j < betemp.length; j++) {
+                var doiset = getDOIMulti(betemp[j]).split(";");
+                for (var k = 0; k < doiset.length; k++) {
+                    doiset[k] = doiset[k].toLowerCase();
+                }
+                var relationship = network.body.edges[visibleedges[i]].from.options.label + " 🡒 " + network.body.edges[visibleedges[i]].to.options.label;
+                var col = network.body.edges[betemp[j]].options.color.color;
+                var finding;
+                if (col == "green") {
+                    finding = "positive"
+                }
+                if (col == "red") {
+                    finding = "negative"
+                }
+                if (col == "gray") {
+                    finding = "zero"
+                }
+                if (col == "purple") {
+                    finding = "mixed"
+                }
+                citetable.push({
+                    relationship: relationship,
+                    x: network.body.edges[betemp[j]].from.options.label,
                     y: network.body.edges[betemp[j]].to.options.label,
                     finding: finding,
                     citation: doiset
-       });
-     }
+                });
+            }
+        }
     }
-  }
-  let edgetabledata = Object.keys(citetable[0]);
-  generateTable(edgetable, citetable);
-  generateTableHead(edgetable, edgetabledata);
-  firstedgetable = false;
+    let edgetabledata = Object.keys(citetable[0]);
+    generateTable(edgetable, citetable);
+    generateTableHead(edgetable, edgetabledata);
+    firstedgetable = false;
 }
 
 
 function generateTableHead(table, data) {
-  let thead = table.createTHead();
-  let row = thead.insertRow();
-  for (let key of data) {
-    let th = document.createElement("th");
-    
-    let text = document.createTextNode(key);
-    th.appendChild(text);
-    row.appendChild(th);
-  }
+    let thead = table.createTHead();
+    let row = thead.insertRow();
+    for (let key of data) {
+        let th = document.createElement("th");
+
+        let text = document.createTextNode(key);
+        th.appendChild(text);
+        row.appendChild(th);
+    }
 }
 
 function generateTable(table, data) {
-  for (let element of data) {
-    let row = table.insertRow();
-    for (key in element) {
-      let cell = row.insertCell();
-      if(key=="citation") {
-        var celldiv = document.createElement('div');
-        var count = 0;
-        for (var j = 0; j < citations2.length; j++) {
-            if(element[key].includes(citations2[j].doi.toLowerCase())) {
-              if(count>0) {
-                let lbreak = document.createElement('br');
-                celldiv.appendChild(lbreak);
-              }
-              var citetext = document.createTextNode(formatArticle2(citations2[j], false));
-              celldiv.appendChild(citetext);
-              var a = document.createElement('a');
-              var linktext = document.createTextNode(citations2[j].URL);
+    for (let element of data) {
+        let row = table.insertRow();
+        for (key in element) {
+            let cell = row.insertCell();
+            if (key == "citation") {
+                var celldiv = document.createElement('div');
+                var count = 0;
+                for (var j = 0; j < citations2.length; j++) {
+                    if (element[key].includes(citations2[j].doi.toLowerCase())) {
+                        if (count > 0) {
+                            let lbreak = document.createElement('br');
+                            celldiv.appendChild(lbreak);
+                        }
+                        var citetext = document.createTextNode(formatArticle2(citations2[j], false));
+                        celldiv.appendChild(citetext);
+                        var a = document.createElement('a');
+                        var linktext = document.createTextNode(citations2[j].URL);
 
-              a.appendChild(linktext);
-              a.href = citations2[j].URL;      
-              celldiv.appendChild(a);
-              count = count + 1;
-              
-          }
+                        a.appendChild(linktext);
+                        a.href = citations2[j].URL;
+                        celldiv.appendChild(a);
+                        count = count + 1;
+
+                    }
+                }
+                cell.appendChild(celldiv);
+            } else {
+
+                let text = document.createTextNode(element[key]);
+                cell.appendChild(text);
+            }
         }
-        cell.appendChild(celldiv);
-      } else {
-        
-        let text = document.createTextNode(element[key]);
-        cell.appendChild(text); 
-      }
     }
-  }
 }
-
