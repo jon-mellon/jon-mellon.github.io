@@ -104,8 +104,9 @@ getDoltStudies = function() {
         for (var i = 0; i < response.rows.length; i++) {
             citations2.push(response.rows[i]);
         }
+        fetchAllCrossRef();
     });
-    fetchAllCrossRef();
+    
     try {
         createEdgeTable();
     } catch (e) {
@@ -619,7 +620,7 @@ populateCiteFromDOI = function(doi) {
 
 getDOIFromCrossRef = function(doi) {
     if (citationPresent2(doi)) {
-        return null;
+        return(null);
     }
     console.log("got past cp2 check" + doi);
     if (currentenv != "offline") {
