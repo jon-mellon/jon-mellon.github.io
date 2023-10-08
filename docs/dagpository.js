@@ -1,3 +1,8 @@
+
+
+
+
+
 makeDate = function(x) {
     if (x == null) {
         return null;
@@ -1650,7 +1655,7 @@ getVariableHierarchy = function() {
           Parent: tempparent
         };
         }
-        resolve(variables);
+        return(variables);
     });
   } else {
   if (currentenv == "offline") {
