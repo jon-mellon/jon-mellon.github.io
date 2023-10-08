@@ -18,6 +18,41 @@ makeDate = function(x) {
 
     }
 }
+
+getDoltVariables = function() {
+  
+  if(backend=="dolthub") {
+    var varreadquery = "SELECT * FROM VARIABLES;";
+    var url = "https://www.dolthub.com/api/v1alpha1/jon-mellon/causes-of-human-outcomes/main?q=" + varreadquery;
+    var varpromise = fetch(url).then((response) => {
+            if (response.ok) {
+                let jsonout = response.json();
+                return jsonout;
+            } else {
+                throw new Error("NETWORK RESPONSE ERROR FROM DOLTHUB DOI CALL");
+            }
+    });
+    varpromise.then((response) => {
+        var variables = [];
+        for (var i = 0; i < response.rows.length; i++) {
+          for(var j = 0; j < response.rows.length; j++) {
+            var tempparent;
+            if(response.rows[i].parent==response.rows[j].id) {
+              tempparent = response.rows[j].label;
+            }
+          }
+          variables[i] = {
+            "Variablename": response.rows[i].label, 
+            Parent: tempparent
+          };
+        }
+        resolve(variables);
+    });
+  }
+}
+  
+  
+
 /*
 // testing code for getNodeStatus:
 
@@ -1590,19 +1625,47 @@ makeNodeCounts = function() {
 
 
 getVariableHierarchy = function() {
-    if (currentenv == "offline") {
-        var varpromise = new Promise((resolve, reject) => {
-            var dummyvars = [{
-                    "Variablename": "years of schooling",
-                    Parent: "education"
-                },
-                {
-                    "Variablename": "music",
-                    Parent: ""
-                },
-                {
-                    "Variablename": "dancing",
-                    Parent: ""
+  if(backend=="dolthub") {
+    var varreadquery = "SELECT * FROM VARIABLES;";
+    var url = "https://www.dolthub.com/api/v1alpha1/jon-mellon/causes-of-human-outcomes/main?q=" + varreadquery;
+    var varpromise = fetch(url).then((response) => {
+    if (response.ok) {
+      let jsonout = response.json();
+      return jsonout;
+    } else {
+      throw new Error("NETWORK RESPONSE ERROR FROM DOLTHUB DOI CALL");
+    }
+    });
+    varpromise.then((response) => {
+      var variables = [];
+      for (var i = 0; i < response.rows.length; i++) {
+        for(var j = 0; j < response.rows.length; j++) {
+          var tempparent;
+          if(response.rows[i].parent==response.rows[j].id) {
+            tempparent = response.rows[j].label;
+          }
+        }
+        variables[i] = {
+          "Variablename": response.rows[i].label, 
+          Parent: tempparent
+        };
+        }
+        resolve(variables);
+    });
+  } else {
+  if (currentenv == "offline") {
+      var varpromise = new Promise((resolve, reject) => {
+      var dummyvars = [{
+        "Variablename": "years of schooling",
+        Parent: "education"
+        },
+        {
+        "Variablename": "music",
+        Parent: ""
+        },
+        {
+        "Variablename": "dancing",
+        Parent: ""
                 },
                 {
                     "Variablename": "rainfall",
@@ -1727,6 +1790,7 @@ getVariableHierarchy = function() {
         }
         var varpromise = new PublicGoogleSheetsParser(spreadsheetId, sheetInfo).parse();
     }
+  }
     varpromise.then((items) => {
         var keep = [];
         for (var i = 0; i < items.length; i++) {
