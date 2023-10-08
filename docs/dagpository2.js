@@ -605,7 +605,7 @@ populateCiteFromDOI = function(doi) {
         }
     }
     */
-    if (citationPresent2(doi)) {
+    if (citationPresent2(doi.toLowerCase())) {
         for (var i = 0; i < citations2.length; i++) {
             if (citations2[i].doi == doi.toLowerCase()) {
                 pubtext.innerHTML = pubtext.innerHTML + "<br>" + formatArticle2(citations2[i]);
@@ -670,7 +670,7 @@ getDOIFromCrossRef = function(doi) {
         });
     }
     doipromise.then(data => {
-            if (!citationPresent2(doi)) {
+            if (!citationPresent2(doi.toLowerCase())) {
                 //data.message.DOI = data.message.DOI.toLowerCase();
                 //citations.push(data.message);
 
@@ -699,16 +699,16 @@ getDOIFromCrossRef = function(doi) {
                     title: data.message.title[0],
                     type: data.message.type,
                 });
-                /*
+                
                 // remove duplicates
                 var doiall = [];
-                for (var i = 0; i < citations.length; i++) {
-                    doiall[i] = citations[i].DOI;
+                for (var i = 0; i < citations2.length; i++) {
+                    doiall[i] = citations2[i].doi;
                 }
-                citations = citations.filter(function(item, pos) {
-                    return doiall.indexOf(item.DOI) == pos;
+                citations2 = citations2.filter(function(item, pos) {
+                    return doiall.indexOf(item.doi) == pos;
                 });
-                */
+                
                 try {
                     createEdgeTable();
                 } catch (e) {
