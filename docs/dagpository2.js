@@ -582,10 +582,12 @@ citationPresent = function(doi) {
 }
 */
 citationPresent2 = function(doi) {
+    if(citations2.length>0) {
     for (var i = 0; i < citations2.length; i++) {
-        if (citations2[i].doi == doi.toLowerCase()) {
+        if (citations2[i].doi.toLowerCase() == doi.toLowerCase()) {
             return true;
         }
+    }  
     }
     return false;
 }
