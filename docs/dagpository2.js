@@ -760,6 +760,7 @@ cleanDOI = function(doi) {
     doi = doi.replace("http://doi.org/", "");
     doi = doi.replace("doi.org/", "");
     doi = doi.replace("www.doi.org/", "");
+    doi = doi.toLowerCase();
     return (doi)
 }
 
