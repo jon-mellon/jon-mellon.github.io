@@ -1375,10 +1375,7 @@ getEdges = function() {
                 };
                 edgeset.push(ivedge);
             }
-
         }
-
-
         createNetwork();
         getDoltStudies();
         createListHierarchy();
@@ -1640,8 +1637,7 @@ getVariableHierarchy = function() {
     } else {
       throw new Error("NETWORK RESPONSE ERROR FROM DOLTHUB DOI CALL");
     }
-    });
-    varpromise.then((response) => {
+    }).then((response) => {
       var variables = [];
       for (var i = 0; i < response.rows.length; i++) {
         for(var j = 0; j < response.rows.length; j++) {
@@ -1654,8 +1650,8 @@ getVariableHierarchy = function() {
           "Variablename": response.rows[i].label, 
           Parent: tempparent
         };
-        }
-        return(variables);
+      }
+      return(variables);
     });
   } else {
   if (currentenv == "offline") {
@@ -1856,9 +1852,7 @@ getVariableHierarchy = function() {
             };
         }
 
-
         getEdges();
-
 
     });
 }
