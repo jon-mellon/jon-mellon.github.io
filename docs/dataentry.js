@@ -434,7 +434,7 @@ fetchFindingOpts = function () {
       })
 
    } else {
-     var varreadquery = "SELECT * FROM IDENTIFICATION;";
+     var varreadquery = "SELECT * FROM FINDINGS;";
     var url = "https://www.dolthub.com/api/v1alpha1/jon-mellon/causes-of-human-outcomes/main?q=" + varreadquery;
     var varpromise = fetch(url).then((response) => {
     if (response.ok) {
