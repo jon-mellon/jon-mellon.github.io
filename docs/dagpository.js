@@ -1,8 +1,3 @@
-
-
-
-
-
 makeDate = function(x) {
     if (x == null) {
         return null;
@@ -23,40 +18,6 @@ makeDate = function(x) {
 
     }
 }
-
-getDoltVariables = function() {
-  
-  if(backend=="dolthub") {
-    var varreadquery = "SELECT * FROM VARIABLES;";
-    var url = "https://www.dolthub.com/api/v1alpha1/jon-mellon/causes-of-human-outcomes/main?q=" + varreadquery;
-    var varpromise = fetch(url).then((response) => {
-            if (response.ok) {
-                let jsonout = response.json();
-                return jsonout;
-            } else {
-                throw new Error("NETWORK RESPONSE ERROR FROM DOLTHUB DOI CALL");
-            }
-    });
-    varpromise.then((response) => {
-        var variables = [];
-        for (var i = 0; i < response.rows.length; i++) {
-          for(var j = 0; j < response.rows.length; j++) {
-            var tempparent;
-            if(response.rows[i].parent==response.rows[j].id) {
-              tempparent = response.rows[j].label;
-            }
-          }
-          variables[i] = {
-            "Variablename": response.rows[i].label, 
-            Parent: tempparent
-          };
-        }
-        resolve(variables);
-    });
-  }
-}
-  
-  
 
 /*
 // testing code for getNodeStatus:
@@ -154,9 +115,6 @@ getDoltStudies = function() {
     }
 }
 
-
-
-
 getDOIMulti = function(id) {
     var doismulti = "";
     var baseedgeids = network.clustering.getBaseEdges(id);
@@ -213,9 +171,6 @@ foldTopLevels = function() {
     }
 }
 
-
-
-
 DOIChecker = function(doi) {
     for (var i = 0; i < currentitems.length; i++) {
         if (currentitems[i].DOI != null) {
@@ -240,9 +195,6 @@ setSize = function(x) {
     return (size);
 }
 
-
-
-
 unclusterAllNodes = function() {
     let allclusters = getAllClusters(network);
 
@@ -266,8 +218,7 @@ unclusterSpecificNodes = function(touncluster) {
     }
 }
 
-
-hideChildren2 = function(nodeid) {
+hideChildren = function(nodeid) {
     var parentlabel;
     let hidethese = reachableNodesGeneral(nodeid, edgesh);
     for (var i = 0; i < nodesh.length; i++) {
@@ -357,7 +308,7 @@ clusterFoldedNodes = function() {
             }
         }
         if (cluster) {
-            hideChildren2(foldednodes[i].id);
+            hideChildren(foldednodes[i].id);
         }
     }
     updateAllClusterEdges();
@@ -551,10 +502,6 @@ reachableNodeOrParent = function(startnode, edgesetall) {
     return (allreachable)
 }
 
-openListToLevel = function(cnode) {
-
-}
-
 reachableByNodeOrParent = function(startnode, edgesetall, currentnetwork) {
     var allreachable = reachableByNodes(startnode, edgesetall);
     var allclusters = getAllClusters(currentnetwork);
@@ -611,17 +558,8 @@ reachableNodesGeneral = function(startnode, edgesetall) {
     nodesreached = nodesreached.filter(onlyUnique);
     return nodesreached;
 }
-/*
+
 citationPresent = function(doi) {
-    for (var i = 0; i < citations.length; i++) {
-        if (citations[i].DOI == doi.toLowerCase()) {
-            return true;
-        }
-    }
-    return false;
-}
-*/
-citationPresent2 = function(doi) {
     if(citations2.length>0) {
     for (var i = 0; i < citations2.length; i++) {
         if (citations2[i].doi.toLowerCase() == doi.toLowerCase()) {
@@ -637,18 +575,7 @@ clearStudyText = function() {
     pubtext.innerHTML = ""
 }
 populateCiteFromDOI = function(doi) {
-    /*
-    if (citationPresent(doi)) {
-        for (var i = 0; i < citations.length; i++) {
-            if (citations[i].DOI == doi.toLowerCase()) {
-                pubtext.innerHTML = pubtext.innerHTML + "<br>" + formatArticle(citations[i]);
-            } else {
-
-            }
-        }
-    }
-    */
-    if (citationPresent2(doi.toLowerCase())) {
+    if (citationPresent(doi.toLowerCase())) {
         for (var i = 0; i < citations2.length; i++) {
             if (citations2[i].doi == doi.toLowerCase()) {
                 pubtext.innerHTML = pubtext.innerHTML + "<br>" + formatArticle2(citations2[i]);
@@ -661,7 +588,7 @@ populateCiteFromDOI = function(doi) {
 }
 
 getDOIFromCrossRef = function(doi) {
-    if (citationPresent2(doi)) {
+    if (citationPresent(doi)) {
         return(null);
     }
     console.log("got past cp2 check" + doi);
@@ -713,16 +640,12 @@ getDOIFromCrossRef = function(doi) {
         });
     }
     doipromise.then(data => {
-            if (!citationPresent2(doi.toLowerCase())) {
-                //data.message.DOI = data.message.DOI.toLowerCase();
-                //citations.push(data.message);
-
+            if (!citationPresent(doi.toLowerCase())) {
+                
                 var authorlist = data.message.author[0].given + " " + data.message.author[0].family;
                 for (var i = 1; i < data.message.author.length; i++) {
                     authorlist = authorlist + ", " + data.message.author[i].given + " " + data.message.author[i].family;
                 }
-
-
                 citations2.push({
                     URL: data.message.URL,
                     alternativeid: data.message["alternative-id"],
@@ -806,15 +729,6 @@ cleanDOI = function(doi) {
 
 
 //// main DAG ////
-attemptDAGButton = function() {
-
-    if (dvselector.value != "" &
-        ivselector.value != "") {
-        const dagbutton = document.getElementById('createdagbutton');
-        dagbutton.disabled = false;
-    }
-}
-
 
 getParentFromLabel = function(nodelabel) {
     for (var i = 0; i < nodesh.length; i++) {
@@ -954,12 +868,6 @@ blankNodeStatus = function() {
     }
 }
 
-resetDVIVFilter = function() {
-
-    dvselector.value = "";
-    ivselector.value = "";
-    showCurrentNetworkState();
-}
 
 updateNodeStatus = function() {
     if (dvselector.value == "" &
@@ -1096,7 +1004,6 @@ getEdges = function() {
 
     if (currentenv == "offline") {
         var studypromise = new Promise((resolve, reject) => {
-
             var studies = [{
                     DOI: "12345A",
                     "x variable": "education",
@@ -1228,7 +1135,6 @@ getEdges = function() {
     }
 
     studypromise.then((items) => {
-        console.table(items)
         currentitems = items;
         var edgecombs = [];
         for (var i = 0; i < currentitems.length; i++) {
@@ -1383,6 +1289,8 @@ getEdges = function() {
         createEdgeTable();
     })
 }
+
+
 var notstarted = true;
 createNetwork = function() {
     const nodeFilterSelector = document.getElementById("nodeFilterSelect");
@@ -1392,7 +1300,7 @@ createNetwork = function() {
     orignodes = new vis.DataSet(nodesh);
     origedges = new vis.DataSet(edgeset);
 
-    const resetit = document.getElementById('resetbutton');
+    //const resetit = document.getElementById('resetbutton');
     const dagbutton = document.getElementById('createdagbutton');
     dagbutton.disabled = true;
 
@@ -1809,6 +1717,7 @@ getVariableHierarchy = function() {
 
             if (!badparent) {
                 if (!allvars.includes(items[i].Parent)) {
+                    console.log("adding parent to allvars" + items[i].Parent);
                     allvars.push(items[i].Parent);
                 }
                 keep.push(i);
@@ -2060,10 +1969,10 @@ makeEdgeTwoway = function(edge) {
                 relation: "twoway"
             })
         } else {
-            //console.log("avoided");
+            
         }
     } else {
-        //console.log("avoided")
+        
     }
 }
 
@@ -2253,7 +2162,6 @@ formatArticle = function(dat, showurl = true) {
             title + "\"" + " " + journal + ": ";
     }
 
-    //console.log(combtitle);
     return combtitle
 }
 
@@ -2275,7 +2183,6 @@ formatArticle2 = function(dat, showurl = true) {
             title + "\"" + " " + journal + ": ";
     }
 
-    //console.log(combtitle);
     return combtitle
 }
 
