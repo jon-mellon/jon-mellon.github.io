@@ -368,20 +368,7 @@ fetchAllVars = function () {
 
 
 fetchIdentStrats = function () {
-  if(backend=="dolthub") {
-    var varreadquery = "SELECT * FROM IDENTIFICATION;";
-    var url = "https://www.dolthub.com/api/v1alpha1/jon-mellon/causes-of-human-outcomes/main?q=" + varreadquery;
-    var varpromise = fetch(url).then((response) => {
-    if (response.ok) {
-      let jsonout = response.json();
-      return jsonout;
-    } else {
-      throw new Error("NETWORK RESPONSE ERROR FROM DOLTHUB DOI CALL");
-    }
-    }).then((response) => {
-      return(response.rows);
-    });
-  } else {
+
    if (currentenv == "offline") {
       var varpromise = new Promise((resolve, reject) => {
          var dummstrats = [{
@@ -405,16 +392,19 @@ fetchIdentStrats = function () {
       })
 
    } else {
-      const spreadsheetId = "1N66GqAVQGcmV4PMQk6B2zDwvSZ3Oa6aF6FXwfKoVUU8"
-      const sheetId = 0;
-      const sheetName = "identification";
-      const sheetInfo = {
-         sheetId,
-         sheetName
-      }
-      var varpromise = new PublicGoogleSheetsParser(spreadsheetId, sheetInfo).parse();
+    var varreadquery = "SELECT * FROM IDENTIFICATION;";
+    var url = "https://www.dolthub.com/api/v1alpha1/jon-mellon/causes-of-human-outcomes/main?q=" + varreadquery;
+    var varpromise = fetch(url).then((response) => {
+    if (response.ok) {
+      let jsonout = response.json();
+      return jsonout;
+    } else {
+      throw new Error("NETWORK RESPONSE ERROR FROM DOLTHUB DOI CALL");
+    }
+    }).then((response) => {
+      return(response.rows);
+    });
    }
-  }
    varpromise.then((value) => {
       for (var i = 0; i < value.length; i++) {
          allidentifications[i] = value[i].strategy;
@@ -444,7 +434,20 @@ fetchFindingOpts = function () {
       })
 
    } else {
-      const spreadsheetId = "1N66GqAVQGcmV4PMQk6B2zDwvSZ3Oa6aF6FXwfKoVUU8"
+     var varreadquery = "SELECT * FROM IDENTIFICATION;";
+    var url = "https://www.dolthub.com/api/v1alpha1/jon-mellon/causes-of-human-outcomes/main?q=" + varreadquery;
+    var varpromise = fetch(url).then((response) => {
+    if (response.ok) {
+      let jsonout = response.json();
+      return jsonout;
+    } else {
+      throw new Error("NETWORK RESPONSE ERROR FROM DOLTHUB DOI CALL");
+    }
+    }).then((response) => {
+      return(response.rows);
+    });
+     /*
+     const spreadsheetId = "1N66GqAVQGcmV4PMQk6B2zDwvSZ3Oa6aF6FXwfKoVUU8"
       const sheetId = 0;
       const sheetName = "finding";
       const sheetInfo = {
@@ -452,6 +455,7 @@ fetchFindingOpts = function () {
          sheetName
       }
       var varpromise = new PublicGoogleSheetsParser(spreadsheetId, sheetInfo).parse();
+      */
    }
    varpromise.then((value) => {
       for (var i = 0; i < value.length; i++) {
