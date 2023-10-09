@@ -91,6 +91,10 @@ getDOIFromCrossRef = function (doi) {
       .catch((error) => console.error("FETCH ERROR:", error));
 }
 
+
+
+
+
 showDOINotFound = function() {
   document.getElementById("notfound").hidden = false;
 }
@@ -364,6 +368,20 @@ fetchAllVars = function () {
 
 
 fetchIdentStrats = function () {
+  if(backend=="dolthub") {
+    var varreadquery = "SELECT * FROM IDENTIFICATION;";
+    var url = "https://www.dolthub.com/api/v1alpha1/jon-mellon/causes-of-human-outcomes/main?q=" + varreadquery;
+    var varpromise = fetch(url).then((response) => {
+    if (response.ok) {
+      let jsonout = response.json();
+      return jsonout;
+    } else {
+      throw new Error("NETWORK RESPONSE ERROR FROM DOLTHUB DOI CALL");
+    }
+    }).then((response) => {
+      return(response.rows);
+    });
+  } else {
    if (currentenv == "offline") {
       var varpromise = new Promise((resolve, reject) => {
          var dummstrats = [{
@@ -396,6 +414,7 @@ fetchIdentStrats = function () {
       }
       var varpromise = new PublicGoogleSheetsParser(spreadsheetId, sheetInfo).parse();
    }
+  }
    varpromise.then((value) => {
       for (var i = 0; i < value.length; i++) {
          allidentifications[i] = value[i].strategy;
