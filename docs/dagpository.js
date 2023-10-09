@@ -1640,8 +1640,8 @@ getVariableHierarchy = function() {
     }).then((response) => {
       var variables = [];
       for (var i = 0; i < response.rows.length; i++) {
+        var tempparent;
         for(var j = 0; j < response.rows.length; j++) {
-          var tempparent;
           if(response.rows[i].parent==response.rows[j].id) {
             tempparent = response.rows[j].label;
           }
