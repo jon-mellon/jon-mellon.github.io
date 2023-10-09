@@ -1713,6 +1713,9 @@ getVariableHierarchy = function() {
                 if (items[i].Parent == "") {
                     badparent = true;
                 }
+                if (items[i].Parent == null) {
+                    badparent = true;
+                }
             }
 
             if (!badparent) {
