@@ -434,7 +434,7 @@ fetchFindingOpts = function () {
       })
 
    } else {
-     var varreadquery = "SELECT * FROM FINDINGS;";
+    var varreadquery = "SELECT * FROM FINDINGS;";
     var url = "https://www.dolthub.com/api/v1alpha1/jon-mellon/causes-of-human-outcomes/main?q=" + varreadquery;
     var varpromise = fetch(url).then((response) => {
     if (response.ok) {
@@ -446,16 +446,6 @@ fetchFindingOpts = function () {
     }).then((response) => {
       return(response.rows);
     });
-     /*
-     const spreadsheetId = "1N66GqAVQGcmV4PMQk6B2zDwvSZ3Oa6aF6FXwfKoVUU8"
-      const sheetId = 0;
-      const sheetName = "finding";
-      const sheetInfo = {
-         sheetId,
-         sheetName
-      }
-      var varpromise = new PublicGoogleSheetsParser(spreadsheetId, sheetInfo).parse();
-      */
    }
    varpromise.then((value) => {
       for (var i = 0; i < value.length; i++) {
@@ -479,14 +469,18 @@ fetchUOA = function () {
       })
 
    } else {
-      const spreadsheetId = "1N66GqAVQGcmV4PMQk6B2zDwvSZ3Oa6aF6FXwfKoVUU8"
-      const sheetId = 0;
-      const sheetName = "unitofanalysis";
-      const sheetInfo = {
-         sheetId,
-         sheetName
-      }
-      var varpromise = new PublicGoogleSheetsParser(spreadsheetId, sheetInfo).parse();
+    var varreadquery = "SELECT * FROM uoas;";
+    var url = "https://www.dolthub.com/api/v1alpha1/jon-mellon/causes-of-human-outcomes/main?q=" + varreadquery;
+    var varpromise = fetch(url).then((response) => {
+    if (response.ok) {
+      let jsonout = response.json();
+      return jsonout;
+    } else {
+      throw new Error("NETWORK RESPONSE ERROR FROM DOLTHUB DOI CALL");
+    }
+    }).then((response) => {
+      return(response.rows);
+    });
    }
 
 
