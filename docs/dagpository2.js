@@ -18,6 +18,7 @@ makeDate = function(x) {
 
     }
 }
+
 /*
 // testing code for getNodeStatus:
 
@@ -114,9 +115,6 @@ getDoltStudies = function() {
     }
 }
 
-
-
-
 getDOIMulti = function(id) {
     var doismulti = "";
     var baseedgeids = network.clustering.getBaseEdges(id);
@@ -173,9 +171,6 @@ foldTopLevels = function() {
     }
 }
 
-
-
-
 DOIChecker = function(doi) {
     for (var i = 0; i < currentitems.length; i++) {
         if (currentitems[i].DOI != null) {
@@ -200,9 +195,6 @@ setSize = function(x) {
     return (size);
 }
 
-
-
-
 unclusterAllNodes = function() {
     let allclusters = getAllClusters(network);
 
@@ -226,8 +218,7 @@ unclusterSpecificNodes = function(touncluster) {
     }
 }
 
-
-hideChildren2 = function(nodeid) {
+hideChildren = function(nodeid) {
     var parentlabel;
     let hidethese = reachableNodesGeneral(nodeid, edgesh);
     for (var i = 0; i < nodesh.length; i++) {
@@ -310,15 +301,17 @@ clusterFoldedNodes = function() {
     // this function clusters everything in the foldednodes array
     var allclusters = getAllClusters(network);
     for (var i = 0; i < foldednodes.length; i++) {
+        /*
         var cluster = true;
         for (var j = 0; j < allclusters.length; j++) {
             if (allclusters[j].label == foldednodes[i].label) {
                 cluster = false;
             }
         }
-        if (cluster) {
-            hideChildren2(foldednodes[i].id);
-        }
+        */
+        //if (cluster) {
+            hideChildren(foldednodes[i].id);
+        //}
     }
     updateAllClusterEdges();
 }
@@ -511,10 +504,6 @@ reachableNodeOrParent = function(startnode, edgesetall) {
     return (allreachable)
 }
 
-openListToLevel = function(cnode) {
-
-}
-
 reachableByNodeOrParent = function(startnode, edgesetall, currentnetwork) {
     var allreachable = reachableByNodes(startnode, edgesetall);
     var allclusters = getAllClusters(currentnetwork);
@@ -571,17 +560,8 @@ reachableNodesGeneral = function(startnode, edgesetall) {
     nodesreached = nodesreached.filter(onlyUnique);
     return nodesreached;
 }
-/*
+
 citationPresent = function(doi) {
-    for (var i = 0; i < citations.length; i++) {
-        if (citations[i].DOI == doi.toLowerCase()) {
-            return true;
-        }
-    }
-    return false;
-}
-*/
-citationPresent2 = function(doi) {
     if(citations2.length>0) {
     for (var i = 0; i < citations2.length; i++) {
         if (citations2[i].doi.toLowerCase() == doi.toLowerCase()) {
@@ -597,18 +577,7 @@ clearStudyText = function() {
     pubtext.innerHTML = ""
 }
 populateCiteFromDOI = function(doi) {
-    /*
-    if (citationPresent(doi)) {
-        for (var i = 0; i < citations.length; i++) {
-            if (citations[i].DOI == doi.toLowerCase()) {
-                pubtext.innerHTML = pubtext.innerHTML + "<br>" + formatArticle(citations[i]);
-            } else {
-
-            }
-        }
-    }
-    */
-    if (citationPresent2(doi.toLowerCase())) {
+    if (citationPresent(doi.toLowerCase())) {
         for (var i = 0; i < citations2.length; i++) {
             if (citations2[i].doi == doi.toLowerCase()) {
                 pubtext.innerHTML = pubtext.innerHTML + "<br>" + formatArticle2(citations2[i]);
@@ -621,7 +590,7 @@ populateCiteFromDOI = function(doi) {
 }
 
 getDOIFromCrossRef = function(doi) {
-    if (citationPresent2(doi)) {
+    if (citationPresent(doi)) {
         return(null);
     }
     console.log("got past cp2 check" + doi);
@@ -673,16 +642,12 @@ getDOIFromCrossRef = function(doi) {
         });
     }
     doipromise.then(data => {
-            if (!citationPresent2(doi.toLowerCase())) {
-                //data.message.DOI = data.message.DOI.toLowerCase();
-                //citations.push(data.message);
-
+            if (!citationPresent(doi.toLowerCase())) {
+                
                 var authorlist = data.message.author[0].given + " " + data.message.author[0].family;
                 for (var i = 1; i < data.message.author.length; i++) {
                     authorlist = authorlist + ", " + data.message.author[i].given + " " + data.message.author[i].family;
                 }
-
-
                 citations2.push({
                     URL: data.message.URL,
                     alternativeid: data.message["alternative-id"],
@@ -766,15 +731,6 @@ cleanDOI = function(doi) {
 
 
 //// main DAG ////
-attemptDAGButton = function() {
-
-    if (dvselector.value != "" &
-        ivselector.value != "") {
-        const dagbutton = document.getElementById('createdagbutton');
-        dagbutton.disabled = false;
-    }
-}
-
 
 getParentFromLabel = function(nodelabel) {
     for (var i = 0; i < nodesh.length; i++) {
@@ -914,12 +870,6 @@ blankNodeStatus = function() {
     }
 }
 
-resetDVIVFilter = function() {
-
-    dvselector.value = "";
-    ivselector.value = "";
-    showCurrentNetworkState();
-}
 
 updateNodeStatus = function() {
     if (dvselector.value == "" &
@@ -1056,8 +1006,9 @@ getEdges = function() {
 
     if (currentenv == "offline") {
         var studypromise = new Promise((resolve, reject) => {
-
-            var studies = [{
+            var studies = [
+                
+                {
                     DOI: "12345A",
                     "x variable": "education",
                     "y variable": "income",
@@ -1094,6 +1045,15 @@ getEdges = function() {
                     "instrument": "rainfall",
                     finding: "positive"
                 },
+                
+                {
+                    DOI: "12345",
+                    "x variable": "cement production",
+                    "y variable": "house building",
+                    "instrument": "",
+                    finding: "positive"
+                },
+                
                 {
                     DOI: "12345",
                     "x variable": "living in argentina",
@@ -1173,6 +1133,7 @@ getEdges = function() {
                     "instrument": "",
                     finding: "positive"
                 }
+                
             ];
             resolve(studies);
         });
@@ -1188,7 +1149,6 @@ getEdges = function() {
     }
 
     studypromise.then((items) => {
-        console.table(items)
         currentitems = items;
         var edgecombs = [];
         for (var i = 0; i < currentitems.length; i++) {
@@ -1335,10 +1295,7 @@ getEdges = function() {
                 };
                 edgeset.push(ivedge);
             }
-
         }
-
-
         createNetwork();
         getDoltStudies();
         createListHierarchy();
@@ -1346,6 +1303,8 @@ getEdges = function() {
         createEdgeTable();
     })
 }
+
+
 var notstarted = true;
 createNetwork = function() {
     const nodeFilterSelector = document.getElementById("nodeFilterSelect");
@@ -1355,7 +1314,7 @@ createNetwork = function() {
     orignodes = new vis.DataSet(nodesh);
     origedges = new vis.DataSet(edgeset);
 
-    const resetit = document.getElementById('resetbutton');
+    //const resetit = document.getElementById('resetbutton');
     const dagbutton = document.getElementById('createdagbutton');
     dagbutton.disabled = true;
 
@@ -1590,9 +1549,38 @@ makeNodeCounts = function() {
 
 
 getVariableHierarchy = function() {
-    if (currentenv == "offline") {
-        var varpromise = new Promise((resolve, reject) => {
-            var dummyvars = [{
+  if(backend=="dolthub") {
+    var varreadquery = "SELECT * FROM VARIABLES;";
+    var url = "https://www.dolthub.com/api/v1alpha1/jon-mellon/causes-of-human-outcomes/main?q=" + varreadquery;
+    var varpromise = fetch(url).then((response) => {
+    if (response.ok) {
+      let jsonout = response.json();
+      return jsonout;
+    } else {
+      throw new Error("NETWORK RESPONSE ERROR FROM DOLTHUB DOI CALL");
+    }
+    }).then((response) => {
+      var variables = [];
+      for (var i = 0; i < response.rows.length; i++) {
+        var tempparent = null;
+        for(var j = 0; j < response.rows.length; j++) {
+          if(response.rows[i].parent==response.rows[j].id) {
+            tempparent = response.rows[j].label;
+          }
+        }
+        variables[i] = {
+          "Variablename": response.rows[i].label, 
+          Parent: tempparent
+        };
+      }
+      return(variables);
+    });
+  } else {
+  if (currentenv == "offline") {
+      var varpromise = new Promise((resolve, reject) => {
+      var dummyvars = [
+                
+                {
                     "Variablename": "years of schooling",
                     Parent: "education"
                 },
@@ -1604,6 +1592,24 @@ getVariableHierarchy = function() {
                     "Variablename": "dancing",
                     Parent: ""
                 },
+                
+                {
+                    "Variablename": "building material production",
+                    Parent: ""
+                },
+                {
+                    "Variablename": "cement production",
+                    Parent: "building material production"
+                },
+                {
+                    "Variablename": "rough cement production",
+                    Parent: "building material production"
+                },
+                {
+                    "Variablename": "house building",
+                    Parent: ""
+                },
+                
                 {
                     "Variablename": "rainfall",
                     Parent: "weather"
@@ -1713,6 +1719,7 @@ getVariableHierarchy = function() {
                     "Variablename": "not real data",
                     Parent: ""
                 }
+                
             ]
 
             resolve(dummyvars);
@@ -1727,6 +1734,7 @@ getVariableHierarchy = function() {
         }
         var varpromise = new PublicGoogleSheetsParser(spreadsheetId, sheetInfo).parse();
     }
+  }
     varpromise.then((items) => {
         var keep = [];
         for (var i = 0; i < items.length; i++) {
@@ -1740,10 +1748,14 @@ getVariableHierarchy = function() {
                 if (items[i].Parent == "") {
                     badparent = true;
                 }
+                if (items[i].Parent == null) {
+                    badparent = true;
+                }
             }
 
             if (!badparent) {
                 if (!allvars.includes(items[i].Parent)) {
+                    console.log("adding parent to allvars" + items[i].Parent);
                     allvars.push(items[i].Parent);
                 }
                 keep.push(i);
@@ -1787,9 +1799,7 @@ getVariableHierarchy = function() {
             };
         }
 
-
         getEdges();
-
 
     });
 }
@@ -1997,10 +2007,10 @@ makeEdgeTwoway = function(edge) {
                 relation: "twoway"
             })
         } else {
-            //console.log("avoided");
+            
         }
     } else {
-        //console.log("avoided")
+        
     }
 }
 
@@ -2190,7 +2200,6 @@ formatArticle = function(dat, showurl = true) {
             title + "\"" + " " + journal + ": ";
     }
 
-    //console.log(combtitle);
     return combtitle
 }
 
@@ -2212,7 +2221,6 @@ formatArticle2 = function(dat, showurl = true) {
             title + "\"" + " " + journal + ": ";
     }
 
-    //console.log(combtitle);
     return combtitle
 }
 
