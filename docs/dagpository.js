@@ -301,15 +301,17 @@ clusterFoldedNodes = function() {
     // this function clusters everything in the foldednodes array
     var allclusters = getAllClusters(network);
     for (var i = 0; i < foldednodes.length; i++) {
+        /*
         var cluster = true;
         for (var j = 0; j < allclusters.length; j++) {
             if (allclusters[j].label == foldednodes[i].label) {
                 cluster = false;
             }
         }
-        if (cluster) {
+        */
+        //if (cluster) {
             hideChildren(foldednodes[i].id);
-        }
+        //}
     }
     updateAllClusterEdges();
 }
@@ -1004,7 +1006,9 @@ getEdges = function() {
 
     if (currentenv == "offline") {
         var studypromise = new Promise((resolve, reject) => {
-            var studies = [{
+            var studies = [
+                
+                {
                     DOI: "12345A",
                     "x variable": "education",
                     "y variable": "income",
@@ -1041,6 +1045,15 @@ getEdges = function() {
                     "instrument": "rainfall",
                     finding: "positive"
                 },
+                
+                {
+                    DOI: "12345",
+                    "x variable": "cement production",
+                    "y variable": "house building",
+                    "instrument": "",
+                    finding: "positive"
+                },
+                
                 {
                     DOI: "12345",
                     "x variable": "living in argentina",
@@ -1120,6 +1133,7 @@ getEdges = function() {
                     "instrument": "",
                     finding: "positive"
                 }
+                
             ];
             resolve(studies);
         });
@@ -1564,18 +1578,38 @@ getVariableHierarchy = function() {
   } else {
   if (currentenv == "offline") {
       var varpromise = new Promise((resolve, reject) => {
-      var dummyvars = [{
-        "Variablename": "years of schooling",
-        Parent: "education"
-        },
-        {
-        "Variablename": "music",
-        Parent: ""
-        },
-        {
-        "Variablename": "dancing",
-        Parent: ""
+      var dummyvars = [
+                
+                {
+                    "Variablename": "years of schooling",
+                    Parent: "education"
                 },
+                {
+                    "Variablename": "music",
+                    Parent: ""
+                },
+                {
+                    "Variablename": "dancing",
+                    Parent: ""
+                },
+                
+                {
+                    "Variablename": "building material production",
+                    Parent: ""
+                },
+                {
+                    "Variablename": "cement production",
+                    Parent: "building material production"
+                },
+                {
+                    "Variablename": "rough cement production",
+                    Parent: "building material production"
+                },
+                {
+                    "Variablename": "house building",
+                    Parent: ""
+                },
+                
                 {
                     "Variablename": "rainfall",
                     Parent: "weather"
@@ -1685,6 +1719,7 @@ getVariableHierarchy = function() {
                     "Variablename": "not real data",
                     Parent: ""
                 }
+                
             ]
 
             resolve(dummyvars);
