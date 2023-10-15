@@ -10,6 +10,20 @@
          } else {
           var currentenv = "live";  
          }
+         function GetURLParameter(sParam) {
+          var sPageURL = window.location.search.substring(1);
+          var sURLVariables = sPageURL.split('&');
+          for (var i = 0; i < sURLVariables.length; i++) {
+            var sParameterName = sURLVariables[i].split('=');
+            if (sParameterName[0] == sParam) {
+              return sParameterName[1];
+            }
+          }
+         }
+         var backend = GetURLParameter('backend');
+         if(backend==null) {
+           backend = "gs";  
+         }
       </script>
       <script
          type="text/javascript"
@@ -60,7 +74,6 @@
             <input id="selectDV" type="text" name="q" placeholder="Search for dependent variable..." style="width:100%;max-width:1200px;outline:0" onfocusout = "showCurrentNetworkState();" hidden>
          </form>
          <button hidden id = "filterbutton"  onclick="nodesView.refresh();">Filter network</button>
-         <button hidden id = "resetbutton"  onclick="resetDVIVFilter();">Reset</button>
          <p>
             Here are all the relevant causal claims listed in our dataset. 
          </p>
