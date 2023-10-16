@@ -557,6 +557,7 @@ updateVarSubmission = function () {
 
 
 submitVarClaim = function () {
+  updateVarSubmission();
   if(allvars.includes(newvar.name)) {
     // variable already exists
   } else {
@@ -573,15 +574,54 @@ submitVarClaim = function () {
 }
 
 updateClaimSubmission = function () {
-   claim.doi = doicurrent.value;
-   claim.xvar = indvar.value;
-   claim.yvar = depvar.value;
-   claim.instrument = instrvar.value;
-   claim.finding = finding.value;
-   claim.identification = identification.value;
-   claim.uoa = uoa.value;
+  try{
+    claim.doi = doicurrent.value;
+  } catch(e) {
+    
+  }
+  try{
+    claim.xvar = indvar.value;
+  } catch(e) {
+    
+  }
+  try{
+    claim.yvar = depvar.value;
+  } catch(e) {
+    
+  }
+  try{
+    claim.instrument = instrvar.value;
+  } catch(e) {
+    
+  }
+  try{
+    claim.finding = finding.value;
+  } catch(e) {
+    
+  }
+  try{
+    claim.identification = identification.value;
+  } catch(e) {
+    
+  }
+  try{
+    claim.uoa = uoa.value;
+  } catch(e) {
+    
+  }
+  try{
    claim.startyear = startyr.value;
-   claim.endyear = startyr.value;
+  } catch(e) {
+    
+  }
+  try{
+   claim.endyear = endyr.value;
+  } catch(e) {
+    
+  }
+   
+   
+   try{
    let countrystring = "";
    for (var i = 0; i < countries.selectedOptions.length; i++) {
       if (countrystring == "") {
@@ -589,13 +629,36 @@ updateClaimSubmission = function () {
       } else {
          countrystring = countrystring + ";" + countries.selectedOptions[i].value;
       }
-
+   }  
+   }catch(e) {
+     
    }
+  try{
    claim.countries = countrystring;
+  } catch(e) {
+    
+  }
+  try{
    claim.subpop = subpop.value;
+  } catch(e) {
+    
+  }
+  
+  try{
    claim.n = nobs.value;
+  } catch(e) {
+    
+  }
+  try{
    claim.resultdoc = resultdoc.value;
+  } catch(e) {
+    
+  }
+  try{
    claim.submitter = submitter.value;
+  } catch(e) {
+    
+  }
 }
 
 
