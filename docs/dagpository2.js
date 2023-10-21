@@ -1267,9 +1267,10 @@ getEdges = function() {
         // creating edges
         for (var i = 0; i < uniqueitems.length; i++) {
           
-            let fromid =allvars[allvars.findIndex(k => k.label === uniqueitems[i]["x variable"])].id;
-            let toid = allvars[allvars.findIndex(k => k.label === uniqueitems[i]["y variable"])].id;
-            edgeset[i] = {
+            try{
+              let fromid = allvars[allvars.findIndex(k => k.label === uniqueitems[i]["x variable"])].id;
+              let toid = allvars[allvars.findIndex(k => k.label === uniqueitems[i]["y variable"])].id;
+               edgeset[i] = {
                 from: fromid,
                 to: toid,
                 relation: uniqueitems[i].finding,
@@ -1283,7 +1284,12 @@ getEdges = function() {
                     label: false,
                     edge: testEdgeChoice
                 },
-            };
+              };
+            } catch(e) {
+              console.log(e)
+            }
+            
+           
         }
 
         for (var i = 0; i < uniqueitems.length; i++) {
