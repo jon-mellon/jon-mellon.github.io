@@ -1550,7 +1550,7 @@ makeNodeCounts = function() {
 
 getVariableHierarchy = function() {
   if(backend=="dolthub") {
-    var varreadquery = "SELECT * FROM VARIABLES;";
+    var varreadquery = "SELECT v1.id AS id, v1.timestamp, v1.parent AS parentid, v1.label AS label, v2.label AS parentlabel FROM variables v1 LEFT JOIN variables v2 ON v1.parent = v2.id;";
     var url = "https://www.dolthub.com/api/v1alpha1/jon-mellon/causes-of-human-outcomes/main?q=" + varreadquery;
     var varpromise = fetch(url).then((response) => {
     if (response.ok) {
@@ -1562,17 +1562,22 @@ getVariableHierarchy = function() {
     }).then((response) => {
       var variables = [];
       for (var i = 0; i < response.rows.length; i++) {
+        /*
         var tempparent = null;
         for(var j = 0; j < response.rows.length; j++) {
           if(response.rows[i].parent==response.rows[j].id) {
             tempparent = response.rows[j].label;
           }
         }
-        variables[i] = {
-          "Variablename": response.rows[i].label, 
-          Parent: tempparent
-        };
-      }
+        */
+        variables[i] = { 
+                          id: response.rows[i].id,
+                          Timestamp: response.rows[i].timestamp,
+                          Variablename: response.rows[i].label,
+                          Parent: response.rows[i].parentlabel,
+                          parentid: response.rows[i].parentid,
+                        };
+        }
       return(variables);
     });
   } else {
@@ -2300,7 +2305,9 @@ function generateTableHead(table, data) {
     let row = thead.insertRow();
     for (let key of data) {
         let th = document.createElement("th");
-
+        if(key=="finding") {
+          th.style ="width:6%";
+        }
         let text = document.createTextNode(key);
         th.appendChild(text);
         row.appendChild(th);
