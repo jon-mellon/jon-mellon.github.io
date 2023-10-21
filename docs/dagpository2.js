@@ -1205,7 +1205,7 @@ getEdges = function() {
             }
         }
 
-
+        console.table(uniqueitems);
 
 
         testEdgeChoice = function(values,
