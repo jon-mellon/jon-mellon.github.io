@@ -1288,7 +1288,7 @@ getEdges = function() {
               };
               edgeset.push(substantiveedge);
             } catch(e) {
-              console.log("failed to create edge: " + uniqueitems[i]);
+              console.log("failed to create edge: " + uniqueitems[i]["x variable"])] + uniqueitems[i]["y variable"])]);
             }
         }
         for (var i = 0; i < uniqueitems.length; i++) {
@@ -1916,7 +1916,11 @@ createNextLevel = function(currentorig) {
         });
         */
     } else {
-        toplevel.innerText = nodesh[currentorig].label;
+        try{
+          toplevel.innerText = getAllVarIdLabel(currentorig);  
+        } catch(e) {
+          console.log("Failed to create top level node: " + currentorig);
+        }
     }
     return (toplevel);
 }
