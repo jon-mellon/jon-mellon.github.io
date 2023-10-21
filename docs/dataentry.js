@@ -335,14 +335,14 @@ fetchAllVars = function () {
           var input= response.json().rows;
           var output = [];
           for (var i = 0; i < output.length; i++) {
-            output[i] = {id: id,
-                        Timestamp: input[i].timestamp,
-                        Variablename: input[i].label,
-                        Parent: input[i].parentlabel,
-                        parentid: input[i].parentid,
-            }
+            output[i] = { 
+                          id: input[i].id,
+                          Timestamp: input[i].timestamp,
+                          Variablename: input[i].label,
+                          Parent: input[i].parentlabel,
+                          parentid: input[i].parentid,
+                        };
           }
-          
           return(output);
       });
       }
