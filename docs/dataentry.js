@@ -253,6 +253,16 @@ fetchAllStudies = function () {
    });
 }
 
+getAllVarIdLabel = function(id) {
+  for (var i = 0; i < allvars.length; i++) {
+    if(allvars[i].id==id) {
+      return allvars[i].label;
+    }
+  }
+  return null
+}
+
+
 allVarInclude = function(text) {
   for (var i = 0; i < allvars.length; i++) {
     if(allvars[i].label==text) {
@@ -625,7 +635,7 @@ submitVarClaim = function () {
         method: "POST",
           body: JSON.stringify({
           label: newvar.name,
-          parent: "6df77ebd-f239-4329-a190-51ec99b424af",
+          parent: getAllVarIdLabel(newvar.parentvar),
           description: newvar.vardescription
   }),
   headers: {
