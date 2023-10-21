@@ -1288,7 +1288,7 @@ getEdges = function() {
               };
               edgeset.push(substantiveedge);
             } catch(e) {
-              console.log("failed to create edge: " + uniqueitems[i]["x variable"])] + uniqueitems[i]["y variable"])]);
+              console.log("failed to create edge: " + uniqueitems[i][["x variable"]] + uniqueitems[i][["y variable"]]);
             }
         }
         for (var i = 0; i < uniqueitems.length; i++) {
