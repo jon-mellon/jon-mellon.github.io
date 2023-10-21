@@ -280,7 +280,6 @@ validatePosInteger = function (selector) {
    }
 }
 
-
 fetchAllVars = function () {
    if (currentenv == "offline") {
       var varpromise = new Promise((resolve, reject) => {
@@ -321,15 +320,35 @@ fetchAllVars = function () {
          resolve(dummyvars);
       })
    } else {
-      const spreadsheetId = "1JdIwj_x64L6rpEK48acjnctYfrzFIS5HBkb4s27S7L8"
-      const sheetId = 0;
-      const sheetName = "variables";
-      const sheetInfo = {
-         sheetId,
-         sheetName
+      if(backend=="gs") {
+        const spreadsheetId = "1JdIwj_x64L6rpEK48acjnctYfrzFIS5HBkb4s27S7L8"
+        const sheetId = 0;
+        const sheetName = "variables";
+        const sheetInfo = {
+           sheetId,
+          sheetName
+        }
+        var varpromise = new PublicGoogleSheetsParser(spreadsheetId, sheetInfo).parse();
       }
-      var varpromise = new PublicGoogleSheetsParser(spreadsheetId, sheetInfo).parse();
+      if(backend=="dolthub") {
+        var varpromise = fetch('https://www.dolthub.com/api/v1alpha1/jon-mellon/causes-of-human-outcomes/main?q=SELECT v1.id AS id, v1.timestamp, v1.parent AS parentid, v1.label AS label, v2.label AS parentlabel FROM variables v1 LEFT JOIN variables v2 ON v1.parent = v2.id;').then((response) => {
+          var input= response.json().rows;
+          var output = [];
+          for (var i = 0; i < output.length; i++) {
+            output[i] = {id: id,
+                        Timestamp: input[i].timestamp,
+                        Variablename: input[i].label,
+                        Parent: input[i].parentlabel,
+                        parentid: input[i].parentid,
+            }
+          }
+          
+          return(output);
+      });
+      }
+ 
    }
+   
    varpromise.then((value) => {
       for (var i = 0; i < value.length; i++) {
          allvars[i] = value[i].Variablename;
