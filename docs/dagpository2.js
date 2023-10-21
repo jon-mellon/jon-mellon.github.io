@@ -1263,14 +1263,15 @@ getEdges = function() {
                 pubtext.innerHTML = "No citations listed";
             }
         }
-
+        
         // creating edges
         for (var i = 0; i < uniqueitems.length; i++) {
           
             try{
+              let substantiveedge;
               let fromid = allvars[allvars.findIndex(k => k.label === uniqueitems[i]["x variable"])].id;
               let toid = allvars[allvars.findIndex(k => k.label === uniqueitems[i]["y variable"])].id;
-               edgeset[i] = {
+               substantiveedge = {
                 from: fromid,
                 to: toid,
                 relation: uniqueitems[i].finding,
@@ -1285,8 +1286,9 @@ getEdges = function() {
                     edge: testEdgeChoice
                 },
               };
+              edgeset.push(substantiveedge);
             } catch(e) {
-              console.log(e)
+              console.log("failed to create edge: " + uniqueitems[i]);
             }
         }
         for (var i = 0; i < uniqueitems.length; i++) {
