@@ -1,9 +1,19 @@
+function comparevar(a,b) {
+  var al = a.label.toLowerCase();
+  var bl = b.label.toLowerCase();
+  if (al < bl)
+     return -1;
+  if (al > bl)
+    return 1;
+  return 0;
+}
+
 matcher = function (term, suggest) {
    term = term.toLowerCase();
    var suggestions = [];
    for (i = 0; i < allvars.length; i++)
-      if (~allvars[i].toLowerCase().indexOf(term)) {
-         suggestions.push(allvars[i]);
+      if (~allvars[i].label.toLowerCase().indexOf(term)) {
+         suggestions.push(allvars[i].label);
          if (allchildren[i].length > 0) {
             for (var j = 0; j < allchildren[i].length; j++) {
                if (allchildren[i][j] != "") {
@@ -243,8 +253,17 @@ fetchAllStudies = function () {
    });
 }
 
+allVarInclude = function(text) {
+  for (var i = 0; i < allvars.length; i++) {
+    if(allvars[i].label==text) {
+      return true;
+    }
+  }
+  return false;
+}
+
 wipeInvalidAnswer = function (selector) {
-   if (!allvars.includes(document.getElementById(selector).value)) {
+   if (!allVarInclude(document.getElementById(selector).value)) {
       document.getElementById(selector).value = ""
    } else {
       updateClaimSubmission();
@@ -351,22 +370,20 @@ fetchAllVars = function () {
    
    varpromise.then((value) => {
       for (var i = 0; i < value.length; i++) {
-         allvars[i] = value[i].Variablename;
-
+         allvars[i] = {label: value[i].Variablename};
       }
-      allvars = allvars.sort();
+      allvars = allvars.sort(comparevar);
       for (var i = 0; i < allvars.length; i++) {
          allchildren[i] = [];
          for (var j = 0; j < value.length; j++) {
-            if (value[j].Variablename == allvars[i]) {
+            if (value[j].Variablename == allvars[i].label) {
                if(value[j].Parent==null) {
                  allparents[i]= "";
                } else {
                  allparents[i] = value[j].Parent;
                }
-               
             }
-            if (value[j].Parent == allvars[i]) {
+            if (value[j].Parent == allvars[i].label) {
               if(value[j].Variablename==null) {
                 
               } else {
@@ -431,6 +448,7 @@ fetchIdentStrats = function () {
       updateSelector("identification", allidentifications);
    });
 }
+
 
 
 fetchFindingOpts = function () {
@@ -577,17 +595,34 @@ updateVarSubmission = function () {
 
 submitVarClaim = function () {
   updateVarSubmission();
-  if(allvars.includes(newvar.name)) {
+  if(allVarInclude(newvar.name)) {
     // variable already exists
   } else {
-   var submissionurl = "https://docs.google.com/forms/d/e/1FAIpQLScWFrxRU7VDtPnKe857jBIPCYFRBNftoICGAUT5xPMuwIJFVA/viewform?usp=pp_url&entry.775303211=" +
+    if(backend=="gs") {
+      var submissionurl = "https://docs.google.com/forms/d/e/1FAIpQLScWFrxRU7VDtPnKe857jBIPCYFRBNftoICGAUT5xPMuwIJFVA/viewform?usp=pp_url&entry.775303211=" +
       newvar.name +
       "&entry.1554052921=" + newvar.parentvar +
       "&entry.1513559511=" + newvar.vardescription;
 
-   document.getElementById("varoverlay").style.display = "block";
-
-   window.open(submissionurl, '_blank'); 
+     document.getElementById("varoverlay").style.display = "block";
+     window.open(submissionurl, '_blank');    
+    }
+   if(backend=="dolthub") {
+     var test = fetch("https://lastakeholders.jonathanmellon.com/api/submitclaim", {
+        method: "POST",
+          body: JSON.stringify({
+          label: newvar.name,
+          parent: "6df77ebd-f239-4329-a190-51ec99b424af",
+          description: newvar.vardescription
+  }),
+  headers: {
+    "Content-type": "application/json; charset=UTF-8"
+  }
+});
+   }
+   
+   
+   
   }
    
 }

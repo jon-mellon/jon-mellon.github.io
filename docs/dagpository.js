@@ -347,10 +347,10 @@ createCurrentvardet = function() {
     for (var i = 0; i < origids.length; i++) {
         origvardet[i] = {
             id: origids[i],
-            label: allvars[origids[i]],
+            label: allvars[origids[i]].label,
             status: "blank",
             count: 1,
-            parent: allparents[origids[i]],
+            parent: allparents[origids[i] ],
         };
     }
 
@@ -1260,8 +1260,8 @@ getEdges = function() {
         // creating edges
         for (var i = 0; i < uniqueitems.length; i++) {
             edgeset[i] = {
-                from: allvars.indexOf(uniqueitems[i]["x variable"]),
-                to: allvars.indexOf(uniqueitems[i]["y variable"]),
+                from: allvars.findIndex(k => k.label === uniqueitems[i]["x variable"]),
+                to: allvars.findIndex(k => k.label === uniqueitems[i]["y variable"]),
                 relation: uniqueitems[i].finding,
                 arrows: "to",
                 color: {
@@ -1273,14 +1273,17 @@ getEdges = function() {
                     label: false,
                     edge: testEdgeChoice
                 },
+                
+                
+                
             };
         }
 
         for (var i = 0; i < uniqueitems.length; i++) {
             if (uniqueitems[i]["instrument"] != "") {
                 let ivedge = {
-                    from: allvars.indexOf(uniqueitems[i]["instrument"]),
-                    to: allvars.indexOf(uniqueitems[i]["x variable"]),
+                    from: allvars.findIndex(k => k.label === uniqueitems[i]["x instrument"]),
+                    to: allvars.findIndex(k => k.label === uniqueitems[i]["x variable"]),
                     relation: "first-stage",
                     arrows: "to",
                     color: {
@@ -1349,7 +1352,7 @@ createNetwork = function() {
             document.getElementById("varname").innerText = findVariableLabelFromId(properties.nodes);
 
             for (var i = 0; i < allvars.length; i++) {
-                if (allvars[i] == findVariableLabelFromId(properties.nodes)) {
+                if (allvars[i].label == findVariableLabelFromId(properties.nodes)) {
                     var childtext = "";
 
                     if (allchildren[i].length > 0) {
@@ -1743,8 +1746,12 @@ getVariableHierarchy = function() {
     varpromise.then((items) => {
         var keep = [];
         for (var i = 0; i < items.length; i++) {
-            if (!allvars.includes(items[i].Variablename)) {
-                allvars.push(items[i].Variablename);
+            if (!allVarInclude(items[i].Variablename)) {
+                allvars.push(
+                    {
+                      label: items[i].Variablename  
+                    }
+                  );
             }
             var badparent = false;
             if (typeof items[i].Parent === "undefined") {
@@ -1759,9 +1766,12 @@ getVariableHierarchy = function() {
             }
 
             if (!badparent) {
-                if (!allvars.includes(items[i].Parent)) {
+                if (!allVarInclude(items[i].Parent)) {
                     console.log("adding parent to allvars" + items[i].Parent);
-                    allvars.push(items[i].Parent);
+                    allvars.push({
+                      label: items[i].Parent
+                      }
+                      );
                 }
                 keep.push(i);
             }
@@ -1770,7 +1780,7 @@ getVariableHierarchy = function() {
         for (var i = 0; i < allvars.length; i++) {
             allchildren[i] = [];
             for (var j = 0; j < items.length; j++) {
-                if (items[j].Variablename == allvars[i]) {
+                if (items[j].Variablename == allvars[i].label) {
                     if (items[j].Parent == null) {
                         allparents[i] = "";
                     } else {
@@ -1778,7 +1788,7 @@ getVariableHierarchy = function() {
                     }
 
                 }
-                if (items[j].Parent == allvars[i]) {
+                if (items[j].Parent == allvars[i].label) {
                     if (items[j].Variablename == null) {
 
                     } else {
@@ -1791,7 +1801,7 @@ getVariableHierarchy = function() {
         for (var i = 0; i < allvars.length; i++) {
             nodesh[i] = {
                 id: (i),
-                label: allvars[i],
+                label: allvars[i].label,
                 parent: allparents[i],
             };
         }
@@ -1799,8 +1809,8 @@ getVariableHierarchy = function() {
 
         for (var i = 0; i < items.length; i++) {
             edgesh[i] = {
-                from: allvars.indexOf(items[i].Parent),
-                to: allvars.indexOf(items[i].Variablename)
+                from: allvars.findIndex(k => k.label === items[i].Parent),
+                to: allvars.findIndex(k => k.label === items[i].Variablename)
             };
         }
 
