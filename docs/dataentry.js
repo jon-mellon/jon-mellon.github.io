@@ -332,21 +332,21 @@ fetchAllVars = function () {
       }
       if(backend=="dolthub") {
         var varpromise = fetch('https://www.dolthub.com/api/v1alpha1/jon-mellon/causes-of-human-outcomes/main?q=SELECT v1.id AS id, v1.timestamp, v1.parent AS parentid, v1.label AS label, v2.label AS parentlabel FROM variables v1 LEFT JOIN variables v2 ON v1.parent = v2.id;').then((response) => {
-          var input= response.json().rows;
+          return(response.json());
+        }).then((response) => {
           var output = [];
-          for (var i = 0; i < output.length; i++) {
+          for (var i = 0; i < response.rows.length; i++) {
             output[i] = { 
-                          id: input[i].id,
-                          Timestamp: input[i].timestamp,
-                          Variablename: input[i].label,
-                          Parent: input[i].parentlabel,
-                          parentid: input[i].parentid,
+                          id: response.rows[i].id,
+                          Timestamp: response.rows[i].timestamp,
+                          Variablename: response.rows[i].label,
+                          Parent: response.rows[i].parentlabel,
+                          parentid: response.rows[i].parentid,
                         };
           }
           return(output);
-      });
+        });
       }
- 
    }
    
    varpromise.then((value) => {
