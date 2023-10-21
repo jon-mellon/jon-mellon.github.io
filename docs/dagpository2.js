@@ -1288,12 +1288,9 @@ getEdges = function() {
             } catch(e) {
               console.log(e)
             }
-            
-           
         }
-
         for (var i = 0; i < uniqueitems.length; i++) {
-            if (uniqueitems[i]["instrument"] != "") {
+            if (uniqueitems[i]["instrument"]!=null && uniqueitems[i]["instrument"] != "") {
                 try{
                   let fromid = allvars[allvars.findIndex(k => k.label === uniqueitems[i]["instrument"])].id;
                   let toid = allvars[allvars.findIndex(k => k.label === uniqueitems[i]["x variable"])].id;
