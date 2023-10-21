@@ -1335,8 +1335,8 @@ createNetwork = function() {
     origedges = new vis.DataSet(edgeset);
 
     //const resetit = document.getElementById('resetbutton');
-    const dagbutton = document.getElementById('createdagbutton');
-    dagbutton.disabled = true;
+    //const dagbutton = document.getElementById('createdagbutton');
+    //dagbutton.disabled = true;
 
     function startNetwork(data) {
         const container = document.getElementById("mynetwork");
