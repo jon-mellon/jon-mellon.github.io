@@ -1294,9 +1294,10 @@ getEdges = function() {
 
         for (var i = 0; i < uniqueitems.length; i++) {
             if (uniqueitems[i]["instrument"] != "") {
-                let fromid = allvars[allvars.findIndex(k => k.label === uniqueitems[i]["instrument"])].id;
-                let toid = allvars[allvars.findIndex(k => k.label === uniqueitems[i]["x variable"])].id;
-                let ivedge = {
+                try{
+                  let fromid = allvars[allvars.findIndex(k => k.label === uniqueitems[i]["instrument"])].id;
+                  let toid = allvars[allvars.findIndex(k => k.label === uniqueitems[i]["x variable"])].id;
+                  let ivedge = {
                     from: fromid,
                     to: toid,
                     relation: "first-stage",
@@ -1312,6 +1313,10 @@ getEdges = function() {
                     },
                 };
                 edgeset.push(ivedge);
+                } catch(e) {
+                  console.log(e);
+                }
+                
             }
         }
         createNetwork();
