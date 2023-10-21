@@ -347,10 +347,10 @@ createCurrentvardet = function() {
     for (var i = 0; i < origids.length; i++) {
         origvardet[i] = {
             id: origids[i],
-            label: allvars[origids[i]],
+            label: getAllVarIdLabel(origids[i]),
             status: "blank",
             count: 1,
-            parent: allparents[origids[i]],
+            parent: allparents[origids[i] ],
         };
     }
 
@@ -366,7 +366,14 @@ createCurrentvardet = function() {
         }
     }
 }
-
+getAllVarIdLabel = function(id) {
+  for (var i = 0; i < allvars.length; i++) {
+    if(allvars[i].id==id) {
+      return allvars[i].label;
+    }
+  }
+  return null
+}
 
 sfb = function() {
     showFilterBoxes();
@@ -1259,9 +1266,12 @@ getEdges = function() {
 
         // creating edges
         for (var i = 0; i < uniqueitems.length; i++) {
+          
+            let fromid =allvars[allvars.findIndex(k => k.label === uniqueitems[i]["x variable"])].id;
+            let toid = allvars[allvars.findIndex(k => k.label === uniqueitems[i]["y variable"])].id;
             edgeset[i] = {
-                from: allvars.indexOf(uniqueitems[i]["x variable"]),
-                to: allvars.indexOf(uniqueitems[i]["y variable"]),
+                from: fromid,
+                to: toid,
                 relation: uniqueitems[i].finding,
                 arrows: "to",
                 color: {
@@ -1278,9 +1288,11 @@ getEdges = function() {
 
         for (var i = 0; i < uniqueitems.length; i++) {
             if (uniqueitems[i]["instrument"] != "") {
+                let fromid = allvars[allvars.findIndex(k => k.label === uniqueitems[i]["instrument"])].id;
+                let toid = allvars[allvars.findIndex(k => k.label === uniqueitems[i]["x variable"])].id;
                 let ivedge = {
-                    from: allvars.indexOf(uniqueitems[i]["instrument"]),
-                    to: allvars.indexOf(uniqueitems[i]["x variable"]),
+                    from: fromid,
+                    to: toid,
                     relation: "first-stage",
                     arrows: "to",
                     color: {
@@ -1349,7 +1361,7 @@ createNetwork = function() {
             document.getElementById("varname").innerText = findVariableLabelFromId(properties.nodes);
 
             for (var i = 0; i < allvars.length; i++) {
-                if (allvars[i] == findVariableLabelFromId(properties.nodes)) {
+                if (allvars[i].label == findVariableLabelFromId(properties.nodes)) {
                     var childtext = "";
 
                     if (allchildren[i].length > 0) {
@@ -1550,7 +1562,7 @@ makeNodeCounts = function() {
 
 getVariableHierarchy = function() {
   if(backend=="dolthub") {
-    var varreadquery = "SELECT * FROM VARIABLES;";
+    var varreadquery = "SELECT v1.id AS id, v1.timestamp, v1.parent AS parentid, v1.label AS label, v2.label AS parentlabel FROM variables v1 LEFT JOIN variables v2 ON v1.parent = v2.id;";
     var url = "https://www.dolthub.com/api/v1alpha1/jon-mellon/causes-of-human-outcomes/main?q=" + varreadquery;
     var varpromise = fetch(url).then((response) => {
     if (response.ok) {
@@ -1562,17 +1574,22 @@ getVariableHierarchy = function() {
     }).then((response) => {
       var variables = [];
       for (var i = 0; i < response.rows.length; i++) {
+        /*
         var tempparent = null;
         for(var j = 0; j < response.rows.length; j++) {
           if(response.rows[i].parent==response.rows[j].id) {
             tempparent = response.rows[j].label;
           }
         }
-        variables[i] = {
-          "Variablename": response.rows[i].label, 
-          Parent: tempparent
-        };
-      }
+        */
+        variables[i] = { 
+                          id: response.rows[i].id,
+                          Timestamp: response.rows[i].timestamp,
+                          Variablename: response.rows[i].label,
+                          Parent: response.rows[i].parentlabel,
+                          parentid: response.rows[i].parentid,
+                        };
+        }
       return(variables);
     });
   } else {
@@ -1738,42 +1755,78 @@ getVariableHierarchy = function() {
     varpromise.then((items) => {
         var keep = [];
         for (var i = 0; i < items.length; i++) {
-            if (!allvars.includes(items[i].Variablename)) {
-                allvars.push(items[i].Variablename);
-            }
-            var badparent = false;
-            if (typeof items[i].Parent === "undefined") {
+          var badparent = false;
+            if (!allVarInclude(items[i].Variablename)) {
+                let newid;
+                if(items[i].id==null) {
+                  newid = i;
+                } else {
+                  newid= items[i].id;
+                }
+                
+              if (typeof items[i].Parent === "undefined") {
                 badparent = true;
-            } else {
+              } else {
                 if (items[i].Parent == "") {
                     badparent = true;
                 }
                 if (items[i].Parent == null) {
                     badparent = true;
                 }
+              }
+              let newparent;
+              let newparentid;
+              if(!badparent) {
+                newparent = items[i].Parent;
+                newparentid = items[i].parentid;
+              } else {
+                newparent = null;
+                newparentid = null;
+              }
+              allvars.push(
+                    {
+                      id: newid,
+                      label: items[i].Variablename,
+                      parentlabel: newparent,
+                      parentid: newparentid,
+                    }
+                  );
             }
-
+            
+            
             if (!badparent) {
-                if (!allvars.includes(items[i].Parent)) {
+                /*
+                if (!allVarInclude(items[i].Parent)) {
                     console.log("adding parent to allvars" + items[i].Parent);
-                    allvars.push(items[i].Parent);
+                    let newid;
+                    if(items[i].parentid==null) {
+                      newid = items.length + i;
+                    } else {
+                      newid = items[i].parentid;
+                    }
+                    allvars.push({
+                      id: newid,
+                      label: items[i].Parent
+                      }
+                      );
                 }
+                */
                 keep.push(i);
             }
+            
         }
 
         for (var i = 0; i < allvars.length; i++) {
             allchildren[i] = [];
             for (var j = 0; j < items.length; j++) {
-                if (items[j].Variablename == allvars[i]) {
+                if (items[j].Variablename == allvars[i].label) {
                     if (items[j].Parent == null) {
                         allparents[i] = "";
                     } else {
                         allparents[i] = items[j].Parent;
                     }
-
                 }
-                if (items[j].Parent == allvars[i]) {
+                if (items[j].Parent == allvars[i].label) {
                     if (items[j].Variablename == null) {
 
                     } else {
@@ -1784,18 +1837,24 @@ getVariableHierarchy = function() {
         }
 
         for (var i = 0; i < allvars.length; i++) {
+            let newid;
+            if(allvars[i].id==null) {
+              newid = i;
+            } else {
+              newid = allvars[i].id;
+            }
             nodesh[i] = {
-                id: (i),
-                label: allvars[i],
-                parent: allparents[i],
+                id: newid,
+                label: allvars[i].label,
+                parent: allvars[i].parentlabel,
             };
         }
         items = keep.map(i => items[i]);
 
         for (var i = 0; i < items.length; i++) {
             edgesh[i] = {
-                from: allvars.indexOf(items[i].Parent),
-                to: allvars.indexOf(items[i].Variablename)
+                from: allvars[allvars.findIndex(k => k.label === items[i].Parent)].id,
+                to: allvars[allvars.findIndex(k => k.label === items[i].Variablename)].id
             };
         }
 
@@ -1914,6 +1973,8 @@ createListHierarchy = function() {
         }
     }
     originnodes.sort(function(a, b) {
+        //console.log(a);
+        //console.log(b);
         let alabel = nodeLabelFromIdh(a);
         let blabel = nodeLabelFromIdh(b);
         return alabel.localeCompare(blabel);
@@ -2300,7 +2361,9 @@ function generateTableHead(table, data) {
     let row = thead.insertRow();
     for (let key of data) {
         let th = document.createElement("th");
-
+        if(key=="finding") {
+          th.style ="width:6%";
+        }
         let text = document.createTextNode(key);
         th.appendChild(text);
         row.appendChild(th);

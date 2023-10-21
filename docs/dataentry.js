@@ -302,35 +302,42 @@ validatePosInteger = function (selector) {
 fetchAllVars = function () {
    if (currentenv == "offline") {
       var varpromise = new Promise((resolve, reject) => {
-         var dummyvars = [{
-               "Variablename": "none",
-               Parent: ""
-            },
+         var dummyvars = [
             {
+               id: "D0",
                "Variablename": "education",
                Parent: ""
             },
             {
+               id: "D7",
                "Variablename": "years of schooling",
-               Parent: "education"
+               Parent: "education",
+               parentid: "D0"
             },
             {
+              id: "D1",
                "Variablename": "income",
                Parent: ""
             },
             {
+               id: "D4",
                "Variablename": "individual income",
-               Parent: "income"
+               Parent: "income",
+               parentid: "D1"
             },
             {
+               id: "D5",
                "Variablename": "voting for economic right wing party",
-               Parent: "voting for party"
+               Parent: "voting for party",
+               parentid: "D2"
             },
             {
+               id: "D2",
                "Variablename": "voting for party",
                Parent: ""
             },
             {
+               id: "D6",
                "Variablename": "not real data",
                Parent: ""
             }
@@ -370,7 +377,13 @@ fetchAllVars = function () {
    
    varpromise.then((value) => {
       for (var i = 0; i < value.length; i++) {
-         allvars[i] = {label: value[i].Variablename};
+         allvars[i] = {
+           label: value[i].Variablename, 
+           id: value[i].id,
+           parentid: value[i].parentid,
+           parentlabel: value[i].Parent,
+           timestamp: value[i].Timestamp,
+         };
       }
       allvars = allvars.sort(comparevar);
       for (var i = 0; i < allvars.length; i++) {
