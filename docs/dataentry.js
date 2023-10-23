@@ -624,6 +624,14 @@ updateVarSubmission = function () {
    newvar.vardescription = vardescription.value;
 }
 
+doltVarOverlayBlank = function() {
+    document.getElementById("varsubmitting").hidden = true;
+    document.getElementById("varsuccess").hidden = true;
+    document.getElementById("varfail").hidden = true;
+    document.getElementById("continuevar").hidden = true;
+    document.getElementById("cancelvardolt").hidden = true;
+    document.getElementById("resubmitvardolt").hidden = true;
+}
 
 submitVarClaim = function () {
   updateVarSubmission();
@@ -640,6 +648,10 @@ submitVarClaim = function () {
      window.open(submissionurl, '_blank');    
     }
    if(backend=="dolthub") {
+     document.getElementById("varoverlaydolthub").style.display = "block";
+     doltVarOverlayBlank();
+     document.getElementById("varsubmitting").hidden = false;
+     
      var doltvarsubmit = fetch("https://lastakeholders.jonathanmellon.com/api/submitclaim", {
         method: "POST",
         body: JSON.stringify({
@@ -655,6 +667,7 @@ submitVarClaim = function () {
     let resp = item.json();
     return(resp)
   }).then((out) => {
+    doltVarOverlayBlank();
     var successcheck;
     try{
       successcheck = out.data.res_details.query_execution_status=="Success";
@@ -663,8 +676,13 @@ submitVarClaim = function () {
     }
     if(successcheck) {
       console.log("Success");
+      document.getElementById("varsuccess").hidden = false;
+      document.getElementById("continuevar").hidden = false;
     } else {
       console.log("Something went wrong")
+      document.getElementById("varfail").hidden = false;
+      document.getElementById("cancelvardolt").hidden = false;
+      document.getElementById("resubmitvardolt").hidden = false;
     }
   })
 

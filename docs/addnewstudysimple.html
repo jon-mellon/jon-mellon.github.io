@@ -74,9 +74,6 @@
     
     
   </script>
-    <style>
-  
-    </style>
     
     <link rel="stylesheet" href="auto-complete.css">
 
@@ -201,6 +198,17 @@ function showPopup(id) {
             <button id="confirmvar">I confirm that I submitted my variable through the Google form</button>
             <button id="cancelvar">Cancel my submission</button>
             <button id="resubmitvar">Resend submission to Google Forms</button>
+        </div>
+    </div>
+    
+    <div id="varoverlaydolthub" class="overlay">
+        <div id="varoverlay-content-dolthub">
+            <p hidden id ="varsubmitting" hidden>Variable submitting...</p>
+            <p hidden id ="varsuccess" hidden>Variable successfully submitted!</p>
+            <p hidden id ="varfail" hidden>Something went wrong</p>
+            <button hidden id="continuevar">OK</button>
+            <button hidden id="cancelvardolt">Cancel</button>
+            <button hidden id="resubmitvardolt">Resend</button>
         </div>
     </div>
 
