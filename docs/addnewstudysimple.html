@@ -2,6 +2,8 @@
 <html>
 <head>
   <meta charset='UTF-8'>
+  <link rel="icon" type="image/x-icon" href="logo2.png">
+
   <script>
     if(window.location.hostname=="") {
       var currentenv = "offline";  
@@ -27,6 +29,7 @@
       type="text/javascript"
       src="dataentry.js"
     ></script>
+  <link rel="stylesheet" href="addstudy.css">
   <script src="auto-complete.js"></script>
 
   <script 
@@ -72,176 +75,7 @@
     
   </script>
     <style>
-        .invisiblecolumns {
-            display: flex;
-            justify-content: space-between;
-            height: 500px;
-            display: none;
-        }
-        .columns {
-            display: flex;
-            justify-content: space-between;
-            height: 500px;
-        }
-        .column {
-            flex: 25%;
-            overflow: auto;
-            padding: 1em;
-            border: 1px solid #000;
-            margin: 1em;
-            box-sizing: border-box;
-        }
-        .column2 {
-            flex: 75%;
-            overflow: auto;
-            padding: 1em;
-            border: 1px solid #000;
-            margin: 1em;
-            box-sizing: border-box;
-        }
-        form label, form select, form input, form button {
-            display: block;
-            margin: 15px 0;
-            width: 95%;
-        }
-        
-        .hidden { display: none; }
-        
-        .overlay {
-            display: none;
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(128,128,128,0.5);
-            z-index: 2;
-            cursor: pointer;
-        }
-        #overlay-content {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: white;
-            padding: 20px;
-            color: black;
-            text-align: center;
-            width: 50%;
-        }
-        #varoverlay-content {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: white;
-            padding: 20px;
-            color: black;
-            text-align: center;
-            width: 50%;
-        }
-        .text{
-            position: absolute;
-            text-align: center;
-            top: 50%;
-            left: 50%;
-            font-size: 20px;
-            color: white;
-            transform: translate(-50%,-50%);
-            -ms-transform: translate(-50%,-50%);
-        }
-        body { margin: 0; padding: 0; border: 0; min-width: 320px; }
-        html, button, input, select, textarea, .pure-g [class *= "pure-u"] { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 1.02em; }
-        p, td { line-height: 1.5; }
-        ul { padding: 0 0 0 20px; }
-        th { background: #eee; white-space: nowrap; }
-        th, td { padding: 10px; text-align: left; vertical-align: top; font-size: .9em; font-weight: normal; border-right: 1px solid #fff; }
-        td:first-child { white-space: nowrap; color: #008000; width: 1%; font-style: italic; }
-        h1, h2, h3 { ; font-family: "Source Sans Pro", sans-serif; font-weight: 300; margin: 0 0 1.2em; }
-        h1 { font-size: 4.5em ; margin: 0 0 .4em; }
-        h2 { font-size: 2em}
-        h3 { font-size: 1.8em; color: #4b4b4b; margin: 1.8em 0 .8em }
-        h4 { font: bold 1em sans-serif; color: #636363; margin: 4em 0 1em; }
-        a { color: #4e99c7; text-decoration: none; }
-        a:hover { text-decoration: underline; }
-        p { margin: 0 0 1.2em; }
-        ::selection { color: #fff; background: #328efd; }
-        ::-moz-selection { color: #fff; background: #328efd; }
-        @media (max-width:480px) {
-            h1 { font-size: 3em; }
-            h2 { font-size: 1.8em; }
-            h3 { font-size: 1.5em; }
-            td:first-child { white-space: normal; }
-        }
-        .inline-code { padding: 1px 5px; background: #eee; border-radius: 2px; }
-        pre {
-            margin: 10px 0; overflow: auto; white-space: pre; word-wrap: normal;
-            border: 0 !important; padding: 8px 10px !important; line-height: 18px; background: #edf3f8;
-            font-family: Consolas, 'Liberation Mono', Courier, monospace; font-size: 14px;
-        }
-        /* Pure CSS */
-        .pure-button { margin: 5px 0; text-decoration: none !important; }
-        .button-lg { margin: 5px 0; padding: .65em 1.6em; font-size: 105%; }
-        input[type="text"] { border-radius: 0 !important; }
-        /* Popup container */
-.popup {
-  position: relative;
-  display: inline-block;
-  cursor: pointer;
-}
-
-/* The actual popup (appears on top) */
-.popup .popuptext {
-  visibility: hidden;
-  width: 300px;
-  background-color: #555;
-  color: #fff;
-  text-align: center;
-  border-radius: 6px;
-  padding: 8px 0;
-  position: absolute;
-  z-index: 1;
-  bottom: 125%;
-  left: 50%;
-  margin-left: -80px;
-}
-
-/* Popup arrow */
-.popup .popuptext::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: #555 transparent transparent transparent;
-}
-.title {
-      font-size: 2rem;
-      font-weight: 800;
-      margin-top: 2rem;
-      margin-bottom: 2rem;
-    }
-/* Toggle this class when clicking on the popup container (hide and show the popup) */
-.popup .show {
-  visibility: visible;
-  -webkit-animation: fadeIn 1s;
-  animation: fadeIn 1s
-}
-
-/* Add animation (fade in the popup) */
-@-webkit-keyframes fadeIn {
-  from {opacity: 0;}
-  to {opacity: 1;}
-}
-
-@keyframes fadeIn {
-  from {opacity: 0;}
-  to {opacity:1 ;}
-}
+  
     </style>
     
     <link rel="stylesheet" href="auto-complete.css">
@@ -259,7 +93,8 @@ function showPopup(id) {
 }
 </script>
     <div class="title">
-    <span>Causal claim entry form: Beta Version</span>
+    <span><img  src="logo2.png" style="width:3%; border: 0px solid">Causal claim entry form: Beta Version</span>
+
     <div class="row badges">
     </div>
   </div>
