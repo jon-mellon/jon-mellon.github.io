@@ -26,6 +26,12 @@
            backend = "gs";  
          }
       </script>
+       
+       <script
+         type="text/javascript"
+         src="sharednetworking.js"
+        ></script>
+        
       <script
          type="text/javascript"
          src="dataentry.js"
@@ -34,10 +40,17 @@
          type="text/javascript"
          src="visjs-min.js"
          ></script>
+         
       <script
          type="text/javascript"
          src="dagpository.js"
          ></script>
+        
+      <script
+         type="text/javascript"
+         src="utils.js"
+         ></script>
+         
       <script 
          src="https://cdn.jsdelivr.net/npm/public-google-sheets-parser?v=20230209"
         ></script>
@@ -164,7 +177,7 @@
         
         
          <script>
-            
+            var page = "viewer";
             // main DAG variables
             var canreachdv = [];
             var dvcanreach = [];
@@ -206,6 +219,10 @@
             //var currentids = [];
             var combids = [];
             var combvardet = [];
+            
+            
+            var allidentifications= [];
+            
             // html elements:
             const pubtext = document.getElementById('pubdetails');
             

@@ -1,3 +1,10 @@
+fetchAllCrossRef = function() {
+    var alldois = getAllDOIS();
+    for (var i = 0; i < alldois.length; i++) {
+        setTimeout(getDOIFromCrossRef, i * 100, alldois[i]);
+    }
+}
+
 function comparevar(a,b) {
   var al = a.label.toLowerCase();
   var bl = b.label.toLowerCase();
@@ -78,32 +85,6 @@ function DOIchecker() {
    }
    DOIInfoCall(doibox.value);
 }
-
-// https://docs.google.com/forms/d/e/1FAIpQLSdXgItq-zrA7Do6vOAuJmtd_nDqYFoZ3l8ypO4EQ0fUoLWA_w/viewform?usp=pp_url&entry.1535032722=test&entry.1128171251=xvar1&entry.860119781=yvar1&entry.1916574635=none&entry.1950636191=1999&entry.1246413525=2001&entry.883997836=positive&entry.756521078=QCA&entry.2108748939=person&entry.163883274=CA;GB&entry.583739099=children&entry.1778787331=120&entry.308413737=table+1(col+a)
-
-
-getDOIFromCrossRef = function (doi) {
-   fetch("https://api.crossref.org/works/" + doi)
-      .then((response) => {
-         //console.log("crossref API Call");
-         if (response.ok) {
-            let jsonout = response.json();
-            return jsonout;
-         } else {
-            throw new Error("NETWORK RESPONSE ERROR");
-            // error handling here
-         }
-      })
-      .then(data => {
-         console.log(data.message);
-         studyinfo = data.message;
-      })
-      .catch((error) => console.error("FETCH ERROR:", error));
-}
-
-
-
-
 
 showDOINotFound = function() {
   document.getElementById("notfound").hidden = false;
@@ -205,7 +186,6 @@ function revealColumns() {
    document.getElementById('columnentry').classList.add('columns');
    document.getElementById("DOI").disabled = true;
    document.getElementById("doicheckbutton").disabled = true;
-
 }
 
 hideDOIImage = function() {
@@ -424,158 +404,6 @@ fetchAllVars = function () {
             }
          }
       }
-
-      /*
-      const varselects = ["dependent-variable", "independent-variable", "instrumental-variable", "parent-variable"];
-    for (var i = 0; i < varselects.length; i++) {
-      updateSelector(varselects[i], allvars)
-    }
-    */
-   });
-}
-
-
-fetchIdentStrats = function () {
-
-   if (currentenv == "offline") {
-      var varpromise = new Promise((resolve, reject) => {
-         var dummstrats = [{
-               strategy: "Selection on observables"
-            },
-            {
-               strategy: "Diff-in-diff"
-            },
-            {
-               strategy: "Regression discontinuity design"
-            },
-            {
-               strategy: "Randomized experiment"
-            },
-            {
-               strategy: "not real data"
-            }
-         ];
-
-         resolve(dummstrats);
-      })
-
-   } else {
-    var varreadquery = "SELECT * FROM IDENTIFICATION;";
-    var url = "https://www.dolthub.com/api/v1alpha1/jon-mellon/causes-of-human-outcomes/main?q=" + varreadquery;
-    var varpromise = fetch(url).then((response) => {
-    if (response.ok) {
-      let jsonout = response.json();
-      return jsonout;
-    } else {
-      throw new Error("NETWORK RESPONSE ERROR FROM DOLTHUB DOI CALL");
-    }
-    }).then((response) => {
-      return(response.rows);
-    });
-   }
-   varpromise.then((value) => {
-      for (var i = 0; i < value.length; i++) {
-         allidentifications[i] = value[i].strategy;
-      }
-      updateSelector("identification", allidentifications);
-   });
-}
-
-
-
-fetchFindingOpts = function () {
-   if (currentenv == "offline") {
-      var varpromise = new Promise((resolve, reject) => {
-         var dummfinds = [{
-               finding: "Positive"
-            },
-            {
-               finding: "Negative"
-            },
-            {
-               finding: "Zero"
-            },
-            {
-               finding: "Not real data"
-            }
-         ];
-         resolve(dummfinds);
-      })
-
-   } else {
-    var varreadquery = "SELECT * FROM FINDINGS;";
-    var url = "https://www.dolthub.com/api/v1alpha1/jon-mellon/causes-of-human-outcomes/main?q=" + varreadquery;
-    var varpromise = fetch(url).then((response) => {
-    if (response.ok) {
-      let jsonout = response.json();
-      return jsonout;
-    } else {
-      throw new Error("NETWORK RESPONSE ERROR FROM DOLTHUB DOI CALL");
-    }
-    }).then((response) => {
-      return(response.rows);
-    });
-   }
-   varpromise.then((value) => {
-      for (var i = 0; i < value.length; i++) {
-         allfindings[i] = value[i].finding;
-      }
-      updateSelector("finding", allfindings);
-   });
-}
-
-fetchUOA = function () {
-   if (currentenv == "offline") {
-      var varpromise = new Promise((resolve, reject) => {
-         var dummyvars = [{
-            uoa: "Individual"
-         }, {
-            uoa: "Household"
-         }, {
-            uoa: "Not real data"
-         }];
-         resolve(dummyvars);
-      })
-
-   } else {
-    var varreadquery = "SELECT * FROM uoas;";
-    var url = "https://www.dolthub.com/api/v1alpha1/jon-mellon/causes-of-human-outcomes/main?q=" + varreadquery;
-    var varpromise = fetch(url).then((response) => {
-    if (response.ok) {
-      let jsonout = response.json();
-      return jsonout;
-    } else {
-      throw new Error("NETWORK RESPONSE ERROR FROM DOLTHUB DOI CALL");
-    }
-    }).then((response) => {
-      return(response.rows);
-    });
-   }
-
-
-   varpromise.then((value) => {
-      for (var i = 0; i < value.length; i++) {
-         uoas[i] = value[i].uoa;
-      }
-      updateSelector("uoa", uoas);
-   });
-}
-
-
-function updateSelector(id, varset) {
-   const selects = document.querySelectorAll('select');
-   selects.forEach(select => {
-      if (select.id == id) {
-         const selectedOption = select.value;
-         while (select.firstChild) select.removeChild(select.firstChild);
-         select.append(new Option());
-
-         varset.forEach(variable => {
-            const option = new Option(variable, variable);
-            if (variable === selectedOption) option.selected = true;
-            select.append(option);
-         });
-      }
    });
 }
 
@@ -791,15 +619,16 @@ updateClaimSubmission = function () {
   }
 }
 
-
+/*
 getCausalSheet = function () {
-
    parser.parse().then((items) => {
       for (var i = 0; i < items.length; i++) {
          sheetout[i] = items[i];
       }
    })
 }
+*/
+
 
 unselectAllCountries = function () {
    for (var i = 0; i < countries.options.length; i++) {

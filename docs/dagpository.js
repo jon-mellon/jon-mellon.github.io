@@ -19,102 +19,6 @@ makeDate = function(x) {
     }
 }
 
-/*
-// testing code for getNodeStatus:
-
-var dv = findVariableIdFromLabel(dvselector.value);
-var iv = findVariableIdFromLabel(ivselector.value);
-var cnode = "cluster4"
-var cnode = findVariableIdFromLabel("education");
-getNodeStatus(cnode, iv, dv)
-dvcanreach = reachableNodeOrParent(dv, currentedgeset);
-dvcanreach2 = reachableNodeOrParent(dv, edgeset);
-*/
-// create offline version of getDoltStudies
-getDoltStudies = function() {
-    var doireadallquery = "SELECT s.*, REPLACE(CONCAT(GROUP_CONCAT(CONCAT(a.given, ' ', a.family) ORDER BY a.id ASC)), ',', ', ') AS authors FROM studies AS s JOIN doiauthors AS a ON s.doi = a.doi GROUP BY s.doi;";
-    var url = "https://www.dolthub.com/api/v1alpha1/jon-mellon/causes-of-human-outcomes/main?q=" + doireadallquery;
-    if (currentenv != "offline") {
-        var doipromise = fetch(url).then((response) => {
-            if (response.ok) {
-                let jsonout = response.json();
-                return jsonout;
-            } else {
-                throw new Error("NETWORK RESPONSE ERROR FROM DOLTHUB DOI CALL");
-            }
-        });
-    } else {
-
-        var doipromise = new Promise((resolve, reject) => {
-            var studytemp = {
-                rows: [{
-                        authors: "Bob Smith, Joe Bloggs, Davey Jones, Jane Doe",
-                        title: "The Causal Effect of Lorem Ipsum on tktk",
-                        containertitle: "Journal of Placeholder Studies",
-                        published: "2023-07-01",
-                        URL: "www.example.com",
-                        doi: "12345a"
-                    },
-                    {
-                        authors: "Bob Smith, Joe Bloggs, Davey Jones, Jane Doe",
-                        title: "The Causal Effect of tktk on tbc",
-                        containertitle: "Placeholder",
-                        published: "2023-07-01",
-                        URL: "www.example.com",
-                        doi: "12345c"
-                    },
-                    {
-                        authors: "Joe Bloggs, Bob Smith, Davey Jones, Jane Doe",
-                        title: "On Lorem Ipsum",
-                        containertitle: "Journal of Experimental Placeholder Studies",
-                        published: "2019-02-01",
-                        URL: "www.example.com",
-                        doi: "54321"
-                    },
-                    {
-                        authors: "Joe Bloggs, Bob Smith, Davey Jones, Jane Doe",
-                        title: "The Causal Effect of Lorem Ipsum on tktk",
-                        containertitle: "Placeholder Studies Quarterly",
-                        published: "2023-07-01",
-                        URL: "www.example.com",
-                        doi: "243"
-                    },
-                    {
-                        authors: "Bob Smith, Davey Jones, Jane Doe",
-                        title: "The Causal Effect of Lorem Ipsum on tktk",
-                        containertitle: "American Placeholder Studies Review",
-                        published: "2003-07-21",
-                        URL: "www.example.com",
-                        doi: "244"
-                    },
-                    {
-                        authors: "Joe Bloggs",
-                        title: "The Causal Effect of Lorem Ipsum on tktk",
-                        containertitle: "Annual Review of Placeholder Studies",
-                        published: "1922-01-01",
-                        URL: "www.example.com",
-                        doi: "6789"
-                    },
-                ]
-            };
-            resolve(studytemp);
-        })
-    }
-
-    doipromise.then((response) => {
-        for (var i = 0; i < response.rows.length; i++) {
-            citations2.push(response.rows[i]);
-        }
-        fetchAllCrossRef();
-    });
-    
-    try {
-        createEdgeTable();
-    } catch (e) {
-
-    }
-}
-
 getDOIMulti = function(id) {
     var doismulti = "";
     var baseedgeids = network.clustering.getBaseEdges(id);
@@ -155,7 +59,6 @@ hideVariableHeaders = function() {
     document.getElementById("parentbutton").hidden = true;
     document.getElementById("childbutton").hidden = true;
     document.getElementById("childrecallbutton").hidden = true;
-
 }
 
 foldTopLevels = function() {
@@ -347,7 +250,7 @@ createCurrentvardet = function() {
     for (var i = 0; i < origids.length; i++) {
         origvardet[i] = {
             id: origids[i],
-            label: allvars[origids[i]].label,
+            label: getAllVarIdLabel(origids[i]),
             status: "blank",
             count: 1,
             parent: allparents[origids[i] ],
@@ -366,7 +269,14 @@ createCurrentvardet = function() {
         }
     }
 }
-
+getAllVarIdLabel = function(id) {
+  for (var i = 0; i < allvars.length; i++) {
+    if(allvars[i].id==id) {
+      return allvars[i].label;
+    }
+  }
+  return null
+}
 
 sfb = function() {
     showFilterBoxes();
@@ -561,33 +471,6 @@ reachableNodesGeneral = function(startnode, edgesetall) {
     return nodesreached;
 }
 
-citationPresent = function(doi) {
-    if(citations2.length>0) {
-    for (var i = 0; i < citations2.length; i++) {
-        if (citations2[i].doi.toLowerCase() == doi.toLowerCase()) {
-            return true;
-        }
-    }  
-    }
-    return false;
-}
-
-//// reference management ////
-clearStudyText = function() {
-    pubtext.innerHTML = ""
-}
-populateCiteFromDOI = function(doi) {
-    if (citationPresent(doi.toLowerCase())) {
-        for (var i = 0; i < citations2.length; i++) {
-            if (citations2[i].doi == doi.toLowerCase()) {
-                pubtext.innerHTML = pubtext.innerHTML + "<br>" + formatArticle2(citations2[i]);
-            } else {
-
-            }
-        }
-    }
-
-}
 
 getDOIFromCrossRef = function(doi) {
     if (citationPresent(doi)) {
@@ -687,6 +570,24 @@ getDOIFromCrossRef = function(doi) {
         .catch((error) => console.error("FETCH ERROR:", error));
 }
 
+
+//// reference management ////
+clearStudyText = function() {
+    pubtext.innerHTML = ""
+}
+populateCiteFromDOI = function(doi) {
+    if (citationPresent(doi.toLowerCase())) {
+        for (var i = 0; i < citations2.length; i++) {
+            if (citations2[i].doi == doi.toLowerCase()) {
+                pubtext.innerHTML = pubtext.innerHTML + "<br>" + formatArticle2(citations2[i]);
+            } else {
+
+            }
+        }
+    }
+
+}
+
 getAllDOIS = function() {
     //console.log("getAllDOIS called");
     var alldois = [];
@@ -703,12 +604,6 @@ getAllDOIS = function() {
 }
 
 
-fetchAllCrossRef = function() {
-    var alldois = getAllDOIS();
-    for (var i = 0; i < alldois.length; i++) {
-        setTimeout(getDOIFromCrossRef, i * 100, alldois[i]);
-    }
-}
 
 populateDOIList = function(dois) {
     clearStudyText();
@@ -719,16 +614,6 @@ populateDOIList = function(dois) {
         pubtext.innerHTML = "No reference listed";
     }
 }
-
-cleanDOI = function(doi) {
-    doi = doi.replace("https://doi.org/", "");
-    doi = doi.replace("http://doi.org/", "");
-    doi = doi.replace("doi.org/", "");
-    doi = doi.replace("www.doi.org/", "");
-    doi = doi.toLowerCase();
-    return (doi)
-}
-
 
 //// main DAG ////
 
@@ -962,10 +847,6 @@ getAllClusters = function(currentnetwork) {
 }
 
 
-onlyUnique = function(value, index, array) {
-    return array.indexOf(value) === index;
-}
-
 
 reachableByNodes = function(startnode, edgesetall) {
     var nodesreached = [];
@@ -1198,7 +1079,7 @@ getEdges = function() {
             }
         }
 
-
+        console.table(uniqueitems);
 
 
         testEdgeChoice = function(values,
@@ -1256,12 +1137,17 @@ getEdges = function() {
                 pubtext.innerHTML = "No citations listed";
             }
         }
-
+        
         // creating edges
         for (var i = 0; i < uniqueitems.length; i++) {
-            edgeset[i] = {
-                from: allvars.findIndex(k => k.label === uniqueitems[i]["x variable"]),
-                to: allvars.findIndex(k => k.label === uniqueitems[i]["y variable"]),
+          
+            try{
+              let substantiveedge;
+              let fromid = allvars[allvars.findIndex(k => k.label === uniqueitems[i]["x variable"])].id;
+              let toid = allvars[allvars.findIndex(k => k.label === uniqueitems[i]["y variable"])].id;
+               substantiveedge = {
+                from: fromid,
+                to: toid,
                 relation: uniqueitems[i].finding,
                 arrows: "to",
                 color: {
@@ -1273,17 +1159,20 @@ getEdges = function() {
                     label: false,
                     edge: testEdgeChoice
                 },
-                
-                
-                
-            };
+              };
+              edgeset.push(substantiveedge);
+            } catch(e) {
+              console.log("failed to create edge: " + uniqueitems[i][["x variable"]] + uniqueitems[i][["y variable"]]);
+            }
         }
-
         for (var i = 0; i < uniqueitems.length; i++) {
-            if (uniqueitems[i]["instrument"] != "") {
-                let ivedge = {
-                    from: allvars.findIndex(k => k.label === uniqueitems[i]["x instrument"]),
-                    to: allvars.findIndex(k => k.label === uniqueitems[i]["x variable"]),
+            if (uniqueitems[i]["instrument"]!=null && uniqueitems[i]["instrument"] != "") {
+                try{
+                  let fromid = allvars[allvars.findIndex(k => k.label === uniqueitems[i]["instrument"])].id;
+                  let toid = allvars[allvars.findIndex(k => k.label === uniqueitems[i]["x variable"])].id;
+                  let ivedge = {
+                    from: fromid,
+                    to: toid,
                     relation: "first-stage",
                     arrows: "to",
                     color: {
@@ -1297,6 +1186,10 @@ getEdges = function() {
                     },
                 };
                 edgeset.push(ivedge);
+                } catch(e) {
+                  console.log(e);
+                }
+                
             }
         }
         createNetwork();
@@ -1318,8 +1211,8 @@ createNetwork = function() {
     origedges = new vis.DataSet(edgeset);
 
     //const resetit = document.getElementById('resetbutton');
-    const dagbutton = document.getElementById('createdagbutton');
-    dagbutton.disabled = true;
+    //const dagbutton = document.getElementById('createdagbutton');
+    //dagbutton.disabled = true;
 
     function startNetwork(data) {
         const container = document.getElementById("mynetwork");
@@ -1746,35 +1639,65 @@ getVariableHierarchy = function() {
     varpromise.then((items) => {
         var keep = [];
         for (var i = 0; i < items.length; i++) {
+          var badparent = false;
             if (!allVarInclude(items[i].Variablename)) {
-                allvars.push(
-                    {
-                      label: items[i].Variablename  
-                    }
-                  );
-            }
-            var badparent = false;
-            if (typeof items[i].Parent === "undefined") {
+                let newid;
+                if(items[i].id==null) {
+                  newid = i;
+                } else {
+                  newid= items[i].id;
+                }
+                
+              if (typeof items[i].Parent === "undefined") {
                 badparent = true;
-            } else {
+              } else {
                 if (items[i].Parent == "") {
                     badparent = true;
                 }
                 if (items[i].Parent == null) {
                     badparent = true;
                 }
+              }
+              let newparent;
+              let newparentid;
+              if(!badparent) {
+                newparent = items[i].Parent;
+                newparentid = items[i].parentid;
+              } else {
+                newparent = null;
+                newparentid = null;
+              }
+              allvars.push(
+                    {
+                      id: newid,
+                      label: items[i].Variablename,
+                      parentlabel: newparent,
+                      parentid: newparentid,
+                    }
+                  );
             }
-
+            
+            
             if (!badparent) {
+                /*
                 if (!allVarInclude(items[i].Parent)) {
                     console.log("adding parent to allvars" + items[i].Parent);
+                    let newid;
+                    if(items[i].parentid==null) {
+                      newid = items.length + i;
+                    } else {
+                      newid = items[i].parentid;
+                    }
                     allvars.push({
+                      id: newid,
                       label: items[i].Parent
                       }
                       );
                 }
+                */
                 keep.push(i);
             }
+            
         }
 
         for (var i = 0; i < allvars.length; i++) {
@@ -1786,7 +1709,6 @@ getVariableHierarchy = function() {
                     } else {
                         allparents[i] = items[j].Parent;
                     }
-
                 }
                 if (items[j].Parent == allvars[i].label) {
                     if (items[j].Variablename == null) {
@@ -1799,18 +1721,24 @@ getVariableHierarchy = function() {
         }
 
         for (var i = 0; i < allvars.length; i++) {
+            let newid;
+            if(allvars[i].id==null) {
+              newid = i;
+            } else {
+              newid = allvars[i].id;
+            }
             nodesh[i] = {
-                id: (i),
+                id: newid,
                 label: allvars[i].label,
-                parent: allparents[i],
+                parent: allvars[i].parentlabel,
             };
         }
         items = keep.map(i => items[i]);
 
         for (var i = 0; i < items.length; i++) {
             edgesh[i] = {
-                from: allvars.findIndex(k => k.label === items[i].Parent),
-                to: allvars.findIndex(k => k.label === items[i].Variablename)
+                from: allvars[allvars.findIndex(k => k.label === items[i].Parent)].id,
+                to: allvars[allvars.findIndex(k => k.label === items[i].Variablename)].id
             };
         }
 
@@ -1862,7 +1790,11 @@ createNextLevel = function(currentorig) {
         });
         */
     } else {
-        toplevel.innerText = nodesh[currentorig].label;
+        try{
+          toplevel.innerText = getAllVarIdLabel(currentorig);  
+        } catch(e) {
+          console.log("Failed to create top level node: " + currentorig);
+        }
     }
     return (toplevel);
 }
@@ -1929,6 +1861,8 @@ createListHierarchy = function() {
         }
     }
     originnodes.sort(function(a, b) {
+        //console.log(a);
+        //console.log(b);
         let alabel = nodeLabelFromIdh(a);
         let blabel = nodeLabelFromIdh(b);
         return alabel.localeCompare(blabel);

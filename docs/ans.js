@@ -1,3 +1,4 @@
+var page = "adder";
 var doicurrent = document.getElementById("DOI");
 var indvar = document.getElementById("independent-variable");
 var depvar = document.getElementById("dependent-variable");
@@ -17,6 +18,7 @@ var endyr = document.getElementById("endyear");
 var varname = document.getElementById("variable-name");
 var parentvar = document.getElementById("parent-variable");
 var vardescription = document.getElementById("description");
+var citations2 = [];
 
 document.getElementById("confirm").addEventListener("click", function() {
     location.reload();
@@ -62,7 +64,7 @@ document.getElementById("resubmitvardolt").addEventListener("click", function() 
 });
 
 const pubtext = document.getElementById('pubdetails');
-
+getDoltStudies();
 fetchAllVars();
 fetchAllStudies();
 fetchFindingOpts();
