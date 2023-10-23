@@ -91,8 +91,6 @@ form label, form select, form input, form button {
 }
         
 
-        
-        
 body { margin: 0; padding: 0; border: 0; min-width: 320px; }
 html, button, input, select, textarea, .pure-g [class *= "pure-u"] { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 1.02em; }
 p, td { line-height: 1.5; }
@@ -163,11 +161,11 @@ input[type="text"] { border-radius: 0 !important; }
   border-color: #555 transparent transparent transparent;
 }
 .title {
-      font-size: 2rem;
-      font-weight: 800;
-      margin-top: 2rem;
-      margin-bottom: 2rem;
-    }
+  font-size: 2rem;
+  font-weight: 800;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
 /* Toggle this class when clicking on the popup container (hide and show the popup) */
 .popup .show {
   visibility: visible;

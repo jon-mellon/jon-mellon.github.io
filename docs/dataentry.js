@@ -658,40 +658,49 @@ submitVarClaim = function () {
         label: newvar.name,
         parent: getAllVarLabelId(newvar.parentvar),
         description: newvar.vardescription
-    }),
-    headers: {
-      "Content-type": "application/json; charset=UTF-8"
-    }
-  });
-    doltvarsubmit.then((item) => {
-    let resp = item.json();
-    return(resp)
-  }).then((out) => {
-    doltVarOverlayBlank();
-    var successcheck;
-    try{
-      successcheck = out.data.res_details.query_execution_status=="Success";
-    } catch(e) {
-      successcheck = false;
-    }
-    if(successcheck) {
-      console.log("Success");
-      document.getElementById("varsuccess").hidden = false;
-      document.getElementById("continuevar").hidden = false;
-    } else {
-      console.log("Something went wrong")
-      document.getElementById("varfail").hidden = false;
-      document.getElementById("cancelvardolt").hidden = false;
-      document.getElementById("resubmitvardolt").hidden = false;
-    }
-  })
-
+      }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8"
+      }
+      }).catch(error => {
+        doltVarOverlayBlank();
+        document.getElementById("varfail").hidden = false;
+        document.getElementById("cancelvardolt").hidden = false;
+        document.getElementById("resubmitvardolt").hidden = false;
+      });
+      
+      doltvarsubmit.then((item) => {
+      if(item.ok) {
+        let resp = item.json();
+        return(resp)  
+      } else {
+        doltVarOverlayBlank();
+        document.getElementById("varfail").hidden = false;
+        document.getElementById("cancelvardolt").hidden = false;
+        document.getElementById("resubmitvardolt").hidden = false;
+        return(null);
+      }
+    }).then((out) => {
+      doltVarOverlayBlank();
+      var successcheck;
+      try{
+        successcheck = out.data.res_details.query_execution_status=="Success";
+      } catch(e) {
+        successcheck = false;
+      }
+      if(successcheck) {
+        console.log("Success");
+        document.getElementById("varsuccess").hidden = false;
+        document.getElementById("continuevar").hidden = false;
+      } else {
+        console.log("Something went wrong")
+        document.getElementById("varfail").hidden = false;
+        document.getElementById("cancelvardolt").hidden = false;
+        document.getElementById("resubmitvardolt").hidden = false;
+      }
+    })
   }
-   
-   
-   
-  }
-   
+}
 }
 
 updateClaimSubmission = function () {
