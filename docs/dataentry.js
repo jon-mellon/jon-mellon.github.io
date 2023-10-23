@@ -262,6 +262,15 @@ getAllVarIdLabel = function(id) {
   return null
 }
 
+getAllVarLabelId = function(label) {
+  for (var i = 0; i < allvars.length; i++) {
+    if(allvars[i].label==label) {
+      return allvars[i].id;
+    }
+  }
+  return null
+}
+
 
 allVarInclude = function(text) {
   for (var i = 0; i < allvars.length; i++) {
@@ -631,18 +640,35 @@ submitVarClaim = function () {
      window.open(submissionurl, '_blank');    
     }
    if(backend=="dolthub") {
-     var test = fetch("https://lastakeholders.jonathanmellon.com/api/submitclaim", {
+     var doltvarsubmit = fetch("https://lastakeholders.jonathanmellon.com/api/submitclaim", {
         method: "POST",
-          body: JSON.stringify({
-          label: newvar.name,
-          parent: getAllVarIdLabel(newvar.parentvar),
-          description: newvar.vardescription
-  }),
-  headers: {
-    "Content-type": "application/json; charset=UTF-8"
+        body: JSON.stringify({
+        label: newvar.name,
+        parent: getAllVarLabelId(newvar.parentvar),
+        description: newvar.vardescription
+    }),
+    headers: {
+      "Content-type": "application/json; charset=UTF-8"
+    }
+  });
+    doltvarsubmit.then((item) => {
+    let resp = item.json();
+    return(resp)
+  }).then((out) => {
+    var successcheck;
+    try{
+      successcheck = out.data.res_details.query_execution_status=="Success";
+    } catch(e) {
+      successcheck = false;
+    }
+    if(successcheck) {
+      console.log("Success");
+    } else {
+      console.log("Something went wrong")
+    }
+  })
+
   }
-});
-   }
    
    
    
