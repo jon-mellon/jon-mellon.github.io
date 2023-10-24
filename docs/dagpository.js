@@ -235,14 +235,18 @@ createCurrentvardet = function() {
     currentvardet = [];
     var currentids = network.body.nodeIndices;
     for (var i = 0; i < currentids.length; i++) {
-        let currentvar = network.body.nodes[currentids[i]].options.label;
-        currentvardet[i] = {
+        try{
+          let currentvar = network.body.nodes[currentids[i]].options.label;
+          currentvardet[i] = {
             id: currentids[i],
             label: currentvar,
             status: "blank",
             count: 1,
             parent: getParentFromLabel(currentvar),
         };
+        } catch(e) {
+          
+        }
     }
 
     let origids = orignodes.getIds();
