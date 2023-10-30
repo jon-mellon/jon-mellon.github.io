@@ -93,9 +93,40 @@ hideDOINotFound = function() {
   document.getElementById("notfound").hidden = true;
 }
 
+doiInfoHandle = function(message, doi) {
+  var authorstr = message.author[0].family;
+      if (message.author.length > 1) {
+         for (var i = 1; i < message.author.length; i++) {
+            authorstr = authorstr + ", " + message.author[i].family;
+         }
+      }
+
+      var paperstring = authorstr + " (" + message.published["date-parts"][0][0] + ") " + message.title + ", " +
+         message["container-title"][0];
+      pubtext.innerHTML = paperstring;
+      
+      if (alldois.includes(doi)) {
+        hideDOIImage();
+        revealPrevClaimCheck();
+      } else {
+        revealStudyCheck();
+        hideDOIImage();
+      }
+}
+
+
+
 DOIInfoCall = function (doi) {
     hideDOINotFound();
-   if (currentenv == "offline") {
+    if(citationPresent(doi)) {
+      for (var i = 0; i < citations2.length; i++) {
+        if(citations2[i].doi==doi) {
+          console.log("citation retrieved")
+          doiInfoHandle(citations2[i], doi)
+        }
+      }
+    } else {
+      if (currentenv == "offline") {
       var varpromise = new Promise((resolve, reject) => {
         if(doi==98765)  {
           reject("this DOI is not recognized");
@@ -150,6 +181,8 @@ DOIInfoCall = function (doi) {
          });
    }
    varpromise.then((value) => {
+     doiInfoHandle(value.message, doi);
+     /*
       studyinfo = value.message;
       // put the citation in here
       var authorstr = value.message.author[0].family;
@@ -164,6 +197,7 @@ DOIInfoCall = function (doi) {
       pubtext.innerHTML = paperstring;
       
       
+      
       if (alldois.includes(doi)) {
         hideDOIImage();
         revealPrevClaimCheck();
@@ -171,11 +205,130 @@ DOIInfoCall = function (doi) {
         revealStudyCheck();
         hideDOIImage();
       }
+      */
    })
    .catch((reason) => {
      console.error(reason);
    })
+    }
+   
 }
+
+
+sendDOIInfo = function(message) {
+  // formulate study call to API
+    var containertitle;
+    var shortcontainertitle;
+    if(message["container-title"]!=null && message["container-title"].length>0) {
+      containertitle = message["container-title"][0];
+    } else {
+      containertitle = message.publisher;
+    }
+    
+    if(message["short-container-title"]!=null && message["short-container-title"].length>0) {
+      shortcontainertitle = message["short-container-title"][0];
+    } else {
+      shortcontainertitle = message.publisher;
+    }
+    var altid;
+    if(message["alternative-id"] !=null && message["alternative-id"].length>0) {
+      altid = message["alternative-id"][0];
+    } else {
+      altid = null;
+    }
+    
+    formatDate = function(dateobj) {
+      if(dateobj!=null) {
+        var dateparts = dateobj['date-parts'][0];
+      if(dateparts!=null) {
+        var pubdate;
+      let pubyr;
+      if(dateparts[0]!=null) {
+        pubyr = dateparts[0];
+      } else {
+        pubyr = null;
+      }
+      let pubmn;
+      if(dateparts[1]!=null) {
+        pubmn = dateparts[1];  
+        pubmn = pubmn.toString().padStart(2,"0");
+      } else {
+        pubmn = "01"
+      }
+    
+      let pubd;
+      if(dateparts[2]!=null) {
+        pubd = dateparts[2];
+        pubd = pubd.toString().padStart(2,"0");
+      } else {
+        pubd = "01"
+      }
+      if(pubyr==null) {
+        pubdate = null;
+      } else {
+        pubdate = pubyr + "-" + pubmn + "-" + pubd;  
+      }
+      return(pubdate)
+      } else {
+        return(null);
+      }
+    } else {
+      return(null)
+    }
+    }
+    
+    var published = formatDate(message["published"]);
+    var pubprint = formatDate(message["published-print"]);
+    var pubonline = formatDate(message["published-online"]);
+    
+    undefinedToNull = function(x) {
+      if(x==null) {
+        return(null)
+      } else {
+        return(x)
+      }
+    }
+    
+    var submission = 
+          {
+          doi: undefinedToNull(message.DOI),
+          title: undefinedToNull(message.title[0]),
+          containertitle: undefinedToNull(containertitle),
+          shortcontainertitle: undefinedToNull(shortcontainertitle),
+          published: undefinedToNull(published),
+          publishedprint: undefinedToNull(pubprint),
+          publishedonline: undefinedToNull(pubonline),
+          publisher: undefinedToNull(message.publisher),
+          volume: undefinedToNull(message.volume),
+          language: undefinedToNull(message.language),
+          issue: undefinedToNull(message.issue),
+          page: undefinedToNull(message.page),
+          url: undefinedToNull(message.url),
+          type: undefinedToNull(message.type),
+          alternativeid: undefinedToNull(altid),
+          referencecount: undefinedToNull(message["is-referenced-by-count"]),
+          issn: undefinedToNull(message["issn-type"]),
+          authors: undefinedToNull(message.author),
+        };
+        console.log(submission);
+    var doltstudysubmit = fetch("https://lastakeholders.jonathanmellon.com/api/submitstudy", {
+        method: "POST",
+        body: JSON.stringify(submission),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8"
+      }
+      }).catch(error => {
+        console.log(error)
+      });
+  
+  console.log(doltstudysubmit);
+  doltstudysubmit.then((out) => {
+      console.log(out);
+      var doltupdate = out.json();
+      console.log(doltupdate);
+  })
+}
+
 
 
 function revealColumns() {

@@ -1,4 +1,5 @@
 
+
 cleanDOI = function(doi) {
     doi = doi.replace("https://doi.org/", "");
     doi = doi.replace("http://doi.org/", "");
