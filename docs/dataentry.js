@@ -119,6 +119,7 @@ DOIInfoCall = function (doi) {
         }
       }
     } else {
+      
       if (currentenv == "offline") {
       var varpromise = new Promise((resolve, reject) => {
         if(doi==98765)  {
@@ -158,7 +159,7 @@ DOIInfoCall = function (doi) {
    } else {
       var varpromise = fetch("https://api.crossref.org/works/" + doi)
          .then((response) => {
-            //console.log("crossref API Call");
+            console.log("crossref API Call");
             if (response.ok) {
                let jsonout = response.json();
                return jsonout;
@@ -187,7 +188,10 @@ DOIInfoCall = function (doi) {
       var paperstring = authorstr + " (" + value.message.published["date-parts"][0][0] + ") " + value.message.title + ", " +
          value.message["container-title"][0];
          doiInfoHandle(value.message, doi, authorstr, paperstring);
-   })
+         
+      // citation -> backend -> dolthub
+      sendDOIInfo(value.message);
+    })
    .catch((reason) => {
      console.error(reason);
    })
