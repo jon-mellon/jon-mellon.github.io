@@ -79,11 +79,12 @@ function revealPrevClaimCheck() {
 function DOIchecker() {
    // Dummy function (replace this with actual functionality)
    let doibox = document.getElementById('DOI');
-   console.log(doibox.value);
+   let doic = cleanDOI(doibox.value);
+   console.log(doic);
    if (doibox.value == "") {
       return null;
    }
-   DOIInfoCall(doibox.value);
+   DOIInfoCall(doic);
 }
 
 showDOINotFound = function() {
