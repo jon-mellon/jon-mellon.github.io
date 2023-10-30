@@ -234,6 +234,10 @@ getDoltStudies = function() {
 
     doipromise.then((response) => {
         for (var i = 0; i < response.rows.length; i++) {
+            var paperstring = response.rows[i].authors + 
+            " (" + response.rows[i].published.substr(0,4) + ") " + response.rows[i].title + ", " +
+            response.rows[i].containertitle;
+            response.rows[i].paperstring = paperstring;
             citations2.push(response.rows[i]);
         }
         if(page!="adder") {

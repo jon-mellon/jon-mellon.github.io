@@ -93,16 +93,9 @@ hideDOINotFound = function() {
   document.getElementById("notfound").hidden = true;
 }
 
-doiInfoHandle = function(message, doi) {
-  var authorstr = message.author[0].family;
-      if (message.author.length > 1) {
-         for (var i = 1; i < message.author.length; i++) {
-            authorstr = authorstr + ", " + message.author[i].family;
-         }
-      }
-
-      var paperstring = authorstr + " (" + message.published["date-parts"][0][0] + ") " + message.title + ", " +
-         message["container-title"][0];
+doiInfoHandle = function(message, doi, authorstr, paperstring) {
+      studyinfo = message;
+      
       pubtext.innerHTML = paperstring;
       
       if (alldois.includes(doi)) {
@@ -122,7 +115,7 @@ DOIInfoCall = function (doi) {
       for (var i = 0; i < citations2.length; i++) {
         if(citations2[i].doi==doi) {
           console.log("citation retrieved")
-          doiInfoHandle(citations2[i], doi)
+          doiInfoHandle(citations2[i], doi, citations2[i].authors, citations2[i].paperstring);
         }
       }
     } else {
@@ -182,8 +175,7 @@ DOIInfoCall = function (doi) {
    }
    varpromise.then((value) => {
      doiInfoHandle(value.message, doi);
-     /*
-      studyinfo = value.message;
+      
       // put the citation in here
       var authorstr = value.message.author[0].family;
       if (value.message.author.length > 1) {
@@ -194,18 +186,7 @@ DOIInfoCall = function (doi) {
 
       var paperstring = authorstr + " (" + value.message.published["date-parts"][0][0] + ") " + value.message.title + ", " +
          value.message["container-title"][0];
-      pubtext.innerHTML = paperstring;
-      
-      
-      
-      if (alldois.includes(doi)) {
-        hideDOIImage();
-        revealPrevClaimCheck();
-      } else {
-        revealStudyCheck();
-        hideDOIImage();
-      }
-      */
+         doiInfoHandle(value.message, doi, authorstr, paperstring);
    })
    .catch((reason) => {
      console.error(reason);
