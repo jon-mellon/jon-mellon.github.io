@@ -1697,7 +1697,7 @@ getVariableHierarchy = function() {
               allvars.push(
                     {
                       id: newid,
-                      varid: varid;
+                      varid: varid,
                       label: items[i].Variablename,
                       parentlabel: newparent,
                       parentid: newparentid,
