@@ -21,7 +21,8 @@
     }
     var backend = GetURLParameter('backend');
     if(backend==null) {
-      backend = "gs";  
+      // default to dolthub backend
+      backend = "dolthub";  
     }
   </script>
   <script
