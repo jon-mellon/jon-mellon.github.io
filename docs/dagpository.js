@@ -1479,17 +1479,17 @@ getVariableHierarchy = function() {
         }
         if(response.rows[i].parentlabel==null) {
             variables[i] = { 
-                          id: response.rows[i].id,
+                          //id: response.rows[i].id,
                           Timestamp: response.rows[i].timestamp,
                           Variablename: response.rows[i].label,
                         };
         } else {
           variables[i] = { 
-                          id: response.rows[i].id,
+                          //id: response.rows[i].id,
                           Timestamp: response.rows[i].timestamp,
                           Variablename: response.rows[i].label,
                           Parent: response.rows[i].parentlabel,
-                          parentid: response.rows[i].parentid,
+                          //parentid: response.rows[i].parentid,
                         };
         }
         }
@@ -1662,11 +1662,15 @@ getVariableHierarchy = function() {
           var badparent = false;
             if (!allVarInclude(items[i].Variablename)) {
                 let newid;
+                
                 if(items[i].id==null) {
                   newid = i;
                 } else {
                   newid= items[i].id;
                 }
+                
+                
+                
                 
               if (typeof items[i].Parent === "undefined") {
                 badparent = true;
@@ -1742,11 +1746,15 @@ getVariableHierarchy = function() {
 
         for (var i = 0; i < allvars.length; i++) {
             let newid;
+            
             if(allvars[i].id==null) {
               newid = i;
             } else {
               newid = allvars[i].id;
             }
+            
+            //newid = i;
+            
             nodesh[i] = {
                 id: newid,
                 label: allvars[i].label,
