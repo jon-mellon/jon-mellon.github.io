@@ -1200,7 +1200,11 @@ getEdges = function() {
         getDoltStudies();
         createListHierarchy();
         showCurrentNetworkState();
-        createEdgeTable();
+        try{
+          createEdgeTable();
+        } catch(e) {
+          console.log(e);
+        }
     })
 }
 
@@ -1470,13 +1474,24 @@ getVariableHierarchy = function() {
           }
         }
         */
-        variables[i] = { 
+        if(response.rows[i].label==null) {
+            response.rows[i].label= ""
+        }
+        if(response.rows[i].parentlabel==null) {
+            variables[i] = { 
+                          id: response.rows[i].id,
+                          Timestamp: response.rows[i].timestamp,
+                          Variablename: response.rows[i].label,
+                        };
+        } else {
+          variables[i] = { 
                           id: response.rows[i].id,
                           Timestamp: response.rows[i].timestamp,
                           Variablename: response.rows[i].label,
                           Parent: response.rows[i].parentlabel,
                           parentid: response.rows[i].parentid,
                         };
+        }
         }
       return(variables);
     });
@@ -1641,6 +1656,7 @@ getVariableHierarchy = function() {
     }
   }
     varpromise.then((items) => {
+      console.log(items);
         var keep = [];
         for (var i = 0; i < items.length; i++) {
           var badparent = false;
@@ -1662,8 +1678,8 @@ getVariableHierarchy = function() {
                     badparent = true;
                 }
               }
-              let newparent;
-              let newparentid;
+              let newparent = null;
+              let newparentid = null;
               if(!badparent) {
                 newparent = items[i].Parent;
                 newparentid = items[i].parentid;
