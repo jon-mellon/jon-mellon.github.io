@@ -1,4 +1,179 @@
+fetchDoltEdges = function() {
+    var varreadquery = "SELECT  cc.id AS causalclaim_id,    cc.doi AS DOI,    cc.x AS x,    cc.y AS y,    cc.instrument AS instrument,    cc.conditioning AS conditioning,    v_x.label AS x_label,    v_y.label AS y_label,    f.finding AS finding,     v_instrument.label AS instrument_label,     v_conditioning.label AS conditioning_label,    cc.doi, cc.timestamp,     cc.submitter FROM causalclaims cc LEFT JOIN variables v_x ON cc.x = v_x.id LEFT JOIN variables v_y ON cc.y = v_y.id LEFT JOIN variables v_instrument ON cc.instrument = v_instrument.id LEFT JOIN variables v_conditioning ON cc.conditioning = v_conditioning.id LEFT JOIN findings f ON cc.finding = f.id";
+    var url = "https://www.dolthub.com/api/v1alpha1/jon-mellon/causes-of-human-outcomes/main?q=" + varreadquery;
+    var studypromise = fetch(url).then((response) => {
+    if (response.ok) {
+      let jsonout = response.json();
+      return jsonout;
+    } else {
+      throw new Error("NETWORK RESPONSE ERROR FROM DOLTHUB DOI CALL");
+    }
+    }).then((response) => {
+      console.log(response.rows);
+      var studies = [];
+      for (var i = 0; i < response.rows.length; i++) {
+          studies.push(
+          {
+                    DOI: response.rows[i].DOI,
+                    "x variable": response.rows[i].x_label,
+                    "y variable": response.rows[i].y_label,
+                    "instrument": response.rows[i].instrument_label,
+                    finding: response.rows[i].finding
+          });
+      }
+      console.log(studies);
+      return(studies);
+    });
+    return(studypromise);
+}
 
+
+fetchFakeEdges = function() {
+   var studypromise = new Promise((resolve, reject) => {
+            var studies = [
+                
+                {
+                    DOI: "12345A",
+                    "x variable": "education",
+                    "y variable": "income",
+                    "instrument": "",
+                    finding: "positive"
+                },
+
+                {
+                    DOI: "12345a",
+                    "x variable": "performance anxiety",
+                    "y variable": "performance",
+                    "instrument": "",
+                    finding: "positive"
+                },
+                {
+                    DOI: "12345c",
+                    "x variable": "performance",
+                    "y variable": "social anxiety",
+                    "instrument": "",
+                    finding: "positive"
+                },
+                {
+                    DOI: "12345",
+                    "x variable": "individual income tax",
+                    "y variable": "aggregate income tax",
+                    "instrument": "",
+                    finding: "positive"
+                },
+                {
+                    DOI: "12345",
+                    "x variable": "music",
+                    "y variable": "dancing",
+                    "instrument": "rainfall",
+                    finding: "positive"
+                },
+                
+                {
+                    DOI: "12345",
+                    "x variable": "cement production",
+                    "y variable": "house building",
+                    "instrument": "",
+                    finding: "positive"
+                },
+                
+                {
+                    DOI: "12345",
+                    "x variable": "living in argentina",
+                    "y variable": "tango dancing",
+                    "instrument": "",
+                    finding: "non-monotonic"
+                },
+                {
+                    DOI: "12345",
+                    "x variable": "living in bolivia",
+                    "y variable": "bolivian tango dancing",
+                    "instrument": "",
+                    finding: "positive"
+                },
+                {
+                    DOI: "12345",
+                    "x variable": "revenue",
+                    "y variable": "smoking",
+                    "instrument": "",
+                    finding: "positive"
+                },
+                {
+                    DOI: "12345",
+                    "x variable": "education",
+                    "y variable": "voting for economic right wing party",
+                    "instrument": "",
+                    finding: "positive"
+                },
+                {
+                    DOI: "54321",
+                    "x variable": "years of schooling",
+                    "y variable": "voting for economic right wing party",
+                    "instrument": "",
+                    finding: "positive"
+                },
+                {
+                    DOI: "243",
+                    "x variable": "snacks eaten per minute",
+                    "y variable": "years of schooling",
+                    "instrument": "",
+                    finding: "positive"
+                },
+                {
+                    DOI: "243",
+                    "x variable": "snacks eaten per minute",
+                    "y variable": "income",
+                    "instrument": "",
+                    finding: "positive"
+                },
+
+                {
+                    DOI: "244",
+                    "x variable": "snacks eaten per minute",
+                    "y variable": "voting for economic right wing party",
+                    "instrument": "",
+                    finding: "positive"
+                },
+                {
+                    DOI: "54321",
+                    "y variable": "education",
+                    "x variable": "voting for economic right wing party",
+                    "instrument": "",
+                    finding: "positive"
+                },
+                {
+                    DOI: "54321",
+                    "x variable": "education",
+                    "y variable": "voting for party",
+                    "instrument": "",
+                    finding: "positive"
+                },
+
+                {
+                    DOI: "6789",
+                    "x variable": "smoking",
+                    "y variable": "cancer",
+                    "instrument": "",
+                    finding: "positive"
+                }
+                
+            ];
+            resolve(studies);
+        });
+        return(studypromise);
+}
+
+fetchGSEdges = function() {
+   const spreadsheetId = "11hfXFfdpMyDEeMSy3xeO3rsbI7a6UdcaJfJpZZlBJ34"
+        const sheetId = 0;
+        const sheetName = "causalclaims";
+        const sheetInfo = {
+            sheetId,
+            sheetName
+        }
+    var studypromise = new PublicGoogleSheetsParser(spreadsheetId, sheetInfo).parse()
+    return(studypromise);
+}
 
 cleanDOI = function(doi) {
     doi = doi.replace("https://doi.org/", "");

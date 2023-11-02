@@ -887,152 +887,20 @@ reachableByNodes = function(startnode, edgesetall) {
     return nodesreached;
 }
 
+
 getEdges = function() {
 
     if (currentenv == "offline") {
-        var studypromise = new Promise((resolve, reject) => {
-            var studies = [
-                
-                {
-                    DOI: "12345A",
-                    "x variable": "education",
-                    "y variable": "income",
-                    "instrument": "",
-                    finding: "positive"
-                },
-
-                {
-                    DOI: "12345a",
-                    "x variable": "performance anxiety",
-                    "y variable": "performance",
-                    "instrument": "",
-                    finding: "positive"
-                },
-                {
-                    DOI: "12345c",
-                    "x variable": "performance",
-                    "y variable": "social anxiety",
-                    "instrument": "",
-                    finding: "positive"
-                },
-
-                {
-                    DOI: "12345",
-                    "x variable": "individual income tax",
-                    "y variable": "aggregate income tax",
-                    "instrument": "",
-                    finding: "positive"
-                },
-                {
-                    DOI: "12345",
-                    "x variable": "music",
-                    "y variable": "dancing",
-                    "instrument": "rainfall",
-                    finding: "positive"
-                },
-                
-                {
-                    DOI: "12345",
-                    "x variable": "cement production",
-                    "y variable": "house building",
-                    "instrument": "",
-                    finding: "positive"
-                },
-                
-                {
-                    DOI: "12345",
-                    "x variable": "living in argentina",
-                    "y variable": "tango dancing",
-                    "instrument": "",
-                    finding: "non-monotonic"
-                },
-                {
-                    DOI: "12345",
-                    "x variable": "living in bolivia",
-                    "y variable": "bolivian tango dancing",
-                    "instrument": "",
-                    finding: "positive"
-                },
-                {
-                    DOI: "12345",
-                    "x variable": "revenue",
-                    "y variable": "smoking",
-                    "instrument": "",
-                    finding: "positive"
-                },
-                {
-                    DOI: "12345",
-                    "x variable": "education",
-                    "y variable": "voting for economic right wing party",
-                    "instrument": "",
-                    finding: "positive"
-                },
-                {
-                    DOI: "54321",
-                    "x variable": "years of schooling",
-                    "y variable": "voting for economic right wing party",
-                    "instrument": "",
-                    finding: "positive"
-                },
-                {
-                    DOI: "243",
-                    "x variable": "snacks eaten per minute",
-                    "y variable": "years of schooling",
-                    "instrument": "",
-                    finding: "positive"
-                },
-                {
-                    DOI: "243",
-                    "x variable": "snacks eaten per minute",
-                    "y variable": "income",
-                    "instrument": "",
-                    finding: "positive"
-                },
-
-                {
-                    DOI: "244",
-                    "x variable": "snacks eaten per minute",
-                    "y variable": "voting for economic right wing party",
-                    "instrument": "",
-                    finding: "positive"
-                },
-                {
-                    DOI: "54321",
-                    "y variable": "education",
-                    "x variable": "voting for economic right wing party",
-                    "instrument": "",
-                    finding: "positive"
-                },
-                {
-                    DOI: "54321",
-                    "x variable": "education",
-                    "y variable": "voting for party",
-                    "instrument": "",
-                    finding: "positive"
-                },
-
-                {
-                    DOI: "6789",
-                    "x variable": "smoking",
-                    "y variable": "cancer",
-                    "instrument": "",
-                    finding: "positive"
-                }
-                
-            ];
-            resolve(studies);
-        });
+       var studypromise = fetchFakeEdges();
     } else {
-        const spreadsheetId = "11hfXFfdpMyDEeMSy3xeO3rsbI7a6UdcaJfJpZZlBJ34"
-        const sheetId = 0;
-        const sheetName = "causalclaims";
-        const sheetInfo = {
-            sheetId,
-            sheetName
-        }
-        var studypromise = new PublicGoogleSheetsParser(spreadsheetId, sheetInfo).parse()
+      if(backend=="gs") {
+        var studypromise = fetchGSEdges(); 
+      } 
+      if(backend=="dolthub") {
+        var studypromise = fetchDoltEdges();
+      }
     }
-
+    
     studypromise.then((items) => {
         currentitems = items;
         var edgecombs = [];
