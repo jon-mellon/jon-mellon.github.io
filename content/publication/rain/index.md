@@ -9,7 +9,7 @@ image:
   focal_point: ""
   preview_only: false
 projects: []
-publication: '*American Journal of Political Science* (accepted)'
+publication: '*American Journal of Political Science* (Accepted)'
 publication_short: ""
 publication_types:
 - "2"

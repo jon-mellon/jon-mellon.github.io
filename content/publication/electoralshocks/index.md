@@ -29,7 +29,7 @@ tags:
 - british politics
 title: "Electoral Shocks: the Volatile Voter in a Turbulent World"
 url_dataset: "britishelectionstudy.com"
-url_pdf: "https://library.oapen.org/bitstream/handle/20.500.12657/47106/9780198800583.pdf?sequence=1"
+url_pdf: "https://www.loc.gov/item/2021758787/"
 # url_poster: ""
 # url_project: ""
 # url_slides: ""
