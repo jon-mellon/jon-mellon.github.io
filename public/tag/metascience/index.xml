@@ -5,7 +5,7 @@
     <link>/tag/metascience/</link>
       <atom:link href="/tag/metascience/index.xml" rel="self" type="application/rss+xml" />
     <description>metascience</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Wed, 28 Jun 2023 00:00:00 +0000</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Thu, 01 Aug 2024 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_3.png</url>
       <title>metascience</title>
@@ -15,8 +15,16 @@
     <item>
       <title>Rain, Rain, Go away: 192 potential exclusion-restriction violations for studies using weather as an instrumental variable (accepted at AJPS)</title>
       <link>/publication/rain/</link>
-      <pubDate>Wed, 28 Jun 2023 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 01 Aug 2024 00:00:00 +0000</pubDate>
       <guid>/publication/rain/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Regularized Regression Can Reintroduce Backdoor Confounding: The Case of Mass Polarization (Accepted at APSR)</title>
+      <link>/publication/regularization/</link>
+      <pubDate>Mon, 15 Jul 2024 00:00:00 +0000</pubDate>
+      <guid>/publication/regularization/</guid>
       <description></description>
     </item>
     
