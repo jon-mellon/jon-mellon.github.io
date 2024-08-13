@@ -22,7 +22,7 @@ tags:
 - brexit
 - political science
 - accountability
-title: "Members of Parliament are Minimally Accountable for Their Issue Stances (and They Know It) (APSR)"
+title: "Members of Parliament are Minimally Accountable for Their Issue Stances (and They Know It) (Published at APSR)"
 # url_code: https://github.com/wowchemy/wowchemy-hugo-themes
 # url_dataset: ""
 url_pdf: https://www.cambridge.org/core/journals/american-political-science-review/article/members-of-parliament-are-minimally-accountable-for-their-issue-stances-and-they-know-it/7A1EEBA7660F5F2E07EE3548C82143AE
