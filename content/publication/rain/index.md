@@ -23,7 +23,7 @@ tags:
 title: "Rain, Rain, Go away: 192 potential exclusion-restriction violations for studies using weather as an instrumental variable (Published at AJPS)"
 # url_code: https://github.com/wowchemy/wowchemy-hugo-themes
 # url_dataset: ""
-url_pdf: https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3715610
+url_pdf: https://onlinelibrary.wiley.com/doi/full/10.1111/ajps.12894
 # url_poster: ""
 # url_project: ""
 # url_slides: ""
