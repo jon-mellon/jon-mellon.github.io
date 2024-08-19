@@ -9,6 +9,7 @@ file.copy(from = "C:/Users/jonathan.mellon/Dropbox/paperwork/achievements/cv_upd
 blogdown::stop_server()
 
 blogdown::build_site()
+
 unlink("docs", recursive = TRUE, force = TRUE)
 R.utils::copyDirectory("public", "docs")
 file.copy("CNAME", "docs/CNAME")
