@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>ECHO: Every Cause of Human Outcomes</title>
+      <link rel="icon" type="image/x-icon" href="logo2.png">
+      <script>
+         if(window.location.hostname=="") {
+          var currentenv = "offline";  
+         } else {
+          var currentenv = "live";  
+         }
+         function GetURLParameter(sParam) {
+          var sPageURL = window.location.search.substring(1);
+          var sURLVariables = sPageURL.split('&');
+          for (var i = 0; i < sURLVariables.length; i++) {
+            var sParameterName = sURLVariables[i].split('=');
+            if (sParameterName[0] == sParam) {
+              return sParameterName[1];
+            }
+          }
+         }
+         var backend = GetURLParameter('backend');
+         if(backend==null) {
+           backend = "dolthub";  
+         }
+      </script>
+       
+       <script
+         type="text/javascript"
+         src="sharednetworking.js"
+        ></script>
+        
+      <script
+         type="text/javascript"
+         src="dataentry.js"
+         ></script>
+      <script
+         type="text/javascript"
+         src="visjs-min.js"
+         ></script>
+         
+      <script
+         type="text/javascript"
+         src="dagpository.js"
+         ></script>
+        
+      <script
+         type="text/javascript"
+         src="utils.js"
+         ></script>
+         
+      <script 
+         src="https://cdn.jsdelivr.net/npm/public-google-sheets-parser?v=20230209"
+        ></script>
+      <script
+        src="auto-complete.js"
+      ></script>
+      
+      <link rel="stylesheet" href="auto-complete.css">
+      <link rel="stylesheet" href="dagpository.css">
+      <link data-n-head="1" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=block">
+
+      
+   </head>
+   
+   <body>
+      <div class="title">
+         <span><img  src="logo2.png" style="width:3%; border: 0px solid">  Every Cause of Human Outcomes: Early Access</span>
+         <div class="row badges">
+         </div>
+      </div>
+      
+         <label hidden>
+            Filter nodes
+            <select id="nodeFilterSelect">
+               <option value="">All</option>
+               <option value="test">test</option>
+            </select>
+         </label>
+         <form id="varselector">
+            <label for="selectIV">Independent Variable</label>
+            <input id="selectIV"  type="text" name="q" placeholder="Search for independent variable..." style="width:100%;max-width:1200px;outline:0" onfocusout = "showCurrentNetworkState();" >
+            </select>
+            <br>
+            <label for="selectDV">Dependent Variable</label>
+            <input id="selectDV" type="text" name="q" placeholder="Search for dependent variable..." style="width:100%;max-width:1200px;outline:0" onfocusout = "showCurrentNetworkState();" hidden>
+         </form>
+         <button hidden id = "filterbutton"  onclick="nodesView.refresh();">Filter network</button>
+         <p>
+            Here are all the relevant causal claims listed in our dataset. 
+         </p>
+         <a href="addnewstudy.html" target="_blank">Add a new study here.</a>
+
+         <label hidden>
+            Filter edges
+            <div>
+         <label>
+         <input type="checkbox" name="edgesFilter" value="positive" checked />
+         <span style="color: green">Positive</span>
+         </label>
+         </div>
+         <div>
+            <label>
+            <input type="checkbox" name="edgesFilter" value="zero" unchecked />
+            <span style="color: gray">Null</span>
+            </label>
+         </div>
+         <div>
+            <label>
+            <input type="checkbox" name="edgesFilter" value="mixed" checked />
+            <span style="color: purple">Mixed</span>
+            </label>
+         </div>
+         <div>
+            <label>
+            <input type="checkbox" name="edgesFilter" value="negative" checked />
+            <span style="color: red">Negative</span>
+            </label>
+         </div>
+         <button id = "createdagbutton" onclick="createNetwork()" disabled hidden>Create DAG</button>
+         </label>
+         <br/>
+         <div class="columns" id = "columnentry" >
+         <div class="column2" id="causal-network">
+            <div id = "networkcontainer" >
+               <div id="mynetwork"></div>
+            </div>
+         </div>
+         <div class="column" id="add-variable">
+            <div class="tab">
+               <button id  = "buttonviewertab" class="tablinks" onclick="openTab('buttonviewertab', 'viewertab')">Viewer</button>
+               <button id  = "buttonvarhiertab" class="tablinks" onclick="openTab('buttonvarhiertab', 'vartab')">Variable hierarchy</button>
+            </div>
+            <!-- Tab content -->
+            <div id="viewertab" class="tabcontent">
+               <div>
+                  <h2 id ="studytitle">
+                     Studies
+                  </h2>
+                  <h3 id ="claimstudy">
+                  </h3>
+                  <p id = "varname" hidden></p>
+                  <h4 id ="parenttitle" hidden>
+                     Parent
+                  </h4>
+                  <p id="parentlist" hidden></p>
+                  <button hidden id = "parentbutton"  onclick="foldNode()">Aggregate</button>
+                  <h4 id ="childtitle" hidden>
+                     Children
+                  </h4>
+                  <p id="childlist" hidden></p>
+                  <button hidden id = "childbutton"  onclick="unfoldNode()">Disaggregate</button>
+                  <button hidden id = "childrecallbutton"  onclick="refoldNode()">Reaggregate</button>
+                  <br>
+                  <div>
+                     <p id="pubdetails"></p>
+                  </div>
+               </div>
+              </div>
+
+               <div id="vartab" class="tabcontent">
+                  <ul id="ultest">
+                  </ul>
+               </div>
+            </div>
+         </div>
+         </div>
+        
+        <h1>Data</h1>
+        
+        <table id = "edgetable" style="border: 1px solid black;">
+          <!-- here goes our data! -->
+        </table>
+ 
+        
+        
+         <script>
+            var page = "viewer";
+            // main DAG variables
+            var canreachdv = [];
+            var dvcanreach = [];
+            var canreachiv = [];
+            var ivcanreach = [];
+            var ivchildren = [];
+            var ivparents = [];
+            var dvchildren = [];
+            var dvparents = [];
+            
+            // original network objects            
+            var orignodes;
+            var origedges;  
+            // filter network objects
+            var nodesView;
+            var edgesView;
+            // network object
+            var network = null;
+            
+            var nodecount = [];
+            var edgeset = [];
+            var currentedgeset = [];
+            var currentvardet = [];
+            
+            var citations = [];
+            var citations2 = [];
+            var allchildren = [];
+            var allparents = [];
+            
+            // shared network variables
+            var allvars = [];
+            var edgesh = [];
+            var nodesh = [];
+            
+            // could convert to functional code
+            var foldednodes = [];
+            var clusterednodes = [];
+            
+            //var currentids = [];
+            var combids = [];
+            var combvardet = [];
+            
+            
+            var allidentifications= [];
+            
+            // html elements:
+            const pubtext = document.getElementById('pubdetails');
+            
+            var nestedvars;
+            var depvarautomatch = new autoComplete({
+                    selector: '#selectDV',
+                    minChars: 1,
+                    source: matcher
+                });  
+            
+            var indvarautomatch = new autoComplete({
+                    selector: '#selectIV',
+                    minChars: 1,
+                    source: matcher
+                });  
+            
+            var dvselector = document.getElementById('selectDV');
+            var ivselector = document.getElementById('selectIV');
+            var nestedvars = document.getElementById('ultest');
+            getVariableHierarchy();
+            
+         </script>
+   </body>

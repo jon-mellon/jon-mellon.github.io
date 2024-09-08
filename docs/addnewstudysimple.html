@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='UTF-8'>
+  <link rel="icon" type="image/x-icon" href="logo2.png">
+
+  <script>
+    if(window.location.hostname=="") {
+      var currentenv = "offline";  
+    } else {
+      var currentenv = "live";  
+    }
+    function GetURLParameter(sParam) {
+      var sPageURL = window.location.search.substring(1);
+      var sURLVariables = sPageURL.split('&');
+      for (var i = 0; i < sURLVariables.length; i++) {
+        var sParameterName = sURLVariables[i].split('=');
+        if (sParameterName[0] == sParam) {
+          return sParameterName[1];
+        }
+      }
+    }
+    var backend = GetURLParameter('backend');
+    if(backend==null) {
+      backend = "dolthub";  
+    }
+  </script>
+  <script
+     type="text/javascript"
+     src="dataentry.js"
+    ></script>
+  <script
+     type="text/javascript"
+     src="sharednetworking.js"
+  ></script>
+  <script
+    type="text/javascript"
+    src="utils.js"
+  ></script>
+  <link rel="stylesheet" href="addstudy.css">
+  <script src="auto-complete.js"></script>
+
+  <script 
+      src="https://cdn.jsdelivr.net/npm/public-google-sheets-parser?v=20230209"
+    ></script>
+  <script>
+    
+    
+    // instantiating all global variables needed
+    var studyinfo;
+    var allstudies = [];
+    var allfindings = [];
+    var allidentifications = [];
+    var uoas = [];
+    var alldois = [];
+    var allvars = ["none"];
+    var allparents = ["none"];
+    var allchildren = [];
+    var claim = {doi: "blank", 
+                xvar: "blank",
+                yvar: "blank",
+                instrument: "blank",
+                xvarstart: "blank",
+                xvarend: "blank",
+                yvarstart: "blank",
+                yvarend: "blank",
+                finding: "blank",
+                identification: "blank",
+                uoa: "blank",
+                countries: "blank",
+                subpop: "blank",
+                n: "blank",
+                resultdoc: "blank",
+                env: currentenv,
+                submitter: "blank"
+    };
+    
+    var newvar = {name: "", 
+                  parentvar: "",
+                  vardescription: ""
+    }
+    
+    
+  </script>
+    
+    <link rel="stylesheet" href="auto-complete.css">
+
+  
+  </head>
+<body>
+
+
+<script>
+// When the user clicks on <div>, open the popup
+function showPopup(id) {
+  var popup = document.getElementById(id);
+  popup.classList.toggle("show");
+}
+</script>
+    <div class="title">
+    <span><img  src="logo2.png" style="width:3%; border: 0px solid">Causal claim entry form: Beta Version</span>
+
+    <div class="row badges">
+    </div>
+  </div>
+  <div style="max-width:2200px;padding:0 10px;margin:40px auto;text-align:center">
+    </div>
+  <div id="message"></div>
+    <input type="text" id="DOI" placeholder="Enter DOI here">
+    <button onclick="DOIchecker()" id = "doicheckbutton">Check DOI</button>
+    <br>
+    <br>
+    <div id = "exampledoi">
+    <p id= "notfound" style="color:red" hidden>DOI not found.</p>
+    <p>Example of a DOI:</p>
+    <img  src="doiexample.png" alt="example of a DOI" style="width:40%; border: 2px solid">  
+    </div>
+    
+
+    <p id="pubdetails" class="hidden"></p>
+    <div id = "pubcheck" class="hidden">
+      </br>
+      Is this the study you want to add a claim to?
+        </br>
+        <button onclick="revealColumns()">Yes</button>
+        <button onclick="resetPage()">No</button>
+    </div>
+    <div id="prevclaimcheck" class="hidden">
+        
+        </br>
+        This study has already been entered with the following causal claims:  </br>
+        <pre id="prevclaims" content="text/html; charset=utf-8"></pre>
+        Do you have an additional causal claim associated with this study? 
+        </br>
+        <button onclick="revealColumns()">Yes</button>
+        <button onclick="resetPage()">No</button>
+    </div>
+    
+    <div class="invisiblecolumns" id = "columnentry" >
+        <!-- Causal claim column -->
+        <div class="column2" id="causal-claim">
+            <h2>Causal claim</h2>
+            
+            <p>Please add the variables for this study. If a variable is not present please add the variable using the add variable form on the right side.</p>
+       <form id="claim-form">
+                <label for="independent-variable">Independent Variable</label>
+                <input id="independent-variable" type="text" name="q" placeholder="Search for independent variable..." style="width:100%;max-width:1200px;outline:0" onfocusout = "wipeInvalidAnswer('independent-variable');">
+
+                <label for="dependent-variable">Dependent Variable</label>
+                <input id="dependent-variable" type="text" name="q" placeholder="Search for dependent variable..." style="width:100%;max-width:1200px;outline:0" onfocusout = "wipeInvalidAnswer('dependent-variable');">
+
+                <label for="instrumental-variable">Instrumental Variable (Optional)</label>
+                <input id="instrumental-variable" type="text" name="q" placeholder="Search for instrumental variable..." style="width:100%;max-width:1200px;outline:0" onfocusout = "wipeInvalidAnswer('instrumental-variable');">
+
+  Finding
+  <div class="popup" onclick="showPopup('findpopup')">ⓘ
+  <span class="popuptext" id="findpopup"> Can be zero (the authors claim a null finding), positive (the x variable increases the y variable) or negative the x variable decreases the y variable. Non-monotonic is when the authors claim the relationship varies in direction over the range of the x variable (e.g. u-shaped). Heterogeneous is when the relationship is positive for some subgroups and negative for others. 
+  </span>
+  </div> 
+  <select id="finding" name="finding" onchange = "updateClaimSubmission();"></select>       
+  
+  <label for="yourname">Your name (optional)</label>
+  <input type="text" id="yourname" name="yourname" onchange = "updateClaimSubmission();">
+  
+                
+                <button type="button" onclick = "submitClaim();">Submit causal claim</button>
+            </form>
+        </div>
+
+        <!-- Add a variable column -->
+        <div class="column" id="add-variable">
+            <h2>Add a variable</h2>
+            <form id="add-var-form">
+                <label for="variable-name">Variable name</label>
+                <input type="text" id="variable-name" name="variable-name" required onchange = "updateVarSubmission();">
+
+                <label for="parent-variable">Parent Variable</label>
+                <input id="parent-variable" type="text" name="q" placeholder="Search for parent variable..." style="width:100%;max-width:1200px;outline:0" onfocusout = "wipeInvalidAnswer('parent-variable');">
+
+
+                <label for="description">Description</label>
+                <input type="text" id="description" name="description" required onchange = "updateVarSubmission();">
+
+                <button type="button" id = "varsubmitbutton" onclick = "submitVarClaim();">Submit variable to database</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Initial update on page load
+    window.onload = fetchAllVars;
+    </script>
+    
+    <div id="overlay" class="overlay">
+        <div id="overlay-content">
+            <p>Submission created. Please confirm that you submitted the causal claim through Google Forms</p>
+            <button id="confirm">I confirm that I submitted my causal claim through the Google form</button>
+            <button id="cancel">Cancel my submission</button>
+            <button id="resubmit">Resend submission to Google Forms</button>
+        </div>
+    </div>
+    
+    <div id="varoverlay" class="overlay">
+        <div id="varoverlay-content">
+            <p>Variable submission created. Please confirm that you submitted the variable through Google Forms</p>
+            <button id="confirmvar">I confirm that I submitted my variable through the Google form</button>
+            <button id="cancelvar">Cancel my submission</button>
+            <button id="resubmitvar">Resend submission to Google Forms</button>
+        </div>
+    </div>
+    
+    <div id="varoverlaydolthub" class="overlay">
+        <div id="varoverlay-content-dolthub">
+            <p hidden id ="varsubmitting" hidden>Variable submitting...</p>
+            <p hidden id ="varsuccess" hidden>Variable successfully submitted!</p>
+            <p hidden id ="varfail" hidden>Something went wrong</p>
+            <button hidden id="continuevar">OK</button>
+            <button hidden id="cancelvardolt">Cancel</button>
+            <button hidden id="resubmitvardolt">Resend</button>
+        </div>
+    </div>
+
+    <script
+      type="text/javascript"
+      src="ans.js"
+      defer
+    ></script>
+    
+    
+</body>
+</html>
