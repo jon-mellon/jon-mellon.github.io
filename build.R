@@ -6,6 +6,10 @@ file.copy(from = "C:/Users/jonathan.mellon/Dropbox/paperwork/achievements/cv_upd
 file.copy(from = "C:/Users/jonathan.mellon/Dropbox/paperwork/achievements/cv_updated.pdf", 
           to = "themes/starter-hugo-academic/static/uploads/resume.pdf", overwrite = TRUE)
 
+file.copy(from = "C:/Users/jonathan.mellon/Dropbox/paperwork/achievements/cv_updated.pdf", 
+          to = "docs/uploads/resume.pdf", overwrite = TRUE)
+
+
 blogdown::stop_server()
 
 blogdown::build_site()

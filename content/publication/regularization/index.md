@@ -14,7 +14,7 @@ publication: '*American Political Science Review* (accepted)'
 publication_short: ""
 publication_types:
 - "2"
-publishDate: "Accepted"
+publishDate: "2024"
 summary: "Regularization can reduce the problem of extreme inference but inappropriate use can lead to reopening backdoor paths and lead to highly biased estimates."
 tags:
 - causal inference
@@ -22,8 +22,8 @@ tags:
 - statistics
 - regularization
 - metascience
-title: "Regularized Regression Can Reintroduce Backdoor Confounding: The Case of Mass Polarization (Accepted at APSR)"
-url_pdf: https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3715610
+title: "Regularized Regression Can Reintroduce Backdoor Confounding: The Case of Mass Polarization (APSR)"
+url_pdf: https://www.cambridge.org/core/journals/american-political-science-review/article/regularized-regression-can-reintroduce-backdoor-confounding-the-case-of-mass-polarization/3806AC4212AE06432DA309F07890C486
 # url_poster: ""
 # url_project: ""
 # url_slides: ""
