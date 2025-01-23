@@ -5,3 +5,5 @@
 .Rproj.user
 .Rproj.user/57D0B9A4/pcs/files-pane.pper
 *.pper
+/.Rproj.user
+*.pper
