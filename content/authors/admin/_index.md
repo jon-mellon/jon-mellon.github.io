@@ -22,7 +22,7 @@ interests:
 last_name: Mellon
 organizations:
 - name: British Election Study
-  url: www.britishelectionstudy.com
+  url: http://www.britishelectionstudy.com
 role: Political Scientist
 social:
 - icon: envelope
