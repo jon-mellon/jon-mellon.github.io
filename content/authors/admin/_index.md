@@ -12,7 +12,7 @@ education:
   - course: BA in Politics, Philosophy, and Economics
     institution: St Anne's College, University of Oxford
     year: 2006-2009
-email: "jonathan.mellon@westpoint.edu"
+email: "jonamellon@gmail.com"
 first_name: Jon
 highlight_name: true
 interests:
@@ -21,19 +21,19 @@ interests:
 - Social Science Measurement
 last_name: Mellon
 organizations:
-- name: West Point Department of Systems Engineering
-  url: https://www.westpoint.edu/academics/academic-departments/systems-engineering
-role: Associate Professor
+- name: British Election Study
+  url: www.britishelectionstudy.com
+role: Political Scientist
 social:
 - icon: envelope
   icon_pack: fas
-  link: mailto:jonathan.mellon@westpoint.edu
+  link: mailto:jonamellon@gmail.com
 - display:
     header: false
   icon: twitter
   icon_pack: fab
   label: Follow me on Twitter
-  link: https://twitter.com/jon_mellon
+  link: https://bsky.app/profile/jonmellon.bsky.social
 - icon: graduation-cap
   icon_pack: fas
   link: https://scholar.google.com/citations?user=EekbrtcAAAAJ&hl=en
@@ -47,7 +47,7 @@ superuser: true
 title: Jonathan Mellon
 ---
 
-I am an Associate Professor at West Point’s Department of Systems Engineering and co-director of the British Election Study.
+I am co-director of the British Election Study and an Associate Professor at West Point’s Department of Systems Engineering.
 
 My research focuses on improving measurement and causal inference in social science. Substantively I study electoral behavior, online citizen engagement, and measuring public opinion. 
 
