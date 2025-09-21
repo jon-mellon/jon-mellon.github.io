@@ -22,10 +22,17 @@ sections:
   content:
     date_format: Jan 2006
     items:
+    - company: Pinterest
+      company_logo: pinterest-logo
+      company_url: ""
+      date_end: ""
+      date_start: "2025-09-01"
+      location: Remote
+      title: Staff Data Scientist
     - company: West Point
       company_logo: westpoint-logo
       company_url: ""
-      date_end: ""
+      date_end: "2025-08-20"
       date_start: "2023-08-10"
       location: NY
       title: Associate Professor

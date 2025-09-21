@@ -47,11 +47,11 @@ superuser: true
 title: Jonathan Mellon
 ---
 
-I am co-director of the British Election Study and an Associate Professor at West Point’s Department of Systems Engineering.
+I am co-director of the British Election Study and a Staff Data Scientist at Pinterest. Formerly an Associate Professor (with tenure) at West Point's Department of Systems Engineering. 
 
-My research focuses on improving measurement and causal inference in social science. Substantively I study electoral behavior, online citizen engagement, and measuring public opinion. 
+My research focuses on survey methodology, improving measurement (including through the use of AI tools), and causal inference in social science. Substantively I study electoral behavior, online citizen engagement, and measuring public opinion. 
 
-I have published 26 articles in peer reviewed journals including the *American Political Science Review*, *American Journal of Political Science*, and the *Journal of Politics*. I also co-authored *Electoral Shocks: The Volatile Voter in a Turbulent World* with Oxford University Press (available [open access](https://www.loc.gov/item/2021758787/)). 
+I have published 31 articles in peer reviewed journals including the *American Political Science Review*, *American Journal of Political Science*, and the *Journal of Politics*. I also co-authored *Electoral Shocks: The Volatile Voter in a Turbulent World* with Oxford University Press (available [open access](https://www.loc.gov/item/2021758787/)). 
 
 My full list of publications are available on [Google Scholar](https://scholar.google.com/citations?user=EekbrtcAAAAJ&hl=en) or my [CV](uploads/resume.pdf). 
 
