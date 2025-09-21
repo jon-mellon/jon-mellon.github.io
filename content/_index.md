@@ -23,7 +23,7 @@ sections:
     date_format: Jan 2006
     items:
     - company: Pinterest
-      company_logo: pinterest-logo
+      company_logo: Pinterest-logo
       company_url: ""
       date_end: ""
       date_start: "2025-09-01"
