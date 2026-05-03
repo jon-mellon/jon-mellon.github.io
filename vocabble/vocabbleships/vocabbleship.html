@@ -1,0 +1,575 @@
+﻿<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    
+    <title>Wordships</title>
+    <script> 
+        var todaytext = "{\n \"solution\": [ [ \"C\", \"\", \"\", \"\", \"\", \"\", \"\", \"\" ],\n[ \"U\", \"\", \"C\", \"A\", \"T\", \"I\", \"O\", \"N\" ],\n[ \"P\", \"\", \"\", \"\", \"\", \"\", \"\", \"\" ],\n[ \"S\", \"\", \"\", \"N\", \"A\", \"Y\", \"\", \"\" ],\n[ \"\", \"\", \"\", \"\", \"\", \"\", \"U\", \"\" ],\n[ \"L\", \"E\", \"W\", \"I\", \"S\", \"\", \"S\", \"\" ],\n[ \"\", \"\", \"\", \"\", \"\", \"\", \"E\", \"\" ],\n[ \"D\", \"I\", \"N\", \"\", \"\", \"\", \"S\", \"\" ] ],\n\"puzzle\": [ [ \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\" ],\n[ \"U\", \"\", \"C\", \"A\", \"T\", \"\", \"O\", \"N\" ],\n[ \"P\", \"\", \"\", \"\", \"\", \"\", \"\", \"\" ],\n[ \"S\", \"\", \"\", \"N\", \"A\", \"Y\", \"\", \"\" ],\n[ \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\" ],\n[ \"L\", \"E\", \"W\", \"I\", \"S\", \"\", \"S\", \"\" ],\n[ \"\", \"\", \"\", \"\", \"\", \"\", \"E\", \"\" ],\n[ \"\", \"I\", \"N\", \"\", \"\", \"\", \"S\", \"\" ] ],\n\"rowside\": [ \"D\", \"E\", \"C\", \"I\", \"S\", \"I\", \"O\", \"N\" ],\n\"coltop\": [ \"C\", \"A\", \"P\", \"S\", \"U\", \"L\", \"E\", \"S\" ],\n\"colinit\": [ true, false, true, true, true, false, false, true ],\n\"rowinit\": [ true, true, true, false, true, true, false, false ] \n}";
+        var today = JSON.parse(todaytext);
+        var puzzlegrid = today.puzzle;
+        var answer = today.solution;
+
+        var coltop = today.coltop;
+        var colinit = today.colinit;
+
+        var rowside = today.rowside;
+        
+        var rowinit = today.rowinit;
+
+        var certainhitcol = "#07b343";
+        var playerhitcol = "#0CFA5F";
+     
+        var letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split('');
+        
+
+        
+    </script>
+    <H1 align="center">Wordship</H1>
+
+    <style>
+        * {
+            margin: auto;
+        }
+
+        main {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            height: 100vh;
+        }
+
+        div {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .mobile {
+            display: none;
+        }
+
+        .desktop {
+            margin: 0;
+            width: 100%;
+        }
+
+        .noPieceHere {
+            background-color: white;
+            border: 1px solid #c4c4c4;
+            text-size-adjust:auto;
+        }
+        .colBox {
+            
+            border: 0px ;
+            text-size-adjust: auto;
+        }
+        .rowBox {
+            border: 0px;
+            text-size-adjust: auto;
+            border-right: 8px solid black;
+        }
+        .invisiBox {
+            background-color:white;
+            border: 0px white;
+            text-size-adjust: auto;
+        }
+        .inputCol {
+            background-color: white;
+            text-size-adjust: auto;
+            margin: 0px 0px 0px 0px;
+            padding: 0px 0px 0px 0px;
+            border: 0px;
+            text-align: center;
+            box-sizing: border-box;
+            width: 100%;
+            height: 100%;
+            font-size: 40px;
+            text-transform:uppercase;
+        }
+        ::selection {
+            background-color: rgba(0, 0, 0, 0);
+        }
+        .input {
+            background-color: white;
+            text-size-adjust: auto;
+            margin: 0px 0px 0px 0px;
+            padding: 0px 0px 0px 0px;
+            border: 0px;
+            text-align: center;
+            box-sizing: border-box;
+            width: 100%;
+            height: 100%;
+            font-size: 40px;
+            text-transform: uppercase;
+        }
+
+        
+        tr.border_bottom td {
+            border-bottom: 8px solid black;
+        }
+        td.border_bottom tr {
+            border-right: 8px solid black;
+        }
+        table {
+            border-collapse: collapse;
+        }
+        td {
+            text-align: center;
+            background-color: white;
+            width: 65px;
+            height: 65px;
+            border: 1px solid #c4c4c4;
+        }
+
+        .red-turn-text {
+            text-align: center;
+            color: black;
+            font-family: "open sans";
+            font-size: 55px;
+        }
+
+        .black-turn-text {
+            text-align: center;
+            font-family: "open sans";
+            font-size: 55px;
+            color: lightgray;
+        }
+
+        .black-piece {
+            width: 20px;
+            height: 20px;
+            padding: 12px;
+            background-color: black;
+            border: 1px solid white;
+            border-radius: 50px;
+        }
+
+        .red-piece {
+            width: 20px;
+            height: 20px;
+            padding: 12px;
+            background-color: red;
+            border: 1px solid white;
+            border-radius: 50px;
+        }
+
+        p {
+            display: inline-block;
+        }
+
+        #divider {
+            font-size: 90px;
+            margin-left: 15px;
+            margin-right: 15px;
+        }
+
+        span {
+            display: inline-block;
+        }
+
+        @media screen and (max-width: 560px) {
+            .red-piece {
+                height: 4.5vw;
+                width: 4.5vw;
+            }
+
+            .black-piece {
+                height: 4.5vw;
+                width: 4.5vw;
+            }
+
+            td {
+                width: 12vw;
+                height: 12vw;
+            }
+
+            .red-turn-text {
+                font-size: 40px;
+            }
+
+            .black-turn-text {
+                font-size: 40px;
+            }
+
+            table {
+                margin: 0;
+            }
+
+            .mobile {
+                display: block;
+            }
+
+            .desktop {
+                display: none;
+            }
+
+         
+        }
+
+        @media screen and (max-width: 380px) {
+            .red-piece {
+                height: 3vw;
+                width: 3vw;
+            }
+
+            .black-piece {
+                height: 3vw;
+                width: 3vw;
+            }
+        }
+
+        @media screen and (max-width: 345px) {
+            .red-piece {
+                height: 2.5vw;
+                width: 2.5vw;
+            }
+
+            .black-piece {
+                height: 2.5vw;
+                width: 2.5vw;
+            }
+        }
+
+        @media screen and (max-width: 300px) {
+            .red-piece {
+                height: 1.5vw;
+                width: 1.5vw;
+            }
+
+            .black-piece {
+                height: 1.5vw;
+                width: 1.5vw;
+            }
+
+            .red-turn-text {
+                font-size: 35px;
+            }
+
+            .black-turn-text {
+                font-size: 35px;
+            }
+        }
+        .floatedTable {
+            float: left;
+        }
+
+        .inlineTable {
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <script>
+            function componentToHex(c) {
+                var hex = c.toString(16);
+                return hex.length == 1 ? "0" + hex : hex;
+            }
+            function rgbToHex(r, g, b) {
+                return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+            }
+
+            updatecol = function (id) {
+
+                let colupdate = document.getElementById(id);
+                let currenthex;
+                let currentcol = colupdate.style.backgroundColor;
+                if (currentcol != "") {
+                    currentcol = currentcol.substr(4, 20);
+                    let colrgb = currentcol.split(",");
+                    colrgb[2] = colrgb[2].replace(")", "");
+                    colrgb[2] = colrgb[2].replace(" ", "");
+                    currenthex = rgbToHex(parseInt(colrgb[0]), parseInt(colrgb[1]), parseInt(colrgb[2]));
+                    currenthex = currenthex.toUpperCase();
+                    console.log(currenthex);
+                } else {
+                    currenthex = "#FFFFFF";
+                }
+                if (currenthex == playerhitcol.toUpperCase()) {
+                    colupdate.style.backgroundColor = "#FFFFFF";
+                }
+                if (currenthex == "#FFFFFF") {
+                    colupdate.style.backgroundColor = "#F0E816";
+                }
+                if (currenthex == "#F0E816") {
+                    colupdate.style.backgroundColor = playerhitcol.toUpperCase();
+                }
+            }
+
+            updateboard = function (id) {
+                let colupdate = document.getElementById(id);
+
+                let currentcol = colupdate.style.backgroundColor;
+                let currenthex;
+                if (currentcol != "") {
+                    currentcol = currentcol.substr(4, 20);
+                    let colrgb = currentcol.split(",");
+                    colrgb[2] = colrgb[2].replace(")", "");
+                    colrgb[2] = colrgb[2].replace(" ", "");
+                    currenthex = rgbToHex(parseInt(colrgb[0]), parseInt(colrgb[1]), parseInt(colrgb[2]));
+                    currenthex = currenthex.toUpperCase();
+                } else {
+                    currenthex = "#FFFFFF";
+                }
+
+                if (currenthex == playerhitcol.toUpperCase()) {
+                    colupdate.style.backgroundColor = "#FFFFFF";
+                }
+                if (currenthex == "#FFFFFF") {
+                    colupdate.style.backgroundColor = "#16BDF0";
+                }
+                if (currenthex == "#16BDF0") {
+                    colupdate.style.backgroundColor = "#F0E816";
+                }
+                if (currenthex == "#F0E816") {
+                    colupdate.style.backgroundColor = playerhitcol.toUpperCase();
+                }
+            }
+
+        </script>
+
+
+        <table class="floatedTable">
+            <tr class="border_bottom">
+                <td class="rowBox" id="blank"><span></span></td>
+                <td class="colBox"><span><input id="col1" class="inputCol" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" onclick="updatecol('col1')" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="colBox"><span><input id="col2" class="inputCol" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" onclick="updatecol('col2')" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="colBox"><span><input id="col3" class="inputCol" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" onclick="updatecol('col3')" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="colBox"><span><input id="col4" class="inputCol" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" onclick="updatecol('col4')" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="colBox"><span><input id="col5" class="inputCol" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" onclick="updatecol('col5')" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="colBox"><span><input id="col6" class="inputCol" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" onclick="updatecol('col6')" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="colBox"><span><input id="col7" class="inputCol" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" onclick="updatecol('col7')" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="colBox"><span><input id="col8" class="inputCol" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" onclick="updatecol('col8')" type="text" minlength="0" maxlength="1"></span></td>
+            </tr>
+            <tr>
+                <td class="rowBox"><span><input class="inputCol" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" onclick="updatecol('row1')" id="row1" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="noPieceHere" onclick="updateboard('A1')"><input id="A1" class="input" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></td>
+                <td class="noPieceHere" onclick="updateboard('A2')"><span><input class="input" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" id="A2" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="noPieceHere" onclick="updateboard('A3')"><span><input class="input" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" id="A3" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="noPieceHere" onclick="updateboard('A4')"><span><input class="input" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" id="A4" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="noPieceHere" onclick="updateboard('A5')"><span><input class="input" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" id="A5" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="noPieceHere" onclick="updateboard('A6')"><span><input class="input" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" id="A6" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="noPieceHere" onclick="updateboard('A7')"><span><input class="input" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" id="A7" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="noPieceHere" onclick="updateboard('A8')"><span><input class="input" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" id="A8" type="text" minlength="0" maxlength="1"></span></td>
+            </tr>
+            <tr>
+                <td class="rowBox"><span><input class="inputCol" id="row2" onclick="updatecol('row2')" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="noPieceHere" onclick="updateboard('B1')"><span><input class="input" id="B1" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="noPieceHere" onclick="updateboard('B2')"><span><input class="input" id="B2" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="noPieceHere" onclick="updateboard('B3')"><span><input class="input" id="B3" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="noPieceHere" onclick="updateboard('B4')"><span><input class="input" id="B4" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="noPieceHere" onclick="updateboard('B5')"><span><input class="input" id="B5" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="noPieceHere" onclick="updateboard('B6')"><span><input class="input" id="B6" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="noPieceHere" onclick="updateboard('B7')"><span><input class="input" id="B7" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="noPieceHere" onclick="updateboard('B8')"><span><input class="input" id="B8" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+            </tr>
+            <tr>
+                <td class="rowBox"><span><input class="inputCol" id="row3" onclick="updatecol('row3')" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="noPieceHere" onclick="updateboard('C1')"><span><input class="input" id="C1" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="noPieceHere" onclick="updateboard('C2')"><span><input class="input" id="C2" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="noPieceHere" onclick="updateboard('C3')"><span><input class="input" id="C3" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="noPieceHere" onclick="updateboard('C4')"><span><input class="input" id="C4" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="noPieceHere" onclick="updateboard('C5')"><span><input class="input" id="C5" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="noPieceHere" onclick="updateboard('C6')"><span><input class="input" id="C6" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="noPieceHere" onclick="updateboard('C7')"><span><input class="input" id="C7" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="noPieceHere" onclick="updateboard('C8')"><span><input class="input" id="C8" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+            </tr>
+            <tr>
+                <td class="rowBox"><span><input class="inputCol" id="row4" onclick="updatecol('row4')" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="noPieceHere" onclick="updateboard('D1')"><span><input class="input" id="D1" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="noPieceHere" onclick="updateboard('D2')"><span><input class="input" id="D2" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="noPieceHere" onclick="updateboard('D3')"><span><input class="input" id="D3" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="noPieceHere" onclick="updateboard('D4')"><span><input class="input" id="D4" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="noPieceHere" onclick="updateboard('D5')"><span><input class="input" id="D5" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="noPieceHere" onclick="updateboard('D6')"><span><input class="input" id="D6" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="noPieceHere" onclick="updateboard('D7')"><span><input class="input" id="D7" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="noPieceHere" onclick="updateboard('D8')"><span><input class="input" id="D8" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+            </tr>
+            <tr>
+                <td class="rowBox"><span><input class="inputCol" id="row5" onclick="updatecol('row5')" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="noPieceHere" onclick="updateboard('E1')"><span><input class="input" id="E1" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="noPieceHere" onclick="updateboard('E2')"><span><input class="input" id="E2" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="noPieceHere" onclick="updateboard('E3')"><span><input class="input" id="E3" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="noPieceHere" onclick="updateboard('E4')"><span><input class="input" id="E4" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="noPieceHere" onclick="updateboard('E5')"><span><input class="input" id="E5" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="noPieceHere" onclick="updateboard('E6')"><span><input class="input" id="E6" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="noPieceHere" onclick="updateboard('E7')"><span><input class="input" id="E7" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="noPieceHere" onclick="updateboard('E8')"><span><input class="input" id="E8" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+            </tr>
+            <tr>
+                <td class="rowBox"><span><input class="inputCol" id="row6" onclick="updatecol('row6')" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="noPieceHere" onclick="updateboard('F1')"><span><input class="input" id="F1" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="noPieceHere" onclick="updateboard('F2')"><span><input class="input" id="F2" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="noPieceHere" onclick="updateboard('F3')"><span><input class="input" id="F3" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="noPieceHere" onclick="updateboard('F4')"><span><input class="input" id="F4" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="noPieceHere" onclick="updateboard('F5')"><span><input class="input" id="F5" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="noPieceHere" onclick="updateboard('F6')"><span><input class="input" id="F6" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="noPieceHere" onclick="updateboard('F7')"><span><input class="input" id="F7" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="noPieceHere" onclick="updateboard('F8')"><span><input class="input" id="F8" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+            </tr>
+            <tr>
+                <td class="rowBox"><span><input class="inputCol" id="row7" onclick="updatecol('row7')" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="noPieceHere" onclick="updateboard('G1')"><span><input class="input" id="G1" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="noPieceHere" onclick="updateboard('G2')"><span><input class="input" id="G2" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="noPieceHere" onclick="updateboard('G3')"><span><input class="input" id="G3" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="noPieceHere" onclick="updateboard('G4')"><span><input class="input" id="G4" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="noPieceHere" onclick="updateboard('G5')"><span><input class="input" id="G5" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="noPieceHere" onclick="updateboard('G6')"><span><input class="input" id="G6" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="noPieceHere" onclick="updateboard('G7')"><span><input class="input" id="G7" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="noPieceHere" onclick="updateboard('G8')"><span><input class="input" id="G8" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+            </tr>
+            <tr>
+                <td class="rowBox"><span><input class="inputCol" id="row8" onclick="updatecol('row8')" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="noPieceHere" onclick="updateboard('H1')"><span><input class="input" id="H1" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="noPieceHere" onclick="updateboard('H2')"><span><input class="input" id="H2" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="noPieceHere" onclick="updateboard('H3')"><span><input class="input" id="H3" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="noPieceHere" onclick="updateboard('H4')"><span><input class="input" id="H4" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="noPieceHere" onclick="updateboard('H5')"><span><input class="input" id="H5" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="noPieceHere" onclick="updateboard('H6')"><span><input class="input" id="H6" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="noPieceHere" onclick="updateboard('H7')"><span><input class="input" id="H7" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                <td class="noPieceHere" onclick="updateboard('H8')"><span><input class="input" id="H8" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+            </tr>
+        </table>
+        
+        <table class="floatedTable" width="2.4%">
+            <tr>
+                <td>
+                    <table width="600%" align="center">
+                        <tr>
+                            Super-Carrier
+                            <td class="noPieceHere" onclick="updatecol('sc1')"><span><input class="input" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" id="sc1" type="text" minlength="0" maxlength="1"></span></td>
+                            <td class="noPieceHere" onclick="updatecol('sc2')"><span><input class="input" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" id="sc2" type="text" minlength="0" maxlength="1"></span></td>
+                            <td class="noPieceHere" onclick="updatecol('sc3')"><span><input class="input" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" id="sc3" type="text" minlength="0" maxlength="1"></span></td>
+                            <td class="noPieceHere" onclick="updatecol('sc4')"><span><input class="input" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" id="sc4" type="text" minlength="0" maxlength="1"></span></td>
+                            <td class="noPieceHere" onclick="updatecol('sc5')"><span><input class="input" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" id="sc5" type="text" minlength="0" maxlength="1"></span></td>
+                            <td class="noPieceHere" onclick="updatecol('sc6')"><span><input class="input" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" id="sc6" type="text" minlength="0" maxlength="1"></span></td>
+                        </tr>
+
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table width="500%" align="center">
+                        <tr>
+                            Heli-carrier
+                            <td class="noPieceHere" onclick="updatecol('hc1')"><span><input class="input" id="hc1" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                            <td class="noPieceHere" onclick="updatecol('hc2')"><span><input class="input" id="hc2" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                            <td class="noPieceHere" onclick="updatecol('hc3')"><span><input class="input" id="hc3" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                            <td class="noPieceHere" onclick="updatecol('hc4')"><span><input class="input" id="hc4" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                            <td class="noPieceHere" onclick="updatecol('hc5')"><span><input class="input" id="hc5" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                        </tr>
+
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table width="400%" align="center">
+                        <tr>
+                            Battleship-1
+                            <td class="noPieceHere" onclick="updatecol('bsA1')"><span><input class="input" id="bsA1" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                            <td class="noPieceHere" onclick="updatecol('bsA2')"><span><input class="input" id="bsA2" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                            <td class="noPieceHere" onclick="updatecol('bsA3')"><span><input class="input" id="bsA3" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                            <td class="noPieceHere" onclick="updatecol('bsA4')"><span><input class="input" id="bsA4" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                        </tr>
+
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table width="400%" align="center">
+                        <tr>
+                            Battleship-2
+                            <td class="noPieceHere" onclick="updatecol('bsB1')"><span><input class="input" id="bsB1" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                            <td class="noPieceHere" onclick="updatecol('bsB2')"><span><input class="input" id="bsB2" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                            <td class="noPieceHere" onclick="updatecol('bsB3')"><span><input class="input" id="bsB3" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                            <td class="noPieceHere" onclick="updatecol('bsB4')"><span><input class="input" id="bsB4" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                        </tr>
+
+                    </table>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <table width="300%" align="center">
+                        <tr>
+                            Cruiser
+                            <td class="noPieceHere" onclick="updatecol('crA1')"><span><input class="input" id="crA1" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                            <td class="noPieceHere" onclick="updatecol('crA2')"><span><input class="input" id="crA2" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                            <td class="noPieceHere" onclick="updatecol('crA3')"><span><input class="input" id="crA3" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                        </tr>
+
+                    </table>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <table width="300%" align="center">
+                        <tr>
+                            Submarine
+                            <td class="noPieceHere" onclick="updatecol('crB1')"><span><input class="input" id="crB1" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                            <td class="noPieceHere" onclick="updatecol('crB2')"><span><input class="input" id="crB2" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                            <td class="noPieceHere" onclick="updatecol('crB3')"><span><input class="input" id="crB3" oninput="this.value = this.value.replace(/[^A-Za-z]/, '')" type="text" minlength="0" maxlength="1"></span></td>
+                        </tr>
+
+                    </table>
+                </td>
+            </tr>
+        </table>
+
+
+        <script>
+
+            for (var i = 1; i < 8; i++) {
+                if (colinit[i]) {
+                    let colindex = i + 1;
+                    let colupdate = document.getElementById("col" + colindex);
+                    colupdate.value = coltop[i];
+                    colupdate.style.backgroundColor = certainhitcol;
+                    colupdate.style.borderColor = "white";
+                    colupdate.onclick = null;
+                    colupdate.readOnly = true;
+                }
+            }
+
+            for (var i = 0; i < 8; i++) {
+                if (rowinit[i]) {
+                    let rowindex = i + 1;
+                    let rowupdate = document.getElementById("row" + rowindex );
+                    rowupdate.value = rowside[i];
+                    rowupdate.style.backgroundColor = certainhitcol;
+                    rowupdate.style.borderColor = "white";
+                    rowupdate.onclick = null;
+                    rowupdate.readOnly = true;
+                }
+            }
+            
+            // fill in all answers temporarily
+            for (var i = 0; i < puzzlegrid.length; i++) {
+                for (var j = 0; j < puzzlegrid.length; j++) {
+                    let colindex = i + 1;
+                    let tempid = letters[j] + colindex;
+                    let cellupdate = document.getElementById(tempid);
+                    
+                    if (puzzlegrid[i][j] != null) {
+                        if (letters.includes(puzzlegrid[i][j].toUpperCase())) {
+                            cellupdate.value = puzzlegrid[i][j].toUpperCase();
+                            cellupdate.style.backgroundColor = certainhitcol;
+                            cellupdate.readOnly = true;
+                        }
+                    }
+                }
+
+            }
+        </script>
+    </main>
+</body>
+</html>

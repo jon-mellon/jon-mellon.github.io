@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Vocabble</title>
+    <link rel="stylesheet" href="app.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="masthead">
+        <div>
+          <p class="eyebrow">Daily word fleet</p>
+          <h1>Vocabble</h1>
+        </div>
+        <div class="date-stack">
+          <span id="puzzle-date">UTC</span>
+          <span id="status-text" aria-live="polite">Loading</span>
+        </div>
+      </header>
+
+      <section class="workspace" aria-label="Vocabble puzzle">
+        <div class="board-wrap">
+          <div id="board" class="board" aria-label="Puzzle board"></div>
+        </div>
+
+        <aside class="side-panel">
+          <section class="panel-section">
+            <h2>Fleet</h2>
+            <div id="fleet" class="fleet-list"></div>
+          </section>
+
+          <section class="panel-section">
+            <h2>Mode</h2>
+            <div class="mode-row" role="group" aria-label="Input mode">
+              <button class="mode-button is-active" data-mode="letter" type="button">Letter</button>
+              <button class="mode-button" data-mode="water" type="button">Water</button>
+              <button class="mode-button" data-mode="maybe" type="button">Maybe</button>
+            </div>
+          </section>
+
+          <section class="panel-section">
+            <h2>Actions</h2>
+            <div class="action-grid">
+              <button id="check-button" type="button">Check</button>
+              <button id="reset-button" type="button">Reset</button>
+              <button id="reveal-button" type="button">Reveal</button>
+            </div>
+          </section>
+
+          <section class="panel-section compact-rules">
+            <h2>Rules</h2>
+            <p>Place the six dictionary-word ships. Top and side words are dictionary words too; each edge letter appears in its row or column. Diagonal contact is allowed.</p>
+          </section>
+        </aside>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>

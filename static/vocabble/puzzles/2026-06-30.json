@@ -1,0 +1,86 @@
+{
+  "id": "vocabble-2026-06-30",
+  "date": "2026-06-30",
+  "size": 8,
+  "fleetLengths": [6, 5, 4, 4, 3, 3],
+  "solution": [
+    ["C", "", "", "", "", "", "", ""],
+    ["U", "", "C", "A", "T", "I", "O", "N"],
+    ["P", "", "", "", "", "", "", ""],
+    ["S", "", "", "N", "A", "Y", "", ""],
+    ["", "", "", "", "", "", "U", ""],
+    ["L", "E", "V", "I", "S", "", "S", ""],
+    ["", "", "", "", "", "", "E", ""],
+    ["D", "I", "N", "", "", "", "S", ""]
+  ],
+  "puzzle": [
+    ["", "", "", "", "", "", "", ""],
+    ["", "", "C", "", "", "I", "", ""],
+    ["P", "", "", "", "", "", "", ""],
+    ["", "", "", "N", "", "", "", ""],
+    ["", "", "", "", "", "", "U", ""],
+    ["", "E", "", "", "S", "", "", ""],
+    ["", "", "", "", "", "", "E", ""],
+    ["D", "", "", "", "", "", "S", ""]
+  ],
+  "topWord": "DECISION",
+  "sideWord": "CAPSULES",
+  "topVisible": [true, false, true, false, true, false, false, true],
+  "sideVisible": [true, true, true, false, false, false, false, true],
+  "ships": [
+    {
+      "word": "CUPS",
+      "length": 4,
+      "row": 1,
+      "col": 1,
+      "direction": "V"
+    },
+    {
+      "word": "CATION",
+      "length": 6,
+      "row": 2,
+      "col": 3,
+      "direction": "H"
+    },
+    {
+      "word": "NAY",
+      "length": 3,
+      "row": 4,
+      "col": 4,
+      "direction": "H"
+    },
+    {
+      "word": "USES",
+      "length": 4,
+      "row": 5,
+      "col": 7,
+      "direction": "V"
+    },
+    {
+      "word": "LEVIS",
+      "length": 5,
+      "row": 6,
+      "col": 1,
+      "direction": "H"
+    },
+    {
+      "word": "DIN",
+      "length": 3,
+      "row": 8,
+      "col": 1,
+      "direction": "H"
+    }
+  ],
+  "difficulty": {
+    "label": "medium-hard",
+    "hiddenLetters": 15,
+    "hiddenEdges": 8,
+    "givenLetters": 10
+  },
+  "validation": {
+    "ok": true,
+    "dictionary_ok": true,
+    "row_edge_ok": true,
+    "col_edge_ok": true
+  }
+}
