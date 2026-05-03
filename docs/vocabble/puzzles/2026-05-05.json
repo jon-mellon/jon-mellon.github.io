@@ -4,71 +4,71 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["C", "", "", "", "", "", "", ""],
-    ["O", "", "C", "A", "T", "I", "O", "N"],
-    ["P", "", "", "", "", "", "", ""],
-    ["S", "", "", "N", "A", "Y", "", ""],
-    ["", "", "", "", "", "", "U", ""],
-    ["L", "E", "N", "I", "S", "", "S", ""],
-    ["", "", "", "", "", "", "E", ""],
-    ["D", "E", "N", "", "", "", "S", ""]
+    ["", "", "Q", "U", "E", "E", "N", ""],
+    ["", "", "", "", "A", "B", "L", "E"],
+    ["S", "E", "A", "T", "", "A", "", ""],
+    ["", "", "", "", "", "C", "A", ""],
+    ["", "", "", "", "", "T", "C", ""],
+    ["", "I", "", "", "", "I", "T", ""],
+    ["", "O", "", "", "", "O", "", ""],
+    ["", "N", "", "", "", "N", "", ""]
   ],
   "puzzle": [
     ["", "", "", "", "", "", "", ""],
-    ["O", "", "", "", "", "", "", ""],
-    ["P", "", "", "", "", "", "", ""],
-    ["", "", "", "", "", "Y", "", ""],
-    ["", "", "", "", "", "", "U", ""],
-    ["L", "E", "", "I", "", "", "S", ""],
-    ["", "", "", "", "", "", "E", ""],
-    ["", "", "", "", "", "", "S", ""]
+    ["", "", "", "", "", "", "L", ""],
+    ["", "E", "A", "", "", "A", "", ""],
+    ["", "", "", "", "", "", "A", ""],
+    ["", "", "", "", "", "", "C", ""],
+    ["", "I", "", "", "", "", "T", ""],
+    ["", "", "", "", "", "", "", ""],
+    ["", "N", "", "", "", "N", "", ""]
   ],
-  "topWord": "DECISION",
-  "sideWord": "CAPSULES",
+  "topWord": "SEQUENCE",
+  "sideWord": "ELECTION",
   "topVisible": [true, true, false, true, false, false, true, false],
   "sideVisible": [false, true, false, false, true, false, true, true],
   "ships": [
     {
-      "word": "COPS",
-      "length": 4,
-      "row": 1,
-      "col": 1,
+      "word": "ACTION",
+      "length": 6,
+      "row": 3,
+      "col": 6,
       "direction": "V"
     },
     {
-      "word": "CATION",
-      "length": 6,
-      "row": 2,
+      "word": "QUEEN",
+      "length": 5,
+      "row": 1,
       "col": 3,
       "direction": "H"
     },
     {
-      "word": "NAY",
-      "length": 3,
-      "row": 4,
-      "col": 4,
+      "word": "SEAT",
+      "length": 4,
+      "row": 3,
+      "col": 1,
       "direction": "H"
     },
     {
-      "word": "USES",
+      "word": "ABLE",
       "length": 4,
-      "row": 5,
+      "row": 2,
+      "col": 5,
+      "direction": "H"
+    },
+    {
+      "word": "ACT",
+      "length": 3,
+      "row": 4,
       "col": 7,
       "direction": "V"
     },
     {
-      "word": "LENIS",
-      "length": 5,
-      "row": 6,
-      "col": 1,
-      "direction": "H"
-    },
-    {
-      "word": "DEN",
+      "word": "ION",
       "length": 3,
-      "row": 8,
-      "col": 1,
-      "direction": "H"
+      "row": 6,
+      "col": 2,
+      "direction": "V"
     }
   ],
   "difficulty": {

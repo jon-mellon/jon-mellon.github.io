@@ -4,69 +4,69 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["C", "A", "P", "S", "", "L", "", "D"],
-    ["", "", "", "", "", "E", "", "O"],
-    ["", "C", "", "", "", "N", "", "N"],
-    ["", "A", "", "S", "", "I", "", ""],
-    ["", "T", "", "A", "", "S", "", ""],
-    ["", "I", "", "Y", "", "", "", ""],
-    ["", "O", "", "", "U", "S", "E", "S"],
-    ["", "N", "", "", "", "", "", ""]
+    ["B", "A", "N", "D", "", "I", "C", ""],
+    ["", "", "", "", "R", "R", "L", ""],
+    ["S", "", "", "", "O", "O", "A", ""],
+    ["P", "", "", "", "W", "N", "S", ""],
+    ["R", "", "", "", "", "", "S", ""],
+    ["I", "", "", "", "", "", "", "H"],
+    ["N", "", "", "", "", "", "", "A"],
+    ["G", "", "", "", "", "", "", "T"]
   ],
   "puzzle": [
-    ["C", "", "P", "", "", "", "", "D"],
-    ["", "", "", "", "", "E", "", "O"],
-    ["", "", "", "", "", "N", "", ""],
-    ["", "", "", "", "", "I", "", ""],
-    ["", "", "", "A", "", "", "", ""],
+    ["B", "", "N", "", "", "", "C", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "", "S", "", "S"],
-    ["", "", "", "", "", "", "", ""]
+    ["", "", "", "", "O", "O", "A", ""],
+    ["", "", "", "", "", "N", "", ""],
+    ["", "", "", "", "", "", "S", ""],
+    ["", "", "", "", "", "", "", "H"],
+    ["", "", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", "", "T"]
   ],
-  "topWord": "CAPSULES",
-  "sideWord": "DECISION",
+  "topWord": "SANDWICH",
+  "sideWord": "CROSSING",
   "topVisible": [false, true, false, true, false, false, true, true],
   "sideVisible": [false, false, true, true, true, false, true, false],
   "ships": [
     {
-      "word": "CAPS",
+      "word": "SPRING",
+      "length": 6,
+      "row": 3,
+      "col": 1,
+      "direction": "V"
+    },
+    {
+      "word": "CLASS",
+      "length": 5,
+      "row": 1,
+      "col": 7,
+      "direction": "V"
+    },
+    {
+      "word": "IRON",
+      "length": 4,
+      "row": 1,
+      "col": 6,
+      "direction": "V"
+    },
+    {
+      "word": "BAND",
       "length": 4,
       "row": 1,
       "col": 1,
       "direction": "H"
     },
     {
-      "word": "CATION",
-      "length": 6,
-      "row": 3,
-      "col": 2,
-      "direction": "V"
-    },
-    {
-      "word": "SAY",
+      "word": "ROW",
       "length": 3,
-      "row": 4,
-      "col": 4,
-      "direction": "V"
-    },
-    {
-      "word": "USES",
-      "length": 4,
-      "row": 7,
+      "row": 2,
       "col": 5,
-      "direction": "H"
-    },
-    {
-      "word": "LENIS",
-      "length": 5,
-      "row": 1,
-      "col": 6,
       "direction": "V"
     },
     {
-      "word": "DON",
+      "word": "HAT",
       "length": 3,
-      "row": 1,
+      "row": 6,
       "col": 8,
       "direction": "V"
     }

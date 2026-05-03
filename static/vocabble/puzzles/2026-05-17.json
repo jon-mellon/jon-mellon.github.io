@@ -4,70 +4,70 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["C", "", "", "", "", "", "", ""],
-    ["O", "", "C", "A", "T", "I", "O", "N"],
-    ["P", "", "", "", "", "", "", ""],
-    ["S", "", "", "S", "O", "Y", "", ""],
-    ["", "", "", "", "", "", "U", ""],
-    ["L", "E", "N", "I", "S", "", "S", ""],
-    ["", "", "", "", "", "", "E", ""],
-    ["D", "E", "N", "", "", "", "S", ""]
+    ["", "", "", "A", "B", "O", "O", "K"],
+    ["E", "", "", "N", "", "", "", ""],
+    ["A", "", "", "G", "", "", "", ""],
+    ["S", "", "", "L", "", "", "", ""],
+    ["Y", "", "", "E", "", "", "", ""],
+    ["", "S", "E", "A", "", "", "", ""],
+    ["N", "O", "T", "I", "C", "E", "", ""],
+    ["", "G", "A", "S", "", "", "", ""]
   ],
   "puzzle": [
+    ["", "", "", "A", "B", "O", "O", "K"],
+    ["", "", "", "N", "", "", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "A", "", "I", "O", "N"],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "S", "", "", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["L", "", "N", "", "S", "", "S", ""],
-    ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "", "", "S", ""]
+    ["", "", "", "A", "", "", "", ""],
+    ["N", "", "T", "I", "", "", "", ""],
+    ["", "", "", "", "", "", "", ""]
   ],
-  "topWord": "DECISION",
-  "sideWord": "CAPSULES",
+  "topWord": "NOTEBOOK",
+  "sideWord": "ANALYSIS",
   "topVisible": [true, true, false, false, true, true, false, false],
   "sideVisible": [false, false, false, true, true, true, false, true],
   "ships": [
     {
-      "word": "COPS",
+      "word": "NOTICE",
+      "length": 6,
+      "row": 7,
+      "col": 1,
+      "direction": "H"
+    },
+    {
+      "word": "ANGLE",
+      "length": 5,
+      "row": 1,
+      "col": 4,
+      "direction": "V"
+    },
+    {
+      "word": "BOOK",
       "length": 4,
       "row": 1,
-      "col": 1,
-      "direction": "V"
-    },
-    {
-      "word": "CATION",
-      "length": 6,
-      "row": 2,
-      "col": 3,
+      "col": 5,
       "direction": "H"
     },
     {
-      "word": "SOY",
-      "length": 3,
-      "row": 4,
-      "col": 4,
-      "direction": "H"
-    },
-    {
-      "word": "USES",
+      "word": "EASY",
       "length": 4,
-      "row": 5,
-      "col": 7,
+      "row": 2,
+      "col": 1,
       "direction": "V"
     },
     {
-      "word": "LENIS",
-      "length": 5,
-      "row": 6,
-      "col": 1,
-      "direction": "H"
-    },
-    {
-      "word": "DEN",
+      "word": "GAS",
       "length": 3,
       "row": 8,
-      "col": 1,
+      "col": 2,
+      "direction": "H"
+    },
+    {
+      "word": "SEA",
+      "length": 3,
+      "row": 6,
+      "col": 2,
       "direction": "H"
     }
   ],

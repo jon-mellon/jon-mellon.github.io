@@ -4,71 +4,71 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["C", "", "", "", "", "", "", ""],
-    ["A", "", "C", "A", "T", "I", "O", "N"],
-    ["P", "", "", "", "", "", "", ""],
-    ["S", "", "", "N", "A", "Y", "", ""],
-    ["", "", "", "", "", "", "U", ""],
-    ["L", "E", "N", "I", "S", "", "S", ""],
-    ["", "", "", "", "", "", "E", ""],
-    ["D", "E", "N", "", "", "", "S", ""]
+    ["M", "B", "", "", "", "", "", ""],
+    ["O", "U", "", "", "", "", "", ""],
+    ["U", "S", "", "", "", "", "", ""],
+    ["N", "", "A", "C", "T", "I", "O", "N"],
+    ["T", "M", "R", "", "", "", "", ""],
+    ["F", "A", "A", "", "", "", "", ""],
+    ["U", "I", "I", "", "", "", "", ""],
+    ["N", "N", "N", "", "", "", "", ""]
   ],
   "puzzle": [
-    ["C", "", "", "", "", "", "", ""],
-    ["A", "", "C", "A", "", "", "", ""],
+    ["M", "B", "", "", "", "", "", ""],
+    ["O", "", "", "", "", "", "", ""],
+    ["", "S", "", "", "", "", "", ""],
+    ["", "", "", "C", "", "I", "O", ""],
+    ["", "M", "R", "", "", "", "", ""],
+    ["", "A", "", "", "", "", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "N", "", "", "", ""],
-    ["", "", "", "", "", "", "U", ""],
-    ["", "", "", "", "S", "", "", ""],
-    ["", "", "", "", "", "", "E", ""],
-    ["", "", "N", "", "", "", "S", ""]
+    ["", "", "", "", "", "", "", ""]
   ],
-  "topWord": "DECISION",
-  "sideWord": "CAPSULES",
+  "topWord": "FUNCTION",
+  "sideWord": "MOUNTAIN",
   "topVisible": [true, true, true, true, false, false, false, false],
   "sideVisible": [false, true, false, true, false, true, false, true],
   "ships": [
     {
-      "word": "CAPS",
-      "length": 4,
+      "word": "ACTION",
+      "length": 6,
+      "row": 4,
+      "col": 3,
+      "direction": "H"
+    },
+    {
+      "word": "MOUNT",
+      "length": 5,
       "row": 1,
       "col": 1,
       "direction": "V"
     },
     {
-      "word": "CATION",
-      "length": 6,
-      "row": 2,
-      "col": 3,
-      "direction": "H"
-    },
-    {
-      "word": "NAY",
-      "length": 3,
-      "row": 4,
-      "col": 4,
-      "direction": "H"
-    },
-    {
-      "word": "USES",
+      "word": "MAIN",
       "length": 4,
       "row": 5,
-      "col": 7,
+      "col": 2,
       "direction": "V"
     },
     {
-      "word": "LENIS",
-      "length": 5,
-      "row": 6,
-      "col": 1,
-      "direction": "H"
+      "word": "RAIN",
+      "length": 4,
+      "row": 5,
+      "col": 3,
+      "direction": "V"
     },
     {
-      "word": "DEN",
+      "word": "BUS",
       "length": 3,
-      "row": 8,
+      "row": 1,
+      "col": 2,
+      "direction": "V"
+    },
+    {
+      "word": "FUN",
+      "length": 3,
+      "row": 6,
       "col": 1,
-      "direction": "H"
+      "direction": "V"
     }
   ],
   "difficulty": {

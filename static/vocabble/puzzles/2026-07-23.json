@@ -4,71 +4,71 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["C", "O", "P", "S", "", "L", "", "D"],
-    ["", "", "", "", "", "E", "", "O"],
-    ["", "C", "", "", "", "N", "", "N"],
-    ["", "A", "", "S", "", "I", "", ""],
-    ["", "T", "", "A", "", "S", "", ""],
-    ["", "I", "", "Y", "", "", "", ""],
-    ["", "O", "", "", "U", "S", "E", "S"],
-    ["", "N", "", "", "", "", "", ""]
+    ["F", "V", "I", "E", "W", "", "", ""],
+    ["O", "", "", "", "", "", "", ""],
+    ["R", "", "", "", "", "", "", ""],
+    ["E", "", "K", "E", "Y", "", "", ""],
+    ["S", "", "", "", "", "", "", ""],
+    ["T", "H", "O", "P", "E", "", "", ""],
+    ["", "", "", "B", "O", "A", "R", "D"],
+    ["", "", "", "", "P", "A", "N", ""]
   ],
   "puzzle": [
-    ["C", "O", "P", "", "", "", "", ""],
+    ["F", "", "I", "E", "", "", "", ""],
+    ["O", "", "", "", "", "", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "", "N", "", "N"],
+    ["", "", "", "E", "Y", "", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "A", "", "", "", ""],
-    ["", "I", "", "Y", "", "", "", ""],
-    ["", "", "", "", "", "S", "", "S"],
-    ["", "", "", "", "", "", "", ""]
+    ["T", "", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", "", "D"],
+    ["", "", "", "", "P", "", "N", ""]
   ],
-  "topWord": "CAPSULES",
-  "sideWord": "DECISION",
+  "topWord": "SHIPYARD",
+  "sideWord": "WORKSHOP",
   "topVisible": [false, true, false, true, false, false, true, true],
   "sideVisible": [false, true, false, true, false, true, false, true],
   "ships": [
     {
-      "word": "COPS",
-      "length": 4,
+      "word": "FOREST",
+      "length": 6,
       "row": 1,
       "col": 1,
-      "direction": "H"
-    },
-    {
-      "word": "CATION",
-      "length": 6,
-      "row": 3,
-      "col": 2,
       "direction": "V"
     },
     {
-      "word": "SAY",
+      "word": "BOARD",
+      "length": 5,
+      "row": 7,
+      "col": 4,
+      "direction": "H"
+    },
+    {
+      "word": "HOPE",
+      "length": 4,
+      "row": 6,
+      "col": 2,
+      "direction": "H"
+    },
+    {
+      "word": "VIEW",
+      "length": 4,
+      "row": 1,
+      "col": 2,
+      "direction": "H"
+    },
+    {
+      "word": "KEY",
       "length": 3,
       "row": 4,
-      "col": 4,
-      "direction": "V"
-    },
-    {
-      "word": "USES",
-      "length": 4,
-      "row": 7,
-      "col": 5,
+      "col": 3,
       "direction": "H"
     },
     {
-      "word": "LENIS",
-      "length": 5,
-      "row": 1,
-      "col": 6,
-      "direction": "V"
-    },
-    {
-      "word": "DON",
+      "word": "PAN",
       "length": 3,
-      "row": 1,
-      "col": 8,
-      "direction": "V"
+      "row": 8,
+      "col": 5,
+      "direction": "H"
     }
   ],
   "difficulty": {

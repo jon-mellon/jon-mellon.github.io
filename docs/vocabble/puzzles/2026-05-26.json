@@ -4,71 +4,71 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["C", "U", "P", "S", "", "L", "", "D"],
-    ["", "", "", "", "", "E", "", "E"],
-    ["", "C", "", "", "", "V", "", "N"],
-    ["", "A", "", "N", "", "I", "", ""],
-    ["", "T", "", "A", "", "S", "", ""],
-    ["", "I", "", "Y", "", "", "", ""],
-    ["", "O", "", "", "U", "S", "E", "S"],
-    ["", "N", "", "", "", "", "", ""]
+    ["", "", "C", "", "", "", "", ""],
+    ["", "", "A", "", "", "", "", ""],
+    ["", "", "U", "P", "U", "S", "H", ""],
+    ["", "", "S", "", "", "", "", ""],
+    ["", "", "E", "R", "U", "N", "", ""],
+    ["C", "O", "A", "L", "", "", "", ""],
+    ["", "", "M", "A", "T", "T", "E", "R"],
+    ["", "", "", "", "S", "E", "T", ""]
   ],
   "puzzle": [
-    ["", "", "P", "", "", "L", "", "D"],
-    ["", "", "", "", "", "", "", "E"],
-    ["", "C", "", "", "", "V", "", ""],
-    ["", "", "", "N", "", "", "", ""],
-    ["", "T", "", "", "", "", "", ""],
+    ["", "", "C", "", "", "", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "U", "", "E", ""],
-    ["", "", "", "", "", "", "", ""]
+    ["", "", "U", "", "U", "", "H", ""],
+    ["", "", "", "", "", "", "", ""],
+    ["", "", "", "R", "U", "", "", ""],
+    ["", "", "", "", "", "", "", ""],
+    ["", "", "M", "", "", "", "E", ""],
+    ["", "", "", "", "S", "E", "", ""]
   ],
-  "topWord": "CAPSULES",
-  "sideWord": "DECISION",
+  "topWord": "COMPUTER",
+  "sideWord": "CAPSULES",
   "topVisible": [false, true, false, true, true, false, false, true],
   "sideVisible": [true, true, false, false, true, true, false, false],
   "ships": [
     {
-      "word": "CUPS",
-      "length": 4,
+      "word": "MATTER",
+      "length": 6,
+      "row": 7,
+      "col": 3,
+      "direction": "H"
+    },
+    {
+      "word": "CAUSE",
+      "length": 5,
       "row": 1,
+      "col": 3,
+      "direction": "V"
+    },
+    {
+      "word": "PUSH",
+      "length": 4,
+      "row": 3,
+      "col": 4,
+      "direction": "H"
+    },
+    {
+      "word": "COAL",
+      "length": 4,
+      "row": 6,
       "col": 1,
       "direction": "H"
     },
     {
-      "word": "CATION",
-      "length": 6,
-      "row": 3,
-      "col": 2,
-      "direction": "V"
-    },
-    {
-      "word": "NAY",
+      "word": "RUN",
       "length": 3,
-      "row": 4,
+      "row": 5,
       "col": 4,
-      "direction": "V"
-    },
-    {
-      "word": "USES",
-      "length": 4,
-      "row": 7,
-      "col": 5,
       "direction": "H"
     },
     {
-      "word": "LEVIS",
-      "length": 5,
-      "row": 1,
-      "col": 6,
-      "direction": "V"
-    },
-    {
-      "word": "DEN",
+      "word": "SET",
       "length": 3,
-      "row": 1,
-      "col": 8,
-      "direction": "V"
+      "row": 8,
+      "col": 5,
+      "direction": "H"
     }
   ],
   "difficulty": {

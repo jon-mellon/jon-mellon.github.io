@@ -4,69 +4,69 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["C", "A", "P", "S", "", "L", "", "D"],
-    ["", "", "", "", "", "E", "", "I"],
-    ["", "C", "", "", "", "N", "", "N"],
-    ["", "A", "", "S", "", "I", "", ""],
-    ["", "T", "", "A", "", "S", "", ""],
-    ["", "I", "", "Y", "", "", "", ""],
-    ["", "O", "", "", "U", "S", "E", "S"],
-    ["", "N", "", "", "", "", "", ""]
+    ["", "", "", "", "", "", "", "B"],
+    ["", "", "", "", "", "", "", "A"],
+    ["", "", "", "", "", "", "", "S"],
+    ["S", "A", "N", "S", "W", "E", "R", "E"],
+    ["M", "B", "E", "D", "", "", "", "H"],
+    ["A", "", "", "", "", "", "", "O"],
+    ["L", "", "", "", "", "", "", "T"],
+    ["L", "", "", "", "N", "I", "C", "E"]
   ],
   "puzzle": [
-    ["", "", "P", "S", "", "", "", "D"],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "", "N", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "T", "", "A", "", "", "", ""],
+    ["", "", "", "", "", "", "", "S"],
+    ["", "", "", "S", "W", "E", "", "E"],
+    ["", "", "E", "", "", "", "", "H"],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "U", "S", "E", "S"],
-    ["", "", "", "", "", "", "", ""]
+    ["", "", "", "", "", "", "", ""],
+    ["L", "", "", "", "", "", "C", "E"]
   ],
-  "topWord": "CAPSULES",
-  "sideWord": "DECISION",
+  "topWord": "SANDWICH",
+  "sideWord": "BASEBALL",
   "topVisible": [true, true, false, false, true, true, false, false],
   "sideVisible": [false, true, false, true, false, true, false, true],
   "ships": [
     {
-      "word": "CAPS",
-      "length": 4,
-      "row": 1,
-      "col": 1,
+      "word": "ANSWER",
+      "length": 6,
+      "row": 4,
+      "col": 2,
       "direction": "H"
     },
     {
-      "word": "CATION",
-      "length": 6,
-      "row": 3,
-      "col": 2,
-      "direction": "V"
-    },
-    {
-      "word": "SAY",
-      "length": 3,
+      "word": "SMALL",
+      "length": 5,
       "row": 4,
-      "col": 4,
+      "col": 1,
       "direction": "V"
     },
     {
-      "word": "USES",
+      "word": "BASE",
       "length": 4,
-      "row": 7,
+      "row": 1,
+      "col": 8,
+      "direction": "V"
+    },
+    {
+      "word": "NICE",
+      "length": 4,
+      "row": 8,
       "col": 5,
       "direction": "H"
     },
     {
-      "word": "LENIS",
-      "length": 5,
-      "row": 1,
-      "col": 6,
-      "direction": "V"
+      "word": "BED",
+      "length": 3,
+      "row": 5,
+      "col": 2,
+      "direction": "H"
     },
     {
-      "word": "DIN",
+      "word": "HOT",
       "length": 3,
-      "row": 1,
+      "row": 5,
       "col": 8,
       "direction": "V"
     }

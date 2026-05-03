@@ -1,6 +1,6 @@
-# Vocabble
+# Vocabbleships
 
-Vocabble is served as static files from `static/vocabble/`, which Hugo publishes to
+Vocabbleships is served as static files from `static/vocabble/`, which Hugo publishes to
 `/vocabble/`. The checked-in `public/vocabble/` and `docs/vocabble/` copies are
 generated publishing outputs.
 

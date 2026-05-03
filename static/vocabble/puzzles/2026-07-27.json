@@ -4,71 +4,71 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["C", "A", "P", "S", "", "L", "", "D"],
-    ["", "", "", "", "", "E", "", "O"],
-    ["", "C", "", "", "", "N", "", "N"],
-    ["", "A", "", "S", "", "I", "", ""],
-    ["", "T", "", "O", "", "S", "", ""],
-    ["", "I", "", "Y", "", "", "", ""],
-    ["", "O", "", "", "U", "S", "E", "S"],
-    ["", "N", "", "", "", "", "", ""]
+    ["H", "M", "", "P", "I", "E", "", ""],
+    ["E", "O", "", "", "", "", "", ""],
+    ["N", "U", "A", "N", "I", "M", "A", "L"],
+    ["", "S", "", "", "", "T", "", ""],
+    ["", "E", "S", "", "", "U", "", ""],
+    ["", "", "E", "", "", "R", "", ""],
+    ["", "", "E", "", "", "N", "", ""],
+    ["", "", "D", "", "", "", "", ""]
   ],
   "puzzle": [
-    ["", "A", "", "S", "", "L", "", "D"],
-    ["", "", "", "", "", "", "", "O"],
-    ["", "", "", "", "", "", "", ""],
-    ["", "", "", "S", "", "I", "", ""],
-    ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "", "", "", ""],
-    ["", "O", "", "", "", "S", "", "S"],
+    ["", "", "", "", "", "E", "", ""],
+    ["E", "", "", "", "", "", "", ""],
+    ["", "", "", "N", "", "", "", "L"],
+    ["", "S", "", "", "", "T", "", ""],
+    ["", "", "S", "", "", "", "", ""],
+    ["", "", "E", "", "", "R", "", ""],
+    ["", "", "", "", "", "N", "", ""],
     ["", "", "", "", "", "", "", ""]
   ],
-  "topWord": "CAPSULES",
-  "sideWord": "DECISION",
+  "topWord": "HOSPITAL",
+  "sideWord": "MEASURED",
   "topVisible": [true, false, false, false, true, true, false, true],
   "sideVisible": [false, false, false, false, true, true, true, true],
   "ships": [
     {
-      "word": "CAPS",
-      "length": 4,
-      "row": 1,
-      "col": 1,
+      "word": "ANIMAL",
+      "length": 6,
+      "row": 3,
+      "col": 3,
       "direction": "H"
     },
     {
-      "word": "CATION",
-      "length": 6,
-      "row": 3,
+      "word": "MOUSE",
+      "length": 5,
+      "row": 1,
       "col": 2,
       "direction": "V"
     },
     {
-      "word": "SOY",
-      "length": 3,
-      "row": 4,
-      "col": 4,
+      "word": "SEED",
+      "length": 4,
+      "row": 5,
+      "col": 3,
       "direction": "V"
     },
     {
-      "word": "USES",
+      "word": "TURN",
       "length": 4,
-      "row": 7,
-      "col": 5,
-      "direction": "H"
-    },
-    {
-      "word": "LENIS",
-      "length": 5,
-      "row": 1,
+      "row": 4,
       "col": 6,
       "direction": "V"
     },
     {
-      "word": "DON",
+      "word": "HEN",
       "length": 3,
       "row": 1,
-      "col": 8,
+      "col": 1,
       "direction": "V"
+    },
+    {
+      "word": "PIE",
+      "length": 3,
+      "row": 1,
+      "col": 4,
+      "direction": "H"
     }
   ],
   "difficulty": {

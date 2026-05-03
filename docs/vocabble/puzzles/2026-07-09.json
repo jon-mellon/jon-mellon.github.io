@@ -4,71 +4,71 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["C", "A", "P", "S", "", "L", "", "D"],
-    ["", "", "", "", "", "E", "", "I"],
-    ["", "C", "", "", "", "V", "", "N"],
-    ["", "A", "", "S", "", "I", "", ""],
-    ["", "T", "", "O", "", "S", "", ""],
-    ["", "I", "", "Y", "", "", "", ""],
-    ["", "O", "", "", "U", "S", "E", "S"],
-    ["", "N", "", "", "", "", "", ""]
+    ["", "", "", "", "", "", "", "H"],
+    ["", "", "", "", "", "", "", "O"],
+    ["B", "U", "I", "L", "D", "", "", "S"],
+    ["", "P", "", "", "", "", "", "T"],
+    ["C", "O", "S", "P", "R", "I", "N", "G"],
+    ["O", "T", "", "", "", "", "", ""],
+    ["A", "", "", "", "T", "A", "N", ""],
+    ["L", "", "", "", "", "", "", ""]
   ],
   "puzzle": [
-    ["", "A", "", "S", "", "L", "", ""],
-    ["", "", "", "", "", "E", "", "I"],
-    ["", "C", "", "", "", "", "", ""],
     ["", "", "", "", "", "", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "", "", "", ""],
-    ["", "O", "", "", "U", "S", "", "S"],
+    ["", "", "I", "", "D", "", "", "S"],
+    ["", "P", "", "", "", "", "", ""],
+    ["C", "", "", "", "R", "", "", "G"],
+    ["O", "", "", "", "", "", "", ""],
+    ["", "", "", "", "T", "", "N", ""],
     ["", "", "", "", "", "", "", ""]
   ],
-  "topWord": "CAPSULES",
-  "sideWord": "DECISION",
+  "topWord": "BUILDING",
+  "sideWord": "HOSPITAL",
   "topVisible": [true, true, false, false, true, true, false, false],
   "sideVisible": [false, false, false, true, false, true, true, true],
   "ships": [
     {
-      "word": "CAPS",
-      "length": 4,
-      "row": 1,
+      "word": "SPRING",
+      "length": 6,
+      "row": 5,
+      "col": 3,
+      "direction": "H"
+    },
+    {
+      "word": "BUILD",
+      "length": 5,
+      "row": 3,
       "col": 1,
       "direction": "H"
     },
     {
-      "word": "CATION",
-      "length": 6,
-      "row": 3,
+      "word": "HOST",
+      "length": 4,
+      "row": 1,
+      "col": 8,
+      "direction": "V"
+    },
+    {
+      "word": "COAL",
+      "length": 4,
+      "row": 5,
+      "col": 1,
+      "direction": "V"
+    },
+    {
+      "word": "POT",
+      "length": 3,
+      "row": 4,
       "col": 2,
       "direction": "V"
     },
     {
-      "word": "SOY",
+      "word": "TAN",
       "length": 3,
-      "row": 4,
-      "col": 4,
-      "direction": "V"
-    },
-    {
-      "word": "USES",
-      "length": 4,
       "row": 7,
       "col": 5,
       "direction": "H"
-    },
-    {
-      "word": "LEVIS",
-      "length": 5,
-      "row": 1,
-      "col": 6,
-      "direction": "V"
-    },
-    {
-      "word": "DIN",
-      "length": 3,
-      "row": 1,
-      "col": 8,
-      "direction": "V"
     }
   ],
   "difficulty": {

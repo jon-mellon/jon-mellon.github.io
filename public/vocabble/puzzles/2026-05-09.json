@@ -4,71 +4,71 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["C", "", "", "", "", "", "", ""],
-    ["A", "", "C", "A", "T", "I", "O", "N"],
-    ["P", "", "", "", "", "", "", ""],
-    ["S", "", "", "S", "A", "Y", "", ""],
-    ["", "", "", "", "", "", "U", ""],
-    ["L", "E", "N", "I", "S", "", "S", ""],
-    ["", "", "", "", "", "", "E", ""],
-    ["D", "E", "N", "", "", "", "S", ""]
+    ["", "", "A", "", "C", "", "", ""],
+    ["", "", "R", "", "H", "", "", ""],
+    ["", "", "M", "", "O", "", "A", ""],
+    ["", "", "Y", "B", "O", "", "S", ""],
+    ["K", "E", "Y", "R", "S", "", "H", ""],
+    ["", "", "", "I", "E", "", "", ""],
+    ["", "", "", "N", "Y", "A", "R", "D"],
+    ["", "", "", "G", "", "", "", ""]
   ],
   "puzzle": [
-    ["C", "", "", "", "", "", "", ""],
-    ["", "", "C", "A", "T", "", "O", "N"],
-    ["P", "", "", "", "", "", "", ""],
-    ["", "", "", "S", "", "Y", "", ""],
+    ["", "", "A", "", "C", "", "", ""],
     ["", "", "", "", "", "", "", ""],
+    ["", "", "", "", "O", "", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "", "", "E", ""],
-    ["", "", "", "", "", "", "", ""]
+    ["K", "", "", "R", "", "", "H", ""],
+    ["", "", "", "", "", "", "", ""],
+    ["", "", "", "", "Y", "A", "", "D"],
+    ["", "", "", "G", "", "", "", ""]
   ],
-  "topWord": "DECISION",
-  "sideWord": "CAPSULES",
+  "topWord": "KEYBOARD",
+  "sideWord": "CROSSING",
   "topVisible": [false, true, false, false, true, true, false, true],
   "sideVisible": [false, false, true, false, false, true, true, true],
   "ships": [
     {
-      "word": "CAPS",
-      "length": 4,
+      "word": "CHOOSE",
+      "length": 6,
       "row": 1,
-      "col": 1,
+      "col": 5,
       "direction": "V"
     },
     {
-      "word": "CATION",
-      "length": 6,
-      "row": 2,
-      "col": 3,
-      "direction": "H"
-    },
-    {
-      "word": "SAY",
-      "length": 3,
+      "word": "BRING",
+      "length": 5,
       "row": 4,
       "col": 4,
-      "direction": "H"
-    },
-    {
-      "word": "USES",
-      "length": 4,
-      "row": 5,
-      "col": 7,
       "direction": "V"
     },
     {
-      "word": "LENIS",
-      "length": 5,
-      "row": 6,
+      "word": "YARD",
+      "length": 4,
+      "row": 7,
+      "col": 5,
+      "direction": "H"
+    },
+    {
+      "word": "ARMY",
+      "length": 4,
+      "row": 1,
+      "col": 3,
+      "direction": "V"
+    },
+    {
+      "word": "KEY",
+      "length": 3,
+      "row": 5,
       "col": 1,
       "direction": "H"
     },
     {
-      "word": "DEN",
+      "word": "ASH",
       "length": 3,
-      "row": 8,
-      "col": 1,
-      "direction": "H"
+      "row": 3,
+      "col": 7,
+      "direction": "V"
     }
   ],
   "difficulty": {

@@ -4,70 +4,70 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["C", "", "", "", "", "", "", ""],
-    ["O", "", "C", "A", "T", "I", "O", "N"],
-    ["P", "", "", "", "", "", "", ""],
-    ["S", "", "", "S", "A", "Y", "", ""],
-    ["", "", "", "", "", "", "U", ""],
-    ["L", "E", "N", "I", "S", "", "S", ""],
-    ["", "", "", "", "", "", "E", ""],
-    ["D", "I", "N", "", "", "", "S", ""]
+    ["D", "R", "O", "P", "R", "", "", ""],
+    ["", "", "", "", "A", "", "", ""],
+    ["", "", "", "", "I", "I", "C", "E"],
+    ["", "", "", "", "N", "", "", "B"],
+    ["L", "I", "S", "T", "E", "N", "", "E"],
+    ["", "", "", "", "", "", "", "I"],
+    ["", "", "", "", "A", "N", "T", "N"],
+    ["", "", "", "", "", "", "", "G"]
   ],
   "puzzle": [
+    ["", "R", "O", "", "", "", "", ""],
+    ["", "", "", "", "A", "", "", ""],
+    ["", "", "", "", "", "", "", "E"],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "", "", "O", "N"],
-    ["P", "", "", "", "", "", "", ""],
-    ["", "", "", "S", "", "Y", "", ""],
-    ["", "", "", "", "", "", "", ""],
-    ["L", "", "N", "I", "", "", "", ""],
-    ["", "", "", "", "", "", "E", ""],
-    ["D", "", "", "", "", "", "", ""]
+    ["", "", "S", "", "E", "", "", ""],
+    ["", "", "", "", "", "", "", "I"],
+    ["", "", "", "", "A", "", "T", ""],
+    ["", "", "", "", "", "", "", "G"]
   ],
-  "topWord": "DECISION",
-  "sideWord": "CAPSULES",
+  "topWord": "DISTANCE",
+  "sideWord": "PAINTING",
   "topVisible": [false, false, true, true, true, true, false, false],
   "sideVisible": [true, true, true, false, false, false, true, false],
   "ships": [
     {
-      "word": "COPS",
+      "word": "LISTEN",
+      "length": 6,
+      "row": 5,
+      "col": 1,
+      "direction": "H"
+    },
+    {
+      "word": "BEING",
+      "length": 5,
+      "row": 4,
+      "col": 8,
+      "direction": "V"
+    },
+    {
+      "word": "RAIN",
+      "length": 4,
+      "row": 1,
+      "col": 5,
+      "direction": "V"
+    },
+    {
+      "word": "DROP",
       "length": 4,
       "row": 1,
       "col": 1,
-      "direction": "V"
-    },
-    {
-      "word": "CATION",
-      "length": 6,
-      "row": 2,
-      "col": 3,
       "direction": "H"
     },
     {
-      "word": "SAY",
+      "word": "ICE",
       "length": 3,
-      "row": 4,
-      "col": 4,
+      "row": 3,
+      "col": 6,
       "direction": "H"
     },
     {
-      "word": "USES",
-      "length": 4,
-      "row": 5,
-      "col": 7,
-      "direction": "V"
-    },
-    {
-      "word": "LENIS",
-      "length": 5,
-      "row": 6,
-      "col": 1,
-      "direction": "H"
-    },
-    {
-      "word": "DIN",
+      "word": "ANT",
       "length": 3,
-      "row": 8,
-      "col": 1,
+      "row": 7,
+      "col": 5,
       "direction": "H"
     }
   ],

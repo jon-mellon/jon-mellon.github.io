@@ -4,70 +4,70 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["C", "", "", "", "", "", "", ""],
-    ["U", "", "C", "A", "T", "I", "O", "N"],
-    ["P", "", "", "", "", "", "", ""],
-    ["S", "", "", "S", "A", "Y", "", ""],
-    ["", "", "", "", "", "", "U", ""],
-    ["L", "E", "V", "I", "S", "", "S", ""],
-    ["", "", "", "", "", "", "E", ""],
-    ["D", "E", "N", "", "", "", "S", ""]
+    ["", "", "", "", "", "", "", "Q"],
+    ["P", "L", "O", "T", "", "", "", "U"],
+    ["", "", "A", "", "", "", "", "E"],
+    ["", "", "C", "", "G", "A", "S", "E"],
+    ["", "", "T", "", "", "", "", "N"],
+    ["", "", "I", "", "F", "A", "R", "M"],
+    ["", "", "O", "", "D", "O", "G", ""],
+    ["", "", "N", "", "", "", "", ""]
   ],
   "puzzle": [
-    ["C", "", "", "", "", "", "", ""],
-    ["", "", "", "A", "T", "", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "S", "", "Y", "", ""],
-    ["", "", "", "", "", "", "U", ""],
-    ["", "", "", "", "S", "", "S", ""],
-    ["", "", "", "", "", "", "E", ""],
-    ["", "E", "", "", "", "", "", ""]
+    ["P", "", "", "", "", "", "", "U"],
+    ["", "", "", "", "", "", "", "E"],
+    ["", "", "", "", "", "", "S", "E"],
+    ["", "", "", "", "", "", "", ""],
+    ["", "", "", "", "F", "A", "", ""],
+    ["", "", "O", "", "D", "", "G", ""],
+    ["", "", "", "", "", "", "", ""]
   ],
-  "topWord": "DECISION",
-  "sideWord": "CAPSULES",
+  "topWord": "PLATFORM",
+  "sideWord": "QUESTION",
   "topVisible": [false, true, true, false, false, false, true, true],
   "sideVisible": [false, true, true, true, false, false, true, false],
   "ships": [
     {
-      "word": "CUPS",
-      "length": 4,
-      "row": 1,
-      "col": 1,
+      "word": "ACTION",
+      "length": 6,
+      "row": 3,
+      "col": 3,
       "direction": "V"
     },
     {
-      "word": "CATION",
-      "length": 6,
-      "row": 2,
-      "col": 3,
+      "word": "QUEEN",
+      "length": 5,
+      "row": 1,
+      "col": 8,
+      "direction": "V"
+    },
+    {
+      "word": "FARM",
+      "length": 4,
+      "row": 6,
+      "col": 5,
       "direction": "H"
     },
     {
-      "word": "SAY",
+      "word": "PLOT",
+      "length": 4,
+      "row": 2,
+      "col": 1,
+      "direction": "H"
+    },
+    {
+      "word": "DOG",
+      "length": 3,
+      "row": 7,
+      "col": 5,
+      "direction": "H"
+    },
+    {
+      "word": "GAS",
       "length": 3,
       "row": 4,
-      "col": 4,
-      "direction": "H"
-    },
-    {
-      "word": "USES",
-      "length": 4,
-      "row": 5,
-      "col": 7,
-      "direction": "V"
-    },
-    {
-      "word": "LEVIS",
-      "length": 5,
-      "row": 6,
-      "col": 1,
-      "direction": "H"
-    },
-    {
-      "word": "DEN",
-      "length": 3,
-      "row": 8,
-      "col": 1,
+      "col": 5,
       "direction": "H"
     }
   ],

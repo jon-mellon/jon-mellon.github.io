@@ -4,70 +4,70 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["C", "A", "P", "S", "", "L", "", "D"],
-    ["", "", "", "", "", "E", "", "E"],
-    ["", "C", "", "", "", "V", "", "N"],
-    ["", "A", "", "S", "", "I", "", ""],
-    ["", "T", "", "A", "", "S", "", ""],
-    ["", "I", "", "Y", "", "", "", ""],
-    ["", "O", "", "", "U", "S", "E", "S"],
-    ["", "N", "", "", "", "", "", ""]
+    ["", "E", "V", "E", "N", "", "", ""],
+    ["", "", "", "A", "", "", "", ""],
+    ["", "", "", "R", "", "R", "E", "D"],
+    ["J", "", "", "I", "", "", "", ""],
+    ["A", "", "", "S", "", "", "", "A"],
+    ["M", "", "", "E", "", "", "", "B"],
+    ["", "", "", "", "", "", "", "L"],
+    ["", "N", "A", "T", "U", "R", "E", "E"]
   ],
   "puzzle": [
-    ["C", "", "", "S", "", "L", "", ""],
-    ["", "", "", "", "", "E", "", ""],
-    ["", "", "", "", "", "V", "", "N"],
+    ["", "", "", "", "N", "", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "A", "", "", "", ""],
+    ["", "", "", "R", "", "R", "", ""],
+    ["J", "", "", "", "", "", "", ""],
+    ["", "", "", "S", "", "", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "O", "", "", "", "S", "", "S"],
-    ["", "", "", "", "", "", "", ""]
+    ["", "", "", "", "", "", "", "L"],
+    ["", "", "A", "", "U", "", "E", "E"]
   ],
-  "topWord": "CAPSULES",
-  "sideWord": "DECISION",
+  "topWord": "MEASURED",
+  "sideWord": "VARIABLE",
   "topVisible": [false, true, false, true, false, true, false, true],
   "sideVisible": [false, true, true, false, false, false, true, true],
   "ships": [
     {
-      "word": "CAPS",
-      "length": 4,
-      "row": 1,
-      "col": 1,
+      "word": "NATURE",
+      "length": 6,
+      "row": 8,
+      "col": 2,
       "direction": "H"
     },
     {
-      "word": "CATION",
-      "length": 6,
-      "row": 3,
-      "col": 2,
-      "direction": "V"
-    },
-    {
-      "word": "SAY",
-      "length": 3,
-      "row": 4,
+      "word": "ARISE",
+      "length": 5,
+      "row": 2,
       "col": 4,
       "direction": "V"
     },
     {
-      "word": "USES",
+      "word": "ABLE",
       "length": 4,
-      "row": 7,
-      "col": 5,
-      "direction": "H"
-    },
-    {
-      "word": "LEVIS",
-      "length": 5,
-      "row": 1,
-      "col": 6,
+      "row": 5,
+      "col": 8,
       "direction": "V"
     },
     {
-      "word": "DEN",
-      "length": 3,
+      "word": "EVEN",
+      "length": 4,
       "row": 1,
-      "col": 8,
+      "col": 2,
+      "direction": "H"
+    },
+    {
+      "word": "RED",
+      "length": 3,
+      "row": 3,
+      "col": 6,
+      "direction": "H"
+    },
+    {
+      "word": "JAM",
+      "length": 3,
+      "row": 4,
+      "col": 1,
       "direction": "V"
     }
   ],

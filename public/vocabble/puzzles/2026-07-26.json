@@ -4,71 +4,71 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["C", "", "", "", "", "", "", ""],
-    ["A", "", "C", "A", "T", "I", "O", "N"],
-    ["P", "", "", "", "", "", "", ""],
-    ["S", "", "", "S", "O", "Y", "", ""],
-    ["", "", "", "", "", "", "U", ""],
-    ["L", "E", "N", "I", "S", "", "S", ""],
-    ["", "", "", "", "", "", "E", ""],
-    ["D", "O", "N", "", "", "", "S", ""]
+    ["", "B", "", "", "", "", "", ""],
+    ["S", "O", "", "", "", "", "", ""],
+    ["U", "N", "", "", "", "", "", ""],
+    ["N", "E", "S", "P", "R", "I", "N", "G"],
+    ["B", "U", "I", "L", "D", "D", "", ""],
+    ["", "", "T", "", "", "A", "", ""],
+    ["", "", "O", "", "", "R", "", ""],
+    ["", "", "Y", "", "", "K", "", ""]
   ],
   "puzzle": [
     ["", "", "", "", "", "", "", ""],
-    ["", "", "C", "A", "T", "I", "O", "N"],
-    ["P", "", "", "", "", "", "", ""],
-    ["", "", "", "", "O", "", "", ""],
-    ["", "", "", "", "", "", "U", ""],
     ["", "", "", "", "", "", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "O", "", "", "", "", "", ""]
+    ["N", "E", "", "P", "", "", "", "G"],
+    ["", "U", "", "L", "D", "D", "", ""],
+    ["", "", "T", "", "", "A", "", ""],
+    ["", "", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", "", ""]
   ],
-  "topWord": "DECISION",
-  "sideWord": "CAPSULES",
+  "topWord": "BUILDING",
+  "sideWord": "BOUNDARY",
   "topVisible": [false, true, false, false, true, true, true, false],
   "sideVisible": [false, true, true, false, true, false, false, true],
   "ships": [
     {
-      "word": "CAPS",
-      "length": 4,
-      "row": 1,
-      "col": 1,
-      "direction": "V"
-    },
-    {
-      "word": "CATION",
+      "word": "SPRING",
       "length": 6,
-      "row": 2,
+      "row": 4,
       "col": 3,
       "direction": "H"
     },
     {
-      "word": "SOY",
-      "length": 3,
-      "row": 4,
-      "col": 4,
+      "word": "BUILD",
+      "length": 5,
+      "row": 5,
+      "col": 1,
       "direction": "H"
     },
     {
-      "word": "USES",
+      "word": "DARK",
       "length": 4,
       "row": 5,
-      "col": 7,
+      "col": 6,
       "direction": "V"
     },
     {
-      "word": "LENIS",
-      "length": 5,
-      "row": 6,
-      "col": 1,
-      "direction": "H"
+      "word": "BONE",
+      "length": 4,
+      "row": 1,
+      "col": 2,
+      "direction": "V"
     },
     {
-      "word": "DON",
+      "word": "SUN",
       "length": 3,
-      "row": 8,
+      "row": 2,
       "col": 1,
-      "direction": "H"
+      "direction": "V"
+    },
+    {
+      "word": "TOY",
+      "length": 3,
+      "row": 6,
+      "col": 3,
+      "direction": "V"
     }
   ],
   "difficulty": {

@@ -4,71 +4,71 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["C", "", "", "", "", "", "", ""],
-    ["A", "", "C", "A", "T", "I", "O", "N"],
-    ["P", "", "", "", "", "", "", ""],
-    ["S", "", "", "S", "O", "Y", "", ""],
-    ["", "", "", "", "", "", "U", ""],
-    ["L", "E", "N", "I", "S", "", "S", ""],
-    ["", "", "", "", "", "", "E", ""],
-    ["D", "I", "N", "", "", "", "S", ""]
+    ["B", "U", "L", "L", "", "", "", "G"],
+    ["", "", "P", "L", "A", "I", "N", "A"],
+    ["", "", "", "", "D", "", "", "S"],
+    ["", "", "", "", "E", "", "", ""],
+    ["", "", "", "B", "B", "", "", ""],
+    ["", "", "O", "A", "A", "", "", ""],
+    ["", "", "I", "L", "T", "", "", ""],
+    ["", "", "L", "L", "E", "", "", ""]
   ],
   "puzzle": [
-    ["C", "", "", "", "", "", "", ""],
-    ["", "", "", "A", "T", "", "", "N"],
+    ["B", "", "", "", "", "", "", ""],
+    ["", "", "", "", "A", "I", "N", ""],
+    ["", "", "", "", "D", "", "", "S"],
+    ["", "", "", "", "E", "", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "O", "", "", ""],
-    ["", "", "", "", "", "", "U", ""],
-    ["L", "", "", "I", "", "", "S", ""],
-    ["", "", "", "", "", "", "", ""],
-    ["", "", "N", "", "", "", "", ""]
+    ["", "", "O", "A", "", "", "", ""],
+    ["", "", "", "L", "", "", "", ""],
+    ["", "", "", "", "", "", "", ""]
   ],
-  "topWord": "DECISION",
-  "sideWord": "CAPSULES",
+  "topWord": "BUILDING",
+  "sideWord": "BASEBALL",
   "topVisible": [false, false, true, true, false, true, true, false],
   "sideVisible": [true, false, false, true, true, false, true, false],
   "ships": [
     {
-      "word": "CAPS",
-      "length": 4,
-      "row": 1,
-      "col": 1,
+      "word": "DEBATE",
+      "length": 6,
+      "row": 3,
+      "col": 5,
       "direction": "V"
     },
     {
-      "word": "CATION",
-      "length": 6,
+      "word": "PLAIN",
+      "length": 5,
       "row": 2,
       "col": 3,
       "direction": "H"
     },
     {
-      "word": "SOY",
-      "length": 3,
-      "row": 4,
-      "col": 4,
+      "word": "BULL",
+      "length": 4,
+      "row": 1,
+      "col": 1,
       "direction": "H"
     },
     {
-      "word": "USES",
+      "word": "BALL",
       "length": 4,
       "row": 5,
-      "col": 7,
+      "col": 4,
       "direction": "V"
     },
     {
-      "word": "LENIS",
-      "length": 5,
-      "row": 6,
-      "col": 1,
-      "direction": "H"
+      "word": "GAS",
+      "length": 3,
+      "row": 1,
+      "col": 8,
+      "direction": "V"
     },
     {
-      "word": "DIN",
+      "word": "OIL",
       "length": 3,
-      "row": 8,
-      "col": 1,
-      "direction": "H"
+      "row": 6,
+      "col": 3,
+      "direction": "V"
     }
   ],
   "difficulty": {

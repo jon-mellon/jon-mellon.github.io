@@ -4,70 +4,70 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["C", "U", "P", "S", "", "L", "", "D"],
-    ["", "", "", "", "", "E", "", "I"],
-    ["", "C", "", "", "", "V", "", "N"],
-    ["", "A", "", "N", "", "I", "", ""],
-    ["", "T", "", "A", "", "S", "", ""],
-    ["", "I", "", "Y", "", "", "", ""],
-    ["", "O", "", "", "U", "S", "E", "S"],
-    ["", "N", "", "", "", "", "", ""]
+    ["", "", "", "", "S", "", "", ""],
+    ["", "", "", "", "O", "", "", ""],
+    ["", "", "", "", "L", "B", "R", ""],
+    ["", "", "", "", "I", "U", "U", ""],
+    ["T", "R", "E", "E", "D", "T", "N", "F"],
+    ["", "", "", "", "", "T", "", "I"],
+    ["", "", "", "", "", "O", "", "R"],
+    ["", "", "M", "A", "N", "N", "", "E"]
   ],
   "puzzle": [
-    ["", "", "", "", "", "L", "", ""],
+    ["", "", "", "", "", "", "", ""],
+    ["", "", "", "", "O", "", "", ""],
+    ["", "", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", "", ""],
+    ["", "", "", "E", "D", "T", "N", ""],
     ["", "", "", "", "", "", "", "I"],
     ["", "", "", "", "", "", "", ""],
-    ["", "A", "", "N", "", "I", "", ""],
-    ["", "T", "", "A", "", "", "", ""],
-    ["", "I", "", "", "", "", "", ""],
-    ["", "", "", "", "", "", "E", ""],
-    ["", "N", "", "", "", "", "", ""]
+    ["", "", "M", "A", "N", "N", "", ""]
   ],
-  "topWord": "CAPSULES",
-  "sideWord": "DECISION",
+  "topWord": "TREASURE",
+  "sideWord": "SOLUTION",
   "topVisible": [false, true, true, false, false, false, true, true],
   "sideVisible": [true, false, false, true, false, true, true, false],
   "ships": [
     {
-      "word": "CUPS",
-      "length": 4,
-      "row": 1,
-      "col": 1,
-      "direction": "H"
-    },
-    {
-      "word": "CATION",
+      "word": "BUTTON",
       "length": 6,
       "row": 3,
-      "col": 2,
-      "direction": "V"
-    },
-    {
-      "word": "NAY",
-      "length": 3,
-      "row": 4,
-      "col": 4,
-      "direction": "V"
-    },
-    {
-      "word": "USES",
-      "length": 4,
-      "row": 7,
-      "col": 5,
-      "direction": "H"
-    },
-    {
-      "word": "LEVIS",
-      "length": 5,
-      "row": 1,
       "col": 6,
       "direction": "V"
     },
     {
-      "word": "DIN",
-      "length": 3,
+      "word": "SOLID",
+      "length": 5,
       "row": 1,
+      "col": 5,
+      "direction": "V"
+    },
+    {
+      "word": "TREE",
+      "length": 4,
+      "row": 5,
+      "col": 1,
+      "direction": "H"
+    },
+    {
+      "word": "FIRE",
+      "length": 4,
+      "row": 5,
       "col": 8,
+      "direction": "V"
+    },
+    {
+      "word": "MAN",
+      "length": 3,
+      "row": 8,
+      "col": 3,
+      "direction": "H"
+    },
+    {
+      "word": "RUN",
+      "length": 3,
+      "row": 3,
+      "col": 7,
       "direction": "V"
     }
   ],

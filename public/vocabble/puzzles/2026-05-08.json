@@ -4,71 +4,71 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["C", "U", "P", "S", "", "L", "", "D"],
-    ["", "", "", "", "", "E", "", "E"],
-    ["", "C", "", "", "", "N", "", "N"],
-    ["", "A", "", "N", "", "I", "", ""],
-    ["", "T", "", "A", "", "S", "", ""],
-    ["", "I", "", "Y", "", "", "", ""],
-    ["", "O", "", "", "U", "S", "E", "S"],
-    ["", "N", "", "", "", "", "", ""]
+    ["P", "L", "A", "N", "E", "", "", ""],
+    ["", "", "", "", "L", "A", "I", "M"],
+    ["", "", "", "", "E", "C", "", ""],
+    ["", "C", "A", "T", "A", "A", "C", ""],
+    ["", "", "", "", "F", "T", "R", ""],
+    ["", "", "", "", "", "I", "O", ""],
+    ["", "", "", "", "", "O", "P", ""],
+    ["", "", "", "", "", "N", "", ""]
   ],
   "puzzle": [
-    ["", "U", "P", "S", "", "", "", ""],
+    ["", "L", "A", "", "", "", "", ""],
+    ["", "", "", "", "L", "", "", "M"],
+    ["", "", "", "", "E", "C", "", ""],
+    ["", "", "A", "", "", "", "C", ""],
+    ["", "", "", "", "F", "", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "", "", "", ""],
-    ["", "A", "", "", "", "I", "", ""],
-    ["", "T", "", "A", "", "", "", ""],
-    ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "U", "", "E", "S"],
+    ["", "", "", "", "", "O", "", ""],
     ["", "", "", "", "", "", "", ""]
   ],
-  "topWord": "CAPSULES",
-  "sideWord": "DECISION",
+  "topWord": "PLATFORM",
+  "sideWord": "ELECTION",
   "topVisible": [false, true, false, true, false, false, true, true],
   "sideVisible": [false, false, false, true, true, false, true, true],
   "ships": [
     {
-      "word": "CUPS",
-      "length": 4,
+      "word": "CATION",
+      "length": 6,
+      "row": 3,
+      "col": 6,
+      "direction": "V"
+    },
+    {
+      "word": "PLANE",
+      "length": 5,
       "row": 1,
       "col": 1,
       "direction": "H"
     },
     {
-      "word": "CATION",
-      "length": 6,
-      "row": 3,
-      "col": 2,
+      "word": "LEAF",
+      "length": 4,
+      "row": 2,
+      "col": 5,
       "direction": "V"
     },
     {
-      "word": "NAY",
+      "word": "CROP",
+      "length": 4,
+      "row": 4,
+      "col": 7,
+      "direction": "V"
+    },
+    {
+      "word": "CAT",
       "length": 3,
       "row": 4,
-      "col": 4,
-      "direction": "V"
-    },
-    {
-      "word": "USES",
-      "length": 4,
-      "row": 7,
-      "col": 5,
+      "col": 2,
       "direction": "H"
     },
     {
-      "word": "LENIS",
-      "length": 5,
-      "row": 1,
-      "col": 6,
-      "direction": "V"
-    },
-    {
-      "word": "DEN",
+      "word": "AIM",
       "length": 3,
-      "row": 1,
-      "col": 8,
-      "direction": "V"
+      "row": 2,
+      "col": 6,
+      "direction": "H"
     }
   ],
   "difficulty": {

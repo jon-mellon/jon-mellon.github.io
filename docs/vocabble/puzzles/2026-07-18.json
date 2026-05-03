@@ -4,71 +4,71 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["C", "", "", "", "", "", "", ""],
-    ["U", "", "C", "A", "T", "I", "O", "N"],
-    ["P", "", "", "", "", "", "", ""],
-    ["S", "", "", "N", "A", "Y", "", ""],
-    ["", "", "", "", "", "", "U", ""],
-    ["L", "E", "N", "I", "S", "", "S", ""],
-    ["", "", "", "", "", "", "E", ""],
-    ["D", "O", "N", "", "", "", "S", ""]
+    ["", "", "", "S", "", "", "", ""],
+    ["", "", "", "H", "", "T", "", ""],
+    ["", "", "", "A", "I", "O", "", ""],
+    ["", "", "", "P", "S", "P", "", "L"],
+    ["", "", "", "E", "L", "", "Y", "E"],
+    ["", "", "", "", "A", "", "A", "G"],
+    ["H", "O", "S", "T", "N", "", "R", ""],
+    ["", "", "", "", "D", "", "D", ""]
   ],
   "puzzle": [
-    ["C", "", "", "", "", "", "", ""],
-    ["", "", "", "A", "", "I", "O", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "N", "", "", "", ""],
-    ["", "", "", "", "", "", "", ""],
-    ["L", "", "N", "", "S", "", "", ""],
-    ["", "", "", "", "", "", "E", ""],
-    ["", "", "N", "", "", "", "", ""]
+    ["", "", "", "H", "", "", "", ""],
+    ["", "", "", "", "I", "O", "", ""],
+    ["", "", "", "", "S", "P", "", "L"],
+    ["", "", "", "", "L", "", "", ""],
+    ["", "", "", "", "A", "", "A", ""],
+    ["H", "", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", "", ""]
   ],
-  "topWord": "DECISION",
-  "sideWord": "CAPSULES",
+  "topWord": "HOSPITAL",
+  "sideWord": "SHIPYARD",
   "topVisible": [false, true, true, false, false, false, true, true],
   "sideVisible": [false, true, false, false, false, true, true, true],
   "ships": [
     {
-      "word": "CUPS",
-      "length": 4,
-      "row": 1,
-      "col": 1,
+      "word": "ISLAND",
+      "length": 6,
+      "row": 3,
+      "col": 5,
       "direction": "V"
     },
     {
-      "word": "CATION",
-      "length": 6,
-      "row": 2,
-      "col": 3,
-      "direction": "H"
-    },
-    {
-      "word": "NAY",
-      "length": 3,
-      "row": 4,
+      "word": "SHAPE",
+      "length": 5,
+      "row": 1,
       "col": 4,
+      "direction": "V"
+    },
+    {
+      "word": "HOST",
+      "length": 4,
+      "row": 7,
+      "col": 1,
       "direction": "H"
     },
     {
-      "word": "USES",
+      "word": "YARD",
       "length": 4,
       "row": 5,
       "col": 7,
       "direction": "V"
     },
     {
-      "word": "LENIS",
-      "length": 5,
-      "row": 6,
-      "col": 1,
-      "direction": "H"
+      "word": "TOP",
+      "length": 3,
+      "row": 2,
+      "col": 6,
+      "direction": "V"
     },
     {
-      "word": "DON",
+      "word": "LEG",
       "length": 3,
-      "row": 8,
-      "col": 1,
-      "direction": "H"
+      "row": 4,
+      "col": 8,
+      "direction": "V"
     }
   ],
   "difficulty": {

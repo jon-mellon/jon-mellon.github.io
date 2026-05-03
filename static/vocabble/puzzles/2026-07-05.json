@@ -4,71 +4,71 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["C", "O", "P", "S", "", "L", "", "D"],
-    ["", "", "", "", "", "E", "", "I"],
-    ["", "C", "", "", "", "V", "", "N"],
-    ["", "A", "", "S", "", "I", "", ""],
-    ["", "T", "", "A", "", "S", "", ""],
-    ["", "I", "", "Y", "", "", "", ""],
-    ["", "O", "", "", "U", "S", "E", "S"],
-    ["", "N", "", "", "", "", "", ""]
+    ["K", "", "", "", "", "", "", ""],
+    ["E", "R", "E", "A", "S", "O", "N", ""],
+    ["Y", "", "", "", "K", "I", "N", "G"],
+    ["", "", "", "", "", "B", "A", "G"],
+    ["C", "L", "O", "S", "E", "", "", "Y"],
+    ["", "", "", "", "", "", "", "A"],
+    ["", "", "", "", "", "", "", "R"],
+    ["", "", "", "", "", "", "", "D"]
   ],
   "puzzle": [
-    ["C", "", "P", "", "", "L", "", "D"],
+    ["K", "", "", "", "", "", "", ""],
+    ["", "", "", "A", "", "O", "N", ""],
+    ["", "", "", "", "", "I", "", "G"],
+    ["", "", "", "", "", "", "", "G"],
+    ["", "L", "", "", "", "", "", "Y"],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "", "V", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "", "", "", ""],
-    ["", "I", "", "", "", "", "", ""],
-    ["", "", "", "", "U", "S", "E", "S"],
-    ["", "", "", "", "", "", "", ""]
+    ["", "", "", "", "", "", "", "D"]
   ],
-  "topWord": "CAPSULES",
-  "sideWord": "DECISION",
+  "topWord": "CROSSING",
+  "sideWord": "KEYBOARD",
   "topVisible": [false, false, false, true, true, true, true, false],
   "sideVisible": [true, true, false, false, true, false, false, true],
   "ships": [
     {
-      "word": "COPS",
-      "length": 4,
-      "row": 1,
+      "word": "REASON",
+      "length": 6,
+      "row": 2,
+      "col": 2,
+      "direction": "H"
+    },
+    {
+      "word": "CLOSE",
+      "length": 5,
+      "row": 5,
       "col": 1,
       "direction": "H"
     },
     {
-      "word": "CATION",
-      "length": 6,
-      "row": 3,
-      "col": 2,
-      "direction": "V"
-    },
-    {
-      "word": "SAY",
-      "length": 3,
-      "row": 4,
-      "col": 4,
-      "direction": "V"
-    },
-    {
-      "word": "USES",
+      "word": "YARD",
       "length": 4,
-      "row": 7,
+      "row": 5,
+      "col": 8,
+      "direction": "V"
+    },
+    {
+      "word": "KING",
+      "length": 4,
+      "row": 3,
       "col": 5,
       "direction": "H"
     },
     {
-      "word": "LEVIS",
-      "length": 5,
+      "word": "KEY",
+      "length": 3,
       "row": 1,
-      "col": 6,
+      "col": 1,
       "direction": "V"
     },
     {
-      "word": "DIN",
+      "word": "BAG",
       "length": 3,
-      "row": 1,
-      "col": 8,
-      "direction": "V"
+      "row": 4,
+      "col": 6,
+      "direction": "H"
     }
   ],
   "difficulty": {

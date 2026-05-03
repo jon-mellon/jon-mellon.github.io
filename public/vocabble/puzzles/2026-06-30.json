@@ -4,70 +4,70 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["C", "", "", "", "", "", "", ""],
-    ["U", "", "C", "A", "T", "I", "O", "N"],
-    ["P", "", "", "", "", "", "", ""],
-    ["S", "", "", "N", "A", "Y", "", ""],
-    ["", "", "", "", "", "", "U", ""],
-    ["L", "E", "V", "I", "S", "", "S", ""],
-    ["", "", "", "", "", "", "E", ""],
-    ["D", "I", "N", "", "", "", "S", ""]
+    ["", "L", "O", "V", "E", "", "", ""],
+    ["A", "", "", "C", "A", "P", "", ""],
+    ["R", "", "S", "", "T", "U", "R", "N"],
+    ["I", "", "T", "", "", "", "", ""],
+    ["S", "", "A", "", "", "", "", ""],
+    ["E", "", "B", "", "", "I", "O", "N"],
+    ["", "", "L", "", "", "", "", ""],
+    ["", "", "E", "", "", "", "", ""]
   ],
   "puzzle": [
+    ["", "L", "O", "", "", "", "", ""],
+    ["", "", "", "", "A", "", "", ""],
+    ["", "", "", "", "T", "", "", "N"],
+    ["I", "", "T", "", "", "", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "C", "", "", "I", "", ""],
-    ["P", "", "", "", "", "", "", ""],
-    ["", "", "", "N", "", "", "", ""],
-    ["", "", "", "", "", "", "U", ""],
-    ["", "E", "", "", "S", "", "", ""],
-    ["", "", "", "", "", "", "E", ""],
-    ["D", "", "", "", "", "", "S", ""]
+    ["", "", "", "", "", "I", "O", ""],
+    ["", "", "", "", "", "", "", ""],
+    ["", "", "E", "", "", "", "", ""]
   ],
-  "topWord": "DECISION",
-  "sideWord": "CAPSULES",
+  "topWord": "ELECTION",
+  "sideWord": "VARIABLE",
   "topVisible": [true, false, true, false, true, false, false, true],
   "sideVisible": [true, true, true, false, false, false, false, true],
   "ships": [
     {
-      "word": "CUPS",
+      "word": "STABLE",
+      "length": 6,
+      "row": 3,
+      "col": 3,
+      "direction": "V"
+    },
+    {
+      "word": "ARISE",
+      "length": 5,
+      "row": 2,
+      "col": 1,
+      "direction": "V"
+    },
+    {
+      "word": "TURN",
+      "length": 4,
+      "row": 3,
+      "col": 5,
+      "direction": "H"
+    },
+    {
+      "word": "LOVE",
       "length": 4,
       "row": 1,
-      "col": 1,
-      "direction": "V"
-    },
-    {
-      "word": "CATION",
-      "length": 6,
-      "row": 2,
-      "col": 3,
+      "col": 2,
       "direction": "H"
     },
     {
-      "word": "NAY",
+      "word": "ION",
       "length": 3,
-      "row": 4,
-      "col": 4,
-      "direction": "H"
-    },
-    {
-      "word": "USES",
-      "length": 4,
-      "row": 5,
-      "col": 7,
-      "direction": "V"
-    },
-    {
-      "word": "LEVIS",
-      "length": 5,
       "row": 6,
-      "col": 1,
+      "col": 6,
       "direction": "H"
     },
     {
-      "word": "DIN",
+      "word": "CAP",
       "length": 3,
-      "row": 8,
-      "col": 1,
+      "row": 2,
+      "col": 4,
       "direction": "H"
     }
   ],

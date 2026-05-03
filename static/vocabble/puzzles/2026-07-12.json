@@ -4,71 +4,71 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["C", "", "", "", "", "", "", ""],
-    ["U", "", "C", "A", "T", "I", "O", "N"],
-    ["P", "", "", "", "", "", "", ""],
-    ["S", "", "", "S", "O", "Y", "", ""],
-    ["", "", "", "", "", "", "U", ""],
-    ["L", "E", "V", "I", "S", "", "S", ""],
-    ["", "", "", "", "", "", "E", ""],
-    ["D", "I", "N", "", "", "", "S", ""]
+    ["W", "O", "R", "K", "M", "H", "", ""],
+    ["", "", "F", "", "A", "E", "", ""],
+    ["", "", "U", "", "P", "A", "", ""],
+    ["", "", "T", "", "S", "D", "", ""],
+    ["", "", "U", "", "O", "", "", ""],
+    ["", "", "R", "", "L", "", "", ""],
+    ["", "", "E", "", "I", "T", "O", "P"],
+    ["", "", "", "", "D", "", "", ""]
   ],
   "puzzle": [
-    ["C", "", "", "", "", "", "", ""],
-    ["", "", "", "A", "", "", "", "N"],
-    ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "O", "Y", "", ""],
-    ["", "", "", "", "", "", "", ""],
-    ["L", "E", "", "", "", "", "S", ""],
-    ["", "", "", "", "", "", "", ""],
-    ["", "", "N", "", "", "", "S", ""]
+    ["W", "", "", "", "M", "H", "", ""],
+    ["", "", "", "", "A", "", "", ""],
+    ["", "", "U", "", "", "", "", ""],
+    ["", "", "", "", "", "D", "", ""],
+    ["", "", "U", "", "", "", "", ""],
+    ["", "", "", "", "L", "", "", ""],
+    ["", "", "", "", "", "", "O", "P"],
+    ["", "", "", "", "", "", "", ""]
   ],
-  "topWord": "DECISION",
-  "sideWord": "CAPSULES",
+  "topWord": "WORKSHOP",
+  "sideWord": "MEASURED",
   "topVisible": [true, true, false, false, false, true, false, true],
   "sideVisible": [true, true, false, true, false, false, false, true],
   "ships": [
     {
-      "word": "CUPS",
-      "length": 4,
-      "row": 1,
-      "col": 1,
-      "direction": "V"
-    },
-    {
-      "word": "CATION",
+      "word": "FUTURE",
       "length": 6,
       "row": 2,
       "col": 3,
-      "direction": "H"
-    },
-    {
-      "word": "SOY",
-      "length": 3,
-      "row": 4,
-      "col": 4,
-      "direction": "H"
-    },
-    {
-      "word": "USES",
-      "length": 4,
-      "row": 5,
-      "col": 7,
       "direction": "V"
     },
     {
-      "word": "LEVIS",
+      "word": "SOLID",
       "length": 5,
-      "row": 6,
+      "row": 4,
+      "col": 5,
+      "direction": "V"
+    },
+    {
+      "word": "HEAD",
+      "length": 4,
+      "row": 1,
+      "col": 6,
+      "direction": "V"
+    },
+    {
+      "word": "WORK",
+      "length": 4,
+      "row": 1,
       "col": 1,
       "direction": "H"
     },
     {
-      "word": "DIN",
+      "word": "TOP",
       "length": 3,
-      "row": 8,
-      "col": 1,
+      "row": 7,
+      "col": 6,
       "direction": "H"
+    },
+    {
+      "word": "MAP",
+      "length": 3,
+      "row": 1,
+      "col": 5,
+      "direction": "V"
     }
   ],
   "difficulty": {

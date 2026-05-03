@@ -5,68 +5,68 @@
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
     ["C", "", "", "", "", "", "", ""],
-    ["U", "", "C", "A", "T", "I", "O", "N"],
+    ["A", "", "", "", "", "", "", ""],
     ["P", "", "", "", "", "", "", ""],
-    ["S", "", "", "S", "A", "Y", "", ""],
-    ["", "", "", "", "", "", "U", ""],
-    ["L", "E", "V", "I", "S", "", "S", ""],
-    ["", "", "", "", "", "", "E", ""],
-    ["D", "I", "N", "", "", "", "S", ""]
+    ["S", "E", "T", "", "", "", "", ""],
+    ["", "", "T", "U", "R", "N", "", ""],
+    ["", "", "P", "A", "L", "A", "C", "E"],
+    ["", "", "Q", "U", "E", "E", "N", ""],
+    ["S", "E", "E", "D", "", "", "", ""]
   ],
   "puzzle": [
     ["", "", "", "", "", "", "", ""],
-    ["", "", "C", "", "T", "", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["S", "", "", "", "A", "Y", "", ""],
-    ["", "", "", "", "", "", "U", ""],
-    ["L", "", "", "", "", "", "S", ""],
     ["", "", "", "", "", "", "", ""],
-    ["D", "", "", "", "", "", "S", ""]
+    ["S", "E", "", "", "", "", "", ""],
+    ["", "", "T", "", "", "", "", ""],
+    ["", "", "", "", "", "A", "", ""],
+    ["", "", "", "U", "E", "E", "N", ""],
+    ["S", "", "", "D", "", "", "", ""]
   ],
-  "topWord": "DECISION",
+  "topWord": "SEQUENCE",
   "sideWord": "CAPSULES",
   "topVisible": [false, true, true, false, true, false, true, false],
   "sideVisible": [true, true, false, true, true, false, false, false],
   "ships": [
     {
-      "word": "CUPS",
+      "word": "PALACE",
+      "length": 6,
+      "row": 6,
+      "col": 3,
+      "direction": "H"
+    },
+    {
+      "word": "QUEEN",
+      "length": 5,
+      "row": 7,
+      "col": 3,
+      "direction": "H"
+    },
+    {
+      "word": "SEED",
       "length": 4,
+      "row": 8,
+      "col": 1,
+      "direction": "H"
+    },
+    {
+      "word": "TURN",
+      "length": 4,
+      "row": 5,
+      "col": 3,
+      "direction": "H"
+    },
+    {
+      "word": "CAP",
+      "length": 3,
       "row": 1,
       "col": 1,
       "direction": "V"
     },
     {
-      "word": "CATION",
-      "length": 6,
-      "row": 2,
-      "col": 3,
-      "direction": "H"
-    },
-    {
-      "word": "SAY",
+      "word": "SET",
       "length": 3,
       "row": 4,
-      "col": 4,
-      "direction": "H"
-    },
-    {
-      "word": "USES",
-      "length": 4,
-      "row": 5,
-      "col": 7,
-      "direction": "V"
-    },
-    {
-      "word": "LEVIS",
-      "length": 5,
-      "row": 6,
-      "col": 1,
-      "direction": "H"
-    },
-    {
-      "word": "DIN",
-      "length": 3,
-      "row": 8,
       "col": 1,
       "direction": "H"
     }

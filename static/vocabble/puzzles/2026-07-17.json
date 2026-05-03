@@ -4,70 +4,70 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["C", "O", "P", "S", "", "L", "", "D"],
-    ["", "", "", "", "", "E", "", "O"],
-    ["", "C", "", "", "", "N", "", "N"],
-    ["", "A", "", "N", "", "I", "", ""],
-    ["", "T", "", "A", "", "S", "", ""],
-    ["", "I", "", "Y", "", "", "", ""],
-    ["", "O", "", "", "U", "S", "E", "S"],
-    ["", "N", "", "", "", "", "", ""]
+    ["", "", "", "", "L", "", "D", "D"],
+    ["", "", "", "", "I", "", "O", "R"],
+    ["", "", "", "", "S", "", "T", "O"],
+    ["", "", "", "", "T", "", "D", "P"],
+    ["", "", "", "", "E", "", "A", ""],
+    ["W", "O", "R", "K", "N", "H", "N", ""],
+    ["", "", "", "", "", "A", "C", ""],
+    ["", "", "", "", "", "T", "E", ""]
   ],
   "puzzle": [
-    ["", "O", "", "", "", "", "", "D"],
+    ["", "", "", "", "L", "", "D", "D"],
+    ["", "", "", "", "I", "", "", "R"],
     ["", "", "", "", "", "", "", "O"],
-    ["", "", "", "", "", "", "", "N"],
-    ["", "", "", "N", "", "", "", ""],
-    ["", "T", "", "", "", "S", "", ""],
-    ["", "I", "", "", "", "", "", ""],
-    ["", "", "", "", "U", "", "", ""],
-    ["", "N", "", "", "", "", "", ""]
+    ["", "", "", "", "T", "", "", ""],
+    ["", "", "", "", "", "", "", ""],
+    ["", "O", "", "", "", "H", "N", ""],
+    ["", "", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", "", ""]
   ],
-  "topWord": "CAPSULES",
-  "sideWord": "DECISION",
+  "topWord": "WORKSHOP",
+  "sideWord": "DISTANCE",
   "topVisible": [false, true, true, false, false, false, true, true],
   "sideVisible": [true, false, true, true, false, false, false, true],
   "ships": [
     {
-      "word": "COPS",
-      "length": 4,
+      "word": "LISTEN",
+      "length": 6,
       "row": 1,
+      "col": 5,
+      "direction": "V"
+    },
+    {
+      "word": "DANCE",
+      "length": 5,
+      "row": 4,
+      "col": 7,
+      "direction": "V"
+    },
+    {
+      "word": "WORK",
+      "length": 4,
+      "row": 6,
       "col": 1,
       "direction": "H"
     },
     {
-      "word": "CATION",
-      "length": 6,
-      "row": 3,
-      "col": 2,
-      "direction": "V"
-    },
-    {
-      "word": "NAY",
-      "length": 3,
-      "row": 4,
-      "col": 4,
-      "direction": "V"
-    },
-    {
-      "word": "USES",
+      "word": "DROP",
       "length": 4,
-      "row": 7,
-      "col": 5,
-      "direction": "H"
-    },
-    {
-      "word": "LENIS",
-      "length": 5,
-      "row": 1,
-      "col": 6,
-      "direction": "V"
-    },
-    {
-      "word": "DON",
-      "length": 3,
       "row": 1,
       "col": 8,
+      "direction": "V"
+    },
+    {
+      "word": "DOT",
+      "length": 3,
+      "row": 1,
+      "col": 7,
+      "direction": "V"
+    },
+    {
+      "word": "HAT",
+      "length": 3,
+      "row": 6,
+      "col": 6,
       "direction": "V"
     }
   ],

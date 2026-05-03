@@ -4,69 +4,69 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["C", "", "", "", "", "", "", ""],
-    ["A", "", "C", "A", "T", "I", "O", "N"],
-    ["P", "", "", "", "", "", "", ""],
-    ["S", "", "", "S", "O", "Y", "", ""],
-    ["", "", "", "", "", "", "U", ""],
-    ["L", "E", "V", "I", "S", "", "S", ""],
-    ["", "", "", "", "", "", "E", ""],
-    ["D", "I", "N", "", "", "", "S", ""]
+    ["V", "A", "N", "", "", "", "P", ""],
+    ["", "", "", "", "", "", "O", ""],
+    ["", "", "", "", "", "", "L", ""],
+    ["", "", "", "", "", "", "I", ""],
+    ["", "T", "R", "I", "A", "L", "C", "N"],
+    ["", "", "", "", "", "B", "Y", "I"],
+    ["", "", "", "", "", "A", "", "C"],
+    ["C", "A", "S", "E", "", "G", "", "E"]
   ],
   "puzzle": [
+    ["", "A", "", "", "", "", "P", ""],
+    ["", "", "", "", "", "", "O", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "A", "", "", "", "N"],
-    ["P", "", "", "", "", "", "", ""],
-    ["", "", "", "", "O", "", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "V", "I", "S", "", "S", ""],
+    ["", "", "", "", "A", "L", "", "N"],
     ["", "", "", "", "", "", "", ""],
-    ["", "I", "N", "", "", "", "", ""]
+    ["", "", "", "", "", "A", "", ""],
+    ["", "", "S", "E", "", "", "", "E"]
   ],
-  "topWord": "DECISION",
-  "sideWord": "CAPSULES",
+  "topWord": "VARIABLE",
+  "sideWord": "POLITICS",
   "topVisible": [false, false, true, true, true, false, true, false],
   "sideVisible": [true, true, false, false, false, false, true, true],
   "ships": [
     {
-      "word": "CAPS",
-      "length": 4,
-      "row": 1,
-      "col": 1,
-      "direction": "V"
-    },
-    {
-      "word": "CATION",
+      "word": "POLICY",
       "length": 6,
-      "row": 2,
-      "col": 3,
-      "direction": "H"
-    },
-    {
-      "word": "SOY",
-      "length": 3,
-      "row": 4,
-      "col": 4,
-      "direction": "H"
-    },
-    {
-      "word": "USES",
-      "length": 4,
-      "row": 5,
+      "row": 1,
       "col": 7,
       "direction": "V"
     },
     {
-      "word": "LEVIS",
+      "word": "TRIAL",
       "length": 5,
-      "row": 6,
+      "row": 5,
+      "col": 2,
+      "direction": "H"
+    },
+    {
+      "word": "NICE",
+      "length": 4,
+      "row": 5,
+      "col": 8,
+      "direction": "V"
+    },
+    {
+      "word": "CASE",
+      "length": 4,
+      "row": 8,
       "col": 1,
       "direction": "H"
     },
     {
-      "word": "DIN",
+      "word": "BAG",
       "length": 3,
-      "row": 8,
+      "row": 6,
+      "col": 6,
+      "direction": "V"
+    },
+    {
+      "word": "VAN",
+      "length": 3,
+      "row": 1,
       "col": 1,
       "direction": "H"
     }

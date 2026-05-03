@@ -4,69 +4,69 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["C", "A", "P", "S", "", "L", "", "D"],
-    ["", "", "", "", "", "E", "", "E"],
-    ["", "C", "", "", "", "N", "", "N"],
-    ["", "A", "", "S", "", "I", "", ""],
-    ["", "T", "", "A", "", "S", "", ""],
-    ["", "I", "", "Y", "", "", "", ""],
-    ["", "O", "", "", "U", "S", "E", "S"],
-    ["", "N", "", "", "", "", "", ""]
+    ["", "P", "", "", "", "D", "", ""],
+    ["", "I", "", "", "", "A", "", ""],
+    ["S", "E", "", "", "", "W", "", ""],
+    ["T", "", "", "", "", "N", "", "T"],
+    ["A", "", "", "", "", "", "", "E"],
+    ["B", "", "Q", "U", "E", "E", "N", "N"],
+    ["L", "", "", "", "N", "I", "C", "E"],
+    ["E", "", "", "", "", "", "", ""]
   ],
   "puzzle": [
-    ["", "", "P", "", "", "L", "", ""],
-    ["", "", "", "", "", "", "", "E"],
-    ["", "C", "", "", "", "", "", ""],
-    ["", "", "", "S", "", "", "", ""],
-    ["", "", "", "A", "", "S", "", ""],
+    ["", "", "", "", "", "D", "", ""],
+    ["", "", "", "", "", "A", "", ""],
+    ["", "E", "", "", "", "", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "U", "S", "", "S"],
+    ["A", "", "", "", "", "", "", "E"],
+    ["", "", "", "U", "E", "", "N", ""],
+    ["", "", "", "", "", "I", "", "E"],
     ["", "", "", "", "", "", "", ""]
   ],
-  "topWord": "CAPSULES",
-  "sideWord": "DECISION",
+  "topWord": "SEQUENCE",
+  "sideWord": "DISTANCE",
   "topVisible": [true, true, false, false, false, true, false, true],
   "sideVisible": [true, true, false, false, false, true, false, true],
   "ships": [
     {
-      "word": "CAPS",
-      "length": 4,
-      "row": 1,
+      "word": "STABLE",
+      "length": 6,
+      "row": 3,
       "col": 1,
+      "direction": "V"
+    },
+    {
+      "word": "QUEEN",
+      "length": 5,
+      "row": 6,
+      "col": 3,
       "direction": "H"
     },
     {
-      "word": "CATION",
-      "length": 6,
-      "row": 3,
-      "col": 2,
-      "direction": "V"
-    },
-    {
-      "word": "SAY",
-      "length": 3,
-      "row": 4,
-      "col": 4,
-      "direction": "V"
-    },
-    {
-      "word": "USES",
+      "word": "NICE",
       "length": 4,
       "row": 7,
       "col": 5,
       "direction": "H"
     },
     {
-      "word": "LENIS",
-      "length": 5,
+      "word": "DAWN",
+      "length": 4,
       "row": 1,
       "col": 6,
       "direction": "V"
     },
     {
-      "word": "DEN",
+      "word": "PIE",
       "length": 3,
       "row": 1,
+      "col": 2,
+      "direction": "V"
+    },
+    {
+      "word": "TEN",
+      "length": 3,
+      "row": 4,
       "col": 8,
       "direction": "V"
     }

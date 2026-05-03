@@ -4,70 +4,70 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["C", "U", "P", "S", "", "L", "", "D"],
-    ["", "", "", "", "", "E", "", "E"],
-    ["", "C", "", "", "", "V", "", "N"],
-    ["", "A", "", "S", "", "I", "", ""],
-    ["", "T", "", "O", "", "S", "", ""],
-    ["", "I", "", "Y", "", "", "", ""],
-    ["", "O", "", "", "U", "S", "E", "S"],
-    ["", "N", "", "", "", "", "", ""]
+    ["", "L", "", "B", "U", "N", "", ""],
+    ["", "O", "", "", "", "", "", "W"],
+    ["", "V", "Q", "U", "E", "E", "N", "O"],
+    ["", "E", "", "", "", "", "", "N"],
+    ["E", "", "", "", "", "", "C", "D"],
+    ["A", "", "", "", "", "", "A", "E"],
+    ["S", "", "", "", "", "", "R", "R"],
+    ["Y", "", "", "", "", "", "", ""]
   ],
   "puzzle": [
+    ["", "", "", "", "U", "N", "", ""],
+    ["", "O", "", "", "", "", "", ""],
+    ["", "V", "", "", "E", "", "", "O"],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "", "", "", "E"],
-    ["", "", "", "", "", "V", "", ""],
-    ["", "A", "", "", "", "", "", ""],
-    ["", "", "", "O", "", "", "", ""],
-    ["", "I", "", "Y", "", "", "", ""],
-    ["", "O", "", "", "U", "", "E", "S"],
-    ["", "", "", "", "", "", "", ""]
+    ["", "", "", "", "", "", "C", "D"],
+    ["", "", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", "", "R"],
+    ["Y", "", "", "", "", "", "", ""]
   ],
-  "topWord": "CAPSULES",
-  "sideWord": "DECISION",
+  "topWord": "SEQUENCE",
+  "sideWord": "BOUNDARY",
   "topVisible": [true, true, false, true, true, false, false, false],
   "sideVisible": [false, false, true, true, false, false, true, true],
   "ships": [
     {
-      "word": "CUPS",
-      "length": 4,
-      "row": 1,
-      "col": 1,
+      "word": "WONDER",
+      "length": 6,
+      "row": 2,
+      "col": 8,
+      "direction": "V"
+    },
+    {
+      "word": "QUEEN",
+      "length": 5,
+      "row": 3,
+      "col": 3,
       "direction": "H"
     },
     {
-      "word": "CATION",
-      "length": 6,
-      "row": 3,
+      "word": "EASY",
+      "length": 4,
+      "row": 5,
+      "col": 1,
+      "direction": "V"
+    },
+    {
+      "word": "LOVE",
+      "length": 4,
+      "row": 1,
       "col": 2,
       "direction": "V"
     },
     {
-      "word": "SOY",
+      "word": "BUN",
       "length": 3,
-      "row": 4,
+      "row": 1,
       "col": 4,
-      "direction": "V"
-    },
-    {
-      "word": "USES",
-      "length": 4,
-      "row": 7,
-      "col": 5,
       "direction": "H"
     },
     {
-      "word": "LEVIS",
-      "length": 5,
-      "row": 1,
-      "col": 6,
-      "direction": "V"
-    },
-    {
-      "word": "DEN",
+      "word": "CAR",
       "length": 3,
-      "row": 1,
-      "col": 8,
+      "row": 5,
+      "col": 7,
       "direction": "V"
     }
   ],

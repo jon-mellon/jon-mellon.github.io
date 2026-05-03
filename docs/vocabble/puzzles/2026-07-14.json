@@ -4,71 +4,71 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["C", "", "", "", "", "", "", ""],
-    ["A", "", "C", "A", "T", "I", "O", "N"],
-    ["P", "", "", "", "", "", "", ""],
-    ["S", "", "", "N", "A", "Y", "", ""],
-    ["", "", "", "", "", "", "U", ""],
-    ["L", "E", "N", "I", "S", "", "S", ""],
-    ["", "", "", "", "", "", "E", ""],
-    ["D", "O", "N", "", "", "", "S", ""]
+    ["", "", "", "", "", "", "C", ""],
+    ["", "S", "N", "O", "W", "", "O", ""],
+    ["", "M", "", "", "", "", "W", ""],
+    ["", "A", "", "D", "E", "P", "T", "H"],
+    ["U", "T", "", "", "", "", "", ""],
+    ["S", "T", "", "", "", "", "", ""],
+    ["E", "E", "", "", "N", "I", "C", "E"],
+    ["", "R", "", "", "", "", "", ""]
   ],
   "puzzle": [
-    ["C", "", "", "", "", "", "", ""],
-    ["", "", "C", "A", "", "", "O", "N"],
     ["", "", "", "", "", "", "", ""],
+    ["", "", "", "O", "", "", "O", ""],
+    ["", "M", "", "", "", "", "W", ""],
+    ["", "", "", "", "", "P", "T", ""],
+    ["U", "T", "", "", "", "", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "", "", "U", ""],
-    ["L", "E", "", "", "S", "", "S", ""],
-    ["", "", "", "", "", "", "", ""],
+    ["", "E", "", "", "", "", "", "E"],
     ["", "", "", "", "", "", "", ""]
   ],
-  "topWord": "DECISION",
-  "sideWord": "CAPSULES",
+  "topWord": "SANDWICH",
+  "sideWord": "COMPUTER",
   "topVisible": [true, false, false, true, false, false, true, true],
   "sideVisible": [false, true, true, false, false, true, true, false],
   "ships": [
     {
-      "word": "CAPS",
-      "length": 4,
-      "row": 1,
-      "col": 1,
+      "word": "MATTER",
+      "length": 6,
+      "row": 3,
+      "col": 2,
       "direction": "V"
     },
     {
-      "word": "CATION",
-      "length": 6,
-      "row": 2,
-      "col": 3,
-      "direction": "H"
-    },
-    {
-      "word": "NAY",
-      "length": 3,
+      "word": "DEPTH",
+      "length": 5,
       "row": 4,
       "col": 4,
       "direction": "H"
     },
     {
-      "word": "USES",
+      "word": "NICE",
       "length": 4,
+      "row": 7,
+      "col": 5,
+      "direction": "H"
+    },
+    {
+      "word": "SNOW",
+      "length": 4,
+      "row": 2,
+      "col": 2,
+      "direction": "H"
+    },
+    {
+      "word": "USE",
+      "length": 3,
       "row": 5,
-      "col": 7,
+      "col": 1,
       "direction": "V"
     },
     {
-      "word": "LENIS",
-      "length": 5,
-      "row": 6,
-      "col": 1,
-      "direction": "H"
-    },
-    {
-      "word": "DON",
+      "word": "COW",
       "length": 3,
-      "row": 8,
-      "col": 1,
-      "direction": "H"
+      "row": 1,
+      "col": 7,
+      "direction": "V"
     }
   ],
   "difficulty": {

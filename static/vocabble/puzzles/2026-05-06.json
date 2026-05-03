@@ -4,70 +4,70 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["C", "O", "P", "S", "", "L", "", "D"],
-    ["", "", "", "", "", "E", "", "E"],
-    ["", "C", "", "", "", "N", "", "N"],
-    ["", "A", "", "N", "", "I", "", ""],
-    ["", "T", "", "A", "", "S", "", ""],
-    ["", "I", "", "Y", "", "", "", ""],
-    ["", "O", "", "", "U", "S", "E", "S"],
-    ["", "N", "", "", "", "", "", ""]
+    ["S", "E", "T", "", "", "", "", ""],
+    ["", "", "", "R", "", "", "", ""],
+    ["", "", "", "E", "E", "A", "C", "H"],
+    ["", "", "", "A", "L", "", "", ""],
+    ["", "", "", "D", "A", "S", "", ""],
+    ["", "", "", "E", "W", "U", "", ""],
+    ["", "", "", "R", "", "I", "", ""],
+    ["D", "A", "N", "C", "E", "T", "", ""]
   ],
   "puzzle": [
-    ["", "O", "", "S", "", "", "", ""],
-    ["", "", "", "", "", "E", "", ""],
-    ["", "", "", "", "", "", "", "N"],
-    ["", "A", "", "N", "", "I", "", ""],
-    ["", "", "", "A", "", "S", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "", "", "E", ""],
-    ["", "", "", "", "", "", "", ""]
+    ["", "", "", "", "", "", "", ""],
+    ["", "", "", "", "", "A", "C", ""],
+    ["", "", "", "", "", "", "", ""],
+    ["", "", "", "D", "A", "", "", ""],
+    ["", "", "", "E", "", "U", "", ""],
+    ["", "", "", "R", "", "", "", ""],
+    ["D", "A", "", "", "E", "", "", ""]
   ],
-  "topWord": "CAPSULES",
-  "sideWord": "DECISION",
+  "topWord": "SANDWICH",
+  "sideWord": "TREASURE",
   "topVisible": [true, false, true, true, false, false, true, false],
   "sideVisible": [false, false, true, true, true, false, true, false],
   "ships": [
     {
-      "word": "COPS",
+      "word": "READER",
+      "length": 6,
+      "row": 2,
+      "col": 4,
+      "direction": "V"
+    },
+    {
+      "word": "DANCE",
+      "length": 5,
+      "row": 8,
+      "col": 1,
+      "direction": "H"
+    },
+    {
+      "word": "SUIT",
       "length": 4,
+      "row": 5,
+      "col": 6,
+      "direction": "V"
+    },
+    {
+      "word": "EACH",
+      "length": 4,
+      "row": 3,
+      "col": 5,
+      "direction": "H"
+    },
+    {
+      "word": "SET",
+      "length": 3,
       "row": 1,
       "col": 1,
       "direction": "H"
     },
     {
-      "word": "CATION",
-      "length": 6,
-      "row": 3,
-      "col": 2,
-      "direction": "V"
-    },
-    {
-      "word": "NAY",
+      "word": "LAW",
       "length": 3,
       "row": 4,
-      "col": 4,
-      "direction": "V"
-    },
-    {
-      "word": "USES",
-      "length": 4,
-      "row": 7,
       "col": 5,
-      "direction": "H"
-    },
-    {
-      "word": "LENIS",
-      "length": 5,
-      "row": 1,
-      "col": 6,
-      "direction": "V"
-    },
-    {
-      "word": "DEN",
-      "length": 3,
-      "row": 1,
-      "col": 8,
       "direction": "V"
     }
   ],

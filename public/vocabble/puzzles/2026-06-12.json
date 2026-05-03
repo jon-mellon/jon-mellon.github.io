@@ -4,69 +4,69 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["C", "", "", "", "", "", "", ""],
-    ["U", "", "C", "A", "T", "I", "O", "N"],
-    ["P", "", "", "", "", "", "", ""],
-    ["S", "", "", "N", "A", "Y", "", ""],
-    ["", "", "", "", "", "", "U", ""],
-    ["L", "E", "N", "I", "S", "", "S", ""],
-    ["", "", "", "", "", "", "E", ""],
-    ["D", "I", "N", "", "", "", "S", ""]
+    ["O", "A", "R", "H", "", "", "", ""],
+    ["", "", "", "O", "", "", "", ""],
+    ["S", "", "", "P", "", "", "", ""],
+    ["A", "P", "", "E", "", "", "", ""],
+    ["L", "I", "", "", "", "", "", "S"],
+    ["T", "T", "", "", "", "", "", "E"],
+    ["", "C", "", "", "", "", "", "A"],
+    ["", "H", "I", "S", "L", "A", "N", "D"]
   ],
   "puzzle": [
+    ["", "A", "R", "", "", "", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "A", "", "", "O", "N"],
+    ["", "", "", "P", "", "", "", ""],
+    ["", "", "", "E", "", "", "", ""],
+    ["L", "", "", "", "", "", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["S", "", "", "N", "A", "", "", ""],
-    ["", "", "", "", "", "", "U", ""],
-    ["", "", "N", "", "S", "", "", ""],
-    ["", "", "", "", "", "", "", ""],
-    ["D", "", "", "", "", "", "", ""]
+    ["", "C", "", "", "", "", "", ""],
+    ["", "", "I", "", "", "A", "N", "D"]
   ],
-  "topWord": "DECISION",
-  "sideWord": "CAPSULES",
+  "topWord": "AIRPLANE",
+  "sideWord": "HOSPITAL",
   "topVisible": [false, true, true, false, false, true, false, true],
   "sideVisible": [true, false, false, false, false, true, true, true],
   "ships": [
     {
-      "word": "CUPS",
-      "length": 4,
-      "row": 1,
-      "col": 1,
-      "direction": "V"
-    },
-    {
-      "word": "CATION",
+      "word": "ISLAND",
       "length": 6,
-      "row": 2,
+      "row": 8,
       "col": 3,
       "direction": "H"
     },
     {
-      "word": "NAY",
-      "length": 3,
+      "word": "PITCH",
+      "length": 5,
       "row": 4,
-      "col": 4,
-      "direction": "H"
-    },
-    {
-      "word": "USES",
-      "length": 4,
-      "row": 5,
-      "col": 7,
+      "col": 2,
       "direction": "V"
     },
     {
-      "word": "LENIS",
-      "length": 5,
-      "row": 6,
-      "col": 1,
-      "direction": "H"
+      "word": "HOPE",
+      "length": 4,
+      "row": 1,
+      "col": 4,
+      "direction": "V"
     },
     {
-      "word": "DIN",
+      "word": "SALT",
+      "length": 4,
+      "row": 3,
+      "col": 1,
+      "direction": "V"
+    },
+    {
+      "word": "SEA",
       "length": 3,
-      "row": 8,
+      "row": 5,
+      "col": 8,
+      "direction": "V"
+    },
+    {
+      "word": "OAR",
+      "length": 3,
+      "row": 1,
       "col": 1,
       "direction": "H"
     }

@@ -4,71 +4,71 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["C", "O", "P", "S", "", "L", "", "D"],
-    ["", "", "", "", "", "E", "", "I"],
-    ["", "C", "", "", "", "V", "", "N"],
-    ["", "A", "", "N", "", "I", "", ""],
-    ["", "T", "", "A", "", "S", "", ""],
-    ["", "I", "", "Y", "", "", "", ""],
-    ["", "O", "", "", "U", "S", "E", "S"],
-    ["", "N", "", "", "", "", "", ""]
+    ["", "", "", "", "", "", "", "P"],
+    ["", "", "", "", "", "", "", "O"],
+    ["", "", "", "", "", "", "", "L"],
+    ["", "", "", "", "", "", "", "I"],
+    ["", "", "P", "A", "R", "T", "", "C"],
+    ["O", "I", "L", "R", "U", "L", "E", "Y"],
+    ["C", "A", "U", "S", "E", "", "", ""],
+    ["", "", "", "", "", "G", "A", "S"]
   ],
   "puzzle": [
-    ["", "", "P", "S", "", "", "", ""],
-    ["", "", "", "", "", "E", "", "I"],
-    ["", "C", "", "", "", "V", "", "N"],
+    ["", "", "", "", "", "", "", "P"],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "", "S", "", ""],
-    ["", "", "", "Y", "", "", "", ""],
-    ["", "", "", "", "", "", "E", ""],
-    ["", "", "", "", "", "", "", ""]
+    ["", "", "", "", "", "", "", "L"],
+    ["", "", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", "", "C"],
+    ["", "I", "", "R", "", "", "E", "Y"],
+    ["", "", "", "S", "E", "", "", ""],
+    ["", "", "", "", "", "G", "", ""]
   ],
   "topWord": "CAPSULES",
-  "sideWord": "DECISION",
+  "sideWord": "POLITICS",
   "topVisible": [false, true, false, true, false, true, true, false],
   "sideVisible": [true, true, false, false, false, true, false, true],
   "ships": [
     {
-      "word": "COPS",
-      "length": 4,
+      "word": "POLICY",
+      "length": 6,
       "row": 1,
+      "col": 8,
+      "direction": "V"
+    },
+    {
+      "word": "CAUSE",
+      "length": 5,
+      "row": 7,
       "col": 1,
       "direction": "H"
     },
     {
-      "word": "CATION",
-      "length": 6,
-      "row": 3,
-      "col": 2,
-      "direction": "V"
-    },
-    {
-      "word": "NAY",
-      "length": 3,
-      "row": 4,
-      "col": 4,
-      "direction": "V"
-    },
-    {
-      "word": "USES",
+      "word": "RULE",
       "length": 4,
-      "row": 7,
-      "col": 5,
+      "row": 6,
+      "col": 4,
       "direction": "H"
     },
     {
-      "word": "LEVIS",
-      "length": 5,
-      "row": 1,
-      "col": 6,
-      "direction": "V"
+      "word": "PART",
+      "length": 4,
+      "row": 5,
+      "col": 3,
+      "direction": "H"
     },
     {
-      "word": "DIN",
+      "word": "GAS",
       "length": 3,
-      "row": 1,
-      "col": 8,
-      "direction": "V"
+      "row": 8,
+      "col": 6,
+      "direction": "H"
+    },
+    {
+      "word": "OIL",
+      "length": 3,
+      "row": 6,
+      "col": 1,
+      "direction": "H"
     }
   ],
   "difficulty": {

@@ -4,71 +4,71 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["C", "O", "P", "S", "", "L", "", "D"],
-    ["", "", "", "", "", "E", "", "I"],
-    ["", "C", "", "", "", "N", "", "N"],
-    ["", "A", "", "S", "", "I", "", ""],
-    ["", "T", "", "O", "", "S", "", ""],
-    ["", "I", "", "Y", "", "", "", ""],
-    ["", "O", "", "", "U", "S", "E", "S"],
-    ["", "N", "", "", "", "", "", ""]
+    ["G", "A", "S", "", "", "", "", "S"],
+    ["", "", "", "", "", "", "L", "T"],
+    ["", "", "", "", "", "", "A", "A"],
+    ["", "", "", "", "", "", "N", "B"],
+    ["B", "", "", "", "", "", "D", "L"],
+    ["I", "A", "R", "E", "N", "A", "", "E"],
+    ["R", "", "", "", "", "", "", ""],
+    ["D", "", "", "", "B", "A", "T", ""]
   ],
   "puzzle": [
-    ["", "O", "", "", "", "", "", "D"],
+    ["", "", "S", "", "", "", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "", "N", "", "N"],
-    ["", "A", "", "", "", "I", "", ""],
-    ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "", "", "", ""],
-    ["", "O", "", "", "U", "", "", "S"],
-    ["", "N", "", "", "", "", "", ""]
+    ["", "", "", "", "", "", "", "A"],
+    ["", "", "", "", "", "", "N", ""],
+    ["B", "", "", "", "", "", "D", "L"],
+    ["", "A", "", "", "", "", "", "E"],
+    ["R", "", "", "", "", "", "", ""],
+    ["", "", "", "", "", "A", "", ""]
   ],
-  "topWord": "CAPSULES",
-  "sideWord": "DECISION",
+  "topWord": "BASEBALL",
+  "sideWord": "STANDARD",
   "topVisible": [false, true, false, true, true, false, true, false],
   "sideVisible": [false, true, false, true, false, true, false, true],
   "ships": [
     {
-      "word": "COPS",
+      "word": "STABLE",
+      "length": 6,
+      "row": 1,
+      "col": 8,
+      "direction": "V"
+    },
+    {
+      "word": "ARENA",
+      "length": 5,
+      "row": 6,
+      "col": 2,
+      "direction": "H"
+    },
+    {
+      "word": "LAND",
       "length": 4,
+      "row": 2,
+      "col": 7,
+      "direction": "V"
+    },
+    {
+      "word": "BIRD",
+      "length": 4,
+      "row": 5,
+      "col": 1,
+      "direction": "V"
+    },
+    {
+      "word": "GAS",
+      "length": 3,
       "row": 1,
       "col": 1,
       "direction": "H"
     },
     {
-      "word": "CATION",
-      "length": 6,
-      "row": 3,
-      "col": 2,
-      "direction": "V"
-    },
-    {
-      "word": "SOY",
+      "word": "BAT",
       "length": 3,
-      "row": 4,
-      "col": 4,
-      "direction": "V"
-    },
-    {
-      "word": "USES",
-      "length": 4,
-      "row": 7,
+      "row": 8,
       "col": 5,
       "direction": "H"
-    },
-    {
-      "word": "LENIS",
-      "length": 5,
-      "row": 1,
-      "col": 6,
-      "direction": "V"
-    },
-    {
-      "word": "DIN",
-      "length": 3,
-      "row": 1,
-      "col": 8,
-      "direction": "V"
     }
   ],
   "difficulty": {

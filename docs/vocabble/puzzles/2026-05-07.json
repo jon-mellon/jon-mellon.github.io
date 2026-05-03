@@ -4,71 +4,71 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["C", "", "", "", "", "", "", ""],
-    ["U", "", "C", "A", "T", "I", "O", "N"],
-    ["P", "", "", "", "", "", "", ""],
-    ["S", "", "", "N", "A", "Y", "", ""],
-    ["", "", "", "", "", "", "U", ""],
-    ["L", "E", "N", "I", "S", "", "S", ""],
-    ["", "", "", "", "", "", "E", ""],
-    ["D", "E", "N", "", "", "", "S", ""]
+    ["", "", "", "C", "", "", "", ""],
+    ["", "", "", "A", "B", "O", "O", "K"],
+    ["", "P", "", "U", "", "", "", ""],
+    ["", "U", "", "S", "", "S", "", ""],
+    ["", "L", "", "E", "", "U", "", ""],
+    ["", "L", "", "", "", "N", "", ""],
+    ["N", "O", "T", "I", "C", "E", "", ""],
+    ["", "", "", "", "B", "U", "S", ""]
   ],
   "puzzle": [
     ["", "", "", "", "", "", "", ""],
-    ["U", "", "C", "", "T", "I", "", "N"],
+    ["", "", "", "A", "B", "", "", "K"],
+    ["", "P", "", "U", "", "", "", ""],
+    ["", "", "", "", "", "S", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "N", "", "", "", ""],
-    ["", "", "", "", "", "", "U", ""],
-    ["", "", "N", "I", "", "", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["D", "", "", "", "", "", "", ""]
+    ["", "O", "", "I", "C", "E", "", ""],
+    ["", "", "", "", "", "", "", ""]
   ],
-  "topWord": "DECISION",
+  "topWord": "NOTEBOOK",
   "sideWord": "CAPSULES",
   "topVisible": [false, true, false, false, true, false, true, true],
   "sideVisible": [false, true, true, false, false, true, false, true],
   "ships": [
     {
-      "word": "CUPS",
-      "length": 4,
-      "row": 1,
-      "col": 1,
-      "direction": "V"
-    },
-    {
-      "word": "CATION",
+      "word": "NOTICE",
       "length": 6,
-      "row": 2,
-      "col": 3,
-      "direction": "H"
-    },
-    {
-      "word": "NAY",
-      "length": 3,
-      "row": 4,
-      "col": 4,
-      "direction": "H"
-    },
-    {
-      "word": "USES",
-      "length": 4,
-      "row": 5,
-      "col": 7,
-      "direction": "V"
-    },
-    {
-      "word": "LENIS",
-      "length": 5,
-      "row": 6,
+      "row": 7,
       "col": 1,
       "direction": "H"
     },
     {
-      "word": "DEN",
+      "word": "CAUSE",
+      "length": 5,
+      "row": 1,
+      "col": 4,
+      "direction": "V"
+    },
+    {
+      "word": "BOOK",
+      "length": 4,
+      "row": 2,
+      "col": 5,
+      "direction": "H"
+    },
+    {
+      "word": "PULL",
+      "length": 4,
+      "row": 3,
+      "col": 2,
+      "direction": "V"
+    },
+    {
+      "word": "BUS",
       "length": 3,
       "row": 8,
-      "col": 1,
+      "col": 5,
       "direction": "H"
+    },
+    {
+      "word": "SUN",
+      "length": 3,
+      "row": 4,
+      "col": 6,
+      "direction": "V"
     }
   ],
   "difficulty": {

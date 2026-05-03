@@ -4,71 +4,71 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["C", "", "", "", "", "", "", ""],
-    ["A", "", "C", "A", "T", "I", "O", "N"],
-    ["P", "", "", "", "", "", "", ""],
-    ["S", "", "", "S", "O", "Y", "", ""],
-    ["", "", "", "", "", "", "U", ""],
-    ["L", "E", "N", "I", "S", "", "S", ""],
-    ["", "", "", "", "", "", "E", ""],
-    ["D", "E", "N", "", "", "", "S", ""]
+    ["", "", "", "", "S", "I", "D", "E"],
+    ["", "R", "E", "A", "D", "Y", "", ""],
+    ["C", "", "", "D", "", "", "", ""],
+    ["A", "", "", "I", "", "", "", ""],
+    ["T", "", "", "G", "B", "U", "S", ""],
+    ["I", "", "", "", "", "", "", ""],
+    ["O", "", "", "", "", "", "", ""],
+    ["N", "", "", "", "T", "U", "R", "N"]
   ],
   "puzzle": [
+    ["", "", "", "", "", "", "", "E"],
+    ["", "", "E", "", "", "", "", ""],
     ["C", "", "", "", "", "", "", ""],
-    ["A", "", "", "A", "T", "", "O", ""],
-    ["P", "", "", "", "", "", "", ""],
-    ["", "", "", "", "O", "", "", ""],
+    ["A", "", "", "", "", "", "", ""],
+    ["T", "", "", "G", "B", "", "", ""],
     ["", "", "", "", "", "", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "", "", "", ""],
-    ["D", "E", "", "", "", "", "S", ""]
+    ["N", "", "", "", "T", "U", "", ""]
   ],
-  "topWord": "DECISION",
-  "sideWord": "CAPSULES",
+  "topWord": "TREASURE",
+  "sideWord": "DECISION",
   "topVisible": [false, false, false, true, false, true, true, true],
   "sideVisible": [true, false, false, false, false, true, true, true],
   "ships": [
     {
-      "word": "CAPS",
-      "length": 4,
-      "row": 1,
-      "col": 1,
-      "direction": "V"
-    },
-    {
       "word": "CATION",
       "length": 6,
-      "row": 2,
-      "col": 3,
-      "direction": "H"
-    },
-    {
-      "word": "SOY",
-      "length": 3,
-      "row": 4,
-      "col": 4,
-      "direction": "H"
-    },
-    {
-      "word": "USES",
-      "length": 4,
-      "row": 5,
-      "col": 7,
+      "row": 3,
+      "col": 1,
       "direction": "V"
     },
     {
-      "word": "LENIS",
+      "word": "READY",
       "length": 5,
-      "row": 6,
-      "col": 1,
+      "row": 2,
+      "col": 2,
       "direction": "H"
     },
     {
-      "word": "DEN",
-      "length": 3,
-      "row": 8,
-      "col": 1,
+      "word": "SIDE",
+      "length": 4,
+      "row": 1,
+      "col": 5,
       "direction": "H"
+    },
+    {
+      "word": "TURN",
+      "length": 4,
+      "row": 8,
+      "col": 5,
+      "direction": "H"
+    },
+    {
+      "word": "BUS",
+      "length": 3,
+      "row": 5,
+      "col": 5,
+      "direction": "H"
+    },
+    {
+      "word": "DIG",
+      "length": 3,
+      "row": 3,
+      "col": 4,
+      "direction": "V"
     }
   ],
   "difficulty": {

@@ -4,69 +4,69 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["C", "", "", "", "", "", "", ""],
-    ["O", "", "C", "A", "T", "I", "O", "N"],
-    ["P", "", "", "", "", "", "", ""],
-    ["S", "", "", "S", "O", "Y", "", ""],
-    ["", "", "", "", "", "", "U", ""],
-    ["L", "E", "N", "I", "S", "", "S", ""],
-    ["", "", "", "", "", "", "E", ""],
-    ["D", "O", "N", "", "", "", "S", ""]
+    ["B", "I", "R", "D", "", "", "", ""],
+    ["A", "I", "M", "", "I", "", "", ""],
+    ["", "", "", "", "S", "", "", ""],
+    ["", "", "T", "", "L", "", "", ""],
+    ["F", "", "A", "", "A", "", "", ""],
+    ["A", "", "N", "", "N", "", "", ""],
+    ["C", "", "", "", "D", "", "", ""],
+    ["E", "", "", "P", "L", "A", "N", "E"]
   ],
   "puzzle": [
-    ["", "", "", "", "", "", "", ""],
-    ["O", "", "C", "", "T", "I", "", "N"],
-    ["P", "", "", "", "", "", "", ""],
-    ["", "", "", "S", "", "", "", ""],
-    ["", "", "", "", "", "", "U", ""],
-    ["L", "", "", "", "S", "", "", ""],
-    ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "", "", "", ""]
+    ["", "", "R", "", "", "", "", ""],
+    ["A", "", "", "", "", "", "", ""],
+    ["", "", "", "", "S", "", "", ""],
+    ["", "", "", "", "L", "", "", ""],
+    ["F", "", "", "", "", "", "", ""],
+    ["", "", "N", "", "", "", "", ""],
+    ["C", "", "", "", "D", "", "", ""],
+    ["", "", "", "P", "", "", "", "E"]
   ],
-  "topWord": "DECISION",
-  "sideWord": "CAPSULES",
+  "topWord": "AIRPLANE",
+  "sideWord": "DISTANCE",
   "topVisible": [false, true, false, true, false, false, true, true],
   "sideVisible": [false, false, true, true, false, false, true, true],
   "ships": [
     {
-      "word": "COPS",
-      "length": 4,
-      "row": 1,
-      "col": 1,
+      "word": "ISLAND",
+      "length": 6,
+      "row": 2,
+      "col": 5,
       "direction": "V"
     },
     {
-      "word": "CATION",
-      "length": 6,
-      "row": 2,
-      "col": 3,
-      "direction": "H"
-    },
-    {
-      "word": "SOY",
-      "length": 3,
-      "row": 4,
+      "word": "PLANE",
+      "length": 5,
+      "row": 8,
       "col": 4,
       "direction": "H"
     },
     {
-      "word": "USES",
+      "word": "BIRD",
       "length": 4,
-      "row": 5,
-      "col": 7,
-      "direction": "V"
-    },
-    {
-      "word": "LENIS",
-      "length": 5,
-      "row": 6,
+      "row": 1,
       "col": 1,
       "direction": "H"
     },
     {
-      "word": "DON",
+      "word": "FACE",
+      "length": 4,
+      "row": 5,
+      "col": 1,
+      "direction": "V"
+    },
+    {
+      "word": "TAN",
       "length": 3,
-      "row": 8,
+      "row": 4,
+      "col": 3,
+      "direction": "V"
+    },
+    {
+      "word": "AIM",
+      "length": 3,
+      "row": 2,
       "col": 1,
       "direction": "H"
     }

@@ -4,70 +4,70 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["C", "", "", "", "", "", "", ""],
-    ["U", "", "C", "A", "T", "I", "O", "N"],
-    ["P", "", "", "", "", "", "", ""],
-    ["S", "", "", "N", "A", "Y", "", ""],
-    ["", "", "", "", "", "", "U", ""],
-    ["L", "E", "V", "I", "S", "", "S", ""],
-    ["", "", "", "", "", "", "E", ""],
-    ["D", "E", "N", "", "", "", "S", ""]
+    ["F", "I", "S", "H", "", "", "", ""],
+    ["", "", "", "", "", "I", "C", "E"],
+    ["", "", "", "", "", "Q", "", ""],
+    ["K", "", "", "", "", "U", "", ""],
+    ["I", "", "", "", "", "E", "", ""],
+    ["N", "", "", "", "", "E", "", ""],
+    ["D", "C", "A", "N", "", "N", "", ""],
+    ["", "", "S", "T", "A", "B", "L", "E"]
   ],
   "puzzle": [
-    ["C", "", "", "", "", "", "", ""],
-    ["", "", "C", "A", "", "I", "", "N"],
+    ["F", "", "", "H", "", "", "", ""],
+    ["", "", "", "", "", "", "", "E"],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "", "Y", "", ""],
-    ["", "", "", "", "", "", "U", ""],
-    ["", "", "", "", "S", "", "", ""],
-    ["", "", "", "", "", "", "", ""],
-    ["", "", "N", "", "", "", "S", ""]
+    ["", "", "", "", "", "U", "", ""],
+    ["", "", "", "", "", "E", "", ""],
+    ["", "", "", "", "", "E", "", ""],
+    ["", "", "A", "N", "", "", "", ""],
+    ["", "", "", "", "", "B", "", "E"]
   ],
-  "topWord": "DECISION",
-  "sideWord": "CAPSULES",
+  "topWord": "DISTANCE",
+  "sideWord": "SEQUENCE",
   "topVisible": [false, false, true, true, false, false, true, true],
   "sideVisible": [false, true, false, true, true, true, false, false],
   "ships": [
     {
-      "word": "CUPS",
-      "length": 4,
-      "row": 1,
-      "col": 1,
-      "direction": "V"
-    },
-    {
-      "word": "CATION",
+      "word": "STABLE",
       "length": 6,
-      "row": 2,
+      "row": 8,
       "col": 3,
       "direction": "H"
     },
     {
-      "word": "NAY",
-      "length": 3,
-      "row": 4,
-      "col": 4,
-      "direction": "H"
-    },
-    {
-      "word": "USES",
-      "length": 4,
-      "row": 5,
-      "col": 7,
+      "word": "QUEEN",
+      "length": 5,
+      "row": 3,
+      "col": 6,
       "direction": "V"
     },
     {
-      "word": "LEVIS",
-      "length": 5,
-      "row": 6,
+      "word": "FISH",
+      "length": 4,
+      "row": 1,
       "col": 1,
       "direction": "H"
     },
     {
-      "word": "DEN",
-      "length": 3,
-      "row": 8,
+      "word": "KIND",
+      "length": 4,
+      "row": 4,
       "col": 1,
+      "direction": "V"
+    },
+    {
+      "word": "ICE",
+      "length": 3,
+      "row": 2,
+      "col": 6,
+      "direction": "H"
+    },
+    {
+      "word": "CAN",
+      "length": 3,
+      "row": 7,
+      "col": 2,
       "direction": "H"
     }
   ],

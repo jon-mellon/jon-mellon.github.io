@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Vocabble</title>
+    <title>Vocabbleships</title>
     <link rel="stylesheet" href="app.css">
   </head>
   <body>
@@ -11,7 +11,7 @@
       <header class="masthead">
         <div>
           <p class="eyebrow">Daily word fleet</p>
-          <h1>Vocabble</h1>
+          <h1>Vocabbleships</h1>
         </div>
         <div class="date-stack">
           <span id="puzzle-date">UTC</span>
@@ -19,18 +19,18 @@
         </div>
       </header>
 
-      <section class="workspace" aria-label="Vocabble puzzle">
+      <section class="workspace" aria-label="Vocabbleships puzzle">
         <div class="board-wrap">
           <div id="board" class="board" aria-label="Puzzle board"></div>
         </div>
 
         <aside class="side-panel">
-          <section class="panel-section">
+          <section class="panel-section fleet-section">
             <h2>Fleet</h2>
             <div id="fleet" class="fleet-list"></div>
           </section>
 
-          <section class="panel-section">
+          <section class="panel-section mode-section">
             <h2>Mode</h2>
             <div class="mode-row" role="group" aria-label="Input mode">
               <button class="mode-button is-active" data-mode="letter" type="button">Letter</button>
@@ -39,7 +39,7 @@
             </div>
           </section>
 
-          <section class="panel-section">
+          <section class="panel-section action-section">
             <h2>Actions</h2>
             <div class="action-grid">
               <button id="check-button" type="button">Check</button>
@@ -48,7 +48,7 @@
             </div>
           </section>
 
-          <section class="panel-section compact-rules">
+          <section class="panel-section compact-rules rules-section">
             <h2>Rules</h2>
             <p>Place the six dictionary-word ships. Top and side words are dictionary words too; each edge letter appears in its row or column. Diagonal contact is allowed.</p>
           </section>
@@ -61,41 +61,256 @@
         "id": "vocabble-2026-05-03",
         "date": "2026-05-03",
         "size": 8,
-        "fleetLengths": [6, 5, 4, 4, 3, 3],
+        "fleetLengths": [
+          6,
+          5,
+          4,
+          4,
+          3,
+          3
+        ],
         "solution": [
-          ["C", "", "", "", "", "", "", ""],
-          ["A", "", "C", "A", "T", "I", "O", "N"],
-          ["P", "", "", "", "", "", "", ""],
-          ["S", "", "", "N", "A", "Y", "", ""],
-          ["", "", "", "", "", "", "U", ""],
-          ["L", "E", "N", "I", "S", "", "S", ""],
-          ["", "", "", "", "", "", "E", ""],
-          ["D", "E", "N", "", "", "", "S", ""]
+          [
+            "M",
+            "B",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          [
+            "O",
+            "U",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          [
+            "U",
+            "S",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          [
+            "N",
+            "",
+            "A",
+            "C",
+            "T",
+            "I",
+            "O",
+            "N"
+          ],
+          [
+            "T",
+            "M",
+            "R",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          [
+            "F",
+            "A",
+            "A",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          [
+            "U",
+            "I",
+            "I",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          [
+            "N",
+            "N",
+            "N",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ]
         ],
         "puzzle": [
-          ["C", "", "", "", "", "", "", ""],
-          ["A", "", "C", "A", "", "", "", ""],
-          ["", "", "", "", "", "", "", ""],
-          ["", "", "", "N", "", "", "", ""],
-          ["", "", "", "", "", "", "U", ""],
-          ["", "", "", "", "S", "", "", ""],
-          ["", "", "", "", "", "", "E", ""],
-          ["", "", "N", "", "", "", "S", ""]
+          [
+            "M",
+            "B",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          [
+            "O",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          [
+            "",
+            "S",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          [
+            "",
+            "",
+            "",
+            "C",
+            "",
+            "I",
+            "O",
+            ""
+          ],
+          [
+            "",
+            "M",
+            "R",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          [
+            "",
+            "A",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ]
         ],
-        "topWord": "DECISION",
-        "sideWord": "CAPSULES",
-        "topVisible": [true, true, true, true, false, false, false, false],
-        "sideVisible": [false, true, false, true, false, true, false, true],
+        "topWord": "FUNCTION",
+        "sideWord": "MOUNTAIN",
+        "topVisible": [
+          true,
+          true,
+          true,
+          true,
+          false,
+          false,
+          false,
+          false
+        ],
+        "sideVisible": [
+          false,
+          true,
+          false,
+          true,
+          false,
+          true,
+          false,
+          true
+        ],
         "ships": [
-          {"word": "CAPS", "length": 4, "row": 1, "col": 1, "direction": "V"},
-          {"word": "CATION", "length": 6, "row": 2, "col": 3, "direction": "H"},
-          {"word": "NAY", "length": 3, "row": 4, "col": 4, "direction": "H"},
-          {"word": "USES", "length": 4, "row": 5, "col": 7, "direction": "V"},
-          {"word": "LENIS", "length": 5, "row": 6, "col": 1, "direction": "H"},
-          {"word": "DEN", "length": 3, "row": 8, "col": 1, "direction": "H"}
+          {
+            "word": "ACTION",
+            "length": 6,
+            "row": 4,
+            "col": 3,
+            "direction": "H"
+          },
+          {
+            "word": "MOUNT",
+            "length": 5,
+            "row": 1,
+            "col": 1,
+            "direction": "V"
+          },
+          {
+            "word": "MAIN",
+            "length": 4,
+            "row": 5,
+            "col": 2,
+            "direction": "V"
+          },
+          {
+            "word": "RAIN",
+            "length": 4,
+            "row": 5,
+            "col": 3,
+            "direction": "V"
+          },
+          {
+            "word": "BUS",
+            "length": 3,
+            "row": 1,
+            "col": 2,
+            "direction": "V"
+          },
+          {
+            "word": "FUN",
+            "length": 3,
+            "row": 6,
+            "col": 1,
+            "direction": "V"
+          }
         ],
-        "difficulty": {"label": "medium-hard", "hiddenLetters": 15, "hiddenEdges": 8, "givenLetters": 10},
-        "validation": {"ok": true, "dictionary_ok": true, "row_edge_ok": true, "col_edge_ok": true}
+        "difficulty": {
+          "label": "medium-hard",
+          "hiddenLetters": 15,
+          "hiddenEdges": 8,
+          "givenLetters": 10
+        },
+        "validation": {
+          "ok": true,
+          "dictionary_ok": true,
+          "row_edge_ok": true,
+          "col_edge_ok": true
+        }
       }
     </script>
     <script src="app.js"></script>

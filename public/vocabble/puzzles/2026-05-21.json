@@ -4,71 +4,71 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["C", "", "", "", "", "", "", ""],
-    ["A", "", "C", "A", "T", "I", "O", "N"],
-    ["P", "", "", "", "", "", "", ""],
-    ["S", "", "", "N", "A", "Y", "", ""],
-    ["", "", "", "", "", "", "U", ""],
-    ["L", "E", "V", "I", "S", "", "S", ""],
-    ["", "", "", "", "", "", "E", ""],
-    ["D", "E", "N", "", "", "", "S", ""]
+    ["", "", "", "", "", "R", "A", "G"],
+    ["", "H", "I", "D", "D", "E", "N", ""],
+    ["B", "U", "L", "L", "B", "I", "R", "D"],
+    ["", "", "", "", "", "", "", "P"],
+    ["", "", "", "", "", "", "T", "L"],
+    ["", "", "", "", "", "", "A", "A"],
+    ["", "", "", "", "", "", "N", "N"],
+    ["", "", "", "", "", "", "", "E"]
   ],
   "puzzle": [
-    ["C", "", "", "", "", "", "", ""],
-    ["A", "", "", "", "T", "", "", ""],
-    ["P", "", "", "", "", "", "", ""],
-    ["", "", "", "", "", "Y", "", ""],
-    ["", "", "", "", "", "", "U", ""],
-    ["", "", "V", "", "S", "", "", ""],
+    ["", "", "", "", "", "R", "", "G"],
+    ["", "H", "", "D", "", "", "", ""],
+    ["B", "U", "", "", "", "", "R", ""],
+    ["", "", "", "", "", "", "", "P"],
     ["", "", "", "", "", "", "", ""],
-    ["D", "", "", "", "", "", "S", ""]
+    ["", "", "", "", "", "", "A", ""],
+    ["", "", "", "", "", "", "", "N"],
+    ["", "", "", "", "", "", "", ""]
   ],
-  "topWord": "DECISION",
-  "sideWord": "CAPSULES",
+  "topWord": "BUILDING",
+  "sideWord": "AIRPLANE",
   "topVisible": [true, true, true, false, false, false, false, true],
   "sideVisible": [true, false, false, false, true, false, true, true],
   "ships": [
     {
-      "word": "CAPS",
-      "length": 4,
-      "row": 1,
-      "col": 1,
+      "word": "HIDDEN",
+      "length": 6,
+      "row": 2,
+      "col": 2,
+      "direction": "H"
+    },
+    {
+      "word": "PLANE",
+      "length": 5,
+      "row": 4,
+      "col": 8,
       "direction": "V"
     },
     {
-      "word": "CATION",
-      "length": 6,
-      "row": 2,
-      "col": 3,
-      "direction": "H"
-    },
-    {
-      "word": "NAY",
-      "length": 3,
-      "row": 4,
-      "col": 4,
-      "direction": "H"
-    },
-    {
-      "word": "USES",
+      "word": "BULL",
       "length": 4,
+      "row": 3,
+      "col": 1,
+      "direction": "H"
+    },
+    {
+      "word": "BIRD",
+      "length": 4,
+      "row": 3,
+      "col": 5,
+      "direction": "H"
+    },
+    {
+      "word": "RAG",
+      "length": 3,
+      "row": 1,
+      "col": 6,
+      "direction": "H"
+    },
+    {
+      "word": "TAN",
+      "length": 3,
       "row": 5,
       "col": 7,
       "direction": "V"
-    },
-    {
-      "word": "LEVIS",
-      "length": 5,
-      "row": 6,
-      "col": 1,
-      "direction": "H"
-    },
-    {
-      "word": "DEN",
-      "length": 3,
-      "row": 8,
-      "col": 1,
-      "direction": "H"
     }
   ],
   "difficulty": {

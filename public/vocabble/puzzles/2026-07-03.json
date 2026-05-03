@@ -4,71 +4,71 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["C", "A", "P", "S", "", "L", "", "D"],
-    ["", "", "", "", "", "E", "", "I"],
-    ["", "C", "", "", "", "V", "", "N"],
-    ["", "A", "", "S", "", "I", "", ""],
-    ["", "T", "", "A", "", "S", "", ""],
-    ["", "I", "", "Y", "", "", "", ""],
-    ["", "O", "", "", "U", "S", "E", "S"],
-    ["", "N", "", "", "", "", "", ""]
+    ["", "F", "R", "E", "S", "H", "", ""],
+    ["W", "A", "R", "C", "U", "T", "S", ""],
+    ["", "", "", "", "", "", "N", "O"],
+    ["R", "O", "C", "K", "", "", "O", "P"],
+    ["", "", "", "", "", "", "W", "T"],
+    ["", "", "", "", "", "", "", "I"],
+    ["", "", "", "", "", "", "", "O"],
+    ["", "", "", "", "", "", "", "N"]
   ],
   "puzzle": [
-    ["", "A", "", "S", "", "", "", ""],
-    ["", "", "", "", "", "E", "", "I"],
-    ["", "", "", "", "", "V", "", ""],
-    ["", "", "", "", "", "I", "", ""],
+    ["", "", "R", "", "", "", "", ""],
+    ["", "", "", "C", "U", "", "S", ""],
+    ["", "", "", "", "", "", "N", ""],
+    ["R", "", "C", "", "", "", "O", "P"],
     ["", "", "", "", "", "", "", ""],
-    ["", "I", "", "Y", "", "", "", ""],
-    ["", "", "", "", "", "", "E", ""],
-    ["", "N", "", "", "", "", "", ""]
+    ["", "", "", "", "", "", "", "I"],
+    ["", "", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", "", ""]
   ],
-  "topWord": "CAPSULES",
-  "sideWord": "DECISION",
+  "topWord": "WORKSHOP",
+  "sideWord": "FUNCTION",
   "topVisible": [false, true, false, true, true, false, false, true],
   "sideVisible": [true, true, true, true, false, false, false, false],
   "ships": [
     {
-      "word": "CAPS",
-      "length": 4,
+      "word": "OPTION",
+      "length": 6,
+      "row": 3,
+      "col": 8,
+      "direction": "V"
+    },
+    {
+      "word": "FRESH",
+      "length": 5,
       "row": 1,
+      "col": 2,
+      "direction": "H"
+    },
+    {
+      "word": "ROCK",
+      "length": 4,
+      "row": 4,
       "col": 1,
       "direction": "H"
     },
     {
-      "word": "CATION",
-      "length": 6,
-      "row": 3,
-      "col": 2,
-      "direction": "V"
-    },
-    {
-      "word": "SAY",
-      "length": 3,
-      "row": 4,
-      "col": 4,
-      "direction": "V"
-    },
-    {
-      "word": "USES",
+      "word": "SNOW",
       "length": 4,
-      "row": 7,
-      "col": 5,
+      "row": 2,
+      "col": 7,
+      "direction": "V"
+    },
+    {
+      "word": "WAR",
+      "length": 3,
+      "row": 2,
+      "col": 1,
       "direction": "H"
     },
     {
-      "word": "LEVIS",
-      "length": 5,
-      "row": 1,
-      "col": 6,
-      "direction": "V"
-    },
-    {
-      "word": "DIN",
+      "word": "CUT",
       "length": 3,
-      "row": 1,
-      "col": 8,
-      "direction": "V"
+      "row": 2,
+      "col": 4,
+      "direction": "H"
     }
   ],
   "difficulty": {

@@ -41,11 +41,20 @@
           <p id="message" class="message">Tap the answer.</p>
         </section>
 
+        <section class="garden-panel" aria-label="Your growing number garden">
+          <div class="garden-header">
+            <span>Garden blooms</span>
+            <span id="bloom-count">0</span>
+          </div>
+          <div id="garden-bed" class="garden-bed" aria-hidden="true"></div>
+        </section>
+
         <section id="choices" class="choices" aria-label="Answer choices"></section>
 
         <footer class="controls">
           <button id="sound-button" class="control-button is-on" type="button" aria-pressed="true">Sound On</button>
           <button id="new-button" class="control-button" type="button">New Sum</button>
+          <button id="new-garden-button" class="control-button" type="button">New Garden</button>
         </footer>
       </section>
 

@@ -4,71 +4,71 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["C", "U", "P", "S", "", "L", "", "D"],
-    ["", "", "", "", "", "E", "", "I"],
-    ["", "C", "", "", "", "N", "", "N"],
-    ["", "A", "", "N", "", "I", "", ""],
-    ["", "T", "", "A", "", "S", "", ""],
-    ["", "I", "", "Y", "", "", "", ""],
-    ["", "O", "", "", "U", "S", "E", "S"],
-    ["", "N", "", "", "", "", "", ""]
+    ["S", "I", "L", "K", "", "", "", ""],
+    ["", "B", "L", "U", "E", "", "", ""],
+    ["", "", "", "", "", "K", "E", "Y"],
+    ["", "B", "", "", "", "", "", ""],
+    ["", "O", "", "", "", "", "", ""],
+    ["", "A", "A", "C", "T", "I", "O", "N"],
+    ["", "R", "", "", "T", "I", "N", ""],
+    ["", "D", "", "", "", "", "", ""]
   ],
   "puzzle": [
+    ["", "", "", "K", "", "", "", ""],
+    ["", "B", "", "", "", "", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "", "E", "", ""],
-    ["", "C", "", "", "", "", "", ""],
-    ["", "", "", "N", "", "", "", ""],
-    ["", "T", "", "A", "", "S", "", ""],
-    ["", "I", "", "", "", "", "", ""],
-    ["", "", "", "", "", "S", "", "S"],
-    ["", "N", "", "", "", "", "", ""]
+    ["", "", "", "", "", "", "", ""],
+    ["", "O", "", "", "", "", "", ""],
+    ["", "A", "A", "", "T", "I", "", "N"],
+    ["", "", "", "", "", "I", "", ""],
+    ["", "D", "", "", "", "", "", ""]
   ],
-  "topWord": "CAPSULES",
-  "sideWord": "DECISION",
+  "topWord": "SOLUTION",
+  "sideWord": "KEYBOARD",
   "topVisible": [false, true, false, true, true, false, true, false],
   "sideVisible": [true, false, true, true, false, false, true, false],
   "ships": [
     {
-      "word": "CUPS",
+      "word": "ACTION",
+      "length": 6,
+      "row": 6,
+      "col": 3,
+      "direction": "H"
+    },
+    {
+      "word": "BOARD",
+      "length": 5,
+      "row": 4,
+      "col": 2,
+      "direction": "V"
+    },
+    {
+      "word": "SILK",
       "length": 4,
       "row": 1,
       "col": 1,
       "direction": "H"
     },
     {
-      "word": "CATION",
-      "length": 6,
-      "row": 3,
-      "col": 2,
-      "direction": "V"
-    },
-    {
-      "word": "NAY",
-      "length": 3,
-      "row": 4,
-      "col": 4,
-      "direction": "V"
-    },
-    {
-      "word": "USES",
+      "word": "BLUE",
       "length": 4,
-      "row": 7,
-      "col": 5,
+      "row": 2,
+      "col": 2,
       "direction": "H"
     },
     {
-      "word": "LENIS",
-      "length": 5,
-      "row": 1,
+      "word": "KEY",
+      "length": 3,
+      "row": 3,
       "col": 6,
-      "direction": "V"
+      "direction": "H"
     },
     {
-      "word": "DIN",
+      "word": "TIN",
       "length": 3,
-      "row": 1,
-      "col": 8,
-      "direction": "V"
+      "row": 7,
+      "col": 5,
+      "direction": "H"
     }
   ],
   "difficulty": {

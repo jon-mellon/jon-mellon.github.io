@@ -4,71 +4,71 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["C", "", "", "", "", "", "", ""],
-    ["U", "", "C", "A", "T", "I", "O", "N"],
-    ["P", "", "", "", "", "", "", ""],
-    ["S", "", "", "S", "A", "Y", "", ""],
-    ["", "", "", "", "", "", "U", ""],
-    ["L", "E", "N", "I", "S", "", "S", ""],
-    ["", "", "", "", "", "", "E", ""],
-    ["D", "O", "N", "", "", "", "S", ""]
+    ["", "", "", "", "G", "I", "F", "T"],
+    ["", "", "", "", "", "B", "U", "S"],
+    ["P", "O", "I", "N", "T", "", "A", ""],
+    ["", "", "", "", "", "", "C", ""],
+    ["", "", "", "", "", "", "T", ""],
+    ["", "I", "L", "I", "F", "E", "I", ""],
+    ["", "O", "", "", "", "", "O", ""],
+    ["", "N", "", "", "", "", "N", ""]
   ],
   "puzzle": [
+    ["", "", "", "", "", "I", "F", "T"],
     ["", "", "", "", "", "", "", ""],
-    ["U", "", "C", "A", "", "", "", ""],
+    ["", "O", "", "", "", "", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["S", "", "", "S", "A", "", "", ""],
-    ["", "", "", "", "", "", "U", ""],
-    ["", "E", "", "", "", "", "S", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "", "", "S", ""]
+    ["", "", "L", "I", "F", "", "I", ""],
+    ["", "O", "", "", "", "", "O", ""],
+    ["", "", "", "", "", "", "", ""]
   ],
-  "topWord": "DECISION",
-  "sideWord": "CAPSULES",
+  "topWord": "POLITICS",
+  "sideWord": "FUNCTION",
   "topVisible": [false, true, true, false, true, false, false, true],
   "sideVisible": [false, false, true, true, false, false, true, true],
   "ships": [
     {
-      "word": "CUPS",
-      "length": 4,
-      "row": 1,
-      "col": 1,
-      "direction": "V"
-    },
-    {
-      "word": "CATION",
+      "word": "ACTION",
       "length": 6,
-      "row": 2,
-      "col": 3,
-      "direction": "H"
-    },
-    {
-      "word": "SAY",
-      "length": 3,
-      "row": 4,
-      "col": 4,
-      "direction": "H"
-    },
-    {
-      "word": "USES",
-      "length": 4,
-      "row": 5,
+      "row": 3,
       "col": 7,
       "direction": "V"
     },
     {
-      "word": "LENIS",
+      "word": "POINT",
       "length": 5,
-      "row": 6,
+      "row": 3,
       "col": 1,
       "direction": "H"
     },
     {
-      "word": "DON",
-      "length": 3,
-      "row": 8,
-      "col": 1,
+      "word": "LIFE",
+      "length": 4,
+      "row": 6,
+      "col": 3,
       "direction": "H"
+    },
+    {
+      "word": "GIFT",
+      "length": 4,
+      "row": 1,
+      "col": 5,
+      "direction": "H"
+    },
+    {
+      "word": "BUS",
+      "length": 3,
+      "row": 2,
+      "col": 6,
+      "direction": "H"
+    },
+    {
+      "word": "ION",
+      "length": 3,
+      "row": 6,
+      "col": 2,
+      "direction": "V"
     }
   ],
   "difficulty": {

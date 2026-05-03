@@ -4,70 +4,70 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["C", "U", "P", "S", "", "L", "", "D"],
-    ["", "", "", "", "", "E", "", "O"],
-    ["", "C", "", "", "", "N", "", "N"],
-    ["", "A", "", "N", "", "I", "", ""],
-    ["", "T", "", "A", "", "S", "", ""],
-    ["", "I", "", "Y", "", "", "", ""],
-    ["", "O", "", "", "U", "S", "E", "S"],
-    ["", "N", "", "", "", "", "", ""]
+    ["", "C", "", "P", "O", "T", "", ""],
+    ["C", "L", "M", "A", "T", "T", "E", "R"],
+    ["A", "O", "", "", "", "", "", ""],
+    ["N", "S", "", "", "", "", "", ""],
+    ["R", "E", "", "", "U", "S", "E", "R"],
+    ["I", "", "", "", "", "", "", ""],
+    ["N", "", "", "", "", "", "", ""],
+    ["G", "", "", "", "", "", "", ""]
   ],
   "puzzle": [
-    ["", "", "", "", "", "L", "", "D"],
+    ["", "", "", "", "", "T", "", ""],
+    ["", "", "", "A", "", "T", "E", "R"],
     ["", "", "", "", "", "", "", ""],
-    ["", "C", "", "", "", "", "", "N"],
-    ["", "", "", "", "", "", "", ""],
-    ["", "T", "", "", "", "S", "", ""],
-    ["", "I", "", "", "", "", "", ""],
-    ["", "O", "", "", "", "S", "E", ""],
-    ["", "", "", "", "", "", "", ""]
+    ["N", "", "", "", "", "", "", ""],
+    ["", "", "", "", "", "S", "", ""],
+    ["I", "", "", "", "", "", "", ""],
+    ["N", "", "", "", "", "", "", ""],
+    ["G", "", "", "", "", "", "", ""]
   ],
-  "topWord": "CAPSULES",
-  "sideWord": "DECISION",
+  "topWord": "COMPUTER",
+  "sideWord": "CROSSING",
   "topVisible": [false, true, false, false, true, true, true, false],
   "sideVisible": [false, false, true, false, true, false, true, true],
   "ships": [
     {
-      "word": "CUPS",
-      "length": 4,
-      "row": 1,
-      "col": 1,
+      "word": "MATTER",
+      "length": 6,
+      "row": 2,
+      "col": 3,
       "direction": "H"
     },
     {
-      "word": "CATION",
-      "length": 6,
-      "row": 3,
+      "word": "CLOSE",
+      "length": 5,
+      "row": 1,
       "col": 2,
       "direction": "V"
     },
     {
-      "word": "NAY",
-      "length": 3,
-      "row": 4,
-      "col": 4,
+      "word": "RING",
+      "length": 4,
+      "row": 5,
+      "col": 1,
       "direction": "V"
     },
     {
-      "word": "USES",
+      "word": "USER",
       "length": 4,
-      "row": 7,
+      "row": 5,
       "col": 5,
       "direction": "H"
     },
     {
-      "word": "LENIS",
-      "length": 5,
-      "row": 1,
-      "col": 6,
-      "direction": "V"
-    },
-    {
-      "word": "DON",
+      "word": "POT",
       "length": 3,
       "row": 1,
-      "col": 8,
+      "col": 4,
+      "direction": "H"
+    },
+    {
+      "word": "CAN",
+      "length": 3,
+      "row": 2,
+      "col": 1,
       "direction": "V"
     }
   ],

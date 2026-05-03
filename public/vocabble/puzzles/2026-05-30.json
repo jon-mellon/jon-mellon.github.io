@@ -4,71 +4,71 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["C", "O", "P", "S", "", "L", "", "D"],
-    ["", "", "", "", "", "E", "", "E"],
-    ["", "C", "", "", "", "V", "", "N"],
-    ["", "A", "", "S", "", "I", "", ""],
-    ["", "T", "", "A", "", "S", "", ""],
-    ["", "I", "", "Y", "", "", "", ""],
-    ["", "O", "", "", "U", "S", "E", "S"],
-    ["", "N", "", "", "", "", "", ""]
+    ["C", "I", "R", "C", "L", "E", "", ""],
+    ["A", "R", "E", "A", "", "", "", ""],
+    ["", "", "", "P", "L", "A", "N", "E"],
+    ["", "R", "", "", "G", "A", "S", ""],
+    ["", "U", "", "", "", "", "", ""],
+    ["", "L", "", "", "", "", "", ""],
+    ["", "E", "", "", "", "", "", ""],
+    ["", "", "", "", "U", "S", "E", ""]
   ],
   "puzzle": [
-    ["", "O", "P", "", "", "", "", "D"],
+    ["", "", "R", "C", "L", "E", "", ""],
+    ["A", "", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", "N", "E"],
+    ["", "R", "", "", "", "", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "", "V", "", ""],
-    ["", "", "", "S", "", "I", "", ""],
-    ["", "T", "", "", "", "", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "U", "", "E", "S"],
-    ["", "", "", "", "", "", "", ""]
+    ["", "", "", "", "", "", "", ""],
+    ["", "", "", "", "U", "S", "", ""]
   ],
-  "topWord": "CAPSULES",
-  "sideWord": "DECISION",
+  "topWord": "AIRPLANE",
+  "sideWord": "CAPSULES",
   "topVisible": [false, true, false, false, false, true, true, true],
   "sideVisible": [true, true, false, false, true, false, false, true],
   "ships": [
     {
-      "word": "COPS",
-      "length": 4,
+      "word": "CIRCLE",
+      "length": 6,
       "row": 1,
       "col": 1,
       "direction": "H"
     },
     {
-      "word": "CATION",
-      "length": 6,
+      "word": "PLANE",
+      "length": 5,
       "row": 3,
+      "col": 4,
+      "direction": "H"
+    },
+    {
+      "word": "RULE",
+      "length": 4,
+      "row": 4,
       "col": 2,
       "direction": "V"
     },
     {
-      "word": "SAY",
-      "length": 3,
-      "row": 4,
-      "col": 4,
-      "direction": "V"
+      "word": "AREA",
+      "length": 4,
+      "row": 2,
+      "col": 1,
+      "direction": "H"
     },
     {
-      "word": "USES",
-      "length": 4,
-      "row": 7,
+      "word": "GAS",
+      "length": 3,
+      "row": 4,
       "col": 5,
       "direction": "H"
     },
     {
-      "word": "LEVIS",
-      "length": 5,
-      "row": 1,
-      "col": 6,
-      "direction": "V"
-    },
-    {
-      "word": "DEN",
+      "word": "USE",
       "length": 3,
-      "row": 1,
-      "col": 8,
-      "direction": "V"
+      "row": 8,
+      "col": 5,
+      "direction": "H"
     }
   ],
   "difficulty": {

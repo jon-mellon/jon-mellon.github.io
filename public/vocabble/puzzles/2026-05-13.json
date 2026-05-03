@@ -4,71 +4,71 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["C", "", "", "", "", "", "", ""],
-    ["U", "", "C", "A", "T", "I", "O", "N"],
-    ["P", "", "", "", "", "", "", ""],
-    ["S", "", "", "S", "A", "Y", "", ""],
-    ["", "", "", "", "", "", "U", ""],
-    ["L", "E", "N", "I", "S", "", "S", ""],
-    ["", "", "", "", "", "", "E", ""],
-    ["D", "E", "N", "", "", "", "S", ""]
+    ["S", "L", "I", "S", "T", "E", "N", ""],
+    ["H", "", "", "", "K", "I", "N", "G"],
+    ["I", "", "", "", "", "", "", "B"],
+    ["P", "G", "", "", "", "", "", "A"],
+    ["", "U", "", "M", "", "", "", "Y"],
+    ["", "A", "", "A", "", "", "", ""],
+    ["", "R", "", "N", "", "", "", ""],
+    ["", "D", "", "", "", "", "", ""]
   ],
   "puzzle": [
-    ["C", "", "", "", "", "", "", ""],
-    ["", "", "", "A", "", "I", "", ""],
+    ["S", "", "I", "S", "T", "E", "", ""],
+    ["", "", "", "", "K", "", "N", ""],
+    ["", "", "", "", "", "", "", "B"],
+    ["", "G", "", "", "", "", "", ""],
+    ["", "U", "", "", "", "", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "A", "", "", ""],
-    ["", "", "", "", "", "", "U", ""],
-    ["", "E", "", "", "S", "", "", ""],
-    ["", "", "", "", "", "", "E", ""],
-    ["D", "", "N", "", "", "", "", ""]
+    ["", "", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", "", ""]
   ],
-  "topWord": "DECISION",
-  "sideWord": "CAPSULES",
+  "topWord": "PAINTING",
+  "sideWord": "SHIPYARD",
   "topVisible": [false, true, false, true, true, false, true, false],
   "sideVisible": [false, true, true, true, false, false, false, true],
   "ships": [
     {
-      "word": "CUPS",
+      "word": "LISTEN",
+      "length": 6,
+      "row": 1,
+      "col": 2,
+      "direction": "H"
+    },
+    {
+      "word": "GUARD",
+      "length": 5,
+      "row": 4,
+      "col": 2,
+      "direction": "V"
+    },
+    {
+      "word": "SHIP",
       "length": 4,
       "row": 1,
       "col": 1,
       "direction": "V"
     },
     {
-      "word": "CATION",
-      "length": 6,
-      "row": 2,
-      "col": 3,
-      "direction": "H"
-    },
-    {
-      "word": "SAY",
-      "length": 3,
-      "row": 4,
-      "col": 4,
-      "direction": "H"
-    },
-    {
-      "word": "USES",
+      "word": "KING",
       "length": 4,
+      "row": 2,
+      "col": 5,
+      "direction": "H"
+    },
+    {
+      "word": "MAN",
+      "length": 3,
       "row": 5,
-      "col": 7,
+      "col": 4,
       "direction": "V"
     },
     {
-      "word": "LENIS",
-      "length": 5,
-      "row": 6,
-      "col": 1,
-      "direction": "H"
-    },
-    {
-      "word": "DEN",
+      "word": "BAY",
       "length": 3,
-      "row": 8,
-      "col": 1,
-      "direction": "H"
+      "row": 3,
+      "col": 8,
+      "direction": "V"
     }
   ],
   "difficulty": {

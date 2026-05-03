@@ -4,70 +4,70 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["C", "", "", "", "", "", "", ""],
-    ["A", "", "C", "A", "T", "I", "O", "N"],
-    ["P", "", "", "", "", "", "", ""],
-    ["S", "", "", "S", "A", "Y", "", ""],
-    ["", "", "", "", "", "", "U", ""],
-    ["L", "E", "N", "I", "S", "", "S", ""],
-    ["", "", "", "", "", "", "E", ""],
-    ["D", "O", "N", "", "", "", "S", ""]
+    ["", "", "C", "U", "T", "C", "", ""],
+    ["S", "O", "L", "I", "D", "A", "", ""],
+    ["", "", "", "", "", "M", "", ""],
+    ["", "G", "", "", "", "P", "", ""],
+    ["", "A", "B", "U", "T", "T", "O", "N"],
+    ["", "T", "", "", "", "A", "", ""],
+    ["", "E", "", "", "", "I", "", ""],
+    ["", "", "", "", "", "R", "", ""]
   ],
   "puzzle": [
+    ["", "", "", "", "T", "C", "", ""],
+    ["", "", "", "I", "D", "A", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "A", "", "", "", "N"],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "S", "A", "", "", ""],
-    ["", "", "", "", "", "", "U", ""],
-    ["L", "", "", "I", "S", "", "", ""],
-    ["", "", "", "", "", "", "", ""],
-    ["D", "", "N", "", "", "", "", ""]
+    ["", "", "", "U", "", "", "", "N"],
+    ["", "T", "", "", "", "A", "", ""],
+    ["", "E", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", "", ""]
   ],
-  "topWord": "DECISION",
-  "sideWord": "CAPSULES",
+  "topWord": "SOLUTION",
+  "sideWord": "COMPUTER",
   "topVisible": [true, false, false, true, false, false, true, true],
   "sideVisible": [false, false, true, true, false, true, false, true],
   "ships": [
     {
-      "word": "CAPS",
-      "length": 4,
-      "row": 1,
-      "col": 1,
-      "direction": "V"
-    },
-    {
-      "word": "CATION",
+      "word": "BUTTON",
       "length": 6,
-      "row": 2,
+      "row": 5,
       "col": 3,
       "direction": "H"
     },
     {
-      "word": "SAY",
-      "length": 3,
-      "row": 4,
-      "col": 4,
+      "word": "SOLID",
+      "length": 5,
+      "row": 2,
+      "col": 1,
       "direction": "H"
     },
     {
-      "word": "USES",
+      "word": "CAMP",
       "length": 4,
-      "row": 5,
-      "col": 7,
+      "row": 1,
+      "col": 6,
       "direction": "V"
     },
     {
-      "word": "LENIS",
-      "length": 5,
-      "row": 6,
-      "col": 1,
-      "direction": "H"
+      "word": "GATE",
+      "length": 4,
+      "row": 4,
+      "col": 2,
+      "direction": "V"
     },
     {
-      "word": "DON",
+      "word": "AIR",
       "length": 3,
-      "row": 8,
-      "col": 1,
+      "row": 6,
+      "col": 6,
+      "direction": "V"
+    },
+    {
+      "word": "CUT",
+      "length": 3,
+      "row": 1,
+      "col": 3,
       "direction": "H"
     }
   ],

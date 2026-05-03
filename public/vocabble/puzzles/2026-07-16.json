@@ -4,71 +4,71 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["C", "", "", "", "", "", "", ""],
-    ["O", "", "C", "A", "T", "I", "O", "N"],
-    ["P", "", "", "", "", "", "", ""],
-    ["S", "", "", "N", "A", "Y", "", ""],
-    ["", "", "", "", "", "", "U", ""],
-    ["L", "E", "N", "I", "S", "", "S", ""],
-    ["", "", "", "", "", "", "E", ""],
-    ["D", "O", "N", "", "", "", "S", ""]
+    ["H", "", "", "", "H", "", "", ""],
+    ["E", "", "", "", "O", "", "", ""],
+    ["L", "", "A", "", "S", "", "", ""],
+    ["P", "", "N", "", "T", "", "", ""],
+    ["", "", "I", "D", "A", "N", "C", "E"],
+    ["", "V", "M", "N", "E", "T", "", ""],
+    ["", "A", "A", "", "", "", "", ""],
+    ["", "N", "L", "", "", "", "", ""]
   ],
   "puzzle": [
-    ["C", "", "", "", "", "", "", ""],
-    ["O", "", "", "A", "", "I", "", ""],
+    ["H", "", "", "", "", "", "", ""],
+    ["E", "", "", "", "", "", "", ""],
+    ["", "", "", "", "S", "", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "", "", "U", ""],
-    ["L", "", "N", "I", "", "", "S", ""],
-    ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "", "", "S", ""]
+    ["", "", "I", "D", "", "N", "C", ""],
+    ["", "V", "", "", "E", "", "", ""],
+    ["", "", "A", "", "", "", "", ""],
+    ["", "", "", "", "", "", "", ""]
   ],
-  "topWord": "DECISION",
-  "sideWord": "CAPSULES",
+  "topWord": "EVIDENCE",
+  "sideWord": "HOSPITAL",
   "topVisible": [false, true, true, false, false, true, true, false],
   "sideVisible": [true, true, false, true, false, true, false, false],
   "ships": [
     {
-      "word": "COPS",
+      "word": "ANIMAL",
+      "length": 6,
+      "row": 3,
+      "col": 3,
+      "direction": "V"
+    },
+    {
+      "word": "DANCE",
+      "length": 5,
+      "row": 5,
+      "col": 4,
+      "direction": "H"
+    },
+    {
+      "word": "HOST",
+      "length": 4,
+      "row": 1,
+      "col": 5,
+      "direction": "V"
+    },
+    {
+      "word": "HELP",
       "length": 4,
       "row": 1,
       "col": 1,
       "direction": "V"
     },
     {
-      "word": "CATION",
-      "length": 6,
-      "row": 2,
-      "col": 3,
-      "direction": "H"
-    },
-    {
-      "word": "NAY",
+      "word": "NET",
       "length": 3,
-      "row": 4,
+      "row": 6,
       "col": 4,
       "direction": "H"
     },
     {
-      "word": "USES",
-      "length": 4,
-      "row": 5,
-      "col": 7,
-      "direction": "V"
-    },
-    {
-      "word": "LENIS",
-      "length": 5,
-      "row": 6,
-      "col": 1,
-      "direction": "H"
-    },
-    {
-      "word": "DON",
+      "word": "VAN",
       "length": 3,
-      "row": 8,
-      "col": 1,
-      "direction": "H"
+      "row": 6,
+      "col": 2,
+      "direction": "V"
     }
   ],
   "difficulty": {

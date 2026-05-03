@@ -4,70 +4,70 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["C", "", "", "", "", "", "", ""],
-    ["A", "", "C", "A", "T", "I", "O", "N"],
-    ["P", "", "", "", "", "", "", ""],
-    ["S", "", "", "S", "A", "Y", "", ""],
-    ["", "", "", "", "", "", "U", ""],
-    ["L", "E", "N", "I", "S", "", "S", ""],
-    ["", "", "", "", "", "", "E", ""],
-    ["D", "I", "N", "", "", "", "S", ""]
+    ["N", "", "", "", "", "T", "E", "N"],
+    ["O", "", "", "", "", "", "", ""],
+    ["T", "", "D", "E", "T", "A", "I", "L"],
+    ["E", "", "", "", "", "", "", ""],
+    ["", "", "", "", "", "B", "", ""],
+    ["M", "O", "U", "N", "T", "O", "", ""],
+    ["", "", "", "", "", "O", "", ""],
+    ["", "O", "A", "K", "", "K", "", ""]
   ],
   "puzzle": [
-    ["C", "", "", "", "", "", "", ""],
-    ["", "", "", "A", "", "", "O", ""],
+    ["N", "", "", "", "", "T", "E", "N"],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "A", "", "", ""],
+    ["", "", "", "E", "", "", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["L", "E", "", "", "", "", "S", ""],
     ["", "", "", "", "", "", "", ""],
-    ["D", "", "N", "", "", "", "S", ""]
+    ["M", "O", "", "N", "", "", "", ""],
+    ["", "", "", "", "", "O", "", ""],
+    ["", "O", "", "", "", "", "", ""]
   ],
-  "topWord": "DECISION",
-  "sideWord": "CAPSULES",
+  "topWord": "MOUNTAIN",
+  "sideWord": "NOTEBOOK",
   "topVisible": [false, true, true, false, true, true, false, false],
   "sideVisible": [false, true, true, false, false, false, true, true],
   "ships": [
     {
-      "word": "CAPS",
-      "length": 4,
-      "row": 1,
-      "col": 1,
-      "direction": "V"
-    },
-    {
-      "word": "CATION",
+      "word": "DETAIL",
       "length": 6,
-      "row": 2,
+      "row": 3,
       "col": 3,
       "direction": "H"
     },
     {
-      "word": "SAY",
-      "length": 3,
-      "row": 4,
-      "col": 4,
-      "direction": "H"
-    },
-    {
-      "word": "USES",
-      "length": 4,
-      "row": 5,
-      "col": 7,
-      "direction": "V"
-    },
-    {
-      "word": "LENIS",
+      "word": "MOUNT",
       "length": 5,
       "row": 6,
       "col": 1,
       "direction": "H"
     },
     {
-      "word": "DIN",
+      "word": "BOOK",
+      "length": 4,
+      "row": 5,
+      "col": 6,
+      "direction": "V"
+    },
+    {
+      "word": "NOTE",
+      "length": 4,
+      "row": 1,
+      "col": 1,
+      "direction": "V"
+    },
+    {
+      "word": "TEN",
+      "length": 3,
+      "row": 1,
+      "col": 6,
+      "direction": "H"
+    },
+    {
+      "word": "OAK",
       "length": 3,
       "row": 8,
-      "col": 1,
+      "col": 2,
       "direction": "H"
     }
   ],

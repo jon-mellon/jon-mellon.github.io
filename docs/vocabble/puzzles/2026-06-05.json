@@ -4,71 +4,71 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["C", "O", "P", "S", "", "L", "", "D"],
-    ["", "", "", "", "", "E", "", "E"],
-    ["", "C", "", "", "", "V", "", "N"],
-    ["", "A", "", "S", "", "I", "", ""],
-    ["", "T", "", "O", "", "S", "", ""],
-    ["", "I", "", "Y", "", "", "", ""],
-    ["", "O", "", "", "U", "S", "E", "S"],
-    ["", "N", "", "", "", "", "", ""]
+    ["", "V", "I", "E", "W", "", "", ""],
+    ["A", "R", "E", "D", "N", "I", "C", "E"],
+    ["R", "", "", "", "S", "W", "", ""],
+    ["I", "", "", "", "T", "I", "", ""],
+    ["S", "", "", "", "A", "N", "", ""],
+    ["E", "", "", "", "B", "", "", ""],
+    ["", "", "", "", "L", "", "", ""],
+    ["", "", "", "", "E", "", "", ""]
   ],
   "puzzle": [
-    ["C", "", "", "", "", "L", "", ""],
-    ["", "", "", "", "", "E", "", ""],
-    ["", "", "", "", "", "V", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "T", "", "", "", "S", "", ""],
-    ["", "", "", "Y", "", "", "", ""],
-    ["", "O", "", "", "", "", "E", "S"],
-    ["", "", "", "", "", "", "", ""]
+    ["A", "R", "", "", "N", "", "", "E"],
+    ["", "", "", "", "", "W", "", ""],
+    ["", "", "", "", "T", "", "", ""],
+    ["", "", "", "", "A", "", "", ""],
+    ["E", "", "", "", "B", "", "", ""],
+    ["", "", "", "", "", "", "", ""],
+    ["", "", "", "", "E", "", "", ""]
   ],
-  "topWord": "CAPSULES",
-  "sideWord": "DECISION",
+  "topWord": "EVIDENCE",
+  "sideWord": "VARIABLE",
   "topVisible": [true, true, false, false, false, true, false, true],
   "sideVisible": [true, true, false, true, false, false, false, true],
   "ships": [
     {
-      "word": "COPS",
+      "word": "STABLE",
+      "length": 6,
+      "row": 3,
+      "col": 5,
+      "direction": "V"
+    },
+    {
+      "word": "ARISE",
+      "length": 5,
+      "row": 2,
+      "col": 1,
+      "direction": "V"
+    },
+    {
+      "word": "VIEW",
       "length": 4,
       "row": 1,
-      "col": 1,
+      "col": 2,
       "direction": "H"
     },
     {
-      "word": "CATION",
-      "length": 6,
-      "row": 3,
-      "col": 2,
-      "direction": "V"
-    },
-    {
-      "word": "SOY",
-      "length": 3,
-      "row": 4,
-      "col": 4,
-      "direction": "V"
-    },
-    {
-      "word": "USES",
+      "word": "NICE",
       "length": 4,
-      "row": 7,
+      "row": 2,
       "col": 5,
       "direction": "H"
     },
     {
-      "word": "LEVIS",
-      "length": 5,
-      "row": 1,
+      "word": "WIN",
+      "length": 3,
+      "row": 3,
       "col": 6,
       "direction": "V"
     },
     {
-      "word": "DEN",
+      "word": "RED",
       "length": 3,
-      "row": 1,
-      "col": 8,
-      "direction": "V"
+      "row": 2,
+      "col": 2,
+      "direction": "H"
     }
   ],
   "difficulty": {

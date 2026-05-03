@@ -4,71 +4,71 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["C", "", "", "", "", "", "", ""],
-    ["O", "", "C", "A", "T", "I", "O", "N"],
-    ["P", "", "", "", "", "", "", ""],
-    ["S", "", "", "N", "A", "Y", "", ""],
-    ["", "", "", "", "", "", "U", ""],
-    ["L", "E", "V", "I", "S", "", "S", ""],
-    ["", "", "", "", "", "", "E", ""],
-    ["D", "E", "N", "", "", "", "S", ""]
+    ["", "", "A", "", "A", "", "", ""],
+    ["", "", "N", "E", "N", "", "", ""],
+    ["", "", "G", "A", "T", "", "", ""],
+    ["", "", "L", "S", "", "", "", ""],
+    ["", "", "E", "Y", "", "", "", ""],
+    ["F", "A", "S", "T", "", "", "", ""],
+    ["", "", "A", "C", "T", "I", "O", "N"],
+    ["B", "U", "S", "", "", "", "", ""]
   ],
   "puzzle": [
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "A", "", "I", "", ""],
-    ["P", "", "", "", "", "", "", ""],
-    ["S", "", "", "N", "", "", "", ""],
-    ["", "", "", "", "", "", "U", ""],
-    ["", "", "", "I", "", "", "", ""],
-    ["", "", "", "", "", "", "E", ""],
-    ["", "E", "N", "", "", "", "", ""]
+    ["", "", "", "E", "", "", "", ""],
+    ["", "", "", "A", "T", "", "", ""],
+    ["", "", "L", "", "", "", "", ""],
+    ["", "", "", "", "", "", "", ""],
+    ["", "A", "", "", "", "", "", ""],
+    ["", "", "A", "C", "", "I", "", ""],
+    ["", "U", "S", "", "", "", "", ""]
   ],
-  "topWord": "DECISION",
-  "sideWord": "CAPSULES",
+  "topWord": "FUNCTION",
+  "sideWord": "ANALYSIS",
   "topVisible": [false, true, true, false, false, false, true, true],
   "sideVisible": [false, true, false, true, false, true, true, false],
   "ships": [
     {
-      "word": "COPS",
-      "length": 4,
-      "row": 1,
-      "col": 1,
-      "direction": "V"
-    },
-    {
-      "word": "CATION",
+      "word": "ACTION",
       "length": 6,
-      "row": 2,
+      "row": 7,
       "col": 3,
       "direction": "H"
     },
     {
-      "word": "NAY",
-      "length": 3,
-      "row": 4,
-      "col": 4,
-      "direction": "H"
-    },
-    {
-      "word": "USES",
-      "length": 4,
-      "row": 5,
-      "col": 7,
+      "word": "ANGLE",
+      "length": 5,
+      "row": 1,
+      "col": 3,
       "direction": "V"
     },
     {
-      "word": "LEVIS",
-      "length": 5,
+      "word": "FAST",
+      "length": 4,
       "row": 6,
       "col": 1,
       "direction": "H"
     },
     {
-      "word": "DEN",
+      "word": "EASY",
+      "length": 4,
+      "row": 2,
+      "col": 4,
+      "direction": "V"
+    },
+    {
+      "word": "BUS",
       "length": 3,
       "row": 8,
       "col": 1,
       "direction": "H"
+    },
+    {
+      "word": "ANT",
+      "length": 3,
+      "row": 1,
+      "col": 5,
+      "direction": "V"
     }
   ],
   "difficulty": {

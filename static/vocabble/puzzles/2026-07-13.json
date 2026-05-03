@@ -4,71 +4,71 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["C", "U", "P", "S", "", "L", "", "D"],
-    ["", "", "", "", "", "E", "", "I"],
-    ["", "C", "", "", "", "V", "", "N"],
-    ["", "A", "", "S", "", "I", "", ""],
-    ["", "T", "", "O", "", "S", "", ""],
-    ["", "I", "", "Y", "", "", "", ""],
-    ["", "O", "", "", "U", "S", "E", "S"],
-    ["", "N", "", "", "", "", "", ""]
+    ["R", "", "B", "E", "A", "T", "", ""],
+    ["O", "", "", "", "", "", "", ""],
+    ["U", "", "S", "E", "A", "R", "C", "H"],
+    ["N", "N", "", "", "", "", "", ""],
+    ["D", "E", "", "", "", "", "", ""],
+    ["D", "A", "", "", "A", "R", "T", ""],
+    ["A", "R", "", "", "", "", "", ""],
+    ["Y", "", "", "", "", "", "", ""]
   ],
   "puzzle": [
-    ["", "", "", "S", "", "L", "", "D"],
+    ["", "", "", "E", "A", "", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "", "V", "", "N"],
-    ["", "A", "", "", "", "I", "", ""],
-    ["", "", "", "O", "", "", "", ""],
-    ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "U", "", "", "S"],
+    ["", "", "S", "", "A", "", "", "H"],
+    ["N", "", "", "", "", "", "", ""],
+    ["", "E", "", "", "", "", "", ""],
+    ["", "", "", "", "", "R", "T", ""],
+    ["", "R", "", "", "", "", "", ""],
     ["", "", "", "", "", "", "", ""]
   ],
-  "topWord": "CAPSULES",
-  "sideWord": "DECISION",
+  "topWord": "RESEARCH",
+  "sideWord": "BOUNDARY",
   "topVisible": [true, false, true, false, true, true, false, false],
   "sideVisible": [false, false, true, true, false, false, true, true],
   "ships": [
     {
-      "word": "CUPS",
-      "length": 4,
-      "row": 1,
-      "col": 1,
+      "word": "SEARCH",
+      "length": 6,
+      "row": 3,
+      "col": 3,
       "direction": "H"
     },
     {
-      "word": "CATION",
-      "length": 6,
-      "row": 3,
+      "word": "ROUND",
+      "length": 5,
+      "row": 1,
+      "col": 1,
+      "direction": "V"
+    },
+    {
+      "word": "NEAR",
+      "length": 4,
+      "row": 4,
       "col": 2,
       "direction": "V"
     },
     {
-      "word": "SOY",
-      "length": 3,
-      "row": 4,
-      "col": 4,
-      "direction": "V"
-    },
-    {
-      "word": "USES",
+      "word": "BEAT",
       "length": 4,
-      "row": 7,
-      "col": 5,
+      "row": 1,
+      "col": 3,
       "direction": "H"
     },
     {
-      "word": "LEVIS",
-      "length": 5,
-      "row": 1,
-      "col": 6,
+      "word": "DAY",
+      "length": 3,
+      "row": 6,
+      "col": 1,
       "direction": "V"
     },
     {
-      "word": "DIN",
+      "word": "ART",
       "length": 3,
-      "row": 1,
-      "col": 8,
-      "direction": "V"
+      "row": 6,
+      "col": 5,
+      "direction": "H"
     }
   ],
   "difficulty": {

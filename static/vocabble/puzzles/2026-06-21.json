@@ -4,71 +4,71 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["C", "A", "P", "S", "", "L", "", "D"],
-    ["", "", "", "", "", "E", "", "I"],
-    ["", "C", "", "", "", "N", "", "N"],
-    ["", "A", "", "S", "", "I", "", ""],
-    ["", "T", "", "O", "", "S", "", ""],
-    ["", "I", "", "Y", "", "", "", ""],
-    ["", "O", "", "", "U", "S", "E", "S"],
-    ["", "N", "", "", "", "", "", ""]
+    ["S", "T", "A", "B", "L", "E", "", ""],
+    ["", "", "", "", "B", "A", "N", "D"],
+    ["", "", "", "", "D", "E", "N", ""],
+    ["", "", "U", "N", "D", "E", "R", ""],
+    ["W", "", "", "E", "", "", "", ""],
+    ["I", "", "", "A", "", "", "", ""],
+    ["N", "", "", "C", "", "", "", ""],
+    ["", "", "", "H", "", "", "", ""]
   ],
   "puzzle": [
-    ["C", "", "", "", "", "L", "", "D"],
-    ["", "", "", "", "", "E", "", ""],
-    ["", "", "", "", "", "", "", "N"],
-    ["", "", "", "S", "", "I", "", ""],
+    ["S", "", "", "", "", "E", "", ""],
+    ["", "", "", "", "B", "", "N", ""],
+    ["", "", "", "", "D", "", "", ""],
+    ["", "", "U", "", "", "E", "R", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "Y", "", "", "", ""],
-    ["", "O", "", "", "", "", "E", ""],
-    ["", "", "", "", "", "", "", ""]
+    ["", "", "", "A", "", "", "", ""],
+    ["", "", "", "", "", "", "", ""],
+    ["", "", "", "H", "", "", "", ""]
   ],
-  "topWord": "CAPSULES",
-  "sideWord": "DECISION",
+  "topWord": "STANDARD",
+  "sideWord": "SANDWICH",
   "topVisible": [true, true, false, false, false, true, true, false],
   "sideVisible": [true, true, false, false, true, false, false, true],
   "ships": [
     {
-      "word": "CAPS",
-      "length": 4,
+      "word": "STABLE",
+      "length": 6,
       "row": 1,
       "col": 1,
       "direction": "H"
     },
     {
-      "word": "CATION",
-      "length": 6,
-      "row": 3,
-      "col": 2,
-      "direction": "V"
-    },
-    {
-      "word": "SOY",
-      "length": 3,
+      "word": "UNDER",
+      "length": 5,
       "row": 4,
-      "col": 4,
-      "direction": "V"
+      "col": 3,
+      "direction": "H"
     },
     {
-      "word": "USES",
+      "word": "BAND",
       "length": 4,
-      "row": 7,
+      "row": 2,
       "col": 5,
       "direction": "H"
     },
     {
-      "word": "LENIS",
-      "length": 5,
-      "row": 1,
-      "col": 6,
+      "word": "EACH",
+      "length": 4,
+      "row": 5,
+      "col": 4,
       "direction": "V"
     },
     {
-      "word": "DIN",
+      "word": "WIN",
       "length": 3,
-      "row": 1,
-      "col": 8,
+      "row": 5,
+      "col": 1,
       "direction": "V"
+    },
+    {
+      "word": "DEN",
+      "length": 3,
+      "row": 3,
+      "col": 5,
+      "direction": "H"
     }
   ],
   "difficulty": {

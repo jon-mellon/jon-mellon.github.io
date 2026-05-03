@@ -4,70 +4,70 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["C", "", "", "", "", "", "", ""],
-    ["O", "", "C", "A", "T", "I", "O", "N"],
-    ["P", "", "", "", "", "", "", ""],
-    ["S", "", "", "S", "A", "Y", "", ""],
-    ["", "", "", "", "", "", "U", ""],
-    ["L", "E", "V", "I", "S", "", "S", ""],
-    ["", "", "", "", "", "", "E", ""],
-    ["D", "I", "N", "", "", "", "S", ""]
+    ["A", "I", "R", "P", "", "", "", ""],
+    ["", "", "", "O", "", "", "", ""],
+    ["", "", "", "L", "L", "O", "G", ""],
+    ["", "S", "", "I", "", "", "", ""],
+    ["", "T", "", "C", "", "", "", ""],
+    ["", "I", "", "Y", "", "", "", ""],
+    ["", "C", "", "", "L", "A", "K", "E"],
+    ["", "K", "", "S", "I", "G", "N", ""]
   ],
   "puzzle": [
+    ["", "", "", "P", "", "", "", ""],
+    ["", "", "", "O", "", "", "", ""],
+    ["", "", "", "", "L", "", "", ""],
+    ["", "", "", "I", "", "", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "C", "A", "T", "", "O", ""],
-    ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "A", "", "", ""],
-    ["", "", "", "", "", "", "", ""],
-    ["L", "", "V", "I", "S", "", "", ""],
-    ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "", "", "S", ""]
+    ["", "I", "", "Y", "", "", "", ""],
+    ["", "", "", "", "L", "A", "", ""],
+    ["", "", "", "S", "", "", "N", ""]
   ],
-  "topWord": "DECISION",
-  "sideWord": "CAPSULES",
+  "topWord": "AIRPLANE",
+  "sideWord": "POLITICS",
   "topVisible": [false, true, false, false, true, false, true, true],
   "sideVisible": [false, false, false, true, true, true, false, true],
   "ships": [
     {
-      "word": "COPS",
-      "length": 4,
+      "word": "POLICY",
+      "length": 6,
       "row": 1,
-      "col": 1,
+      "col": 4,
       "direction": "V"
     },
     {
-      "word": "CATION",
-      "length": 6,
-      "row": 2,
-      "col": 3,
+      "word": "STICK",
+      "length": 5,
+      "row": 4,
+      "col": 2,
+      "direction": "V"
+    },
+    {
+      "word": "LAKE",
+      "length": 4,
+      "row": 7,
+      "col": 5,
       "direction": "H"
     },
     {
-      "word": "SAY",
-      "length": 3,
-      "row": 4,
+      "word": "SIGN",
+      "length": 4,
+      "row": 8,
       "col": 4,
       "direction": "H"
     },
     {
-      "word": "USES",
-      "length": 4,
-      "row": 5,
-      "col": 7,
-      "direction": "V"
-    },
-    {
-      "word": "LEVIS",
-      "length": 5,
-      "row": 6,
+      "word": "AIR",
+      "length": 3,
+      "row": 1,
       "col": 1,
       "direction": "H"
     },
     {
-      "word": "DIN",
+      "word": "LOG",
       "length": 3,
-      "row": 8,
-      "col": 1,
+      "row": 3,
+      "col": 5,
       "direction": "H"
     }
   ],

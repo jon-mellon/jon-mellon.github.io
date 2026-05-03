@@ -279,7 +279,7 @@ function renderFleet() {
     label.textContent = `Ship ${index + 1}`;
     const cells = document.createElement("div");
     cells.className = "fleet-cells";
-    cells.style.gridTemplateColumns = `repeat(${length}, minmax(0, 1fr))`;
+    cells.style.gridTemplateColumns = `repeat(${length}, var(--fleet-cell-size))`;
     for (let ii = 0; ii < length; ii += 1) {
       const cell = document.createElement("label");
       cell.className = "fleet-cell";

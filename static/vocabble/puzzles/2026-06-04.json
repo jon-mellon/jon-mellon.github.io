@@ -4,71 +4,71 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["C", "", "", "", "", "", "", ""],
-    ["O", "", "C", "A", "T", "I", "O", "N"],
-    ["P", "", "", "", "", "", "", ""],
-    ["S", "", "", "S", "O", "Y", "", ""],
-    ["", "", "", "", "", "", "U", ""],
-    ["L", "E", "V", "I", "S", "", "S", ""],
-    ["", "", "", "", "", "", "E", ""],
-    ["D", "E", "N", "", "", "", "S", ""]
+    ["S", "", "", "", "", "", "", "A"],
+    ["H", "", "", "", "", "I", "", "C"],
+    ["I", "P", "", "", "", "O", "", "R"],
+    ["P", "A", "", "", "", "N", "C", "E"],
+    ["", "L", "", "", "", "", "U", ""],
+    ["", "A", "", "", "", "", "P", ""],
+    ["", "C", "Q", "U", "E", "E", "N", ""],
+    ["", "E", "", "", "", "", "", ""]
   ],
   "puzzle": [
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "T", "I", "", "N"],
-    ["P", "", "", "", "", "", "", ""],
-    ["S", "", "", "S", "", "", "", ""],
-    ["", "", "", "", "", "", "U", ""],
-    ["", "E", "V", "", "", "", "", ""],
-    ["", "", "", "", "", "", "E", ""],
-    ["", "", "", "", "", "", "", ""]
+    ["", "", "", "", "", "", "", "C"],
+    ["I", "", "", "", "", "O", "", ""],
+    ["P", "", "", "", "", "", "C", "E"],
+    ["", "L", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", "", ""],
+    ["", "", "", "", "E", "", "N", ""],
+    ["", "E", "", "", "", "", "", ""]
   ],
-  "topWord": "DECISION",
-  "sideWord": "CAPSULES",
+  "topWord": "SEQUENCE",
+  "sideWord": "AIRPLANE",
   "topVisible": [false, false, true, true, false, true, true, false],
   "sideVisible": [true, true, false, false, false, false, true, true],
   "ships": [
     {
-      "word": "COPS",
+      "word": "PALACE",
+      "length": 6,
+      "row": 3,
+      "col": 2,
+      "direction": "V"
+    },
+    {
+      "word": "QUEEN",
+      "length": 5,
+      "row": 7,
+      "col": 3,
+      "direction": "H"
+    },
+    {
+      "word": "ACRE",
+      "length": 4,
+      "row": 1,
+      "col": 8,
+      "direction": "V"
+    },
+    {
+      "word": "SHIP",
       "length": 4,
       "row": 1,
       "col": 1,
       "direction": "V"
     },
     {
-      "word": "CATION",
-      "length": 6,
-      "row": 2,
-      "col": 3,
-      "direction": "H"
-    },
-    {
-      "word": "SOY",
+      "word": "ION",
       "length": 3,
-      "row": 4,
-      "col": 4,
-      "direction": "H"
-    },
-    {
-      "word": "USES",
-      "length": 4,
-      "row": 5,
-      "col": 7,
+      "row": 2,
+      "col": 6,
       "direction": "V"
     },
     {
-      "word": "LEVIS",
-      "length": 5,
-      "row": 6,
-      "col": 1,
-      "direction": "H"
-    },
-    {
-      "word": "DEN",
+      "word": "CUP",
       "length": 3,
-      "row": 8,
-      "col": 1,
-      "direction": "H"
+      "row": 4,
+      "col": 7,
+      "direction": "V"
     }
   ],
   "difficulty": {

@@ -4,71 +4,71 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["C", "", "", "", "", "", "", ""],
-    ["O", "", "C", "A", "T", "I", "O", "N"],
-    ["P", "", "", "", "", "", "", ""],
-    ["S", "", "", "N", "A", "Y", "", ""],
-    ["", "", "", "", "", "", "U", ""],
-    ["L", "E", "V", "I", "S", "", "S", ""],
-    ["", "", "", "", "", "", "E", ""],
-    ["D", "I", "N", "", "", "", "S", ""]
+    ["L", "E", "A", "S", "T", "", "", ""],
+    ["", "F", "L", "Y", "G", "R", "I", "D"],
+    ["", "A", "", "R", "U", "L", "E", ""],
+    ["", "C", "", "", "", "", "", ""],
+    ["A", "T", "", "", "", "", "", ""],
+    ["R", "I", "", "", "", "", "", ""],
+    ["M", "O", "", "", "", "", "", ""],
+    ["", "N", "", "", "", "", "", ""]
   ],
   "puzzle": [
+    ["", "E", "", "S", "", "", "", ""],
+    ["", "", "", "", "G", "R", "", "D"],
+    ["", "", "", "", "", "", "E", ""],
+    ["", "C", "", "", "", "", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "A", "T", "", "", "N"],
-    ["P", "", "", "", "", "", "", ""],
-    ["", "", "", "", "", "Y", "", ""],
-    ["", "", "", "", "", "", "U", ""],
-    ["L", "", "", "", "", "", "", ""],
-    ["", "", "", "", "", "", "", ""],
-    ["", "I", "N", "", "", "", "S", ""]
+    ["R", "", "", "", "", "", "", ""],
+    ["", "O", "", "", "", "", "", ""],
+    ["", "N", "", "", "", "", "", ""]
   ],
-  "topWord": "DECISION",
-  "sideWord": "CAPSULES",
+  "topWord": "MEASURED",
+  "sideWord": "ELECTION",
   "topVisible": [true, false, false, true, true, false, false, true],
   "sideVisible": [true, false, true, false, true, false, false, true],
   "ships": [
     {
-      "word": "COPS",
-      "length": 4,
-      "row": 1,
-      "col": 1,
+      "word": "ACTION",
+      "length": 6,
+      "row": 3,
+      "col": 2,
       "direction": "V"
     },
     {
-      "word": "CATION",
-      "length": 6,
-      "row": 2,
-      "col": 3,
+      "word": "LEAST",
+      "length": 5,
+      "row": 1,
+      "col": 1,
       "direction": "H"
     },
     {
-      "word": "NAY",
-      "length": 3,
-      "row": 4,
+      "word": "RULE",
+      "length": 4,
+      "row": 3,
       "col": 4,
       "direction": "H"
     },
     {
-      "word": "USES",
+      "word": "GRID",
       "length": 4,
-      "row": 5,
-      "col": 7,
-      "direction": "V"
-    },
-    {
-      "word": "LEVIS",
-      "length": 5,
-      "row": 6,
-      "col": 1,
+      "row": 2,
+      "col": 5,
       "direction": "H"
     },
     {
-      "word": "DIN",
+      "word": "FLY",
       "length": 3,
-      "row": 8,
-      "col": 1,
+      "row": 2,
+      "col": 2,
       "direction": "H"
+    },
+    {
+      "word": "ARM",
+      "length": 3,
+      "row": 5,
+      "col": 1,
+      "direction": "V"
     }
   ],
   "difficulty": {

@@ -4,70 +4,70 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["C", "U", "P", "S", "", "L", "", "D"],
-    ["", "", "", "", "", "E", "", "O"],
-    ["", "C", "", "", "", "N", "", "N"],
-    ["", "A", "", "S", "", "I", "", ""],
-    ["", "T", "", "A", "", "S", "", ""],
-    ["", "I", "", "Y", "", "", "", ""],
-    ["", "O", "", "", "U", "S", "E", "S"],
-    ["", "N", "", "", "", "", "", ""]
+    ["", "", "", "S", "", "", "F", ""],
+    ["V", "A", "N", "O", "", "", "L", ""],
+    ["", "", "", "L", "", "B", "Y", ""],
+    ["", "", "", "I", "", "U", "", ""],
+    ["", "", "", "D", "", "T", "", "V"],
+    ["", "", "", "", "", "T", "", "I"],
+    ["", "", "", "", "", "O", "", "E"],
+    ["", "A", "R", "E", "A", "N", "", "W"]
   ],
   "puzzle": [
-    ["", "U", "", "S", "", "L", "", "D"],
-    ["", "", "", "", "", "", "", "O"],
-    ["", "", "", "", "", "N", "", ""],
-    ["", "", "", "S", "", "", "", ""],
-    ["", "T", "", "", "", "", "", ""],
-    ["", "", "", "Y", "", "", "", ""],
-    ["", "O", "", "", "", "", "", ""],
-    ["", "", "", "", "", "", "", ""]
+    ["", "", "", "", "", "", "", ""],
+    ["", "A", "", "O", "", "", "", ""],
+    ["", "", "", "", "", "B", "", ""],
+    ["", "", "", "", "", "", "", ""],
+    ["", "", "", "D", "", "T", "", "V"],
+    ["", "", "", "", "", "", "", "I"],
+    ["", "", "", "", "", "O", "", ""],
+    ["", "", "R", "E", "", "", "", ""]
   ],
-  "topWord": "CAPSULES",
-  "sideWord": "DECISION",
+  "topWord": "VARIABLE",
+  "sideWord": "SOLUTION",
   "topVisible": [true, true, true, false, true, false, false, false],
   "sideVisible": [false, false, true, false, true, true, true, false],
   "ships": [
     {
-      "word": "CUPS",
-      "length": 4,
-      "row": 1,
-      "col": 1,
-      "direction": "H"
-    },
-    {
-      "word": "CATION",
+      "word": "BUTTON",
       "length": 6,
       "row": 3,
-      "col": 2,
-      "direction": "V"
-    },
-    {
-      "word": "SAY",
-      "length": 3,
-      "row": 4,
-      "col": 4,
-      "direction": "V"
-    },
-    {
-      "word": "USES",
-      "length": 4,
-      "row": 7,
-      "col": 5,
-      "direction": "H"
-    },
-    {
-      "word": "LENIS",
-      "length": 5,
-      "row": 1,
       "col": 6,
       "direction": "V"
     },
     {
-      "word": "DON",
+      "word": "SOLID",
+      "length": 5,
+      "row": 1,
+      "col": 4,
+      "direction": "V"
+    },
+    {
+      "word": "AREA",
+      "length": 4,
+      "row": 8,
+      "col": 2,
+      "direction": "H"
+    },
+    {
+      "word": "VIEW",
+      "length": 4,
+      "row": 5,
+      "col": 8,
+      "direction": "V"
+    },
+    {
+      "word": "VAN",
+      "length": 3,
+      "row": 2,
+      "col": 1,
+      "direction": "H"
+    },
+    {
+      "word": "FLY",
       "length": 3,
       "row": 1,
-      "col": 8,
+      "col": 7,
       "direction": "V"
     }
   ],

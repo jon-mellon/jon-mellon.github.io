@@ -4,71 +4,71 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["C", "U", "P", "S", "", "L", "", "D"],
-    ["", "", "", "", "", "E", "", "I"],
-    ["", "C", "", "", "", "N", "", "N"],
-    ["", "A", "", "S", "", "I", "", ""],
-    ["", "T", "", "O", "", "S", "", ""],
-    ["", "I", "", "Y", "", "", "", ""],
-    ["", "O", "", "", "U", "S", "E", "S"],
-    ["", "N", "", "", "", "", "", ""]
+    ["", "", "A", "C", "T", "I", "O", "N"],
+    ["", "", "", "", "", "T", "O", "P"],
+    ["", "", "", "S", "A", "L", "T", ""],
+    ["Q", "U", "E", "E", "N", "", "", ""],
+    ["", "B", "", "", "", "", "", ""],
+    ["", "O", "", "", "", "", "", ""],
+    ["", "O", "", "", "", "", "", ""],
+    ["", "K", "", "", "", "I", "O", "N"]
   ],
   "puzzle": [
-    ["C", "U", "", "", "", "", "", ""],
-    ["", "", "", "", "", "E", "", "I"],
-    ["", "C", "", "", "", "", "", ""],
-    ["", "A", "", "", "", "", "", ""],
-    ["", "", "", "O", "", "S", "", ""],
+    ["", "", "", "", "T", "", "O", "N"],
+    ["", "", "", "", "", "T", "", ""],
+    ["", "", "", "", "", "", "T", ""],
+    ["Q", "U", "E", "", "", "", "", ""],
+    ["", "B", "", "", "", "", "", ""],
+    ["", "O", "", "", "", "", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "", "", "E", ""],
-    ["", "N", "", "", "", "", "", ""]
+    ["", "", "", "", "", "", "", ""]
   ],
-  "topWord": "CAPSULES",
-  "sideWord": "DECISION",
+  "topWord": "QUESTION",
+  "sideWord": "NOTEBOOK",
   "topVisible": [false, true, true, false, false, false, true, true],
   "sideVisible": [true, true, true, false, false, true, false, false],
   "ships": [
     {
-      "word": "CUPS",
-      "length": 4,
+      "word": "ACTION",
+      "length": 6,
       "row": 1,
+      "col": 3,
+      "direction": "H"
+    },
+    {
+      "word": "QUEEN",
+      "length": 5,
+      "row": 4,
       "col": 1,
       "direction": "H"
     },
     {
-      "word": "CATION",
-      "length": 6,
-      "row": 3,
+      "word": "BOOK",
+      "length": 4,
+      "row": 5,
       "col": 2,
       "direction": "V"
     },
     {
-      "word": "SOY",
-      "length": 3,
-      "row": 4,
-      "col": 4,
-      "direction": "V"
-    },
-    {
-      "word": "USES",
+      "word": "SALT",
       "length": 4,
-      "row": 7,
-      "col": 5,
+      "row": 3,
+      "col": 4,
       "direction": "H"
     },
     {
-      "word": "LENIS",
-      "length": 5,
-      "row": 1,
+      "word": "TOP",
+      "length": 3,
+      "row": 2,
       "col": 6,
-      "direction": "V"
+      "direction": "H"
     },
     {
-      "word": "DIN",
+      "word": "ION",
       "length": 3,
-      "row": 1,
-      "col": 8,
-      "direction": "V"
+      "row": 8,
+      "col": 6,
+      "direction": "H"
     }
   ],
   "difficulty": {

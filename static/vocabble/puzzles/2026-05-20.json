@@ -4,70 +4,70 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["C", "U", "P", "S", "", "L", "", "D"],
-    ["", "", "", "", "", "E", "", "E"],
-    ["", "C", "", "", "", "N", "", "N"],
-    ["", "A", "", "S", "", "I", "", ""],
-    ["", "T", "", "O", "", "S", "", ""],
-    ["", "I", "", "Y", "", "", "", ""],
-    ["", "O", "", "", "U", "S", "E", "S"],
-    ["", "N", "", "", "", "", "", ""]
+    ["", "", "", "", "F", "A", "R", "M"],
+    ["K", "E", "Y", "U", "", "", "", ""],
+    ["", "A", "", "N", "", "", "", ""],
+    ["", "C", "", "I", "", "", "", ""],
+    ["", "T", "", "T", "", "", "", ""],
+    ["", "I", "I", "", "", "", "", ""],
+    ["", "O", "O", "", "", "", "", ""],
+    ["", "N", "N", "B", "O", "A", "R", "D"]
   ],
   "puzzle": [
-    ["", "U", "", "", "", "", "", ""],
+    ["", "", "", "", "", "A", "", "M"],
+    ["", "E", "", "U", "", "", "", ""],
+    ["", "", "", "N", "", "", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "", "N", "", "N"],
-    ["", "", "", "S", "", "", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "Y", "", "", "", ""],
-    ["", "", "", "", "U", "S", "E", "S"],
-    ["", "N", "", "", "", "", "", ""]
+    ["", "", "", "", "", "", "", ""],
+    ["", "", "O", "", "", "", "", ""],
+    ["", "N", "", "B", "", "A", "", "D"]
   ],
-  "topWord": "CAPSULES",
-  "sideWord": "DECISION",
+  "topWord": "KEYBOARD",
+  "sideWord": "FUNCTION",
   "topVisible": [true, false, true, false, false, true, true, false],
   "sideVisible": [true, false, true, false, true, false, true, false],
   "ships": [
     {
-      "word": "CUPS",
-      "length": 4,
-      "row": 1,
-      "col": 1,
-      "direction": "H"
-    },
-    {
-      "word": "CATION",
+      "word": "ACTION",
       "length": 6,
       "row": 3,
       "col": 2,
       "direction": "V"
     },
     {
-      "word": "SOY",
-      "length": 3,
-      "row": 4,
+      "word": "BOARD",
+      "length": 5,
+      "row": 8,
+      "col": 4,
+      "direction": "H"
+    },
+    {
+      "word": "UNIT",
+      "length": 4,
+      "row": 2,
       "col": 4,
       "direction": "V"
     },
     {
-      "word": "USES",
+      "word": "FARM",
       "length": 4,
-      "row": 7,
+      "row": 1,
       "col": 5,
       "direction": "H"
     },
     {
-      "word": "LENIS",
-      "length": 5,
-      "row": 1,
-      "col": 6,
-      "direction": "V"
+      "word": "KEY",
+      "length": 3,
+      "row": 2,
+      "col": 1,
+      "direction": "H"
     },
     {
-      "word": "DEN",
+      "word": "ION",
       "length": 3,
-      "row": 1,
-      "col": 8,
+      "row": 6,
+      "col": 3,
       "direction": "V"
     }
   ],
