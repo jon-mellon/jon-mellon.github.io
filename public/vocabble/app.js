@@ -29,19 +29,36 @@ function setStatus(text, className = "") {
   statusElement.className = className;
 }
 
+function embeddedPuzzleForDate(date) {
+  const fallbackElement = document.querySelector("#fallback-puzzle");
+  if (!fallbackElement) return null;
+  try {
+    const embeddedPuzzle = JSON.parse(fallbackElement.textContent);
+    return embeddedPuzzle.date === date ? embeddedPuzzle : null;
+  } catch {
+    return null;
+  }
+}
+
 async function loadPuzzle() {
   const today = utcDateString();
   dateElement.textContent = `${today} UTC`;
 
-  const response = await fetch("puzzles/manifest.json", { cache: "no-cache" });
-  if (!response.ok) throw new Error("Puzzle manifest unavailable");
-  const manifest = await response.json();
-  const entry = manifest.puzzles.find((candidate) => candidate.date === today);
-  if (!entry) throw new Error("No puzzle is published for today");
+  try {
+    const response = await fetch("puzzles/manifest.json", { cache: "no-cache" });
+    if (!response.ok) throw new Error("Puzzle manifest unavailable");
+    const manifest = await response.json();
+    const entry = manifest.puzzles.find((candidate) => candidate.date === today);
+    if (!entry) throw new Error("No puzzle is published for today");
 
-  const puzzleResponse = await fetch(`puzzles/${entry.file}`, { cache: "no-cache" });
-  if (!puzzleResponse.ok) throw new Error("Puzzle file unavailable");
-  return puzzleResponse.json();
+    const puzzleResponse = await fetch(`puzzles/${entry.file}`, { cache: "no-cache" });
+    if (!puzzleResponse.ok) throw new Error("Puzzle file unavailable");
+    return puzzleResponse.json();
+  } catch (error) {
+    const embeddedPuzzle = embeddedPuzzleForDate(today);
+    if (embeddedPuzzle) return embeddedPuzzle;
+    throw error;
+  }
 }
 
 function initialStateFromPuzzle(currentPuzzle) {
@@ -49,7 +66,11 @@ function initialStateFromPuzzle(currentPuzzle) {
   if (saved) {
     try {
       const parsed = JSON.parse(saved);
-      if (parsed && parsed.date === currentPuzzle.date) return parsed;
+      if (parsed && parsed.date === currentPuzzle.date) {
+        parsed.fleet = normalizeFleetState(parsed.fleet, currentPuzzle.fleetLengths);
+        parsed.maybe = normalizeBoardLayer(parsed.maybe);
+        return parsed;
+      }
     } catch {
       localStorage.removeItem(storageKey(currentPuzzle.date));
     }
@@ -67,10 +88,26 @@ function initialStateFromPuzzle(currentPuzzle) {
     date: currentPuzzle.date,
     board,
     marks,
+    maybe: blankMatrix(""),
     top: currentPuzzle.topWord.split("").map((letter, index) => currentPuzzle.topVisible[index] ? letter : ""),
     side: currentPuzzle.sideWord.split("").map((letter, index) => currentPuzzle.sideVisible[index] ? letter : ""),
+    fleet: normalizeFleetState(null, currentPuzzle.fleetLengths),
     revealed: false
   };
+}
+
+function normalizeBoardLayer(layer) {
+  return Array.from({ length: SIZE }, (_, row) => {
+    const existingRow = Array.isArray(layer) && Array.isArray(layer[row]) ? layer[row] : [];
+    return Array.from({ length: SIZE }, (_, col) => normalizeLetter(existingRow[col] || ""));
+  });
+}
+
+function normalizeFleetState(fleet, lengths) {
+  return lengths.map((length, shipIndex) => {
+    const existing = Array.isArray(fleet) && Array.isArray(fleet[shipIndex]) ? fleet[shipIndex] : [];
+    return Array.from({ length }, (_, letterIndex) => normalizeLetter(existing[letterIndex] || ""));
+  });
 }
 
 function saveState() {
@@ -109,6 +146,23 @@ function makeInput(value, readonly, label, onInput) {
     onInput(input.value);
   });
   return input;
+}
+
+function nextEditableBoardInput(row, col, direction = 1) {
+  const start = row * SIZE + col;
+  for (let offset = 1; offset < SIZE * SIZE; offset += 1) {
+    const index = (start + offset * direction + SIZE * SIZE) % (SIZE * SIZE);
+    const nextRow = Math.floor(index / SIZE);
+    const nextCol = index % SIZE;
+    if (!isBoardGiven(nextRow, nextCol)) {
+      return boardElement.querySelector(`[data-row="${nextRow}"][data-col="${nextCol}"] input`);
+    }
+  }
+  return null;
+}
+
+function boardDisplayValue(row, col) {
+  return state.board[row][col] || state.maybe[row][col] || "";
 }
 
 function renderBoard() {
@@ -155,18 +209,33 @@ function renderBoard() {
       square.dataset.row = row;
       square.dataset.col = col;
       square.addEventListener("click", (event) => handleCellClick(event, row, col));
-      square.append(makeInput(
-        state.board[row][col],
+      const input = makeInput(
+        boardDisplayValue(row, col),
         isBoardGiven(row, col) || state.revealed,
         `Row ${row + 1}, column ${col + 1}`,
         (value) => {
-          state.board[row][col] = value;
-          if (value) state.marks[row][col] = "";
+          if (mode === "maybe") {
+            state.maybe[row][col] = value;
+            state.board[row][col] = "";
+          } else {
+            state.board[row][col] = value;
+            state.maybe[row][col] = "";
+          }
+          if (value) {
+            state.marks[row][col] = "";
+          }
           saveState();
           renderCell(row, col);
           updateCompletion();
+          if (value) nextEditableBoardInput(row, col)?.focus();
         }
-      ));
+      );
+      input.addEventListener("keydown", (event) => {
+        if (event.key === "Backspace" && !input.value) {
+          nextEditableBoardInput(row, col, -1)?.focus();
+        }
+      });
+      square.append(input);
       boardElement.append(square);
     }
   }
@@ -175,8 +244,9 @@ function renderBoard() {
 function squareClass(row, col) {
   const classes = ["square", "board-square"];
   if (isBoardGiven(row, col)) classes.push("is-given");
+  if (!isBoardGiven(row, col) && !state.revealed) classes.push("is-editable");
   if (state.marks[row][col] === "water") classes.push("is-water");
-  if (state.marks[row][col] === "maybe") classes.push("is-maybe");
+  if (state.maybe[row][col] && !state.board[row][col]) classes.push("is-maybe-letter");
   return classes.join(" ");
 }
 
@@ -188,12 +258,13 @@ function renderCell(row, col) {
 
 function handleCellClick(event, row, col) {
   if (isBoardGiven(row, col) || state.revealed) return;
-  if (mode === "letter") {
+  if (mode === "letter" || mode === "maybe") {
     event.currentTarget.querySelector("input").focus();
     return;
   }
 
   state.board[row][col] = "";
+  state.maybe[row][col] = "";
   state.marks[row][col] = state.marks[row][col] === mode ? "" : mode;
   saveState();
   renderBoard();
@@ -210,8 +281,17 @@ function renderFleet() {
     cells.className = "fleet-cells";
     cells.style.gridTemplateColumns = `repeat(${length}, minmax(0, 1fr))`;
     for (let ii = 0; ii < length; ii += 1) {
-      const cell = document.createElement("span");
+      const cell = document.createElement("label");
       cell.className = "fleet-cell";
+      cell.append(makeInput(
+        state.fleet[index][ii],
+        false,
+        `Ship ${index + 1} planning letter ${ii + 1}`,
+        (value) => {
+          state.fleet[index][ii] = value;
+          saveState();
+        }
+      ));
       cells.append(cell);
     }
     item.append(label, cells);
@@ -301,9 +381,11 @@ function revealPuzzle() {
   state.top = expectedTop();
   state.side = expectedSide();
   state.marks = blankMatrix("");
+  state.maybe = blankMatrix("");
   state.revealed = true;
   saveState();
   renderBoard();
+  renderFleet();
   setStatus("Revealed");
 }
 
@@ -311,6 +393,7 @@ function resetPuzzle() {
   localStorage.removeItem(storageKey(puzzle.date));
   state = initialStateFromPuzzle(puzzle);
   renderBoard();
+  renderFleet();
   setStatus("In progress");
 }
 
