@@ -4,71 +4,71 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["", "", "", "", "S", "I", "D", "E"],
-    ["", "R", "E", "A", "D", "Y", "", ""],
-    ["C", "", "", "D", "", "", "", ""],
-    ["A", "", "", "I", "", "", "", ""],
-    ["T", "", "", "G", "B", "U", "S", ""],
-    ["I", "", "", "", "", "", "", ""],
-    ["O", "", "", "", "", "", "", ""],
-    ["N", "", "", "", "T", "U", "R", "N"]
+    ["S", "H", "A", "P", "E", "", "", ""],
+    ["", "", "", "", "", "O", "A", "K"],
+    ["S", "", "S", "", "", "", "", ""],
+    ["U", "", "O", "", "P", "I", "E", ""],
+    ["I", "", "C", "", "", "", "", ""],
+    ["T", "", "I", "", "", "", "", ""],
+    ["", "", "A", "", "Y", "A", "R", "D"],
+    ["", "", "L", "", "", "", "", ""]
   ],
   "puzzle": [
-    ["", "", "", "", "", "", "", "E"],
-    ["", "", "E", "", "", "", "", ""],
-    ["C", "", "", "", "", "", "", ""],
-    ["A", "", "", "", "", "", "", ""],
-    ["T", "", "", "G", "B", "", "", ""],
+    ["S", "H", "", "", "E", "", "", ""],
+    ["", "", "", "", "", "", "", "K"],
+    ["S", "", "S", "", "", "", "", ""],
+    ["U", "", "", "", "P", "", "", ""],
     ["", "", "", "", "", "", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["N", "", "", "", "T", "U", "", ""]
+    ["", "", "A", "", "", "A", "", ""],
+    ["", "", "", "", "", "", "", ""]
   ],
-  "topWord": "TREASURE",
-  "sideWord": "DECISION",
+  "topWord": "SHIPYARD",
+  "sideWord": "HOSPITAL",
   "topVisible": [false, false, false, true, false, true, true, true],
   "sideVisible": [true, false, false, false, false, true, true, true],
   "ships": [
     {
-      "word": "CATION",
+      "word": "SOCIAL",
       "length": 6,
+      "row": 3,
+      "col": 3,
+      "direction": "V"
+    },
+    {
+      "word": "SHAPE",
+      "length": 5,
+      "row": 1,
+      "col": 1,
+      "direction": "H"
+    },
+    {
+      "word": "YARD",
+      "length": 4,
+      "row": 7,
+      "col": 5,
+      "direction": "H"
+    },
+    {
+      "word": "SUIT",
+      "length": 4,
       "row": 3,
       "col": 1,
       "direction": "V"
     },
     {
-      "word": "READY",
-      "length": 5,
+      "word": "PIE",
+      "length": 3,
+      "row": 4,
+      "col": 5,
+      "direction": "H"
+    },
+    {
+      "word": "OAK",
+      "length": 3,
       "row": 2,
-      "col": 2,
+      "col": 6,
       "direction": "H"
-    },
-    {
-      "word": "SIDE",
-      "length": 4,
-      "row": 1,
-      "col": 5,
-      "direction": "H"
-    },
-    {
-      "word": "TURN",
-      "length": 4,
-      "row": 8,
-      "col": 5,
-      "direction": "H"
-    },
-    {
-      "word": "BUS",
-      "length": 3,
-      "row": 5,
-      "col": 5,
-      "direction": "H"
-    },
-    {
-      "word": "DIG",
-      "length": 3,
-      "row": 3,
-      "col": 4,
-      "direction": "V"
     }
   ],
   "difficulty": {
@@ -81,6 +81,7 @@
     "ok": true,
     "dictionary_ok": true,
     "row_edge_ok": true,
-    "col_edge_ok": true
+    "col_edge_ok": true,
+    "no_orthogonal_touch": true
   }
 }

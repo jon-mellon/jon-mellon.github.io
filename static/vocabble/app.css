@@ -259,6 +259,11 @@ h2 {
   box-shadow: 0 0 0 3px rgba(164, 93, 24, 0.16), inset 0 0 0 1px var(--focus);
 }
 
+.board-square.is-selected {
+  border-color: var(--focus);
+  box-shadow: 0 0 0 3px rgba(164, 93, 24, 0.18), inset 0 0 0 1px var(--focus);
+}
+
 .edge-square.is-given {
   border-color: var(--edge);
   background: #121314;

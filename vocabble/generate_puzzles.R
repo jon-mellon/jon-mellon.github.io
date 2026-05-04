@@ -173,13 +173,32 @@ placement_cells <- function(row, col, direction, length) {
   }
 }
 
+linear_cells <- function(cells) {
+  (cells[, "col"] - 1) * board_size + cells[, "row"]
+}
+
+orthogonal_neighbor_cells <- function(cells) {
+  own <- paste(cells[, "row"], cells[, "col"])
+  out <- list()
+  for (ii in seq_len(nrow(cells))) {
+    adjacent <- neighbors4(cells[ii, "row"], cells[ii, "col"])
+    if (!nrow(adjacent)) next
+    adjacent <- adjacent[!paste(adjacent[, 1], adjacent[, 2]) %in% own, , drop = FALSE]
+    if (nrow(adjacent)) out[[length(out) + 1]] <- adjacent
+  }
+  if (!length(out)) return(integer())
+  unique(linear_cells(do.call(rbind, out)))
+}
+
 can_place <- function(board, row, col, direction, letters) {
   length <- length(letters)
   if (direction == "H" && col + length - 1 > board_size) return(FALSE)
   if (direction == "V" && row + length - 1 > board_size) return(FALSE)
 
   cells <- placement_cells(row, col, direction, length)
-  !any(board[cells] != "")
+  if (any(board[cells] != "")) return(FALSE)
+  neighbors <- orthogonal_neighbor_cells(cells)
+  !length(neighbors) || !any(board[neighbors] != "")
 }
 
 place_word <- function(board, row, col, direction, word) {
@@ -248,7 +267,8 @@ candidate_placements <- function(dictionary, side_word, top_word, seed) {
               row = row,
               col = col,
               direction = direction,
-              cells = (cells[, "col"] - 1) * board_size + cells[, "row"],
+              cells = linear_cells(cells),
+              neighbors = orthogonal_neighbor_cells(cells),
               covered = covered,
               score = sum(covered)
             )
@@ -266,7 +286,7 @@ make_edge_first_board <- function(dictionary, side_word, top_word, seed) {
   placements <- candidate_placements(dictionary, side_word, top_word, seed)
   names <- constraint_names(side_word, top_word)
 
-  for (attempt in seq_len(900)) {
+  for (attempt in seq_len(70)) {
     board <- empty_board()
     occupied <- rep(FALSE, board_size * board_size)
     covered <- rep(FALSE, length(names))
@@ -277,7 +297,9 @@ make_edge_first_board <- function(dictionary, side_word, top_word, seed) {
       length <- fleet_lengths[[ship_index]]
       pool <- placements[[as.character(length)]]
       usable <- pool[vapply(pool, function(candidate) {
-        !candidate$word %in% used_words && !any(occupied[candidate$cells])
+        !candidate$word %in% used_words &&
+          !any(occupied[candidate$cells]) &&
+          !any(occupied[candidate$neighbors])
       }, logical(1))]
       if (!length(usable)) break
 
@@ -383,18 +405,40 @@ mask_puzzle <- function(board, top_word, side_word, seed) {
 validate_candidate <- function(candidate, dictionary) {
   board <- candidate$board
   words <- c(vapply(candidate$ships, `[[`, character(1), "word"), candidate$side, candidate$top)
-  lengths_ok <- sort(vapply(candidate$ships, `[[`, numeric(1), "length")) == sort(fleet_lengths)
+  ship_lengths <- vapply(candidate$ships, `[[`, numeric(1), "length")
+  lengths_ok <- length(ship_lengths) == length(fleet_lengths) && identical(sort(ship_lengths), sort(fleet_lengths))
   dictionary_ok <- all(words %in% unlist(dictionary, use.names = FALSE))
   row_sets <- apply(board, 1, function(x) unique(x[x != ""]))
   col_sets <- apply(board, 2, function(x) unique(x[x != ""]))
   row_ok <- all(mapply(`%in%`, strsplit(candidate$side, "", fixed = TRUE)[[1]], row_sets))
   col_ok <- all(mapply(`%in%`, strsplit(candidate$top, "", fixed = TRUE)[[1]], col_sets))
+  no_touch <- validate_no_orthogonal_touch(candidate$ships)
   list(
-    ok = all(lengths_ok, dictionary_ok, row_ok, col_ok, sum(board != "") == sum(fleet_lengths)),
+    ok = all(lengths_ok, dictionary_ok, row_ok, col_ok, no_touch, sum(board != "") == sum(fleet_lengths)),
     dictionary_ok = dictionary_ok,
     row_edge_ok = row_ok,
-    col_edge_ok = col_ok
+    col_edge_ok = col_ok,
+    no_orthogonal_touch = no_touch
   )
+}
+
+validate_no_orthogonal_touch <- function(ships) {
+  occupied_by_ship <- list()
+  for (ii in seq_along(ships)) {
+    ship <- ships[[ii]]
+    cells <- placement_cells(ship$row, ship$col, ship$direction, ship$length)
+    occupied_by_ship[[ii]] <- linear_cells(cells)
+  }
+  all_occupied <- unlist(occupied_by_ship, use.names = FALSE)
+  if (anyDuplicated(all_occupied)) return(FALSE)
+  for (ii in seq_along(ships)) {
+    ship <- ships[[ii]]
+    cells <- placement_cells(ship$row, ship$col, ship$direction, ship$length)
+    neighbors <- orthogonal_neighbor_cells(cells)
+    other_occupied <- setdiff(all_occupied, occupied_by_ship[[ii]])
+    if (length(intersect(neighbors, other_occupied))) return(FALSE)
+  }
+  TRUE
 }
 
 matrix_to_rows <- function(board) {
@@ -467,6 +511,7 @@ write_batch <- function(start_date = "2026-05-03", days = 90, seed_base = 202605
 
   used_pair_keys <- character()
   for (ii in seq_along(dates)) {
+    message("Generating ", dates[ii])
     puzzle <- make_puzzle(
       date = dates[ii],
       id = sprintf("vocabble-%s", dates[ii]),

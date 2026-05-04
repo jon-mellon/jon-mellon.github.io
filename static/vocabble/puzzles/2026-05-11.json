@@ -4,71 +4,71 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["C", "H", "O", "O", "S", "E", "", ""],
-    ["", "R", "U", "L", "E", "L", "E", "G"],
-    ["", "", "", "", "", "", "Q", ""],
-    ["", "", "", "S", "", "", "U", ""],
-    ["", "", "", "U", "", "N", "E", ""],
-    ["", "", "", "N", "", "I", "E", ""],
-    ["", "", "", "", "", "C", "N", ""],
-    ["", "", "", "", "", "E", "", ""]
+    ["L", "", "F", "", "U", "S", "E", "R"],
+    ["U", "", "A", "", "", "", "", ""],
+    ["N", "", "R", "", "", "O", "", ""],
+    ["C", "", "M", "", "", "P", "", ""],
+    ["H", "", "", "P", "", "T", "", ""],
+    ["", "T", "", "I", "", "I", "", ""],
+    ["", "O", "", "E", "", "O", "", ""],
+    ["", "Y", "", "", "", "N", "", ""]
   ],
   "puzzle": [
-    ["", "H", "", "", "", "", "", ""],
-    ["", "", "U", "", "", "L", "E", ""],
-    ["", "", "", "", "", "", "Q", ""],
-    ["", "", "", "S", "", "", "", ""],
     ["", "", "", "", "", "", "E", ""],
-    ["", "", "", "N", "", "", "E", ""],
-    ["", "", "", "", "", "", "N", ""],
-    ["", "", "", "", "", "", "", ""]
+    ["U", "", "A", "", "", "", "", ""],
+    ["", "", "", "", "", "", "", ""],
+    ["", "", "", "", "", "P", "", ""],
+    ["H", "", "", "", "", "T", "", ""],
+    ["", "", "", "I", "", "", "", ""],
+    ["", "", "", "", "", "O", "", ""],
+    ["", "Y", "", "", "", "N", "", ""]
   ],
-  "topWord": "CROSSING",
-  "sideWord": "SEQUENCE",
+  "topWord": "COMPUTER",
+  "sideWord": "FUNCTION",
   "topVisible": [false, false, false, true, false, true, true, true],
   "sideVisible": [false, true, true, false, true, true, false, false],
   "ships": [
     {
-      "word": "CHOOSE",
+      "word": "OPTION",
       "length": 6,
+      "row": 3,
+      "col": 6,
+      "direction": "V"
+    },
+    {
+      "word": "LUNCH",
+      "length": 5,
       "row": 1,
       "col": 1,
-      "direction": "H"
-    },
-    {
-      "word": "QUEEN",
-      "length": 5,
-      "row": 3,
-      "col": 7,
       "direction": "V"
     },
     {
-      "word": "NICE",
+      "word": "USER",
       "length": 4,
-      "row": 5,
-      "col": 6,
-      "direction": "V"
-    },
-    {
-      "word": "RULE",
-      "length": 4,
-      "row": 2,
-      "col": 2,
+      "row": 1,
+      "col": 5,
       "direction": "H"
     },
     {
-      "word": "SUN",
+      "word": "FARM",
+      "length": 4,
+      "row": 1,
+      "col": 3,
+      "direction": "V"
+    },
+    {
+      "word": "TOY",
       "length": 3,
-      "row": 4,
+      "row": 6,
+      "col": 2,
+      "direction": "V"
+    },
+    {
+      "word": "PIE",
+      "length": 3,
+      "row": 5,
       "col": 4,
       "direction": "V"
-    },
-    {
-      "word": "LEG",
-      "length": 3,
-      "row": 2,
-      "col": 6,
-      "direction": "H"
     }
   ],
   "difficulty": {
@@ -81,6 +81,7 @@
     "ok": true,
     "dictionary_ok": true,
     "row_edge_ok": true,
-    "col_edge_ok": true
+    "col_edge_ok": true,
+    "no_orthogonal_touch": true
   }
 }

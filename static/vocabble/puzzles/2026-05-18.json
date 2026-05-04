@@ -4,70 +4,70 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["", "", "", "A", "F", "T", "E", "R"],
-    ["C", "A", "M", "P", "U", "", "", ""],
-    ["", "", "", "O", "N", "", "", ""],
-    ["", "C", "", "P", "I", "", "", ""],
-    ["", "O", "", "T", "T", "T", "E", "N"],
-    ["", "W", "", "I", "", "", "", ""],
-    ["", "", "", "O", "", "", "", ""],
-    ["", "", "", "N", "", "", "", ""]
+    ["C", "", "", "", "", "", "", ""],
+    ["R", "", "S", "P", "R", "I", "N", "G"],
+    ["O", "", "", "", "", "", "", ""],
+    ["P", "", "", "", "S", "U", "N", ""],
+    ["", "S", "E", "T", "", "", "", "R"],
+    ["", "", "", "", "", "", "", "I"],
+    ["B", "U", "I", "L", "D", "", "", "N"],
+    ["", "", "", "", "", "", "", "G"]
   ],
   "puzzle": [
-    ["", "", "", "", "F", "T", "", ""],
-    ["", "", "", "P", "U", "", "", ""],
-    ["", "", "", "", "N", "", "", ""],
-    ["", "", "", "", "I", "", "", ""],
-    ["", "O", "", "T", "", "", "", "N"],
-    ["", "", "", "I", "", "", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "", "", "", ""]
+    ["", "", "S", "P", "", "I", "", ""],
+    ["", "", "", "", "", "", "", ""],
+    ["P", "", "", "", "S", "U", "N", ""],
+    ["", "", "", "T", "", "", "", ""],
+    ["", "", "", "", "", "", "", ""],
+    ["", "", "", "", "D", "", "", ""],
+    ["", "", "", "", "", "", "", "G"]
   ],
-  "topWord": "COMPUTER",
-  "sideWord": "FUNCTION",
+  "topWord": "BUILDING",
+  "sideWord": "CROSSING",
   "topVisible": [true, false, false, true, false, false, true, true],
   "sideVisible": [true, false, true, false, true, true, false, false],
   "ships": [
     {
-      "word": "OPTION",
+      "word": "SPRING",
       "length": 6,
-      "row": 3,
-      "col": 4,
-      "direction": "V"
-    },
-    {
-      "word": "AFTER",
-      "length": 5,
-      "row": 1,
-      "col": 4,
+      "row": 2,
+      "col": 3,
       "direction": "H"
     },
     {
-      "word": "UNIT",
-      "length": 4,
-      "row": 2,
-      "col": 5,
-      "direction": "V"
-    },
-    {
-      "word": "CAMP",
-      "length": 4,
-      "row": 2,
+      "word": "BUILD",
+      "length": 5,
+      "row": 7,
       "col": 1,
       "direction": "H"
     },
     {
-      "word": "COW",
-      "length": 3,
-      "row": 4,
-      "col": 2,
+      "word": "RING",
+      "length": 4,
+      "row": 5,
+      "col": 8,
       "direction": "V"
     },
     {
-      "word": "TEN",
+      "word": "CROP",
+      "length": 4,
+      "row": 1,
+      "col": 1,
+      "direction": "V"
+    },
+    {
+      "word": "SUN",
+      "length": 3,
+      "row": 4,
+      "col": 5,
+      "direction": "H"
+    },
+    {
+      "word": "SET",
       "length": 3,
       "row": 5,
-      "col": 6,
+      "col": 2,
       "direction": "H"
     }
   ],
@@ -81,6 +81,7 @@
     "ok": true,
     "dictionary_ok": true,
     "row_edge_ok": true,
-    "col_edge_ok": true
+    "col_edge_ok": true,
+    "no_orthogonal_touch": true
   }
 }

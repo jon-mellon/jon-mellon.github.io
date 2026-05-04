@@ -4,27 +4,27 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["", "", "S", "E", "T", "", "", ""],
-    ["", "L", "E", "A", "F", "", "", ""],
-    ["", "", "A", "C", "T", "I", "O", "N"],
-    ["D", "", "", "", "", "", "", ""],
-    ["R", "E", "", "", "", "W", "", ""],
-    ["I", "A", "", "", "", "I", "", ""],
-    ["V", "C", "", "", "", "N", "", ""],
-    ["E", "H", "", "", "", "", "", ""]
+    ["", "", "", "F", "O", "U", "R", ""],
+    ["", "U", "", "", "", "", "", ""],
+    ["", "N", "", "", "", "A", "", ""],
+    ["", "D", "", "B", "", "C", "", "C"],
+    ["", "E", "", "U", "", "T", "", "A"],
+    ["", "R", "", "S", "", "I", "", "R"],
+    ["", "", "", "", "", "O", "", "D"],
+    ["K", "E", "Y", "", "", "N", "", ""]
   ],
   "puzzle": [
-    ["", "", "", "E", "", "", "", ""],
-    ["", "L", "E", "A", "", "", "", ""],
-    ["", "", "", "", "T", "", "", "N"],
-    ["D", "", "", "", "", "", "", ""],
-    ["", "", "", "", "", "W", "", ""],
-    ["", "A", "", "", "", "", "", ""],
+    ["", "", "", "", "", "U", "R", ""],
     ["", "", "", "", "", "", "", ""],
-    ["E", "", "", "", "", "", "", ""]
+    ["", "", "", "", "", "A", "", ""],
+    ["", "", "", "", "", "", "", ""],
+    ["", "E", "", "", "", "", "", ""],
+    ["", "R", "", "S", "", "", "", ""],
+    ["", "", "", "", "", "O", "", "D"],
+    ["K", "", "Y", "", "", "", "", ""]
   ],
-  "topWord": "ELECTION",
-  "sideWord": "SANDWICH",
+  "topWord": "KEYBOARD",
+  "sideWord": "FUNCTION",
   "topVisible": [true, true, true, false, false, true, false, false],
   "sideVisible": [true, true, false, false, true, false, false, true],
   "ships": [
@@ -32,42 +32,42 @@
       "word": "ACTION",
       "length": 6,
       "row": 3,
-      "col": 3,
-      "direction": "H"
-    },
-    {
-      "word": "DRIVE",
-      "length": 5,
-      "row": 4,
-      "col": 1,
+      "col": 6,
       "direction": "V"
     },
     {
-      "word": "LEAF",
-      "length": 4,
+      "word": "UNDER",
+      "length": 5,
       "row": 2,
       "col": 2,
-      "direction": "H"
-    },
-    {
-      "word": "EACH",
-      "length": 4,
-      "row": 5,
-      "col": 2,
       "direction": "V"
     },
     {
-      "word": "SET",
-      "length": 3,
+      "word": "FOUR",
+      "length": 4,
       "row": 1,
-      "col": 3,
+      "col": 4,
       "direction": "H"
     },
     {
-      "word": "WIN",
+      "word": "CARD",
+      "length": 4,
+      "row": 4,
+      "col": 8,
+      "direction": "V"
+    },
+    {
+      "word": "KEY",
       "length": 3,
-      "row": 5,
-      "col": 6,
+      "row": 8,
+      "col": 1,
+      "direction": "H"
+    },
+    {
+      "word": "BUS",
+      "length": 3,
+      "row": 4,
+      "col": 4,
       "direction": "V"
     }
   ],
@@ -81,6 +81,7 @@
     "ok": true,
     "dictionary_ok": true,
     "row_edge_ok": true,
-    "col_edge_ok": true
+    "col_edge_ok": true,
+    "no_orthogonal_touch": true
   }
 }

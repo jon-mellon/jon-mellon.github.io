@@ -4,70 +4,70 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["", "", "", "A", "B", "O", "O", "K"],
-    ["E", "", "", "N", "", "", "", ""],
-    ["A", "", "", "G", "", "", "", ""],
-    ["S", "", "", "L", "", "", "", ""],
-    ["Y", "", "", "E", "", "", "", ""],
-    ["", "S", "E", "A", "", "", "", ""],
-    ["N", "O", "T", "I", "C", "E", "", ""],
-    ["", "G", "A", "S", "", "", "", ""]
+    ["A", "I", "R", "", "", "", "", "C"],
+    ["", "", "", "", "", "", "", "A"],
+    ["", "", "O", "P", "E", "N", "", "U"],
+    ["", "F", "", "", "", "", "", "S"],
+    ["", "I", "", "B", "U", "S", "", "E"],
+    ["", "L", "", "", "", "", "", ""],
+    ["", "E", "", "", "", "", "", ""],
+    ["", "", "I", "S", "L", "A", "N", "D"]
   ],
   "puzzle": [
-    ["", "", "", "A", "B", "O", "O", "K"],
-    ["", "", "", "N", "", "", "", ""],
+    ["", "", "", "", "", "", "", "C"],
     ["", "", "", "", "", "", "", ""],
+    ["", "", "", "P", "E", "", "", "U"],
     ["", "", "", "", "", "", "", ""],
+    ["", "", "", "", "", "S", "", "E"],
+    ["", "L", "", "", "", "", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "A", "", "", "", ""],
-    ["N", "", "T", "I", "", "", "", ""],
-    ["", "", "", "", "", "", "", ""]
+    ["", "", "", "S", "", "A", "", "D"]
   ],
-  "topWord": "NOTEBOOK",
-  "sideWord": "ANALYSIS",
+  "topWord": "AIRPLANE",
+  "sideWord": "CAPSULES",
   "topVisible": [true, true, false, false, true, true, false, false],
   "sideVisible": [false, false, false, true, true, true, false, true],
   "ships": [
     {
-      "word": "NOTICE",
+      "word": "ISLAND",
       "length": 6,
-      "row": 7,
-      "col": 1,
+      "row": 8,
+      "col": 3,
       "direction": "H"
     },
     {
-      "word": "ANGLE",
+      "word": "CAUSE",
       "length": 5,
       "row": 1,
-      "col": 4,
+      "col": 8,
       "direction": "V"
     },
     {
-      "word": "BOOK",
+      "word": "FILE",
       "length": 4,
+      "row": 4,
+      "col": 2,
+      "direction": "V"
+    },
+    {
+      "word": "OPEN",
+      "length": 4,
+      "row": 3,
+      "col": 3,
+      "direction": "H"
+    },
+    {
+      "word": "AIR",
+      "length": 3,
       "row": 1,
-      "col": 5,
-      "direction": "H"
-    },
-    {
-      "word": "EASY",
-      "length": 4,
-      "row": 2,
       "col": 1,
-      "direction": "V"
-    },
-    {
-      "word": "GAS",
-      "length": 3,
-      "row": 8,
-      "col": 2,
       "direction": "H"
     },
     {
-      "word": "SEA",
+      "word": "BUS",
       "length": 3,
-      "row": 6,
-      "col": 2,
+      "row": 5,
+      "col": 4,
       "direction": "H"
     }
   ],
@@ -81,6 +81,7 @@
     "ok": true,
     "dictionary_ok": true,
     "row_edge_ok": true,
-    "col_edge_ok": true
+    "col_edge_ok": true,
+    "no_orthogonal_touch": true
   }
 }

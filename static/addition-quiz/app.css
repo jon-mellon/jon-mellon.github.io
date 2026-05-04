@@ -757,6 +757,7 @@ h1 {
 .plant {
   --height: 74px;
   --scale: 1;
+  --garden-scale: 1;
   --hue: 330;
   --lean: 0deg;
   position: absolute;
@@ -764,7 +765,7 @@ h1 {
   left: var(--x);
   width: 54px;
   height: calc(var(--height) + 44px);
-  transform: translateX(-50%) scale(var(--scale)) rotate(var(--lean));
+  transform: translateX(-50%) scale(calc(var(--scale) * var(--garden-scale))) rotate(var(--lean));
   transform-origin: 50% 100%;
   animation: plant-arrive 720ms cubic-bezier(0.2, 0.9, 0.25, 1.25) both, plant-sway 3.8s ease-in-out infinite;
   animation-delay: var(--delay), calc(var(--delay) + 720ms);
@@ -1181,17 +1182,17 @@ h1 {
   }
   to {
     opacity: 1;
-    transform: translateX(-50%) translateY(0) scale(var(--scale)) rotate(var(--lean));
+    transform: translateX(-50%) translateY(0) scale(calc(var(--scale) * var(--garden-scale))) rotate(var(--lean));
   }
 }
 
 @keyframes plant-sway {
   0%,
   100% {
-    transform: translateX(-50%) scale(var(--scale)) rotate(var(--lean));
+    transform: translateX(-50%) scale(calc(var(--scale) * var(--garden-scale))) rotate(var(--lean));
   }
   50% {
-    transform: translateX(-50%) scale(var(--scale)) rotate(calc(var(--lean) + 2deg));
+    transform: translateX(-50%) scale(calc(var(--scale) * var(--garden-scale))) rotate(calc(var(--lean) + 2deg));
   }
 }
 
@@ -1353,11 +1354,23 @@ h1 {
   }
 
   .garden-bed {
-    min-height: 210px;
+    min-height: 260px;
   }
 
   .plant {
+    --garden-scale: 0.58;
     width: 44px;
+  }
+
+  .garden-story {
+    left: 4%;
+    right: 4%;
+    bottom: 8px;
+  }
+
+  .pond-stage {
+    width: min(240px, 78vw);
+    height: 58px;
   }
 
   .choices {
