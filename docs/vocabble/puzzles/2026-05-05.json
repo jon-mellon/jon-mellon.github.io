@@ -4,71 +4,71 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["", "", "Q", "U", "E", "E", "N", ""],
-    ["", "", "", "", "A", "B", "L", "E"],
-    ["S", "E", "A", "T", "", "A", "", ""],
-    ["", "", "", "", "", "C", "A", ""],
-    ["", "", "", "", "", "T", "C", ""],
-    ["", "I", "", "", "", "I", "T", ""],
-    ["", "O", "", "", "", "O", "", ""],
-    ["", "N", "", "", "", "N", "", ""]
+    ["T", "A", "N", "", "W", "E", "S", "T"],
+    ["", "", "", "R", "", "", "", ""],
+    ["I", "", "", "E", "", "", "", ""],
+    ["S", "", "", "A", "", "", "", ""],
+    ["S", "", "", "D", "", "", "", ""],
+    ["U", "", "", "E", "", "I", "C", "E"],
+    ["E", "", "", "R", "", "", "", ""],
+    ["", "", "", "", "E", "A", "C", "H"]
   ],
   "puzzle": [
+    ["", "A", "", "", "", "", "", "T"],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "", "", "L", ""],
-    ["", "E", "A", "", "", "A", "", ""],
-    ["", "", "", "", "", "", "A", ""],
-    ["", "", "", "", "", "", "C", ""],
-    ["", "I", "", "", "", "", "T", ""],
+    ["I", "", "", "", "", "", "", ""],
+    ["S", "", "", "", "", "", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "N", "", "", "", "N", "", ""]
+    ["U", "", "", "", "", "", "C", "E"],
+    ["", "", "", "R", "", "", "", ""],
+    ["", "", "", "", "", "A", "C", ""]
   ],
-  "topWord": "SEQUENCE",
-  "sideWord": "ELECTION",
+  "topWord": "SANDWICH",
+  "sideWord": "TREASURE",
   "topVisible": [true, true, false, true, false, false, true, false],
   "sideVisible": [false, true, false, false, true, false, true, true],
   "ships": [
     {
-      "word": "ACTION",
+      "word": "READER",
       "length": 6,
-      "row": 3,
-      "col": 6,
+      "row": 2,
+      "col": 4,
       "direction": "V"
     },
     {
-      "word": "QUEEN",
+      "word": "ISSUE",
       "length": 5,
-      "row": 1,
-      "col": 3,
-      "direction": "H"
-    },
-    {
-      "word": "SEAT",
-      "length": 4,
       "row": 3,
       "col": 1,
-      "direction": "H"
+      "direction": "V"
     },
     {
-      "word": "ABLE",
+      "word": "EACH",
       "length": 4,
-      "row": 2,
+      "row": 8,
       "col": 5,
       "direction": "H"
     },
     {
-      "word": "ACT",
-      "length": 3,
-      "row": 4,
-      "col": 7,
-      "direction": "V"
+      "word": "WEST",
+      "length": 4,
+      "row": 1,
+      "col": 5,
+      "direction": "H"
     },
     {
-      "word": "ION",
+      "word": "TAN",
+      "length": 3,
+      "row": 1,
+      "col": 1,
+      "direction": "H"
+    },
+    {
+      "word": "ICE",
       "length": 3,
       "row": 6,
-      "col": 2,
-      "direction": "V"
+      "col": 6,
+      "direction": "H"
     }
   ],
   "difficulty": {
@@ -81,6 +81,7 @@
     "ok": true,
     "dictionary_ok": true,
     "row_edge_ok": true,
-    "col_edge_ok": true
+    "col_edge_ok": true,
+    "no_orthogonal_touch": true
   }
 }

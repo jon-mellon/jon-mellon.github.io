@@ -4,71 +4,71 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["", "", "", "", "F", "A", "R", "M"],
-    ["K", "E", "Y", "U", "", "", "", ""],
-    ["", "A", "", "N", "", "", "", ""],
-    ["", "C", "", "I", "", "", "", ""],
-    ["", "T", "", "T", "", "", "", ""],
-    ["", "I", "I", "", "", "", "", ""],
-    ["", "O", "O", "", "", "", "", ""],
-    ["", "N", "N", "B", "O", "A", "R", "D"]
+    ["G", "A", "S", "", "B", "", "", "W"],
+    ["", "", "", "", "O", "", "", "A"],
+    ["B", "A", "G", "", "R", "", "", "L"],
+    ["", "", "", "", "D", "", "", "K"],
+    ["S", "", "", "", "E", "", "", ""],
+    ["H", "", "", "", "R", "", "", ""],
+    ["O", "", "", "", "", "", "", ""],
+    ["P", "", "M", "E", "T", "A", "L", ""]
   ],
   "puzzle": [
-    ["", "", "", "", "", "A", "", "M"],
-    ["", "E", "", "U", "", "", "", ""],
-    ["", "", "", "N", "", "", "", ""],
+    ["", "", "", "", "B", "", "", ""],
+    ["", "", "", "", "O", "", "", ""],
+    ["B", "A", "", "", "", "", "", "L"],
+    ["", "", "", "", "", "", "", "K"],
+    ["", "", "", "", "E", "", "", ""],
     ["", "", "", "", "", "", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "", "", "", ""],
-    ["", "", "O", "", "", "", "", ""],
-    ["", "N", "", "B", "", "A", "", "D"]
+    ["", "", "M", "", "", "A", "L", ""]
   ],
-  "topWord": "KEYBOARD",
-  "sideWord": "FUNCTION",
+  "topWord": "BASEBALL",
+  "sideWord": "WORKSHOP",
   "topVisible": [true, false, true, false, false, true, true, false],
   "sideVisible": [true, false, true, false, true, false, true, false],
   "ships": [
     {
-      "word": "ACTION",
+      "word": "BORDER",
       "length": 6,
-      "row": 3,
-      "col": 2,
-      "direction": "V"
-    },
-    {
-      "word": "BOARD",
-      "length": 5,
-      "row": 8,
-      "col": 4,
-      "direction": "H"
-    },
-    {
-      "word": "UNIT",
-      "length": 4,
-      "row": 2,
-      "col": 4,
-      "direction": "V"
-    },
-    {
-      "word": "FARM",
-      "length": 4,
       "row": 1,
       "col": 5,
+      "direction": "V"
+    },
+    {
+      "word": "METAL",
+      "length": 5,
+      "row": 8,
+      "col": 3,
       "direction": "H"
     },
     {
-      "word": "KEY",
+      "word": "SHOP",
+      "length": 4,
+      "row": 5,
+      "col": 1,
+      "direction": "V"
+    },
+    {
+      "word": "WALK",
+      "length": 4,
+      "row": 1,
+      "col": 8,
+      "direction": "V"
+    },
+    {
+      "word": "BAG",
       "length": 3,
-      "row": 2,
+      "row": 3,
       "col": 1,
       "direction": "H"
     },
     {
-      "word": "ION",
+      "word": "GAS",
       "length": 3,
-      "row": 6,
-      "col": 3,
-      "direction": "V"
+      "row": 1,
+      "col": 1,
+      "direction": "H"
     }
   ],
   "difficulty": {
@@ -81,6 +81,7 @@
     "ok": true,
     "dictionary_ok": true,
     "row_edge_ok": true,
-    "col_edge_ok": true
+    "col_edge_ok": true,
+    "no_orthogonal_touch": true
   }
 }

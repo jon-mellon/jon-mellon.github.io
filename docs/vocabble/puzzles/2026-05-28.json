@@ -4,71 +4,71 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["", "E", "V", "E", "N", "", "", ""],
-    ["", "", "", "A", "", "", "", ""],
-    ["", "", "", "R", "", "R", "E", "D"],
-    ["J", "", "", "I", "", "", "", ""],
-    ["A", "", "", "S", "", "", "", "A"],
-    ["M", "", "", "E", "", "", "", "B"],
-    ["", "", "", "", "", "", "", "L"],
-    ["", "N", "A", "T", "U", "R", "E", "E"]
+    ["", "A", "", "D", "A", "N", "C", "E"],
+    ["", "I", "", "", "", "", "", ""],
+    ["", "R", "", "T", "A", "N", "", ""],
+    ["", "", "", "", "", "", "", "P"],
+    ["L", "I", "S", "T", "E", "N", "", "L"],
+    ["", "", "", "", "", "", "", "A"],
+    ["", "", "", "", "", "", "", "N"],
+    ["D", "A", "T", "E", "", "", "", ""]
   ],
   "puzzle": [
-    ["", "", "", "", "N", "", "", ""],
+    ["", "", "", "D", "", "N", "C", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "R", "", "R", "", ""],
-    ["J", "", "", "", "", "", "", ""],
-    ["", "", "", "S", "", "", "", ""],
+    ["", "", "", "", "A", "", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "", "", "", "L"],
-    ["", "", "A", "", "U", "", "E", "E"]
+    ["L", "", "", "T", "E", "", "", ""],
+    ["", "", "", "", "", "", "", "A"],
+    ["", "", "", "", "", "", "", "N"],
+    ["", "A", "", "", "", "", "", ""]
   ],
-  "topWord": "MEASURED",
-  "sideWord": "VARIABLE",
+  "topWord": "DISTANCE",
+  "sideWord": "AIRPLANE",
   "topVisible": [false, true, false, true, false, true, false, true],
   "sideVisible": [false, true, true, false, false, false, true, true],
   "ships": [
     {
-      "word": "NATURE",
+      "word": "LISTEN",
       "length": 6,
-      "row": 8,
-      "col": 2,
+      "row": 5,
+      "col": 1,
       "direction": "H"
     },
     {
-      "word": "ARISE",
+      "word": "DANCE",
       "length": 5,
-      "row": 2,
+      "row": 1,
       "col": 4,
-      "direction": "V"
+      "direction": "H"
     },
     {
-      "word": "ABLE",
+      "word": "PLAN",
       "length": 4,
-      "row": 5,
+      "row": 4,
       "col": 8,
       "direction": "V"
     },
     {
-      "word": "EVEN",
+      "word": "DATE",
       "length": 4,
+      "row": 8,
+      "col": 1,
+      "direction": "H"
+    },
+    {
+      "word": "AIR",
+      "length": 3,
       "row": 1,
       "col": 2,
-      "direction": "H"
+      "direction": "V"
     },
     {
-      "word": "RED",
+      "word": "TAN",
       "length": 3,
       "row": 3,
-      "col": 6,
+      "col": 4,
       "direction": "H"
-    },
-    {
-      "word": "JAM",
-      "length": 3,
-      "row": 4,
-      "col": 1,
-      "direction": "V"
     }
   ],
   "difficulty": {
@@ -81,6 +81,7 @@
     "ok": true,
     "dictionary_ok": true,
     "row_edge_ok": true,
-    "col_edge_ok": true
+    "col_edge_ok": true,
+    "no_orthogonal_touch": true
   }
 }

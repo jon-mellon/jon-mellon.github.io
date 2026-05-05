@@ -4,70 +4,70 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["", "", "A", "", "A", "", "", ""],
-    ["", "", "N", "E", "N", "", "", ""],
-    ["", "", "G", "A", "T", "", "", ""],
-    ["", "", "L", "S", "", "", "", ""],
-    ["", "", "E", "Y", "", "", "", ""],
-    ["F", "A", "S", "T", "", "", "", ""],
-    ["", "", "A", "C", "T", "I", "O", "N"],
-    ["B", "U", "S", "", "", "", "", ""]
+    ["S", "H", "O", "P", "", "", "", "D"],
+    ["", "", "", "", "", "", "", "E"],
+    ["C", "", "V", "", "", "G", "", "P"],
+    ["A", "", "I", "", "", "A", "", "T"],
+    ["P", "", "S", "", "", "S", "", "H"],
+    ["", "", "I", "", "", "", "", ""],
+    ["", "", "O", "", "", "", "", ""],
+    ["", "", "N", "", "Y", "A", "R", "D"]
   ],
   "puzzle": [
+    ["", "", "", "P", "", "", "", ""],
+    ["", "", "", "", "", "", "", "E"],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "E", "", "", "", ""],
-    ["", "", "", "A", "T", "", "", ""],
-    ["", "", "L", "", "", "", "", ""],
+    ["A", "", "I", "", "", "", "", "T"],
+    ["P", "", "", "", "", "", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "A", "", "", "", "", "", ""],
-    ["", "", "A", "C", "", "I", "", ""],
-    ["", "U", "S", "", "", "", "", ""]
+    ["", "", "O", "", "", "", "", ""],
+    ["", "", "N", "", "Y", "A", "", ""]
   ],
-  "topWord": "FUNCTION",
-  "sideWord": "ANALYSIS",
+  "topWord": "SHIPYARD",
+  "sideWord": "DECISION",
   "topVisible": [false, true, true, false, false, false, true, true],
   "sideVisible": [false, true, false, true, false, true, true, false],
   "ships": [
     {
-      "word": "ACTION",
+      "word": "VISION",
       "length": 6,
-      "row": 7,
+      "row": 3,
       "col": 3,
-      "direction": "H"
+      "direction": "V"
     },
     {
-      "word": "ANGLE",
+      "word": "DEPTH",
       "length": 5,
       "row": 1,
-      "col": 3,
+      "col": 8,
       "direction": "V"
     },
     {
-      "word": "FAST",
+      "word": "SHOP",
       "length": 4,
-      "row": 6,
-      "col": 1,
-      "direction": "H"
-    },
-    {
-      "word": "EASY",
-      "length": 4,
-      "row": 2,
-      "col": 4,
-      "direction": "V"
-    },
-    {
-      "word": "BUS",
-      "length": 3,
-      "row": 8,
-      "col": 1,
-      "direction": "H"
-    },
-    {
-      "word": "ANT",
-      "length": 3,
       "row": 1,
+      "col": 1,
+      "direction": "H"
+    },
+    {
+      "word": "YARD",
+      "length": 4,
+      "row": 8,
       "col": 5,
+      "direction": "H"
+    },
+    {
+      "word": "CAP",
+      "length": 3,
+      "row": 3,
+      "col": 1,
+      "direction": "V"
+    },
+    {
+      "word": "GAS",
+      "length": 3,
+      "row": 3,
+      "col": 6,
       "direction": "V"
     }
   ],
@@ -81,6 +81,7 @@
     "ok": true,
     "dictionary_ok": true,
     "row_edge_ok": true,
-    "col_edge_ok": true
+    "col_edge_ok": true,
+    "no_orthogonal_touch": true
   }
 }

@@ -4,69 +4,69 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["", "", "", "", "", "", "", "Q"],
-    ["P", "L", "O", "T", "", "", "", "U"],
-    ["", "", "A", "", "", "", "", "E"],
-    ["", "", "C", "", "G", "A", "S", "E"],
-    ["", "", "T", "", "", "", "", "N"],
-    ["", "", "I", "", "F", "A", "R", "M"],
-    ["", "", "O", "", "D", "O", "G", ""],
-    ["", "", "N", "", "", "", "", ""]
+    ["M", "A", "N", "", "", "", "", "B"],
+    ["", "", "", "", "", "", "", "A"],
+    ["C", "O", "U", "N", "T", "Y", "", "S"],
+    ["", "", "", "", "", "", "", "E"],
+    ["B", "", "", "", "", "", "", ""],
+    ["A", "", "", "A", "G", "A", "I", "N"],
+    ["L", "", "", "", "", "", "", ""],
+    ["L", "", "", "", "L", "A", "W", ""]
   ],
   "puzzle": [
+    ["M", "", "", "", "", "", "", "B"],
+    ["", "", "", "", "", "", "", "A"],
+    ["", "O", "", "", "T", "", "", "S"],
     ["", "", "", "", "", "", "", ""],
-    ["P", "", "", "", "", "", "", "U"],
-    ["", "", "", "", "", "", "", "E"],
-    ["", "", "", "", "", "", "S", "E"],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "F", "A", "", ""],
-    ["", "", "O", "", "D", "", "G", ""],
-    ["", "", "", "", "", "", "", ""]
+    ["", "", "", "A", "", "A", "I", ""],
+    ["", "", "", "", "", "", "", ""],
+    ["", "", "", "", "L", "", "", ""]
   ],
-  "topWord": "PLATFORM",
-  "sideWord": "QUESTION",
+  "topWord": "MOUNTAIN",
+  "sideWord": "BASEBALL",
   "topVisible": [false, true, true, false, false, false, true, true],
   "sideVisible": [false, true, true, true, false, false, true, false],
   "ships": [
     {
-      "word": "ACTION",
+      "word": "COUNTY",
       "length": 6,
       "row": 3,
-      "col": 3,
+      "col": 1,
+      "direction": "H"
+    },
+    {
+      "word": "AGAIN",
+      "length": 5,
+      "row": 6,
+      "col": 4,
+      "direction": "H"
+    },
+    {
+      "word": "BALL",
+      "length": 4,
+      "row": 5,
+      "col": 1,
       "direction": "V"
     },
     {
-      "word": "QUEEN",
-      "length": 5,
+      "word": "BASE",
+      "length": 4,
       "row": 1,
       "col": 8,
       "direction": "V"
     },
     {
-      "word": "FARM",
-      "length": 4,
-      "row": 6,
-      "col": 5,
-      "direction": "H"
-    },
-    {
-      "word": "PLOT",
-      "length": 4,
-      "row": 2,
+      "word": "MAN",
+      "length": 3,
+      "row": 1,
       "col": 1,
       "direction": "H"
     },
     {
-      "word": "DOG",
+      "word": "LAW",
       "length": 3,
-      "row": 7,
-      "col": 5,
-      "direction": "H"
-    },
-    {
-      "word": "GAS",
-      "length": 3,
-      "row": 4,
+      "row": 8,
       "col": 5,
       "direction": "H"
     }
@@ -81,6 +81,7 @@
     "ok": true,
     "dictionary_ok": true,
     "row_edge_ok": true,
-    "col_edge_ok": true
+    "col_edge_ok": true,
+    "no_orthogonal_touch": true
   }
 }

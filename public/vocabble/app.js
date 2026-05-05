@@ -11,6 +11,9 @@ const SIZE = 8;
 let puzzle = null;
 let state = null;
 let mode = "letter";
+let selectedCell = null;
+let ignoreNextSelectedClick = false;
+let pointerDownCell = null;
 
 function utcDateString(date = new Date()) {
   return date.toISOString().slice(0, 10);
@@ -22,6 +25,16 @@ function blankMatrix(value = "") {
 
 function storageKey(date) {
   return `vocabble:${date}`;
+}
+
+function puzzleSignature(currentPuzzle) {
+  return JSON.stringify({
+    solution: currentPuzzle.solution,
+    topWord: currentPuzzle.topWord,
+    sideWord: currentPuzzle.sideWord,
+    topVisible: currentPuzzle.topVisible,
+    sideVisible: currentPuzzle.sideVisible
+  });
 }
 
 function setStatus(text, className = "") {
@@ -66,7 +79,7 @@ function initialStateFromPuzzle(currentPuzzle) {
   if (saved) {
     try {
       const parsed = JSON.parse(saved);
-      if (parsed && parsed.date === currentPuzzle.date) {
+      if (parsed && parsed.date === currentPuzzle.date && parsed.puzzleSignature === puzzleSignature(currentPuzzle)) {
         parsed.fleet = normalizeFleetState(parsed.fleet, currentPuzzle.fleetLengths);
         parsed.maybe = normalizeBoardLayer(parsed.maybe);
         return parsed;
@@ -86,6 +99,7 @@ function initialStateFromPuzzle(currentPuzzle) {
 
   return {
     date: currentPuzzle.date,
+    puzzleSignature: puzzleSignature(currentPuzzle),
     board,
     marks,
     maybe: blankMatrix(""),
@@ -154,11 +168,61 @@ function nextEditableBoardInput(row, col, direction = 1) {
     const index = (start + offset * direction + SIZE * SIZE) % (SIZE * SIZE);
     const nextRow = Math.floor(index / SIZE);
     const nextCol = index % SIZE;
-    if (!isBoardGiven(nextRow, nextCol)) {
+    if (!isBoardGiven(nextRow, nextCol) && state.marks[nextRow][nextCol] !== "water") {
       return boardElement.querySelector(`[data-row="${nextRow}"][data-col="${nextCol}"] input`);
     }
   }
   return null;
+}
+
+function setMode(nextMode) {
+  mode = nextMode;
+  modeButtons.forEach((candidate) => candidate.classList.toggle("is-active", candidate.dataset.mode === mode));
+}
+
+function cellInputMode(row, col) {
+  if (state.marks[row][col] === "water") return "water";
+  if (state.marks[row][col] === "maybe" || (state.maybe[row][col] && !state.board[row][col])) return "maybe";
+  return "letter";
+}
+
+function setSelectedCell(row, col) {
+  selectedCell = { row, col };
+  setMode(cellInputMode(row, col));
+  renderSelectedCell();
+}
+
+function isSelectedCell(row, col) {
+  return selectedCell && selectedCell.row === row && selectedCell.col === col;
+}
+
+function renderSelectedCell() {
+  boardElement.querySelectorAll(".is-selected").forEach((node) => node.classList.remove("is-selected"));
+  if (!selectedCell) return;
+  const square = boardElement.querySelector(`[data-row="${selectedCell.row}"][data-col="${selectedCell.col}"]`);
+  if (square) square.classList.add("is-selected");
+}
+
+function cycleCellState(row, col) {
+  const current = cellInputMode(row, col);
+  state.board[row][col] = "";
+  state.maybe[row][col] = "";
+  state.marks[row][col] = "";
+
+  if (current === "letter") {
+    state.marks[row][col] = "water";
+    setMode("water");
+  } else if (current === "water") {
+    state.marks[row][col] = "maybe";
+    setMode("maybe");
+  } else {
+    setMode("letter");
+  }
+
+  saveState();
+  renderBoard();
+  const input = boardElement.querySelector(`[data-row="${row}"][data-col="${col}"] input`);
+  if (cellInputMode(row, col) !== "water") input?.focus();
 }
 
 function boardDisplayValue(row, col) {
@@ -208,6 +272,9 @@ function renderBoard() {
       square.className = squareClass(row, col);
       square.dataset.row = row;
       square.dataset.col = col;
+      square.addEventListener("pointerdown", () => {
+        pointerDownCell = { row, col, wasSelected: isSelectedCell(row, col) };
+      });
       square.addEventListener("click", (event) => handleCellClick(event, row, col));
       const input = makeInput(
         boardDisplayValue(row, col),
@@ -217,11 +284,12 @@ function renderBoard() {
           if (mode === "maybe") {
             state.maybe[row][col] = value;
             state.board[row][col] = "";
+            state.marks[row][col] = value ? "" : "maybe";
           } else {
             state.board[row][col] = value;
             state.maybe[row][col] = "";
           }
-          if (value) {
+          if (value && mode !== "maybe") {
             state.marks[row][col] = "";
           }
           saveState();
@@ -235,18 +303,26 @@ function renderBoard() {
           nextEditableBoardInput(row, col, -1)?.focus();
         }
       });
+      input.addEventListener("focus", () => {
+        if (pointerDownCell && pointerDownCell.row === row && pointerDownCell.col === col && !pointerDownCell.wasSelected) {
+          ignoreNextSelectedClick = true;
+        }
+        setSelectedCell(row, col);
+      });
       square.append(input);
       boardElement.append(square);
     }
   }
+  renderSelectedCell();
 }
 
 function squareClass(row, col) {
   const classes = ["square", "board-square"];
   if (isBoardGiven(row, col)) classes.push("is-given");
   if (!isBoardGiven(row, col) && !state.revealed) classes.push("is-editable");
+  if (isSelectedCell(row, col)) classes.push("is-selected");
   if (state.marks[row][col] === "water") classes.push("is-water");
-  if (state.maybe[row][col] && !state.board[row][col]) classes.push("is-maybe-letter");
+  if (state.marks[row][col] === "maybe" || (state.maybe[row][col] && !state.board[row][col])) classes.push("is-maybe-letter");
   return classes.join(" ");
 }
 
@@ -258,16 +334,20 @@ function renderCell(row, col) {
 
 function handleCellClick(event, row, col) {
   if (isBoardGiven(row, col) || state.revealed) return;
-  if (mode === "letter" || mode === "maybe") {
-    event.currentTarget.querySelector("input").focus();
+  if (!isSelectedCell(row, col)) {
+    setSelectedCell(row, col);
+    if (cellInputMode(row, col) !== "water") event.currentTarget.querySelector("input").focus();
+    ignoreNextSelectedClick = false;
+    pointerDownCell = null;
     return;
   }
-
-  state.board[row][col] = "";
-  state.maybe[row][col] = "";
-  state.marks[row][col] = state.marks[row][col] === mode ? "" : mode;
-  saveState();
-  renderBoard();
+  if (ignoreNextSelectedClick) {
+    ignoreNextSelectedClick = false;
+    pointerDownCell = null;
+    return;
+  }
+  pointerDownCell = null;
+  cycleCellState(row, col);
 }
 
 function renderFleet() {
@@ -400,8 +480,7 @@ function resetPuzzle() {
 function setupControls() {
   modeButtons.forEach((button) => {
     button.addEventListener("click", () => {
-      mode = button.dataset.mode;
-      modeButtons.forEach((candidate) => candidate.classList.toggle("is-active", candidate === button));
+      setMode(button.dataset.mode);
     });
   });
 

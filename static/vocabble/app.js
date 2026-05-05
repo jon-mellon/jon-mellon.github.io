@@ -27,6 +27,16 @@ function storageKey(date) {
   return `vocabble:${date}`;
 }
 
+function puzzleSignature(currentPuzzle) {
+  return JSON.stringify({
+    solution: currentPuzzle.solution,
+    topWord: currentPuzzle.topWord,
+    sideWord: currentPuzzle.sideWord,
+    topVisible: currentPuzzle.topVisible,
+    sideVisible: currentPuzzle.sideVisible
+  });
+}
+
 function setStatus(text, className = "") {
   statusElement.textContent = text;
   statusElement.className = className;
@@ -69,7 +79,7 @@ function initialStateFromPuzzle(currentPuzzle) {
   if (saved) {
     try {
       const parsed = JSON.parse(saved);
-      if (parsed && parsed.date === currentPuzzle.date) {
+      if (parsed && parsed.date === currentPuzzle.date && parsed.puzzleSignature === puzzleSignature(currentPuzzle)) {
         parsed.fleet = normalizeFleetState(parsed.fleet, currentPuzzle.fleetLengths);
         parsed.maybe = normalizeBoardLayer(parsed.maybe);
         return parsed;
@@ -89,6 +99,7 @@ function initialStateFromPuzzle(currentPuzzle) {
 
   return {
     date: currentPuzzle.date,
+    puzzleSignature: puzzleSignature(currentPuzzle),
     board,
     marks,
     maybe: blankMatrix(""),

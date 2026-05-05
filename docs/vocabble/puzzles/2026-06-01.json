@@ -4,67 +4,67 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["", "C", "", "", "", "", "", ""],
-    ["", "R", "", "", "D", "E", "N", ""],
-    ["", "O", "", "", "", "", "", ""],
-    ["", "P", "S", "P", "R", "I", "N", "G"],
-    ["B", "U", "I", "L", "D", "S", "R", ""],
-    ["", "", "", "", "", "U", "I", ""],
-    ["", "", "", "", "", "N", "N", ""],
-    ["", "", "", "", "", "", "G", ""]
+    ["S", "", "", "", "B", "A", "L", "L"],
+    ["T", "", "", "", "", "", "", ""],
+    ["A", "", "", "U", "", "", "", ""],
+    ["B", "", "", "N", "", "", "", ""],
+    ["L", "", "", "D", "", "A", "", "L"],
+    ["E", "", "", "E", "", "I", "", "A"],
+    ["", "", "", "R", "", "R", "", "N"],
+    ["G", "A", "S", "", "", "", "", "D"]
   ],
   "puzzle": [
+    ["S", "", "", "", "B", "", "L", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "R", "", "", "", "", "N", ""],
+    ["A", "", "", "", "", "", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "", "I", "N", ""],
-    ["B", "", "I", "", "", "", "", ""],
-    ["", "", "", "", "", "U", "I", ""],
-    ["", "", "", "", "", "N", "", ""],
-    ["", "", "", "", "", "", "G", ""]
+    ["", "", "", "", "", "A", "", "L"],
+    ["", "", "", "", "", "I", "", ""],
+    ["", "", "", "", "", "R", "", "N"],
+    ["", "A", "", "", "", "", "", ""]
   ],
-  "topWord": "BUILDING",
-  "sideWord": "CROSSING",
+  "topWord": "BASEBALL",
+  "sideWord": "STANDARD",
   "topVisible": [false, true, false, true, false, false, true, true],
   "sideVisible": [true, false, true, false, false, false, true, true],
   "ships": [
     {
-      "word": "SPRING",
+      "word": "STABLE",
       "length": 6,
-      "row": 4,
-      "col": 3,
-      "direction": "H"
-    },
-    {
-      "word": "BUILD",
-      "length": 5,
-      "row": 5,
+      "row": 1,
       "col": 1,
-      "direction": "H"
+      "direction": "V"
     },
     {
-      "word": "CROP",
+      "word": "UNDER",
+      "length": 5,
+      "row": 3,
+      "col": 4,
+      "direction": "V"
+    },
+    {
+      "word": "BALL",
       "length": 4,
       "row": 1,
-      "col": 2,
-      "direction": "V"
-    },
-    {
-      "word": "RING",
-      "length": 4,
-      "row": 5,
-      "col": 7,
-      "direction": "V"
-    },
-    {
-      "word": "DEN",
-      "length": 3,
-      "row": 2,
       "col": 5,
       "direction": "H"
     },
     {
-      "word": "SUN",
+      "word": "LAND",
+      "length": 4,
+      "row": 5,
+      "col": 8,
+      "direction": "V"
+    },
+    {
+      "word": "GAS",
+      "length": 3,
+      "row": 8,
+      "col": 1,
+      "direction": "H"
+    },
+    {
+      "word": "AIR",
       "length": 3,
       "row": 5,
       "col": 6,
@@ -81,6 +81,7 @@
     "ok": true,
     "dictionary_ok": true,
     "row_edge_ok": true,
-    "col_edge_ok": true
+    "col_edge_ok": true,
+    "no_orthogonal_touch": true
   }
 }

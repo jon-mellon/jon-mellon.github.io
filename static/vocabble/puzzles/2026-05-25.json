@@ -4,69 +4,69 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["F", "I", "S", "H", "", "", "", ""],
-    ["", "", "", "", "", "I", "C", "E"],
-    ["", "", "", "", "", "Q", "", ""],
-    ["K", "", "", "", "", "U", "", ""],
-    ["I", "", "", "", "", "E", "", ""],
-    ["N", "", "", "", "", "E", "", ""],
-    ["D", "C", "A", "N", "", "N", "", ""],
-    ["", "", "S", "T", "A", "B", "L", "E"]
+    ["", "P", "I", "N", "", "", "", "N"],
+    ["", "", "", "", "", "", "", "O"],
+    ["C", "O", "U", "N", "T", "Y", "", "V"],
+    ["", "", "", "", "", "", "", "E"],
+    ["", "", "B", "", "", "", "", "L"],
+    ["A", "", "O", "", "", "", "", ""],
+    ["R", "", "O", "", "", "", "", ""],
+    ["M", "", "K", "", "P", "A", "I", "R"]
   ],
   "puzzle": [
-    ["F", "", "", "H", "", "", "", ""],
-    ["", "", "", "", "", "", "", "E"],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "", "U", "", ""],
-    ["", "", "", "", "", "E", "", ""],
-    ["", "", "", "", "", "E", "", ""],
-    ["", "", "A", "N", "", "", "", ""],
-    ["", "", "", "", "", "B", "", "E"]
+    ["", "", "", "", "", "", "", "O"],
+    ["C", "", "", "", "", "Y", "", ""],
+    ["", "", "", "", "", "", "", ""],
+    ["", "", "B", "", "", "", "", "L"],
+    ["", "", "", "", "", "", "", ""],
+    ["", "", "O", "", "", "", "", ""],
+    ["", "", "K", "", "", "A", "I", "R"]
   ],
-  "topWord": "DISTANCE",
-  "sideWord": "SEQUENCE",
+  "topWord": "MOUNTAIN",
+  "sideWord": "NOTEBOOK",
   "topVisible": [false, false, true, true, false, false, true, true],
   "sideVisible": [false, true, false, true, true, true, false, false],
   "ships": [
     {
-      "word": "STABLE",
+      "word": "COUNTY",
       "length": 6,
-      "row": 8,
-      "col": 3,
-      "direction": "H"
-    },
-    {
-      "word": "QUEEN",
-      "length": 5,
       "row": 3,
-      "col": 6,
-      "direction": "V"
+      "col": 1,
+      "direction": "H"
     },
     {
-      "word": "FISH",
-      "length": 4,
+      "word": "NOVEL",
+      "length": 5,
       "row": 1,
-      "col": 1,
+      "col": 8,
+      "direction": "V"
+    },
+    {
+      "word": "BOOK",
+      "length": 4,
+      "row": 5,
+      "col": 3,
+      "direction": "V"
+    },
+    {
+      "word": "PAIR",
+      "length": 4,
+      "row": 8,
+      "col": 5,
       "direction": "H"
     },
     {
-      "word": "KIND",
-      "length": 4,
-      "row": 4,
+      "word": "ARM",
+      "length": 3,
+      "row": 6,
       "col": 1,
       "direction": "V"
     },
     {
-      "word": "ICE",
+      "word": "PIN",
       "length": 3,
-      "row": 2,
-      "col": 6,
-      "direction": "H"
-    },
-    {
-      "word": "CAN",
-      "length": 3,
-      "row": 7,
+      "row": 1,
       "col": 2,
       "direction": "H"
     }
@@ -81,6 +81,7 @@
     "ok": true,
     "dictionary_ok": true,
     "row_edge_ok": true,
-    "col_edge_ok": true
+    "col_edge_ok": true,
+    "no_orthogonal_touch": true
   }
 }

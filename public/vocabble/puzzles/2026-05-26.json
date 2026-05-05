@@ -4,71 +4,71 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["", "", "C", "", "", "", "", ""],
-    ["", "", "A", "", "", "", "", ""],
-    ["", "", "U", "P", "U", "S", "H", ""],
-    ["", "", "S", "", "", "", "", ""],
-    ["", "", "E", "R", "U", "N", "", ""],
-    ["C", "O", "A", "L", "", "", "", ""],
-    ["", "", "M", "A", "T", "T", "E", "R"],
-    ["", "", "", "", "S", "E", "T", ""]
+    ["C", "A", "B", "", "", "", "C", ""],
+    ["", "", "", "", "", "", "A", ""],
+    ["", "S", "N", "O", "W", "", "M", ""],
+    ["S", "", "", "", "", "", "E", ""],
+    ["T", "", "", "B", "", "", "R", ""],
+    ["I", "", "", "E", "", "", "A", ""],
+    ["L", "", "", "D", "", "", "", ""],
+    ["L", "", "", "", "F", "I", "S", "H"]
   ],
   "puzzle": [
-    ["", "", "C", "", "", "", "", ""],
+    ["", "", "B", "", "", "", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "U", "", "U", "", "H", ""],
-    ["", "", "", "", "", "", "", ""],
-    ["", "", "", "R", "U", "", "", ""],
-    ["", "", "", "", "", "", "", ""],
-    ["", "", "M", "", "", "", "E", ""],
-    ["", "", "", "", "S", "E", "", ""]
+    ["", "", "", "O", "W", "", "", ""],
+    ["", "", "", "", "", "", "E", ""],
+    ["T", "", "", "", "", "", "R", ""],
+    ["", "", "", "", "", "", "A", ""],
+    ["L", "", "", "D", "", "", "", ""],
+    ["", "", "", "", "", "I", "", ""]
   ],
-  "topWord": "COMPUTER",
-  "sideWord": "CAPSULES",
+  "topWord": "SANDWICH",
+  "sideWord": "BASEBALL",
   "topVisible": [false, true, false, true, true, false, false, true],
   "sideVisible": [true, true, false, false, true, true, false, false],
   "ships": [
     {
-      "word": "MATTER",
+      "word": "CAMERA",
       "length": 6,
-      "row": 7,
-      "col": 3,
-      "direction": "H"
-    },
-    {
-      "word": "CAUSE",
-      "length": 5,
       "row": 1,
-      "col": 3,
+      "col": 7,
       "direction": "V"
     },
     {
-      "word": "PUSH",
+      "word": "STILL",
+      "length": 5,
+      "row": 4,
+      "col": 1,
+      "direction": "V"
+    },
+    {
+      "word": "SNOW",
       "length": 4,
       "row": 3,
-      "col": 4,
+      "col": 2,
       "direction": "H"
     },
     {
-      "word": "COAL",
+      "word": "FISH",
       "length": 4,
-      "row": 6,
+      "row": 8,
+      "col": 5,
+      "direction": "H"
+    },
+    {
+      "word": "CAB",
+      "length": 3,
+      "row": 1,
       "col": 1,
       "direction": "H"
     },
     {
-      "word": "RUN",
+      "word": "BED",
       "length": 3,
       "row": 5,
       "col": 4,
-      "direction": "H"
-    },
-    {
-      "word": "SET",
-      "length": 3,
-      "row": 8,
-      "col": 5,
-      "direction": "H"
+      "direction": "V"
     }
   ],
   "difficulty": {
@@ -81,6 +81,7 @@
     "ok": true,
     "dictionary_ok": true,
     "row_edge_ok": true,
-    "col_edge_ok": true
+    "col_edge_ok": true,
+    "no_orthogonal_touch": true
   }
 }

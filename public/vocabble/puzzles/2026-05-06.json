@@ -4,70 +4,70 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["S", "E", "T", "", "", "", "", ""],
-    ["", "", "", "R", "", "", "", ""],
-    ["", "", "", "E", "E", "A", "C", "H"],
-    ["", "", "", "A", "L", "", "", ""],
-    ["", "", "", "D", "A", "S", "", ""],
-    ["", "", "", "E", "W", "U", "", ""],
-    ["", "", "", "R", "", "I", "", ""],
-    ["D", "A", "N", "C", "E", "T", "", ""]
+    ["P", "L", "A", "T", "E", "", "", ""],
+    ["", "", "", "", "", "L", "", ""],
+    ["", "", "A", "", "", "E", "", ""],
+    ["", "", "C", "", "", "A", "", "J"],
+    ["", "", "T", "", "", "F", "", "A"],
+    ["I", "", "I", "", "", "", "", "M"],
+    ["O", "", "O", "", "", "", "", ""],
+    ["N", "", "N", "", "F", "O", "R", "M"]
   ],
   "puzzle": [
     ["", "", "", "", "", "", "", ""],
+    ["", "", "", "", "", "L", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "", "A", "C", ""],
-    ["", "", "", "", "", "", "", ""],
-    ["", "", "", "D", "A", "", "", ""],
-    ["", "", "", "E", "", "U", "", ""],
-    ["", "", "", "R", "", "", "", ""],
-    ["D", "A", "", "", "E", "", "", ""]
+    ["", "", "", "", "", "A", "", ""],
+    ["", "", "", "", "", "F", "", ""],
+    ["I", "", "I", "", "", "", "", "M"],
+    ["", "", "O", "", "", "", "", ""],
+    ["N", "", "N", "", "", "", "R", ""]
   ],
-  "topWord": "SANDWICH",
-  "sideWord": "TREASURE",
+  "topWord": "PLATFORM",
+  "sideWord": "ELECTION",
   "topVisible": [true, false, true, true, false, false, true, false],
   "sideVisible": [false, false, true, true, true, false, true, false],
   "ships": [
     {
-      "word": "READER",
+      "word": "ACTION",
       "length": 6,
-      "row": 2,
-      "col": 4,
-      "direction": "V"
-    },
-    {
-      "word": "DANCE",
-      "length": 5,
-      "row": 8,
-      "col": 1,
-      "direction": "H"
-    },
-    {
-      "word": "SUIT",
-      "length": 4,
-      "row": 5,
-      "col": 6,
-      "direction": "V"
-    },
-    {
-      "word": "EACH",
-      "length": 4,
       "row": 3,
-      "col": 5,
-      "direction": "H"
+      "col": 3,
+      "direction": "V"
     },
     {
-      "word": "SET",
-      "length": 3,
+      "word": "PLATE",
+      "length": 5,
       "row": 1,
       "col": 1,
       "direction": "H"
     },
     {
-      "word": "LAW",
+      "word": "FORM",
+      "length": 4,
+      "row": 8,
+      "col": 5,
+      "direction": "H"
+    },
+    {
+      "word": "LEAF",
+      "length": 4,
+      "row": 2,
+      "col": 6,
+      "direction": "V"
+    },
+    {
+      "word": "ION",
+      "length": 3,
+      "row": 6,
+      "col": 1,
+      "direction": "V"
+    },
+    {
+      "word": "JAM",
       "length": 3,
       "row": 4,
-      "col": 5,
+      "col": 8,
       "direction": "V"
     }
   ],
@@ -81,6 +81,7 @@
     "ok": true,
     "dictionary_ok": true,
     "row_edge_ok": true,
-    "col_edge_ok": true
+    "col_edge_ok": true,
+    "no_orthogonal_touch": true
   }
 }

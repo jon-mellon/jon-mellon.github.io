@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Number Garden</title>
+    <link rel="stylesheet" href="app.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="game" aria-label="Single digit addition quiz">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Add and grow</p>
+            <h1>Number Garden</h1>
+          </div>
+          <div class="score-card" aria-label="Score">
+            <span class="score-label">Stars</span>
+            <span id="score" class="score-value">0</span>
+          </div>
+        </header>
+
+        <section class="question-panel" aria-live="polite">
+          <div class="character" aria-hidden="true">
+            <div class="face">
+              <span class="eye left-eye"></span>
+              <span class="eye right-eye"></span>
+              <span class="smile"></span>
+            </div>
+          </div>
+
+          <div class="sum" aria-label="Addition problem">
+            <span id="left-number">2</span>
+            <span class="operator">+</span>
+            <span id="right-number">3</span>
+            <span class="operator">=</span>
+            <span class="answer-blank">?</span>
+          </div>
+
+          <div id="counter-row" class="counter-row" aria-hidden="true"></div>
+          <p id="message" class="message">Tap the answer.</p>
+        </section>
+
+        <section class="garden-panel" aria-label="Your growing number garden">
+          <div class="garden-header">
+            <span>Garden blooms</span>
+            <span id="bloom-count">0</span>
+          </div>
+          <div id="garden-bed" class="garden-bed" aria-hidden="true"></div>
+        </section>
+
+        <section id="choices" class="choices" aria-label="Answer choices"></section>
+
+        <footer class="controls">
+          <button id="sound-button" class="control-button is-on" type="button" aria-pressed="true">Sound On</button>
+          <button id="new-button" class="control-button" type="button">New Sum</button>
+          <button id="new-garden-button" class="control-button" type="button">New Garden</button>
+        </footer>
+      </section>
+
+      <div id="celebration" class="celebration" aria-hidden="true"></div>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>

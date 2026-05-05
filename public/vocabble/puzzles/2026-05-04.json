@@ -4,24 +4,24 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["", "", "", "C", "U", "E", "", ""],
-    ["D", "", "", "S", "A", "L", "T", "S"],
-    ["E", "A", "P", "L", "A", "T", "E", "E"],
-    ["C", "C", "", "", "", "", "", "A"],
-    ["K", "T", "", "", "", "", "", ""],
-    ["", "I", "", "", "", "", "", ""],
-    ["", "O", "", "", "", "", "", ""],
-    ["", "N", "", "", "", "", "", ""]
+    ["C", "A", "U", "S", "E", "", "", ""],
+    ["", "", "", "", "", "L", "", ""],
+    ["", "", "O", "", "", "E", "", ""],
+    ["C", "", "P", "", "", "F", "", "S"],
+    ["A", "", "T", "", "", "T", "", "E"],
+    ["N", "", "I", "", "", "", "", "A"],
+    ["", "", "O", "", "", "", "", ""],
+    ["", "", "N", "", "U", "S", "E", "R"]
   ],
   "puzzle": [
-    ["", "", "", "C", "", "E", "", ""],
-    ["", "", "", "", "A", "", "", ""],
-    ["", "A", "P", "L", "", "T", "", ""],
-    ["", "", "", "", "", "", "", "A"],
-    ["K", "", "", "", "", "", "", ""],
+    ["", "A", "", "", "E", "", "", ""],
+    ["", "", "", "", "", "L", "", ""],
     ["", "", "", "", "", "", "", ""],
+    ["", "", "", "", "", "F", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "N", "", "", "", "", "", ""]
+    ["N", "", "I", "", "", "", "", ""],
+    ["", "", "O", "", "", "", "", ""],
+    ["", "", "N", "", "", "S", "", "R"]
   ],
   "topWord": "CAPSULES",
   "sideWord": "ELECTION",
@@ -29,45 +29,45 @@
   "sideVisible": [true, false, false, true, false, true, false, true],
   "ships": [
     {
-      "word": "ACTION",
+      "word": "OPTION",
       "length": 6,
       "row": 3,
-      "col": 2,
-      "direction": "V"
-    },
-    {
-      "word": "PLATE",
-      "length": 5,
-      "row": 3,
       "col": 3,
-      "direction": "H"
-    },
-    {
-      "word": "SALT",
-      "length": 4,
-      "row": 2,
-      "col": 4,
-      "direction": "H"
-    },
-    {
-      "word": "DECK",
-      "length": 4,
-      "row": 2,
-      "col": 1,
       "direction": "V"
     },
     {
-      "word": "CUE",
-      "length": 3,
+      "word": "CAUSE",
+      "length": 5,
       "row": 1,
-      "col": 4,
+      "col": 1,
+      "direction": "H"
+    },
+    {
+      "word": "LEFT",
+      "length": 4,
+      "row": 2,
+      "col": 6,
+      "direction": "V"
+    },
+    {
+      "word": "USER",
+      "length": 4,
+      "row": 8,
+      "col": 5,
       "direction": "H"
     },
     {
       "word": "SEA",
       "length": 3,
-      "row": 2,
+      "row": 4,
       "col": 8,
+      "direction": "V"
+    },
+    {
+      "word": "CAN",
+      "length": 3,
+      "row": 4,
+      "col": 1,
       "direction": "V"
     }
   ],
@@ -81,6 +81,7 @@
     "ok": true,
     "dictionary_ok": true,
     "row_edge_ok": true,
-    "col_edge_ok": true
+    "col_edge_ok": true,
+    "no_orthogonal_touch": true
   }
 }

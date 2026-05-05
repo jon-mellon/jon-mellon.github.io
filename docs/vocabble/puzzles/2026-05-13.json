@@ -4,70 +4,70 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["S", "L", "I", "S", "T", "E", "N", ""],
-    ["H", "", "", "", "K", "I", "N", "G"],
-    ["I", "", "", "", "", "", "", "B"],
-    ["P", "G", "", "", "", "", "", "A"],
-    ["", "U", "", "M", "", "", "", "Y"],
-    ["", "A", "", "A", "", "", "", ""],
-    ["", "R", "", "N", "", "", "", ""],
-    ["", "D", "", "", "", "", "", ""]
+    ["", "", "", "", "", "R", "A", "G"],
+    ["B", "U", "I", "L", "D", "", "", ""],
+    ["", "", "", "", "", "R", "", ""],
+    ["", "", "", "", "", "A", "", "P"],
+    ["I", "", "", "", "", "I", "", "L"],
+    ["O", "", "", "", "", "N", "", "A"],
+    ["N", "", "", "", "", "", "", "Y"],
+    ["", "H", "I", "D", "D", "E", "N", ""]
   ],
   "puzzle": [
-    ["S", "", "I", "S", "T", "E", "", ""],
-    ["", "", "", "", "K", "", "N", ""],
-    ["", "", "", "", "", "", "", "B"],
-    ["", "G", "", "", "", "", "", ""],
-    ["", "U", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", "", "G"],
+    ["B", "", "I", "", "D", "", "", ""],
     ["", "", "", "", "", "", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "", "", "", ""]
+    ["", "", "", "", "", "I", "", "L"],
+    ["", "", "", "", "", "N", "", ""],
+    ["", "", "", "", "", "", "", ""],
+    ["", "H", "", "", "D", "E", "", ""]
   ],
-  "topWord": "PAINTING",
-  "sideWord": "SHIPYARD",
+  "topWord": "BUILDING",
+  "sideWord": "AIRPLANE",
   "topVisible": [false, true, false, true, true, false, true, false],
   "sideVisible": [false, true, true, true, false, false, false, true],
   "ships": [
     {
-      "word": "LISTEN",
+      "word": "HIDDEN",
       "length": 6,
-      "row": 1,
+      "row": 8,
       "col": 2,
       "direction": "H"
     },
     {
-      "word": "GUARD",
+      "word": "BUILD",
       "length": 5,
-      "row": 4,
-      "col": 2,
-      "direction": "V"
-    },
-    {
-      "word": "SHIP",
-      "length": 4,
-      "row": 1,
-      "col": 1,
-      "direction": "V"
-    },
-    {
-      "word": "KING",
-      "length": 4,
       "row": 2,
-      "col": 5,
+      "col": 1,
       "direction": "H"
     },
     {
-      "word": "MAN",
+      "word": "PLAY",
+      "length": 4,
+      "row": 4,
+      "col": 8,
+      "direction": "V"
+    },
+    {
+      "word": "RAIN",
+      "length": 4,
+      "row": 3,
+      "col": 6,
+      "direction": "V"
+    },
+    {
+      "word": "RAG",
+      "length": 3,
+      "row": 1,
+      "col": 6,
+      "direction": "H"
+    },
+    {
+      "word": "ION",
       "length": 3,
       "row": 5,
-      "col": 4,
-      "direction": "V"
-    },
-    {
-      "word": "BAY",
-      "length": 3,
-      "row": 3,
-      "col": 8,
+      "col": 1,
       "direction": "V"
     }
   ],
@@ -81,6 +81,7 @@
     "ok": true,
     "dictionary_ok": true,
     "row_edge_ok": true,
-    "col_edge_ok": true
+    "col_edge_ok": true,
+    "no_orthogonal_touch": true
   }
 }

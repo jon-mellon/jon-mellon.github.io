@@ -4,27 +4,27 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["", "F", "", "", "", "", "", ""],
-    ["", "I", "S", "T", "A", "N", "D", "U"],
-    ["", "N", "", "", "", "", "A", "S"],
-    ["", "E", "", "", "", "", "C", "E"],
-    ["", "", "", "", "", "", "T", "R"],
-    ["D", "I", "", "", "", "", "I", ""],
-    ["I", "O", "", "", "", "", "O", ""],
-    ["G", "N", "", "", "", "", "N", ""]
+    ["B", "U", "I", "L", "D", "", "", "E"],
+    ["", "", "", "", "", "L", "", "G"],
+    ["", "A", "", "A", "", "E", "", "G"],
+    ["", "C", "", "C", "", "A", "", ""],
+    ["", "T", "", "E", "", "F", "", ""],
+    ["", "I", "", "", "", "", "", ""],
+    ["", "O", "", "", "", "", "", ""],
+    ["", "N", "", "", "R", "I", "N", "G"]
   ],
   "puzzle": [
+    ["B", "", "", "", "", "", "", "E"],
+    ["", "", "", "", "", "L", "", "G"],
+    ["", "A", "", "A", "", "", "", ""],
+    ["", "", "", "C", "", "", "", ""],
+    ["", "T", "", "", "", "", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "I", "S", "T", "", "", "", "U"],
-    ["", "", "", "", "", "", "A", "S"],
-    ["", "E", "", "", "", "", "", ""],
-    ["", "", "", "", "", "", "", ""],
-    ["D", "", "", "", "", "", "", ""],
-    ["", "", "", "", "", "", "O", ""],
-    ["G", "", "", "", "", "", "", ""]
+    ["", "O", "", "", "", "", "", ""],
+    ["", "", "", "", "", "I", "", ""]
   ],
-  "topWord": "DISTANCE",
-  "sideWord": "FUNCTION",
+  "topWord": "BUILDING",
+  "sideWord": "ELECTION",
   "topVisible": [false, false, true, false, true, true, false, true],
   "sideVisible": [false, false, true, true, false, true, false, true],
   "ships": [
@@ -32,42 +32,42 @@
       "word": "ACTION",
       "length": 6,
       "row": 3,
-      "col": 7,
-      "direction": "V"
-    },
-    {
-      "word": "STAND",
-      "length": 5,
-      "row": 2,
-      "col": 3,
-      "direction": "H"
-    },
-    {
-      "word": "FINE",
-      "length": 4,
-      "row": 1,
       "col": 2,
       "direction": "V"
     },
     {
-      "word": "USER",
+      "word": "BUILD",
+      "length": 5,
+      "row": 1,
+      "col": 1,
+      "direction": "H"
+    },
+    {
+      "word": "RING",
+      "length": 4,
+      "row": 8,
+      "col": 5,
+      "direction": "H"
+    },
+    {
+      "word": "LEAF",
       "length": 4,
       "row": 2,
+      "col": 6,
+      "direction": "V"
+    },
+    {
+      "word": "EGG",
+      "length": 3,
+      "row": 1,
       "col": 8,
       "direction": "V"
     },
     {
-      "word": "DIG",
+      "word": "ACE",
       "length": 3,
-      "row": 6,
-      "col": 1,
-      "direction": "V"
-    },
-    {
-      "word": "ION",
-      "length": 3,
-      "row": 6,
-      "col": 2,
+      "row": 3,
+      "col": 4,
       "direction": "V"
     }
   ],
@@ -81,6 +81,7 @@
     "ok": true,
     "dictionary_ok": true,
     "row_edge_ok": true,
-    "col_edge_ok": true
+    "col_edge_ok": true,
+    "no_orthogonal_touch": true
   }
 }

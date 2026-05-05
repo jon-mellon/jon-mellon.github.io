@@ -4,71 +4,71 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["", "", "", "P", "C", "O", "A", "L"],
-    ["H", "", "", "L", "", "", "", ""],
-    ["A", "B", "", "A", "", "", "", ""],
-    ["T", "E", "", "T", "", "", "", ""],
-    ["", "F", "", "E", "", "", "", ""],
-    ["", "O", "", "", "", "", "", "J"],
-    ["", "R", "", "", "", "", "", "A"],
-    ["", "E", "S", "U", "I", "T", "", "M"]
+    ["C", "", "", "", "", "", "", ""],
+    ["U", "", "M", "A", "S", "T", "E", "R"],
+    ["P", "", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", "", "S"],
+    ["", "I", "N", "P", "U", "T", "", "I"],
+    ["", "", "", "", "", "", "", "L"],
+    ["C", "O", "M", "E", "", "", "", "K"],
+    ["", "", "", "", "U", "S", "E", ""]
   ],
   "puzzle": [
-    ["", "", "", "", "C", "", "A", ""],
-    ["H", "", "", "L", "", "", "", ""],
-    ["A", "", "", "", "", "", "", ""],
-    ["T", "", "", "T", "", "", "", ""],
+    ["C", "", "", "", "", "", "", ""],
+    ["U", "", "", "", "", "", "", "R"],
+    ["P", "", "", "", "", "", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "", "", "", "J"],
-    ["", "", "", "", "", "", "", "A"],
-    ["", "E", "", "", "", "", "", ""]
+    ["", "", "", "", "U", "T", "", "I"],
+    ["", "", "", "", "", "", "", "L"],
+    ["", "", "M", "E", "", "", "", ""],
+    ["", "", "", "", "", "", "", ""]
   ],
-  "topWord": "HOSPITAL",
-  "sideWord": "PLATFORM",
+  "topWord": "COMPUTER",
+  "sideWord": "CAPSULES",
   "topVisible": [true, false, true, true, false, true, false, false],
   "sideVisible": [false, true, false, true, false, true, false, true],
   "ships": [
     {
-      "word": "BEFORE",
+      "word": "MASTER",
       "length": 6,
-      "row": 3,
-      "col": 2,
-      "direction": "V"
-    },
-    {
-      "word": "PLATE",
-      "length": 5,
-      "row": 1,
-      "col": 4,
-      "direction": "V"
-    },
-    {
-      "word": "SUIT",
-      "length": 4,
-      "row": 8,
+      "row": 2,
       "col": 3,
       "direction": "H"
     },
     {
-      "word": "COAL",
-      "length": 4,
-      "row": 1,
-      "col": 5,
+      "word": "INPUT",
+      "length": 5,
+      "row": 5,
+      "col": 2,
       "direction": "H"
     },
     {
-      "word": "HAT",
+      "word": "COME",
+      "length": 4,
+      "row": 7,
+      "col": 1,
+      "direction": "H"
+    },
+    {
+      "word": "SILK",
+      "length": 4,
+      "row": 4,
+      "col": 8,
+      "direction": "V"
+    },
+    {
+      "word": "CUP",
       "length": 3,
-      "row": 2,
+      "row": 1,
       "col": 1,
       "direction": "V"
     },
     {
-      "word": "JAM",
+      "word": "USE",
       "length": 3,
-      "row": 6,
-      "col": 8,
-      "direction": "V"
+      "row": 8,
+      "col": 5,
+      "direction": "H"
     }
   ],
   "difficulty": {
@@ -81,6 +81,7 @@
     "ok": true,
     "dictionary_ok": true,
     "row_edge_ok": true,
-    "col_edge_ok": true
+    "col_edge_ok": true,
+    "no_orthogonal_touch": true
   }
 }

@@ -4,70 +4,70 @@
   "size": 8,
   "fleetLengths": [6, 5, 4, 4, 3, 3],
   "solution": [
-    ["", "", "", "B", "U", "S", "", ""],
+    ["", "", "S", "P", "R", "I", "N", "G"],
+    ["", "H", "", "", "", "", "", ""],
+    ["", "O", "", "B", "", "F", "I", "N"],
+    ["", "P", "", "O", "", "", "", ""],
+    ["", "E", "", "Y", "", "", "H", ""],
     ["", "", "", "", "", "", "A", ""],
-    ["", "E", "A", "S", "Y", "", "N", "S"],
-    ["A", "N", "G", "L", "E", "", "I", "E"],
-    ["", "", "", "", "B", "", "M", "T"],
-    ["", "", "", "", "U", "", "A", ""],
-    ["", "", "", "", "L", "", "L", ""],
-    ["", "", "", "", "L", "", "", ""]
+    ["B", "U", "I", "L", "D", "", "R", ""],
+    ["", "", "", "", "", "", "D", ""]
   ],
   "puzzle": [
-    ["", "", "", "B", "", "", "", ""],
+    ["", "", "", "", "R", "", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "Y", "", "", "S"],
-    ["", "N", "", "L", "", "", "I", ""],
-    ["", "", "", "", "B", "", "M", ""],
+    ["", "O", "", "B", "", "", "I", ""],
+    ["", "", "", "", "", "", "", ""],
+    ["", "", "", "Y", "", "", "H", ""],
     ["", "", "", "", "", "", "A", ""],
-    ["", "", "", "", "L", "", "", ""],
-    ["", "", "", "", "", "", "", ""]
+    ["", "U", "I", "", "", "", "", ""],
+    ["", "", "", "", "", "", "D", ""]
   ],
-  "topWord": "ANALYSIS",
-  "sideWord": "BASEBALL",
+  "topWord": "BUILDING",
+  "sideWord": "SHIPYARD",
   "topVisible": [false, true, false, false, true, false, true, true],
   "sideVisible": [false, true, true, false, false, true, true, false],
   "ships": [
     {
-      "word": "ANIMAL",
+      "word": "SPRING",
       "length": 6,
-      "row": 2,
-      "col": 7,
-      "direction": "V"
+      "row": 1,
+      "col": 3,
+      "direction": "H"
     },
     {
-      "word": "ANGLE",
+      "word": "BUILD",
       "length": 5,
-      "row": 4,
+      "row": 7,
       "col": 1,
       "direction": "H"
     },
     {
-      "word": "EASY",
-      "length": 4,
-      "row": 3,
-      "col": 2,
-      "direction": "H"
-    },
-    {
-      "word": "BULL",
+      "word": "HARD",
       "length": 4,
       "row": 5,
-      "col": 5,
+      "col": 7,
       "direction": "V"
     },
     {
-      "word": "BUS",
+      "word": "HOPE",
+      "length": 4,
+      "row": 2,
+      "col": 2,
+      "direction": "V"
+    },
+    {
+      "word": "FIN",
       "length": 3,
-      "row": 1,
-      "col": 4,
+      "row": 3,
+      "col": 6,
       "direction": "H"
     },
     {
-      "word": "SET",
+      "word": "BOY",
       "length": 3,
       "row": 3,
-      "col": 8,
+      "col": 4,
       "direction": "V"
     }
   ],
@@ -81,6 +81,7 @@
     "ok": true,
     "dictionary_ok": true,
     "row_edge_ok": true,
-    "col_edge_ok": true
+    "col_edge_ok": true,
+    "no_orthogonal_touch": true
   }
 }
