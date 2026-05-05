@@ -242,7 +242,7 @@ function makePlantPosition() {
 }
 
 function isInPondFootprint(x, row) {
-  return score >= 5 && x >= 30 && x <= 72 && row <= 2;
+  return score >= 5 && x >= 28 && x <= 74 && row >= 0;
 }
 
 function displayPlantPosition(plant, index) {

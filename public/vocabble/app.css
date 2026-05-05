@@ -388,7 +388,7 @@ h2 {
 }
 
 .action-grid {
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
 }
 
 .compact-rules p {
@@ -418,6 +418,7 @@ h2 {
 
   .fleet-section {
     order: 3;
+    grid-column: 1 / -1;
   }
 
   .rules-section {
@@ -426,6 +427,11 @@ h2 {
 
   .compact-rules {
     grid-column: 1 / -1;
+  }
+
+  .fleet-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 14px;
   }
 }
 
@@ -450,7 +456,7 @@ h2 {
   }
 
   h1 {
-    font-size: clamp(1.78rem, 8vw, 2.55rem);
+    font-size: clamp(1.58rem, 7.4vw, 2.35rem);
     line-height: 1;
   }
 
@@ -492,7 +498,20 @@ h2 {
 
   .corner-square::before,
   .corner-square::after {
-    font-size: 0.42rem;
+    content: "";
+    top: auto;
+    right: auto;
+    bottom: auto;
+    left: auto;
+    width: 68%;
+    height: 2px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.42);
+    transform: rotate(45deg);
+  }
+
+  .corner-square::after {
+    display: none;
   }
 
   .side-panel {
@@ -520,6 +539,14 @@ h2 {
     gap: 6px;
   }
 
+  .square.is-maybe-letter::after {
+    content: "?";
+    right: 8%;
+    bottom: 4%;
+    font-size: 0.72rem;
+    letter-spacing: 0;
+  }
+
   .fleet-item {
     grid-template-columns: 54px max-content;
     gap: 8px;
@@ -527,6 +554,7 @@ h2 {
   }
 
   .fleet-list {
+    grid-template-columns: 1fr;
     gap: 6px;
   }
 
@@ -537,5 +565,36 @@ h2 {
   .compact-rules p {
     font-size: 0.82rem;
     line-height: 1.35;
+  }
+}
+
+@media (max-width: 340px) {
+  .app-shell {
+    padding-inline: 6px;
+  }
+
+  .masthead {
+    display: grid;
+    justify-items: start;
+    gap: 2px;
+  }
+
+  .date-stack {
+    display: flex;
+    justify-items: start;
+    gap: 10px;
+    font-size: 0.7rem;
+  }
+
+  .board-wrap {
+    padding: 4px;
+  }
+
+  .board {
+    gap: 1px;
+  }
+
+  button {
+    font-size: 0.84rem;
   }
 }

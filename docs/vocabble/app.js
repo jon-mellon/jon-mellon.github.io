@@ -5,6 +5,7 @@ const dateElement = document.querySelector("#puzzle-date");
 const checkButton = document.querySelector("#check-button");
 const resetButton = document.querySelector("#reset-button");
 const revealButton = document.querySelector("#reveal-button");
+const soundButton = document.querySelector("#sound-button");
 const modeButtons = Array.from(document.querySelectorAll(".mode-button"));
 
 const SIZE = 8;
@@ -14,6 +15,8 @@ let mode = "letter";
 let selectedCell = null;
 let ignoreNextSelectedClick = false;
 let pointerDownCell = null;
+let audioContext = null;
+let soundEnabled = localStorage.getItem("vocabble:sound") === "on";
 
 function utcDateString(date = new Date()) {
   return date.toISOString().slice(0, 10);
@@ -25,6 +28,60 @@ function blankMatrix(value = "") {
 
 function storageKey(date) {
   return `vocabble:${date}`;
+}
+
+function updateSoundButton() {
+  if (!soundButton) return;
+  soundButton.textContent = soundEnabled ? "Sound on" : "Sound off";
+  soundButton.setAttribute("aria-pressed", soundEnabled ? "true" : "false");
+}
+
+function ensureAudioContext() {
+  if (!audioContext) {
+    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContextClass) return null;
+    audioContext = new AudioContextClass();
+  }
+  if (audioContext.state === "suspended") {
+    audioContext.resume();
+  }
+  return audioContext;
+}
+
+function playTone(frequency, duration = 0.08, type = "sine", delay = 0) {
+  if (!soundEnabled) return;
+  const context = ensureAudioContext();
+  if (!context) return;
+
+  const start = context.currentTime + delay;
+  const oscillator = context.createOscillator();
+  const gain = context.createGain();
+  oscillator.type = type;
+  oscillator.frequency.setValueAtTime(frequency, start);
+  gain.gain.setValueAtTime(0.0001, start);
+  gain.gain.exponentialRampToValueAtTime(0.05, start + 0.01);
+  gain.gain.exponentialRampToValueAtTime(0.0001, start + duration);
+  oscillator.connect(gain).connect(context.destination);
+  oscillator.start(start);
+  oscillator.stop(start + duration + 0.02);
+}
+
+function playSound(kind) {
+  if (!soundEnabled) return;
+  const patterns = {
+    type: [[520, 0.045, "triangle", 0]],
+    water: [[240, 0.055, "sine", 0], [190, 0.06, "sine", 0.035]],
+    maybe: [[420, 0.045, "triangle", 0], [610, 0.05, "triangle", 0.045]],
+    clear: [[300, 0.05, "sine", 0]],
+    check: [[520, 0.05, "triangle", 0], [660, 0.06, "triangle", 0.055]],
+    wrong: [[180, 0.08, "sawtooth", 0]],
+    complete: [[440, 0.07, "triangle", 0], [660, 0.08, "triangle", 0.075], [880, 0.11, "triangle", 0.155]],
+    reset: [[260, 0.06, "sine", 0]],
+    reveal: [[330, 0.06, "triangle", 0], [494, 0.08, "triangle", 0.06]]
+  };
+  (patterns[kind] || patterns.type).forEach(([frequency, duration, type, delay]) => {
+    playTone(frequency, duration, type, delay);
+  });
 }
 
 function puzzleSignature(currentPuzzle) {
@@ -106,6 +163,7 @@ function initialStateFromPuzzle(currentPuzzle) {
     top: currentPuzzle.topWord.split("").map((letter, index) => currentPuzzle.topVisible[index] ? letter : ""),
     side: currentPuzzle.sideWord.split("").map((letter, index) => currentPuzzle.sideVisible[index] ? letter : ""),
     fleet: normalizeFleetState(null, currentPuzzle.fleetLengths),
+    completed: false,
     revealed: false
   };
 }
@@ -212,11 +270,14 @@ function cycleCellState(row, col) {
   if (current === "letter") {
     state.marks[row][col] = "water";
     setMode("water");
+    playSound("water");
   } else if (current === "water") {
     state.marks[row][col] = "maybe";
     setMode("maybe");
+    playSound("maybe");
   } else {
     setMode("letter");
+    playSound("clear");
   }
 
   saveState();
@@ -295,7 +356,10 @@ function renderBoard() {
           saveState();
           renderCell(row, col);
           updateCompletion();
-          if (value) nextEditableBoardInput(row, col)?.focus();
+          if (value) {
+            playSound(mode === "maybe" ? "maybe" : "type");
+            nextEditableBoardInput(row, col)?.focus();
+          }
         }
       );
       input.addEventListener("keydown", (event) => {
@@ -370,6 +434,7 @@ function renderFleet() {
         (value) => {
           state.fleet[index][ii] = value;
           saveState();
+          if (value) playSound("type");
         }
       ));
       cells.append(cell);
@@ -401,8 +466,14 @@ function isComplete() {
 function updateCompletion() {
   clearWrongMarks();
   if (isComplete()) {
+    if (!state.completed) {
+      state.completed = true;
+      saveState();
+      playSound("complete");
+    }
     setStatus("Complete", "complete");
   } else {
+    state.completed = false;
     setStatus("In progress");
   }
 }
@@ -448,10 +519,13 @@ function markWrongInputs() {
   });
 
   if (isComplete()) {
+    playSound("complete");
     setStatus("Complete", "complete");
   } else if (wrongCount > 0) {
+    playSound("wrong");
     setStatus(`${wrongCount} to revisit`, "error");
   } else {
+    playSound("check");
     setStatus("No conflicts found");
   }
 }
@@ -467,6 +541,7 @@ function revealPuzzle() {
   renderBoard();
   renderFleet();
   setStatus("Revealed");
+  playSound("reveal");
 }
 
 function resetPuzzle() {
@@ -475,9 +550,11 @@ function resetPuzzle() {
   renderBoard();
   renderFleet();
   setStatus("In progress");
+  playSound("reset");
 }
 
 function setupControls() {
+  updateSoundButton();
   modeButtons.forEach((button) => {
     button.addEventListener("click", () => {
       setMode(button.dataset.mode);
@@ -487,6 +564,15 @@ function setupControls() {
   checkButton.addEventListener("click", markWrongInputs);
   resetButton.addEventListener("click", resetPuzzle);
   revealButton.addEventListener("click", revealPuzzle);
+  soundButton?.addEventListener("click", () => {
+    soundEnabled = !soundEnabled;
+    localStorage.setItem("vocabble:sound", soundEnabled ? "on" : "off");
+    updateSoundButton();
+    if (soundEnabled) {
+      ensureAudioContext();
+      playSound("check");
+    }
+  });
 }
 
 async function init() {
