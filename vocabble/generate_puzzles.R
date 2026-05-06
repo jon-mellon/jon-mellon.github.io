@@ -373,16 +373,18 @@ make_candidate_board <- function(dictionary) {
   list(board = board, ships = ships, side = side_word, top = top_word)
 }
 
-mask_puzzle <- function(board, top_word, side_word, seed) {
+mask_puzzle <- function(board, top_word, side_word, ships, seed) {
   set.seed(seed)
   filled <- which(board != "")
   givens <- integer()
 
-  for (cell in split(filled, rep(seq_along(fleet_lengths), fleet_lengths))) {
-    givens <- c(givens, sample(cell, 1))
+  for (ship in ships) {
+    cells <- linear_cells(placement_cells(ship$row, ship$col, ship$direction, ship$length))
+    needed <- if (ship$length <= 3) 2 else 1
+    givens <- c(givens, sample(cells, needed))
   }
   remaining <- setdiff(filled, givens)
-  target_givens <- min(length(filled), 10)
+  target_givens <- min(length(filled), 14)
   if (length(givens) < target_givens) {
     givens <- c(givens, sample(remaining, target_givens - length(givens)))
   }
@@ -400,6 +402,147 @@ mask_puzzle <- function(board, top_word, side_word, seed) {
     top_visible = top_visible,
     side_visible = side_visible
   )
+}
+
+make_puzzle_object <- function(candidate, masked, id, date, validation = NULL, uniqueness = NULL) {
+  hidden_letters <- sum(candidate$board != "") - sum(masked$puzzle != "")
+  hidden_edges <- sum(!masked$top_visible) + sum(!masked$side_visible)
+  validation <- validation %||% validate_candidate(candidate, read_dictionary())
+
+  list(
+    id = id,
+    date = date,
+    size = board_size,
+    fleetLengths = fleet_lengths,
+    solution = matrix_to_rows(candidate$board),
+    puzzle = matrix_to_rows(masked$puzzle),
+    topWord = candidate$top,
+    sideWord = candidate$side,
+    topVisible = unname(masked$top_visible),
+    sideVisible = unname(masked$side_visible),
+    ships = candidate$ships,
+    difficulty = list(
+      label = "medium-hard",
+      hiddenLetters = hidden_letters,
+      hiddenEdges = hidden_edges,
+      givenLetters = sum(masked$puzzle != "")
+    ),
+    validation = validation,
+    uniqueness = uniqueness
+  )
+}
+
+full_clue_mask <- function(candidate) {
+  list(
+    puzzle = candidate$board,
+    top_visible = rep(TRUE, board_size),
+    side_visible = rep(TRUE, board_size)
+  )
+}
+
+build_unique_clue_set <- function(candidate, dictionary, id, date, seed, min_total_givens = 8, min_ship_givens = 1, min_edge_visible = 2) {
+  set.seed(seed)
+  validation <- validate_candidate(candidate, dictionary)
+  placement_cache <- new.env(parent = emptyenv())
+  masked <- full_clue_mask(candidate)
+  current <- make_puzzle_object(candidate, masked, id, date, validation = validation)
+  current_uniqueness <- word_removal_uniqueness(current, dictionary, placement_cache)
+  if (!current_uniqueness$unique) return(NULL)
+
+  filled_cells <- which(candidate$board != "")
+  ship_cells <- lapply(candidate$ships, function(ship) {
+    linear_cells(placement_cells(ship$row, ship$col, ship$direction, ship$length))
+  })
+  names(ship_cells) <- vapply(candidate$ships, `[[`, character(1), "word")
+  clue_counts <- rep(0L, length(ship_cells))
+  names(clue_counts) <- names(ship_cells)
+  for (ii in seq_along(ship_cells)) clue_counts[[ii]] <- length(ship_cells[[ii]])
+
+  removal_order <- sample(filled_cells)
+  for (cell in removal_order) {
+    if (sum(masked$puzzle != "") <= min_total_givens) break
+    ship_index <- which(vapply(ship_cells, function(cells) cell %in% cells, logical(1)))
+    if (length(ship_index) && clue_counts[[ship_index]] <= min_ship_givens) next
+
+    row <- ((cell - 1) %% board_size) + 1
+    col <- ((cell - 1) %/% board_size) + 1
+    old_value <- masked$puzzle[row, col]
+    masked$puzzle[row, col] <- ""
+
+    trial <- make_puzzle_object(candidate, masked, id, date, validation = validation)
+    trial_uniqueness <- word_removal_uniqueness(trial, dictionary, placement_cache)
+    if (trial_uniqueness$unique) {
+      current_uniqueness <- trial_uniqueness
+      if (length(ship_index)) clue_counts[[ship_index]] <- clue_counts[[ship_index]] - 1L
+    } else {
+      masked$puzzle[row, col] <- old_value
+    }
+  }
+
+  # A second pass catches clues that were necessary before other removals but
+  # become redundant after the board has been made sparser.
+  for (cell in sample(filled_cells)) {
+    if (sum(masked$puzzle != "") <= min_total_givens) break
+    row <- ((cell - 1) %% board_size) + 1
+    col <- ((cell - 1) %/% board_size) + 1
+    if (masked$puzzle[row, col] == "") next
+    ship_index <- which(vapply(ship_cells, function(cells) cell %in% cells, logical(1)))
+    if (length(ship_index) && clue_counts[[ship_index]] <= min_ship_givens) next
+
+    old_value <- masked$puzzle[row, col]
+    masked$puzzle[row, col] <- ""
+    trial <- make_puzzle_object(candidate, masked, id, date, validation = validation)
+    trial_uniqueness <- word_removal_uniqueness(trial, dictionary, placement_cache)
+    if (trial_uniqueness$unique) {
+      current_uniqueness <- trial_uniqueness
+      if (length(ship_index)) clue_counts[[ship_index]] <- clue_counts[[ship_index]] - 1L
+    } else {
+      masked$puzzle[row, col] <- old_value
+    }
+  }
+
+  edge_attempts <- c(
+    paste0("top:", sample(seq_len(board_size))),
+    paste0("side:", sample(seq_len(board_size)))
+  )
+  edge_attempts <- sample(edge_attempts)
+  for (edge in edge_attempts) {
+    parts <- strsplit(edge, ":", fixed = TRUE)[[1]]
+    axis <- parts[[1]]
+    index <- as.integer(parts[[2]])
+    if (axis == "top") {
+      if (sum(masked$top_visible) <= min_edge_visible || !masked$top_visible[[index]]) next
+      masked$top_visible[[index]] <- FALSE
+    } else {
+      if (sum(masked$side_visible) <= min_edge_visible || !masked$side_visible[[index]]) next
+      masked$side_visible[[index]] <- FALSE
+    }
+
+    trial <- make_puzzle_object(candidate, masked, id, date, validation = validation)
+    trial_uniqueness <- word_removal_uniqueness(trial, dictionary, placement_cache)
+    if (trial_uniqueness$unique) {
+      current_uniqueness <- trial_uniqueness
+    } else if (axis == "top") {
+      masked$top_visible[[index]] <- TRUE
+    } else {
+      masked$side_visible[[index]] <- TRUE
+    }
+  }
+
+  final_puzzle <- make_puzzle_object(
+    candidate,
+    masked,
+    id,
+    date,
+    validation = validation,
+    uniqueness = list(
+      method = "word-removal backtracking",
+      unique = current_uniqueness$unique,
+      solutionWords = current_uniqueness$solutionWords
+    )
+  )
+  if (!isTRUE(final_puzzle$uniqueness$unique)) return(NULL)
+  final_puzzle
 }
 
 validate_candidate <- function(candidate, dictionary) {
@@ -441,52 +584,398 @@ validate_no_orthogonal_touch <- function(ships) {
   TRUE
 }
 
+solver_ship_pool <- function(dictionary, length) {
+  pool <- dictionary[[as.character(length)]]
+  preferred_pool <- intersect(pool, preferred_ship_words())
+  if (length(preferred_pool) >= 20) preferred_pool else pool
+}
+
+word_matches_pattern <- function(word, pattern) {
+  letters <- strsplit(word, "", fixed = TRUE)[[1]]
+  all(pattern == "" | letters == pattern)
+}
+
+edge_candidates_from_pattern <- function(edge_words, word, visible) {
+  pattern <- ifelse(visible, strsplit(word, "", fixed = TRUE)[[1]], "")
+  edge_words[vapply(edge_words, word_matches_pattern, logical(1), pattern = pattern)]
+}
+
+puzzle_matrix <- function(rows) {
+  out <- do.call(rbind, rows)
+  storage.mode(out) <- "character"
+  out
+}
+
+solver_placements <- function(dictionary, puzzle_board, side_candidates, top_candidates) {
+  side_allowed <- lapply(seq_len(board_size), function(ii) unique(substr(side_candidates, ii, ii)))
+  top_allowed <- lapply(seq_len(board_size), function(ii) unique(substr(top_candidates, ii, ii)))
+  placements <- list()
+
+  for (length in unique(fleet_lengths)) {
+    pool <- solver_ship_pool(dictionary, length)
+    length_placements <- list()
+    next_id <- 1L
+
+    for (word in pool) {
+      letters <- strsplit(word, "", fixed = TRUE)[[1]]
+      for (direction in c("H", "V")) {
+        max_row <- if (direction == "V") board_size - length + 1 else board_size
+        max_col <- if (direction == "H") board_size - length + 1 else board_size
+        for (row in seq_len(max_row)) {
+          for (col in seq_len(max_col)) {
+            cells <- placement_cells(row, col, direction, length)
+            existing <- puzzle_board[cells]
+            if (any(existing != "" & existing != letters)) next
+
+            contributes_edge <- FALSE
+            for (ii in seq_along(letters)) {
+              if (letters[[ii]] %in% side_allowed[[cells[ii, "row"]]] ||
+                  letters[[ii]] %in% top_allowed[[cells[ii, "col"]]]) {
+                contributes_edge <- TRUE
+                break
+              }
+            }
+            if (!contributes_edge) next
+
+            length_placements[[length(length_placements) + 1]] <- list(
+              id = next_id,
+              word = word,
+              length = length,
+              row = row,
+              col = col,
+              direction = direction,
+              letters = letters,
+              cells = linear_cells(cells),
+              neighbors = orthogonal_neighbor_cells(cells)
+            )
+            next_id <- next_id + 1L
+          }
+        }
+      }
+    }
+    placements[[as.character(length)]] <- length_placements
+  }
+  placements
+}
+
+selected_board <- function(selected) {
+  board <- empty_board()
+  for (placement in selected) {
+    letters <- placement$letters %||% strsplit(placement$word, "", fixed = TRUE)[[1]]
+    board[placement$cells] <- letters
+  }
+  board
+}
+
+board_solution_key <- function(board, side_word, top_word) {
+  paste(c(apply(board, 1, paste0, collapse = ""), side_word, top_word), collapse = "|")
+}
+
+edge_words_for_board <- function(board, side_candidates, top_candidates) {
+  row_sets <- apply(board, 1, function(x) unique(x[x != ""]))
+  col_sets <- apply(board, 2, function(x) unique(x[x != ""]))
+  side_matches <- side_candidates[
+    vapply(side_candidates, function(word) {
+      all(mapply(`%in%`, strsplit(word, "", fixed = TRUE)[[1]], row_sets))
+    }, logical(1))
+  ]
+  top_matches <- top_candidates[
+    vapply(top_candidates, function(word) {
+      all(mapply(`%in%`, strsplit(word, "", fixed = TRUE)[[1]], col_sets))
+    }, logical(1))
+  ]
+  list(side = side_matches, top = top_matches)
+}
+
+placement_fits_puzzle <- function(placement, puzzle_board) {
+  letters <- strsplit(placement$word, "", fixed = TRUE)[[1]]
+  existing <- puzzle_board[placement$cells]
+  !any(existing != "" & existing != letters)
+}
+
+placement_cache_key <- function(side_word, top_word) {
+  paste(side_word, top_word, sep = "/")
+}
+
+cached_candidate_placements <- function(dictionary, side_word, top_word, cache = NULL) {
+  if (is.null(cache)) return(candidate_placements(dictionary, side_word, top_word, seed = 1))
+  key <- placement_cache_key(side_word, top_word)
+  if (!exists(key, envir = cache, inherits = FALSE)) {
+    assign(key, candidate_placements(dictionary, side_word, top_word, seed = 1), envir = cache)
+  }
+  get(key, envir = cache, inherits = FALSE)
+}
+
+count_fixed_edge_solutions <- function(puzzle_board, dictionary, side_word, top_word, limit = 2, cache = NULL, excluded_words = character()) {
+  placements <- cached_candidate_placements(dictionary, side_word, top_word, cache)
+  given_cells <- which(puzzle_board != "")
+  solutions <- character()
+  examples <- character()
+  solution_words <- list()
+
+  for (length in names(placements)) {
+    placements[[length]] <- placements[[length]][
+      !vapply(placements[[length]], function(candidate) candidate$word %in% excluded_words, logical(1))
+    ]
+    placements[[length]] <- placements[[length]][
+      vapply(placements[[length]], placement_fits_puzzle, logical(1), puzzle_board = puzzle_board)
+    ]
+    if (length(placements[[length]])) {
+      scores <- vapply(placements[[length]], function(candidate) {
+        50 * sum(candidate$cells %in% given_cells) + sum(candidate$covered)
+      }, numeric(1))
+      placements[[length]] <- placements[[length]][order(scores, decreasing = TRUE)]
+      for (ii in seq_along(placements[[length]])) placements[[length]][[ii]]$id <- ii
+    }
+  }
+
+  feasible_candidates <- function(length, occupied, blocked, used_words, last_ids, enforce_order = TRUE) {
+    candidates <- placements[[as.character(length)]]
+    candidates[vapply(candidates, function(candidate) {
+      !candidate$word %in% used_words &&
+        !any(candidate$cells %in% occupied) &&
+        !any(candidate$cells %in% blocked)
+    }, logical(1))]
+  }
+
+  can_still_finish <- function(remaining_lengths, occupied, blocked, used_words, last_ids, covered_edges) {
+    if (!length(remaining_lengths)) return(TRUE)
+    possible_cells <- integer()
+    possible_edges <- covered_edges
+    for (future_length in unique(remaining_lengths)) {
+      candidates <- feasible_candidates(future_length, occupied, blocked, used_words, last_ids, enforce_order = FALSE)
+      if (!length(candidates)) return(FALSE)
+      possible_cells <- unique(c(possible_cells, unlist(lapply(candidates, `[[`, "cells"), use.names = FALSE)))
+      for (candidate in candidates) possible_edges <- possible_edges | candidate$covered
+    }
+    all(covered_edges | possible_edges) &&
+      (!length(given_cells) || all(given_cells %in% c(occupied, possible_cells)))
+  }
+
+  all_feasible_candidates <- function(remaining_lengths, occupied, blocked, used_words, last_ids) {
+    out <- list()
+    for (length in unique(remaining_lengths)) {
+      candidates <- feasible_candidates(length, occupied, blocked, used_words, last_ids)
+      if (length(candidates)) out <- c(out, candidates)
+    }
+    out
+  }
+
+  choose_next_candidates <- function(remaining_lengths, occupied, blocked, used_words, last_ids, covered_edges) {
+    all_candidates <- all_feasible_candidates(remaining_lengths, occupied, blocked, used_words, last_ids)
+    if (!length(all_candidates)) return(list())
+
+    constraints <- list()
+    for (cell in setdiff(given_cells, occupied)) {
+      constraints[[length(constraints) + 1]] <- list(
+        count = sum(vapply(all_candidates, function(candidate) cell %in% candidate$cells, logical(1))),
+        keep = function(candidate, target = cell) target %in% candidate$cells
+      )
+    }
+    for (edge_index in which(!covered_edges)) {
+      constraints[[length(constraints) + 1]] <- list(
+        count = sum(vapply(all_candidates, function(candidate) candidate$covered[[edge_index]], logical(1))),
+        keep = function(candidate, target = edge_index) candidate$covered[[target]]
+      )
+    }
+
+    if (!length(constraints)) {
+      options <- unique(remaining_lengths)
+      counts <- vapply(options, function(length) {
+        length(feasible_candidates(length, occupied, blocked, used_words, last_ids))
+      }, integer(1))
+      return(feasible_candidates(options[[which.min(counts)]], occupied, blocked, used_words, last_ids))
+    }
+
+    counts <- vapply(constraints, `[[`, integer(1), "count")
+    if (any(counts == 0L)) return(list())
+    chosen <- constraints[[which.min(counts)]]
+    all_candidates[vapply(all_candidates, chosen$keep, logical(1))]
+  }
+
+  remove_one_length <- function(remaining_lengths, length) {
+    remaining_lengths[-match(length, remaining_lengths)]
+  }
+
+  record_solution <- function(selected) {
+    board <- selected_board(selected)
+    key <- board_solution_key(board, side_word, top_word)
+    if (!key %in% solutions) {
+      solutions <<- c(solutions, key)
+      ship_words <- vapply(selected, `[[`, character(1), "word")
+      examples <<- c(examples, paste(side_word, top_word, paste(ship_words, collapse = ","), sep = " / "))
+      solution_words[[length(solution_words) + 1]] <<- c(side_word, top_word, ship_words)
+    }
+  }
+
+  search <- function(remaining_lengths, occupied, blocked, used_words, selected, covered_edges, last_ids) {
+    if (length(solutions) >= limit) return()
+
+    if (!length(remaining_lengths)) {
+      if (length(given_cells) && !all(given_cells %in% occupied)) return()
+      if (!all(covered_edges)) return()
+      record_solution(selected)
+      return()
+    }
+
+    if (!can_still_finish(remaining_lengths, occupied, blocked, used_words, last_ids, covered_edges)) return()
+    candidates <- choose_next_candidates(remaining_lengths, occupied, blocked, used_words, last_ids, covered_edges)
+    if (!length(candidates)) return()
+
+    if (length(remaining_lengths) == 1L) {
+      for (candidate in candidates) {
+        next_occupied <- unique(c(occupied, candidate$cells))
+        next_covered_edges <- covered_edges | candidate$covered
+        if (length(given_cells) && !all(given_cells %in% next_occupied)) next
+        if (!all(next_covered_edges)) next
+        record_solution(c(selected, list(candidate)))
+        if (length(solutions) >= limit) return()
+      }
+      return()
+    }
+
+    for (candidate in candidates) {
+      next_last_ids <- last_ids
+      next_last_ids[[as.character(candidate$length)]] <- candidate$id
+      search(
+        remove_one_length(remaining_lengths, candidate$length),
+        unique(c(occupied, candidate$cells)),
+        unique(c(blocked, candidate$neighbors)),
+        c(used_words, candidate$word),
+        c(selected, list(candidate)),
+        covered_edges | candidate$covered,
+        next_last_ids
+      )
+      if (length(solutions) >= limit) return()
+    }
+  }
+
+  search(fleet_lengths, integer(), integer(), character(), list(), rep(FALSE, board_size * 2), list())
+  list(count = length(solutions), examples = examples, solutionWords = solution_words)
+}
+
+count_puzzle_solutions <- function(puzzle, dictionary, limit = 2, cache = NULL, excluded_words = character()) {
+  puzzle_board <- puzzle_matrix(puzzle$puzzle)
+  edge_words <- setdiff(preferred_edge_words(dictionary), excluded_words)
+  side_candidates <- edge_candidates_from_pattern(edge_words, puzzle$sideWord, unlist(puzzle$sideVisible))
+  top_candidates <- edge_candidates_from_pattern(edge_words, puzzle$topWord, unlist(puzzle$topVisible))
+  if (!length(side_candidates) || !length(top_candidates)) {
+    return(list(count = 0L, examples = character(), sideCandidates = length(side_candidates), topCandidates = length(top_candidates)))
+  }
+
+  count <- 0L
+  examples <- character()
+  solution_words <- list()
+  for (side_word in side_candidates) {
+    for (top_word in top_candidates) {
+      result <- count_fixed_edge_solutions(
+        puzzle_board,
+        dictionary,
+        side_word,
+        top_word,
+        limit = limit - count,
+        cache = cache,
+        excluded_words = excluded_words
+      )
+      count <- count + result$count
+      examples <- c(examples, result$examples)
+      solution_words <- c(solution_words, result$solutionWords)
+      if (count >= limit) {
+        return(list(
+          count = count,
+          examples = examples,
+          solutionWords = solution_words,
+          sideCandidates = length(side_candidates),
+          topCandidates = length(top_candidates)
+        ))
+      }
+    }
+  }
+
+  list(
+    count = count,
+    examples = examples,
+    solutionWords = solution_words,
+    sideCandidates = length(side_candidates),
+    topCandidates = length(top_candidates)
+  )
+}
+
+dictionary_without_words <- function(dictionary, words) {
+  lapply(dictionary, function(pool) setdiff(pool, words))
+}
+
+word_removal_uniqueness <- function(puzzle, dictionary, placement_cache = NULL) {
+  if (is.null(placement_cache)) placement_cache <- new.env(parent = emptyenv())
+  first_solution <- count_puzzle_solutions(puzzle, dictionary, limit = 1, cache = placement_cache)
+  if (first_solution$count != 1 || !length(first_solution$solutionWords)) {
+    return(list(
+      unique = FALSE,
+      reason = "no initial solution",
+      solutionWords = character(),
+      alternatives = list()
+    ))
+  }
+
+  solution_words <- unique(first_solution$solutionWords[[1]])
+  alternatives <- list()
+  for (word in solution_words) {
+    alternate <- count_puzzle_solutions(
+      puzzle,
+      dictionary,
+      limit = 1,
+      cache = placement_cache,
+      excluded_words = word
+    )
+    if (alternate$count > 0) {
+      alternatives[[length(alternatives) + 1]] <- list(
+        removedWord = word,
+        example = alternate$examples[[1]] %||% ""
+      )
+    }
+  }
+
+  list(
+    unique = !length(alternatives),
+    reason = if (length(alternatives)) "alternative after removing solution word" else "unique by word removal",
+    solutionWords = solution_words,
+    alternatives = alternatives
+  )
+}
+
 matrix_to_rows <- function(board) {
   unname(lapply(seq_len(nrow(board)), function(ii) unname(as.character(board[ii, ]))))
 }
 
 make_puzzle <- function(date, id, seed, dictionary, edge_pairs, start_pair = 1, used_pair_keys = character()) {
   set.seed(seed)
-  candidate <- NULL
+  accepted <- NULL
+  chosen_pair_key <- NULL
   for (offset in seq_len(nrow(edge_pairs))) {
     pair_index <- ((start_pair + offset - 2) %% nrow(edge_pairs)) + 1
     side_word <- edge_pairs$side[[pair_index]]
     top_word <- edge_pairs$top[[pair_index]]
     if (paste(side_word, top_word, sep = "/") %in% used_pair_keys) next
     candidate <- make_edge_first_board(dictionary, side_word, top_word, seed + offset)
-    if (!is.null(candidate)) break
+    if (is.null(candidate)) next
+
+    validation <- validate_candidate(candidate, dictionary)
+    if (!validation$ok) next
+
+    accepted <- build_unique_clue_set(
+      candidate = candidate,
+      dictionary = dictionary,
+      id = id,
+      date = date,
+      seed = seed + offset
+    )
+    if (!is.null(accepted)) {
+      chosen_pair_key <- paste(candidate$side, candidate$top, sep = "/")
+      break
+    }
   }
-  if (is.null(candidate)) stop("Could not generate edge-first board for ", date)
-
-  validation <- validate_candidate(candidate, dictionary)
-  if (!validation$ok) stop("Generated board failed validation for ", date)
-
-  masked <- mask_puzzle(candidate$board, candidate$top, candidate$side, seed)
-  hidden_letters <- sum(candidate$board != "") - sum(masked$puzzle != "")
-  hidden_edges <- sum(!masked$top_visible) + sum(!masked$side_visible)
-
-  chosen_pair_key <- paste(candidate$side, candidate$top, sep = "/")
-
-  list(
-    id = id,
-    date = date,
-    size = board_size,
-    fleetLengths = fleet_lengths,
-    solution = matrix_to_rows(candidate$board),
-    puzzle = matrix_to_rows(masked$puzzle),
-    topWord = candidate$top,
-    sideWord = candidate$side,
-    topVisible = unname(masked$top_visible),
-    sideVisible = unname(masked$side_visible),
-    ships = candidate$ships,
-    difficulty = list(
-      label = "medium-hard",
-      hiddenLetters = hidden_letters,
-      hiddenEdges = hidden_edges,
-      givenLetters = sum(masked$puzzle != "")
-    ),
-    validation = validation
-  ) |>
+  if (is.null(accepted)) stop("Could not generate uniquely solvable board for ", date)
+  accepted |>
     c(list(pairKey = chosen_pair_key))
 }
 
@@ -533,7 +1022,9 @@ write_batch <- function(start_date = "2026-05-03", days = 90, seed_base = 202605
   invisible(manifest)
 }
 
-args <- commandArgs(trailingOnly = TRUE)
-days <- if (length(args) >= 1) as.integer(args[[1]]) else 90
-start_date <- if (length(args) >= 2) args[[2]] else "2026-05-03"
-write_batch(start_date = start_date, days = days)
+if (any(grepl("generate_puzzles\\.R$", commandArgs(FALSE)))) {
+  args <- commandArgs(trailingOnly = TRUE)
+  days <- if (length(args) >= 1) as.integer(args[[1]]) else 90
+  start_date <- if (length(args) >= 2) args[[2]] else "2026-05-03"
+  write_batch(start_date = start_date, days = days)
+}
