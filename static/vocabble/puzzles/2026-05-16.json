@@ -14,19 +14,19 @@
     ["", "N", "", "", "R", "I", "N", "G"]
   ],
   "puzzle": [
-    ["B", "", "", "", "", "", "", "E"],
+    ["B", "U", "I", "L", "D", "", "", "E"],
     ["", "", "", "", "", "L", "", "G"],
-    ["", "A", "", "A", "", "", "", ""],
-    ["", "", "", "C", "", "", "", ""],
-    ["", "T", "", "", "", "", "", ""],
-    ["", "", "", "", "", "", "", ""],
+    ["", "A", "", "A", "", "E", "", "G"],
+    ["", "", "", "C", "", "A", "", ""],
+    ["", "T", "", "E", "", "F", "", ""],
+    ["", "I", "", "", "", "", "", ""],
     ["", "O", "", "", "", "", "", ""],
-    ["", "", "", "", "", "I", "", ""]
+    ["", "N", "", "", "R", "I", "N", ""]
   ],
   "topWord": "BUILDING",
   "sideWord": "ELECTION",
-  "topVisible": [false, false, true, false, true, true, false, true],
-  "sideVisible": [false, false, true, true, false, true, false, true],
+  "topVisible": [true, true, true, false, false, true, true, true],
+  "sideVisible": [true, true, false, true, true, true, true, false],
   "ships": [
     {
       "word": "ACTION",
@@ -73,9 +73,9 @@
   ],
   "difficulty": {
     "label": "medium-hard",
-    "hiddenLetters": 15,
-    "hiddenEdges": 8,
-    "givenLetters": 10
+    "hiddenLetters": 2,
+    "hiddenEdges": 4,
+    "givenLetters": 23
   },
   "validation": {
     "ok": true,
@@ -83,5 +83,10 @@
     "row_edge_ok": true,
     "col_edge_ok": true,
     "no_orthogonal_touch": true
+  },
+  "uniqueness": {
+    "method": "word-removal backtracking",
+    "unique": true,
+    "solutionWords": ["ELECTION", "BUILDING", "EGG", "RING", "LEAF", "BUILD", "ACE", "ACTION"]
   }
 }

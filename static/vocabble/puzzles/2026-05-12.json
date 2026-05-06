@@ -14,19 +14,19 @@
     ["K", "E", "Y", "", "", "N", "", ""]
   ],
   "puzzle": [
-    ["", "", "", "", "", "U", "R", ""],
-    ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "", "A", "", ""],
-    ["", "", "", "", "", "", "", ""],
-    ["", "E", "", "", "", "", "", ""],
-    ["", "R", "", "S", "", "", "", ""],
-    ["", "", "", "", "", "O", "", "D"],
-    ["K", "", "Y", "", "", "", "", ""]
+    ["", "", "", "F", "O", "U", "R", ""],
+    ["", "U", "", "", "", "", "", ""],
+    ["", "N", "", "", "", "A", "", ""],
+    ["", "", "", "B", "", "C", "", "C"],
+    ["", "E", "", "U", "", "T", "", "A"],
+    ["", "R", "", "S", "", "I", "", "R"],
+    ["", "", "", "", "", "O", "", ""],
+    ["K", "E", "Y", "", "", "N", "", ""]
   ],
   "topWord": "KEYBOARD",
   "sideWord": "FUNCTION",
-  "topVisible": [true, true, true, false, false, true, false, false],
-  "sideVisible": [true, true, false, false, true, false, false, true],
+  "topVisible": [true, true, true, false, false, true, true, true],
+  "sideVisible": [true, true, false, true, true, true, true, false],
   "ships": [
     {
       "word": "ACTION",
@@ -73,9 +73,9 @@
   ],
   "difficulty": {
     "label": "medium-hard",
-    "hiddenLetters": 15,
-    "hiddenEdges": 8,
-    "givenLetters": 10
+    "hiddenLetters": 2,
+    "hiddenEdges": 4,
+    "givenLetters": 23
   },
   "validation": {
     "ok": true,
@@ -83,5 +83,10 @@
     "row_edge_ok": true,
     "col_edge_ok": true,
     "no_orthogonal_touch": true
+  },
+  "uniqueness": {
+    "method": "word-removal backtracking",
+    "unique": true,
+    "solutionWords": ["FUNCTION", "KEYBOARD", "CARD", "FOUR", "ACTION", "BUS", "KEY", "UNDER"]
   }
 }

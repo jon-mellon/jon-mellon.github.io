@@ -15,18 +15,18 @@
   ],
   "puzzle": [
     ["C", "", "", "", "", "", "", ""],
-    ["U", "", "", "", "", "", "", "R"],
+    ["U", "", "", "A", "S", "T", "E", "R"],
     ["P", "", "", "", "", "", "", ""],
-    ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "U", "T", "", "I"],
+    ["", "", "", "", "", "", "", "S"],
+    ["", "I", "N", "P", "U", "T", "", "I"],
     ["", "", "", "", "", "", "", "L"],
-    ["", "", "M", "E", "", "", "", ""],
-    ["", "", "", "", "", "", "", ""]
+    ["C", "O", "M", "E", "", "", "", ""],
+    ["", "", "", "", "U", "S", "E", ""]
   ],
   "topWord": "COMPUTER",
   "sideWord": "CAPSULES",
-  "topVisible": [true, false, true, true, false, true, false, false],
-  "sideVisible": [false, true, false, true, false, true, false, true],
+  "topVisible": [true, true, true, false, false, true, true, true],
+  "sideVisible": [true, true, false, true, true, true, true, false],
   "ships": [
     {
       "word": "MASTER",
@@ -73,9 +73,9 @@
   ],
   "difficulty": {
     "label": "medium-hard",
-    "hiddenLetters": 15,
-    "hiddenEdges": 8,
-    "givenLetters": 10
+    "hiddenLetters": 2,
+    "hiddenEdges": 4,
+    "givenLetters": 23
   },
   "validation": {
     "ok": true,
@@ -83,5 +83,10 @@
     "row_edge_ok": true,
     "col_edge_ok": true,
     "no_orthogonal_touch": true
+  },
+  "uniqueness": {
+    "method": "word-removal backtracking",
+    "unique": true,
+    "solutionWords": ["CAPSULES", "COMPUTER", "SILK", "MASTER", "USE", "INPUT", "COME", "CUP"]
   }
 }

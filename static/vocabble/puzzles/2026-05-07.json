@@ -14,19 +14,19 @@
     ["D", "", "", "", "", "", "", ""]
   ],
   "puzzle": [
-    ["", "", "S", "", "", "", "", ""],
+    ["G", "A", "S", "", "", "", "S", ""],
     ["", "", "", "", "", "", "H", ""],
-    ["P", "", "I", "", "T", "", "", ""],
+    ["P", "R", "I", "N", "T", "", "O", ""],
+    ["", "", "", "", "", "", "P", ""],
+    ["L", "", "", "K", "E", "Y", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "K", "", "Y", "", ""],
-    ["", "", "", "", "", "", "", ""],
-    ["", "", "", "P", "", "", "", "G"],
+    ["N", "", "S", "P", "R", "I", "N", ""],
     ["D", "", "", "", "", "", "", ""]
   ],
   "topWord": "PAINTING",
   "sideWord": "SHIPYARD",
-  "topVisible": [false, true, false, false, true, false, true, true],
-  "sideVisible": [false, true, true, false, false, true, false, true],
+  "topVisible": [true, true, true, false, false, true, true, true],
+  "sideVisible": [true, true, false, true, true, true, true, false],
   "ships": [
     {
       "word": "SPRING",
@@ -73,9 +73,9 @@
   ],
   "difficulty": {
     "label": "medium-hard",
-    "hiddenLetters": 15,
-    "hiddenEdges": 8,
-    "givenLetters": 10
+    "hiddenLetters": 2,
+    "hiddenEdges": 4,
+    "givenLetters": 23
   },
   "validation": {
     "ok": true,
@@ -83,5 +83,10 @@
     "row_edge_ok": true,
     "col_edge_ok": true,
     "no_orthogonal_touch": true
+  },
+  "uniqueness": {
+    "method": "word-removal backtracking",
+    "unique": true,
+    "solutionWords": ["SHIPYARD", "PAINTING", "SPRING", "SHOP", "KEY", "PRINT", "GAS", "LAND"]
   }
 }

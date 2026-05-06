@@ -440,7 +440,7 @@ full_clue_mask <- function(candidate) {
   )
 }
 
-build_unique_clue_set <- function(candidate, dictionary, id, date, seed, min_total_givens = 8, min_ship_givens = 1, min_edge_visible = 2) {
+build_unique_clue_set <- function(candidate, dictionary, id, date, seed, min_total_givens = 23, min_ship_givens = 1, min_edge_visible = 6) {
   set.seed(seed)
   validation <- validate_candidate(candidate, dictionary)
   placement_cache <- new.env(parent = emptyenv())
