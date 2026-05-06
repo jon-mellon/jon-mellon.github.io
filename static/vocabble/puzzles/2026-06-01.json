@@ -14,19 +14,19 @@
     ["G", "A", "S", "", "", "", "", "D"]
   ],
   "puzzle": [
-    ["S", "", "", "", "B", "", "L", ""],
-    ["", "", "", "", "", "", "", ""],
-    ["A", "", "", "", "", "", "", ""],
-    ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "", "A", "", "L"],
-    ["", "", "", "", "", "I", "", ""],
-    ["", "", "", "", "", "R", "", "N"],
-    ["", "A", "", "", "", "", "", ""]
+    ["S", "", "", "", "B", "A", "L", "L"],
+    ["T", "", "", "", "", "", "", ""],
+    ["A", "", "", "U", "", "", "", ""],
+    ["", "", "", "N", "", "", "", ""],
+    ["L", "", "", "D", "", "A", "", "L"],
+    ["E", "", "", "E", "", "I", "", "A"],
+    ["", "", "", "R", "", "R", "", "N"],
+    ["G", "A", "S", "", "", "", "", ""]
   ],
   "topWord": "BASEBALL",
   "sideWord": "STANDARD",
-  "topVisible": [false, true, false, true, false, false, true, true],
-  "sideVisible": [true, false, true, false, false, false, true, true],
+  "topVisible": [true, true, true, false, false, true, true, true],
+  "sideVisible": [true, true, false, true, true, true, true, false],
   "ships": [
     {
       "word": "STABLE",
@@ -73,9 +73,9 @@
   ],
   "difficulty": {
     "label": "medium-hard",
-    "hiddenLetters": 15,
-    "hiddenEdges": 8,
-    "givenLetters": 10
+    "hiddenLetters": 2,
+    "hiddenEdges": 4,
+    "givenLetters": 23
   },
   "validation": {
     "ok": true,
@@ -83,5 +83,10 @@
     "row_edge_ok": true,
     "col_edge_ok": true,
     "no_orthogonal_touch": true
+  },
+  "uniqueness": {
+    "method": "word-removal backtracking",
+    "unique": true,
+    "solutionWords": ["STANDARD", "BASEBALL", "LAND", "BALL", "AIR", "UNDER", "GAS", "STABLE"]
   }
 }

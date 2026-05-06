@@ -14,19 +14,19 @@
     ["C", "I", "R", "C", "L", "E", "", ""]
   ],
   "puzzle": [
-    ["", "", "", "", "", "", "", ""],
-    ["", "O", "", "P", "", "", "N", "E"],
+    ["", "H", "", "", "", "", "", ""],
+    ["", "", "", "P", "L", "A", "N", ""],
     ["", "S", "", "", "", "", "", ""],
-    ["", "", "", "", "P", "", "D", ""],
-    ["", "", "", "", "", "", "", ""],
-    ["", "", "E", "", "N", "", "", ""],
-    ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "", "E", "", ""]
+    ["", "T", "", "", "P", "", "D", ""],
+    ["", "", "", "", "I", "", "A", ""],
+    ["A", "C", "E", "", "N", "", "T", ""],
+    ["", "", "", "", "", "", "A", ""],
+    ["C", "I", "R", "C", "L", "E", "", ""]
   ],
   "topWord": "AIRPLANE",
   "sideWord": "HOSPITAL",
-  "topVisible": [false, true, false, false, true, true, true, false],
-  "sideVisible": [false, true, false, true, false, false, true, true],
+  "topVisible": [true, true, true, false, false, true, true, true],
+  "sideVisible": [true, true, false, true, true, true, true, false],
   "ships": [
     {
       "word": "CIRCLE",
@@ -73,9 +73,9 @@
   ],
   "difficulty": {
     "label": "medium-hard",
-    "hiddenLetters": 15,
-    "hiddenEdges": 8,
-    "givenLetters": 10
+    "hiddenLetters": 2,
+    "hiddenEdges": 4,
+    "givenLetters": 23
   },
   "validation": {
     "ok": true,
@@ -83,5 +83,10 @@
     "row_edge_ok": true,
     "col_edge_ok": true,
     "no_orthogonal_touch": true
+  },
+  "uniqueness": {
+    "method": "word-removal backtracking",
+    "unique": true,
+    "solutionWords": ["HOSPITAL", "AIRPLANE", "DATA", "PLANE", "CIRCLE", "PIN", "ACE", "HOST"]
   }
 }

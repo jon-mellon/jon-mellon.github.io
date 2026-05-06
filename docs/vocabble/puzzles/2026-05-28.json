@@ -14,19 +14,19 @@
     ["D", "A", "T", "E", "", "", "", ""]
   ],
   "puzzle": [
-    ["", "", "", "D", "", "N", "C", ""],
+    ["", "A", "", "D", "A", "N", "C", "E"],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "A", "", "", ""],
-    ["", "", "", "", "", "", "", ""],
-    ["L", "", "", "T", "E", "", "", ""],
+    ["", "R", "", "T", "A", "N", "", ""],
+    ["", "", "", "", "", "", "", "P"],
+    ["L", "I", "S", "T", "E", "N", "", "L"],
     ["", "", "", "", "", "", "", "A"],
-    ["", "", "", "", "", "", "", "N"],
-    ["", "A", "", "", "", "", "", ""]
+    ["", "", "", "", "", "", "", ""],
+    ["D", "A", "T", "E", "", "", "", ""]
   ],
   "topWord": "DISTANCE",
   "sideWord": "AIRPLANE",
-  "topVisible": [false, true, false, true, false, true, false, true],
-  "sideVisible": [false, true, true, false, false, false, true, true],
+  "topVisible": [true, true, true, false, false, true, true, true],
+  "sideVisible": [true, true, false, true, true, true, true, false],
   "ships": [
     {
       "word": "LISTEN",
@@ -73,9 +73,9 @@
   ],
   "difficulty": {
     "label": "medium-hard",
-    "hiddenLetters": 15,
-    "hiddenEdges": 8,
-    "givenLetters": 10
+    "hiddenLetters": 2,
+    "hiddenEdges": 4,
+    "givenLetters": 23
   },
   "validation": {
     "ok": true,
@@ -83,5 +83,10 @@
     "row_edge_ok": true,
     "col_edge_ok": true,
     "no_orthogonal_touch": true
+  },
+  "uniqueness": {
+    "method": "word-removal backtracking",
+    "unique": true,
+    "solutionWords": ["AIRPLANE", "DISTANCE", "PLAN", "DANCE", "LISTEN", "TAN", "DATE", "AIR"]
   }
 }

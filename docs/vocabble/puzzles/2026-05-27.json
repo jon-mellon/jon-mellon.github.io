@@ -14,19 +14,19 @@
     ["", "M", "", "", "K", "", "Y", ""]
   ],
   "puzzle": [
-    ["", "", "", "T", "", "B", "L", ""],
+    ["S", "", "S", "T", "A", "B", "L", ""],
     ["O", "", "", "", "", "", "", ""],
-    ["", "", "", "F", "U", "", "", ""],
+    ["U", "", "", "F", "U", "N", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "", "", "C", ""],
-    ["", "", "", "", "A", "", "", ""],
-    ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "K", "", "Y", ""]
+    ["D", "", "", "", "D", "", "C", ""],
+    ["", "A", "", "", "A", "", "I", ""],
+    ["", "I", "", "", "R", "", "T", ""],
+    ["", "M", "", "", "K", "", "Y", ""]
   ],
   "topWord": "DISTANCE",
   "sideWord": "BOUNDARY",
-  "topVisible": [false, true, true, false, false, true, false, true],
-  "sideVisible": [false, false, true, true, true, false, true, false],
+  "topVisible": [true, true, true, false, false, true, true, true],
+  "sideVisible": [true, true, false, true, true, true, true, false],
   "ships": [
     {
       "word": "STABLE",
@@ -73,9 +73,9 @@
   ],
   "difficulty": {
     "label": "medium-hard",
-    "hiddenLetters": 15,
-    "hiddenEdges": 8,
-    "givenLetters": 10
+    "hiddenLetters": 2,
+    "hiddenEdges": 4,
+    "givenLetters": 23
   },
   "validation": {
     "ok": true,
@@ -83,5 +83,10 @@
     "row_edge_ok": true,
     "col_edge_ok": true,
     "no_orthogonal_touch": true
+  },
+  "uniqueness": {
+    "method": "word-removal backtracking",
+    "unique": true,
+    "solutionWords": ["BOUNDARY", "DISTANCE", "CITY", "STABLE", "FUN", "DARK", "AIM", "SOUND"]
   }
 }

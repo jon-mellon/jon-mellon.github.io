@@ -72,6 +72,8 @@ for (path in puzzle_files) {
     expect_true(all(vapply(seq_len(8), function(ii) top[ii] %in% board[board[, ii] != "", ii], logical(1))))
     expect_true(all(givens[givens != ""] == board[givens != ""]))
     expect_true(no_touch())
+    expect_true(isTRUE(puzzle$uniqueness$unique))
+    expect_equal(puzzle$uniqueness$method, "word-removal backtracking")
     expect_equal(puzzle$difficulty$label, "medium-hard")
   })
 }

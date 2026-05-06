@@ -14,19 +14,19 @@
     ["", "", "N", "", "U", "S", "E", "R"]
   ],
   "puzzle": [
-    ["", "A", "", "", "E", "", "", ""],
+    ["", "A", "U", "S", "E", "", "", ""],
     ["", "", "", "", "", "L", "", ""],
-    ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "", "F", "", ""],
-    ["", "", "", "", "", "", "", ""],
-    ["N", "", "I", "", "", "", "", ""],
+    ["", "", "", "", "", "E", "", ""],
+    ["C", "", "P", "", "", "F", "", "S"],
+    ["A", "", "T", "", "", "T", "", "E"],
+    ["N", "", "I", "", "", "", "", "A"],
     ["", "", "O", "", "", "", "", ""],
-    ["", "", "N", "", "", "S", "", "R"]
+    ["", "", "N", "", "U", "S", "E", "R"]
   ],
   "topWord": "CAPSULES",
   "sideWord": "ELECTION",
-  "topVisible": [true, false, true, false, true, false, true, false],
-  "sideVisible": [true, false, false, true, false, true, false, true],
+  "topVisible": [true, true, true, false, false, true, true, true],
+  "sideVisible": [true, true, false, true, true, true, true, false],
   "ships": [
     {
       "word": "OPTION",
@@ -73,9 +73,9 @@
   ],
   "difficulty": {
     "label": "medium-hard",
-    "hiddenLetters": 15,
-    "hiddenEdges": 8,
-    "givenLetters": 10
+    "hiddenLetters": 2,
+    "hiddenEdges": 4,
+    "givenLetters": 23
   },
   "validation": {
     "ok": true,
@@ -83,5 +83,10 @@
     "row_edge_ok": true,
     "col_edge_ok": true,
     "no_orthogonal_touch": true
+  },
+  "uniqueness": {
+    "method": "word-removal backtracking",
+    "unique": true,
+    "solutionWords": ["ELECTION", "CAPSULES", "USER", "SEA", "LEFT", "CAUSE", "OPTION", "CAN"]
   }
 }

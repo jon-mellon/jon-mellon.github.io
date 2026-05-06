@@ -14,19 +14,19 @@
     ["", "H", "O", "L", "D", "", "", ""]
   ],
   "puzzle": [
-    ["", "", "", "J", "", "", "", ""],
-    ["", "", "", "", "", "", "", "G"],
+    ["B", "", "", "J", "O", "I", "N", ""],
+    ["A", "", "", "", "", "", "", "G"],
     ["S", "", "", "", "", "", "", "L"],
-    ["", "", "I", "", "", "", "", ""],
-    ["", "", "", "", "", "", "", "B"],
-    ["", "U", "", "E", "", "", "", "A"],
+    ["", "", "I", "C", "E", "", "", "O"],
+    ["C", "", "", "", "", "", "", "B"],
+    ["", "U", "S", "E", "", "", "", "A"],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "D", "", "", ""]
+    ["", "H", "O", "L", "D", "", "", ""]
   ],
   "topWord": "BUILDING",
   "sideWord": "BASEBALL",
-  "topVisible": [true, false, true, true, false, false, true, false],
-  "sideVisible": [false, true, false, false, true, true, true, false],
+  "topVisible": [true, true, true, false, false, true, true, true],
+  "sideVisible": [true, true, false, true, true, true, true, false],
   "ships": [
     {
       "word": "GLOBAL",
@@ -73,9 +73,9 @@
   ],
   "difficulty": {
     "label": "medium-hard",
-    "hiddenLetters": 15,
-    "hiddenEdges": 8,
-    "givenLetters": 10
+    "hiddenLetters": 2,
+    "hiddenEdges": 4,
+    "givenLetters": 23
   },
   "validation": {
     "ok": true,
@@ -83,5 +83,10 @@
     "row_edge_ok": true,
     "col_edge_ok": true,
     "no_orthogonal_touch": true
+  },
+  "uniqueness": {
+    "method": "word-removal backtracking",
+    "unique": true,
+    "solutionWords": ["BASEBALL", "BUILDING", "GLOBAL", "JOIN", "HOLD", "ICE", "USE", "BASIC"]
   }
 }

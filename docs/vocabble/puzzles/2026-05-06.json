@@ -14,19 +14,19 @@
     ["N", "", "N", "", "F", "O", "R", "M"]
   ],
   "puzzle": [
-    ["", "", "", "", "", "", "", ""],
+    ["P", "L", "A", "T", "E", "", "", ""],
     ["", "", "", "", "", "L", "", ""],
-    ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "", "A", "", ""],
-    ["", "", "", "", "", "F", "", ""],
+    ["", "", "A", "", "", "E", "", ""],
+    ["", "", "C", "", "", "A", "", "J"],
+    ["", "", "T", "", "", "F", "", "A"],
     ["I", "", "I", "", "", "", "", "M"],
-    ["", "", "O", "", "", "", "", ""],
-    ["N", "", "N", "", "", "", "R", ""]
+    ["O", "", "O", "", "", "", "", ""],
+    ["", "", "N", "", "F", "O", "R", ""]
   ],
   "topWord": "PLATFORM",
   "sideWord": "ELECTION",
-  "topVisible": [true, false, true, true, false, false, true, false],
-  "sideVisible": [false, false, true, true, true, false, true, false],
+  "topVisible": [true, true, true, false, false, true, true, true],
+  "sideVisible": [true, true, false, true, true, true, true, false],
   "ships": [
     {
       "word": "ACTION",
@@ -73,9 +73,9 @@
   ],
   "difficulty": {
     "label": "medium-hard",
-    "hiddenLetters": 15,
-    "hiddenEdges": 8,
-    "givenLetters": 10
+    "hiddenLetters": 2,
+    "hiddenEdges": 4,
+    "givenLetters": 23
   },
   "validation": {
     "ok": true,
@@ -83,5 +83,10 @@
     "row_edge_ok": true,
     "col_edge_ok": true,
     "no_orthogonal_touch": true
+  },
+  "uniqueness": {
+    "method": "word-removal backtracking",
+    "unique": true,
+    "solutionWords": ["ELECTION", "PLATFORM", "JAM", "FORM", "LEAF", "PLATE", "ACTION", "ION"]
   }
 }

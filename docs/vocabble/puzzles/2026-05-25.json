@@ -14,19 +14,19 @@
     ["M", "", "K", "", "P", "A", "I", "R"]
   ],
   "puzzle": [
-    ["", "", "", "", "", "", "", ""],
+    ["", "P", "I", "N", "", "", "", "N"],
     ["", "", "", "", "", "", "", "O"],
-    ["C", "", "", "", "", "Y", "", ""],
-    ["", "", "", "", "", "", "", ""],
+    ["C", "O", "U", "N", "T", "Y", "", "V"],
+    ["", "", "", "", "", "", "", "E"],
     ["", "", "B", "", "", "", "", "L"],
-    ["", "", "", "", "", "", "", ""],
-    ["", "", "O", "", "", "", "", ""],
-    ["", "", "K", "", "", "A", "I", "R"]
+    ["A", "", "O", "", "", "", "", ""],
+    ["R", "", "O", "", "", "", "", ""],
+    ["", "", "K", "", "P", "A", "I", ""]
   ],
   "topWord": "MOUNTAIN",
   "sideWord": "NOTEBOOK",
-  "topVisible": [false, false, true, true, false, false, true, true],
-  "sideVisible": [false, true, false, true, true, true, false, false],
+  "topVisible": [true, true, true, false, false, true, true, true],
+  "sideVisible": [true, true, false, true, true, true, true, false],
   "ships": [
     {
       "word": "COUNTY",
@@ -73,9 +73,9 @@
   ],
   "difficulty": {
     "label": "medium-hard",
-    "hiddenLetters": 15,
-    "hiddenEdges": 8,
-    "givenLetters": 10
+    "hiddenLetters": 2,
+    "hiddenEdges": 4,
+    "givenLetters": 23
   },
   "validation": {
     "ok": true,
@@ -83,5 +83,10 @@
     "row_edge_ok": true,
     "col_edge_ok": true,
     "no_orthogonal_touch": true
+  },
+  "uniqueness": {
+    "method": "word-removal backtracking",
+    "unique": true,
+    "solutionWords": ["NOTEBOOK", "MOUNTAIN", "NOVEL", "PAIR", "COUNTY", "PIN", "BOOK", "ARM"]
   }
 }

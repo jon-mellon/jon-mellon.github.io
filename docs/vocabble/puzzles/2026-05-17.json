@@ -14,19 +14,19 @@
     ["", "", "I", "S", "L", "A", "N", "D"]
   ],
   "puzzle": [
-    ["", "", "", "", "", "", "", "C"],
-    ["", "", "", "", "", "", "", ""],
-    ["", "", "", "P", "E", "", "", "U"],
-    ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "", "S", "", "E"],
+    ["A", "I", "R", "", "", "", "", "C"],
+    ["", "", "", "", "", "", "", "A"],
+    ["", "", "O", "P", "E", "N", "", "U"],
+    ["", "F", "", "", "", "", "", "S"],
+    ["", "", "", "B", "U", "S", "", "E"],
     ["", "L", "", "", "", "", "", ""],
-    ["", "", "", "", "", "", "", ""],
-    ["", "", "", "S", "", "A", "", "D"]
+    ["", "E", "", "", "", "", "", ""],
+    ["", "", "I", "S", "L", "A", "N", ""]
   ],
   "topWord": "AIRPLANE",
   "sideWord": "CAPSULES",
-  "topVisible": [true, true, false, false, true, true, false, false],
-  "sideVisible": [false, false, false, true, true, true, false, true],
+  "topVisible": [true, true, true, false, false, true, true, true],
+  "sideVisible": [true, true, false, true, true, true, true, false],
   "ships": [
     {
       "word": "ISLAND",
@@ -73,9 +73,9 @@
   ],
   "difficulty": {
     "label": "medium-hard",
-    "hiddenLetters": 15,
-    "hiddenEdges": 8,
-    "givenLetters": 10
+    "hiddenLetters": 2,
+    "hiddenEdges": 4,
+    "givenLetters": 23
   },
   "validation": {
     "ok": true,
@@ -83,5 +83,10 @@
     "row_edge_ok": true,
     "col_edge_ok": true,
     "no_orthogonal_touch": true
+  },
+  "uniqueness": {
+    "method": "word-removal backtracking",
+    "unique": true,
+    "solutionWords": ["CAPSULES", "AIRPLANE", "CAUSE", "ISLAND", "BUS", "OPEN", "AIR", "FILE"]
   }
 }

@@ -14,19 +14,19 @@
     ["L", "", "", "", "F", "I", "S", "H"]
   ],
   "puzzle": [
-    ["", "", "B", "", "", "", "", ""],
-    ["", "", "", "", "", "", "", ""],
-    ["", "", "", "O", "W", "", "", ""],
-    ["", "", "", "", "", "", "E", ""],
-    ["T", "", "", "", "", "", "R", ""],
+    ["C", "A", "B", "", "", "", "C", ""],
     ["", "", "", "", "", "", "A", ""],
+    ["", "S", "N", "O", "W", "", "M", ""],
+    ["S", "", "", "", "", "", "E", ""],
+    ["T", "", "", "B", "", "", "R", ""],
+    ["", "", "", "E", "", "", "A", ""],
     ["L", "", "", "D", "", "", "", ""],
-    ["", "", "", "", "", "I", "", ""]
+    ["L", "", "", "", "F", "I", "S", ""]
   ],
   "topWord": "SANDWICH",
   "sideWord": "BASEBALL",
-  "topVisible": [false, true, false, true, true, false, false, true],
-  "sideVisible": [true, true, false, false, true, true, false, false],
+  "topVisible": [true, true, true, false, false, true, true, true],
+  "sideVisible": [true, true, false, true, true, true, true, false],
   "ships": [
     {
       "word": "CAMERA",
@@ -73,9 +73,9 @@
   ],
   "difficulty": {
     "label": "medium-hard",
-    "hiddenLetters": 15,
-    "hiddenEdges": 8,
-    "givenLetters": 10
+    "hiddenLetters": 2,
+    "hiddenEdges": 4,
+    "givenLetters": 23
   },
   "validation": {
     "ok": true,
@@ -83,5 +83,10 @@
     "row_edge_ok": true,
     "col_edge_ok": true,
     "no_orthogonal_touch": true
+  },
+  "uniqueness": {
+    "method": "word-removal backtracking",
+    "unique": true,
+    "solutionWords": ["BASEBALL", "SANDWICH", "FISH", "CAMERA", "SNOW", "BED", "CAB", "STILL"]
   }
 }

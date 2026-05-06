@@ -14,19 +14,19 @@
     ["", "", "N", "", "Y", "A", "R", "D"]
   ],
   "puzzle": [
-    ["", "", "", "P", "", "", "", ""],
+    ["S", "H", "O", "P", "", "", "", "D"],
     ["", "", "", "", "", "", "", "E"],
-    ["", "", "", "", "", "", "", ""],
-    ["A", "", "I", "", "", "", "", "T"],
-    ["P", "", "", "", "", "", "", ""],
-    ["", "", "", "", "", "", "", ""],
+    ["C", "", "", "", "", "G", "", "P"],
+    ["A", "", "I", "", "", "A", "", "T"],
+    ["P", "", "S", "", "", "S", "", "H"],
+    ["", "", "I", "", "", "", "", ""],
     ["", "", "O", "", "", "", "", ""],
-    ["", "", "N", "", "Y", "A", "", ""]
+    ["", "", "N", "", "Y", "A", "R", ""]
   ],
   "topWord": "SHIPYARD",
   "sideWord": "DECISION",
-  "topVisible": [false, true, true, false, false, false, true, true],
-  "sideVisible": [false, true, false, true, false, true, true, false],
+  "topVisible": [true, true, true, false, false, true, true, true],
+  "sideVisible": [true, true, false, true, true, true, true, false],
   "ships": [
     {
       "word": "VISION",
@@ -73,9 +73,9 @@
   ],
   "difficulty": {
     "label": "medium-hard",
-    "hiddenLetters": 15,
-    "hiddenEdges": 8,
-    "givenLetters": 10
+    "hiddenLetters": 2,
+    "hiddenEdges": 4,
+    "givenLetters": 23
   },
   "validation": {
     "ok": true,
@@ -83,5 +83,10 @@
     "row_edge_ok": true,
     "col_edge_ok": true,
     "no_orthogonal_touch": true
+  },
+  "uniqueness": {
+    "method": "word-removal backtracking",
+    "unique": true,
+    "solutionWords": ["DECISION", "SHIPYARD", "DEPTH", "YARD", "GAS", "SHOP", "VISION", "CAP"]
   }
 }

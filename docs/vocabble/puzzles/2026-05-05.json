@@ -14,19 +14,19 @@
     ["", "", "", "", "E", "A", "C", "H"]
   ],
   "puzzle": [
-    ["", "A", "", "", "", "", "", "T"],
-    ["", "", "", "", "", "", "", ""],
-    ["I", "", "", "", "", "", "", ""],
-    ["S", "", "", "", "", "", "", ""],
-    ["", "", "", "", "", "", "", ""],
-    ["U", "", "", "", "", "", "C", "E"],
+    ["T", "A", "N", "", "W", "E", "S", "T"],
     ["", "", "", "R", "", "", "", ""],
-    ["", "", "", "", "", "A", "C", ""]
+    ["I", "", "", "E", "", "", "", ""],
+    ["S", "", "", "A", "", "", "", ""],
+    ["", "", "", "D", "", "", "", ""],
+    ["U", "", "", "E", "", "I", "C", "E"],
+    ["E", "", "", "R", "", "", "", ""],
+    ["", "", "", "", "E", "A", "C", ""]
   ],
   "topWord": "SANDWICH",
   "sideWord": "TREASURE",
-  "topVisible": [true, true, false, true, false, false, true, false],
-  "sideVisible": [false, true, false, false, true, false, true, true],
+  "topVisible": [true, true, true, false, false, true, true, true],
+  "sideVisible": [true, true, false, true, true, true, true, false],
   "ships": [
     {
       "word": "READER",
@@ -73,9 +73,9 @@
   ],
   "difficulty": {
     "label": "medium-hard",
-    "hiddenLetters": 15,
-    "hiddenEdges": 8,
-    "givenLetters": 10
+    "hiddenLetters": 2,
+    "hiddenEdges": 4,
+    "givenLetters": 23
   },
   "validation": {
     "ok": true,
@@ -83,5 +83,10 @@
     "row_edge_ok": true,
     "col_edge_ok": true,
     "no_orthogonal_touch": true
+  },
+  "uniqueness": {
+    "method": "word-removal backtracking",
+    "unique": true,
+    "solutionWords": ["TREASURE", "SANDWICH", "ICE", "WEST", "EACH", "READER", "TAN", "ISSUE"]
   }
 }
