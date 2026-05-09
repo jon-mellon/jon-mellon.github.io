@@ -10,6 +10,7 @@ const celebrationElement = document.querySelector("#completion-celebration");
 const modeButtons = Array.from(document.querySelectorAll(".mode-button"));
 
 const SIZE = 8;
+const STORAGE_VERSION = "v3";
 let puzzle = null;
 let state = null;
 let mode = "letter";
@@ -28,7 +29,7 @@ function blankMatrix(value = "") {
 }
 
 function storageKey(date) {
-  return `vocabble:${date}`;
+  return `vocabble:${STORAGE_VERSION}:${date}`;
 }
 
 function updateSoundButton() {
@@ -88,10 +89,13 @@ function playSound(kind) {
 function puzzleSignature(currentPuzzle) {
   return JSON.stringify({
     solution: currentPuzzle.solution,
+    puzzle: currentPuzzle.puzzle,
     topWord: currentPuzzle.topWord,
     sideWord: currentPuzzle.sideWord,
     topVisible: currentPuzzle.topVisible,
-    sideVisible: currentPuzzle.sideVisible
+    sideVisible: currentPuzzle.sideVisible,
+    fleetLengths: currentPuzzle.fleetLengths,
+    ships: currentPuzzle.ships
   });
 }
 
@@ -173,7 +177,10 @@ function initialStateFromPuzzle(currentPuzzle) {
       const parsed = JSON.parse(saved);
       if (parsed && parsed.date === currentPuzzle.date && parsed.puzzleSignature === puzzleSignature(currentPuzzle)) {
         parsed.fleet = normalizeFleetState(parsed.fleet, currentPuzzle.fleetLengths);
+        parsed.board = normalizeBoardLayer(parsed.board);
+        parsed.marks = normalizeMarkLayer(parsed.marks);
         parsed.maybe = normalizeBoardLayer(parsed.maybe);
+        applyCurrentGivens(parsed, currentPuzzle);
         return parsed;
       }
     } catch {
@@ -208,6 +215,32 @@ function normalizeBoardLayer(layer) {
     const existingRow = Array.isArray(layer) && Array.isArray(layer[row]) ? layer[row] : [];
     return Array.from({ length: SIZE }, (_, col) => normalizeLetter(existingRow[col] || ""));
   });
+}
+
+function normalizeMarkLayer(layer) {
+  const validMarks = new Set(["", "water", "maybe"]);
+  return Array.from({ length: SIZE }, (_, row) => {
+    const existingRow = Array.isArray(layer) && Array.isArray(layer[row]) ? layer[row] : [];
+    return Array.from({ length: SIZE }, (_, col) => {
+      const value = existingRow[col] || "";
+      return validMarks.has(value) ? value : "";
+    });
+  });
+}
+
+function applyCurrentGivens(savedState, currentPuzzle) {
+  for (let row = 0; row < SIZE; row += 1) {
+    for (let col = 0; col < SIZE; col += 1) {
+      if (currentPuzzle.puzzle[row][col]) {
+        savedState.board[row][col] = currentPuzzle.puzzle[row][col];
+        savedState.marks[row][col] = "";
+        savedState.maybe[row][col] = "";
+      }
+    }
+  }
+  savedState.top = currentPuzzle.topWord.split("").map((letter, index) => currentPuzzle.topVisible[index] ? letter : normalizeLetter(savedState.top?.[index] || ""));
+  savedState.side = currentPuzzle.sideWord.split("").map((letter, index) => currentPuzzle.sideVisible[index] ? letter : normalizeLetter(savedState.side?.[index] || ""));
+  savedState.puzzleSignature = puzzleSignature(currentPuzzle);
 }
 
 function normalizeFleetState(fleet, lengths) {
