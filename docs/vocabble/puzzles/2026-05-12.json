@@ -15,18 +15,18 @@
   ],
   "puzzle": [
     ["", "", "", "F", "O", "U", "R", ""],
-    ["", "U", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", "", ""],
     ["", "N", "", "", "", "A", "", ""],
     ["", "", "", "B", "", "C", "", "C"],
     ["", "E", "", "U", "", "T", "", "A"],
     ["", "R", "", "S", "", "I", "", "R"],
     ["", "", "", "", "", "O", "", ""],
-    ["K", "E", "Y", "", "", "N", "", ""]
+    ["", "", "Y", "", "", "N", "", ""]
   ],
   "topWord": "KEYBOARD",
   "sideWord": "FUNCTION",
-  "topVisible": [true, true, true, false, false, true, true, true],
-  "sideVisible": [true, true, false, true, true, true, true, false],
+  "topVisible": [true, true, false, false, false, true, true, false],
+  "sideVisible": [true, false, false, true, false, true, true, false],
   "ships": [
     {
       "word": "ACTION",
@@ -73,9 +73,9 @@
   ],
   "difficulty": {
     "label": "medium-hard",
-    "hiddenLetters": 2,
-    "hiddenEdges": 4,
-    "givenLetters": 23
+    "hiddenLetters": 5,
+    "hiddenEdges": 8,
+    "givenLetters": 20
   },
   "validation": {
     "ok": true,

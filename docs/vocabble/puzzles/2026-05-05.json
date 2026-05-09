@@ -14,10 +14,10 @@
     ["", "", "", "", "E", "A", "C", "H"]
   ],
   "puzzle": [
-    ["T", "A", "N", "", "W", "E", "S", "T"],
+    ["T", "", "N", "", "W", "E", "S", "T"],
     ["", "", "", "R", "", "", "", ""],
-    ["I", "", "", "E", "", "", "", ""],
-    ["S", "", "", "A", "", "", "", ""],
+    ["", "", "", "E", "", "", "", ""],
+    ["S", "", "", "", "", "", "", ""],
     ["", "", "", "D", "", "", "", ""],
     ["U", "", "", "E", "", "I", "C", "E"],
     ["E", "", "", "R", "", "", "", ""],
@@ -25,8 +25,8 @@
   ],
   "topWord": "SANDWICH",
   "sideWord": "TREASURE",
-  "topVisible": [true, true, true, false, false, true, true, true],
-  "sideVisible": [true, true, false, true, true, true, true, false],
+  "topVisible": [true, true, false, false, false, true, true, false],
+  "sideVisible": [true, false, false, true, false, true, true, false],
   "ships": [
     {
       "word": "READER",
@@ -73,9 +73,9 @@
   ],
   "difficulty": {
     "label": "medium-hard",
-    "hiddenLetters": 2,
-    "hiddenEdges": 4,
-    "givenLetters": 23
+    "hiddenLetters": 5,
+    "hiddenEdges": 8,
+    "givenLetters": 20
   },
   "validation": {
     "ok": true,

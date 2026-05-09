@@ -22,6 +22,7 @@
 body {
   margin: 0;
   min-height: 100vh;
+  min-height: 100svh;
   background:
     radial-gradient(circle at 18% 12%, rgba(255, 255, 255, 0.55) 0 54px, transparent 55px),
     radial-gradient(circle at 82% 18%, rgba(255, 255, 255, 0.38) 0 42px, transparent 43px),
@@ -40,13 +41,14 @@ button {
   display: grid;
   place-items: center;
   min-height: 100vh;
-  padding: 18px;
+  min-height: 100svh;
+  padding: clamp(10px, 1.7svh, 18px);
 }
 
 .game {
   width: min(940px, 100%);
   display: grid;
-  gap: 16px;
+  gap: clamp(8px, 1.35svh, 16px);
 }
 
 .topbar {
@@ -73,7 +75,7 @@ p {
 
 h1 {
   margin-bottom: 0;
-  font-size: clamp(2.3rem, 8vw, 5.4rem);
+  font-size: clamp(2.1rem, 6.6svh, 4.6rem);
   line-height: 0.92;
 }
 
@@ -106,14 +108,14 @@ h1 {
 .question-panel {
   position: relative;
   display: grid;
-  gap: 16px;
+  gap: clamp(8px, 1.4svh, 16px);
   place-items: center;
-  min-height: 360px;
+  min-height: clamp(210px, 28svh, 330px);
   border: 4px solid rgba(36, 48, 66, 0.12);
   border-radius: 8px;
   background: var(--paper);
   box-shadow: var(--shadow);
-  padding: clamp(18px, 4vw, 34px);
+  padding: clamp(14px, 3svh, 34px);
   overflow: hidden;
 }
 
@@ -137,8 +139,8 @@ h1 {
 }
 
 .character {
-  width: 104px;
-  height: 104px;
+  width: clamp(68px, 8.5svh, 94px);
+  height: clamp(68px, 8.5svh, 94px);
   border-radius: 50%;
   background: var(--yellow);
   box-shadow: inset -10px -12px rgba(218, 139, 0, 0.15), 0 12px 22px rgba(36, 48, 66, 0.14);
@@ -153,28 +155,28 @@ h1 {
 
 .eye {
   position: absolute;
-  top: 36px;
-  width: 13px;
-  height: 18px;
+  top: 35%;
+  width: 12.5%;
+  height: 17%;
   border-radius: 999px;
   background: var(--ink);
 }
 
 .left-eye {
-  left: 31px;
+  left: 30%;
 }
 
 .right-eye {
-  right: 31px;
+  right: 30%;
 }
 
 .smile {
   position: absolute;
-  left: 34px;
-  bottom: 28px;
-  width: 36px;
-  height: 18px;
-  border-bottom: 6px solid var(--ink);
+  left: 33%;
+  bottom: 27%;
+  width: 35%;
+  height: 17%;
+  border-bottom: max(4px, 0.55svh) solid var(--ink);
   border-radius: 0 0 999px 999px;
 }
 
@@ -185,8 +187,8 @@ h1 {
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  gap: clamp(8px, 2vw, 18px);
-  font-size: clamp(3.8rem, 15vw, 8.5rem);
+  gap: clamp(7px, 1.5svh, 18px);
+  font-size: clamp(3.1rem, 8.5svh, 7.2rem);
   font-weight: 1000;
   line-height: 0.95;
 }
@@ -206,13 +208,13 @@ h1 {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 8px;
-  min-height: 44px;
+  gap: clamp(5px, 0.9svh, 8px);
+  min-height: clamp(30px, 4.5svh, 44px);
 }
 
 .counter {
-  width: 34px;
-  height: 34px;
+  width: clamp(25px, 4svh, 34px);
+  height: clamp(25px, 4svh, 34px);
   border: 3px solid rgba(36, 48, 66, 0.12);
   border-radius: 50%;
   background: var(--teal);
@@ -230,10 +232,10 @@ h1 {
 .plus-counter {
   display: grid;
   place-items: center;
-  width: 34px;
-  height: 34px;
+  width: clamp(25px, 4svh, 34px);
+  height: clamp(25px, 4svh, 34px);
   color: var(--muted);
-  font-size: 1.5rem;
+  font-size: clamp(1.1rem, 2.8svh, 1.5rem);
   font-weight: 1000;
 }
 
@@ -243,7 +245,7 @@ h1 {
   min-height: 1.5em;
   margin-bottom: 0;
   color: #3f5f50;
-  font-size: clamp(1.15rem, 4vw, 1.8rem);
+  font-size: clamp(1rem, 2.6svh, 1.8rem);
   font-weight: 900;
   text-align: center;
 }
@@ -260,7 +262,7 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 42px;
+  min-height: clamp(32px, 4.8svh, 42px);
   padding: 0 16px;
   background: rgba(255, 253, 244, 0.72);
   color: #315d3d;
@@ -271,7 +273,7 @@ h1 {
 
 .garden-bed {
   position: relative;
-  min-height: 275px;
+  min-height: clamp(160px, 22svh, 245px);
   overflow: hidden;
   isolation: isolate;
   background:
@@ -1015,8 +1017,8 @@ h1 {
 }
 
 .choice-button {
-  min-height: 104px;
-  font-size: clamp(2.6rem, 10vw, 5rem);
+  min-height: clamp(64px, 9svh, 92px);
+  font-size: clamp(2.25rem, 6.2svh, 4.4rem);
 }
 
 .choice-button:nth-child(1) {
@@ -1059,14 +1061,14 @@ h1 {
 .controls {
   display: flex;
   justify-content: center;
-  gap: 12px;
+  gap: clamp(8px, 1.2svh, 12px);
 }
 
 .control-button {
   min-width: 128px;
-  min-height: 52px;
+  min-height: clamp(38px, 5.2svh, 46px);
   padding: 0 18px;
-  font-size: 1.05rem;
+  font-size: clamp(0.92rem, 2svh, 1.05rem);
 }
 
 .control-button.is-on {
@@ -1333,61 +1335,146 @@ h1 {
 @media (max-width: 700px) {
   .app-shell {
     align-items: start;
-    padding: 14px;
+    padding: 8px;
+  }
+
+  .game {
+    gap: 7px;
   }
 
   .topbar {
     align-items: start;
+    gap: 8px;
+  }
+
+  .eyebrow {
+    margin-bottom: 1px;
+    font-size: 0.7rem;
+  }
+
+  h1 {
+    font-size: clamp(1.75rem, 5.6svh, 2.55rem);
   }
 
   .score-card {
-    min-width: 88px;
-    padding: 8px 10px;
+    min-width: 78px;
+    padding: 6px 8px;
+  }
+
+  .score-label {
+    font-size: 0.7rem;
   }
 
   .score-value {
-    font-size: 1.8rem;
+    font-size: 1.45rem;
   }
 
   .question-panel {
-    min-height: 330px;
+    gap: 7px;
+    min-height: clamp(158px, 25svh, 220px);
+    padding: 8px;
+  }
+
+  .question-panel::before,
+  .question-panel::after {
+    height: 62px;
+  }
+
+  .character {
+    width: clamp(50px, 7.6svh, 68px);
+    height: clamp(50px, 7.6svh, 68px);
+  }
+
+  .sum {
+    font-size: clamp(2.45rem, 6.8svh, 4.1rem);
+    gap: 6px;
+  }
+
+  .counter-row {
+    gap: 4px;
+    min-height: 28px;
+  }
+
+  .counter,
+  .plus-counter {
+    width: 20px;
+    height: 20px;
+    border-width: 2px;
+  }
+
+  .plus-counter {
+    font-size: 0.88rem;
+  }
+
+  .message {
+    font-size: clamp(0.82rem, 2svh, 1.05rem);
+  }
+
+  .garden-header {
+    min-height: 28px;
+    padding: 0 10px;
+    font-size: 0.76rem;
   }
 
   .garden-bed {
-    min-height: 260px;
+    min-height: clamp(112px, 17svh, 155px);
   }
 
   .plant {
-    --garden-scale: 0.58;
+    --garden-scale: 0.45;
     width: 44px;
   }
 
   .garden-story {
     left: 4%;
     right: 4%;
-    bottom: 8px;
+    bottom: 4px;
+    height: 94px;
   }
 
   .pond-stage {
-    width: min(240px, 78vw);
-    height: 58px;
+    width: min(190px, 74vw);
+    height: 44px;
+    bottom: 12px;
+  }
+
+  .garden-helper {
+    bottom: 31px;
+    transform: scale(0.7);
+    transform-origin: 50% 100%;
+  }
+
+  .duck {
+    --duck-scale: 0.68;
+    bottom: 32px;
+  }
+
+  .duck-two {
+    --duck-scale: 0.58;
+    bottom: 30px;
   }
 
   .choices {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 7px;
   }
 
   .choice-button {
-    min-height: 88px;
+    min-height: clamp(46px, 7svh, 60px);
+    font-size: clamp(1.85rem, 5.2svh, 2.8rem);
   }
 
   .controls {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 7px;
   }
 
   .control-button {
     min-width: 0;
+    min-height: clamp(32px, 4.8svh, 40px);
+    padding: 0 8px;
+    font-size: 0.7rem;
   }
 }
 

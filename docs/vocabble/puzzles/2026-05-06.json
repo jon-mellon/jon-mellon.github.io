@@ -14,19 +14,19 @@
     ["N", "", "N", "", "F", "O", "R", "M"]
   ],
   "puzzle": [
-    ["P", "L", "A", "T", "E", "", "", ""],
+    ["", "L", "A", "T", "E", "", "", ""],
     ["", "", "", "", "", "L", "", ""],
-    ["", "", "A", "", "", "E", "", ""],
+    ["", "", "", "", "", "E", "", ""],
     ["", "", "C", "", "", "A", "", "J"],
     ["", "", "T", "", "", "F", "", "A"],
     ["I", "", "I", "", "", "", "", "M"],
-    ["O", "", "O", "", "", "", "", ""],
+    ["O", "", "", "", "", "", "", ""],
     ["", "", "N", "", "F", "O", "R", ""]
   ],
   "topWord": "PLATFORM",
   "sideWord": "ELECTION",
-  "topVisible": [true, true, true, false, false, true, true, true],
-  "sideVisible": [true, true, false, true, true, true, true, false],
+  "topVisible": [true, true, false, false, false, true, true, false],
+  "sideVisible": [true, false, false, true, false, true, true, false],
   "ships": [
     {
       "word": "ACTION",
@@ -73,9 +73,9 @@
   ],
   "difficulty": {
     "label": "medium-hard",
-    "hiddenLetters": 2,
-    "hiddenEdges": 4,
-    "givenLetters": 23
+    "hiddenLetters": 5,
+    "hiddenEdges": 8,
+    "givenLetters": 20
   },
   "validation": {
     "ok": true,

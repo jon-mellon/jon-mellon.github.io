@@ -15,18 +15,18 @@
   ],
   "puzzle": [
     ["", "", "", "", "", "B", "", "D"],
-    ["T", "R", "E", "E", "", "E", "", "E"],
+    ["", "R", "", "E", "", "E", "", "E"],
     ["", "", "", "", "", "D", "", "C"],
     ["", "", "", "", "", "", "", "I"],
     ["", "L", "E", "A", "S", "T", "", "D"],
-    ["I", "", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", "", ""],
     ["O", "", "", "", "", "", "", ""],
     ["", "", "", "F", "O", "U", "R", ""]
   ],
   "topWord": "TREASURE",
   "sideWord": "DECISION",
-  "topVisible": [true, true, true, false, false, true, true, true],
-  "sideVisible": [true, true, false, true, true, true, true, false],
+  "topVisible": [true, true, false, false, false, true, true, false],
+  "sideVisible": [true, false, false, true, false, true, true, false],
   "ships": [
     {
       "word": "DECIDE",
@@ -73,9 +73,9 @@
   ],
   "difficulty": {
     "label": "medium-hard",
-    "hiddenLetters": 2,
-    "hiddenEdges": 4,
-    "givenLetters": 23
+    "hiddenLetters": 5,
+    "hiddenEdges": 8,
+    "givenLetters": 20
   },
   "validation": {
     "ok": true,

@@ -445,10 +445,12 @@ build_unique_clue_set <- function(candidate,
                                   id,
                                   date,
                                   seed,
-                                  min_total_givens = 20,
+                                  target_total_givens = 20,
+                                  min_total_givens = 6,
                                   min_ship_givens = 0,
                                   min_edge_visible = 4,
                                   max_total_givens = 20,
+                                  extra_board_passes = 0,
                                   max_ship_givens = NULL) {
   set.seed(seed)
   validation <- validate_candidate(candidate, dictionary)
@@ -510,17 +512,32 @@ build_unique_clue_set <- function(candidate,
   }
   if (any(clue_counts > max_ship_givens)) return(NULL)
 
-  removal_order <- sample(filled_cells)
-  for (cell in removal_order) {
-    if (board_givens() <= min_total_givens) break
+  for (cell in sample(filled_cells)) {
+    if (board_givens() <= target_total_givens) break
     try_remove_cell(cell)
   }
 
   # A second pass catches clues that were necessary before other removals but
   # become redundant after the board has been made sparser.
   for (cell in sample(filled_cells)) {
-    if (board_givens() <= min_total_givens) break
+    if (board_givens() <= target_total_givens) break
     try_remove_cell(cell)
+  }
+
+  # After reaching the old floor, make a bounded minimization pass over the
+  # remaining clues. This avoids falsely treating the floor as evidence that no
+  # more letters can be removed, while keeping batch generation tractable.
+  if (extra_board_passes > 0) {
+    for (pass in seq_len(extra_board_passes)) {
+      removed_any <- FALSE
+      remaining <- filled_cells[masked$puzzle[filled_cells] != ""]
+      if (!length(remaining) || board_givens() <= min_total_givens) break
+      for (cell in sample(remaining)) {
+        if (board_givens() <= min_total_givens) break
+        if (try_remove_cell(cell)) removed_any <- TRUE
+      }
+      if (!removed_any) break
+    }
   }
 
   edge_attempts <- c(
@@ -551,6 +568,13 @@ build_unique_clue_set <- function(candidate,
     }
   }
 
+  if (extra_board_passes > 0) {
+    for (cell in sample(filled_cells)) {
+      if (board_givens() <= min_total_givens) break
+      try_remove_cell(cell)
+    }
+  }
+
   final_uniqueness <- word_removal_uniqueness(
     make_puzzle_object(candidate, masked, id, date, validation = validation),
     dictionary,
@@ -572,6 +596,109 @@ build_unique_clue_set <- function(candidate,
   if (!isTRUE(final_puzzle$uniqueness$unique)) return(NULL)
   if (final_puzzle$difficulty$givenLetters > max_total_givens) return(NULL)
   final_puzzle
+}
+
+refresh_puzzle_clues <- function(puzzle, puzzle_board, top_visible, side_visible, uniqueness = NULL) {
+  solution_board <- puzzle_matrix(puzzle$solution)
+  puzzle$puzzle <- matrix_to_rows(puzzle_board)
+  puzzle$topVisible <- unname(top_visible)
+  puzzle$sideVisible <- unname(side_visible)
+  puzzle$difficulty$hiddenLetters <- sum(solution_board != "") - sum(puzzle_board != "")
+  puzzle$difficulty$hiddenEdges <- sum(!top_visible) + sum(!side_visible)
+  puzzle$difficulty$givenLetters <- sum(puzzle_board != "")
+  if (!is.null(uniqueness)) {
+    puzzle$uniqueness <- list(
+      method = "word-removal backtracking",
+      unique = uniqueness$unique,
+      solutionWords = uniqueness$solutionWords
+    )
+  }
+  puzzle
+}
+
+minimize_puzzle_clues <- function(puzzle,
+                                  dictionary,
+                                  seed,
+                                  min_total_givens = 12,
+                                  min_edge_visible = 4,
+                                  board_passes = 1,
+                                  edge_passes = 0) {
+  set.seed(seed)
+  original <- puzzle
+  placement_cache <- new.env(parent = emptyenv())
+  puzzle_board <- puzzle_matrix(puzzle$puzzle)
+  top_visible <- unlist(puzzle$topVisible)
+  side_visible <- unlist(puzzle$sideVisible)
+  board_givens <- function() sum(puzzle_board != "")
+
+  candidate_puzzle <- function() {
+    refresh_puzzle_clues(puzzle, puzzle_board, top_visible, side_visible)
+  }
+
+  try_remove_board <- function(cell) {
+    if (board_givens() <= min_total_givens) return(FALSE)
+    row <- ((cell - 1) %% board_size) + 1
+    col <- ((cell - 1) %/% board_size) + 1
+    if (puzzle_board[row, col] == "") return(FALSE)
+
+    old_value <- puzzle_board[row, col]
+    puzzle_board[row, col] <<- ""
+    trial <- candidate_puzzle()
+    trial_uniqueness <- count_puzzle_solutions(trial, dictionary, limit = 2, cache = placement_cache)
+    if (trial_uniqueness$count == 1) {
+      TRUE
+    } else {
+      puzzle_board[row, col] <<- old_value
+      FALSE
+    }
+  }
+
+  try_remove_edge <- function(axis, index) {
+    if (axis == "top") {
+      if (sum(top_visible) <= min_edge_visible || !top_visible[[index]]) return(FALSE)
+      top_visible[[index]] <<- FALSE
+    } else {
+      if (sum(side_visible) <= min_edge_visible || !side_visible[[index]]) return(FALSE)
+      side_visible[[index]] <<- FALSE
+    }
+
+    trial <- candidate_puzzle()
+    trial_uniqueness <- count_puzzle_solutions(trial, dictionary, limit = 2, cache = placement_cache)
+    if (trial_uniqueness$count == 1) {
+      TRUE
+    } else {
+      if (axis == "top") top_visible[[index]] <<- TRUE else side_visible[[index]] <<- TRUE
+      FALSE
+    }
+  }
+
+  for (pass in seq_len(board_passes)) {
+    visible_cells <- which(puzzle_board != "")
+    if (!length(visible_cells)) break
+    removed_any <- FALSE
+    for (cell in sample(visible_cells)) {
+      if (try_remove_board(cell)) removed_any <- TRUE
+    }
+    if (!removed_any) break
+  }
+
+  for (pass in seq_len(edge_passes)) {
+    edge_attempts <- sample(c(
+      paste0("top:", seq_len(board_size)),
+      paste0("side:", seq_len(board_size))
+    ))
+    removed_any <- FALSE
+    for (edge in edge_attempts) {
+      parts <- strsplit(edge, ":", fixed = TRUE)[[1]]
+      if (try_remove_edge(parts[[1]], as.integer(parts[[2]]))) removed_any <- TRUE
+    }
+    if (!removed_any) break
+  }
+
+  minimized <- candidate_puzzle()
+  final_uniqueness <- word_removal_uniqueness(minimized, dictionary, placement_cache)
+  if (!isTRUE(final_uniqueness$unique)) return(original)
+  refresh_puzzle_clues(minimized, puzzle_board, top_visible, side_visible, final_uniqueness)
 }
 
 validate_candidate <- function(candidate, dictionary) {
@@ -1000,6 +1127,11 @@ make_puzzle <- function(date, id, seed, dictionary, edge_pairs, start_pair = 1, 
     )
     if (!is.null(accepted)) {
       chosen_pair_key <- paste(candidate$side, candidate$top, sep = "/")
+      accepted <- minimize_puzzle_clues(
+        accepted,
+        dictionary = dictionary,
+        seed = seed + offset + 100000
+      )
       break
     }
   }

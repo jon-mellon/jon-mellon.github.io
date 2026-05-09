@@ -14,19 +14,19 @@
     ["", "", "N", "", "Y", "A", "R", "D"]
   ],
   "puzzle": [
-    ["S", "H", "O", "P", "", "", "", "D"],
+    ["", "H", "O", "P", "", "", "", "D"],
     ["", "", "", "", "", "", "", "E"],
-    ["C", "", "", "", "", "G", "", "P"],
+    ["", "", "", "", "", "G", "", "P"],
     ["A", "", "I", "", "", "A", "", "T"],
     ["P", "", "S", "", "", "S", "", "H"],
     ["", "", "I", "", "", "", "", ""],
-    ["", "", "O", "", "", "", "", ""],
+    ["", "", "", "", "", "", "", ""],
     ["", "", "N", "", "Y", "A", "R", ""]
   ],
   "topWord": "SHIPYARD",
   "sideWord": "DECISION",
-  "topVisible": [true, true, true, false, false, true, true, true],
-  "sideVisible": [true, true, false, true, true, true, true, false],
+  "topVisible": [true, true, false, false, false, true, true, false],
+  "sideVisible": [true, false, false, true, false, true, true, false],
   "ships": [
     {
       "word": "VISION",
@@ -73,9 +73,9 @@
   ],
   "difficulty": {
     "label": "medium-hard",
-    "hiddenLetters": 2,
-    "hiddenEdges": 4,
-    "givenLetters": 23
+    "hiddenLetters": 5,
+    "hiddenEdges": 8,
+    "givenLetters": 20
   },
   "validation": {
     "ok": true,

@@ -15,18 +15,18 @@
   ],
   "puzzle": [
     ["", "H", "", "", "", "", "", ""],
-    ["", "", "", "P", "L", "A", "N", ""],
+    ["", "", "", "", "L", "A", "N", ""],
     ["", "S", "", "", "", "", "", ""],
     ["", "T", "", "", "P", "", "D", ""],
     ["", "", "", "", "I", "", "A", ""],
-    ["A", "C", "E", "", "N", "", "T", ""],
+    ["", "C", "E", "", "N", "", "T", ""],
     ["", "", "", "", "", "", "A", ""],
-    ["C", "I", "R", "C", "L", "E", "", ""]
+    ["", "I", "R", "C", "L", "E", "", ""]
   ],
   "topWord": "AIRPLANE",
   "sideWord": "HOSPITAL",
-  "topVisible": [true, true, true, false, false, true, true, true],
-  "sideVisible": [true, true, false, true, true, true, true, false],
+  "topVisible": [true, true, false, false, false, true, true, false],
+  "sideVisible": [true, false, false, true, false, true, true, false],
   "ships": [
     {
       "word": "CIRCLE",
@@ -73,9 +73,9 @@
   ],
   "difficulty": {
     "label": "medium-hard",
-    "hiddenLetters": 2,
-    "hiddenEdges": 4,
-    "givenLetters": 23
+    "hiddenLetters": 5,
+    "hiddenEdges": 8,
+    "givenLetters": 20
   },
   "validation": {
     "ok": true,

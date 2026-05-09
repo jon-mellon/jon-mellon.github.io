@@ -15,18 +15,18 @@
   ],
   "puzzle": [
     ["", "", "", "", "", "R", "A", "G"],
-    ["B", "U", "", "L", "D", "", "", ""],
+    ["", "U", "", "L", "", "", "", ""],
     ["", "", "", "", "", "R", "", ""],
     ["", "", "", "", "", "A", "", "P"],
-    ["I", "", "", "", "", "I", "", "L"],
+    ["", "", "", "", "", "I", "", "L"],
     ["O", "", "", "", "", "N", "", "A"],
     ["", "", "", "", "", "", "", "Y"],
     ["", "H", "I", "D", "D", "E", "N", ""]
   ],
   "topWord": "BUILDING",
   "sideWord": "AIRPLANE",
-  "topVisible": [true, true, true, false, false, true, true, true],
-  "sideVisible": [true, true, false, true, true, true, true, false],
+  "topVisible": [true, true, false, false, false, true, true, false],
+  "sideVisible": [true, false, false, true, false, true, true, false],
   "ships": [
     {
       "word": "HIDDEN",
@@ -73,9 +73,9 @@
   ],
   "difficulty": {
     "label": "medium-hard",
-    "hiddenLetters": 2,
-    "hiddenEdges": 4,
-    "givenLetters": 23
+    "hiddenLetters": 5,
+    "hiddenEdges": 8,
+    "givenLetters": 20
   },
   "validation": {
     "ok": true,
