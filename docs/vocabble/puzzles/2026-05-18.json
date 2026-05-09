@@ -94,9 +94,9 @@
   ],
   "puzzle": [
     ["", "", "", "", "", "", "", ""],
-    ["R", "", "S", "", "R", "", "", "G"],
+    ["R", "", "S", "P", "R", "", "", "G"],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "S", "", "N", ""],
+    ["P", "", "", "", "S", "U", "N", ""],
     ["", "", "E", "T", "", "", "", "R"],
     ["", "", "", "", "", "", "", ""],
     ["B", "", "", "L", "", "", "", ""],
@@ -152,9 +152,9 @@
   ],
   "difficulty": {
     "label": "medium-hard",
-    "hiddenLetters": 14,
+    "hiddenLetters": 11,
     "hiddenEdges": 8,
-    "givenLetters": 11
+    "givenLetters": 14
   },
   "validation": {
     "ok": true,
@@ -166,6 +166,6 @@
   "uniqueness": {
     "method": "word-removal backtracking",
     "unique": true,
-    "solutionWords": ["CROSSING", "BUILDING", "RING", "SPRING", "SUN", "BUILD", "SET", "CROP"]
+    "solutionWords": "CROSSING"
   }
 }

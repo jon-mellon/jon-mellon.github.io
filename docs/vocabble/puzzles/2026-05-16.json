@@ -96,11 +96,11 @@
     ["", "", "I", "", "", "", "", "E"],
     ["", "", "", "", "", "", "", "G"],
     ["", "A", "", "A", "", "E", "", "G"],
-    ["", "", "", "", "", "A", "", ""],
+    ["", "C", "", "C", "", "A", "", ""],
     ["", "", "", "E", "", "F", "", ""],
     ["", "", "", "", "", "", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "R", "", "", ""]
+    ["", "", "", "", "R", "", "", "G"]
   ],
   "topWord": "BUILDING",
   "sideWord": "ELECTION",
@@ -152,9 +152,9 @@
   ],
   "difficulty": {
     "label": "medium-hard",
-    "hiddenLetters": 14,
+    "hiddenLetters": 11,
     "hiddenEdges": 8,
-    "givenLetters": 11
+    "givenLetters": 14
   },
   "validation": {
     "ok": true,
@@ -166,6 +166,6 @@
   "uniqueness": {
     "method": "word-removal backtracking",
     "unique": true,
-    "solutionWords": ["ELECTION", "BUILDING", "EGG", "LEAF", "RING", "ACE", "BUILD", "ACTION"]
+    "solutionWords": "ELECTION"
   }
 }

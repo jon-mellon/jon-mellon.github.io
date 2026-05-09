@@ -95,12 +95,12 @@
   "puzzle": [
     ["", "H", "O", "", "", "", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "", "G", "", "P"],
-    ["A", "", "", "", "", "", "", ""],
+    ["", "", "V", "", "", "G", "", "P"],
+    ["A", "", "", "", "", "A", "", "T"],
     ["P", "", "", "", "", "S", "", "H"],
     ["", "", "", "", "", "", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "Y", "", "", ""]
+    ["", "", "", "", "Y", "A", "", "D"]
   ],
   "topWord": "SHIPYARD",
   "sideWord": "DECISION",
@@ -152,9 +152,9 @@
   ],
   "difficulty": {
     "label": "medium-hard",
-    "hiddenLetters": 16,
+    "hiddenLetters": 11,
     "hiddenEdges": 8,
-    "givenLetters": 9
+    "givenLetters": 14
   },
   "validation": {
     "ok": true,
@@ -166,6 +166,6 @@
   "uniqueness": {
     "method": "word-removal backtracking",
     "unique": true,
-    "solutionWords": ["DECISION", "SHIPYARD", "DEPTH", "GAS", "YARD", "SHOP", "CAP", "VISION"]
+    "solutionWords": "DECISION"
   }
 }

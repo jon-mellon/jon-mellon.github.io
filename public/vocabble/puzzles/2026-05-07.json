@@ -99,7 +99,7 @@
     ["", "", "", "", "", "", "", ""],
     ["L", "", "", "K", "E", "", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "P", "R", "", "", ""],
+    ["N", "", "", "P", "R", "", "", ""],
     ["", "", "", "", "", "", "", ""]
   ],
   "topWord": "PAINTING",
@@ -152,9 +152,9 @@
   ],
   "difficulty": {
     "label": "medium-hard",
-    "hiddenLetters": 14,
+    "hiddenLetters": 13,
     "hiddenEdges": 8,
-    "givenLetters": 11
+    "givenLetters": 12
   },
   "validation": {
     "ok": true,
@@ -166,6 +166,6 @@
   "uniqueness": {
     "method": "word-removal backtracking",
     "unique": true,
-    "solutionWords": ["SHIPYARD", "PAINTING", "SHOP", "SPRING", "KEY", "PRINT", "GAS", "LAND"]
+    "solutionWords": "SHIPYARD"
   }
 }

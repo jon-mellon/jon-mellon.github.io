@@ -93,14 +93,14 @@
     ]
   ],
   "puzzle": [
-    ["", "", "", "", "F", "", "", ""],
+    ["", "", "", "", "F", "", "R", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "R", "", "S", ""],
-    ["", "", "", "", "", "", "", ""],
-    ["", "D", "A", "", "", "", "", ""],
+    ["L", "", "A", "", "R", "", "S", ""],
+    ["", "", "", "", "", "", "P", ""],
+    ["", "D", "A", "Y", "", "", "", ""],
     ["", "", "", "", "", "", "I", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "T", "E", "", "G", ""]
+    ["", "", "A", "T", "E", "", "G", ""]
   ],
   "topWord": "PLATFORM",
   "sideWord": "BUILDING",
@@ -152,9 +152,9 @@
   ],
   "difficulty": {
     "label": "medium-hard",
-    "hiddenLetters": 16,
+    "hiddenLetters": 10,
     "hiddenEdges": 8,
-    "givenLetters": 9
+    "givenLetters": 15
   },
   "validation": {
     "ok": true,
@@ -166,6 +166,6 @@
   "uniqueness": {
     "method": "word-removal backtracking",
     "unique": true,
-    "solutionWords": ["BUILDING", "PLATFORM", "SPRING", "FORM", "PLATE", "AIR", "DAY", "BULL"]
+    "solutionWords": "BUILDING"
   }
 }

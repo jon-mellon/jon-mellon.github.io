@@ -94,11 +94,11 @@
   ],
   "puzzle": [
     ["", "", "", "", "", "", "", ""],
-    ["", "", "A", "", "", "I", "O", ""],
+    ["", "", "A", "C", "", "I", "O", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "A", "", "E", "", "", ""],
+    ["", "", "A", "C", "E", "", "", ""],
     ["T", "", "", "", "", "", "M", ""],
-    ["", "", "", "", "", "", "", ""],
+    ["", "", "S", "E", "", "", "", ""],
     ["", "", "", "", "", "", "", ""],
     ["F", "", "N", "E", "", "", "N", ""]
   ],
@@ -152,9 +152,9 @@
   ],
   "difficulty": {
     "label": "medium-hard",
-    "hiddenLetters": 14,
+    "hiddenLetters": 10,
     "hiddenEdges": 8,
-    "givenLetters": 11
+    "givenLetters": 15
   },
   "validation": {
     "ok": true,
@@ -166,6 +166,6 @@
   "uniqueness": {
     "method": "word-removal backtracking",
     "unique": true,
-    "solutionWords": ["MOUNTAIN", "FUNCTION", "MAIN", "ACTION", "ACE", "FINE", "USE", "MOUNT"]
+    "solutionWords": "MOUNTAIN"
   }
 }

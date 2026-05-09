@@ -93,14 +93,14 @@
     ]
   ],
   "puzzle": [
-    ["", "", "", "", "", "", "", ""],
+    ["", "I", "", "", "", "", "", ""],
     ["", "", "", "", "", "", "", "A"],
-    ["", "", "O", "", "", "", "", ""],
+    ["", "", "O", "", "E", "", "", "U"],
     ["", "F", "", "", "", "", "", "S"],
-    ["", "", "", "B", "", "S", "", "E"],
+    ["", "I", "", "B", "", "S", "", "E"],
     ["", "", "", "", "", "", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "S", "L", "A", "", ""]
+    ["", "", "I", "S", "L", "A", "", ""]
   ],
   "topWord": "AIRPLANE",
   "sideWord": "CAPSULES",
@@ -152,9 +152,9 @@
   ],
   "difficulty": {
     "label": "medium-hard",
-    "hiddenLetters": 15,
+    "hiddenLetters": 10,
     "hiddenEdges": 8,
-    "givenLetters": 10
+    "givenLetters": 15
   },
   "validation": {
     "ok": true,
@@ -166,6 +166,6 @@
   "uniqueness": {
     "method": "word-removal backtracking",
     "unique": true,
-    "solutionWords": ["CAPSULES", "AIRPLANE", "CAUSE", "ISLAND", "BUS", "OPEN", "FILE", "AIR"]
+    "solutionWords": "CAPSULES"
   }
 }

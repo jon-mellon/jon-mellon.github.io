@@ -93,13 +93,13 @@ h1 {
 }
 
 .question,
-.choice-panel,
+.selection-panel,
 .answer {
   margin-top: 18px;
 }
 
 .question h2,
-.choice-panel h2 {
+.selection-panel h2 {
   margin-bottom: 14px;
   font-size: 1.15rem;
 }
@@ -117,6 +117,34 @@ h1 {
   border-radius: 8px;
   background: var(--panel);
   box-shadow: var(--shadow);
+  transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+}
+
+.animal-card.selectable {
+  cursor: pointer;
+}
+
+.animal-card.selectable:hover,
+.animal-card.selectable:focus-visible {
+  border-color: var(--accent);
+  box-shadow: 0 20px 48px rgba(31, 122, 104, 0.2);
+  outline: none;
+  transform: translateY(-2px);
+}
+
+.animal-card.selected {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(31, 122, 104, 0.22), var(--shadow);
+}
+
+.animal-card.correct-card {
+  border-color: var(--good);
+  box-shadow: 0 0 0 3px rgba(36, 107, 55, 0.22), var(--shadow);
+}
+
+.animal-card.incorrect-card {
+  border-color: var(--warn);
+  box-shadow: 0 0 0 3px rgba(154, 79, 22, 0.22), var(--shadow);
 }
 
 .animal-card img,
@@ -151,13 +179,23 @@ h1 {
   line-height: 1.45;
 }
 
-.choices {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+.selection-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   gap: 12px;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.68);
 }
 
-.choice-button,
+.selection-actions p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.primary-action,
 .secondary-action,
 .source-link {
   min-height: 48px;
@@ -170,35 +208,22 @@ h1 {
   line-height: 1.2;
 }
 
-.choice-button {
+.primary-action {
   padding: 12px 14px;
 }
 
-.choice-button:hover,
+.primary-action:hover,
 .secondary-action:hover,
 .source-link:hover {
   background: var(--accent-strong);
   border-color: var(--accent-strong);
 }
 
-.choice-button:disabled {
+.primary-action:disabled {
   cursor: default;
-  opacity: 0.7;
-}
-
-.choice-button.selected {
-  outline: 3px solid rgba(31, 122, 104, 0.28);
-  outline-offset: 2px;
-}
-
-.choice-button.correct-choice {
-  border-color: var(--good);
-  background: var(--good);
-}
-
-.choice-button.incorrect-choice.selected {
-  border-color: var(--warn);
-  background: var(--warn);
+  border-color: var(--line);
+  background: var(--panel-muted);
+  color: var(--muted);
 }
 
 .answer {
@@ -332,9 +357,13 @@ h1 {
   }
 
   .animal-grid,
-  .choices,
   .answer-body {
     grid-template-columns: 1fr;
+  }
+
+  .selection-actions {
+    align-items: stretch;
+    flex-direction: column;
   }
 
   .animal-card {

@@ -93,14 +93,14 @@
     ]
   ],
   "puzzle": [
-    ["", "", "N", "", "", "", "", "B"],
+    ["", "A", "N", "", "", "", "", "B"],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "T", "", "", "S"],
+    ["C", "", "", "", "T", "", "", "S"],
     ["", "", "", "", "", "", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["A", "", "", "", "G", "", "", ""],
+    ["A", "", "", "", "G", "A", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "L", "A", "W", ""]
+    ["L", "", "", "", "L", "A", "W", ""]
   ],
   "topWord": "MOUNTAIN",
   "sideWord": "BASEBALL",
@@ -152,9 +152,9 @@
   ],
   "difficulty": {
     "label": "medium-hard",
-    "hiddenLetters": 16,
+    "hiddenLetters": 12,
     "hiddenEdges": 8,
-    "givenLetters": 9
+    "givenLetters": 13
   },
   "validation": {
     "ok": true,
@@ -166,6 +166,6 @@
   "uniqueness": {
     "method": "word-removal backtracking",
     "unique": true,
-    "solutionWords": ["BASEBALL", "MOUNTAIN", "BASE", "LAW", "AGAIN", "COUNTY", "MAN", "BALL"]
+    "solutionWords": "BASEBALL"
   }
 }

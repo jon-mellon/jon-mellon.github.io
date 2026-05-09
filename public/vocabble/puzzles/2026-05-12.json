@@ -97,10 +97,10 @@
     ["", "", "", "", "", "", "", ""],
     ["", "", "", "", "", "", "", ""],
     ["", "", "", "", "", "C", "", "C"],
-    ["", "E", "", "", "", "T", "", "A"],
-    ["", "", "", "S", "", "", "", "R"],
+    ["", "E", "", "U", "", "T", "", "A"],
+    ["", "R", "", "S", "", "", "", "R"],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "", "", "", ""]
+    ["", "E", "", "", "", "", "", ""]
   ],
   "topWord": "KEYBOARD",
   "sideWord": "FUNCTION",
@@ -152,9 +152,9 @@
   ],
   "difficulty": {
     "label": "medium-hard",
-    "hiddenLetters": 16,
+    "hiddenLetters": 13,
     "hiddenEdges": 8,
-    "givenLetters": 9
+    "givenLetters": 12
   },
   "validation": {
     "ok": true,
@@ -166,6 +166,6 @@
   "uniqueness": {
     "method": "word-removal backtracking",
     "unique": true,
-    "solutionWords": ["FUNCTION", "KEYBOARD", "CARD", "ACTION", "FOUR", "BUS", "KEY", "UNDER"]
+    "solutionWords": "FUNCTION"
   }
 }

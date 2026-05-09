@@ -93,9 +93,9 @@
     ]
   ],
   "puzzle": [
-    ["", "", "", "", "E", "", "", ""],
-    ["", "", "", "", "", "", "", "K"],
-    ["", "", "", "", "", "", "", ""],
+    ["S", "", "", "", "E", "", "", ""],
+    ["", "", "", "", "", "", "A", "K"],
+    ["S", "", "S", "", "", "", "", ""],
     ["U", "", "O", "", "", "I", "E", ""],
     ["", "", "", "", "", "", "", ""],
     ["", "", "I", "", "", "", "", ""],
@@ -152,9 +152,9 @@
   ],
   "difficulty": {
     "label": "medium-hard",
-    "hiddenLetters": 17,
+    "hiddenLetters": 13,
     "hiddenEdges": 8,
-    "givenLetters": 8
+    "givenLetters": 12
   },
   "validation": {
     "ok": true,
@@ -166,6 +166,6 @@
   "uniqueness": {
     "method": "word-removal backtracking",
     "unique": true,
-    "solutionWords": ["HOSPITAL", "SHIPYARD", "OAK", "PIE", "YARD", "SHAPE", "SOCIAL", "SUIT"]
+    "solutionWords": "HOSPITAL"
   }
 }

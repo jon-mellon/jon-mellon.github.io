@@ -93,14 +93,14 @@
     ]
   ],
   "puzzle": [
-    ["", "", "", "", "L", "", "", "C"],
+    ["", "", "", "B", "L", "E", "", "C"],
     ["", "", "", "", "", "", "", ""],
     ["", "", "", "", "", "", "", ""],
     ["", "", "U", "", "D", "E", "", ""],
-    ["", "", "", "", "", "", "", "W"],
-    ["", "", "", "", "", "A", "", ""],
-    ["", "", "", "", "", "N", "", ""],
-    ["", "", "", "", "", "", "", ""]
+    ["", "E", "", "", "", "", "", "W"],
+    ["", "A", "", "", "", "A", "", ""],
+    ["", "", "", "", "", "N", "", "N"],
+    ["", "", "", "", "", "T", "", ""]
   ],
   "topWord": "STANDARD",
   "sideWord": "SANDWICH",
@@ -152,9 +152,9 @@
   ],
   "difficulty": {
     "label": "medium-hard",
-    "hiddenLetters": 17,
+    "hiddenLetters": 11,
     "hiddenEdges": 8,
-    "givenLetters": 8
+    "givenLetters": 14
   },
   "validation": {
     "ok": true,
@@ -166,6 +166,6 @@
   "uniqueness": {
     "method": "word-removal backtracking",
     "unique": true,
-    "solutionWords": ["SANDWICH", "STANDARD", "WIND", "CAN", "UNDER", "ANT", "STABLE", "EACH"]
+    "solutionWords": "SANDWICH"
   }
 }

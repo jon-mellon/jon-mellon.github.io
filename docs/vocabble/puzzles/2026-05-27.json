@@ -98,9 +98,9 @@
     ["", "", "", "F", "U", "", "", ""],
     ["", "", "", "", "", "", "", ""],
     ["", "", "", "", "D", "", "C", ""],
-    ["", "", "", "", "A", "", "I", ""],
+    ["", "A", "", "", "A", "", "I", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "M", "", "", "", "", "", ""]
+    ["", "M", "", "", "K", "", "", ""]
   ],
   "topWord": "DISTANCE",
   "sideWord": "BOUNDARY",
@@ -152,9 +152,9 @@
   ],
   "difficulty": {
     "label": "medium-hard",
-    "hiddenLetters": 15,
+    "hiddenLetters": 13,
     "hiddenEdges": 8,
-    "givenLetters": 10
+    "givenLetters": 12
   },
   "validation": {
     "ok": true,
@@ -166,6 +166,6 @@
   "uniqueness": {
     "method": "word-removal backtracking",
     "unique": true,
-    "solutionWords": ["BOUNDARY", "DISTANCE", "CITY", "STABLE", "DARK", "FUN", "AIM", "SOUND"]
+    "solutionWords": "BOUNDARY"
   }
 }

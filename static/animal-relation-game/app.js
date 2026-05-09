@@ -45,6 +45,7 @@ const state = {
   pairResults: [],
   bestPairs: [],
   selectedPairKey: null,
+  selectedQids: [],
   answered: false,
   lcaInfo: null,
   ready: false
@@ -57,13 +58,15 @@ const summaryCache = new Map();
 const els = {
   status: document.querySelector("#status"),
   animals: document.querySelector("#animals"),
-  choices: document.querySelector("#choices"),
+  selectionStatus: document.querySelector("#selectionStatus"),
+  checkAnswer: document.querySelector("#checkAnswer"),
   answer: document.querySelector("#answer"),
   nextRound: document.querySelector("#nextRound")
 };
 
 async function init() {
   els.nextRound.addEventListener("click", startRound);
+  els.checkAnswer.addEventListener("click", submitSelectedPair);
 
   try {
     const res = await fetch("./data/animals.json");
@@ -82,24 +85,34 @@ async function startRound() {
   renderQuestion();
 
   try {
+    let lastError = null;
+
     for (let attempt = 0; attempt < 10; attempt++) {
-      state.currentAnimals = sampleThreeGoodAnimals(state.pool);
-      renderQuestion();
-
-      const qids = state.currentAnimals.map(animal => animal.qid);
-      state.lineages = await fetchLineages(qids);
-      state.pairResults = computePairResults(state.currentAnimals, state.lineages);
-      state.bestPairs = getBestPairs(state.pairResults);
-
-      if (isPlayableRound()) {
-        state.ready = true;
-        renderStatus("Taxonomy loaded. Choose the closest pair.");
+      try {
+        state.currentAnimals = sampleThreeGoodAnimals(state.pool);
         renderQuestion();
-        return;
+
+        const qids = state.currentAnimals.map(animal => animal.qid);
+        state.lineages = await fetchLineages(qids);
+        state.pairResults = computePairResults(state.currentAnimals, state.lineages);
+        state.bestPairs = getBestPairs(state.pairResults);
+
+        if (isPlayableRound()) {
+          state.ready = true;
+          renderStatus("Taxonomy loaded. Select two animals.");
+          renderQuestion();
+          return;
+        }
+
+        lastError = new Error("Unplayable animal triple");
+      } catch (err) {
+        lastError = err;
+        console.warn("Skipping animal triple.", err);
+        renderStatus("That set had incomplete taxonomy. Trying another set...");
       }
     }
 
-    throw new Error("Could not find a playable animal triple");
+    throw lastError ?? new Error("Could not find a playable animal triple");
   } catch (err) {
     console.error(err);
     renderError("Could not load taxonomy for this round. Try another round.");
@@ -113,11 +126,13 @@ function resetStateForRound() {
   state.pairResults = [];
   state.bestPairs = [];
   state.selectedPairKey = null;
+  state.selectedQids = [];
   state.answered = false;
   state.lcaInfo = null;
   state.ready = false;
   els.answer.classList.add("hidden");
   els.answer.innerHTML = "";
+  renderSelectionStatus();
 }
 
 async function runSparql(query) {
@@ -414,7 +429,7 @@ async function fetchWithRetry(url, options) {
   return fetchWithTimeout(url, options);
 }
 
-async function fetchWithTimeout(url, options, timeoutMs = 12000) {
+async function fetchWithTimeout(url, options, timeoutMs = 8000) {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), timeoutMs);
 
@@ -472,12 +487,33 @@ function isPlayableRound() {
   return Math.max(...state.pairResults.map(result => result.score)) > RANK_DEPTH.kingdom;
 }
 
+function toggleAnimalSelection(animal) {
+  if (state.answered || !state.ready) return;
+
+  if (state.selectedQids.includes(animal.qid)) {
+    state.selectedQids = state.selectedQids.filter(qid => qid !== animal.qid);
+  } else {
+    if (state.selectedQids.length >= 2) state.selectedQids.shift();
+    state.selectedQids.push(animal.qid);
+  }
+
+  renderQuestion();
+  renderSelectionStatus();
+}
+
+function submitSelectedPair() {
+  if (state.selectedQids.length !== 2) return;
+  const animals = state.selectedQids.map(qid => state.currentAnimals.find(animal => animal.qid === qid));
+  choosePair(animals[0], animals[1]);
+}
+
 function choosePair(a, b) {
   if (state.answered || !state.ready) return;
 
   state.answered = true;
   state.selectedPairKey = pairKey(a, b);
-  renderPairButtons();
+  renderQuestion();
+  renderSelectionStatus();
   renderAnswerLoading();
 
   fetchLcaInfo(state.bestPairs[0]?.lca)
@@ -507,12 +543,27 @@ function sampleThreeGoodAnimals(pool) {
 function renderQuestion() {
   if (!state.currentAnimals.length) {
     els.animals.innerHTML = "";
-    els.choices.innerHTML = "";
+    renderSelectionStatus();
     return;
   }
 
-  els.animals.innerHTML = state.currentAnimals.map(animal => `
-    <article class="animal-card">
+  const bestKeys = new Set(state.bestPairs.map(pair => pair.key));
+
+  els.animals.innerHTML = state.currentAnimals.map((animal, index) => {
+    const selected = state.selectedQids.includes(animal.qid);
+    const selectedPairIsBest = state.selectedPairKey && bestKeys.has(state.selectedPairKey);
+    const isInBestPair = state.answered && state.bestPairs.some(pair => pair.a.qid === animal.qid || pair.b.qid === animal.qid);
+    const isInWrongSelectedPair = state.answered && !selectedPairIsBest && selected;
+    const classes = [
+      "animal-card",
+      state.ready && !state.answered ? "selectable" : "",
+      selected ? "selected" : "",
+      isInBestPair ? "correct-card" : "",
+      isInWrongSelectedPair ? "incorrect-card" : ""
+    ].filter(Boolean).join(" ");
+
+    return `
+    <article class="${classes}" role="button" tabindex="${state.ready && !state.answered ? "0" : "-1"}" aria-pressed="${selected ? "true" : "false"}" data-animal-index="${index}">
       ${animal.image
         ? `<img src="${escapeAttr(animal.image)}" alt="">`
         : `<div class="image-placeholder" aria-hidden="true">No image</div>`}
@@ -521,40 +572,43 @@ function renderQuestion() {
         <p>${escapeHtml(animal.description ?? "")}</p>
       </div>
     </article>
-  `).join("");
-
-  renderPairButtons();
-}
-
-function renderPairButtons() {
-  if (state.currentAnimals.length !== 3) {
-    els.choices.innerHTML = "";
-    return;
-  }
-
-  const [a, b, c] = state.currentAnimals;
-  const pairs = [[a, b], [a, c], [b, c]];
-  const bestKeys = new Set(state.bestPairs.map(pair => pair.key));
-
-  els.choices.innerHTML = pairs.map(([x, y], i) => {
-    const key = pairKey(x, y);
-    const classes = [
-      "choice-button",
-      state.selectedPairKey === key ? "selected" : "",
-      state.answered && bestKeys.has(key) ? "correct-choice" : "",
-      state.answered && state.selectedPairKey === key && !bestKeys.has(key) ? "incorrect-choice" : ""
-    ].filter(Boolean).join(" ");
-
-    return `
-      <button type="button" class="${classes}" data-pair-index="${i}" ${!state.ready || state.answered ? "disabled" : ""}>
-        ${escapeHtml(x.label)} + ${escapeHtml(y.label)}
-      </button>
     `;
   }).join("");
 
-  els.choices.querySelectorAll("[data-pair-index]").forEach((btn, i) => {
-    btn.addEventListener("click", () => choosePair(...pairs[i]));
+  els.animals.querySelectorAll("[data-animal-index]").forEach(card => {
+    const animal = state.currentAnimals[Number(card.dataset.animalIndex)];
+    card.addEventListener("click", () => toggleAnimalSelection(animal));
+    card.addEventListener("keydown", event => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        toggleAnimalSelection(animal);
+      }
+    });
   });
+
+  renderSelectionStatus();
+}
+
+function renderSelectionStatus() {
+  if (!els.selectionStatus || !els.checkAnswer) return;
+
+  if (state.answered) {
+    els.selectionStatus.textContent = "Answer checked.";
+    els.checkAnswer.disabled = true;
+    return;
+  }
+
+  if (!state.ready) {
+    els.selectionStatus.textContent = "Loading taxonomy before answers are enabled.";
+    els.checkAnswer.disabled = true;
+    return;
+  }
+
+  const needed = 2 - state.selectedQids.length;
+  els.selectionStatus.textContent = needed > 0
+    ? `Select ${needed} more ${needed === 1 ? "animal" : "animals"}.`
+    : "Ready to check your answer.";
+  els.checkAnswer.disabled = state.selectedQids.length !== 2;
 }
 
 function renderAnswerLoading() {
@@ -624,7 +678,8 @@ function renderAnswer() {
     </div>
   `;
 
-  renderPairButtons();
+  renderQuestion();
+  renderSelectionStatus();
 }
 
 function renderStatus(message) {

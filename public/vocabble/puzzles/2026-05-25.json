@@ -95,12 +95,12 @@
   "puzzle": [
     ["", "P", "I", "N", "", "", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "O", "", "", "T", "Y", "", "V"],
+    ["C", "O", "", "", "T", "Y", "", "V"],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", "", "L"],
+    ["A", "", "", "", "", "", "", ""],
     ["R", "", "", "", "", "", "", ""],
-    ["", "", "", "", "P", "", "", ""]
+    ["", "", "", "", "P", "", "", "R"]
   ],
   "topWord": "MOUNTAIN",
   "sideWord": "NOTEBOOK",
@@ -152,9 +152,9 @@
   ],
   "difficulty": {
     "label": "medium-hard",
-    "hiddenLetters": 16,
+    "hiddenLetters": 12,
     "hiddenEdges": 8,
-    "givenLetters": 9
+    "givenLetters": 13
   },
   "validation": {
     "ok": true,
@@ -166,6 +166,6 @@
   "uniqueness": {
     "method": "word-removal backtracking",
     "unique": true,
-    "solutionWords": ["NOTEBOOK", "MOUNTAIN", "NOVEL", "COUNTY", "PAIR", "PIN", "ARM", "BOOK"]
+    "solutionWords": "NOTEBOOK"
   }
 }

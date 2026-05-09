@@ -93,12 +93,12 @@
     ]
   ],
   "puzzle": [
-    ["", "", "", "", "", "", "", "F"],
+    ["", "", "", "", "W", "", "", "F"],
     ["", "", "", "", "", "", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "D", "I", "", "", "M"],
+    ["T", "", "", "D", "I", "G", "", "M"],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "A", "", "C", ""],
+    ["", "", "", "D", "A", "", "C", ""],
     ["", "", "", "", "", "", "", ""],
     ["", "", "", "B", "", "D", "", ""]
   ],
@@ -152,9 +152,9 @@
   ],
   "difficulty": {
     "label": "medium-hard",
-    "hiddenLetters": 17,
+    "hiddenLetters": 13,
     "hiddenEdges": 8,
-    "givenLetters": 8
+    "givenLetters": 12
   },
   "validation": {
     "ok": true,
@@ -166,6 +166,6 @@
   "uniqueness": {
     "method": "word-removal backtracking",
     "unique": true,
-    "solutionWords": ["VARIABLE", "EVIDENCE", "FARM", "DANCE", "BED", "DIG", "VIEW", "STABLE"]
+    "solutionWords": "VARIABLE"
   }
 }

@@ -94,10 +94,10 @@
   ],
   "puzzle": [
     ["", "", "", "", "", "B", "", ""],
-    ["", "", "", "E", "", "", "", "E"],
+    ["", "", "E", "E", "", "E", "", "E"],
     ["", "", "", "", "", "D", "", ""],
     ["", "", "", "", "", "", "", "I"],
-    ["", "L", "", "", "S", "", "", "D"],
+    ["", "L", "", "", "S", "T", "", "D"],
     ["", "", "", "", "", "", "", ""],
     ["", "", "", "", "", "", "", ""],
     ["", "", "", "F", "", "", "", ""]
@@ -152,9 +152,9 @@
   ],
   "difficulty": {
     "label": "medium-hard",
-    "hiddenLetters": 16,
+    "hiddenLetters": 13,
     "hiddenEdges": 8,
-    "givenLetters": 9
+    "givenLetters": 12
   },
   "validation": {
     "ok": true,
@@ -166,6 +166,6 @@
   "uniqueness": {
     "method": "word-removal backtracking",
     "unique": true,
-    "solutionWords": ["DECISION", "TREASURE", "DECIDE", "BED", "LEAST", "FOUR", "TREE", "ION"]
+    "solutionWords": "DECISION"
   }
 }

@@ -94,13 +94,13 @@
   ],
   "puzzle": [
     ["", "", "S", "", "", "B", "", "F"],
-    ["", "", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", "", "A"],
     ["", "", "", "", "", "", "", "C"],
     ["", "", "", "", "", "", "", "E"],
     ["", "", "", "", "", "", "", ""],
-    ["", "I", "", "", "", "I", "C", ""],
+    ["", "I", "", "", "", "I", "C", "E"],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "D", "", "", "C", ""]
+    ["", "", "", "D", "", "N", "C", ""]
   ],
   "topWord": "DISTANCE",
   "sideWord": "FUNCTION",
@@ -152,9 +152,9 @@
   ],
   "difficulty": {
     "label": "medium-hard",
-    "hiddenLetters": 15,
+    "hiddenLetters": 12,
     "hiddenEdges": 8,
-    "givenLetters": 10
+    "givenLetters": 13
   },
   "validation": {
     "ok": true,
@@ -166,6 +166,6 @@
   "uniqueness": {
     "method": "word-removal backtracking",
     "unique": true,
-    "solutionWords": ["FUNCTION", "DISTANCE", "FACE", "DANCE", "ICE", "BUN", "DUST", "ACTION"]
+    "solutionWords": "FUNCTION"
   }
 }

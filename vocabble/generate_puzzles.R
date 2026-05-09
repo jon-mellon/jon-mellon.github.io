@@ -235,20 +235,28 @@ placement_cover <- function(cells, letters, side_letters, top_letters, names) {
   covered
 }
 
-candidate_placements <- function(dictionary, side_word, top_word, seed) {
+candidate_placements <- function(dictionary,
+                                 side_word,
+                                 top_word,
+                                 seed,
+                                 prefer_common_words = TRUE,
+                                 sample_limit = 1200,
+                                 lengths = unique(fleet_lengths)) {
   set.seed(seed)
   side_letters <- strsplit(side_word, "", fixed = TRUE)[[1]]
   top_letters <- strsplit(top_word, "", fixed = TRUE)[[1]]
   names <- constraint_names(side_word, top_word)
   placements <- list()
 
-  for (length in unique(fleet_lengths)) {
+  for (length in unique(lengths)) {
     pool <- dictionary[[as.character(length)]]
-    preferred_pool <- intersect(pool, preferred_ship_words())
-    if (length(preferred_pool) >= 20) pool <- preferred_pool
+    if (prefer_common_words) {
+      preferred_pool <- intersect(pool, preferred_ship_words())
+      if (length(preferred_pool) >= 20) pool <- preferred_pool
+    }
     common_letters <- unique(c(side_letters, top_letters))
     pool <- pool[vapply(pool, function(word) any(strsplit(word, "", fixed = TRUE)[[1]] %in% common_letters), logical(1))]
-    if (length(pool) > 1200) pool <- sample(pool, 1200)
+    if (!is.null(sample_limit) && length(pool) > sample_limit) pool <- sample(pool, sample_limit)
 
     length_placements <- list()
     for (word in pool) {
@@ -618,6 +626,52 @@ refresh_puzzle_clues <- function(puzzle, puzzle_board, top_visible, side_visible
   puzzle
 }
 
+edge_constraints_ok <- function(board, side_word, top_word) {
+  row_sets <- apply(board, 1, function(x) unique(x[x != ""]))
+  col_sets <- apply(board, 2, function(x) unique(x[x != ""]))
+  side_letters <- strsplit(side_word, "", fixed = TRUE)[[1]]
+  top_letters <- strsplit(top_word, "", fixed = TRUE)[[1]]
+  all(mapply(`%in%`, side_letters, row_sets)) &&
+    all(mapply(`%in%`, top_letters, col_sets))
+}
+
+disambiguate_same_slot_words <- function(puzzle, dictionary) {
+  solution_board <- puzzle_matrix(puzzle$solution)
+  puzzle_board <- puzzle_matrix(puzzle$puzzle)
+
+  for (ship in puzzle$ships) {
+    cells <- placement_cells(ship$row, ship$col, ship$direction, ship$length)
+    solution_letters <- solution_board[cells]
+    solution_word <- paste0(solution_letters, collapse = "")
+    pool <- dictionary[[as.character(ship$length)]]
+
+    repeat {
+      pattern <- puzzle_board[cells]
+      candidates <- pool[vapply(pool, function(word) {
+        if (word == solution_word) return(FALSE)
+        letters <- strsplit(word, "", fixed = TRUE)[[1]]
+        if (any(pattern != "" & pattern != letters)) return(FALSE)
+        trial_board <- solution_board
+        trial_board[cells] <- letters
+        edge_constraints_ok(trial_board, puzzle$sideWord, puzzle$topWord)
+      }, logical(1))]
+      if (!length(candidates)) break
+
+      hidden_positions <- which(pattern == "")
+      if (!length(hidden_positions)) break
+      candidate_letters <- lapply(candidates, strsplit, "", fixed = TRUE)
+      candidate_letters <- lapply(candidate_letters, `[[`, 1)
+      scores <- vapply(hidden_positions, function(position) {
+        sum(vapply(candidate_letters, function(letters) letters[[position]] == solution_letters[[position]], logical(1)))
+      }, integer(1))
+      clue_position <- hidden_positions[[which.min(scores)]]
+      puzzle_board[cells[clue_position, "row"], cells[clue_position, "col"]] <- solution_letters[[clue_position]]
+    }
+  }
+
+  refresh_puzzle_clues(puzzle, puzzle_board, unlist(puzzle$topVisible), unlist(puzzle$sideVisible), puzzle$uniqueness)
+}
+
 minimize_puzzle_clues <- function(puzzle,
                                   dictionary,
                                   seed,
@@ -706,9 +760,15 @@ minimize_puzzle_clues <- function(puzzle,
     if (!removed_any) break
   }
 
-  minimized <- candidate_puzzle()
+  minimized <- disambiguate_same_slot_words(candidate_puzzle(), dictionary)
   if (!isTRUE(current_uniqueness$unique)) return(original)
-  refresh_puzzle_clues(minimized, puzzle_board, top_visible, side_visible, current_uniqueness)
+  refresh_puzzle_clues(
+    minimized,
+    puzzle_matrix(minimized$puzzle),
+    unlist(minimized$topVisible),
+    unlist(minimized$sideVisible),
+    current_uniqueness
+  )
 }
 
 validate_candidate <- function(candidate, dictionary) {
@@ -863,13 +923,32 @@ placement_cache_key <- function(side_word, top_word) {
   paste(side_word, top_word, sep = "/")
 }
 
-cached_candidate_placements <- function(dictionary, side_word, top_word, cache = NULL) {
-  if (is.null(cache)) return(candidate_placements(dictionary, side_word, top_word, seed = 1))
-  key <- placement_cache_key(side_word, top_word)
-  if (!exists(key, envir = cache, inherits = FALSE)) {
-    assign(key, candidate_placements(dictionary, side_word, top_word, seed = 1), envir = cache)
+cached_candidate_placements <- function(dictionary, side_word, top_word, cache = NULL, full_dictionary_lengths = 3) {
+  if (is.null(cache)) {
+    placements <- candidate_placements(dictionary, side_word, top_word, seed = 1)
+  } else {
+    key <- placement_cache_key(side_word, top_word)
+    if (!exists(key, envir = cache, inherits = FALSE)) {
+      assign(key, candidate_placements(dictionary, side_word, top_word, seed = 1), envir = cache)
+    }
+    placements <- get(key, envir = cache, inherits = FALSE)
   }
-  get(key, envir = cache, inherits = FALSE)
+
+  if (length(full_dictionary_lengths)) {
+    full <- candidate_placements(
+      dictionary,
+      side_word,
+      top_word,
+      seed = 1,
+      prefer_common_words = FALSE,
+      sample_limit = NULL,
+      lengths = full_dictionary_lengths
+    )
+    for (length in intersect(as.character(full_dictionary_lengths), names(full))) {
+      placements[[length]] <- full[[length]]
+    }
+  }
+  placements
 }
 
 count_fixed_edge_solutions <- function(puzzle_board,

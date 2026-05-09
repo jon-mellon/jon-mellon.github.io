@@ -98,9 +98,9 @@
     ["", "", "", "U", "", "", "", ""],
     ["", "", "", "", "", "", "", ""],
     ["L", "", "", "", "", "A", "", "L"],
-    ["", "", "", "E", "", "", "", "A"],
+    ["E", "", "", "E", "", "I", "", "A"],
     ["", "", "", "R", "", "R", "", "N"],
-    ["", "", "", "", "", "", "", ""]
+    ["G", "", "", "", "", "", "", ""]
   ],
   "topWord": "BASEBALL",
   "sideWord": "STANDARD",
@@ -152,9 +152,9 @@
   ],
   "difficulty": {
     "label": "medium-hard",
-    "hiddenLetters": 14,
+    "hiddenLetters": 11,
     "hiddenEdges": 8,
-    "givenLetters": 11
+    "givenLetters": 14
   },
   "validation": {
     "ok": true,
@@ -166,6 +166,6 @@
   "uniqueness": {
     "method": "word-removal backtracking",
     "unique": true,
-    "solutionWords": ["STANDARD", "BASEBALL", "LAND", "BALL", "AIR", "UNDER", "GAS", "STABLE"]
+    "solutionWords": "STANDARD"
   }
 }

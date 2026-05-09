@@ -93,14 +93,14 @@
     ]
   ],
   "puzzle": [
-    ["G", "", "", "", "", "", "", "W"],
+    ["G", "A", "", "", "", "", "", "W"],
     ["", "", "", "", "O", "", "", "A"],
-    ["", "", "G", "", "", "", "", "L"],
+    ["", "A", "G", "", "", "", "", "L"],
     ["", "", "", "", "", "", "", ""],
     ["", "", "", "", "E", "", "", ""],
     ["", "", "", "", "R", "", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "E", "", "A", "", ""]
+    ["", "", "M", "E", "T", "A", "", ""]
   ],
   "topWord": "BASEBALL",
   "sideWord": "WORKSHOP",
@@ -152,9 +152,9 @@
   ],
   "difficulty": {
     "label": "medium-hard",
-    "hiddenLetters": 15,
+    "hiddenLetters": 11,
     "hiddenEdges": 8,
-    "givenLetters": 10
+    "givenLetters": 14
   },
   "validation": {
     "ok": true,
@@ -166,6 +166,6 @@
   "uniqueness": {
     "method": "word-removal backtracking",
     "unique": true,
-    "solutionWords": ["WORKSHOP", "BASEBALL", "WALK", "METAL", "BORDER", "BAG", "GAS", "SHOP"]
+    "solutionWords": "WORKSHOP"
   }
 }

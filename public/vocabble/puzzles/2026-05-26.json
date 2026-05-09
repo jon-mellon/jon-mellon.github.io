@@ -93,12 +93,12 @@
     ]
   ],
   "puzzle": [
-    ["", "", "B", "", "", "", "", ""],
+    ["C", "", "B", "", "", "", "", ""],
     ["", "", "", "", "", "", "A", ""],
-    ["", "S", "", "", "W", "", "M", ""],
+    ["", "S", "", "O", "W", "", "M", ""],
     ["", "", "", "", "", "", "E", ""],
     ["T", "", "", "", "", "", "", ""],
-    ["", "", "", "E", "", "", "", ""],
+    ["I", "", "", "E", "", "", "", ""],
     ["L", "", "", "", "", "", "", ""],
     ["", "", "", "", "F", "I", "", ""]
   ],
@@ -152,9 +152,9 @@
   ],
   "difficulty": {
     "label": "medium-hard",
-    "hiddenLetters": 14,
+    "hiddenLetters": 11,
     "hiddenEdges": 8,
-    "givenLetters": 11
+    "givenLetters": 14
   },
   "validation": {
     "ok": true,
@@ -166,6 +166,6 @@
   "uniqueness": {
     "method": "word-removal backtracking",
     "unique": true,
-    "solutionWords": ["BASEBALL", "SANDWICH", "CAMERA", "FISH", "SNOW", "BED", "CAB", "STILL"]
+    "solutionWords": "BASEBALL"
   }
 }

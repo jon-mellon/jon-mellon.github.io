@@ -21,9 +21,12 @@
       <div id="animals" class="animal-grid"></div>
     </section>
 
-    <section class="choice-panel" aria-labelledby="choices-title">
-      <h2 id="choices-title">Choose a pair</h2>
-      <div id="choices" class="choices"></div>
+    <section class="selection-panel" aria-labelledby="selection-title">
+      <h2 id="selection-title">Select two animals</h2>
+      <div class="selection-actions">
+        <p id="selectionStatus">Choose two cards to check your answer.</p>
+        <button id="checkAnswer" type="button" class="primary-action" disabled>Check answer</button>
+      </div>
     </section>
 
     <section id="answer" class="answer hidden" aria-live="polite"></section>

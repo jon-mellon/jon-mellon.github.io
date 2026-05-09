@@ -94,13 +94,13 @@
   ],
   "puzzle": [
     ["", "", "", "", "", "", "", ""],
-    ["U", "", "", "", "S", "T", "", "R"],
+    ["U", "", "M", "", "S", "T", "", "R"],
     ["P", "", "", "", "", "", "", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "", "", "", "I"],
+    ["", "I", "", "", "", "", "", "I"],
     ["", "", "", "", "", "", "", "L"],
-    ["C", "", "M", "", "", "", "", ""],
-    ["", "", "", "", "", "S", "E", ""]
+    ["C", "", "M", "", "", "", "", "K"],
+    ["", "", "", "", "U", "S", "E", ""]
   ],
   "topWord": "COMPUTER",
   "sideWord": "CAPSULES",
@@ -152,9 +152,9 @@
   ],
   "difficulty": {
     "label": "medium-hard",
-    "hiddenLetters": 14,
+    "hiddenLetters": 10,
     "hiddenEdges": 8,
-    "givenLetters": 11
+    "givenLetters": 15
   },
   "validation": {
     "ok": true,
@@ -166,6 +166,6 @@
   "uniqueness": {
     "method": "word-removal backtracking",
     "unique": true,
-    "solutionWords": ["CAPSULES", "COMPUTER", "SILK", "MASTER", "USE", "COME", "CUP", "INPUT"]
+    "solutionWords": "CAPSULES"
   }
 }

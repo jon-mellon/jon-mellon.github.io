@@ -93,12 +93,12 @@
     ]
   ],
   "puzzle": [
-    ["", "", "", "", "O", "I", "", ""],
+    ["", "", "", "J", "O", "I", "", ""],
     ["", "", "", "", "", "", "", "G"],
     ["", "", "", "", "", "", "", "L"],
-    ["", "", "I", "", "", "", "", ""],
-    ["", "", "", "", "", "", "", ""],
-    ["", "U", "", "E", "", "", "", ""],
+    ["", "", "I", "C", "", "", "", "O"],
+    ["C", "", "", "", "", "", "", ""],
+    ["", "U", "S", "E", "", "", "", ""],
     ["", "", "", "", "", "", "", ""],
     ["", "H", "O", "L", "", "", "", ""]
   ],
@@ -152,9 +152,9 @@
   ],
   "difficulty": {
     "label": "medium-hard",
-    "hiddenLetters": 15,
+    "hiddenLetters": 10,
     "hiddenEdges": 8,
-    "givenLetters": 10
+    "givenLetters": 15
   },
   "validation": {
     "ok": true,
@@ -166,6 +166,6 @@
   "uniqueness": {
     "method": "word-removal backtracking",
     "unique": true,
-    "solutionWords": ["BASEBALL", "BUILDING", "GLOBAL", "JOIN", "HOLD", "USE", "ICE", "BASIC"]
+    "solutionWords": "BASEBALL"
   }
 }

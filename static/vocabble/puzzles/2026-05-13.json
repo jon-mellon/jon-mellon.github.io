@@ -94,13 +94,13 @@
   ],
   "puzzle": [
     ["", "", "", "", "", "R", "", "G"],
-    ["", "", "", "L", "", "", "", ""],
+    ["", "", "", "L", "D", "", "", ""],
     ["", "", "", "", "", "R", "", ""],
     ["", "", "", "", "", "A", "", ""],
-    ["", "", "", "", "", "", "", "L"],
-    ["O", "", "", "", "", "", "", "A"],
+    ["I", "", "", "", "", "", "", "L"],
+    ["O", "", "", "", "", "N", "", "A"],
     ["", "", "", "", "", "", "", "Y"],
-    ["", "", "", "D", "", "", "", ""]
+    ["", "H", "I", "D", "", "", "", ""]
   ],
   "topWord": "BUILDING",
   "sideWord": "AIRPLANE",
@@ -152,9 +152,9 @@
   ],
   "difficulty": {
     "label": "medium-hard",
-    "hiddenLetters": 15,
+    "hiddenLetters": 10,
     "hiddenEdges": 8,
-    "givenLetters": 10
+    "givenLetters": 15
   },
   "validation": {
     "ok": true,
@@ -166,6 +166,6 @@
   "uniqueness": {
     "method": "word-removal backtracking",
     "unique": true,
-    "solutionWords": ["AIRPLANE", "BUILDING", "PLAY", "RAG", "HIDDEN", "RAIN", "BUILD", "ION"]
+    "solutionWords": "AIRPLANE"
   }
 }

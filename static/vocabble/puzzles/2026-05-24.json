@@ -96,11 +96,11 @@
     ["", "", "", "", "", "", "", ""],
     ["", "", "", "", "", "A", "N", ""],
     ["", "", "", "", "", "", "", ""],
-    ["", "T", "", "", "P", "", "", ""],
-    ["", "", "", "", "I", "", "", ""],
+    ["", "T", "", "", "P", "", "D", ""],
+    ["", "", "", "", "I", "", "A", ""],
     ["", "C", "E", "", "N", "", "T", ""],
     ["", "", "", "", "", "", "A", ""],
-    ["", "", "", "", "", "", "", ""]
+    ["C", "", "", "", "", "", "", ""]
   ],
   "topWord": "AIRPLANE",
   "sideWord": "HOSPITAL",
@@ -152,9 +152,9 @@
   ],
   "difficulty": {
     "label": "medium-hard",
-    "hiddenLetters": 15,
+    "hiddenLetters": 12,
     "hiddenEdges": 8,
-    "givenLetters": 10
+    "givenLetters": 13
   },
   "validation": {
     "ok": true,
@@ -166,6 +166,6 @@
   "uniqueness": {
     "method": "word-removal backtracking",
     "unique": true,
-    "solutionWords": ["HOSPITAL", "AIRPLANE", "DATA", "PLANE", "PIN", "ACE", "CIRCLE", "HOST"]
+    "solutionWords": "HOSPITAL"
   }
 }

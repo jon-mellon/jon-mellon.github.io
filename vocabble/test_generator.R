@@ -7,6 +7,8 @@ suppressPackageStartupMessages({
 
 `%||%` <- function(x, y) if (is.null(x)) y else x
 repo_root <- normalizePath(getwd(), mustWork = TRUE)
+source(file.path(repo_root, "vocabble", "generate_puzzles.R"))
+dictionary <- read_dictionary()
 
 puzzle_dir <- file.path(repo_root, "static", "vocabble", "puzzles")
 manifest_path <- file.path(puzzle_dir, "manifest.json")
@@ -74,6 +76,9 @@ for (path in puzzle_files) {
     expect_true(no_touch())
     expect_true(isTRUE(puzzle$uniqueness$unique))
     expect_equal(puzzle$uniqueness$method, "word-removal backtracking")
+    puzzle_list <- read_json(path, simplifyVector = FALSE)
+    disambiguated <- disambiguate_same_slot_words(puzzle_list, dictionary)
+    expect_equal(disambiguated$difficulty$givenLetters, puzzle_list$difficulty$givenLetters)
     expect_equal(puzzle$difficulty$label, "medium-hard")
   })
 }

@@ -93,14 +93,14 @@
     ]
   ],
   "puzzle": [
-    ["", "L", "", "T", "E", "", "", ""],
+    ["", "L", "A", "T", "E", "", "", ""],
     ["", "", "", "", "", "L", "", ""],
-    ["", "", "", "", "", "E", "", ""],
+    ["", "", "A", "", "", "E", "", ""],
     ["", "", "C", "", "", "A", "", "J"],
-    ["", "", "", "", "", "", "", ""],
-    ["I", "", "", "", "", "", "", ""],
-    ["O", "", "", "", "", "", "", ""],
-    ["", "", "N", "", "", "", "", ""]
+    ["", "", "", "", "", "F", "", "A"],
+    ["I", "", "", "", "", "", "", "M"],
+    ["O", "", "O", "", "", "", "", ""],
+    ["", "", "N", "", "", "", "", "M"]
   ],
   "topWord": "PLATFORM",
   "sideWord": "ELECTION",
@@ -152,9 +152,9 @@
   ],
   "difficulty": {
     "label": "medium-hard",
-    "hiddenLetters": 14,
+    "hiddenLetters": 7,
     "hiddenEdges": 8,
-    "givenLetters": 11
+    "givenLetters": 18
   },
   "validation": {
     "ok": true,
@@ -166,6 +166,6 @@
   "uniqueness": {
     "method": "word-removal backtracking",
     "unique": true,
-    "solutionWords": ["ELECTION", "PLATFORM", "JAM", "LEAF", "PLATE", "ACTION", "ION", "FORM"]
+    "solutionWords": "ELECTION"
   }
 }
