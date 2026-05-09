@@ -607,10 +607,12 @@ refresh_puzzle_clues <- function(puzzle, puzzle_board, top_visible, side_visible
   puzzle$difficulty$hiddenEdges <- sum(!top_visible) + sum(!side_visible)
   puzzle$difficulty$givenLetters <- sum(puzzle_board != "")
   if (!is.null(uniqueness)) {
+    solution_words <- uniqueness$solutionWords
+    if (is.list(solution_words)) solution_words <- solution_words[[1]] %||% character()
     puzzle$uniqueness <- list(
       method = "word-removal backtracking",
       unique = uniqueness$unique,
-      solutionWords = uniqueness$solutionWords
+      solutionWords = solution_words
     )
   }
   puzzle
@@ -619,16 +621,21 @@ refresh_puzzle_clues <- function(puzzle, puzzle_board, top_visible, side_visible
 minimize_puzzle_clues <- function(puzzle,
                                   dictionary,
                                   seed,
-                                  min_total_givens = 12,
+                                  min_total_givens = 8,
                                   min_edge_visible = 4,
                                   board_passes = 1,
-                                  edge_passes = 0) {
+                                  edge_passes = 0,
+                                  seconds_per_trial = 2) {
   set.seed(seed)
   original <- puzzle
   placement_cache <- new.env(parent = emptyenv())
   puzzle_board <- puzzle_matrix(puzzle$puzzle)
   top_visible <- unlist(puzzle$topVisible)
   side_visible <- unlist(puzzle$sideVisible)
+  current_uniqueness <- list(
+    unique = isTRUE(puzzle$uniqueness$unique),
+    solutionWords = puzzle$uniqueness$solutionWords %||% character()
+  )
   board_givens <- function() sum(puzzle_board != "")
 
   candidate_puzzle <- function() {
@@ -644,8 +651,10 @@ minimize_puzzle_clues <- function(puzzle,
     old_value <- puzzle_board[row, col]
     puzzle_board[row, col] <<- ""
     trial <- candidate_puzzle()
-    trial_uniqueness <- count_puzzle_solutions(trial, dictionary, limit = 2, cache = placement_cache)
-    if (trial_uniqueness$count == 1) {
+    deadline <- proc.time()[["elapsed"]] + seconds_per_trial
+    trial_uniqueness <- count_puzzle_solutions(trial, dictionary, limit = 2, cache = placement_cache, deadline = deadline)
+    if (trial_uniqueness$count == 1 && !isTRUE(trial_uniqueness$timedOut)) {
+      current_uniqueness <<- list(unique = TRUE, solutionWords = trial_uniqueness$solutionWords)
       TRUE
     } else {
       puzzle_board[row, col] <<- old_value
@@ -663,8 +672,10 @@ minimize_puzzle_clues <- function(puzzle,
     }
 
     trial <- candidate_puzzle()
-    trial_uniqueness <- count_puzzle_solutions(trial, dictionary, limit = 2, cache = placement_cache)
-    if (trial_uniqueness$count == 1) {
+    deadline <- proc.time()[["elapsed"]] + seconds_per_trial
+    trial_uniqueness <- count_puzzle_solutions(trial, dictionary, limit = 2, cache = placement_cache, deadline = deadline)
+    if (trial_uniqueness$count == 1 && !isTRUE(trial_uniqueness$timedOut)) {
+      current_uniqueness <<- list(unique = TRUE, solutionWords = trial_uniqueness$solutionWords)
       TRUE
     } else {
       if (axis == "top") top_visible[[index]] <<- TRUE else side_visible[[index]] <<- TRUE
@@ -696,9 +707,8 @@ minimize_puzzle_clues <- function(puzzle,
   }
 
   minimized <- candidate_puzzle()
-  final_uniqueness <- word_removal_uniqueness(minimized, dictionary, placement_cache)
-  if (!isTRUE(final_uniqueness$unique)) return(original)
-  refresh_puzzle_clues(minimized, puzzle_board, top_visible, side_visible, final_uniqueness)
+  if (!isTRUE(current_uniqueness$unique)) return(original)
+  refresh_puzzle_clues(minimized, puzzle_board, top_visible, side_visible, current_uniqueness)
 }
 
 validate_candidate <- function(candidate, dictionary) {
@@ -862,12 +872,20 @@ cached_candidate_placements <- function(dictionary, side_word, top_word, cache =
   get(key, envir = cache, inherits = FALSE)
 }
 
-count_fixed_edge_solutions <- function(puzzle_board, dictionary, side_word, top_word, limit = 2, cache = NULL, excluded_words = character()) {
+count_fixed_edge_solutions <- function(puzzle_board,
+                                       dictionary,
+                                       side_word,
+                                       top_word,
+                                       limit = 2,
+                                       cache = NULL,
+                                       excluded_words = character(),
+                                       deadline = Inf) {
   placements <- cached_candidate_placements(dictionary, side_word, top_word, cache)
   given_cells <- which(puzzle_board != "")
   solutions <- character()
   examples <- character()
   solution_words <- list()
+  timed_out <- FALSE
 
   for (length in names(placements)) {
     placements[[length]] <- placements[[length]][
@@ -966,6 +984,10 @@ count_fixed_edge_solutions <- function(puzzle_board, dictionary, side_word, top_
 
   search <- function(remaining_lengths, occupied, blocked, used_words, selected, covered_edges, last_ids) {
     if (length(solutions) >= limit) return()
+    if (proc.time()[["elapsed"]] > deadline) {
+      timed_out <<- TRUE
+      return()
+    }
 
     if (!length(remaining_lengths)) {
       if (length(given_cells) && !all(given_cells %in% occupied)) return()
@@ -991,6 +1013,7 @@ count_fixed_edge_solutions <- function(puzzle_board, dictionary, side_word, top_
     }
 
     for (candidate in candidates) {
+      if (timed_out) return()
       next_last_ids <- last_ids
       next_last_ids[[as.character(candidate$length)]] <- candidate$id
       search(
@@ -1007,16 +1030,16 @@ count_fixed_edge_solutions <- function(puzzle_board, dictionary, side_word, top_
   }
 
   search(fleet_lengths, integer(), integer(), character(), list(), rep(FALSE, board_size * 2), list())
-  list(count = length(solutions), examples = examples, solutionWords = solution_words)
+  list(count = length(solutions), examples = examples, solutionWords = solution_words, timedOut = timed_out)
 }
 
-count_puzzle_solutions <- function(puzzle, dictionary, limit = 2, cache = NULL, excluded_words = character()) {
+count_puzzle_solutions <- function(puzzle, dictionary, limit = 2, cache = NULL, excluded_words = character(), deadline = Inf) {
   puzzle_board <- puzzle_matrix(puzzle$puzzle)
   edge_words <- setdiff(preferred_edge_words(dictionary), excluded_words)
   side_candidates <- edge_candidates_from_pattern(edge_words, puzzle$sideWord, unlist(puzzle$sideVisible))
   top_candidates <- edge_candidates_from_pattern(edge_words, puzzle$topWord, unlist(puzzle$topVisible))
   if (!length(side_candidates) || !length(top_candidates)) {
-    return(list(count = 0L, examples = character(), sideCandidates = length(side_candidates), topCandidates = length(top_candidates)))
+    return(list(count = 0L, examples = character(), sideCandidates = length(side_candidates), topCandidates = length(top_candidates), timedOut = FALSE))
   }
 
   count <- 0L
@@ -1024,6 +1047,16 @@ count_puzzle_solutions <- function(puzzle, dictionary, limit = 2, cache = NULL, 
   solution_words <- list()
   for (side_word in side_candidates) {
     for (top_word in top_candidates) {
+      if (proc.time()[["elapsed"]] > deadline) {
+        return(list(
+          count = limit,
+          examples = examples,
+          solutionWords = solution_words,
+          sideCandidates = length(side_candidates),
+          topCandidates = length(top_candidates),
+          timedOut = TRUE
+        ))
+      }
       result <- count_fixed_edge_solutions(
         puzzle_board,
         dictionary,
@@ -1031,8 +1064,19 @@ count_puzzle_solutions <- function(puzzle, dictionary, limit = 2, cache = NULL, 
         top_word,
         limit = limit - count,
         cache = cache,
-        excluded_words = excluded_words
+        excluded_words = excluded_words,
+        deadline = deadline
       )
+      if (isTRUE(result$timedOut)) {
+        return(list(
+          count = limit,
+          examples = examples,
+          solutionWords = solution_words,
+          sideCandidates = length(side_candidates),
+          topCandidates = length(top_candidates),
+          timedOut = TRUE
+        ))
+      }
       count <- count + result$count
       examples <- c(examples, result$examples)
       solution_words <- c(solution_words, result$solutionWords)
@@ -1042,7 +1086,8 @@ count_puzzle_solutions <- function(puzzle, dictionary, limit = 2, cache = NULL, 
           examples = examples,
           solutionWords = solution_words,
           sideCandidates = length(side_candidates),
-          topCandidates = length(top_candidates)
+          topCandidates = length(top_candidates),
+          timedOut = FALSE
         ))
       }
     }
@@ -1053,7 +1098,8 @@ count_puzzle_solutions <- function(puzzle, dictionary, limit = 2, cache = NULL, 
     examples = examples,
     solutionWords = solution_words,
     sideCandidates = length(side_candidates),
-    topCandidates = length(top_candidates)
+    topCandidates = length(top_candidates),
+    timedOut = FALSE
   )
 }
 

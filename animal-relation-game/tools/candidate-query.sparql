@@ -1,0 +1,14 @@
+SELECT ?animal ?animalLabel ?article ?image WHERE {
+  ?animal wdt:P31 wd:Q16521;
+          wdt:P171* wd:Q729.
+
+  ?article schema:about ?animal;
+           schema:isPartOf <https://en.wikipedia.org/>.
+
+  OPTIONAL { ?animal wdt:P18 ?image. }
+
+  SERVICE wikibase:label {
+    bd:serviceParam wikibase:language "en".
+  }
+}
+LIMIT 500

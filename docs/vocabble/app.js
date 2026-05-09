@@ -6,6 +6,7 @@ const checkButton = document.querySelector("#check-button");
 const resetButton = document.querySelector("#reset-button");
 const revealButton = document.querySelector("#reveal-button");
 const soundButton = document.querySelector("#sound-button");
+const celebrationElement = document.querySelector("#completion-celebration");
 const modeButtons = Array.from(document.querySelectorAll(".mode-button"));
 
 const SIZE = 8;
@@ -75,7 +76,7 @@ function playSound(kind) {
     clear: [[300, 0.05, "sine", 0]],
     check: [[520, 0.05, "triangle", 0], [660, 0.06, "triangle", 0.055]],
     wrong: [[180, 0.08, "sawtooth", 0]],
-    complete: [[440, 0.07, "triangle", 0], [660, 0.08, "triangle", 0.075], [880, 0.11, "triangle", 0.155]],
+    complete: [[330, 0.07, "triangle", 0], [440, 0.07, "triangle", 0.055], [660, 0.09, "triangle", 0.12], [880, 0.12, "triangle", 0.2], [990, 0.12, "sine", 0.3]],
     reset: [[260, 0.06, "sine", 0]],
     reveal: [[330, 0.06, "triangle", 0], [494, 0.08, "triangle", 0.06]]
   };
@@ -97,6 +98,40 @@ function puzzleSignature(currentPuzzle) {
 function setStatus(text, className = "") {
   statusElement.textContent = text;
   statusElement.className = className;
+}
+
+function clearCelebration() {
+  document.body.classList.remove("is-complete");
+  celebrationElement?.replaceChildren();
+}
+
+function celebrateCompletion() {
+  document.body.classList.add("is-complete");
+  if (!celebrationElement) return;
+
+  celebrationElement.replaceChildren();
+  const banner = document.createElement("div");
+  banner.className = "completion-banner";
+  banner.setAttribute("role", "status");
+  banner.innerHTML = "<strong>Fleet complete</strong><span>Daily puzzle solved</span>";
+  celebrationElement.append(banner);
+
+  const colors = ["#1f6f5b", "#a45d18", "#2f3336", "#5a96aa", "#d7b15c"];
+  for (let ii = 0; ii < 46; ii += 1) {
+    const piece = document.createElement("i");
+    piece.className = "confetti-piece";
+    piece.style.setProperty("--x", `${Math.random() * 100}vw`);
+    piece.style.setProperty("--dx", `${Math.random() * 42 - 21}vw`);
+    piece.style.setProperty("--delay", `${Math.random() * 0.28}s`);
+    piece.style.setProperty("--duration", `${0.85 + Math.random() * 0.75}s`);
+    piece.style.setProperty("--turn", `${Math.random() * 540 - 270}deg`);
+    piece.style.background = colors[ii % colors.length];
+    celebrationElement.append(piece);
+  }
+
+  window.setTimeout(() => {
+    celebrationElement.querySelectorAll(".confetti-piece").forEach((node) => node.remove());
+  }, 2200);
 }
 
 function embeddedPuzzleForDate(date) {
@@ -466,14 +501,22 @@ function isComplete() {
 function updateCompletion() {
   clearWrongMarks();
   if (isComplete()) {
+    document.body.classList.add("is-complete");
     if (!state.completed) {
       state.completed = true;
       saveState();
       playSound("complete");
+      celebrateCompletion();
+    } else if (celebrationElement && !celebrationElement.querySelector(".completion-banner")) {
+      const banner = document.createElement("div");
+      banner.className = "completion-banner is-settled";
+      banner.innerHTML = "<strong>Fleet complete</strong><span>Daily puzzle solved</span>";
+      celebrationElement.append(banner);
     }
-    setStatus("Complete", "complete");
+    setStatus("Fleet complete", "complete");
   } else {
     state.completed = false;
+    clearCelebration();
     setStatus("In progress");
   }
 }
@@ -520,7 +563,8 @@ function markWrongInputs() {
 
   if (isComplete()) {
     playSound("complete");
-    setStatus("Complete", "complete");
+    celebrateCompletion();
+    setStatus("Fleet complete", "complete");
   } else if (wrongCount > 0) {
     playSound("wrong");
     setStatus(`${wrongCount} to revisit`, "error");
@@ -540,6 +584,7 @@ function revealPuzzle() {
   saveState();
   renderBoard();
   renderFleet();
+  clearCelebration();
   setStatus("Revealed");
   playSound("reveal");
 }
@@ -549,6 +594,7 @@ function resetPuzzle() {
   state = initialStateFromPuzzle(puzzle);
   renderBoard();
   renderFleet();
+  clearCelebration();
   setStatus("In progress");
   playSound("reset");
 }
