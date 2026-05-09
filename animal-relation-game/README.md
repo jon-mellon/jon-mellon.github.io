@@ -48,4 +48,12 @@ Each animal record contains:
 
 ## Deployment
 
-Commit `index.html`, `styles.css`, `app.js`, `data/animals.json`, `tools/`, and this README. GitHub Pages can serve the folder directly with no backend and no API keys.
+This repository publishes GitHub Pages from `docs/`. Keep the playable app in `static/animal-relation-game/`; Hugo copies that folder to `public/animal-relation-game/`, and `build.R` copies `public/` to `docs/`.
+
+For immediate deployment without a full site rebuild, also keep `docs/animal-relation-game/` in sync. The current URL is:
+
+```text
+https://jon-mellon.github.io/animal-relation-game/
+```
+
+No backend or API keys are needed.

@@ -4,8 +4,11 @@ const fs = require("node:fs/promises");
 const path = require("node:path");
 
 const ROOT = path.resolve(__dirname, "..");
+const REPO_ROOT = path.resolve(ROOT, "..");
 const SEED_PATH = path.join(__dirname, "seed-animals.json");
 const OUT_PATH = path.join(ROOT, "data", "animals.json");
+const STATIC_OUT_PATH = path.join(REPO_ROOT, "static", "animal-relation-game", "data", "animals.json");
+const DOCS_OUT_PATH = path.join(REPO_ROOT, "docs", "animal-relation-game", "data", "animals.json");
 const API_USER_AGENT = "AnimalRelationGame/0.1 (https://jon-mellon.github.io/animal-relation-game/)";
 const MEDIAWIKI_ENDPOINT = "https://en.wikipedia.org/w/api.php";
 
@@ -35,7 +38,13 @@ async function main() {
 
   await fs.mkdir(path.dirname(OUT_PATH), { recursive: true });
   await fs.writeFile(OUT_PATH, `${JSON.stringify(animals, null, 2)}\n`);
+  await fs.mkdir(path.dirname(STATIC_OUT_PATH), { recursive: true });
+  await fs.writeFile(STATIC_OUT_PATH, `${JSON.stringify(animals, null, 2)}\n`);
+  await fs.mkdir(path.dirname(DOCS_OUT_PATH), { recursive: true });
+  await fs.writeFile(DOCS_OUT_PATH, `${JSON.stringify(animals, null, 2)}\n`);
   console.log(`Wrote ${animals.length} animals to ${path.relative(process.cwd(), OUT_PATH)}`);
+  console.log(`Wrote ${animals.length} animals to ${path.relative(process.cwd(), STATIC_OUT_PATH)}`);
+  console.log(`Wrote ${animals.length} animals to ${path.relative(process.cwd(), DOCS_OUT_PATH)}`);
 }
 
 async function fetchAnimalRecords(titles) {

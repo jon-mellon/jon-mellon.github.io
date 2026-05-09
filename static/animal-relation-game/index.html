@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Animal Relatives</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="app">
+    <header class="app-header">
+      <p class="eyebrow">Taxonomy quiz</p>
+      <h1>Animal Relatives</h1>
+      <p>Pick the two animals with the most recent common ancestor.</p>
+    </header>
+
+    <section id="status" class="status" role="status" aria-live="polite"></section>
+
+    <section aria-labelledby="question-title" class="question">
+      <h2 id="question-title">Which two are most closely related?</h2>
+      <div id="animals" class="animal-grid"></div>
+    </section>
+
+    <section class="choice-panel" aria-labelledby="choices-title">
+      <h2 id="choices-title">Choose a pair</h2>
+      <div id="choices" class="choices"></div>
+    </section>
+
+    <section id="answer" class="answer hidden" aria-live="polite"></section>
+
+    <footer class="app-actions">
+      <button id="nextRound" type="button" class="secondary-action">Next round</button>
+    </footer>
+  </main>
+
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
