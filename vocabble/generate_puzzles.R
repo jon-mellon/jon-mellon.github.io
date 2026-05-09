@@ -440,7 +440,16 @@ full_clue_mask <- function(candidate) {
   )
 }
 
-build_unique_clue_set <- function(candidate, dictionary, id, date, seed, min_total_givens = 23, min_ship_givens = 1, min_edge_visible = 6) {
+build_unique_clue_set <- function(candidate,
+                                  dictionary,
+                                  id,
+                                  date,
+                                  seed,
+                                  min_total_givens = 20,
+                                  min_ship_givens = 0,
+                                  min_edge_visible = 4,
+                                  max_total_givens = 20,
+                                  max_ship_givens = NULL) {
   set.seed(seed)
   validation <- validate_candidate(candidate, dictionary)
   placement_cache <- new.env(parent = emptyenv())
@@ -457,48 +466,61 @@ build_unique_clue_set <- function(candidate, dictionary, id, date, seed, min_tot
   clue_counts <- rep(0L, length(ship_cells))
   names(clue_counts) <- names(ship_cells)
   for (ii in seq_along(ship_cells)) clue_counts[[ii]] <- length(ship_cells[[ii]])
+  ship_lengths <- vapply(candidate$ships, `[[`, numeric(1), "length")
+  if (is.null(max_ship_givens)) {
+    max_ship_givens <- ship_lengths
+  }
+  names(max_ship_givens) <- names(ship_cells)
+
+  board_givens <- function() sum(masked$puzzle != "")
+
+  try_remove_cell <- function(cell) {
+    row <- ((cell - 1) %% board_size) + 1
+    col <- ((cell - 1) %/% board_size) + 1
+    if (masked$puzzle[row, col] == "") return(FALSE)
+
+    ship_index <- which(vapply(ship_cells, function(cells) cell %in% cells, logical(1)))
+    if (length(ship_index) && clue_counts[[ship_index]] <= min_ship_givens) return(FALSE)
+
+    old_value <- masked$puzzle[row, col]
+    masked$puzzle[row, col] <<- ""
+    trial <- make_puzzle_object(candidate, masked, id, date, validation = validation)
+    trial_uniqueness <- count_puzzle_solutions(trial, dictionary, limit = 2, cache = placement_cache)
+    if (trial_uniqueness$count == 1) {
+      current_uniqueness <<- trial_uniqueness
+      if (length(ship_index)) clue_counts[[ship_index]] <<- clue_counts[[ship_index]] - 1L
+      TRUE
+    } else {
+      masked$puzzle[row, col] <<- old_value
+      FALSE
+    }
+  }
+
+  # First remove from over-exposed ships. Otherwise the greedy search can leave
+  # one complete ship visible and still call the puzzle "hard" by metadata.
+  repeat {
+    overexposed <- which(clue_counts > max_ship_givens)
+    if (!length(overexposed)) break
+    removable <- unique(unlist(ship_cells[overexposed], use.names = FALSE))
+    removed_any <- FALSE
+    for (cell in sample(removable)) {
+      if (try_remove_cell(cell)) removed_any <- TRUE
+    }
+    if (!removed_any) break
+  }
+  if (any(clue_counts > max_ship_givens)) return(NULL)
 
   removal_order <- sample(filled_cells)
   for (cell in removal_order) {
-    if (sum(masked$puzzle != "") <= min_total_givens) break
-    ship_index <- which(vapply(ship_cells, function(cells) cell %in% cells, logical(1)))
-    if (length(ship_index) && clue_counts[[ship_index]] <= min_ship_givens) next
-
-    row <- ((cell - 1) %% board_size) + 1
-    col <- ((cell - 1) %/% board_size) + 1
-    old_value <- masked$puzzle[row, col]
-    masked$puzzle[row, col] <- ""
-
-    trial <- make_puzzle_object(candidate, masked, id, date, validation = validation)
-    trial_uniqueness <- word_removal_uniqueness(trial, dictionary, placement_cache)
-    if (trial_uniqueness$unique) {
-      current_uniqueness <- trial_uniqueness
-      if (length(ship_index)) clue_counts[[ship_index]] <- clue_counts[[ship_index]] - 1L
-    } else {
-      masked$puzzle[row, col] <- old_value
-    }
+    if (board_givens() <= min_total_givens) break
+    try_remove_cell(cell)
   }
 
   # A second pass catches clues that were necessary before other removals but
   # become redundant after the board has been made sparser.
   for (cell in sample(filled_cells)) {
-    if (sum(masked$puzzle != "") <= min_total_givens) break
-    row <- ((cell - 1) %% board_size) + 1
-    col <- ((cell - 1) %/% board_size) + 1
-    if (masked$puzzle[row, col] == "") next
-    ship_index <- which(vapply(ship_cells, function(cells) cell %in% cells, logical(1)))
-    if (length(ship_index) && clue_counts[[ship_index]] <= min_ship_givens) next
-
-    old_value <- masked$puzzle[row, col]
-    masked$puzzle[row, col] <- ""
-    trial <- make_puzzle_object(candidate, masked, id, date, validation = validation)
-    trial_uniqueness <- word_removal_uniqueness(trial, dictionary, placement_cache)
-    if (trial_uniqueness$unique) {
-      current_uniqueness <- trial_uniqueness
-      if (length(ship_index)) clue_counts[[ship_index]] <- clue_counts[[ship_index]] - 1L
-    } else {
-      masked$puzzle[row, col] <- old_value
-    }
+    if (board_givens() <= min_total_givens) break
+    try_remove_cell(cell)
   }
 
   edge_attempts <- c(
@@ -519,8 +541,8 @@ build_unique_clue_set <- function(candidate, dictionary, id, date, seed, min_tot
     }
 
     trial <- make_puzzle_object(candidate, masked, id, date, validation = validation)
-    trial_uniqueness <- word_removal_uniqueness(trial, dictionary, placement_cache)
-    if (trial_uniqueness$unique) {
+    trial_uniqueness <- count_puzzle_solutions(trial, dictionary, limit = 2, cache = placement_cache)
+    if (trial_uniqueness$count == 1) {
       current_uniqueness <- trial_uniqueness
     } else if (axis == "top") {
       masked$top_visible[[index]] <- TRUE
@@ -528,6 +550,12 @@ build_unique_clue_set <- function(candidate, dictionary, id, date, seed, min_tot
       masked$side_visible[[index]] <- TRUE
     }
   }
+
+  final_uniqueness <- word_removal_uniqueness(
+    make_puzzle_object(candidate, masked, id, date, validation = validation),
+    dictionary,
+    placement_cache
+  )
 
   final_puzzle <- make_puzzle_object(
     candidate,
@@ -537,11 +565,12 @@ build_unique_clue_set <- function(candidate, dictionary, id, date, seed, min_tot
     validation = validation,
     uniqueness = list(
       method = "word-removal backtracking",
-      unique = current_uniqueness$unique,
-      solutionWords = current_uniqueness$solutionWords
+      unique = final_uniqueness$unique,
+      solutionWords = final_uniqueness$solutionWords
     )
   )
   if (!isTRUE(final_puzzle$uniqueness$unique)) return(NULL)
+  if (final_puzzle$difficulty$givenLetters > max_total_givens) return(NULL)
   final_puzzle
 }
 

@@ -14,19 +14,19 @@
     ["M", "", "A", "N", "I", "M", "A", "L"]
   ],
   "puzzle": [
-    ["H", "O", "S", "T", "", "P", "", ""],
+    ["", "O", "S", "T", "", "P", "", ""],
     ["", "", "", "", "", "L", "", ""],
     ["", "", "", "", "", "A", "", ""],
-    ["", "T", "O", "P", "", "T", "", "T"],
-    ["F", "", "", "", "", "E", "", "E"],
+    ["", "", "O", "P", "", "T", "", "T"],
+    ["", "", "", "", "", "E", "", "E"],
     ["O", "", "", "", "", "", "", "N"],
     ["", "", "", "", "", "", "", ""],
     ["M", "", "A", "N", "I", "M", "A", ""]
   ],
   "topWord": "HOSPITAL",
   "sideWord": "PLATFORM",
-  "topVisible": [true, true, true, false, false, true, true, true],
-  "sideVisible": [true, true, false, true, true, true, true, false],
+  "topVisible": [true, true, false, false, false, true, true, false],
+  "sideVisible": [true, false, false, true, false, true, true, false],
   "ships": [
     {
       "word": "ANIMAL",
@@ -73,9 +73,9 @@
   ],
   "difficulty": {
     "label": "medium-hard",
-    "hiddenLetters": 2,
-    "hiddenEdges": 4,
-    "givenLetters": 23
+    "hiddenLetters": 5,
+    "hiddenEdges": 8,
+    "givenLetters": 20
   },
   "validation": {
     "ok": true,

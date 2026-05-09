@@ -14,19 +14,19 @@
     ["", "", "N", "", "U", "S", "E", "R"]
   ],
   "puzzle": [
-    ["", "A", "U", "S", "E", "", "", ""],
+    ["", "A", "U", "S", "", "", "", ""],
     ["", "", "", "", "", "L", "", ""],
     ["", "", "", "", "", "E", "", ""],
-    ["C", "", "P", "", "", "F", "", "S"],
+    ["", "", "P", "", "", "F", "", "S"],
     ["A", "", "T", "", "", "T", "", "E"],
     ["N", "", "I", "", "", "", "", "A"],
-    ["", "", "O", "", "", "", "", ""],
+    ["", "", "", "", "", "", "", ""],
     ["", "", "N", "", "U", "S", "E", "R"]
   ],
   "topWord": "CAPSULES",
   "sideWord": "ELECTION",
-  "topVisible": [true, true, true, false, false, true, true, true],
-  "sideVisible": [true, true, false, true, true, true, true, false],
+  "topVisible": [true, true, false, false, false, true, true, false],
+  "sideVisible": [true, false, false, true, false, true, true, false],
   "ships": [
     {
       "word": "OPTION",
@@ -73,9 +73,9 @@
   ],
   "difficulty": {
     "label": "medium-hard",
-    "hiddenLetters": 2,
-    "hiddenEdges": 4,
-    "givenLetters": 23
+    "hiddenLetters": 5,
+    "hiddenEdges": 8,
+    "givenLetters": 20
   },
   "validation": {
     "ok": true,

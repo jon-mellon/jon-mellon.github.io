@@ -14,19 +14,19 @@
     ["F", "I", "N", "E", "", "", "N", ""]
   ],
   "puzzle": [
-    ["M", "", "", "", "", "", "", ""],
-    ["O", "", "A", "C", "T", "I", "O", ""],
+    ["", "", "", "", "", "", "", ""],
+    ["", "", "A", "C", "T", "I", "O", ""],
     ["U", "", "", "", "", "", "", ""],
     ["", "", "A", "C", "E", "", "", ""],
     ["T", "", "", "", "", "", "M", ""],
-    ["", "U", "S", "E", "", "", "A", ""],
+    ["", "", "S", "E", "", "", "A", ""],
     ["", "", "", "", "", "", "I", ""],
     ["F", "I", "N", "E", "", "", "N", ""]
   ],
   "topWord": "FUNCTION",
   "sideWord": "MOUNTAIN",
-  "topVisible": [true, true, true, false, false, true, true, true],
-  "sideVisible": [true, true, false, true, true, true, true, false],
+  "topVisible": [true, true, false, false, false, true, true, false],
+  "sideVisible": [true, false, false, true, false, true, true, false],
   "ships": [
     {
       "word": "ACTION",
@@ -73,9 +73,9 @@
   ],
   "difficulty": {
     "label": "medium-hard",
-    "hiddenLetters": 2,
-    "hiddenEdges": 4,
-    "givenLetters": 23
+    "hiddenLetters": 5,
+    "hiddenEdges": 8,
+    "givenLetters": 20
   },
   "validation": {
     "ok": true,
@@ -87,6 +87,6 @@
   "uniqueness": {
     "method": "word-removal backtracking",
     "unique": true,
-    "solutionWords": ["MOUNTAIN", "FUNCTION", "MAIN", "ACTION", "ACE", "FINE", "USE", "MOUNT"]
+    "solutionWords": ["MOUNTAIN", "FUNCTION", "MAIN", "ACTION", "FINE", "USE", "MOUNT", "ACE"]
   }
 }

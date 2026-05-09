@@ -8,8 +8,8 @@
   --edge: #2f3336;
   --edge-soft: #474b4e;
   --edge-ink: #ffffff;
-  --given: #1f6f5b;
-  --given-ink: #ffffff;
+  --given: #ede8dc;
+  --given-ink: #171717;
   --focus: #a45d18;
   --water: #d8ecf3;
   --maybe: #f5e7b8;
@@ -235,12 +235,25 @@ h2 {
 }
 
 .board-square.is-given {
-  border-color: var(--given);
+  border-color: #b9b0a0;
   background: var(--given);
 }
 
 .board-square.is-given .cell-input {
   color: var(--given-ink);
+}
+
+.board-square.is-given::after {
+  content: "";
+  position: absolute;
+  right: 8%;
+  bottom: 8%;
+  width: 12%;
+  height: 12%;
+  border-radius: 50%;
+  background: #8f8677;
+  opacity: 0.65;
+  pointer-events: none;
 }
 
 .board-square.is-editable {
