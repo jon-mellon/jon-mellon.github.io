@@ -79,6 +79,7 @@ for (path in puzzle_files) {
     puzzle_list <- read_json(path, simplifyVector = FALSE)
     disambiguated <- disambiguate_same_slot_words(puzzle_list, dictionary)
     expect_equal(disambiguated$difficulty$givenLetters, puzzle_list$difficulty$givenLetters)
+    expect_false(has_fully_clued_ship(puzzle_list))
     expect_equal(puzzle$difficulty$label, "medium-hard")
   })
 }

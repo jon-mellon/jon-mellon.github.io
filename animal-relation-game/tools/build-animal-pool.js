@@ -11,6 +11,7 @@ const STATIC_OUT_PATH = path.join(REPO_ROOT, "static", "animal-relation-game", "
 const DOCS_OUT_PATH = path.join(REPO_ROOT, "docs", "animal-relation-game", "data", "animals.json");
 const API_USER_AGENT = "AnimalRelationGame/0.1 (https://jon-mellon.github.io/animal-relation-game/)";
 const MEDIAWIKI_ENDPOINT = "https://en.wikipedia.org/w/api.php";
+const WIKIDATA_ENDPOINT = "https://www.wikidata.org/w/api.php";
 
 async function main() {
   const titles = JSON.parse(await fs.readFile(SEED_PATH, "utf8"));
@@ -36,15 +37,17 @@ async function main() {
     console.log(`${animals.length}. ${animal.label} (${animal.qid})`);
   }
 
+  const taxonAnimals = await filterTaxonRecords(animals);
+
   await fs.mkdir(path.dirname(OUT_PATH), { recursive: true });
-  await fs.writeFile(OUT_PATH, `${JSON.stringify(animals, null, 2)}\n`);
+  await fs.writeFile(OUT_PATH, `${JSON.stringify(taxonAnimals, null, 2)}\n`);
   await fs.mkdir(path.dirname(STATIC_OUT_PATH), { recursive: true });
-  await fs.writeFile(STATIC_OUT_PATH, `${JSON.stringify(animals, null, 2)}\n`);
+  await fs.writeFile(STATIC_OUT_PATH, `${JSON.stringify(taxonAnimals, null, 2)}\n`);
   await fs.mkdir(path.dirname(DOCS_OUT_PATH), { recursive: true });
-  await fs.writeFile(DOCS_OUT_PATH, `${JSON.stringify(animals, null, 2)}\n`);
-  console.log(`Wrote ${animals.length} animals to ${path.relative(process.cwd(), OUT_PATH)}`);
-  console.log(`Wrote ${animals.length} animals to ${path.relative(process.cwd(), STATIC_OUT_PATH)}`);
-  console.log(`Wrote ${animals.length} animals to ${path.relative(process.cwd(), DOCS_OUT_PATH)}`);
+  await fs.writeFile(DOCS_OUT_PATH, `${JSON.stringify(taxonAnimals, null, 2)}\n`);
+  console.log(`Wrote ${taxonAnimals.length} animals to ${path.relative(process.cwd(), OUT_PATH)}`);
+  console.log(`Wrote ${taxonAnimals.length} animals to ${path.relative(process.cwd(), STATIC_OUT_PATH)}`);
+  console.log(`Wrote ${taxonAnimals.length} animals to ${path.relative(process.cwd(), DOCS_OUT_PATH)}`);
 }
 
 async function fetchAnimalRecords(titles) {
@@ -118,6 +121,50 @@ async function fetchAnimalRecordBatch(titles) {
   }
 
   return byTitle;
+}
+
+async function filterTaxonRecords(animals) {
+  const output = [];
+
+  for (let offset = 0; offset < animals.length; offset += 50) {
+    const batch = animals.slice(offset, offset + 50);
+    const claimsByQid = await fetchWikidataClaims(batch.map(animal => animal.qid));
+
+    for (const animal of batch) {
+      if ((claimsByQid.get(animal.qid)?.P171 ?? []).length) {
+        output.push(animal);
+      } else {
+        console.warn(`Skipping ${animal.label} (${animal.qid}): no parent taxon claim`);
+      }
+    }
+  }
+
+  return output;
+}
+
+async function fetchWikidataClaims(qids) {
+  const url = new URL(WIKIDATA_ENDPOINT);
+  url.searchParams.set("origin", "*");
+  url.searchParams.set("format", "json");
+  url.searchParams.set("action", "wbgetentities");
+  url.searchParams.set("ids", qids.join("|"));
+  url.searchParams.set("props", "claims");
+
+  const res = await fetchWithRetry(url.toString(), {
+    headers: {
+      "User-Agent": API_USER_AGENT,
+      "Api-User-Agent": API_USER_AGENT
+    }
+  });
+
+  if (!res.ok) throw new Error(`Wikidata API failed: ${res.status}`);
+
+  const json = await res.json();
+  const claimsByQid = new Map();
+  for (const [qid, entity] of Object.entries(json.entities ?? {})) {
+    claimsByQid.set(qid, entity.claims ?? {});
+  }
+  return claimsByQid;
 }
 
 function makeSeedTitleMap(titles, query) {

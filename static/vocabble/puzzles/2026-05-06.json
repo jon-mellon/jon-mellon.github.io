@@ -93,19 +93,109 @@
     ]
   ],
   "puzzle": [
-    ["", "L", "A", "T", "E", "", "", ""],
-    ["", "", "", "", "", "L", "", ""],
-    ["", "", "A", "", "", "E", "", ""],
-    ["", "", "C", "", "", "A", "", "J"],
-    ["", "", "", "", "", "F", "", "A"],
-    ["I", "", "", "", "", "", "", "M"],
-    ["O", "", "O", "", "", "", "", ""],
-    ["", "", "N", "", "", "", "", "M"]
+    [
+      "",
+      "L",
+      "A",
+      "T",
+      "E",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "L",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "A",
+      "",
+      "",
+      "E",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "C",
+      "",
+      "",
+      "A",
+      "",
+      "J"
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "F",
+      "",
+      "A"
+    ],
+    [
+      "I",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "M"
+    ],
+    [
+      "O",
+      "",
+      "O",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "N",
+      "",
+      "",
+      "",
+      "",
+      "M"
+    ]
   ],
   "topWord": "PLATFORM",
   "sideWord": "ELECTION",
-  "topVisible": [true, true, false, false, false, true, true, false],
-  "sideVisible": [true, false, false, true, false, true, true, false],
+  "topVisible": [
+    true,
+    true,
+    false,
+    false,
+    false,
+    true,
+    true,
+    false
+  ],
+  "sideVisible": [
+    true,
+    false,
+    false,
+    true,
+    false,
+    true,
+    true,
+    false
+  ],
   "ships": [
     {
       "word": "ACTION",

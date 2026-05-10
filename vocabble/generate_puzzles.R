@@ -10,6 +10,7 @@ suppressPackageStartupMessages({
 
 fleet_lengths <- c(6, 5, 4, 4, 3, 3)
 board_size <- 8
+generation_pool_cache <- new.env(parent = emptyenv())
 
 repo_root <- normalizePath(getwd(), mustWork = TRUE)
 if (!file.exists(file.path(repo_root, "config.yaml"))) {
@@ -61,15 +62,19 @@ preferred_edge_words <- function(dictionary) {
 
 preferred_ship_words <- function() {
   c(
-    "ACE", "ACT", "AGE", "AIM", "AIR", "ANT", "ARM", "ART", "ASH", "BAG",
+    "ACE", "ACT", "AGE", "AIM", "AIR", "ANT", "ARM", "ART", "ASH", "ASK",
+    "AXE", "BAG",
     "BAR", "BAT", "BAY", "BED", "BEE", "BOX", "BOY", "BUN", "BUS", "CAB",
-    "CAN", "CAP", "CAR", "CAT", "COW", "CUE", "CUP", "CUT", "DAY", "DEN",
-    "DIG", "DOG", "DOT", "DUE", "EGG", "FAR", "FAT", "FIG", "FIN", "FLY",
-    "FOX", "FUN", "GAS", "HAT", "HEN", "HOT", "ICE", "INK", "ION", "JAM",
+    "BIZ", "BYE", "CAN", "CAP", "CAR", "CAT", "COW", "CUE", "CUP", "CUT",
+    "DAY", "DEN", "DIG", "DOC", "DOG", "DOT", "DRY", "DUE", "DYE", "EGG",
+    "ELF", "EMU", "EON", "EWE", "FAR", "FAT", "FEZ", "FIG", "FIN", "FLY",
+    "FOX", "FUN", "GAS", "GNU", "GYM", "HAT", "HEN", "HER", "HOT", "ICE",
+    "INK", "ION", "IVY", "JAM",
     "JAR", "JET", "KEY", "LAP", "LAW", "LEG", "LOG", "MAN", "MAP", "NET",
     "OAK", "OAR", "OIL", "PAN", "PEN", "PIE", "PIN", "POT", "RAG", "RAT",
-    "RED", "ROW", "RUN", "SEA", "SET", "SUN", "TAN", "TEA", "TEN", "TIN",
-    "TOE", "TOP", "TOY", "USE", "VAN", "WAR", "WAY", "WIN", "YES",
+    "RED", "ROW", "RUN", "SEA", "SET", "SKY", "SUN", "TAN", "TEA", "TEN",
+    "TIN", "TOE", "TOP", "TOY", "USE", "VAN", "WAR", "WAX", "WAY", "WIN",
+    "YES",
     "ABLE", "ACID", "ACRE", "AREA", "ARMY", "AWAY", "BACK", "BALL", "BAND",
     "BANK", "BASE", "BEAR", "BEAT", "BIRD", "BLUE", "BOAT", "BONE", "BOOK",
     "BORN", "BULL", "CALL", "CAMP", "CARD", "CARE", "CASE", "CITY", "COAL",
@@ -148,6 +153,46 @@ preferred_ship_words <- function() {
     "THREAD", "TICKET", "TIMBER", "TRAVEL", "VALLEY", "VISION", "WINDOW",
     "WINNER", "WINTER", "WONDER", "YELLOW"
   )
+}
+
+slot_stable_words <- function(pool, reference_pool = pool) {
+  if (!length(pool)) return(pool)
+  length <- nchar(pool[[1]])
+  pool[vapply(pool, function(word) {
+    letters <- strsplit(word, "", fixed = TRUE)[[1]]
+    any(vapply(seq_len(length), function(index) {
+      pattern <- letters
+      pattern[[index]] <- ""
+      sum(vapply(reference_pool, word_matches_pattern, logical(1), pattern = pattern)) == 1L
+    }, logical(1)))
+  }, logical(1))]
+}
+
+preferred_generation_pool <- function(dictionary, length) {
+  cache_key <- as.character(length)
+  if (exists(cache_key, envir = generation_pool_cache, inherits = FALSE)) {
+    return(get(cache_key, envir = generation_pool_cache, inherits = FALSE))
+  }
+  pool <- dictionary[[as.character(length)]]
+  if (length == 3) {
+    out <- slot_stable_words(pool, pool)
+    assign(cache_key, out, envir = generation_pool_cache)
+    return(out)
+  }
+  preferred_pool <- intersect(pool, preferred_ship_words())
+  if (length(preferred_pool) < 20) {
+    assign(cache_key, pool, envir = generation_pool_cache)
+    return(pool)
+  }
+
+  stable_preferred <- slot_stable_words(preferred_pool, pool)
+  needed <- table(fleet_lengths)[[as.character(length)]] %||% 1L
+  if (length(stable_preferred) >= needed) {
+    assign(cache_key, stable_preferred, envir = generation_pool_cache)
+    return(stable_preferred)
+  }
+  assign(cache_key, preferred_pool, envir = generation_pool_cache)
+  preferred_pool
 }
 
 
@@ -251,8 +296,7 @@ candidate_placements <- function(dictionary,
   for (length in unique(lengths)) {
     pool <- dictionary[[as.character(length)]]
     if (prefer_common_words) {
-      preferred_pool <- intersect(pool, preferred_ship_words())
-      if (length(preferred_pool) >= 20) pool <- preferred_pool
+      pool <- preferred_generation_pool(dictionary, length)
     }
     common_letters <- unique(c(side_letters, top_letters))
     pool <- pool[vapply(pool, function(word) any(strsplit(word, "", fixed = TRUE)[[1]] %in% common_letters), logical(1))]
@@ -459,7 +503,8 @@ build_unique_clue_set <- function(candidate,
                                   min_edge_visible = 4,
                                   max_total_givens = 20,
                                   extra_board_passes = 0,
-                                  max_ship_givens = NULL) {
+                                  max_ship_givens = NULL,
+                                  seconds_per_trial = 4) {
   set.seed(seed)
   validation <- validate_candidate(candidate, dictionary)
   placement_cache <- new.env(parent = emptyenv())
@@ -495,8 +540,14 @@ build_unique_clue_set <- function(candidate,
     old_value <- masked$puzzle[row, col]
     masked$puzzle[row, col] <<- ""
     trial <- make_puzzle_object(candidate, masked, id, date, validation = validation)
-    trial_uniqueness <- count_puzzle_solutions(trial, dictionary, limit = 2, cache = placement_cache)
-    if (trial_uniqueness$count == 1) {
+    trial_uniqueness <- count_puzzle_solutions(
+      trial,
+      dictionary,
+      limit = 2,
+      cache = placement_cache,
+      deadline = proc.time()[["elapsed"]] + seconds_per_trial
+    )
+    if (trial_uniqueness$count == 1 && !isTRUE(trial_uniqueness$timedOut)) {
       current_uniqueness <<- trial_uniqueness
       if (length(ship_index)) clue_counts[[ship_index]] <<- clue_counts[[ship_index]] - 1L
       TRUE
@@ -566,8 +617,14 @@ build_unique_clue_set <- function(candidate,
     }
 
     trial <- make_puzzle_object(candidate, masked, id, date, validation = validation)
-    trial_uniqueness <- count_puzzle_solutions(trial, dictionary, limit = 2, cache = placement_cache)
-    if (trial_uniqueness$count == 1) {
+    trial_uniqueness <- count_puzzle_solutions(
+      trial,
+      dictionary,
+      limit = 2,
+      cache = placement_cache,
+      deadline = proc.time()[["elapsed"]] + seconds_per_trial
+    )
+    if (trial_uniqueness$count == 1 && !isTRUE(trial_uniqueness$timedOut)) {
       current_uniqueness <- trial_uniqueness
     } else if (axis == "top") {
       masked$top_visible[[index]] <- TRUE
@@ -672,6 +729,70 @@ disambiguate_same_slot_words <- function(puzzle, dictionary) {
   refresh_puzzle_clues(puzzle, puzzle_board, unlist(puzzle$topVisible), unlist(puzzle$sideVisible), puzzle$uniqueness)
 }
 
+ship_given_counts <- function(puzzle) {
+  puzzle_board <- puzzle_matrix(puzzle$puzzle)
+  vapply(puzzle$ships, function(ship) {
+    cells <- placement_cells(ship$row, ship$col, ship$direction, ship$length)
+    sum(puzzle_board[cells] != "")
+  }, integer(1))
+}
+
+has_fully_clued_ship <- function(puzzle) {
+  counts <- ship_given_counts(puzzle)
+  lengths <- vapply(puzzle$ships, `[[`, numeric(1), "length")
+  any(counts >= lengths)
+}
+
+remove_fully_clued_ship_givens <- function(puzzle,
+                                           dictionary,
+                                           seed,
+                                           seconds_per_trial = 12) {
+  set.seed(seed)
+  puzzle_board <- puzzle_matrix(puzzle$puzzle)
+  placement_cache <- new.env(parent = emptyenv())
+
+  for (ship_index in sample(seq_along(puzzle$ships))) {
+    ship <- puzzle$ships[[ship_index]]
+    cells <- placement_cells(ship$row, ship$col, ship$direction, ship$length)
+    if (sum(puzzle_board[cells] != "") < ship$length) next
+
+    for (position in sample(seq_len(nrow(cells)))) {
+      row <- cells[position, "row"]
+      col <- cells[position, "col"]
+      old_value <- puzzle_board[row, col]
+      if (old_value == "") next
+
+      puzzle_board[row, col] <- ""
+      trial <- refresh_puzzle_clues(
+        puzzle,
+        puzzle_board,
+        unlist(puzzle$topVisible),
+        unlist(puzzle$sideVisible)
+      )
+      result <- count_puzzle_solutions(
+        trial,
+        dictionary,
+        limit = 2,
+        cache = placement_cache,
+        deadline = proc.time()[["elapsed"]] + seconds_per_trial
+      )
+      if (result$count == 1 && !isTRUE(result$timedOut)) {
+        puzzle <- refresh_puzzle_clues(
+          trial,
+          puzzle_board,
+          unlist(trial$topVisible),
+          unlist(trial$sideVisible),
+          list(unique = TRUE, solutionWords = result$solutionWords)
+        )
+        break
+      }
+      puzzle_board[row, col] <- old_value
+    }
+  }
+
+  puzzle
+}
+
 minimize_puzzle_clues <- function(puzzle,
                                   dictionary,
                                   seed,
@@ -761,6 +882,7 @@ minimize_puzzle_clues <- function(puzzle,
   }
 
   minimized <- disambiguate_same_slot_words(candidate_puzzle(), dictionary)
+  minimized <- remove_fully_clued_ship_givens(minimized, dictionary, seed = seed + 1L, seconds_per_trial = seconds_per_trial)
   if (!isTRUE(current_uniqueness$unique)) return(original)
   refresh_puzzle_clues(
     minimized,
@@ -1257,6 +1379,10 @@ make_puzzle <- function(date, id, seed, dictionary, edge_pairs, start_pair = 1, 
         dictionary = dictionary,
         seed = seed + offset + 100000
       )
+      if (has_fully_clued_ship(accepted)) {
+        accepted <- NULL
+        next
+      }
       break
     }
   }

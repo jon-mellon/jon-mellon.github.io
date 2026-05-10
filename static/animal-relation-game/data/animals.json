@@ -1,14 +1,5 @@
 [
   {
-    "qid": "Q146",
-    "label": "cat",
-    "description": "small domesticated carnivorous mammal",
-    "articleTitle": "Cat",
-    "articleUrl": "https://en.wikipedia.org/wiki/Cat",
-    "image": "https://upload.wikimedia.org/wikipedia/commons/1/15/Cat_August_2010-4.jpg",
-    "rank": "species"
-  },
-  {
     "qid": "Q140",
     "label": "lion",
     "description": "species of big cat",
@@ -60,15 +51,6 @@
     "articleTitle": "Cougar",
     "articleUrl": "https://en.wikipedia.org/wiki/Cougar",
     "image": "https://upload.wikimedia.org/wikipedia/commons/d/d6/Mountain_Lion_in_Glacier_National_Park.jpg",
-    "rank": "species"
-  },
-  {
-    "qid": "Q144",
-    "label": "dog",
-    "description": "domesticated species of canid",
-    "articleTitle": "Dog",
-    "articleUrl": "https://en.wikipedia.org/wiki/Dog",
-    "image": "https://upload.wikimedia.org/wikipedia/commons/7/7a/Huskiesatrest.jpg",
     "rank": "species"
   },
   {
@@ -126,15 +108,6 @@
     "rank": "species"
   },
   {
-    "qid": "Q726",
-    "label": "horse",
-    "description": "domesticated four-footed mammal from the equine family",
-    "articleTitle": "Horse",
-    "articleUrl": "https://en.wikipedia.org/wiki/Horse",
-    "image": "https://upload.wikimedia.org/wikipedia/commons/8/8c/Horse_007.jpg",
-    "rank": "species"
-  },
-  {
     "qid": "Q32789",
     "label": "zebra",
     "description": "African subgenus of Equus of the horse family",
@@ -153,30 +126,12 @@
     "rank": "species"
   },
   {
-    "qid": "Q830",
-    "label": "cattle",
-    "description": "large, domesticated, cloven-hooved herbivores",
-    "articleTitle": "Cattle",
-    "articleUrl": "https://en.wikipedia.org/wiki/Cattle",
-    "image": "https://upload.wikimedia.org/wikipedia/commons/8/8c/Cow_%28Fleckvieh_breed%29_Oeschinensee_Slaunger_2009-07-07.jpg",
-    "rank": "species"
-  },
-  {
     "qid": "Q2934",
     "label": "goat",
     "description": "domesticated mammal raised for its meat and milk",
     "articleTitle": "Goat",
     "articleUrl": "https://en.wikipedia.org/wiki/Goat",
     "image": "https://upload.wikimedia.org/wikipedia/commons/b/b2/Hausziege_04.jpg",
-    "rank": "species"
-  },
-  {
-    "qid": "Q7368",
-    "label": "sheep",
-    "description": "domesticated ruminant bred for meat, wool, and milk",
-    "articleTitle": "Sheep",
-    "articleUrl": "https://en.wikipedia.org/wiki/Sheep",
-    "image": "https://upload.wikimedia.org/wikipedia/commons/2/2c/Flock_of_sheep.jpg",
     "rank": "species"
   },
   {
@@ -285,15 +240,6 @@
     "articleTitle": "Bison",
     "articleUrl": "https://en.wikipedia.org/wiki/Bison",
     "image": "https://upload.wikimedia.org/wikipedia/commons/8/8d/American_bison_k5680-1.jpg",
-    "rank": "species"
-  },
-  {
-    "qid": "Q5070208",
-    "label": "kangaroo",
-    "description": "common name for some marsupials indigenous to Australia in the family Macropodidae",
-    "articleTitle": "Kangaroo",
-    "articleUrl": "https://en.wikipedia.org/wiki/Kangaroo",
-    "image": "https://upload.wikimedia.org/wikipedia/commons/d/df/Forester_kangaroo_%28Macropus_giganteus_tasmaniensis%29_juvenile_hopping_Esk_Valley.jpg",
     "rank": "species"
   },
   {
@@ -558,15 +504,6 @@
     "rank": "species"
   },
   {
-    "qid": "Q16529344",
-    "label": "goose",
-    "description": "common name for a group of birds",
-    "articleTitle": "Goose",
-    "articleUrl": "https://en.wikipedia.org/wiki/Goose",
-    "image": "https://upload.wikimedia.org/wikipedia/commons/3/37/Anser_anser_1_%28Piotr_Kuczynski%29_%28cropped%29.jpg",
-    "rank": "species"
-  },
-  {
     "qid": "Q25402",
     "label": "Mute Swan",
     "description": "species of swan",
@@ -666,15 +603,6 @@
     "rank": "species"
   },
   {
-    "qid": "Q201251",
-    "label": "peafowl",
-    "description": "group of birds formed by the Indian peafowl, the green peafowl and the Congo peafowl",
-    "articleTitle": "Peafowl",
-    "articleUrl": "https://en.wikipedia.org/wiki/Peafowl",
-    "image": "https://upload.wikimedia.org/wikipedia/commons/c/c5/Peacock_Plumage.jpg",
-    "rank": "species"
-  },
-  {
     "qid": "Q14683",
     "label": "House Sparrow",
     "description": "species of bird",
@@ -699,15 +627,6 @@
     "articleTitle": "Atlantic puffin",
     "articleUrl": "https://en.wikipedia.org/wiki/Atlantic_puffin",
     "image": "https://upload.wikimedia.org/wikipedia/commons/c/c4/Puffin_%28Fratercula_arctica%29.jpg",
-    "rank": "species"
-  },
-  {
-    "qid": "Q5574340",
-    "label": "Kiwi",
-    "description": "Wikimedia disambiguation page",
-    "articleTitle": "Kiwi",
-    "articleUrl": "https://en.wikipedia.org/wiki/Kiwi",
-    "image": "",
     "rank": "species"
   },
   {
@@ -999,15 +918,6 @@
     "rank": "species"
   },
   {
-    "qid": "Q18398431",
-    "label": "grasshopper",
-    "description": "common name for a group of insects",
-    "articleTitle": "Grasshopper",
-    "articleUrl": "https://en.wikipedia.org/wiki/Grasshopper",
-    "image": "https://upload.wikimedia.org/wikipedia/commons/b/b7/American_Bird_Grasshopper.jpg",
-    "rank": "species"
-  },
-  {
     "qid": "Q546583",
     "label": "termite",
     "description": "group of insects",
@@ -1080,15 +990,6 @@
     "rank": "species"
   },
   {
-    "qid": "Q4930074",
-    "label": "Blue crab",
-    "description": "Wikimedia disambiguation page",
-    "articleTitle": "Blue crab",
-    "articleUrl": "https://en.wikipedia.org/wiki/Blue_crab",
-    "image": "",
-    "rank": "species"
-  },
-  {
     "qid": "Q273291",
     "label": "Paguroidea",
     "description": "superfamily of crustaceans",
@@ -1104,15 +1005,6 @@
     "articleTitle": "Cornu aspersum",
     "articleUrl": "https://en.wikipedia.org/wiki/Cornu_aspersum",
     "image": "https://upload.wikimedia.org/wikipedia/commons/2/23/Snail1web.jpg",
-    "rank": "species"
-  },
-  {
-    "qid": "Q1953597",
-    "label": "slug",
-    "description": "common name for an apparently shell-less terrestrial gastropod mollusc",
-    "articleTitle": "Slug",
-    "articleUrl": "https://en.wikipedia.org/wiki/Slug",
-    "image": "https://upload.wikimedia.org/wikipedia/commons/d/d7/Slugs_1896.png",
     "rank": "species"
   },
   {
@@ -1140,24 +1032,6 @@
     "articleTitle": "Sea urchin",
     "articleUrl": "https://en.wikipedia.org/wiki/Sea_urchin",
     "image": "https://upload.wikimedia.org/wikipedia/commons/9/9b/Tripneustes_ventricosus_%28West_Indian_Sea_Egg-top%29_and_Echinometra_viridis_%28Reef_Urchin_-_bottom%29.jpg",
-    "rank": "species"
-  },
-  {
-    "qid": "Q30178",
-    "label": "jellyfish",
-    "description": "soft-bodied, aquatic invertebrates",
-    "articleTitle": "Jellyfish",
-    "articleUrl": "https://en.wikipedia.org/wiki/Jellyfish",
-    "image": "https://upload.wikimedia.org/wikipedia/commons/4/44/Jelly_cc11.jpg",
-    "rank": "species"
-  },
-  {
-    "qid": "Q171446",
-    "label": "coral",
-    "description": "marine invertebrates of the class Anthozoa",
-    "articleTitle": "Coral",
-    "articleUrl": "https://en.wikipedia.org/wiki/Coral",
-    "image": "https://upload.wikimedia.org/wikipedia/commons/2/2e/Coral_Outcrop_Flynn_Reef.jpg",
     "rank": "species"
   },
   {
