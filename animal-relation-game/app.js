@@ -2,7 +2,7 @@ const WDQS_ENDPOINT = "https://query.wikidata.org/sparql";
 const WIKIDATA_API_ENDPOINT = "https://www.wikidata.org/w/api.php";
 const API_USER_AGENT = "AnimalRelationGame/0.1 (https://jon-mellon.github.io/animal-relation-game/)";
 const CACHE_MAX_AGE_MS = 7 * 24 * 60 * 60 * 1000;
-const ASSET_VERSION = "20260510-4";
+const ASSET_VERSION = "20260510-5";
 
 // Taxonomy is not a perfectly regular tree. We use rank specificity as a game-friendly approximation.
 const RANK_DEPTH = {
@@ -29,6 +29,9 @@ const RANK_DEPTH = {
 };
 
 const TAXON_DEPTH = {
+  Aves: 44,
+  Mammalia: 44,
+  Amphibia: 44,
   Reptilia: 42,
   Amniota: 39,
   Tetrapoda: 38,
