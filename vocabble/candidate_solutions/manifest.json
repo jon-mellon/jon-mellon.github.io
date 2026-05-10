@@ -1,0 +1,24 @@
+{
+  "generatedAt": "2026-05-10T22:12:35Z",
+  "attempts": 500,
+  "seedBase": 20260605,
+  "accepted": 1,
+  "criteria": {
+    "validBoard": true,
+    "uniqueBySolver": true,
+    "noFullyShownShipWords": true,
+    "noFullyShownEdgeWords": true,
+    "noSameSlotAmbiguity": true
+  },
+  "puzzles": [
+    {
+      "id": "candidate-2026-06-02-001",
+      "date": "2026-06-02",
+      "file": "puzzles/candidate-001.json",
+      "sideWord": "BUILDING",
+      "topWord": "CROSSING",
+      "givenLetters": 15,
+      "hiddenEdges": 8
+    }
+  ]
+}

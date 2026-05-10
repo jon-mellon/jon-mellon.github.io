@@ -2,7 +2,7 @@ const WDQS_ENDPOINT = "https://query.wikidata.org/sparql";
 const WIKIDATA_API_ENDPOINT = "https://www.wikidata.org/w/api.php";
 const API_USER_AGENT = "AnimalRelationGame/0.1 (https://jon-mellon.github.io/animal-relation-game/)";
 const CACHE_MAX_AGE_MS = 7 * 24 * 60 * 60 * 1000;
-const ASSET_VERSION = "20260510-3";
+const ASSET_VERSION = "20260510-4";
 
 // Taxonomy is not a perfectly regular tree. We use rank specificity as a game-friendly approximation.
 const RANK_DEPTH = {
@@ -527,6 +527,7 @@ function isPlayableRound() {
   if (state.pairResults.length !== 3) return false;
   if (state.pairResults.some(result => !result.lca || result.score <= 0)) return false;
   if (state.bestPairs.length !== 1) return false;
+  if (state.bestPairs[0].lca?.label === "Animalia") return false;
   return Math.max(...state.pairResults.map(result => result.score)) >= RANK_DEPTH.kingdom;
 }
 

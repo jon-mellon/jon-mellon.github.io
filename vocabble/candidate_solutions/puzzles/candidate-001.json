@@ -1,0 +1,92 @@
+{
+  "id": "candidate-2026-06-02-001",
+  "date": "2026-06-02",
+  "size": 8,
+  "fleetLengths": [6, 5, 4, 4, 3, 3],
+  "solution": [
+    ["", "", "G", "A", "S", "", "", "B"],
+    ["", "", "", "", "", "", "", "U"],
+    ["C", "R", "O", "P", "", "", "", "I"],
+    ["", "", "", "", "", "", "", "L"],
+    ["K", "", "", "S", "K", "Y", "", "D"],
+    ["I", "", "", "", "", "", "", ""],
+    ["N", "", "S", "P", "R", "I", "N", "G"],
+    ["G", "", "", "", "", "", "", ""]
+  ],
+  "puzzle": [
+    ["", "", "G", "A", "", "", "", ""],
+    ["", "", "", "", "", "", "", ""],
+    ["C", "", "", "P", "", "", "", "I"],
+    ["", "", "", "", "", "", "", "L"],
+    ["K", "", "", "", "K", "Y", "", "D"],
+    ["", "", "", "", "", "", "", ""],
+    ["", "", "", "P", "R", "I", "", "G"],
+    ["G", "", "", "", "", "", "", ""]
+  ],
+  "topWord": "CROSSING",
+  "sideWord": "BUILDING",
+  "topVisible": [true, true, true, true, false, false, false, false],
+  "sideVisible": [true, false, false, true, true, false, true, false],
+  "ships": [
+    {
+      "word": "SPRING",
+      "length": 6,
+      "row": 7,
+      "col": 3,
+      "direction": "H"
+    },
+    {
+      "word": "BUILD",
+      "length": 5,
+      "row": 1,
+      "col": 8,
+      "direction": "V"
+    },
+    {
+      "word": "CROP",
+      "length": 4,
+      "row": 3,
+      "col": 1,
+      "direction": "H"
+    },
+    {
+      "word": "KING",
+      "length": 4,
+      "row": 5,
+      "col": 1,
+      "direction": "V"
+    },
+    {
+      "word": "SKY",
+      "length": 3,
+      "row": 5,
+      "col": 4,
+      "direction": "H"
+    },
+    {
+      "word": "GAS",
+      "length": 3,
+      "row": 1,
+      "col": 3,
+      "direction": "H"
+    }
+  ],
+  "difficulty": {
+    "label": "medium-hard",
+    "hiddenLetters": 10,
+    "hiddenEdges": 8,
+    "givenLetters": 15
+  },
+  "validation": {
+    "ok": true,
+    "dictionary_ok": true,
+    "row_edge_ok": true,
+    "col_edge_ok": true,
+    "no_orthogonal_touch": true
+  },
+  "uniqueness": {
+    "method": "word-removal backtracking",
+    "unique": true,
+    "solutionWords": ["BUILDING", "CROSSING", "SPRING", "BUILD", "SKY", "CROP", "GAS", "KING"]
+  }
+}

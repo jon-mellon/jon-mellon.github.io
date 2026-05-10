@@ -130,6 +130,9 @@ validate_candidate_puzzle <- function(puzzle, dictionary) {
   if (puzzle$difficulty$givenLetters > 15) return("too_many_givens")
   if (candidate_has_full_edge_word(puzzle)) return("full_edge_word")
   if (has_fully_clued_ship(puzzle)) return("full_ship_word")
+  short_words <- vapply(puzzle$ships, `[[`, "", "word")
+  short_words <- short_words[nchar(short_words) == 3]
+  if (any(!short_words %in% preferred_three_letter_ship_words())) return("unfriendly_three_letter_word")
 
   disambiguated <- disambiguate_same_slot_words(puzzle, dictionary)
   if (disambiguated$difficulty$givenLetters != puzzle$difficulty$givenLetters) {

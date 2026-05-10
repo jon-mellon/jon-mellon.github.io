@@ -190,7 +190,7 @@ preferred_generation_pool <- function(dictionary, length) {
   }
   pool <- dictionary[[as.character(length)]]
   if (length == 3) {
-    preferred_pool <- intersect(pool, preferred_three_letter_ship_words())
+    preferred_pool <- intersect(pool, preferred_ship_words())
     out <- if (length(preferred_pool) >= 20) preferred_pool else slot_stable_words(pool, pool)
     assign(cache_key, out, envir = generation_pool_cache)
     return(out)
