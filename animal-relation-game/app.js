@@ -153,9 +153,10 @@ async function runSparql(query) {
 async function fetchLineages(qids) {
   const lineages = {};
   const missing = [];
+  const animalsByQid = new Map(state.currentAnimals.map(animal => [animal.qid, animal]));
 
   for (const qid of qids) {
-    const cached = lineageCache.get(qid) ?? cacheGet(`lineage:${qid}`);
+    const cached = animalsByQid.get(qid)?.lineage ?? lineageCache.get(qid) ?? cacheGet(`lineage:${qid}`);
     if (cached) {
       lineages[qid] = cached;
     } else {

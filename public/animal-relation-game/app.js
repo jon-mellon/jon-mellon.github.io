@@ -54,6 +54,7 @@ const state = {
 const lineageCache = new Map();
 const lcaInfoCache = new Map();
 const summaryCache = new Map();
+const badLineageQids = new Set();
 
 const els = {
   status: document.querySelector("#status"),
@@ -107,7 +108,6 @@ async function startRound() {
         lastError = new Error("Unplayable animal triple");
       } catch (err) {
         lastError = err;
-        console.warn("Skipping animal triple.", err);
         renderStatus("That set had incomplete taxonomy. Trying another set...");
       }
     }
@@ -142,8 +142,7 @@ async function runSparql(query) {
 
   const res = await fetchWithRetry(url.toString(), {
     headers: {
-      Accept: "application/sparql-results+json",
-      "Api-User-Agent": API_USER_AGENT
+      Accept: "application/sparql-results+json"
     }
   });
 
@@ -169,6 +168,7 @@ async function fetchLineages(qids) {
 
     for (const qid of missing) {
       if (!fetched[qid] || fetched[qid].length < 3) {
+        badLineageQids.add(qid);
         throw new Error(`Insufficient lineage for ${qid}`);
       }
 
@@ -182,13 +182,7 @@ async function fetchLineages(qids) {
 }
 
 async function fetchMissingLineages(qids) {
-  try {
-    const data = await runSparql(lineageQuery(qids));
-    return parseLineageResults(data);
-  } catch (err) {
-    console.warn("WDQS lineage lookup failed; falling back to Wikidata Action API.", err);
-    return fetchLineagesViaWikidataApi(qids);
-  }
+  return fetchLineagesViaWikidataApi(qids);
 }
 
 function lineageQuery(qids) {
@@ -336,11 +330,7 @@ async function wikidataAction(params) {
     url.searchParams.set(key, value);
   }
 
-  const res = await fetchWithRetry(url.toString(), {
-    headers: {
-      "Api-User-Agent": API_USER_AGENT
-    }
-  });
+  const res = await fetchWithRetry(url.toString(), { headers: {} });
 
   if (!res.ok) throw new Error(`Wikidata API failed: ${res.status}`);
   return res.json();
@@ -352,25 +342,42 @@ async function fetchLcaInfo(ancestor) {
   const cached = lcaInfoCache.get(ancestor.qid) ?? cacheGet(`lcaInfo:${ancestor.qid}`);
   if (cached) return cached;
 
-  const data = await runSparql(lcaInfoQuery(ancestor.qid));
-  const binding = data.results.bindings[0];
-
-  const articleUrl = binding?.article?.value ?? null;
-  const title = articleUrl ? wikipediaTitleFromUrl(articleUrl) : null;
+  const data = await wikidataAction({
+    action: "wbgetentities",
+    ids: ancestor.qid,
+    props: "labels|descriptions|claims|sitelinks",
+    languages: "en",
+    sitefilter: "enwiki"
+  });
+  const entity = data.entities?.[ancestor.qid];
+  const title = entity?.sitelinks?.enwiki?.title ?? null;
+  const articleUrl = title ? articleUrlForTitle(title) : null;
   const summary = title ? await fetchWikipediaSummary(title) : null;
+  const imageFile = claimStringValues(entity, "P18")[0] ?? null;
 
   const info = {
     qid: ancestor.qid,
-    label: binding?.ancestorLabel?.value ?? ancestor.label,
-    description: binding?.ancestorDescription?.value ?? "",
+    label: entity?.labels?.en?.value ?? ancestor.label,
+    description: entity?.descriptions?.en?.value ?? "",
     articleUrl,
-    image: summary?.thumbnail?.source ?? binding?.image?.value ?? null,
+    image: summary?.thumbnail?.source ?? commonsFilePath(imageFile),
     summary
   };
 
   lcaInfoCache.set(ancestor.qid, info);
   cacheSet(`lcaInfo:${ancestor.qid}`, info);
   return info;
+}
+
+function claimStringValues(entity, propertyId) {
+  return (entity?.claims?.[propertyId] ?? [])
+    .map(claim => claim.mainsnak?.datavalue?.value)
+    .filter(value => typeof value === "string" && value);
+}
+
+function commonsFilePath(filename) {
+  if (!filename) return null;
+  return `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(filename.replaceAll(" ", "_"))}`;
 }
 
 function lcaInfoQuery(qid) {
@@ -398,11 +405,7 @@ async function fetchWikipediaSummary(title) {
   if (cached) return cached;
 
   const url = `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(title)}`;
-  const res = await fetchWithRetry(url, {
-    headers: {
-      "Api-User-Agent": API_USER_AGENT
-    }
-  });
+  const res = await fetchWithRetry(url, { headers: {} });
 
   if (!res.ok) return null;
   const summary = await res.json();
@@ -528,11 +531,12 @@ function choosePair(a, b) {
 }
 
 function sampleThreeGoodAnimals(pool) {
-  for (let attempt = 0; attempt < 200; attempt++) {
+  for (let attempt = 0; attempt < 300; attempt++) {
     const sample = shuffle(pool).slice(0, 3);
 
     if (new Set(sample.map(animal => animal.qid)).size < 3) continue;
     if (sample.some(animal => !animal.label || !animal.qid)) continue;
+    if (sample.some(animal => badLineageQids.has(animal.qid))) continue;
 
     return sample;
   }
@@ -722,6 +726,10 @@ function wikipediaTitleFromUrl(url) {
   const idx = url.indexOf(marker);
   if (idx === -1) return null;
   return decodeURIComponent(url.slice(idx + marker.length)).replaceAll("_", " ");
+}
+
+function articleUrlForTitle(title) {
+  return `https://en.wikipedia.org/wiki/${encodeURIComponent(title.replaceAll(" ", "_"))}`;
 }
 
 function shuffle(values) {

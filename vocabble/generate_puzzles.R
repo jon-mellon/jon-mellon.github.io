@@ -663,6 +663,92 @@ build_unique_clue_set <- function(candidate,
   final_puzzle
 }
 
+stable_hidden_position <- function(word, dictionary) {
+  letters <- strsplit(word, "", fixed = TRUE)[[1]]
+  pool <- dictionary[[as.character(length(letters))]]
+  candidates <- which(vapply(seq_along(letters), function(index) {
+    pattern <- letters
+    pattern[[index]] <- ""
+    sum(vapply(pool, word_matches_pattern, logical(1), pattern = pattern)) == 1L
+  }, logical(1)))
+  if (!length(candidates)) return(NA_integer_)
+  candidates[[1]]
+}
+
+build_dense_no_full_clue_set <- function(candidate, dictionary, id, date, seed) {
+  set.seed(seed)
+  validation <- validate_candidate(candidate, dictionary)
+  if (!validation$ok) return(NULL)
+
+  masked <- full_clue_mask(candidate)
+  for (ship in candidate$ships) {
+    hidden_position <- stable_hidden_position(ship$word, dictionary)
+    if (is.na(hidden_position)) return(NULL)
+    cells <- placement_cells(ship$row, ship$col, ship$direction, ship$length)
+    masked$puzzle[cells[hidden_position, "row"], cells[hidden_position, "col"]] <- ""
+  }
+
+  placement_cache <- new.env(parent = emptyenv())
+  current <- make_puzzle_object(candidate, masked, id, date, validation = validation)
+  current_uniqueness <- count_puzzle_solutions(
+    current,
+    dictionary,
+    limit = 2,
+    cache = placement_cache,
+    deadline = proc.time()[["elapsed"]] + 2
+  )
+  if (current_uniqueness$count != 1 || isTRUE(current_uniqueness$timedOut)) return(NULL)
+
+  edge_attempts <- sample(c(
+    paste0("top:", seq_len(board_size)),
+    paste0("side:", seq_len(board_size))
+  ))
+  for (edge in edge_attempts) {
+    parts <- strsplit(edge, ":", fixed = TRUE)[[1]]
+    axis <- parts[[1]]
+    index <- as.integer(parts[[2]])
+    if (axis == "top") {
+      if (sum(masked$top_visible) <= 4 || !masked$top_visible[[index]]) next
+      masked$top_visible[[index]] <- FALSE
+    } else {
+      if (sum(masked$side_visible) <= 4 || !masked$side_visible[[index]]) next
+      masked$side_visible[[index]] <- FALSE
+    }
+
+    trial <- make_puzzle_object(candidate, masked, id, date, validation = validation)
+    trial_uniqueness <- count_puzzle_solutions(
+      trial,
+      dictionary,
+      limit = 2,
+      cache = placement_cache,
+      deadline = proc.time()[["elapsed"]] + 4
+    )
+    if (trial_uniqueness$count == 1 && !isTRUE(trial_uniqueness$timedOut)) {
+      current_uniqueness <- trial_uniqueness
+    } else if (axis == "top") {
+      masked$top_visible[[index]] <- TRUE
+    } else {
+      masked$side_visible[[index]] <- TRUE
+    }
+  }
+
+  final_puzzle <- make_puzzle_object(
+    candidate,
+    masked,
+    id,
+    date,
+    validation = validation,
+    uniqueness = list(
+      method = "word-removal backtracking",
+      unique = TRUE,
+      solutionWords = current_uniqueness$solutionWords
+    )
+  )
+  if (has_fully_clued_ship(final_puzzle)) return(NULL)
+  if (disambiguate_same_slot_words(final_puzzle, dictionary)$difficulty$givenLetters != final_puzzle$difficulty$givenLetters) return(NULL)
+  final_puzzle
+}
+
 refresh_puzzle_clues <- function(puzzle, puzzle_board, top_visible, side_visible, uniqueness = NULL) {
   solution_board <- puzzle_matrix(puzzle$solution)
   puzzle$puzzle <- matrix_to_rows(puzzle_board)
@@ -1048,24 +1134,31 @@ placement_cache_key <- function(side_word, top_word) {
 cached_candidate_placements <- function(dictionary, side_word, top_word, cache = NULL, full_dictionary_lengths = 3) {
   if (is.null(cache)) {
     placements <- candidate_placements(dictionary, side_word, top_word, seed = 1)
+    full_cache <- NULL
   } else {
     key <- placement_cache_key(side_word, top_word)
     if (!exists(key, envir = cache, inherits = FALSE)) {
       assign(key, candidate_placements(dictionary, side_word, top_word, seed = 1), envir = cache)
     }
     placements <- get(key, envir = cache, inherits = FALSE)
+    full_cache <- paste0(key, "/full/", paste(full_dictionary_lengths, collapse = ","))
   }
 
   if (length(full_dictionary_lengths)) {
-    full <- candidate_placements(
-      dictionary,
-      side_word,
-      top_word,
-      seed = 1,
-      prefer_common_words = FALSE,
-      sample_limit = NULL,
-      lengths = full_dictionary_lengths
-    )
+    if (!is.null(full_cache) && exists(full_cache, envir = cache, inherits = FALSE)) {
+      full <- get(full_cache, envir = cache, inherits = FALSE)
+    } else {
+      full <- candidate_placements(
+        dictionary,
+        side_word,
+        top_word,
+        seed = 1,
+        prefer_common_words = FALSE,
+        sample_limit = NULL,
+        lengths = full_dictionary_lengths
+      )
+      if (!is.null(full_cache)) assign(full_cache, full, envir = cache)
+    }
     for (length in intersect(as.character(full_dictionary_lengths), names(full))) {
       placements[[length]] <- full[[length]]
     }
@@ -1379,10 +1472,6 @@ make_puzzle <- function(date, id, seed, dictionary, edge_pairs, start_pair = 1, 
         dictionary = dictionary,
         seed = seed + offset + 100000
       )
-      if (has_fully_clued_ship(accepted)) {
-        accepted <- NULL
-        next
-      }
       break
     }
   }
