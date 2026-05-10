@@ -2,6 +2,7 @@ const WDQS_ENDPOINT = "https://query.wikidata.org/sparql";
 const WIKIDATA_API_ENDPOINT = "https://www.wikidata.org/w/api.php";
 const API_USER_AGENT = "AnimalRelationGame/0.1 (https://jon-mellon.github.io/animal-relation-game/)";
 const CACHE_MAX_AGE_MS = 7 * 24 * 60 * 60 * 1000;
+const ASSET_VERSION = "20260510-3";
 
 // Taxonomy is not a perfectly regular tree. We use rank specificity as a game-friendly approximation.
 const RANK_DEPTH = {
@@ -32,7 +33,20 @@ const TAXON_DEPTH = {
   Amniota: 39,
   Tetrapoda: 38,
   Sarcopterygii: 37,
-  Vertebrata: 35
+  Vertebrata: 35,
+  Chordata: 30,
+  Arthropoda: 30,
+  Mollusca: 30,
+  Annelida: 30,
+  Echinodermata: 30,
+  Cnidaria: 30,
+  Deuterostomia: 28,
+  Ecdysozoa: 27,
+  Lophotrochozoa: 27,
+  Protostomia: 26,
+  Bilateria: 24,
+  Eumetazoa: 18,
+  Animalia: 10
 };
 
 const DISPLAY_RANKS = new Set([
@@ -81,7 +95,7 @@ async function init() {
   els.checkAnswer.addEventListener("click", submitSelectedPair);
 
   try {
-    const res = await fetch("./data/animals.json");
+    const res = await fetch(`./data/animals.json?v=${ASSET_VERSION}`);
     if (!res.ok) throw new Error(`Animal pool failed: ${res.status}`);
     state.pool = await res.json();
     await startRound();
@@ -513,8 +527,7 @@ function isPlayableRound() {
   if (state.pairResults.length !== 3) return false;
   if (state.pairResults.some(result => !result.lca || result.score <= 0)) return false;
   if (state.bestPairs.length !== 1) return false;
-  if (state.bestPairs[0].lca?.rankLabel === "kingdom") return false;
-  return Math.max(...state.pairResults.map(result => result.score)) > RANK_DEPTH.kingdom;
+  return Math.max(...state.pairResults.map(result => result.score)) >= RANK_DEPTH.kingdom;
 }
 
 function toggleAnimalSelection(animal) {
