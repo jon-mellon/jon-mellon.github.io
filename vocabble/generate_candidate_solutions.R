@@ -87,12 +87,22 @@ make_fast_edge_first_board <- function(dictionary,
 }
 
 make_candidate_puzzle <- function(candidate, dictionary, id, date, seed) {
-  build_dense_no_full_clue_set(
+  puzzle <- build_unique_clue_set(
     candidate = candidate,
     dictionary = dictionary,
     id = id,
     date = date,
     seed = seed
+  )
+  if (is.null(puzzle)) return(NULL)
+
+  minimize_puzzle_clues(
+    puzzle,
+    dictionary = dictionary,
+    seed = seed + 100000,
+    board_passes = 1,
+    edge_passes = 0,
+    seconds_per_trial = 2
   )
 }
 
@@ -189,7 +199,7 @@ generate_candidate_solutions <- function(attempts = 500,
     side_word <- edge_pairs$side[[pair_index]]
     top_word <- edge_pairs$top[[pair_index]]
 
-    if (attempt %% 25 == 0) {
+    if (attempt %% 5 == 0) {
       message("Attempt ", attempt, "/", attempts, "; accepted ", length(accepted))
     }
 
@@ -215,6 +225,8 @@ generate_candidate_solutions <- function(attempts = 500,
     }
 
     accepted[[length(accepted) + 1]] <- puzzle
+    message("Accepted candidate ", length(accepted), " at attempt ", attempt, "; givens ", puzzle$difficulty$givenLetters)
+    write_candidate_outputs(accepted, rejections, out_dir, attempts, seed_base)
   }
 
   manifest <- write_candidate_outputs(accepted, rejections, out_dir, attempts, seed_base)

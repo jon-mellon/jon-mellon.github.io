@@ -511,7 +511,12 @@ build_unique_clue_set <- function(candidate,
   placement_cache <- new.env(parent = emptyenv())
   masked <- full_clue_mask(candidate)
   current <- make_puzzle_object(candidate, masked, id, date, validation = validation)
-  current_uniqueness <- word_removal_uniqueness(current, dictionary, placement_cache)
+  current_uniqueness <- word_removal_uniqueness(
+    current,
+    dictionary,
+    placement_cache,
+    seconds_per_step = seconds_per_trial
+  )
   if (!current_uniqueness$unique) return(NULL)
 
   filled_cells <- which(candidate$board != "")
@@ -563,7 +568,17 @@ build_unique_clue_set <- function(candidate,
       if (clue_counts[[ship_index]] < ship_lengths[[ship_index]]) next
 
       removed_from_ship <- FALSE
-      for (cell in sample(ship_cells[[ship_index]])) {
+      stable_position <- stable_hidden_position(names(ship_cells)[[ship_index]], dictionary)
+      preferred_cells <- ship_cells[[ship_index]]
+      if (!is.na(stable_position)) {
+        preferred_cells <- c(
+          preferred_cells[[stable_position]],
+          sample(preferred_cells[-stable_position])
+        )
+      } else {
+        preferred_cells <- sample(preferred_cells)
+      }
+      for (cell in preferred_cells) {
         if (try_remove_cell(cell)) {
           removed_from_ship <- TRUE
           break
@@ -659,7 +674,8 @@ build_unique_clue_set <- function(candidate,
   final_uniqueness <- word_removal_uniqueness(
     make_puzzle_object(candidate, masked, id, date, validation = validation),
     dictionary,
-    placement_cache
+    placement_cache,
+    seconds_per_step = seconds_per_trial
   )
 
   final_puzzle <- make_puzzle_object(
@@ -1417,9 +1433,26 @@ dictionary_without_words <- function(dictionary, words) {
   lapply(dictionary, function(pool) setdiff(pool, words))
 }
 
-word_removal_uniqueness <- function(puzzle, dictionary, placement_cache = NULL) {
+word_removal_uniqueness <- function(puzzle,
+                                    dictionary,
+                                    placement_cache = NULL,
+                                    seconds_per_step = 8) {
   if (is.null(placement_cache)) placement_cache <- new.env(parent = emptyenv())
-  first_solution <- count_puzzle_solutions(puzzle, dictionary, limit = 1, cache = placement_cache)
+  first_solution <- count_puzzle_solutions(
+    puzzle,
+    dictionary,
+    limit = 1,
+    cache = placement_cache,
+    deadline = proc.time()[["elapsed"]] + seconds_per_step
+  )
+  if (isTRUE(first_solution$timedOut)) {
+    return(list(
+      unique = FALSE,
+      reason = "initial solution timeout",
+      solutionWords = character(),
+      alternatives = list()
+    ))
+  }
   if (first_solution$count != 1 || !length(first_solution$solutionWords)) {
     return(list(
       unique = FALSE,
@@ -1437,8 +1470,16 @@ word_removal_uniqueness <- function(puzzle, dictionary, placement_cache = NULL) 
       dictionary,
       limit = 1,
       cache = placement_cache,
-      excluded_words = word
+      excluded_words = word,
+      deadline = proc.time()[["elapsed"]] + seconds_per_step
     )
+    if (isTRUE(alternate$timedOut)) {
+      alternatives[[length(alternatives) + 1]] <- list(
+        removedWord = word,
+        example = "timeout"
+      )
+      next
+    }
     if (alternate$count > 0) {
       alternatives[[length(alternatives) + 1]] <- list(
         removedWord = word,

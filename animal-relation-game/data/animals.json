@@ -33,6 +33,30 @@
         "rankQid": null
       },
       {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
+        "rankQid": null
+      },
+      {
         "qid": "local:Chordata",
         "label": "Chordata",
         "rankLabel": "phylum",
@@ -77,6 +101,30 @@
         "qid": "local:Mammalia",
         "label": "Mammalia",
         "rankLabel": "class",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
         "rankQid": null
       },
       {
@@ -127,6 +175,30 @@
         "rankQid": null
       },
       {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
+        "rankQid": null
+      },
+      {
         "qid": "local:Chordata",
         "label": "Chordata",
         "rankLabel": "phylum",
@@ -174,6 +246,30 @@
         "rankQid": null
       },
       {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
+        "rankQid": null
+      },
+      {
         "qid": "local:Chordata",
         "label": "Chordata",
         "rankLabel": "phylum",
@@ -215,6 +311,30 @@
         "rankQid": null
       },
       {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
+        "rankQid": null
+      },
+      {
         "qid": "local:Chordata",
         "label": "Chordata",
         "rankLabel": "phylum",
@@ -253,6 +373,30 @@
         "qid": "local:Mammalia",
         "label": "Mammalia",
         "rankLabel": "class",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
         "rankQid": null
       },
       {
@@ -303,6 +447,30 @@
         "rankQid": null
       },
       {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
+        "rankQid": null
+      },
+      {
         "qid": "local:Chordata",
         "label": "Chordata",
         "rankLabel": "phylum",
@@ -350,6 +518,30 @@
         "rankQid": null
       },
       {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
+        "rankQid": null
+      },
+      {
         "qid": "local:Chordata",
         "label": "Chordata",
         "rankLabel": "phylum",
@@ -388,6 +580,30 @@
         "qid": "local:Mammalia",
         "label": "Mammalia",
         "rankLabel": "class",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
         "rankQid": null
       },
       {
@@ -438,6 +654,30 @@
         "rankQid": null
       },
       {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
+        "rankQid": null
+      },
+      {
         "qid": "local:Chordata",
         "label": "Chordata",
         "rankLabel": "phylum",
@@ -485,6 +725,30 @@
         "rankQid": null
       },
       {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
+        "rankQid": null
+      },
+      {
         "qid": "local:Chordata",
         "label": "Chordata",
         "rankLabel": "phylum",
@@ -523,6 +787,30 @@
         "qid": "local:Mammalia",
         "label": "Mammalia",
         "rankLabel": "class",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
         "rankQid": null
       },
       {
@@ -573,6 +861,30 @@
         "rankQid": null
       },
       {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
+        "rankQid": null
+      },
+      {
         "qid": "local:Chordata",
         "label": "Chordata",
         "rankLabel": "phylum",
@@ -620,6 +932,30 @@
         "rankQid": null
       },
       {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
+        "rankQid": null
+      },
+      {
         "qid": "local:Chordata",
         "label": "Chordata",
         "rankLabel": "phylum",
@@ -661,6 +997,30 @@
         "rankQid": null
       },
       {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
+        "rankQid": null
+      },
+      {
         "qid": "local:Chordata",
         "label": "Chordata",
         "rankLabel": "phylum",
@@ -693,6 +1053,30 @@
         "qid": "local:Mammalia",
         "label": "Mammalia",
         "rankLabel": "class",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
         "rankQid": null
       },
       {
@@ -737,6 +1121,30 @@
         "rankQid": null
       },
       {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
+        "rankQid": null
+      },
+      {
         "qid": "local:Chordata",
         "label": "Chordata",
         "rankLabel": "phylum",
@@ -775,6 +1183,30 @@
         "qid": "local:Mammalia",
         "label": "Mammalia",
         "rankLabel": "class",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
         "rankQid": null
       },
       {
@@ -819,6 +1251,30 @@
         "rankQid": null
       },
       {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
+        "rankQid": null
+      },
+      {
         "qid": "local:Chordata",
         "label": "Chordata",
         "rankLabel": "phylum",
@@ -857,6 +1313,30 @@
         "qid": "local:Mammalia",
         "label": "Mammalia",
         "rankLabel": "class",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
         "rankQid": null
       },
       {
@@ -901,6 +1381,30 @@
         "rankQid": null
       },
       {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
+        "rankQid": null
+      },
+      {
         "qid": "local:Chordata",
         "label": "Chordata",
         "rankLabel": "phylum",
@@ -933,6 +1437,30 @@
         "qid": "local:Mammalia",
         "label": "Mammalia",
         "rankLabel": "class",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
         "rankQid": null
       },
       {
@@ -971,6 +1499,30 @@
         "rankQid": null
       },
       {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
+        "rankQid": null
+      },
+      {
         "qid": "local:Chordata",
         "label": "Chordata",
         "rankLabel": "phylum",
@@ -1003,6 +1555,30 @@
         "qid": "local:Mammalia",
         "label": "Mammalia",
         "rankLabel": "class",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
         "rankQid": null
       },
       {
@@ -1041,6 +1617,30 @@
         "rankQid": null
       },
       {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
+        "rankQid": null
+      },
+      {
         "qid": "local:Chordata",
         "label": "Chordata",
         "rankLabel": "phylum",
@@ -1073,6 +1673,30 @@
         "qid": "local:Mammalia",
         "label": "Mammalia",
         "rankLabel": "class",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
         "rankQid": null
       },
       {
@@ -1117,6 +1741,30 @@
         "rankQid": null
       },
       {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
+        "rankQid": null
+      },
+      {
         "qid": "local:Chordata",
         "label": "Chordata",
         "rankLabel": "phylum",
@@ -1149,6 +1797,30 @@
         "qid": "local:Mammalia",
         "label": "Mammalia",
         "rankLabel": "class",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
         "rankQid": null
       },
       {
@@ -1187,6 +1859,30 @@
         "rankQid": null
       },
       {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
+        "rankQid": null
+      },
+      {
         "qid": "local:Chordata",
         "label": "Chordata",
         "rankLabel": "phylum",
@@ -1213,6 +1909,30 @@
         "qid": "local:Mammalia",
         "label": "Mammalia",
         "rankLabel": "class",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
         "rankQid": null
       },
       {
@@ -1251,6 +1971,30 @@
         "rankQid": null
       },
       {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
+        "rankQid": null
+      },
+      {
         "qid": "local:Chordata",
         "label": "Chordata",
         "rankLabel": "phylum",
@@ -1283,6 +2027,30 @@
         "qid": "local:Mammalia",
         "label": "Mammalia",
         "rankLabel": "class",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
         "rankQid": null
       },
       {
@@ -1321,6 +2089,30 @@
         "rankQid": null
       },
       {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
+        "rankQid": null
+      },
+      {
         "qid": "local:Chordata",
         "label": "Chordata",
         "rankLabel": "phylum",
@@ -1353,6 +2145,30 @@
         "qid": "local:Mammalia",
         "label": "Mammalia",
         "rankLabel": "class",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
         "rankQid": null
       },
       {
@@ -1391,6 +2207,30 @@
         "rankQid": null
       },
       {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
+        "rankQid": null
+      },
+      {
         "qid": "local:Chordata",
         "label": "Chordata",
         "rankLabel": "phylum",
@@ -1423,6 +2263,30 @@
         "qid": "local:Mammalia",
         "label": "Mammalia",
         "rankLabel": "class",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
         "rankQid": null
       },
       {
@@ -1461,6 +2325,30 @@
         "rankQid": null
       },
       {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
+        "rankQid": null
+      },
+      {
         "qid": "local:Chordata",
         "label": "Chordata",
         "rankLabel": "phylum",
@@ -1493,6 +2381,30 @@
         "qid": "local:Mammalia",
         "label": "Mammalia",
         "rankLabel": "class",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
         "rankQid": null
       },
       {
@@ -1531,6 +2443,30 @@
         "rankQid": null
       },
       {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
+        "rankQid": null
+      },
+      {
         "qid": "local:Chordata",
         "label": "Chordata",
         "rankLabel": "phylum",
@@ -1563,6 +2499,30 @@
         "qid": "local:Mammalia",
         "label": "Mammalia",
         "rankLabel": "class",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
         "rankQid": null
       },
       {
@@ -1601,6 +2561,30 @@
         "rankQid": null
       },
       {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
+        "rankQid": null
+      },
+      {
         "qid": "local:Chordata",
         "label": "Chordata",
         "rankLabel": "phylum",
@@ -1633,6 +2617,30 @@
         "qid": "local:Mammalia",
         "label": "Mammalia",
         "rankLabel": "class",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
         "rankQid": null
       },
       {
@@ -1677,6 +2685,30 @@
         "rankQid": null
       },
       {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
+        "rankQid": null
+      },
+      {
         "qid": "local:Chordata",
         "label": "Chordata",
         "rankLabel": "phylum",
@@ -1715,6 +2747,30 @@
         "qid": "local:Mammalia",
         "label": "Mammalia",
         "rankLabel": "class",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
         "rankQid": null
       },
       {
@@ -1759,6 +2815,30 @@
         "rankQid": null
       },
       {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
+        "rankQid": null
+      },
+      {
         "qid": "local:Chordata",
         "label": "Chordata",
         "rankLabel": "phylum",
@@ -1800,6 +2880,30 @@
         "rankQid": null
       },
       {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
+        "rankQid": null
+      },
+      {
         "qid": "local:Chordata",
         "label": "Chordata",
         "rankLabel": "phylum",
@@ -1832,6 +2936,30 @@
         "qid": "local:Mammalia",
         "label": "Mammalia",
         "rankLabel": "class",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
         "rankQid": null
       },
       {
@@ -1870,6 +2998,30 @@
         "rankQid": null
       },
       {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
+        "rankQid": null
+      },
+      {
         "qid": "local:Chordata",
         "label": "Chordata",
         "rankLabel": "phylum",
@@ -1902,6 +3054,30 @@
         "qid": "local:Mammalia",
         "label": "Mammalia",
         "rankLabel": "class",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
         "rankQid": null
       },
       {
@@ -1940,6 +3116,30 @@
         "rankQid": null
       },
       {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
+        "rankQid": null
+      },
+      {
         "qid": "local:Chordata",
         "label": "Chordata",
         "rankLabel": "phylum",
@@ -1972,6 +3172,30 @@
         "qid": "local:Mammalia",
         "label": "Mammalia",
         "rankLabel": "class",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
         "rankQid": null
       },
       {
@@ -2010,6 +3234,30 @@
         "rankQid": null
       },
       {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
+        "rankQid": null
+      },
+      {
         "qid": "local:Chordata",
         "label": "Chordata",
         "rankLabel": "phylum",
@@ -2042,6 +3290,30 @@
         "qid": "local:Mammalia",
         "label": "Mammalia",
         "rankLabel": "class",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
         "rankQid": null
       },
       {
@@ -2080,6 +3352,36 @@
         "rankQid": null
       },
       {
+        "qid": "local:Reptilia",
+        "label": "Reptilia",
+        "rankLabel": "class",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
+        "rankQid": null
+      },
+      {
         "qid": "local:Chordata",
         "label": "Chordata",
         "rankLabel": "phylum",
@@ -2112,6 +3414,36 @@
         "qid": "local:Aves",
         "label": "Aves",
         "rankLabel": "class",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Reptilia",
+        "label": "Reptilia",
+        "rankLabel": "class",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
         "rankQid": null
       },
       {
@@ -2156,6 +3488,36 @@
         "rankQid": null
       },
       {
+        "qid": "local:Reptilia",
+        "label": "Reptilia",
+        "rankLabel": "class",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
+        "rankQid": null
+      },
+      {
         "qid": "local:Chordata",
         "label": "Chordata",
         "rankLabel": "phylum",
@@ -2194,6 +3556,36 @@
         "qid": "local:Aves",
         "label": "Aves",
         "rankLabel": "class",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Reptilia",
+        "label": "Reptilia",
+        "rankLabel": "class",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
         "rankQid": null
       },
       {
@@ -2238,6 +3630,36 @@
         "rankQid": null
       },
       {
+        "qid": "local:Reptilia",
+        "label": "Reptilia",
+        "rankLabel": "class",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
+        "rankQid": null
+      },
+      {
         "qid": "local:Chordata",
         "label": "Chordata",
         "rankLabel": "phylum",
@@ -2279,6 +3701,36 @@
         "rankQid": null
       },
       {
+        "qid": "local:Reptilia",
+        "label": "Reptilia",
+        "rankLabel": "class",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
+        "rankQid": null
+      },
+      {
         "qid": "local:Chordata",
         "label": "Chordata",
         "rankLabel": "phylum",
@@ -2311,6 +3763,36 @@
         "qid": "local:Aves",
         "label": "Aves",
         "rankLabel": "class",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Reptilia",
+        "label": "Reptilia",
+        "rankLabel": "class",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
         "rankQid": null
       },
       {
@@ -2349,6 +3831,36 @@
         "rankQid": null
       },
       {
+        "qid": "local:Reptilia",
+        "label": "Reptilia",
+        "rankLabel": "class",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
+        "rankQid": null
+      },
+      {
         "qid": "local:Chordata",
         "label": "Chordata",
         "rankLabel": "phylum",
@@ -2375,6 +3887,36 @@
         "qid": "local:Aves",
         "label": "Aves",
         "rankLabel": "class",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Reptilia",
+        "label": "Reptilia",
+        "rankLabel": "class",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
         "rankQid": null
       },
       {
@@ -2410,6 +3952,36 @@
         "qid": "local:Aves",
         "label": "Aves",
         "rankLabel": "class",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Reptilia",
+        "label": "Reptilia",
+        "rankLabel": "class",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
         "rankQid": null
       },
       {
@@ -2454,6 +4026,36 @@
         "rankQid": null
       },
       {
+        "qid": "local:Reptilia",
+        "label": "Reptilia",
+        "rankLabel": "class",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
+        "rankQid": null
+      },
+      {
         "qid": "local:Chordata",
         "label": "Chordata",
         "rankLabel": "phylum",
@@ -2495,6 +4097,36 @@
         "rankQid": null
       },
       {
+        "qid": "local:Reptilia",
+        "label": "Reptilia",
+        "rankLabel": "class",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
+        "rankQid": null
+      },
+      {
         "qid": "local:Chordata",
         "label": "Chordata",
         "rankLabel": "phylum",
@@ -2530,6 +4162,36 @@
         "rankQid": null
       },
       {
+        "qid": "local:Reptilia",
+        "label": "Reptilia",
+        "rankLabel": "class",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
+        "rankQid": null
+      },
+      {
         "qid": "local:Chordata",
         "label": "Chordata",
         "rankLabel": "phylum",
@@ -2556,6 +4218,36 @@
         "qid": "local:Aves",
         "label": "Aves",
         "rankLabel": "class",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Reptilia",
+        "label": "Reptilia",
+        "rankLabel": "class",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
         "rankQid": null
       },
       {
@@ -2594,6 +4286,36 @@
         "rankQid": null
       },
       {
+        "qid": "local:Reptilia",
+        "label": "Reptilia",
+        "rankLabel": "class",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
+        "rankQid": null
+      },
+      {
         "qid": "local:Chordata",
         "label": "Chordata",
         "rankLabel": "phylum",
@@ -2629,6 +4351,36 @@
         "rankQid": null
       },
       {
+        "qid": "local:Reptilia",
+        "label": "Reptilia",
+        "rankLabel": "class",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
+        "rankQid": null
+      },
+      {
         "qid": "local:Chordata",
         "label": "Chordata",
         "rankLabel": "phylum",
@@ -2655,6 +4407,36 @@
         "qid": "local:Aves",
         "label": "Aves",
         "rankLabel": "class",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Reptilia",
+        "label": "Reptilia",
+        "rankLabel": "class",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
         "rankQid": null
       },
       {
@@ -2693,6 +4475,30 @@
         "rankQid": null
       },
       {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
+        "rankQid": null
+      },
+      {
         "qid": "local:Chordata",
         "label": "Chordata",
         "rankLabel": "phylum",
@@ -2725,6 +4531,30 @@
         "qid": "local:Reptilia",
         "label": "Reptilia",
         "rankLabel": "class",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
         "rankQid": null
       },
       {
@@ -2763,6 +4593,30 @@
         "rankQid": null
       },
       {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
+        "rankQid": null
+      },
+      {
         "qid": "local:Chordata",
         "label": "Chordata",
         "rankLabel": "phylum",
@@ -2795,6 +4649,30 @@
         "qid": "local:Reptilia",
         "label": "Reptilia",
         "rankLabel": "class",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
         "rankQid": null
       },
       {
@@ -2833,6 +4711,30 @@
         "rankQid": null
       },
       {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
+        "rankQid": null
+      },
+      {
         "qid": "local:Chordata",
         "label": "Chordata",
         "rankLabel": "phylum",
@@ -2868,6 +4770,30 @@
         "rankQid": null
       },
       {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
+        "rankQid": null
+      },
+      {
         "qid": "local:Chordata",
         "label": "Chordata",
         "rankLabel": "phylum",
@@ -2900,6 +4826,30 @@
         "qid": "local:Reptilia",
         "label": "Reptilia",
         "rankLabel": "class",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
         "rankQid": null
       },
       {
@@ -2944,6 +4894,30 @@
         "rankQid": null
       },
       {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
+        "rankQid": null
+      },
+      {
         "qid": "local:Chordata",
         "label": "Chordata",
         "rankLabel": "phylum",
@@ -2982,6 +4956,30 @@
         "qid": "local:Reptilia",
         "label": "Reptilia",
         "rankLabel": "class",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
         "rankQid": null
       },
       {
@@ -3026,6 +5024,30 @@
         "rankQid": null
       },
       {
+        "qid": "local:Amniota",
+        "label": "Amniota",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
+        "rankQid": null
+      },
+      {
         "qid": "local:Chordata",
         "label": "Chordata",
         "rankLabel": "phylum",
@@ -3058,6 +5080,24 @@
         "qid": "local:Amphibia",
         "label": "Amphibia",
         "rankLabel": "class",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
         "rankQid": null
       },
       {
@@ -3096,6 +5136,24 @@
         "rankQid": null
       },
       {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
+        "rankQid": null
+      },
+      {
         "qid": "local:Chordata",
         "label": "Chordata",
         "rankLabel": "phylum",
@@ -3128,6 +5186,24 @@
         "qid": "local:Amphibia",
         "label": "Amphibia",
         "rankLabel": "class",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
         "rankQid": null
       },
       {
@@ -3166,6 +5242,24 @@
         "rankQid": null
       },
       {
+        "qid": "local:Tetrapoda",
+        "label": "Tetrapoda",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Sarcopterygii",
+        "label": "Sarcopterygii",
+        "rankLabel": "clade",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
+        "rankQid": null
+      },
+      {
         "qid": "local:Chordata",
         "label": "Chordata",
         "rankLabel": "phylum",
@@ -3198,6 +5292,12 @@
         "qid": "local:Actinopterygii",
         "label": "ray-finned fishes",
         "rankLabel": "class",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
         "rankQid": null
       },
       {
@@ -3236,6 +5336,12 @@
         "rankQid": null
       },
       {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
+        "rankQid": null
+      },
+      {
         "qid": "local:Chordata",
         "label": "Chordata",
         "rankLabel": "phylum",
@@ -3268,6 +5374,12 @@
         "qid": "local:Actinopterygii",
         "label": "ray-finned fishes",
         "rankLabel": "class",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
         "rankQid": null
       },
       {
@@ -3306,6 +5418,12 @@
         "rankQid": null
       },
       {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
+        "rankQid": null
+      },
+      {
         "qid": "local:Chordata",
         "label": "Chordata",
         "rankLabel": "phylum",
@@ -3338,6 +5456,12 @@
         "qid": "local:Chondrichthyes",
         "label": "cartilaginous fishes",
         "rankLabel": "class",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
         "rankQid": null
       },
       {
@@ -3376,6 +5500,12 @@
         "rankQid": null
       },
       {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
+        "rankQid": null
+      },
+      {
         "qid": "local:Chordata",
         "label": "Chordata",
         "rankLabel": "phylum",
@@ -3408,6 +5538,12 @@
         "qid": "local:Actinopterygii",
         "label": "ray-finned fishes",
         "rankLabel": "class",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
         "rankQid": null
       },
       {
@@ -3446,6 +5582,12 @@
         "rankQid": null
       },
       {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
+        "rankQid": null
+      },
+      {
         "qid": "local:Chordata",
         "label": "Chordata",
         "rankLabel": "phylum",
@@ -3481,6 +5623,12 @@
         "rankQid": null
       },
       {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
+        "rankQid": null
+      },
+      {
         "qid": "local:Chordata",
         "label": "Chordata",
         "rankLabel": "phylum",
@@ -3513,6 +5661,12 @@
         "qid": "local:Chondrichthyes",
         "label": "cartilaginous fishes",
         "rankLabel": "class",
+        "rankQid": null
+      },
+      {
+        "qid": "local:Vertebrata",
+        "label": "Vertebrata",
+        "rankLabel": "subphylum",
         "rankQid": null
       },
       {

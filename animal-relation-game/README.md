@@ -4,11 +4,11 @@ Static browser game hosted on GitHub Pages. Players choose which two of three an
 
 ## Data Sources
 
-- Local `data/animals.json` for random animal selection.
-- Wikidata Query Service for taxonomic lineages.
+- Local `data/animals.json` for random animal selection and cached game lineages.
+- Wikidata/Wikipedia identifiers retained in the cached data for source links and future refreshes.
 - English Wikipedia REST page summary endpoint for readable explanations.
 
-The browser app uses `Api-User-Agent` headers for Wikimedia requests where browsers permit custom headers, keeps live queries small, and caches repeat taxonomy and summary lookups in `localStorage`.
+The browser does not send custom Wikimedia headers, because those trigger CORS preflights that some Wikimedia endpoints reject. Lineages are cached locally so normal play does not depend on live WDQS calls.
 
 ## Development
 

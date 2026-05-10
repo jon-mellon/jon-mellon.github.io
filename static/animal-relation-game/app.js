@@ -34,6 +34,8 @@ const DISPLAY_RANKS = new Set([
   "superfamily",
   "order",
   "class",
+  "clade",
+  "subphylum",
   "phylum",
   "kingdom"
 ]);
@@ -472,21 +474,23 @@ function computePairResults(animals, lineages) {
       b,
       key: pairKey(a, b),
       lca,
-      score: getRankScore(lca)
+      score: getAncestorScore(lca)
     };
   });
 }
 
 function findLCA(lineageA = [], lineageB = []) {
-  const bByQid = new Map(lineageB.map(ancestor => [ancestor.qid, ancestor]));
+  const bByQid = new Map(lineageB.map((ancestor, index) => [ancestor.qid, { ancestor, index }]));
   const common = lineageA
-    .filter(ancestor => bByQid.has(ancestor.qid))
-    .map(ancestor => ({
+    .map((ancestor, indexA) => ({ ancestor, indexA, matchB: bByQid.get(ancestor.qid) }))
+    .filter(item => item.matchB)
+    .map(({ ancestor, indexA, matchB }) => ({
       ...ancestor,
-      rankLabel: ancestor.rankLabel || bByQid.get(ancestor.qid)?.rankLabel || ""
+      rankLabel: ancestor.rankLabel || matchB.ancestor?.rankLabel || "",
+      specificityScore: 1000 - ((indexA + matchB.index) / 2)
     }));
 
-  common.sort((x, y) => getRankScore(y) - getRankScore(x));
+  common.sort((x, y) => getAncestorScore(y) - getAncestorScore(x));
   return common.find(ancestor => DISPLAY_RANKS.has(ancestor.rankLabel)) ?? common[0] ?? null;
 }
 
@@ -671,7 +675,7 @@ function renderAnswer() {
         <h3>Last common ancestor: ${escapeHtml(lca?.label ?? "Unknown")}</h3>
         <div class="ancestor-meta">
           ${lca?.rankLabel ? `<span class="meta-pill">Rank: ${escapeHtml(lca.rankLabel)}</span>` : ""}
-          ${lca?.qid ? `<span class="meta-pill">${escapeHtml(lca.qid)}</span>` : ""}
+          ${lca?.qid?.startsWith("Q") ? `<span class="meta-pill">${escapeHtml(lca.qid)}</span>` : ""}
         </div>
         <p>${escapeHtml(summaryText)}</p>
         <div class="source-links">
@@ -722,6 +726,10 @@ function pairKey(a, b) {
 
 function getRankScore(ancestor) {
   return RANK_DEPTH[ancestor?.rankLabel] ?? 0;
+}
+
+function getAncestorScore(ancestor) {
+  return ancestor?.specificityScore ?? getRankScore(ancestor);
 }
 
 function normalizeRank(value) {
