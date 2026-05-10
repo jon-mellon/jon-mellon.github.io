@@ -92,7 +92,13 @@ make_candidate_puzzle <- function(candidate, dictionary, id, date, seed) {
     dictionary = dictionary,
     id = id,
     date = date,
-    seed = seed
+    seed = seed,
+    target_total_givens = 17,
+    min_total_givens = 8,
+    max_total_givens = 18,
+    extra_board_passes = 1,
+    max_ship_givens = c(5, 4, 3, 3, 2, 2),
+    seconds_per_trial = 4
   )
   if (is.null(puzzle)) return(NULL)
 
@@ -100,7 +106,7 @@ make_candidate_puzzle <- function(candidate, dictionary, id, date, seed) {
     puzzle,
     dictionary = dictionary,
     seed = seed + 100000,
-    board_passes = 1,
+    board_passes = 2,
     edge_passes = 0,
     seconds_per_trial = 2
   )
@@ -110,6 +116,7 @@ validate_candidate_puzzle <- function(puzzle, dictionary) {
   if (is.null(puzzle)) return("no_unique_clue_set")
   if (!isTRUE(puzzle$validation$ok)) return("invalid_board")
   if (!isTRUE(puzzle$uniqueness$unique)) return("not_unique")
+  if (puzzle$difficulty$givenLetters > 18) return("too_many_givens")
   if (candidate_has_full_edge_word(puzzle)) return("full_edge_word")
   if (has_fully_clued_ship(puzzle)) return("full_ship_word")
 
@@ -181,6 +188,11 @@ generate_candidate_solutions <- function(attempts = 500,
   edge_pairs <- edge_pairs[edge_pairs$side != edge_pairs$top, ]
   set.seed(seed_base)
   edge_pairs <- edge_pairs[sample(seq_len(nrow(edge_pairs))), ]
+
+  puzzle_dir <- file.path(out_dir, "puzzles")
+  dir.create(puzzle_dir, recursive = TRUE, showWarnings = FALSE)
+  unlink(file.path(puzzle_dir, "candidate-*.json"))
+  unlink(file.path(out_dir, c("manifest.json", "rejections.csv")))
 
   accepted <- list()
   rejections <- data.frame(

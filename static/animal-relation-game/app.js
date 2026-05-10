@@ -90,7 +90,7 @@ async function startRound() {
   try {
     let lastError = null;
 
-    for (let attempt = 0; attempt < 10; attempt++) {
+    for (let attempt = 0; attempt < 100; attempt++) {
       try {
         state.currentAnimals = sampleThreeGoodAnimals(state.pool);
         renderQuestion();
@@ -107,10 +107,10 @@ async function startRound() {
           return;
         }
 
-        lastError = new Error("Unplayable animal triple");
+        lastError = new Error("Round had no single closest pair");
       } catch (err) {
         lastError = err;
-        renderStatus("That set had incomplete taxonomy. Trying another set...");
+        renderStatus("That set was ambiguous. Trying another set...");
       }
     }
 
@@ -503,6 +503,7 @@ function getBestPairs(pairResults) {
 function isPlayableRound() {
   if (state.pairResults.length !== 3) return false;
   if (state.pairResults.some(result => !result.lca || result.score <= 0)) return false;
+  if (state.bestPairs.length !== 1) return false;
   return Math.max(...state.pairResults.map(result => result.score)) > RANK_DEPTH.kingdom;
 }
 
