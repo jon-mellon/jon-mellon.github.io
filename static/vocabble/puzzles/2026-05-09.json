@@ -12,32 +12,12 @@
   ],
   "solution": [
     [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "B",
-      "",
-      "D"
-    ],
-    [
-      "T",
+      "A",
+      "I",
       "R",
-      "E",
-      "E",
-      "",
-      "E",
-      "",
-      "E"
-    ],
-    [
       "",
       "",
       "",
-      "",
-      "",
-      "D",
       "",
       "C"
     ],
@@ -49,67 +29,117 @@
       "",
       "",
       "",
-      "I"
+      "A"
+    ],
+    [
+      "",
+      "",
+      "O",
+      "P",
+      "E",
+      "N",
+      "",
+      "U"
+    ],
+    [
+      "",
+      "F",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "S"
+    ],
+    [
+      "",
+      "I",
+      "",
+      "B",
+      "U",
+      "S",
+      "",
+      "E"
     ],
     [
       "",
       "L",
-      "E",
-      "A",
-      "S",
-      "T",
       "",
-      "D"
+      "",
+      "",
+      "",
+      "",
+      ""
     ],
     [
+      "",
+      "E",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "I",
+      "S",
+      "L",
+      "A",
+      "N",
+      "D"
+    ]
+  ],
+  "puzzle": [
+    [
+      "",
       "I",
       "",
       "",
       "",
       "",
       "",
-      "",
-      "E"
-    ],
-    [
-      "O",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
       ""
     ],
     [
-      "N",
       "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "A"
+    ],
+    [
+      "",
+      "",
+      "O",
+      "",
+      "E",
+      "",
+      "",
+      "U"
+    ],
+    [
       "",
       "F",
-      "O",
-      "U",
-      "R",
-      ""
-    ]
-  ],
-  "puzzle": [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "S"
+    ],
     [
       "",
-      "",
-      "",
-      "",
+      "I",
       "",
       "B",
       "",
-      ""
-    ],
-    [
-      "",
-      "",
-      "E",
-      "E",
-      "",
-      "E",
+      "S",
       "",
       "E"
     ],
@@ -119,7 +149,7 @@
       "",
       "",
       "",
-      "D",
+      "",
       "",
       ""
     ],
@@ -131,51 +161,21 @@
       "",
       "",
       "",
-      "I"
+      ""
     ],
     [
       "",
-      "L",
       "",
-      "",
+      "I",
       "S",
-      "T",
-      "",
-      "D"
-    ],
-    [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      ""
-    ],
-    [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      ""
-    ],
-    [
-      "",
-      "",
-      "",
-      "F",
-      "",
-      "",
+      "L",
+      "A",
       "",
       ""
     ]
   ],
-  "topWord": "TREASURE",
-  "sideWord": "DECISION",
+  "topWord": "AIRPLANE",
+  "sideWord": "CAPSULES",
   "topVisible": [
     true,
     true,
@@ -198,53 +198,53 @@
   ],
   "ships": [
     {
-      "word": "DECIDE",
+      "word": "ISLAND",
       "length": 6,
+      "row": 8,
+      "col": 3,
+      "direction": "H"
+    },
+    {
+      "word": "CAUSE",
+      "length": 5,
       "row": 1,
       "col": 8,
       "direction": "V"
     },
     {
-      "word": "LEAST",
-      "length": 5,
-      "row": 5,
+      "word": "FILE",
+      "length": 4,
+      "row": 4,
       "col": 2,
-      "direction": "H"
-    },
-    {
-      "word": "TREE",
-      "length": 4,
-      "row": 2,
-      "col": 1,
-      "direction": "H"
-    },
-    {
-      "word": "FOUR",
-      "length": 4,
-      "row": 8,
-      "col": 4,
-      "direction": "H"
-    },
-    {
-      "word": "ION",
-      "length": 3,
-      "row": 6,
-      "col": 1,
       "direction": "V"
     },
     {
-      "word": "BED",
+      "word": "OPEN",
+      "length": 4,
+      "row": 3,
+      "col": 3,
+      "direction": "H"
+    },
+    {
+      "word": "AIR",
       "length": 3,
       "row": 1,
-      "col": 6,
-      "direction": "V"
+      "col": 1,
+      "direction": "H"
+    },
+    {
+      "word": "BUS",
+      "length": 3,
+      "row": 5,
+      "col": 4,
+      "direction": "H"
     }
   ],
   "difficulty": {
     "label": "medium-hard",
-    "hiddenLetters": 13,
+    "hiddenLetters": 10,
     "hiddenEdges": 8,
-    "givenLetters": 12
+    "givenLetters": 15
   },
   "validation": {
     "ok": true,
@@ -256,6 +256,6 @@
   "uniqueness": {
     "method": "word-removal backtracking",
     "unique": true,
-    "solutionWords": "DECISION"
+    "solutionWords": "CAPSULES"
   }
 }

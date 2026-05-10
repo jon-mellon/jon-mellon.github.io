@@ -12,12 +12,12 @@
   ],
   "solution": [
     [
-      "H",
-      "O",
       "S",
-      "T",
-      "",
+      "H",
+      "A",
       "P",
+      "E",
+      "",
       "",
       ""
     ],
@@ -25,123 +25,83 @@
       "",
       "",
       "",
+      "",
+      "",
+      "O",
+      "A",
+      "K"
+    ],
+    [
+      "S",
+      "",
+      "S",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "U",
+      "",
+      "O",
+      "",
+      "P",
+      "I",
+      "E",
+      ""
+    ],
+    [
+      "I",
+      "",
+      "C",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "T",
+      "",
+      "I",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "A",
+      "",
+      "Y",
+      "A",
+      "R",
+      "D"
+    ],
+    [
       "",
       "",
       "L",
       "",
-      ""
-    ],
-    [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "A",
-      "",
-      ""
-    ],
-    [
-      "",
-      "T",
-      "O",
-      "P",
-      "",
-      "T",
-      "",
-      "T"
-    ],
-    [
-      "F",
-      "",
-      "",
-      "",
-      "",
-      "E",
-      "",
-      "E"
-    ],
-    [
-      "O",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "N"
-    ],
-    [
-      "R",
-      "",
-      "",
-      "",
       "",
       "",
       "",
       ""
-    ],
-    [
-      "M",
-      "",
-      "A",
-      "N",
-      "I",
-      "M",
-      "A",
-      "L"
     ]
   ],
   "puzzle": [
     [
-      "",
-      "",
       "S",
-      "T",
-      "",
-      "P",
-      "",
-      ""
-    ],
-    [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      ""
-    ],
-    [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "A",
-      "",
-      ""
-    ],
-    [
-      "",
-      "T",
-      "O",
-      "",
-      "",
-      "",
-      "",
-      "T"
-    ],
-    [
-      "",
-      "",
       "",
       "",
       "",
       "E",
       "",
-      "E"
+      "",
+      ""
     ],
     [
       "",
@@ -150,8 +110,28 @@
       "",
       "",
       "",
+      "A",
+      "K"
+    ],
+    [
+      "S",
       "",
-      "N"
+      "S",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "U",
+      "",
+      "O",
+      "",
+      "",
+      "I",
+      "E",
+      ""
     ],
     [
       "",
@@ -164,18 +144,38 @@
       ""
     ],
     [
-      "M",
-      "",
-      "A",
       "",
       "",
-      "M",
+      "I",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "Y",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
       "",
       ""
     ]
   ],
-  "topWord": "HOSPITAL",
-  "sideWord": "PLATFORM",
+  "topWord": "SHIPYARD",
+  "sideWord": "HOSPITAL",
   "topVisible": [
     true,
     true,
@@ -198,53 +198,53 @@
   ],
   "ships": [
     {
-      "word": "ANIMAL",
+      "word": "SOCIAL",
       "length": 6,
-      "row": 8,
+      "row": 3,
       "col": 3,
-      "direction": "H"
+      "direction": "V"
     },
     {
-      "word": "PLATE",
+      "word": "SHAPE",
       "length": 5,
       "row": 1,
+      "col": 1,
+      "direction": "H"
+    },
+    {
+      "word": "YARD",
+      "length": 4,
+      "row": 7,
+      "col": 5,
+      "direction": "H"
+    },
+    {
+      "word": "SUIT",
+      "length": 4,
+      "row": 3,
+      "col": 1,
+      "direction": "V"
+    },
+    {
+      "word": "PIE",
+      "length": 3,
+      "row": 4,
+      "col": 5,
+      "direction": "H"
+    },
+    {
+      "word": "OAK",
+      "length": 3,
+      "row": 2,
       "col": 6,
-      "direction": "V"
-    },
-    {
-      "word": "FORM",
-      "length": 4,
-      "row": 5,
-      "col": 1,
-      "direction": "V"
-    },
-    {
-      "word": "HOST",
-      "length": 4,
-      "row": 1,
-      "col": 1,
       "direction": "H"
-    },
-    {
-      "word": "TOP",
-      "length": 3,
-      "row": 4,
-      "col": 2,
-      "direction": "H"
-    },
-    {
-      "word": "TEN",
-      "length": 3,
-      "row": 4,
-      "col": 8,
-      "direction": "V"
     }
   ],
   "difficulty": {
     "label": "medium-hard",
-    "hiddenLetters": 12,
+    "hiddenLetters": 13,
     "hiddenEdges": 8,
-    "givenLetters": 13
+    "givenLetters": 12
   },
   "validation": {
     "ok": true,
@@ -256,6 +256,6 @@
   "uniqueness": {
     "method": "word-removal backtracking",
     "unique": true,
-    "solutionWords": "PLATFORM"
+    "solutionWords": "HOSPITAL"
   }
 }

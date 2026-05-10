@@ -12,13 +12,13 @@
   ],
   "solution": [
     [
-      "C",
+      "G",
       "A",
-      "U",
       "S",
-      "E",
       "",
       "",
+      "",
+      "S",
       ""
     ],
     [
@@ -27,54 +27,44 @@
       "",
       "",
       "",
-      "L",
       "",
+      "H",
       ""
     ],
     [
-      "",
+      "P",
+      "R",
+      "I",
+      "N",
+      "T",
       "",
       "O",
-      "",
-      "",
-      "E",
-      "",
       ""
     ],
     [
-      "C",
+      "",
+      "",
+      "",
+      "",
+      "",
       "",
       "P",
+      ""
+    ],
+    [
+      "L",
       "",
       "",
-      "F",
+      "K",
+      "E",
+      "Y",
       "",
-      "S"
+      ""
     ],
     [
       "A",
       "",
-      "T",
       "",
-      "",
-      "T",
-      "",
-      "E"
-    ],
-    [
-      "N",
-      "",
-      "I",
-      "",
-      "",
-      "",
-      "",
-      "A"
-    ],
-    [
-      "",
-      "",
-      "O",
       "",
       "",
       "",
@@ -82,25 +72,35 @@
       ""
     ],
     [
-      "",
-      "",
       "N",
       "",
-      "U",
       "S",
-      "E",
-      "R"
+      "P",
+      "R",
+      "I",
+      "N",
+      "G"
+    ],
+    [
+      "D",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
     ]
   ],
   "puzzle": [
     [
-      "C",
+      "G",
       "",
-      "U",
-      "",
-      "",
+      "S",
       "",
       "",
+      "",
+      "S",
       ""
     ],
     [
@@ -115,50 +115,50 @@
     ],
     [
       "",
+      "R",
       "",
-      "O",
-      "",
-      "",
-      "E",
-      "",
-      ""
-    ],
-    [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "F",
-      "",
-      ""
-    ],
-    [
-      "A",
       "",
       "T",
       "",
+      "O",
+      ""
+    ],
+    [
       "",
       "",
       "",
-      "E"
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "L",
+      "",
+      "",
+      "K",
+      "E",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
     ],
     [
       "N",
       "",
       "",
-      "",
-      "",
-      "",
-      "",
-      "A"
-    ],
-    [
-      "",
-      "",
-      "",
-      "",
-      "",
+      "P",
+      "R",
       "",
       "",
       ""
@@ -170,12 +170,12 @@
       "",
       "",
       "",
-      "E",
-      "R"
+      "",
+      ""
     ]
   ],
-  "topWord": "CAPSULES",
-  "sideWord": "ELECTION",
+  "topWord": "PAINTING",
+  "sideWord": "SHIPYARD",
   "topVisible": [
     true,
     true,
@@ -198,46 +198,46 @@
   ],
   "ships": [
     {
-      "word": "OPTION",
+      "word": "SPRING",
       "length": 6,
-      "row": 3,
+      "row": 7,
       "col": 3,
+      "direction": "H"
+    },
+    {
+      "word": "PRINT",
+      "length": 5,
+      "row": 3,
+      "col": 1,
+      "direction": "H"
+    },
+    {
+      "word": "SHOP",
+      "length": 4,
+      "row": 1,
+      "col": 7,
       "direction": "V"
     },
     {
-      "word": "CAUSE",
-      "length": 5,
+      "word": "LAND",
+      "length": 4,
+      "row": 5,
+      "col": 1,
+      "direction": "V"
+    },
+    {
+      "word": "GAS",
+      "length": 3,
       "row": 1,
       "col": 1,
       "direction": "H"
     },
     {
-      "word": "LEFT",
-      "length": 4,
-      "row": 2,
-      "col": 6,
-      "direction": "V"
-    },
-    {
-      "word": "USER",
-      "length": 4,
-      "row": 8,
-      "col": 5,
+      "word": "KEY",
+      "length": 3,
+      "row": 5,
+      "col": 4,
       "direction": "H"
-    },
-    {
-      "word": "SEA",
-      "length": 3,
-      "row": 4,
-      "col": 8,
-      "direction": "V"
-    },
-    {
-      "word": "CAN",
-      "length": 3,
-      "row": 4,
-      "col": 1,
-      "direction": "V"
     }
   ],
   "difficulty": {
@@ -256,6 +256,6 @@
   "uniqueness": {
     "method": "word-removal backtracking",
     "unique": true,
-    "solutionWords": "ELECTION"
+    "solutionWords": "SHIPYARD"
   }
 }

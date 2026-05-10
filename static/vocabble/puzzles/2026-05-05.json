@@ -12,152 +12,142 @@
   ],
   "solution": [
     [
-      "T",
-      "A",
-      "N",
+      "L",
       "",
-      "W",
+      "F",
+      "",
+      "U",
+      "S",
       "E",
-      "S",
-      "T"
-    ],
-    [
-      "",
-      "",
-      "",
-      "R",
-      "",
-      "",
-      "",
-      ""
-    ],
-    [
-      "I",
-      "",
-      "",
-      "E",
-      "",
-      "",
-      "",
-      ""
-    ],
-    [
-      "S",
-      "",
-      "",
-      "A",
-      "",
-      "",
-      "",
-      ""
-    ],
-    [
-      "S",
-      "",
-      "",
-      "D",
-      "",
-      "",
-      "",
-      ""
+      "R"
     ],
     [
       "U",
       "",
+      "A",
       "",
-      "E",
-      "",
-      "I",
-      "C",
-      "E"
-    ],
-    [
-      "E",
-      "",
-      "",
-      "R",
       "",
       "",
       "",
       ""
     ],
     [
+      "N",
+      "",
+      "R",
       "",
       "",
+      "O",
       "",
+      ""
+    ],
+    [
+      "C",
+      "",
+      "M",
+      "",
+      "",
+      "P",
+      "",
+      ""
+    ],
+    [
+      "H",
+      "",
+      "",
+      "P",
+      "",
+      "T",
+      "",
+      ""
+    ],
+    [
+      "",
+      "T",
+      "",
+      "I",
+      "",
+      "I",
+      "",
+      ""
+    ],
+    [
+      "",
+      "O",
       "",
       "E",
-      "A",
-      "C",
-      "H"
+      "",
+      "O",
+      "",
+      ""
+    ],
+    [
+      "",
+      "Y",
+      "",
+      "",
+      "",
+      "N",
+      "",
+      ""
     ]
   ],
   "puzzle": [
     [
+      "L",
+      "",
+      "",
+      "",
+      "",
+      "S",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "A",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "R",
+      "",
+      "",
+      "O",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "P",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
       "T",
       "",
-      "",
-      "",
-      "",
-      "E",
-      "S",
-      "T"
-    ],
-    [
-      "",
-      "",
-      "",
-      "R",
-      "",
-      "",
-      "",
-      ""
-    ],
-    [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      ""
-    ],
-    [
-      "S",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      ""
-    ],
-    [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      ""
-    ],
-    [
-      "",
-      "",
-      "",
-      "",
-      "",
       "I",
-      "C",
-      "E"
-    ],
-    [
-      "",
-      "",
-      "",
-      "R",
       "",
       "",
       "",
@@ -167,15 +157,25 @@
       "",
       "",
       "",
-      "",
       "E",
-      "A",
-      "C",
+      "",
+      "O",
+      "",
+      ""
+    ],
+    [
+      "",
+      "Y",
+      "",
+      "",
+      "",
+      "N",
+      "",
       ""
     ]
   ],
-  "topWord": "SANDWICH",
-  "sideWord": "TREASURE",
+  "topWord": "COMPUTER",
+  "sideWord": "FUNCTION",
   "topVisible": [
     true,
     true,
@@ -198,53 +198,53 @@
   ],
   "ships": [
     {
-      "word": "READER",
+      "word": "OPTION",
       "length": 6,
-      "row": 2,
-      "col": 4,
-      "direction": "V"
-    },
-    {
-      "word": "ISSUE",
-      "length": 5,
       "row": 3,
+      "col": 6,
+      "direction": "V"
+    },
+    {
+      "word": "LUNCH",
+      "length": 5,
+      "row": 1,
       "col": 1,
       "direction": "V"
     },
     {
-      "word": "EACH",
-      "length": 4,
-      "row": 8,
-      "col": 5,
-      "direction": "H"
-    },
-    {
-      "word": "WEST",
+      "word": "USER",
       "length": 4,
       "row": 1,
       "col": 5,
       "direction": "H"
     },
     {
-      "word": "TAN",
-      "length": 3,
+      "word": "FARM",
+      "length": 4,
       "row": 1,
-      "col": 1,
-      "direction": "H"
+      "col": 3,
+      "direction": "V"
     },
     {
-      "word": "ICE",
+      "word": "TOY",
       "length": 3,
       "row": 6,
-      "col": 6,
-      "direction": "H"
+      "col": 2,
+      "direction": "V"
+    },
+    {
+      "word": "PIE",
+      "length": 3,
+      "row": 5,
+      "col": 4,
+      "direction": "V"
     }
   ],
   "difficulty": {
     "label": "medium-hard",
-    "hiddenLetters": 12,
+    "hiddenLetters": 13,
     "hiddenEdges": 8,
-    "givenLetters": 13
+    "givenLetters": 12
   },
   "validation": {
     "ok": true,
@@ -256,6 +256,6 @@
   "uniqueness": {
     "method": "word-removal backtracking",
     "unique": true,
-    "solutionWords": "TREASURE"
+    "solutionWords": "FUNCTION"
   }
 }

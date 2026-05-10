@@ -12,146 +12,116 @@
   ],
   "solution": [
     [
-      "D",
-      "U",
+      "G",
+      "A",
       "S",
-      "T",
       "",
       "B",
       "",
-      "F"
+      "",
+      "W"
     ],
     [
       "",
       "",
       "",
       "",
+      "O",
       "",
-      "U",
       "",
       "A"
     ],
     [
-      "",
+      "B",
       "A",
+      "G",
+      "",
+      "R",
       "",
       "",
-      "",
-      "N",
-      "",
-      "C"
+      "L"
     ],
     [
       "",
-      "C",
       "",
       "",
       "",
+      "D",
       "",
       "",
-      "E"
+      "K"
     ],
     [
-      "",
-      "T",
-      "",
+      "S",
       "",
       "",
+      "",
+      "E",
       "",
       "",
       ""
     ],
     [
-      "",
-      "I",
-      "",
+      "H",
       "",
       "",
-      "I",
-      "C",
-      "E"
+      "",
+      "R",
+      "",
+      "",
+      ""
     ],
     [
-      "",
       "O",
       "",
       "",
       "",
       "",
       "",
+      "",
       ""
     ],
     [
+      "P",
       "",
-      "N",
-      "",
-      "D",
+      "M",
+      "E",
+      "T",
       "A",
-      "N",
-      "C",
-      "E"
+      "L",
+      ""
     ]
   ],
   "puzzle": [
     [
+      "G",
+      "A",
       "",
       "",
-      "S",
       "",
       "",
-      "B",
       "",
-      "F"
+      "W"
     ],
     [
       "",
       "",
       "",
       "",
-      "",
+      "O",
       "",
       "",
       "A"
     ],
     [
       "",
+      "A",
+      "G",
       "",
       "",
       "",
       "",
-      "",
-      "",
-      "C"
-    ],
-    [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "E"
-    ],
-    [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      ""
-    ],
-    [
-      "",
-      "I",
-      "",
-      "",
-      "",
-      "I",
-      "C",
-      "E"
+      "L"
     ],
     [
       "",
@@ -167,15 +137,45 @@
       "",
       "",
       "",
-      "D",
       "",
-      "N",
-      "C",
+      "E",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "R",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "M",
+      "E",
+      "T",
+      "A",
+      "",
       ""
     ]
   ],
-  "topWord": "DISTANCE",
-  "sideWord": "FUNCTION",
+  "topWord": "BASEBALL",
+  "sideWord": "WORKSHOP",
   "topVisible": [
     true,
     true,
@@ -198,53 +198,53 @@
   ],
   "ships": [
     {
-      "word": "ACTION",
+      "word": "BORDER",
       "length": 6,
-      "row": 3,
-      "col": 2,
+      "row": 1,
+      "col": 5,
       "direction": "V"
     },
     {
-      "word": "DANCE",
+      "word": "METAL",
       "length": 5,
       "row": 8,
-      "col": 4,
+      "col": 3,
       "direction": "H"
     },
     {
-      "word": "DUST",
+      "word": "SHOP",
       "length": 4,
-      "row": 1,
+      "row": 5,
       "col": 1,
-      "direction": "H"
+      "direction": "V"
     },
     {
-      "word": "FACE",
+      "word": "WALK",
       "length": 4,
       "row": 1,
       "col": 8,
       "direction": "V"
     },
     {
-      "word": "BUN",
+      "word": "BAG",
       "length": 3,
-      "row": 1,
-      "col": 6,
-      "direction": "V"
+      "row": 3,
+      "col": 1,
+      "direction": "H"
     },
     {
-      "word": "ICE",
+      "word": "GAS",
       "length": 3,
-      "row": 6,
-      "col": 6,
+      "row": 1,
+      "col": 1,
       "direction": "H"
     }
   ],
   "difficulty": {
     "label": "medium-hard",
-    "hiddenLetters": 12,
+    "hiddenLetters": 11,
     "hiddenEdges": 8,
-    "givenLetters": 13
+    "givenLetters": 14
   },
   "validation": {
     "ok": true,
@@ -256,6 +256,6 @@
   "uniqueness": {
     "method": "word-removal backtracking",
     "unique": true,
-    "solutionWords": "FUNCTION"
+    "solutionWords": "WORKSHOP"
   }
 }

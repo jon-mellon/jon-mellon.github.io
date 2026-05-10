@@ -12,103 +12,153 @@
   ],
   "solution": [
     [
-      "L",
+      "C",
+      "A",
+      "B",
       "",
-      "F",
       "",
-      "U",
-      "S",
-      "E",
-      "R"
+      "",
+      "C",
+      ""
     ],
     [
-      "U",
+      "",
+      "",
+      "",
+      "",
+      "",
       "",
       "A",
-      "",
-      "",
-      "",
-      "",
       ""
     ],
     [
+      "",
+      "S",
       "N",
-      "",
-      "R",
-      "",
-      "",
       "O",
-      "",
-      ""
-    ],
-    [
-      "C",
+      "W",
       "",
       "M",
-      "",
-      "",
-      "P",
-      "",
       ""
     ],
     [
-      "H",
+      "S",
       "",
       "",
-      "P",
       "",
+      "",
+      "",
+      "E",
+      ""
+    ],
+    [
       "T",
       "",
+      "",
+      "B",
+      "",
+      "",
+      "R",
       ""
     ],
     [
-      "",
-      "T",
-      "",
       "I",
       "",
-      "I",
-      "",
-      ""
-    ],
-    [
-      "",
-      "O",
       "",
       "E",
       "",
-      "O",
+      "",
+      "A",
+      ""
+    ],
+    [
+      "L",
+      "",
+      "",
+      "D",
+      "",
+      "",
       "",
       ""
     ],
     [
-      "",
-      "Y",
-      "",
+      "L",
       "",
       "",
-      "N",
       "",
-      ""
+      "F",
+      "I",
+      "S",
+      "H"
     ]
   ],
   "puzzle": [
     [
+      "C",
+      "",
+      "B",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "A",
+      ""
+    ],
+    [
+      "",
+      "S",
+      "",
+      "O",
+      "W",
+      "",
+      "M",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "E",
+      ""
+    ],
+    [
+      "T",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "I",
+      "",
+      "",
+      "E",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
       "L",
       "",
       "",
       "",
       "",
-      "S",
-      "",
-      ""
-    ],
-    [
-      "",
-      "",
-      "A",
-      "",
-      "",
       "",
       "",
       ""
@@ -116,66 +166,16 @@
     [
       "",
       "",
-      "R",
       "",
       "",
-      "O",
-      "",
-      ""
-    ],
-    [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "P",
-      "",
-      ""
-    ],
-    [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      ""
-    ],
-    [
-      "",
-      "T",
-      "",
+      "F",
       "I",
-      "",
-      "",
-      "",
-      ""
-    ],
-    [
-      "",
-      "",
-      "",
-      "E",
-      "",
-      "O",
-      "",
-      ""
-    ],
-    [
-      "",
-      "Y",
-      "",
-      "",
-      "",
-      "N",
       "",
       ""
     ]
   ],
-  "topWord": "COMPUTER",
-  "sideWord": "FUNCTION",
+  "topWord": "SANDWICH",
+  "sideWord": "BASEBALL",
   "topVisible": [
     true,
     true,
@@ -198,42 +198,42 @@
   ],
   "ships": [
     {
-      "word": "OPTION",
+      "word": "CAMERA",
       "length": 6,
-      "row": 3,
-      "col": 6,
+      "row": 1,
+      "col": 7,
       "direction": "V"
     },
     {
-      "word": "LUNCH",
+      "word": "STILL",
       "length": 5,
-      "row": 1,
+      "row": 4,
       "col": 1,
       "direction": "V"
     },
     {
-      "word": "USER",
+      "word": "SNOW",
       "length": 4,
-      "row": 1,
+      "row": 3,
+      "col": 2,
+      "direction": "H"
+    },
+    {
+      "word": "FISH",
+      "length": 4,
+      "row": 8,
       "col": 5,
       "direction": "H"
     },
     {
-      "word": "FARM",
-      "length": 4,
-      "row": 1,
-      "col": 3,
-      "direction": "V"
-    },
-    {
-      "word": "TOY",
+      "word": "CAB",
       "length": 3,
-      "row": 6,
-      "col": 2,
-      "direction": "V"
+      "row": 1,
+      "col": 1,
+      "direction": "H"
     },
     {
-      "word": "PIE",
+      "word": "BED",
       "length": 3,
       "row": 5,
       "col": 4,
@@ -242,9 +242,9 @@
   ],
   "difficulty": {
     "label": "medium-hard",
-    "hiddenLetters": 13,
+    "hiddenLetters": 11,
     "hiddenEdges": 8,
-    "givenLetters": 12
+    "givenLetters": 14
   },
   "validation": {
     "ok": true,
@@ -256,6 +256,6 @@
   "uniqueness": {
     "method": "word-removal backtracking",
     "unique": true,
-    "solutionWords": "FUNCTION"
+    "solutionWords": "BASEBALL"
   }
 }

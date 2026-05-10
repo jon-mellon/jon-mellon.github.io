@@ -12,104 +12,114 @@
   ],
   "solution": [
     [
+      "S",
       "",
+      "S",
+      "T",
+      "A",
+      "B",
+      "L",
+      "E"
+    ],
+    [
+      "O",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "U",
       "",
       "",
       "F",
-      "O",
       "U",
-      "R",
-      ""
-    ],
-    [
-      "",
-      "U",
-      "",
-      "",
-      "",
-      "",
-      "",
-      ""
-    ],
-    [
-      "",
       "N",
       "",
+      ""
+    ],
+    [
+      "N",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "D",
+      "",
+      "",
+      "",
+      "D",
+      "",
+      "C",
+      ""
+    ],
+    [
+      "",
+      "A",
       "",
       "",
       "A",
       "",
+      "I",
       ""
     ],
     [
       "",
-      "D",
+      "I",
       "",
-      "B",
-      "",
-      "C",
-      "",
-      "C"
-    ],
-    [
-      "",
-      "E",
-      "",
-      "U",
-      "",
-      "T",
-      "",
-      "A"
-    ],
-    [
       "",
       "R",
       "",
-      "S",
-      "",
-      "I",
-      "",
-      "R"
+      "T",
+      ""
     ],
     [
       "",
+      "M",
       "",
       "",
-      "",
-      "",
-      "O",
-      "",
-      "D"
-    ],
-    [
       "K",
-      "E",
+      "",
       "Y",
-      "",
-      "",
-      "N",
-      "",
       ""
     ]
   ],
   "puzzle": [
     [
+      "S",
+      "",
+      "",
+      "T",
+      "",
+      "",
+      "L",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
       "",
       "",
       "",
       "F",
-      "",
       "U",
       "",
-      ""
-    ],
-    [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
       "",
       ""
     ],
@@ -128,30 +138,20 @@
       "",
       "",
       "",
+      "D",
       "",
       "C",
-      "",
-      "C"
+      ""
     ],
     [
       "",
-      "E",
-      "",
-      "U",
-      "",
-      "T",
-      "",
-      "A"
-    ],
-    [
-      "",
-      "R",
-      "",
-      "S",
+      "A",
       "",
       "",
+      "A",
       "",
-      "R"
+      "I",
+      ""
     ],
     [
       "",
@@ -165,17 +165,17 @@
     ],
     [
       "",
-      "E",
+      "M",
       "",
       "",
-      "",
+      "K",
       "",
       "",
       ""
     ]
   ],
-  "topWord": "KEYBOARD",
-  "sideWord": "FUNCTION",
+  "topWord": "DISTANCE",
+  "sideWord": "BOUNDARY",
   "topVisible": [
     true,
     true,
@@ -198,45 +198,45 @@
   ],
   "ships": [
     {
-      "word": "ACTION",
+      "word": "STABLE",
       "length": 6,
-      "row": 3,
-      "col": 6,
-      "direction": "V"
-    },
-    {
-      "word": "UNDER",
-      "length": 5,
-      "row": 2,
-      "col": 2,
-      "direction": "V"
-    },
-    {
-      "word": "FOUR",
-      "length": 4,
       "row": 1,
-      "col": 4,
+      "col": 3,
       "direction": "H"
     },
     {
-      "word": "CARD",
-      "length": 4,
-      "row": 4,
-      "col": 8,
+      "word": "SOUND",
+      "length": 5,
+      "row": 1,
+      "col": 1,
       "direction": "V"
     },
     {
-      "word": "KEY",
+      "word": "DARK",
+      "length": 4,
+      "row": 5,
+      "col": 5,
+      "direction": "V"
+    },
+    {
+      "word": "CITY",
+      "length": 4,
+      "row": 5,
+      "col": 7,
+      "direction": "V"
+    },
+    {
+      "word": "FUN",
       "length": 3,
-      "row": 8,
-      "col": 1,
+      "row": 3,
+      "col": 4,
       "direction": "H"
     },
     {
-      "word": "BUS",
+      "word": "AIM",
       "length": 3,
-      "row": 4,
-      "col": 4,
+      "row": 6,
+      "col": 2,
       "direction": "V"
     }
   ],
@@ -256,6 +256,6 @@
   "uniqueness": {
     "method": "word-removal backtracking",
     "unique": true,
-    "solutionWords": "FUNCTION"
+    "solutionWords": "BOUNDARY"
   }
 }

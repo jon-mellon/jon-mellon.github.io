@@ -12,63 +12,13 @@
   ],
   "solution": [
     [
-      "M",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      ""
-    ],
-    [
-      "O",
-      "",
-      "A",
       "C",
-      "T",
-      "I",
-      "O",
-      "N"
-    ],
-    [
-      "U",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      ""
-    ],
-    [
-      "N",
-      "",
       "A",
-      "C",
-      "E",
-      "",
-      "",
-      ""
-    ],
-    [
-      "T",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "M",
-      ""
-    ],
-    [
-      "",
       "U",
       "S",
       "E",
       "",
       "",
-      "A",
       ""
     ],
     [
@@ -77,23 +27,83 @@
       "",
       "",
       "",
+      "L",
       "",
-      "I",
       ""
     ],
     [
-      "F",
-      "I",
-      "N",
+      "",
+      "",
+      "O",
+      "",
+      "",
       "E",
       "",
+      ""
+    ],
+    [
+      "C",
+      "",
+      "P",
+      "",
+      "",
+      "F",
+      "",
+      "S"
+    ],
+    [
+      "A",
+      "",
+      "T",
+      "",
+      "",
+      "T",
+      "",
+      "E"
+    ],
+    [
+      "N",
+      "",
+      "I",
+      "",
+      "",
+      "",
+      "",
+      "A"
+    ],
+    [
+      "",
+      "",
+      "O",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
       "",
       "N",
-      ""
+      "",
+      "U",
+      "S",
+      "E",
+      "R"
     ]
   ],
   "puzzle": [
     [
+      "C",
+      "",
+      "U",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
       "",
       "",
       "",
@@ -106,76 +116,66 @@
     [
       "",
       "",
-      "A",
-      "C",
-      "",
-      "I",
       "O",
-      ""
-    ],
-    [
       "",
       "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      ""
-    ],
-    [
-      "",
-      "",
-      "A",
-      "C",
       "E",
       "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "F",
       "",
       ""
     ],
     [
+      "A",
+      "",
       "T",
       "",
       "",
       "",
       "",
-      "",
-      "M",
-      ""
+      "E"
     ],
     [
-      "",
-      "",
-      "S",
-      "E",
-      "",
-      "",
-      "",
-      ""
-    ],
-    [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      ""
-    ],
-    [
-      "F",
-      "",
       "N",
-      "E",
       "",
       "",
-      "N",
+      "",
+      "",
+      "",
+      "",
+      "A"
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
       ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "E",
+      "R"
     ]
   ],
-  "topWord": "FUNCTION",
-  "sideWord": "MOUNTAIN",
+  "topWord": "CAPSULES",
+  "sideWord": "ELECTION",
   "topVisible": [
     true,
     true,
@@ -198,53 +198,53 @@
   ],
   "ships": [
     {
-      "word": "ACTION",
+      "word": "OPTION",
       "length": 6,
-      "row": 2,
+      "row": 3,
       "col": 3,
-      "direction": "H"
+      "direction": "V"
     },
     {
-      "word": "MOUNT",
+      "word": "CAUSE",
       "length": 5,
       "row": 1,
       "col": 1,
+      "direction": "H"
+    },
+    {
+      "word": "LEFT",
+      "length": 4,
+      "row": 2,
+      "col": 6,
       "direction": "V"
     },
     {
-      "word": "FINE",
+      "word": "USER",
       "length": 4,
       "row": 8,
-      "col": 1,
+      "col": 5,
       "direction": "H"
     },
     {
-      "word": "MAIN",
-      "length": 4,
-      "row": 5,
-      "col": 7,
+      "word": "SEA",
+      "length": 3,
+      "row": 4,
+      "col": 8,
       "direction": "V"
     },
     {
-      "word": "USE",
-      "length": 3,
-      "row": 6,
-      "col": 2,
-      "direction": "H"
-    },
-    {
-      "word": "ACE",
+      "word": "CAN",
       "length": 3,
       "row": 4,
-      "col": 3,
-      "direction": "H"
+      "col": 1,
+      "direction": "V"
     }
   ],
   "difficulty": {
     "label": "medium-hard",
-    "hiddenLetters": 10,
+    "hiddenLetters": 13,
     "hiddenEdges": 8,
-    "givenLetters": 15
+    "givenLetters": 12
   },
   "validation": {
     "ok": true,
@@ -256,6 +256,6 @@
   "uniqueness": {
     "method": "word-removal backtracking",
     "unique": true,
-    "solutionWords": "MOUNTAIN"
+    "solutionWords": "ELECTION"
   }
 }

@@ -12,151 +12,101 @@
   ],
   "solution": [
     [
-      "P",
-      "L",
-      "A",
-      "T",
-      "E",
       "",
-      "",
-      ""
-    ],
-    [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "L",
-      "",
-      ""
-    ],
-    [
-      "",
-      "",
-      "A",
-      "",
-      "",
-      "E",
-      "",
-      ""
-    ],
-    [
-      "",
-      "",
-      "C",
-      "",
-      "",
-      "A",
-      "",
-      "J"
-    ],
-    [
-      "",
-      "",
-      "T",
       "",
       "",
       "F",
+      "O",
+      "U",
+      "R",
+      ""
+    ],
+    [
+      "",
+      "U",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "N",
+      "",
+      "",
+      "",
+      "A",
+      "",
+      ""
+    ],
+    [
+      "",
+      "D",
+      "",
+      "B",
+      "",
+      "C",
+      "",
+      "C"
+    ],
+    [
+      "",
+      "E",
+      "",
+      "U",
+      "",
+      "T",
       "",
       "A"
     ],
     [
-      "I",
+      "",
+      "R",
+      "",
+      "S",
       "",
       "I",
       "",
-      "",
-      "",
-      "",
-      "M"
+      "R"
     ],
     [
-      "O",
+      "",
+      "",
+      "",
+      "",
       "",
       "O",
       "",
+      "D"
+    ],
+    [
+      "K",
+      "E",
+      "Y",
       "",
       "",
+      "N",
       "",
       ""
-    ],
-    [
-      "N",
-      "",
-      "N",
-      "",
-      "F",
-      "O",
-      "R",
-      "M"
     ]
   ],
   "puzzle": [
     [
       "",
-      "L",
-      "A",
-      "T",
-      "E",
-      "",
-      "",
-      ""
-    ],
-    [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "L",
-      "",
-      ""
-    ],
-    [
-      "",
-      "",
-      "A",
-      "",
-      "",
-      "E",
-      "",
-      ""
-    ],
-    [
-      "",
-      "",
-      "C",
-      "",
-      "",
-      "A",
-      "",
-      "J"
-    ],
-    [
-      "",
-      "",
-      "",
       "",
       "",
       "F",
       "",
-      "A"
+      "U",
+      "",
+      ""
     ],
     [
-      "I",
       "",
       "",
       "",
-      "",
-      "",
-      "",
-      "M"
-    ],
-    [
-      "O",
-      "",
-      "O",
       "",
       "",
       "",
@@ -166,16 +116,66 @@
     [
       "",
       "",
-      "N",
       "",
       "",
       "",
       "",
-      "M"
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "C",
+      "",
+      "C"
+    ],
+    [
+      "",
+      "E",
+      "",
+      "U",
+      "",
+      "T",
+      "",
+      "A"
+    ],
+    [
+      "",
+      "R",
+      "",
+      "S",
+      "",
+      "",
+      "",
+      "R"
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "E",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
     ]
   ],
-  "topWord": "PLATFORM",
-  "sideWord": "ELECTION",
+  "topWord": "KEYBOARD",
+  "sideWord": "FUNCTION",
   "topVisible": [
     true,
     true,
@@ -201,50 +201,50 @@
       "word": "ACTION",
       "length": 6,
       "row": 3,
-      "col": 3,
-      "direction": "V"
-    },
-    {
-      "word": "PLATE",
-      "length": 5,
-      "row": 1,
-      "col": 1,
-      "direction": "H"
-    },
-    {
-      "word": "FORM",
-      "length": 4,
-      "row": 8,
-      "col": 5,
-      "direction": "H"
-    },
-    {
-      "word": "LEAF",
-      "length": 4,
-      "row": 2,
       "col": 6,
       "direction": "V"
     },
     {
-      "word": "ION",
-      "length": 3,
-      "row": 6,
-      "col": 1,
+      "word": "UNDER",
+      "length": 5,
+      "row": 2,
+      "col": 2,
       "direction": "V"
     },
     {
-      "word": "JAM",
-      "length": 3,
+      "word": "FOUR",
+      "length": 4,
+      "row": 1,
+      "col": 4,
+      "direction": "H"
+    },
+    {
+      "word": "CARD",
+      "length": 4,
       "row": 4,
       "col": 8,
+      "direction": "V"
+    },
+    {
+      "word": "KEY",
+      "length": 3,
+      "row": 8,
+      "col": 1,
+      "direction": "H"
+    },
+    {
+      "word": "BUS",
+      "length": 3,
+      "row": 4,
+      "col": 4,
       "direction": "V"
     }
   ],
   "difficulty": {
     "label": "medium-hard",
-    "hiddenLetters": 7,
+    "hiddenLetters": 13,
     "hiddenEdges": 8,
-    "givenLetters": 18
+    "givenLetters": 12
   },
   "validation": {
     "ok": true,
@@ -256,6 +256,6 @@
   "uniqueness": {
     "method": "word-removal backtracking",
     "unique": true,
-    "solutionWords": "ELECTION"
+    "solutionWords": "FUNCTION"
   }
 }

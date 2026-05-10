@@ -12,133 +12,103 @@
   ],
   "solution": [
     [
-      "G",
-      "A",
-      "S",
-      "",
-      "",
-      "",
-      "S",
-      ""
-    ],
-    [
       "",
       "",
       "",
       "",
       "",
-      "",
-      "H",
-      ""
-    ],
-    [
-      "P",
       "R",
-      "I",
-      "N",
-      "T",
-      "",
-      "O",
-      ""
-    ],
-    [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "P",
-      ""
-    ],
-    [
-      "L",
-      "",
-      "",
-      "K",
-      "E",
-      "Y",
-      "",
-      ""
-    ],
-    [
       "A",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      ""
-    ],
-    [
-      "N",
-      "",
-      "S",
-      "P",
-      "R",
-      "I",
-      "N",
       "G"
     ],
     [
+      "B",
+      "U",
+      "I",
+      "L",
       "D",
       "",
       "",
+      ""
+    ],
+    [
       "",
       "",
       "",
       "",
+      "",
+      "R",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "A",
+      "",
+      "P"
+    ],
+    [
+      "I",
+      "",
+      "",
+      "",
+      "",
+      "I",
+      "",
+      "L"
+    ],
+    [
+      "O",
+      "",
+      "",
+      "",
+      "",
+      "N",
+      "",
+      "A"
+    ],
+    [
+      "N",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "Y"
+    ],
+    [
+      "",
+      "H",
+      "I",
+      "D",
+      "D",
+      "E",
+      "N",
       ""
     ]
   ],
   "puzzle": [
     [
-      "G",
-      "",
-      "S",
-      "",
-      "",
-      "",
-      "S",
-      ""
-    ],
-    [
       "",
       "",
       "",
       "",
-      "",
-      "",
-      "",
-      ""
-    ],
-    [
       "",
       "R",
       "",
-      "",
-      "T",
-      "",
-      "O",
-      ""
+      "G"
     ],
     [
       "",
       "",
       "",
-      "",
-      "",
-      "",
-      "",
-      ""
-    ],
-    [
       "L",
-      "",
-      "",
-      "K",
-      "E",
+      "D",
       "",
       "",
       ""
@@ -149,33 +119,63 @@
       "",
       "",
       "",
-      "",
+      "R",
       "",
       ""
     ],
     [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "A",
+      "",
+      ""
+    ],
+    [
+      "I",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "L"
+    ],
+    [
+      "O",
+      "",
+      "",
+      "",
+      "",
       "N",
       "",
-      "",
-      "P",
-      "R",
-      "",
-      "",
-      ""
+      "A"
     ],
     [
       "",
       "",
       "",
       "",
+      "",
+      "",
+      "",
+      "Y"
+    ],
+    [
+      "",
+      "H",
+      "I",
+      "D",
       "",
       "",
       "",
       ""
     ]
   ],
-  "topWord": "PAINTING",
-  "sideWord": "SHIPYARD",
+  "topWord": "BUILDING",
+  "sideWord": "AIRPLANE",
   "topVisible": [
     true,
     true,
@@ -198,53 +198,53 @@
   ],
   "ships": [
     {
-      "word": "SPRING",
+      "word": "HIDDEN",
       "length": 6,
-      "row": 7,
-      "col": 3,
+      "row": 8,
+      "col": 2,
       "direction": "H"
     },
     {
-      "word": "PRINT",
+      "word": "BUILD",
       "length": 5,
+      "row": 2,
+      "col": 1,
+      "direction": "H"
+    },
+    {
+      "word": "PLAY",
+      "length": 4,
+      "row": 4,
+      "col": 8,
+      "direction": "V"
+    },
+    {
+      "word": "RAIN",
+      "length": 4,
       "row": 3,
-      "col": 1,
-      "direction": "H"
-    },
-    {
-      "word": "SHOP",
-      "length": 4,
-      "row": 1,
-      "col": 7,
+      "col": 6,
       "direction": "V"
     },
     {
-      "word": "LAND",
-      "length": 4,
+      "word": "RAG",
+      "length": 3,
+      "row": 1,
+      "col": 6,
+      "direction": "H"
+    },
+    {
+      "word": "ION",
+      "length": 3,
       "row": 5,
       "col": 1,
       "direction": "V"
-    },
-    {
-      "word": "GAS",
-      "length": 3,
-      "row": 1,
-      "col": 1,
-      "direction": "H"
-    },
-    {
-      "word": "KEY",
-      "length": 3,
-      "row": 5,
-      "col": 4,
-      "direction": "H"
     }
   ],
   "difficulty": {
     "label": "medium-hard",
-    "hiddenLetters": 13,
+    "hiddenLetters": 10,
     "hiddenEdges": 8,
-    "givenLetters": 12
+    "givenLetters": 15
   },
   "validation": {
     "ok": true,
@@ -256,6 +256,6 @@
   "uniqueness": {
     "method": "word-removal backtracking",
     "unique": true,
-    "solutionWords": "SHIPYARD"
+    "solutionWords": "AIRPLANE"
   }
 }
