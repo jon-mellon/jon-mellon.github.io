@@ -21,9 +21,18 @@ const RANK_DEPTH = {
   infraclass: 47,
   subclass: 45,
   class: 40,
+  clade: 38,
   subphylum: 35,
   phylum: 30,
   kingdom: 10
+};
+
+const TAXON_DEPTH = {
+  Reptilia: 42,
+  Amniota: 39,
+  Tetrapoda: 38,
+  Sarcopterygii: 37,
+  Vertebrata: 35
 };
 
 const DISPLAY_RANKS = new Set([
@@ -645,27 +654,22 @@ function renderAnswerLoading() {
 }
 
 function renderAnswer() {
-  const selectedIsCorrect = state.bestPairs.some(pair => pair.key === state.selectedPairKey);
   const best = state.bestPairs[0];
+  const selectedIsCorrect = best?.key === state.selectedPairKey;
   const lca = best?.lca;
   const info = state.lcaInfo;
   const summaryText = info?.summary?.extract || info?.description || "No English Wikipedia summary was found for this ancestor.";
   const image = info?.image;
   const articleUrl = info?.summary?.content_urls?.desktop?.page || info?.articleUrl;
   const wikidataUrl = lca?.qid?.startsWith("Q") ? `https://www.wikidata.org/wiki/${encodeURIComponent(lca.qid)}` : null;
-  const hasTie = state.bestPairs.length > 1;
-  const resultTitle = hasTie
-    ? `There was a tie: ${formatBestPairs()}`
-    : `Closest pair: ${formatBestPairs()}`;
+  const resultTitle = `Closest pair: ${formatPair(best.a, best.b)}`;
 
   els.answer.classList.remove("hidden");
   els.answer.innerHTML = `
     <div class="answer-header">
       <div>
         <h3>${escapeHtml(resultTitle)}</h3>
-        <p>${hasTie
-          ? "Any of the tied pairs counts as correct."
-          : "This pair shares the most specific ranked ancestor in the round."}</p>
+        <p>This pair shares the most specific ranked ancestor in the round.</p>
       </div>
       <span class="result-badge ${selectedIsCorrect ? "correct" : "incorrect"}">
         ${selectedIsCorrect ? "Correct" : "Not quite"}
@@ -713,10 +717,6 @@ function renderError(message) {
   els.status.textContent = message;
 }
 
-function formatBestPairs() {
-  return state.bestPairs.map(pair => formatPair(pair.a, pair.b)).join(" and ");
-}
-
 function formatPair(a, b) {
   return `${a.label} + ${b.label}`;
 }
@@ -730,7 +730,10 @@ function getRankScore(ancestor) {
 }
 
 function getAncestorScore(ancestor) {
-  return ancestor?.specificityScore ?? getRankScore(ancestor);
+  if (!ancestor) return 0;
+  const baseScore = TAXON_DEPTH[ancestor.label] ?? getRankScore(ancestor);
+  const tieBreak = ancestor.specificityScore ? ancestor.specificityScore / 10000 : 0;
+  return baseScore + tieBreak;
 }
 
 function normalizeRank(value) {

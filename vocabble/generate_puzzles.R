@@ -155,6 +155,21 @@ preferred_ship_words <- function() {
   )
 }
 
+preferred_three_letter_ship_words <- function() {
+  c(
+    "ACE", "ACT", "AGE", "AIM", "AIR", "ANT", "ARM", "ART", "ASH", "ASK",
+    "AXE", "BAG", "BAR", "BAT", "BAY", "BED", "BEE", "BOX", "BOY", "BUN",
+    "BUS", "CAB", "CAN", "CAP", "CAR", "CAT", "COW", "CUE", "CUP", "CUT",
+    "DAY", "DEN", "DIG", "DOG", "DOT", "DRY", "EGG", "FAR", "FAT", "FIG",
+    "FIN", "FLY", "FOX", "FUN", "GAS", "HAT", "HEN", "HOT", "ICE", "INK",
+    "JAM", "JAR", "JET", "KEY", "LAP", "LAW", "LEG", "LOG", "MAN", "MAP",
+    "NET", "OAK", "OAR", "OIL", "PAN", "PEN", "PIE", "PIN", "POT", "RAG",
+    "RAT", "RED", "ROW", "RUN", "SEA", "SET", "SKY", "SUN", "TAN", "TEA",
+    "TEN", "TIN", "TOE", "TOP", "TOY", "USE", "VAN", "WAR", "WAX", "WAY",
+    "WIN", "YES"
+  )
+}
+
 slot_stable_words <- function(pool, reference_pool = pool) {
   if (!length(pool)) return(pool)
   length <- nchar(pool[[1]])
@@ -175,7 +190,7 @@ preferred_generation_pool <- function(dictionary, length) {
   }
   pool <- dictionary[[as.character(length)]]
   if (length == 3) {
-    preferred_pool <- intersect(pool, preferred_ship_words())
+    preferred_pool <- intersect(pool, preferred_three_letter_ship_words())
     out <- if (length(preferred_pool) >= 20) preferred_pool else slot_stable_words(pool, pool)
     assign(cache_key, out, envir = generation_pool_cache)
     return(out)

@@ -4,8 +4,13 @@ suppressPackageStartupMessages({
   library(jsonlite)
 })
 
-script_file <- sub("^--file=", "", commandArgs(FALSE)[grepl("^--file=", commandArgs(FALSE))][[1]])
-script_dir <- dirname(normalizePath(script_file, mustWork = FALSE))
+script_args <- commandArgs(FALSE)
+script_files <- sub("^--file=", "", script_args[grepl("^--file=", script_args)])
+script_dir <- if (length(script_files)) {
+  dirname(normalizePath(script_files[[1]], mustWork = FALSE))
+} else {
+  file.path(getwd(), "vocabble")
+}
 source(file.path(script_dir, "generate_puzzles.R"))
 
 candidate_has_full_edge_word <- function(puzzle) {
@@ -93,30 +98,36 @@ make_candidate_puzzle <- function(candidate, dictionary, id, date, seed) {
     id = id,
     date = date,
     seed = seed,
-    target_total_givens = 17,
+    target_total_givens = 20,
     min_total_givens = 8,
-    max_total_givens = 18,
-    extra_board_passes = 1,
-    max_ship_givens = c(5, 4, 3, 3, 2, 2),
-    seconds_per_trial = 4
+    max_total_givens = 20,
+    extra_board_passes = 0,
+    seconds_per_trial = 8
   )
   if (is.null(puzzle)) return(NULL)
 
-  minimize_puzzle_clues(
-    puzzle,
-    dictionary = dictionary,
-    seed = seed + 100000,
-    board_passes = 2,
-    edge_passes = 0,
-    seconds_per_trial = 2
-  )
+  best <- puzzle
+  for (offset in c(100004, 100000, 200000)) {
+    trial <- minimize_puzzle_clues(
+      puzzle,
+      dictionary = dictionary,
+      seed = seed + offset,
+      min_total_givens = 15,
+      board_passes = 3,
+      edge_passes = 0,
+      seconds_per_trial = 4
+    )
+    if (trial$difficulty$givenLetters < best$difficulty$givenLetters) best <- trial
+    if (best$difficulty$givenLetters <= 15) break
+  }
+  best
 }
 
 validate_candidate_puzzle <- function(puzzle, dictionary) {
   if (is.null(puzzle)) return("no_unique_clue_set")
   if (!isTRUE(puzzle$validation$ok)) return("invalid_board")
   if (!isTRUE(puzzle$uniqueness$unique)) return("not_unique")
-  if (puzzle$difficulty$givenLetters > 18) return("too_many_givens")
+  if (puzzle$difficulty$givenLetters > 15) return("too_many_givens")
   if (candidate_has_full_edge_word(puzzle)) return("full_edge_word")
   if (has_fully_clued_ship(puzzle)) return("full_ship_word")
 
