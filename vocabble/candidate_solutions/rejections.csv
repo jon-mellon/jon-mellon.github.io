@@ -1,0 +1,4 @@
+"attempt","seed","sideWord","topWord","reason","details"
+1,20260603,"BUILDING","RESEARCH","no_unique_clue_set",""
+2,20260604,"MEASURED","WORKSHOP","board_generation_failed",""
+3,20260605,"ELECTION","KEYBOARD","board_generation_failed",""

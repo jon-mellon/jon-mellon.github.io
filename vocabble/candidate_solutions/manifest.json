@@ -1,0 +1,14 @@
+{
+  "generatedAt": "2026-05-10T01:33:12Z",
+  "attempts": 3,
+  "seedBase": 20260602,
+  "accepted": 0,
+  "criteria": {
+    "validBoard": true,
+    "uniqueBySolver": true,
+    "noFullyShownShipWords": true,
+    "noFullyShownEdgeWords": true,
+    "noSameSlotAmbiguity": true
+  },
+  "puzzles": []
+}

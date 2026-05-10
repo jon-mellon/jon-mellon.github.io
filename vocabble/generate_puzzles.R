@@ -504,6 +504,7 @@ build_unique_clue_set <- function(candidate,
                                   max_total_givens = 20,
                                   extra_board_passes = 0,
                                   max_ship_givens = NULL,
+                                  require_hidden_ship_letter = TRUE,
                                   seconds_per_trial = 4) {
   set.seed(seed)
   validation <- validate_candidate(candidate, dictionary)
@@ -554,6 +555,21 @@ build_unique_clue_set <- function(candidate,
     } else {
       masked$puzzle[row, col] <<- old_value
       FALSE
+    }
+  }
+
+  if (require_hidden_ship_letter) {
+    for (ship_index in sample(seq_along(ship_cells))) {
+      if (clue_counts[[ship_index]] < ship_lengths[[ship_index]]) next
+
+      removed_from_ship <- FALSE
+      for (cell in sample(ship_cells[[ship_index]])) {
+        if (try_remove_cell(cell)) {
+          removed_from_ship <- TRUE
+          break
+        }
+      }
+      if (!removed_from_ship) return(NULL)
     }
   }
 

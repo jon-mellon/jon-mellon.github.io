@@ -153,9 +153,10 @@ async function runSparql(query) {
 async function fetchLineages(qids) {
   const lineages = {};
   const missing = [];
+  const animalsByQid = new Map(state.currentAnimals.map(animal => [animal.qid, animal]));
 
   for (const qid of qids) {
-    const cached = lineageCache.get(qid) ?? cacheGet(`lineage:${qid}`);
+    const cached = animalsByQid.get(qid)?.lineage ?? lineageCache.get(qid) ?? cacheGet(`lineage:${qid}`);
     if (cached) {
       lineages[qid] = cached;
     } else {
@@ -338,6 +339,17 @@ async function wikidataAction(params) {
 
 async function fetchLcaInfo(ancestor) {
   if (!ancestor?.qid) return null;
+
+  if (!ancestor.qid.startsWith("Q")) {
+    return {
+      qid: ancestor.qid,
+      label: ancestor.label,
+      description: `${ancestor.label} is the shared taxonomic group for the closest pair in this round.`,
+      articleUrl: articleUrlForTitle(ancestor.label),
+      image: null,
+      summary: null
+    };
+  }
 
   const cached = lcaInfoCache.get(ancestor.qid) ?? cacheGet(`lcaInfo:${ancestor.qid}`);
   if (cached) return cached;
@@ -635,7 +647,7 @@ function renderAnswer() {
   const summaryText = info?.summary?.extract || info?.description || "No English Wikipedia summary was found for this ancestor.";
   const image = info?.image;
   const articleUrl = info?.summary?.content_urls?.desktop?.page || info?.articleUrl;
-  const wikidataUrl = lca ? `https://www.wikidata.org/wiki/${encodeURIComponent(lca.qid)}` : null;
+  const wikidataUrl = lca?.qid?.startsWith("Q") ? `https://www.wikidata.org/wiki/${encodeURIComponent(lca.qid)}` : null;
   const hasTie = state.bestPairs.length > 1;
   const resultTitle = hasTie
     ? `There was a tie: ${formatBestPairs()}`
