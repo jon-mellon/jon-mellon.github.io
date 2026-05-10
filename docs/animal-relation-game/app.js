@@ -513,6 +513,7 @@ function isPlayableRound() {
   if (state.pairResults.length !== 3) return false;
   if (state.pairResults.some(result => !result.lca || result.score <= 0)) return false;
   if (state.bestPairs.length !== 1) return false;
+  if (state.bestPairs[0].lca?.rankLabel === "kingdom") return false;
   return Math.max(...state.pairResults.map(result => result.score)) > RANK_DEPTH.kingdom;
 }
 
