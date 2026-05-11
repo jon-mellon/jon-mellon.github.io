@@ -127,7 +127,11 @@ validate_candidate_puzzle <- function(puzzle, dictionary) {
   if (is.null(puzzle)) return("no_unique_clue_set")
   if (!isTRUE(puzzle$validation$ok)) return("invalid_board")
   if (!isTRUE(puzzle$uniqueness$unique)) return("not_unique")
-  if (puzzle$difficulty$givenLetters > 15) return("too_many_givens")
+  if (puzzle$difficulty$givenLetters > 16) return("too_many_givens")
+  caps <- c("6" = 4, "5" = 4, "4" = 3, "3" = 2)
+  counts <- ship_given_counts(puzzle)
+  lengths <- vapply(puzzle$ships, `[[`, numeric(1), "length")
+  if (any(counts > caps[as.character(lengths)])) return("overexposed_ship_word")
   if (candidate_has_full_edge_word(puzzle)) return("full_edge_word")
   if (has_fully_clued_ship(puzzle)) return("full_ship_word")
   short_words <- vapply(puzzle$ships, `[[`, "", "word")
@@ -144,7 +148,7 @@ validate_candidate_puzzle <- function(puzzle, dictionary) {
     dictionary,
     limit = 2,
     cache = new.env(parent = emptyenv()),
-    deadline = proc.time()[["elapsed"]] + 8
+    deadline = proc.time()[["elapsed"]] + 60
   )
   if (isTRUE(strict$timedOut)) return("strict_solver_timeout")
   if (strict$count != 1) return("strict_not_unique")
