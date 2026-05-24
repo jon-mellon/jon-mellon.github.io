@@ -27,6 +27,8 @@
 
         <div class="segmented" id="sort-tabs" role="group" aria-label="Variable ordering">
           <button type="button" class="is-active" data-sort="magnitude">Largest shifts</button>
+          <button type="button" data-sort="within">Within share</button>
+          <button type="button" data-sort="between">Replacement share</button>
           <button type="button" data-sort="name">A-Z</button>
         </div>
 
@@ -53,24 +55,39 @@
               <p id="selected-code" class="selected-code">GSS</p>
               <h2 id="selected-title">Loading</h2>
             </div>
-            <div class="range-chip" id="range-chip">0-100 response scale</div>
+            <div class="heading-actions">
+              <button type="button" class="link-button" id="copy-link-button">Copy link</button>
+              <div class="range-chip" id="range-chip">0-100 response scale</div>
+            </div>
           </div>
 
           <div class="scale-note">
             <div>
-              <span>Low code</span>
+              <span>Score 0</span>
               <strong id="low-label">-</strong>
             </div>
             <div>
-              <span>High code</span>
+              <span>Score 100</span>
               <strong id="high-label">-</strong>
             </div>
           </div>
 
           <div class="metric-grid">
             <div class="metric">
+              <span>Baseline level</span>
+              <strong id="metric-baseline">-</strong>
+            </div>
+            <div class="metric">
+              <span>End level</span>
+              <strong id="metric-end">-</strong>
+            </div>
+            <div class="metric">
               <span>Total shift</span>
               <strong id="metric-total">-</strong>
+            </div>
+            <div class="metric">
+              <span>Observed range</span>
+              <strong id="metric-range">-</strong>
             </div>
             <div class="metric">
               <span>Intracohort change</span>
@@ -81,6 +98,14 @@
               <strong id="metric-replacement">-</strong>
             </div>
             <div class="metric">
+              <span>Within share</span>
+              <strong id="metric-within-share">-</strong>
+            </div>
+            <div class="metric">
+              <span>Replacement share</span>
+              <strong id="metric-between-share">-</strong>
+            </div>
+            <div class="metric">
               <span>Respondents</span>
               <strong id="metric-n">-</strong>
             </div>
@@ -88,7 +113,13 @@
 
           <section class="chart-section" aria-label="Cumulative change chart">
             <div class="section-head">
-              <h3>Cumulative Change</h3>
+              <div class="chart-title-stack">
+                <h3 id="chart-title">Response Level</h3>
+                <div class="segmented compact" id="chart-tabs" role="group" aria-label="Chart view">
+                  <button type="button" class="is-active" data-chart="levels">Levels</button>
+                  <button type="button" data-chart="change">Change</button>
+                </div>
+              </div>
               <div class="legend" id="chart-legend"></div>
             </div>
             <svg id="trend-chart" class="trend-chart" role="img" aria-label="Trend decomposition chart"></svg>
@@ -116,6 +147,8 @@
                       <th>Total</th>
                       <th>Change</th>
                       <th>Replacement</th>
+                      <th>Within %</th>
+                      <th>Repl. %</th>
                     </tr>
                   </thead>
                   <tbody id="strata-table"></tbody>

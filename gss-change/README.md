@@ -9,12 +9,18 @@ The generator uses:
 - `socialchange::cr_ic()` for the algebraic intracohort change and cohort
   replacement decomposition.
 - `wtssps` as the survey weight, so the 2021, 2022, and 2024 GSS waves are
-  included.
+  included. The generator passes the weight column to `cr_ic()`, which computes
+  weighted year-cohort means and weighted cohort proportions before the
+  decomposition.
+- A reviewed variable specification that drops non-substantive response codes
+  such as other, don't know, refused, no-answer, IAP, and not-available codes.
+  The 0-100 scale is oriented so 100 is the affirmative/agreement/approval or
+  high-intensity end of the item wording.
 
 Run:
 
 ```sh
-Rscript gss-change/generate_decompositions.R --limit=100
+Rscript gss-change/generate_decompositions.R --limit=200
 ```
 
 The script writes `static/gss-change/data/decompositions.json`. Mirror the

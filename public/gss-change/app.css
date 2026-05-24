@@ -199,6 +199,12 @@ select {
   box-shadow: 0 5px 12px rgba(25, 32, 34, 0.18);
 }
 
+.segmented.compact button {
+  min-height: 28px;
+  padding: 0 10px;
+  font-size: 0.78rem;
+}
+
 .workspace {
   display: grid;
   grid-template-columns: 330px minmax(0, 1fr);
@@ -300,6 +306,30 @@ select {
   gap: 18px;
 }
 
+.heading-actions {
+  display: flex;
+  flex: 0 0 auto;
+  flex-wrap: wrap;
+  justify-content: end;
+  gap: 8px;
+}
+
+.link-button {
+  min-height: 32px;
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--teal);
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.link-button:hover {
+  border-color: rgba(20, 108, 109, 0.45);
+  background: var(--teal-soft);
+}
+
 .range-chip {
   flex: 0 0 auto;
   padding: 7px 10px;
@@ -336,7 +366,7 @@ select {
 
 .metric-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
   gap: 10px;
   margin-top: 10px;
 }
@@ -368,6 +398,12 @@ select {
   justify-content: space-between;
   gap: 14px;
   margin-bottom: 10px;
+}
+
+.chart-title-stack {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .section-head span {
@@ -592,6 +628,12 @@ tr.is-selected td {
   .method-note {
     display: grid;
     justify-items: start;
+  }
+
+  .heading-actions,
+  .chart-title-stack {
+    justify-content: start;
+    flex-wrap: wrap;
   }
 
   .source-stack {
