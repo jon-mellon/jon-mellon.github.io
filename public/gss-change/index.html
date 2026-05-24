@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>GSS Change Decomposition</title>
+    <link rel="stylesheet" href="app.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="masthead">
+        <div class="title-block">
+          <p class="eyebrow">General Social Survey</p>
+          <h1>Change Decomposition</h1>
+        </div>
+        <div class="source-stack">
+          <span id="source-years">1972-2024</span>
+          <span id="data-status" aria-live="polite">Loading data</span>
+        </div>
+      </header>
+
+      <section class="control-strip" aria-label="Viewer controls">
+        <label class="search-box">
+          <span>Variable</span>
+          <input id="variable-search" type="search" autocomplete="off" placeholder="Search variables">
+        </label>
+
+        <div class="segmented" id="sort-tabs" role="group" aria-label="Variable ordering">
+          <button type="button" class="is-active" data-sort="magnitude">Largest shifts</button>
+          <button type="button" data-sort="name">A-Z</button>
+        </div>
+
+        <div class="segmented" id="mode-tabs" role="group" aria-label="Stratification"></div>
+
+        <label class="stratum-box" id="stratum-box">
+          <span>Stratum</span>
+          <select id="stratum-select"></select>
+        </label>
+      </section>
+
+      <section class="workspace">
+        <aside class="variable-panel" aria-label="GSS variables">
+          <div class="panel-kicker">
+            <strong id="variable-count">0 variables</strong>
+            <span id="visible-count">0 shown</span>
+          </div>
+          <div id="variable-list" class="variable-list"></div>
+        </aside>
+
+        <section class="analysis-panel" aria-label="Selected decomposition">
+          <div class="variable-heading">
+            <div>
+              <p id="selected-code" class="selected-code">GSS</p>
+              <h2 id="selected-title">Loading</h2>
+            </div>
+            <div class="range-chip" id="range-chip">0-100 response scale</div>
+          </div>
+
+          <div class="scale-note">
+            <div>
+              <span>Low code</span>
+              <strong id="low-label">-</strong>
+            </div>
+            <div>
+              <span>High code</span>
+              <strong id="high-label">-</strong>
+            </div>
+          </div>
+
+          <div class="metric-grid">
+            <div class="metric">
+              <span>Total shift</span>
+              <strong id="metric-total">-</strong>
+            </div>
+            <div class="metric">
+              <span>Intracohort change</span>
+              <strong id="metric-change">-</strong>
+            </div>
+            <div class="metric">
+              <span>Cohort replacement</span>
+              <strong id="metric-replacement">-</strong>
+            </div>
+            <div class="metric">
+              <span>Respondents</span>
+              <strong id="metric-n">-</strong>
+            </div>
+          </div>
+
+          <section class="chart-section" aria-label="Cumulative change chart">
+            <div class="section-head">
+              <h3>Cumulative Change</h3>
+              <div class="legend" id="chart-legend"></div>
+            </div>
+            <svg id="trend-chart" class="trend-chart" role="img" aria-label="Trend decomposition chart"></svg>
+          </section>
+
+          <section class="split-section">
+            <div class="component-panel">
+              <div class="section-head">
+                <h3>Final Decomposition</h3>
+                <span id="component-period">-</span>
+              </div>
+              <div id="component-bars" class="component-bars"></div>
+            </div>
+
+            <div class="table-panel">
+              <div class="section-head">
+                <h3>Strata</h3>
+                <span id="mode-label">None</span>
+              </div>
+              <div class="table-scroll">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Group</th>
+                      <th>Total</th>
+                      <th>Change</th>
+                      <th>Replacement</th>
+                    </tr>
+                  </thead>
+                  <tbody id="strata-table"></tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+
+          <footer class="method-note">
+            <span id="method-note">socialchange::cr_ic algebraic decomposition.</span>
+            <span id="generated-note"></span>
+          </footer>
+        </section>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
