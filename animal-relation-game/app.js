@@ -2,69 +2,7 @@ const WDQS_ENDPOINT = "https://query.wikidata.org/sparql";
 const WIKIDATA_API_ENDPOINT = "https://www.wikidata.org/w/api.php";
 const API_USER_AGENT = "AnimalRelationGame/0.1 (https://jon-mellon.github.io/animal-relation-game/)";
 const CACHE_MAX_AGE_MS = 7 * 24 * 60 * 60 * 1000;
-const ASSET_VERSION = "20260510-5";
-
-// Taxonomy is not a perfectly regular tree. We use rank specificity as a game-friendly approximation.
-const RANK_DEPTH = {
-  subspecies: 100,
-  species: 95,
-  subgenus: 92,
-  genus: 90,
-  subtribe: 85,
-  tribe: 80,
-  subfamily: 75,
-  family: 70,
-  superfamily: 65,
-  infraorder: 62,
-  suborder: 60,
-  order: 55,
-  superorder: 50,
-  infraclass: 47,
-  subclass: 45,
-  class: 40,
-  clade: 38,
-  subphylum: 35,
-  phylum: 30,
-  kingdom: 10
-};
-
-const TAXON_DEPTH = {
-  Aves: 44,
-  Mammalia: 44,
-  Amphibia: 44,
-  Reptilia: 42,
-  Amniota: 39,
-  Tetrapoda: 38,
-  Sarcopterygii: 37,
-  Vertebrata: 35,
-  Chordata: 30,
-  Arthropoda: 30,
-  Mollusca: 30,
-  Annelida: 30,
-  Echinodermata: 30,
-  Cnidaria: 30,
-  Deuterostomia: 28,
-  Ecdysozoa: 27,
-  Lophotrochozoa: 27,
-  Protostomia: 26,
-  Bilateria: 24,
-  Eumetazoa: 18,
-  Animalia: 10
-};
-
-const DISPLAY_RANKS = new Set([
-  "species",
-  "genus",
-  "subfamily",
-  "family",
-  "superfamily",
-  "order",
-  "class",
-  "clade",
-  "subphylum",
-  "phylum",
-  "kingdom"
-]);
+const ASSET_VERSION = "20260511-1";
 
 const state = {
   pool: [],
@@ -72,6 +10,7 @@ const state = {
   lineages: {},
   pairResults: [],
   bestPairs: [],
+  taxonDepthByQid: new Map(),
   selectedPairKey: null,
   selectedQids: [],
   answered: false,
@@ -101,6 +40,7 @@ async function init() {
     const res = await fetch(`./data/animals.json?v=${ASSET_VERSION}`);
     if (!res.ok) throw new Error(`Animal pool failed: ${res.status}`);
     state.pool = await res.json();
+    state.taxonDepthByQid = buildTaxonDepthMap(state.pool);
     await startRound();
   } catch (err) {
     console.error(err);
@@ -249,10 +189,6 @@ function parseLineageResults(data) {
     });
   }
 
-  for (const lineage of Object.values(output)) {
-    lineage.sort((a, b) => getRankScore(b) - getRankScore(a));
-  }
-
   return output;
 }
 
@@ -301,7 +237,6 @@ async function fetchLineagesViaWikidataApi(qids) {
     for (const ancestor of lineage) {
       ancestor.rankLabel = normalizeRank(rankEntities.get(ancestor.rankQid)?.label);
     }
-    lineage.sort((a, b) => getRankScore(b) - getRankScore(a));
   }
 
   return lineages;
@@ -486,6 +421,23 @@ async function fetchWithTimeout(url, options, timeoutMs = 8000) {
   }
 }
 
+function buildTaxonDepthMap(pool) {
+  const depths = new Map();
+
+  for (const animal of pool) {
+    const lineage = Array.isArray(animal.lineage) ? animal.lineage : [];
+    for (let index = 0; index < lineage.length; index++) {
+      const ancestor = lineage[index];
+      if (!ancestor?.qid) continue;
+      const depthFromRoot = lineage.length - index;
+      const currentDepth = depths.get(ancestor.qid) ?? 0;
+      if (depthFromRoot > currentDepth) depths.set(ancestor.qid, depthFromRoot);
+    }
+  }
+
+  return depths;
+}
+
 function computePairResults(animals, lineages) {
   const pairs = [
     [animals[0], animals[1]],
@@ -500,7 +452,7 @@ function computePairResults(animals, lineages) {
       b,
       key: pairKey(a, b),
       lca,
-      score: getAncestorScore(lca)
+      score: lca?.graphDepth ?? 0
     };
   });
 }
@@ -513,11 +465,26 @@ function findLCA(lineageA = [], lineageB = []) {
     .map(({ ancestor, indexA, matchB }) => ({
       ...ancestor,
       rankLabel: ancestor.rankLabel || matchB.ancestor?.rankLabel || "",
-      specificityScore: 1000 - ((indexA + matchB.index) / 2)
+      graphDepth: getGraphDepth(ancestor, lineageA, indexA, lineageB, matchB.index),
+      pathDistance: indexA + matchB.index
     }));
 
-  common.sort((x, y) => getAncestorScore(y) - getAncestorScore(x));
-  return common.find(ancestor => DISPLAY_RANKS.has(ancestor.rankLabel)) ?? common[0] ?? null;
+  common.sort((x, y) => {
+    if (y.graphDepth !== x.graphDepth) return y.graphDepth - x.graphDepth;
+    return x.pathDistance - y.pathDistance;
+  });
+
+  return common[0] ?? null;
+}
+
+function getGraphDepth(ancestor, lineageA, indexA, lineageB, indexB) {
+  const cachedDepth = state.taxonDepthByQid.get(ancestor.qid);
+  if (cachedDepth) return cachedDepth;
+
+  return Math.max(
+    lineageA.length - indexA,
+    lineageB.length - indexB
+  );
 }
 
 function getBestPairs(pairResults) {
@@ -531,7 +498,7 @@ function isPlayableRound() {
   if (state.pairResults.some(result => !result.lca || result.score <= 0)) return false;
   if (state.bestPairs.length !== 1) return false;
   if (state.bestPairs[0].lca?.label === "Animalia") return false;
-  return Math.max(...state.pairResults.map(result => result.score)) >= RANK_DEPTH.kingdom;
+  return Math.max(...state.pairResults.map(result => result.score)) > 1;
 }
 
 function toggleAnimalSelection(animal) {
@@ -741,17 +708,6 @@ function formatPair(a, b) {
 
 function pairKey(a, b) {
   return [a.qid, b.qid].sort().join("|");
-}
-
-function getRankScore(ancestor) {
-  return RANK_DEPTH[ancestor?.rankLabel] ?? 0;
-}
-
-function getAncestorScore(ancestor) {
-  if (!ancestor) return 0;
-  const baseScore = TAXON_DEPTH[ancestor.label] ?? getRankScore(ancestor);
-  const tieBreak = ancestor.specificityScore ? ancestor.specificityScore / 10000 : 0;
-  return baseScore + tieBreak;
 }
 
 function normalizeRank(value) {
