@@ -160,10 +160,12 @@ score_values <- function(values, valid_values, high_end) {
   if (length(valid_values) < 2) {
     return(scores)
   }
+  # Use original response units, oriented so larger values mean the reviewed
+  # high-end response even when the raw GSS coding runs in the opposite direction.
   if (identical(high_end, "min")) {
-    scores[valid] <- 100 * (length(valid_values) - ranks[valid]) / (length(valid_values) - 1)
+    scores[valid] <- rev(valid_values)[ranks[valid]]
   } else {
-    scores[valid] <- 100 * (ranks[valid] - 1) / (length(valid_values) - 1)
+    scores[valid] <- valid_values[ranks[valid]]
   }
   scores
 }
@@ -178,12 +180,25 @@ scale_type_for <- function(valid_values) {
 
 score_note_for <- function(scale_type) {
   if (identical(scale_type, "binary")) {
-    return("Binary item: the oriented score is the weighted percent choosing the Score 100 response.")
+    return("Binary item: the score is a weighted mean in the item's original two response units, oriented so larger values mean the high-end response. It is not a 0-100 percentage.")
   }
   paste(
-    "Ordered multi-category item: the oriented score is a weighted mean of reviewed ordered response ranks on a 0-100 scale.",
-    "It is an index, not a percent."
+    "Ordered multi-category item: the score is a weighted mean in the item's original response units, oriented so larger values mean the high-end response.",
+    "It is an ordinal index, not a percent."
   )
+}
+
+axis_value_labels_for <- function(x, valid_values, high_end) {
+  display_values <- sort(valid_values)
+  raw_values <- if (identical(high_end, "min")) rev(display_values) else display_values
+  lapply(seq_along(display_values), function(index) {
+    raw_value <- raw_values[index]
+    list(
+      value = as.numeric(display_values[index]),
+      raw_value = as.numeric(raw_value),
+      label = value_label(x, raw_value)
+    )
+  })
 }
 
 make_question_lookup <- function() {
@@ -454,6 +469,8 @@ make_reviewed_specs <- function(gss, weight_var) {
       high_end = high_end,
       low_value = low_value,
       high_value = high_value,
+      scale_min = min(valid_values),
+      scale_max = max(valid_values),
       n_unique = length(valid_values),
       first_year = min(years),
       last_year = max(years),
@@ -611,6 +628,8 @@ make_result <- function(gss, spec, weight_var, mode, stratum_value = NULL) {
     first_year = extracted$first_year,
     last_year = extracted$last_year,
     years = extracted$years,
+    scale_min = spec$scale_min,
+    scale_max = spec$scale_max,
     baseline = extracted$baseline,
     start_score = extracted$baseline,
     end_score = extracted$end_score,
@@ -643,9 +662,12 @@ make_variable_object <- function(gss, spec, base_result, question_lookup) {
     high_label = value_label(gss[[spec$variable]], spec$high_value),
     low_value = spec$low_value,
     high_value = spec$high_value,
+    scale_min = spec$scale_min,
+    scale_max = spec$scale_max,
     high_end = spec$high_end,
     valid_values = as.numeric(valid_values),
     value_labels = value_labels_for(gss[[spec$variable]], valid_values),
+    axis_value_labels = axis_value_labels_for(gss[[spec$variable]], valid_values, spec$high_end),
     n_unique = spec$n_unique,
     first_year = base_result$first_year,
     last_year = base_result$last_year,
@@ -756,12 +778,12 @@ payload <- list(
     ),
     method = "socialchange::cr_ic algebraic decomposition (AD): intracohort change plus cohort replacement",
     scale = paste(
-      "Each response variable is mapped to a 0-100 reviewed scale using only substantive valid codes.",
-      "100 is the manually selected affirmative/agreement/approval/high-intensity end for the item wording,",
-      "and 0 is the opposite end. Explicit other, missing, don't know, no-answer, refused, IAP,",
+      "Each response variable is shown in its original response units after reviewing substantive valid codes.",
+      "The scale is oriented so larger values mean the manually selected affirmative/agreement/approval/high-intensity end for the item wording.",
+      "Explicit other, missing, don't know, no-answer, refused, IAP,",
       "and not-available codes are excluded before scaling.",
-      "Binary item scores equal the weighted percent choosing the Score 100 response.",
-      "Ordered multi-category item scores are ordinal indices, not percentages; nominal categorical variables are not included."
+      "Binary item scores are weighted means in the original two response units, not percentages.",
+      "Ordered multi-category item scores are ordinal original-unit indices; nominal categorical variables are not included."
     ),
     package_versions = list(
       socialchange = as.character(packageVersion("socialchange")),

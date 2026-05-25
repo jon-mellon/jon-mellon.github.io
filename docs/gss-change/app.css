@@ -512,6 +512,11 @@ select {
   border-radius: 99px;
 }
 
+.baseline-swatch {
+  background: transparent;
+  border-top: 2px dashed var(--line-strong);
+}
+
 .trend-chart {
   display: block;
   width: 100%;
@@ -535,6 +540,17 @@ select {
   stroke: #9d9483;
   stroke-width: 1.4;
   stroke-dasharray: 5 5;
+}
+
+.baseline-line {
+  stroke: #7f7667;
+  stroke-width: 1.6;
+  stroke-dasharray: 7 5;
+}
+
+.baseline-label {
+  fill: #5e5548;
+  font-weight: 760;
 }
 
 .trend-line {

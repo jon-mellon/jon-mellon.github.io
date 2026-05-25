@@ -14,8 +14,10 @@ The generator uses:
   decomposition.
 - A reviewed variable specification that drops non-substantive response codes
   such as other, don't know, refused, no-answer, IAP, and not-available codes.
-  The 0-100 scale is oriented so 100 is the affirmative/agreement/approval or
-  high-intensity end of the item wording.
+  The displayed scale uses original response units and is oriented so larger
+  values are the affirmative/agreement/approval or high-intensity end of the
+  item wording. Multi-category items are ordinal original-unit indices, not
+  percentages.
 
 Run:
 

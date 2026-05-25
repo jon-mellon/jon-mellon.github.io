@@ -57,7 +57,7 @@ const changeSeriesConfig = [
 ];
 
 const levelSeriesConfig = [
-  { key: "score", label: "Observed level", color: "#22292c" },
+  { key: "score", label: "Observed mean", color: "#22292c" },
   { key: "change_level", label: "Within-only path", color: "#146c6d" },
   { key: "replacement_level", label: "Replacement-only path", color: "#b65d2f" }
 ];
@@ -99,6 +99,12 @@ function compactNumber(value) {
 function formatPercent(value) {
   if (value === null || value === undefined || Number.isNaN(Number(value))) return "-";
   return `${formatNumber(value, 1)}%`;
+}
+
+function formatUnit(value) {
+  if (value === null || value === undefined || Number.isNaN(Number(value))) return "-";
+  const number = Number(value);
+  return formatNumber(number, Math.abs(number - Math.round(number)) < 1e-6 ? 0 : 1);
 }
 
 function readHashState() {
@@ -295,9 +301,9 @@ function renderStratumSelect() {
 function renderHeading(variable, result) {
   elements.selectedCode.textContent = variable.id;
   elements.selectedTitle.textContent = variable.label;
-  elements.rangeChip.textContent = `${result.first_year}-${result.last_year} · observed ${formatNumber(result.observed_min_score)}-${formatNumber(result.observed_max_score)}`;
-  elements.lowLabel.textContent = `${variable.low_label} (raw ${variable.low_value})`;
-  elements.highLabel.textContent = `${variable.high_label} (raw ${variable.high_value})`;
+  elements.rangeChip.textContent = `${result.first_year}-${result.last_year} · observed ${formatNumber(result.observed_min_score)}-${formatNumber(result.observed_max_score)} original units`;
+  elements.lowLabel.textContent = `${formatUnit(variable.scale_min)}: ${variable.low_label} (raw ${variable.low_value})`;
+  elements.highLabel.textContent = `${formatUnit(variable.scale_max)}: ${variable.high_label} (raw ${variable.high_value})`;
   elements.questionText.textContent = variable.question_text || variable.label;
   elements.scoreNote.textContent = variable.score_note || "Scores use reviewed valid responses mapped to a 0-100 oriented scale.";
   if (variable.source_url) {
@@ -324,6 +330,15 @@ function renderLegend() {
   elements.chartLegend.replaceChildren();
   const seriesConfig = state.chart === "levels" ? levelSeriesConfig : changeSeriesConfig;
   elements.chartTitle.textContent = state.chart === "levels" ? "Response Level" : "Cumulative Change";
+  if (state.chart === "levels") {
+    const baselineLegend = document.createElement("span");
+    baselineLegend.className = "legend-item";
+    baselineLegend.innerHTML = `
+      <span class="legend-swatch baseline-swatch"></span>
+      First-year baseline
+    `;
+    elements.chartLegend.append(baselineLegend);
+  }
   seriesConfig.forEach((item) => {
     const legend = document.createElement("span");
     legend.className = "legend-item";
@@ -368,7 +383,11 @@ function hideChartTooltip() {
   elements.chartTooltip.hidden = true;
 }
 
-function renderChart(result) {
+function tickPrecision(values) {
+  return values.some((value) => Math.abs(value - Math.round(value)) > 1e-6) ? 1 : 0;
+}
+
+function renderChart(result, variable) {
   const svg = elements.chart;
   svg.replaceChildren();
   const seriesConfig = state.chart === "levels" ? levelSeriesConfig : changeSeriesConfig;
@@ -394,8 +413,8 @@ function renderChart(result) {
   let yMin;
   let yMax;
   if (state.chart === "levels") {
-    yMin = 0;
-    yMax = 100;
+    yMin = Number(result.scale_min ?? variable.scale_min ?? 0);
+    yMax = Number(result.scale_max ?? variable.scale_max ?? 1);
   } else {
     yMin = Math.min(0, ...values);
     yMax = Math.max(0, ...values);
@@ -413,7 +432,13 @@ function renderChart(result) {
   const xScale = (year) => margin.left + ((year - xMin) / (xMax - xMin || 1)) * plotWidth;
   const yScale = (value) => margin.top + (1 - (value - yMin) / (yMax - yMin || 1)) * plotHeight;
 
-  const yTicks = Array.from({ length: 6 }, (_, index) => yMin + ((yMax - yMin) * index) / 5);
+  const axisValues = (variable.axis_value_labels || [])
+    .map((item) => Number(item.value))
+    .filter((value) => Number.isFinite(value));
+  const yTicks = state.chart === "levels" && axisValues.length >= 2 && axisValues.length <= 7
+    ? axisValues
+    : Array.from({ length: 6 }, (_, index) => yMin + ((yMax - yMin) * index) / 5);
+  const yDigits = tickPrecision(yTicks);
   yTicks.forEach((tick) => {
     const y = yScale(tick);
     svg.append(svgNode("line", {
@@ -429,7 +454,7 @@ function renderChart(result) {
       "text-anchor": "end",
       class: "chart-label"
     });
-    label.textContent = formatNumber(tick, 0);
+    label.textContent = formatNumber(tick, yDigits);
     svg.append(label);
   });
 
@@ -452,6 +477,28 @@ function renderChart(result) {
     label.textContent = year;
     svg.append(label);
   });
+
+  if (state.chart === "levels" && result.baseline !== null && result.baseline !== undefined) {
+    const baseline = Number(result.baseline);
+    if (Number.isFinite(baseline)) {
+      const y = yScale(baseline);
+      svg.append(svgNode("line", {
+        x1: margin.left,
+        x2: width - margin.right,
+        y1: y,
+        y2: y,
+        class: "baseline-line"
+      }));
+      const label = svgNode("text", {
+        x: width - margin.right - 6,
+        y: y - 7,
+        "text-anchor": "end",
+        class: "chart-label baseline-label"
+      });
+      label.textContent = `Baseline ${result.first_year}: ${formatNumber(baseline)}`;
+      svg.append(label);
+    }
+  }
 
   seriesConfig.forEach((item) => {
     const rawPoints = series
@@ -500,7 +547,7 @@ function renderChart(result) {
     "text-anchor": "middle",
     class: "chart-label"
   });
-  yAxisLabel.textContent = state.chart === "levels" ? "Oriented response score" : "Cumulative change in response score";
+  yAxisLabel.textContent = state.chart === "levels" ? "Original response units, oriented" : "Change in original response units";
   svg.append(yAxisLabel);
 }
 
@@ -577,7 +624,7 @@ function render() {
   renderHeading(variable, result);
   renderMetrics(result);
   renderLegend();
-  renderChart(result);
+  renderChart(result, variable);
   renderComponentBars(result);
   renderStrataTable();
   renderNotes();
