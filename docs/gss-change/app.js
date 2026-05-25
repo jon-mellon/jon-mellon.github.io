@@ -16,6 +16,9 @@ const elements = {
   rangeChip: document.querySelector("#range-chip"),
   lowLabel: document.querySelector("#low-label"),
   highLabel: document.querySelector("#high-label"),
+  questionText: document.querySelector("#question-text"),
+  questionSource: document.querySelector("#question-source"),
+  scoreNote: document.querySelector("#score-note"),
   metricBaseline: document.querySelector("#metric-baseline"),
   metricEnd: document.querySelector("#metric-end"),
   metricTotal: document.querySelector("#metric-total"),
@@ -27,6 +30,7 @@ const elements = {
   metricN: document.querySelector("#metric-n"),
   chartTitle: document.querySelector("#chart-title"),
   chart: document.querySelector("#trend-chart"),
+  chartTooltip: document.querySelector("#chart-tooltip"),
   chartLegend: document.querySelector("#chart-legend"),
   componentPeriod: document.querySelector("#component-period"),
   componentBars: document.querySelector("#component-bars"),
@@ -204,7 +208,7 @@ function filteredVariables() {
   const query = state.query.trim().toLowerCase();
   let variables = state.data.variables.filter((variable) => {
     if (!query) return true;
-    return `${variable.id} ${variable.label}`.toLowerCase().includes(query);
+    return `${variable.id} ${variable.label} ${variable.question_text || ""}`.toLowerCase().includes(query);
   });
 
   if (state.sort === "name") {
@@ -229,6 +233,7 @@ function filteredVariables() {
 }
 
 function renderVariableList() {
+  const previousScroll = elements.variableList.scrollTop;
   const variables = filteredVariables();
   elements.variableList.replaceChildren();
   elements.variableCount.textContent = `${state.data.variables.length} variables`;
@@ -250,6 +255,7 @@ function renderVariableList() {
         ? `Repl. ${formatPercent(variable.between_abs_share)}`
         : formatSigned(variable.total);
     button.type = "button";
+    button.title = variable.question_text || variable.label;
     button.className = `variable-button${variable.id === state.variableId ? " is-active" : ""}`;
     button.innerHTML = `
       <span class="variable-name">${escapeHtml(variable.label)}</span>
@@ -264,6 +270,7 @@ function renderVariableList() {
     });
     elements.variableList.append(button);
   });
+  elements.variableList.scrollTop = previousScroll;
 }
 
 function renderStratumSelect() {
@@ -291,6 +298,14 @@ function renderHeading(variable, result) {
   elements.rangeChip.textContent = `${result.first_year}-${result.last_year} · observed ${formatNumber(result.observed_min_score)}-${formatNumber(result.observed_max_score)}`;
   elements.lowLabel.textContent = `${variable.low_label} (raw ${variable.low_value})`;
   elements.highLabel.textContent = `${variable.high_label} (raw ${variable.high_value})`;
+  elements.questionText.textContent = variable.question_text || variable.label;
+  elements.scoreNote.textContent = variable.score_note || "Scores use reviewed valid responses mapped to a 0-100 oriented scale.";
+  if (variable.source_url) {
+    elements.questionSource.href = variable.source_url;
+    elements.questionSource.hidden = false;
+  } else {
+    elements.questionSource.hidden = true;
+  }
 }
 
 function renderMetrics(result) {
@@ -328,6 +343,29 @@ function svgNode(name, attributes = {}) {
 
 function makePath(points) {
   return points.map((point, index) => `${index === 0 ? "M" : "L"}${point[0].toFixed(2)},${point[1].toFixed(2)}`).join(" ");
+}
+
+function positionChartTooltip(event) {
+  const rect = elements.chart.parentElement.getBoundingClientRect();
+  const x = event.clientX - rect.left;
+  const y = event.clientY - rect.top;
+  elements.chartTooltip.style.left = `${x}px`;
+  elements.chartTooltip.style.top = `${y}px`;
+}
+
+function showChartTooltip(target, event) {
+  const value = Number(target.dataset.value);
+  const formattedValue = target.dataset.signed === "true" ? formatSigned(value) : formatNumber(value);
+  elements.chartTooltip.innerHTML = `
+    <strong>${escapeHtml(target.dataset.label)}</strong>
+    <span>${escapeHtml(target.dataset.year)} · ${escapeHtml(formattedValue)}</span>
+  `;
+  elements.chartTooltip.hidden = false;
+  positionChartTooltip(event);
+}
+
+function hideChartTooltip() {
+  elements.chartTooltip.hidden = true;
 }
 
 function renderChart(result) {
@@ -416,10 +454,13 @@ function renderChart(result) {
   });
 
   seriesConfig.forEach((item) => {
-    const points = series
-      .map((row) => [Number(row.year), Number(row[item.key])])
-      .filter((point) => Number.isFinite(point[1]))
-      .map((point) => [xScale(point[0]), yScale(point[1])]);
+    const rawPoints = series
+      .map((row) => ({
+        year: Number(row.year),
+        value: Number(row[item.key])
+      }))
+      .filter((point) => Number.isFinite(point.value));
+    const points = rawPoints.map((point) => [xScale(point.year), yScale(point.value)]);
 
     if (!points.length) return;
     svg.append(svgNode("path", {
@@ -435,6 +476,19 @@ function renderChart(result) {
         r: index === points.length - 1 ? 4 : 3,
         fill: item.color,
         class: "trend-point"
+      }));
+    });
+    rawPoints.forEach((point) => {
+      svg.append(svgNode("circle", {
+        cx: xScale(point.year),
+        cy: yScale(point.value),
+        r: 9,
+        fill: "transparent",
+        class: "trend-hit-target",
+        "data-label": item.label,
+        "data-year": point.year,
+        "data-value": point.value,
+        "data-signed": state.chart === "change" ? "true" : "false"
       }));
     });
   });
@@ -548,6 +602,17 @@ elements.chartTabs.addEventListener("click", (event) => {
   state.chart = button.dataset.chart;
   render();
 });
+
+elements.chart.addEventListener("pointermove", (event) => {
+  const target = event.target.closest?.(".trend-hit-target");
+  if (!target) {
+    hideChartTooltip();
+    return;
+  }
+  showChartTooltip(target, event);
+});
+
+elements.chart.addEventListener("pointerleave", hideChartTooltip);
 
 elements.stratumSelect.addEventListener("change", (event) => {
   state.stratum = event.target.value;

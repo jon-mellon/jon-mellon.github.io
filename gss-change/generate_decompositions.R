@@ -3,6 +3,7 @@
 suppressPackageStartupMessages({
   library(data.table)
   library(gssr)
+  library(gssrdoc)
   library(jsonlite)
   library(labelled)
   library(socialchange)
@@ -47,6 +48,14 @@ clean_label <- function(x) {
   x <- gsub("\\bopp\\.\\b", "opposite", x, ignore.case = TRUE)
   x <- gsub("\\s+", " ", trimws(x))
   title_case(x)
+}
+
+clean_question_text <- function(x) {
+  x <- as.character(x %||% "")
+  x <- gsub("\r\n|\r", "\n", x)
+  x <- gsub("[ \t]+", " ", x)
+  x <- gsub(" *\n *", "\n", x)
+  trimws(x)
 }
 
 stratum_label <- function(x) {
@@ -157,6 +166,51 @@ score_values <- function(values, valid_values, high_end) {
     scores[valid] <- 100 * (ranks[valid] - 1) / (length(valid_values) - 1)
   }
   scores
+}
+
+scale_type_for <- function(valid_values) {
+  if (length(valid_values) == 2) {
+    "binary"
+  } else {
+    "ordinal_index"
+  }
+}
+
+score_note_for <- function(scale_type) {
+  if (identical(scale_type, "binary")) {
+    return("Binary item: the oriented score is the weighted percent choosing the Score 100 response.")
+  }
+  paste(
+    "Ordered multi-category item: the oriented score is a weighted mean of reviewed ordered response ranks on a 0-100 scale.",
+    "It is an index, not a percent."
+  )
+}
+
+make_question_lookup <- function() {
+  data(gss_doc, package = "gssrdoc")
+  lookup <- as.data.table(gss_doc)
+  lookup[, variable := tolower(variable)]
+  lookup[, question := clean_question_text(question)]
+  lookup[, description := clean_question_text(description)]
+  setkey(lookup, variable)
+  lookup
+}
+
+question_for <- function(question_lookup, variable) {
+  key_value <- tolower(as.character(variable))
+  doc <- question_lookup[J(key_value), nomatch = 0]
+  if (!nrow(doc)) {
+    return(list(
+      question_text = NULL,
+      source_url = NULL,
+      source_description = NULL
+    ))
+  }
+  list(
+    question_text = doc$question[1] %||% NULL,
+    source_url = doc$norc_url[1] %||% NULL,
+    source_description = doc$description[1] %||% NULL
+  )
 }
 
 manual_item_specs <- function() {
@@ -390,10 +444,13 @@ make_reviewed_specs <- function(gss, weight_var) {
     high_end <- named_value(manual$high_end, variable, "min")
     high_value <- if (identical(high_end, "min")) min(valid_values) else max(valid_values)
     low_value <- if (identical(high_end, "min")) max(valid_values) else min(valid_values)
+    scale_type <- scale_type_for(valid_values)
 
     data.table(
       variable = variable,
       label = as.character(label),
+      scale_type = scale_type,
+      score_note = score_note_for(scale_type),
       high_end = high_end,
       low_value = low_value,
       high_value = high_value,
@@ -571,11 +628,17 @@ make_result <- function(gss, spec, weight_var, mode, stratum_value = NULL) {
   )
 }
 
-make_variable_object <- function(gss, spec, base_result) {
+make_variable_object <- function(gss, spec, base_result, question_lookup) {
   valid_values <- spec$valid_values[[1]]
+  question <- question_for(question_lookup, spec$variable)
   list(
     id = spec$variable,
     label = clean_label(spec$label),
+    question_text = question$question_text,
+    source_url = question$source_url,
+    source_description = question$source_description,
+    scale_type = spec$scale_type,
+    score_note = spec$score_note,
     low_label = value_label(gss[[spec$variable]], spec$low_value),
     high_label = value_label(gss[[spec$variable]], spec$high_value),
     low_value = spec$low_value,
@@ -627,6 +690,8 @@ modes <- list(
 message("Building reviewed variable specs...")
 specs <- make_reviewed_specs(gss, weight_var)
 message("Reviewed pool after validity/year filters: ", nrow(specs), " variables.")
+message("Loading full question wording from gssrdoc...")
+question_lookup <- make_question_lookup()
 
 variables <- list()
 results <- list()
@@ -661,7 +726,7 @@ for (row_index in seq_len(nrow(specs))) {
     next
   }
 
-  variables[[length(variables) + 1]] <- make_variable_object(gss, spec, base_result)
+  variables[[length(variables) + 1]] <- make_variable_object(gss, spec, base_result, question_lookup)
   results <- c(results, variable_results)
 
   if (length(variables) >= args$limit) {
@@ -694,7 +759,9 @@ payload <- list(
       "Each response variable is mapped to a 0-100 reviewed scale using only substantive valid codes.",
       "100 is the manually selected affirmative/agreement/approval/high-intensity end for the item wording,",
       "and 0 is the opposite end. Explicit other, missing, don't know, no-answer, refused, IAP,",
-      "and not-available codes are excluded before scaling."
+      "and not-available codes are excluded before scaling.",
+      "Binary item scores equal the weighted percent choosing the Score 100 response.",
+      "Ordered multi-category item scores are ordinal indices, not percentages; nominal categorical variables are not included."
     ),
     package_versions = list(
       socialchange = as.character(packageVersion("socialchange")),

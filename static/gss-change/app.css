@@ -30,6 +30,14 @@ body {
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
+@media (min-width: 821px) {
+  html,
+  body {
+    height: 100%;
+    overflow: hidden;
+  }
+}
+
 button,
 input,
 select {
@@ -52,6 +60,15 @@ select:focus-visible {
   width: min(1440px, calc(100vw - 28px));
   margin: 0 auto;
   padding: 30px 0 44px;
+}
+
+@media (min-width: 821px) {
+  .app-shell {
+    height: 100vh;
+    display: grid;
+    grid-template-rows: auto auto minmax(0, 1fr);
+    padding: 24px 0;
+  }
 }
 
 .masthead {
@@ -210,6 +227,7 @@ select {
   grid-template-columns: 330px minmax(0, 1fr);
   gap: 18px;
   margin-top: 18px;
+  min-height: 0;
 }
 
 .variable-panel,
@@ -221,12 +239,25 @@ select {
 }
 
 .variable-panel {
-  position: sticky;
-  top: 86px;
-  max-height: calc(100vh - 112px);
   display: grid;
   grid-template-rows: auto minmax(0, 1fr);
   overflow: hidden;
+}
+
+@media (min-width: 821px) {
+  .workspace {
+    overflow: hidden;
+  }
+
+  .variable-panel,
+  .analysis-panel {
+    height: 100%;
+    max-height: 100%;
+  }
+
+  .analysis-panel {
+    overflow: auto;
+  }
 }
 
 .panel-kicker {
@@ -247,6 +278,7 @@ select {
 .variable-list {
   overflow: auto;
   padding: 8px;
+  min-height: 0;
 }
 
 .variable-button {
@@ -349,12 +381,56 @@ select {
 }
 
 .scale-note div,
+.question-panel,
+.score-panel,
 .metric {
   min-width: 0;
   padding: 12px;
   border: 1px solid var(--line);
   border-radius: 7px;
   background: var(--surface-strong);
+}
+
+.question-panel,
+.score-panel {
+  margin-top: 10px;
+}
+
+.question-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: start;
+}
+
+.question-panel span,
+.score-panel span {
+  color: var(--muted);
+  font-size: 0.68rem;
+  font-weight: 850;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.question-panel p,
+.score-panel p {
+  margin: 5px 0 0;
+  color: var(--ink);
+  font-size: 0.94rem;
+  line-height: 1.4;
+  white-space: pre-line;
+}
+
+.question-panel a {
+  color: var(--teal);
+  font-size: 0.82rem;
+  font-weight: 800;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.question-panel a:hover {
+  text-decoration: underline;
 }
 
 .scale-note strong {
@@ -374,8 +450,8 @@ select {
 .metric strong {
   display: block;
   margin-top: 5px;
-  font-size: clamp(1.25rem, 2.4vw, 2rem);
-  line-height: 1;
+  font-size: clamp(1.08rem, 1.7vw, 1.55rem);
+  line-height: 1.05;
   font-variant-numeric: tabular-nums;
 }
 
@@ -389,6 +465,7 @@ select {
 }
 
 .chart-section {
+  position: relative;
   padding: 14px;
 }
 
@@ -469,6 +546,42 @@ select {
 .trend-point {
   stroke: #fff;
   stroke-width: 1.5;
+}
+
+.trend-hit-target {
+  cursor: crosshair;
+  pointer-events: all;
+}
+
+.chart-tooltip {
+  position: absolute;
+  z-index: 4;
+  display: grid;
+  gap: 3px;
+  min-width: 138px;
+  max-width: 220px;
+  padding: 8px 10px;
+  border: 1px solid rgba(24, 32, 34, 0.22);
+  border-radius: 7px;
+  background: rgba(255, 253, 248, 0.96);
+  box-shadow: 0 12px 28px rgba(24, 32, 34, 0.16);
+  color: var(--ink);
+  font-size: 0.82rem;
+  line-height: 1.25;
+  pointer-events: none;
+  transform: translate(12px, -50%);
+}
+
+.chart-tooltip strong {
+  font-size: 0.76rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.chart-tooltip span {
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  font-weight: 760;
 }
 
 .split-section {
@@ -664,6 +777,10 @@ tr.is-selected td {
 
   .scale-note,
   .metric-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .question-panel {
     grid-template-columns: 1fr;
   }
 

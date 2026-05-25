@@ -72,6 +72,19 @@
             </div>
           </div>
 
+          <section class="question-panel" aria-label="Question wording">
+            <div>
+              <span>Question wording</span>
+              <p id="question-text">-</p>
+            </div>
+            <a id="question-source" href="#" target="_blank" rel="noreferrer">GSS source</a>
+          </section>
+
+          <section class="score-panel" aria-label="Score interpretation">
+            <span>Score interpretation</span>
+            <p id="score-note">-</p>
+          </section>
+
           <div class="metric-grid">
             <div class="metric">
               <span>Baseline level</span>
@@ -123,6 +136,7 @@
               <div class="legend" id="chart-legend"></div>
             </div>
             <svg id="trend-chart" class="trend-chart" role="img" aria-label="Trend decomposition chart"></svg>
+            <div id="chart-tooltip" class="chart-tooltip" hidden></div>
           </section>
 
           <section class="split-section">
