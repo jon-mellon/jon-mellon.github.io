@@ -27,8 +27,11 @@ let soundOn = true;
 let audioContext = null;
 let locked = false;
 let galaxy = [];
+let astronautBodyId = null;
+let leavingAstronautId = null;
+let landingAstronaut = false;
 
-const galaxyKey = "number-galaxy:v1";
+const galaxyKey = "number-solar-system:v1";
 const bodyKinds = ["planet", "planet", "planet", "ringed", "moon", "asteroid"];
 const orbitRings = [0.3, 0.45, 0.6, 0.75, 0.9];
 const starField = makeStarField();
@@ -102,6 +105,7 @@ function loadGalaxy() {
         reverse: Boolean(body.reverse),
         isNew: false
       }));
+    astronautBodyId = galaxy.some((body) => body.id === parsed.astronautBodyId) ? parsed.astronautBodyId : null;
     scoreElement.textContent = score;
     renderGalaxy();
   } catch {
@@ -110,17 +114,20 @@ function loadGalaxy() {
 }
 
 function saveGalaxy() {
-  localStorage.setItem(galaxyKey, JSON.stringify({ score, galaxy }));
+  localStorage.setItem(galaxyKey, JSON.stringify({ score, galaxy, astronautBodyId }));
 }
 
 function startNewGalaxy() {
   score = 0;
   galaxy = [];
+  astronautBodyId = null;
+  leavingAstronautId = null;
+  landingAstronaut = false;
   scoreElement.textContent = score;
   orbitCount.textContent = score;
   localStorage.removeItem(galaxyKey);
   renderGalaxy();
-  message.textContent = "A fresh galaxy is ready.";
+  message.textContent = "A fresh solar system is ready.";
   playGalaxyStartSound();
 }
 
@@ -179,6 +186,8 @@ function chooseAnswer(button, answer) {
     celebrate();
     playSuccessSound();
 
+    if (score % 6 === 0) triggerComet();
+
     if (score % 5 === 0 && galaxy.length > 0) {
       window.setTimeout(() => triggerBlackHole(added), 720);
       window.setTimeout(makeProblem, 2400);
@@ -210,6 +219,11 @@ function leastUsedRing() {
 function growGalaxy() {
   galaxy = galaxy.map((body) => ({ ...body, isNew: false }));
 
+  // any astronaut from the previous turn flies off this turn
+  leavingAstronautId = astronautBodyId;
+  astronautBodyId = null;
+  landingAstronaut = false;
+
   const kind = bodyKinds[randomBetween(0, bodyKinds.length - 1)];
   const sizeBase = kind === "moon" ? randomBetween(11, 16) : kind === "asteroid" ? randomBetween(8, 12) : randomBetween(18, 30);
   const body = {
@@ -225,9 +239,32 @@ function growGalaxy() {
   };
 
   galaxy.push(body);
+
+  // every 3rd correct answer an astronaut lands on a planet and plants a flag
+  if (score % 3 === 0) {
+    const planets = galaxy.filter((other) => other.kind === "planet" || other.kind === "ringed");
+    if (planets.length > 0) {
+      astronautBodyId = planets[randomBetween(0, planets.length - 1)].id;
+      landingAstronaut = true;
+    }
+  }
+
   renderGalaxy();
+  // transient land/leave states only animate on this render
+  leavingAstronautId = null;
+  landingAstronaut = false;
   saveGalaxy();
   return body;
+}
+
+function triggerComet() {
+  const comet = document.createElement("span");
+  comet.className = `comet${Math.random() > 0.5 ? " is-flip" : ""}`;
+  comet.style.setProperty("--y-start", `${randomBetween(8, 40)}%`);
+  comet.style.setProperty("--y-end", `${randomBetween(55, 90)}%`);
+  comet.addEventListener("animationend", () => comet.remove());
+  galaxyBed.append(comet);
+  playCometSound();
 }
 
 function triggerBlackHole(protectBody) {
@@ -309,6 +346,13 @@ function renderGalaxy() {
 
     const visual = makeBody(body);
     upright.append(visual);
+
+    if (body.id === astronautBodyId) {
+      upright.append(makeAstronaut(body, landingAstronaut ? "is-landing" : ""));
+    } else if (body.id === leavingAstronautId) {
+      upright.append(makeAstronaut(body, "is-leaving"));
+    }
+
     orbit.append(upright);
     galaxyBed.append(orbit);
   });
@@ -344,6 +388,19 @@ function makeBody(body) {
   }
 
   return element;
+}
+
+function makeAstronaut(body, stateClass) {
+  const astronaut = document.createElement("span");
+  astronaut.className = `astronaut ${stateClass}`.trim();
+  astronaut.style.setProperty("--planet-size", `${body.size}px`);
+
+  ["astro-flag", "astro-pack", "astro-helmet", "astro-visor", "astro-body", "astro-arm", "astro-leg-left", "astro-leg-right"].forEach((className) => {
+    const part = document.createElement("span");
+    part.className = className;
+    astronaut.append(part);
+  });
+  return astronaut;
 }
 
 function makeStarField() {
@@ -468,6 +525,24 @@ function playBlackHoleSound() {
   gain.connect(context.destination);
   oscillator.start(now);
   oscillator.stop(now + 1.25);
+}
+
+function playCometSound() {
+  const context = ensureAudio();
+  if (!context) return;
+  const now = context.currentTime;
+  const oscillator = context.createOscillator();
+  const gain = context.createGain();
+  oscillator.type = "sine";
+  oscillator.frequency.setValueAtTime(1320, now);
+  oscillator.frequency.exponentialRampToValueAtTime(420, now + 0.9);
+  gain.gain.setValueAtTime(0.0001, now);
+  gain.gain.exponentialRampToValueAtTime(0.05, now + 0.06);
+  gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.95);
+  oscillator.connect(gain);
+  gain.connect(context.destination);
+  oscillator.start(now);
+  oscillator.stop(now + 1);
 }
 
 function celebrate() {

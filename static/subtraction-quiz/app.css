@@ -110,7 +110,7 @@ h1 {
   display: grid;
   gap: clamp(8px, 1.4svh, 16px);
   place-items: center;
-  min-height: clamp(210px, 28svh, 330px);
+  min-height: clamp(140px, 19svh, 230px);
   border: 4px solid rgba(36, 48, 66, 0.12);
   border-radius: 8px;
   background: var(--paper);
@@ -136,48 +136,6 @@ h1 {
 
 .question-panel::after {
   right: -44px;
-}
-
-.character {
-  width: clamp(68px, 8.5svh, 94px);
-  height: clamp(68px, 8.5svh, 94px);
-  border-radius: 50%;
-  background: var(--yellow);
-  box-shadow: inset -10px -12px rgba(218, 139, 0, 0.15), 0 12px 22px rgba(36, 48, 66, 0.14);
-  animation: bob 2.4s ease-in-out infinite;
-}
-
-.face {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
-.eye {
-  position: absolute;
-  top: 35%;
-  width: 12.5%;
-  height: 17%;
-  border-radius: 999px;
-  background: var(--ink);
-}
-
-.left-eye {
-  left: 30%;
-}
-
-.right-eye {
-  right: 30%;
-}
-
-.smile {
-  position: absolute;
-  left: 33%;
-  bottom: 27%;
-  width: 35%;
-  height: 17%;
-  border-bottom: max(4px, 0.55svh) solid var(--ink);
-  border-radius: 0 0 999px 999px;
 }
 
 .sum {
@@ -291,7 +249,7 @@ h1 {
 
 .galaxy-bed {
   position: relative;
-  min-height: clamp(220px, 30svh, 320px);
+  min-height: clamp(300px, 44svh, 480px);
   overflow: hidden;
   isolation: isolate;
   background:
@@ -479,6 +437,160 @@ h1 {
   animation: capture-fly 1000ms cubic-bezier(0.5, 0, 0.9, 0.6) forwards;
 }
 
+.astronaut {
+  position: absolute;
+  z-index: 12;
+  left: 50%;
+  bottom: calc(100% - 3px);
+  width: 16px;
+  height: 22px;
+  transform: translateX(-50%);
+  transform-origin: 50% 100%;
+}
+
+.astronaut.is-landing {
+  animation: astro-land 720ms cubic-bezier(0.2, 0.9, 0.3, 1.2) both;
+}
+
+.astronaut.is-leaving {
+  animation: astro-leave 900ms ease-in forwards;
+}
+
+.astronaut.is-leaving::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -7px;
+  width: 8px;
+  height: 13px;
+  transform: translateX(-50%);
+  border-radius: 50% 50% 60% 60%;
+  background: radial-gradient(circle at 50% 22%, #fff3b0 0 30%, #ff9d3c 62%, transparent 78%);
+  animation: flame 220ms ease-in-out infinite alternate;
+}
+
+.astronaut span {
+  position: absolute;
+  display: block;
+}
+
+.astro-helmet {
+  left: 2.5px;
+  top: 0;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 36% 32%, #ffffff 0 30%, #dde3f2 80%);
+  box-shadow: inset -1px -1px 1px rgba(36, 48, 66, 0.18);
+}
+
+.astro-visor {
+  left: 4.5px;
+  top: 3px;
+  width: 7px;
+  height: 5px;
+  border-radius: 999px;
+  background: linear-gradient(120deg, #4787e9 0 40%, #2a3550 70%);
+}
+
+.astro-pack {
+  left: 1px;
+  top: 10px;
+  width: 4px;
+  height: 7px;
+  border-radius: 2px;
+  background: #c9d2e6;
+}
+
+.astro-body {
+  left: 3px;
+  top: 9.5px;
+  width: 10px;
+  height: 9px;
+  border-radius: 5px 5px 4px 4px;
+  background: #f2f4fb;
+  box-shadow: inset -1px -1px 1px rgba(36, 48, 66, 0.14);
+}
+
+.astro-arm {
+  left: 4px;
+  top: 11px;
+  width: 9px;
+  height: 3.5px;
+  border-radius: 999px;
+  background: #f2f4fb;
+  transform: rotate(-12deg);
+}
+
+.astro-leg-left,
+.astro-leg-right {
+  top: 17px;
+  width: 3px;
+  height: 6px;
+  border-radius: 0 0 2px 2px;
+  background: #e3e7f3;
+}
+
+.astro-leg-left {
+  left: 4.5px;
+}
+
+.astro-leg-right {
+  left: 8.5px;
+}
+
+.astro-flag {
+  left: 12px;
+  bottom: -1px;
+  width: 2px;
+  height: 17px;
+  border-radius: 999px;
+  background: #cfd6e6;
+}
+
+.astro-flag::after {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 0;
+  width: 10px;
+  height: 7px;
+  background: var(--rose);
+  clip-path: polygon(0 0, 100% 0, 76% 50%, 100% 100%, 0 100%);
+  transform-origin: 0 50%;
+  animation: flag-wave 1.6s ease-in-out infinite;
+}
+
+.comet {
+  position: absolute;
+  z-index: 26;
+  left: -12%;
+  top: var(--y-start);
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 38% 36%, #fffefb 0 30%, #aee3ff 58%, #7ab8ff 84%);
+  box-shadow: 0 0 14px 4px rgba(174, 227, 255, 0.8);
+  animation: comet-fly 1500ms ease-in forwards;
+}
+
+.comet::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 5px;
+  width: 66px;
+  height: 7px;
+  border-radius: 999px;
+  background: linear-gradient(270deg, rgba(174, 227, 255, 0.85), rgba(122, 184, 255, 0.22) 56%, transparent);
+  transform: translateY(-50%) rotate(9deg);
+  transform-origin: 100% 50%;
+}
+
+.comet.is-flip::after {
+  transform: translateY(-50%) rotate(-9deg);
+}
+
 .choices {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -578,33 +690,6 @@ h1 {
   bottom: -20px;
   font-size: 2.2rem;
   animation: grow-star 900ms ease-out forwards;
-}
-
-.is-celebrating .character {
-  animation: happy-jump 700ms ease both;
-}
-
-@keyframes bob {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-8px);
-  }
-}
-
-@keyframes happy-jump {
-  0%,
-  100% {
-    transform: translateY(0) scale(1);
-  }
-  35% {
-    transform: translateY(-32px) scale(1.05);
-  }
-  65% {
-    transform: translateY(6px) scale(0.96);
-  }
 }
 
 @keyframes right-pop {
@@ -740,6 +825,74 @@ h1 {
   }
 }
 
+@keyframes astro-land {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-34px) scale(0.7);
+  }
+  70% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(3px) scale(1);
+  }
+  100% {
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+}
+
+@keyframes astro-leave {
+  0% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+  28% {
+    transform: translateX(-50%) translateY(-4px) scale(1.03);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-48px) scale(0.72);
+  }
+}
+
+@keyframes flame {
+  from {
+    transform: translateX(-50%) scaleY(0.85);
+    opacity: 0.8;
+  }
+  to {
+    transform: translateX(-50%) scaleY(1.2);
+    opacity: 1;
+  }
+}
+
+@keyframes flag-wave {
+  0%,
+  100% {
+    transform: skewY(0deg) scaleX(1);
+  }
+  50% {
+    transform: skewY(-7deg) scaleX(0.94);
+  }
+}
+
+@keyframes comet-fly {
+  0% {
+    left: -12%;
+    top: var(--y-start);
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  88% {
+    opacity: 1;
+  }
+  100% {
+    left: 112%;
+    top: var(--y-end);
+    opacity: 0;
+  }
+}
+
 @keyframes capture-fly {
   0% {
     opacity: 1;
@@ -790,18 +943,13 @@ h1 {
 
   .question-panel {
     gap: 7px;
-    min-height: clamp(158px, 25svh, 220px);
+    min-height: clamp(118px, 17svh, 180px);
     padding: 8px;
   }
 
   .question-panel::before,
   .question-panel::after {
     height: 62px;
-  }
-
-  .character {
-    width: clamp(50px, 7.6svh, 68px);
-    height: clamp(50px, 7.6svh, 68px);
   }
 
   .sum {
@@ -831,7 +979,7 @@ h1 {
   }
 
   .galaxy-bed {
-    min-height: clamp(160px, 24svh, 220px);
+    min-height: clamp(240px, 38svh, 360px);
   }
 
   .choices {
